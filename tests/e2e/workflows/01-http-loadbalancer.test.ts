@@ -16,11 +16,11 @@ import axios, { type AxiosInstance } from "axios";
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 import { ResourceTracker } from "../helpers/resource-tracker";
 import {
-	delay,
-	generateHttpLoadBalancerConfig,
-	generateNamespaceConfig,
-	generateOriginPoolConfig,
-	generateTestResourceName,
+  delay,
+  generateHttpLoadBalancerConfig,
+  generateNamespaceConfig,
+  generateOriginPoolConfig,
+  generateTestResourceName,
 } from "../helpers/test-data-generator";
 import { waitForResourceReady } from "../helpers/validation-helpers";
 
@@ -28,120 +28,104 @@ let httpClient: AxiosInstance;
 let resourceTracker: ResourceTracker;
 
 beforeAll(async () => {
-	const credentialManager = new CredentialManager();
-	await credentialManager.initialize();
+  const credentialManager = new CredentialManager();
+  await credentialManager.initialize();
 
-	if (!credentialManager.isAuthenticated()) {
-		throw new Error("Authentication required for E2E tests");
-	}
+  if (!credentialManager.isAuthenticated()) {
+    throw new Error("Authentication required for E2E tests");
+  }
 
-	httpClient = axios.create({
-		baseURL: credentialManager.getApiUrl(),
-		headers: {
-			Authorization: `APIToken ${credentialManager.getToken()}`,
-			"Content-Type": "application/json",
-		},
-		timeout: 30000,
-	});
+  httpClient = axios.create({
+    baseURL: credentialManager.getApiUrl(),
+    headers: {
+      Authorization: `APIToken ${credentialManager.getToken()}`,
+      "Content-Type": "application/json",
+    },
+    timeout: 30000,
+  });
 
-	resourceTracker = new ResourceTracker();
+  resourceTracker = new ResourceTracker();
 });
 
 afterEach(async () => {
-	await resourceTracker.cleanupAll(httpClient);
+  await resourceTracker.cleanupAll(httpClient);
 }, 120000);
 
 describe("HTTP Load Balancer E2E Workflow", () => {
-	it(
-		"should complete full HTTP load balancer workflow",
-		async () => {
-			// Step 1: Create namespace
-			const namespaceName = generateTestResourceName("namespace");
-			const namespaceConfig = generateNamespaceConfig(namespaceName);
+  it(
+    "should complete full HTTP load balancer workflow",
+    async () => {
+      // Step 1: Create namespace
+      const namespaceName = generateTestResourceName("namespace");
+      const namespaceConfig = generateNamespaceConfig(namespaceName);
 
-			const nsResponse = await httpClient.post(
-				"/api/web/namespaces",
-				namespaceConfig,
-			);
-			expect(nsResponse.status).toBeGreaterThanOrEqual(200);
-			expect(nsResponse.status).toBeLessThan(300);
+      const nsResponse = await httpClient.post("/api/web/namespaces", namespaceConfig);
+      expect(nsResponse.status).toBeGreaterThanOrEqual(200);
+      expect(nsResponse.status).toBeLessThan(300);
 
-			resourceTracker.track({
-				type: "namespace",
-				domain: "tenant_and_identity",
-				namespace: "system",
-				name: namespaceName,
-			});
+      resourceTracker.track({
+        type: "namespace",
+        domain: "tenant_and_identity",
+        namespace: "system",
+        name: namespaceName,
+      });
 
-			await delay(2000);
+      await delay(2000);
 
-			// Step 2: Create origin pool
-			const poolName = generateTestResourceName("pool");
-			const poolConfig = generateOriginPoolConfig(poolName, namespaceName, {
-				port: 80,
-				backendCount: 2,
-				healthCheck: true,
-			});
+      // Step 2: Create origin pool
+      const poolName = generateTestResourceName("pool");
+      const poolConfig = generateOriginPoolConfig(poolName, namespaceName, {
+        port: 80,
+        backendCount: 2,
+        healthCheck: true,
+      });
 
-			const poolResponse = await httpClient.post(
-				`/api/config/namespaces/${namespaceName}/origin_pools`,
-				poolConfig,
-			);
-			expect(poolResponse.status).toBeGreaterThanOrEqual(200);
-			expect(poolResponse.status).toBeLessThan(300);
+      const poolResponse = await httpClient.post(`/api/config/namespaces/${namespaceName}/origin_pools`, poolConfig);
+      expect(poolResponse.status).toBeGreaterThanOrEqual(200);
+      expect(poolResponse.status).toBeLessThan(300);
 
-			resourceTracker.track({
-				type: "origin_pool",
-				domain: "virtual",
-				namespace: namespaceName,
-				name: poolName,
-			});
+      resourceTracker.track({
+        type: "origin_pool",
+        domain: "virtual",
+        namespace: namespaceName,
+        name: poolName,
+      });
 
-			await delay(2000);
+      await delay(2000);
 
-			// Step 3: Create HTTP load balancer
-			const lbName = generateTestResourceName("lb");
-			const lbConfig = generateHttpLoadBalancerConfig(
-				lbName,
-				namespaceName,
-				poolName,
-				{
-					domain: `${lbName}.example.com`,
-					port: 80,
-				},
-			);
+      // Step 3: Create HTTP load balancer
+      const lbName = generateTestResourceName("lb");
+      const lbConfig = generateHttpLoadBalancerConfig(lbName, namespaceName, poolName, {
+        domain: `${lbName}.example.com`,
+        port: 80,
+      });
 
-			const lbResponse = await httpClient.post(
-				`/api/config/namespaces/${namespaceName}/http_loadbalancers`,
-				lbConfig,
-			);
-			expect(lbResponse.status).toBeGreaterThanOrEqual(200);
-			expect(lbResponse.status).toBeLessThan(300);
+      const lbResponse = await httpClient.post(`/api/config/namespaces/${namespaceName}/http_loadbalancers`, lbConfig);
+      expect(lbResponse.status).toBeGreaterThanOrEqual(200);
+      expect(lbResponse.status).toBeLessThan(300);
 
-			resourceTracker.track({
-				type: "http_loadbalancer",
-				domain: "virtual",
-				namespace: namespaceName,
-				name: lbName,
-			});
+      resourceTracker.track({
+        type: "http_loadbalancer",
+        domain: "virtual",
+        namespace: namespaceName,
+        name: lbName,
+      });
 
-			// Step 4: Verify load balancer is operational
-			const lbUrl = `/api/config/namespaces/${namespaceName}/http_loadbalancers/${lbName}`;
-			const readyResult = await waitForResourceReady(httpClient, lbUrl, {
-				maxAttempts: 20,
-				interval: 3000,
-			});
+      // Step 4: Verify load balancer is operational
+      const lbUrl = `/api/config/namespaces/${namespaceName}/http_loadbalancers/${lbName}`;
+      const readyResult = await waitForResourceReady(httpClient, lbUrl, {
+        maxAttempts: 20,
+        interval: 3000,
+      });
 
-			expect(readyResult.success).toBe(true);
+      expect(readyResult.success).toBe(true);
 
-			console.log("\n✅ HTTP Load Balancer workflow complete!");
-			console.log(`  - Namespace: ${namespaceName}`);
-			console.log(`  - Origin Pool: ${poolName}`);
-			console.log(`  - Load Balancer: ${lbName}`);
-			console.log(
-				`  - Ready in: ${Math.round(readyResult.duration / 1000)}s\n`,
-			);
-		},
-		{ timeout: 180000 },
-	);
+      console.log("\n✅ HTTP Load Balancer workflow complete!");
+      console.log(`  - Namespace: ${namespaceName}`);
+      console.log(`  - Origin Pool: ${poolName}`);
+      console.log(`  - Load Balancer: ${lbName}`);
+      console.log(`  - Ready in: ${Math.round(readyResult.duration / 1000)}s\n`);
+    },
+    { timeout: 180000 },
+  );
 });

@@ -6,51 +6,49 @@
 import type { ParsedOperation } from "../../../generator/openapi-parser.js";
 
 export const threat_campaignTools: ParsedOperation[] = [
-	{
-		toolName: "f5xc-api-threatcampaign-threat-campaign-get",
-		method: "GET",
-		path: "/api/waf/threat_campaign/{id}",
-		operation: "get",
-		domain: "threat_campaign",
-		resource: "threat-campaign",
-		summary: "GET Threat Campaign by ID.",
-		description: "GET Threat Campaign by ID.",
-		pathParameters: [
-			{
-				description:
-					"ID\nx-required\nID with which the request will find entry.",
-				in: "path",
-				name: "id",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Threat Campaign ID.",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/app_securityThreatCampaign",
-		},
-		requiredParams: ["id"],
-		operationId:
-			"ves.io.schema.app_security.ThreatCampaignAPI.GetThreatCampaignById",
-		tags: ["Security"],
-		sourceFile: "domains/threat_campaign.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
+  {
+    toolName: "f5xc-api-threatcampaign-threat-campaign-get",
+    method: "GET",
+    path: "/api/waf/threat_campaign/{id}",
+    operation: "get",
+    domain: "threat_campaign",
+    resource: "threat-campaign",
+    summary: "GET Threat Campaign by ID.",
+    description: "GET Threat Campaign by ID.",
+    pathParameters: [
+      {
+        description: "ID\nx-required\nID with which the request will find entry.",
+        in: "path",
+        name: "id",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Threat Campaign ID.",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/app_securityThreatCampaign",
+    },
+    requiredParams: ["id"],
+    operationId: "ves.io.schema.app_security.ThreatCampaignAPI.GetThreatCampaignById",
+    tags: ["Security"],
+    sourceFile: "domains/threat_campaign.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
 ];
 
 export default threat_campaignTools;

@@ -14,90 +14,90 @@
  * Registry statistics
  */
 export const REGISTRY_STATS = {
-	totalTools: 1536,
-	totalDomains: 37,
-	domainCounts: {
-		admin_console_and_ui: 2,
-		ai_services: 11,
-		api: 52,
-		authentication: 9,
-		bigip: 25,
-		billing_and_usage: 23,
-		blindfold: 32,
-		bot_and_threat_defense: 20,
-		cdn: 22,
-		ce_management: 19,
-		certificates: 20,
-		cloud_infrastructure: 33,
-		container_services: 16,
-		data_and_privacy_security: 13,
-		data_intelligence: 15,
-		ddos: 68,
-		dns: 52,
-		managed_kubernetes: 25,
-		marketplace: 36,
-		network: 98,
-		network_security: 69,
-		nginx_one: 14,
-		object_storage: 7,
-		observability: 45,
-		rate_limiting: 15,
-		secops_and_incident_response: 5,
-		service_mesh: 44,
-		shape: 180,
-		sites: 106,
-		statistics: 70,
-		support: 47,
-		telemetry_and_insights: 23,
-		tenant_and_identity: 180,
-		threat_campaign: 1,
-		users: 12,
-		virtual: 126,
-		vpm_and_node_management: 1,
-	},
+  totalTools: 1536,
+  totalDomains: 37,
+  domainCounts: {
+    admin_console_and_ui: 2,
+    ai_services: 11,
+    api: 52,
+    authentication: 9,
+    bigip: 25,
+    billing_and_usage: 23,
+    blindfold: 32,
+    bot_and_threat_defense: 20,
+    cdn: 22,
+    ce_management: 19,
+    certificates: 20,
+    cloud_infrastructure: 33,
+    container_services: 16,
+    data_and_privacy_security: 13,
+    data_intelligence: 15,
+    ddos: 68,
+    dns: 52,
+    managed_kubernetes: 25,
+    marketplace: 36,
+    network: 98,
+    network_security: 69,
+    nginx_one: 14,
+    object_storage: 7,
+    observability: 45,
+    rate_limiting: 15,
+    secops_and_incident_response: 5,
+    service_mesh: 44,
+    shape: 180,
+    sites: 106,
+    statistics: 70,
+    support: 47,
+    telemetry_and_insights: 23,
+    tenant_and_identity: 180,
+    threat_campaign: 1,
+    users: 12,
+    virtual: 126,
+    vpm_and_node_management: 1,
+  },
 } as const;
 
 /**
  * Available domains (dynamically generated)
  */
 export const AVAILABLE_DOMAINS = [
-	"admin_console_and_ui",
-	"ai_services",
-	"api",
-	"authentication",
-	"bigip",
-	"billing_and_usage",
-	"blindfold",
-	"bot_and_threat_defense",
-	"cdn",
-	"ce_management",
-	"certificates",
-	"cloud_infrastructure",
-	"container_services",
-	"data_and_privacy_security",
-	"data_intelligence",
-	"ddos",
-	"dns",
-	"managed_kubernetes",
-	"marketplace",
-	"network",
-	"network_security",
-	"nginx_one",
-	"object_storage",
-	"observability",
-	"rate_limiting",
-	"secops_and_incident_response",
-	"service_mesh",
-	"shape",
-	"sites",
-	"statistics",
-	"support",
-	"telemetry_and_insights",
-	"tenant_and_identity",
-	"threat_campaign",
-	"users",
-	"virtual",
-	"vpm_and_node_management",
+  "admin_console_and_ui",
+  "ai_services",
+  "api",
+  "authentication",
+  "bigip",
+  "billing_and_usage",
+  "blindfold",
+  "bot_and_threat_defense",
+  "cdn",
+  "ce_management",
+  "certificates",
+  "cloud_infrastructure",
+  "container_services",
+  "data_and_privacy_security",
+  "data_intelligence",
+  "ddos",
+  "dns",
+  "managed_kubernetes",
+  "marketplace",
+  "network",
+  "network_security",
+  "nginx_one",
+  "object_storage",
+  "observability",
+  "rate_limiting",
+  "secops_and_incident_response",
+  "service_mesh",
+  "shape",
+  "sites",
+  "statistics",
+  "support",
+  "telemetry_and_insights",
+  "tenant_and_identity",
+  "threat_campaign",
+  "users",
+  "virtual",
+  "vpm_and_node_management",
 ] as const;
 
 /**
@@ -109,120 +109,114 @@ export const SAMPLE_DOMAIN = "admin_console_and_ui";
  * Sample tools by domain
  */
 export const SAMPLE_TOOLS_BY_DOMAIN = {
-	admin_console_and_ui: {
-		toolName: "f5xc-api-adminconsoleandui-static-component-get",
-		domain: "admin_console_and_ui",
-		resource: "static-component",
-		method: "GET",
-		path: "/api/web/namespaces/{namespace}/static_components/{name}",
-		operation: "get",
-	},
-	ai_services: {
-		toolName: "f5xc-api-aiservices-allocateip-create",
-		domain: "ai_services",
-		resource: "allocateip",
-		method: "POST",
-		path: "/api/gia/gia/allocateip",
-		operation: "create",
-	},
-	api: {
-		toolName: "f5xc-api-api-api-crawler-create",
-		domain: "api",
-		resource: "api-crawler",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/api_crawlers",
-		operation: "create",
-	},
-	authentication: {
-		toolName: "f5xc-api-authentication-api-credential-create",
-		domain: "authentication",
-		resource: "api-credential",
-		method: "POST",
-		path: "/api/web/namespaces/system/bulk_revoke/api_credentials",
-		operation: "create",
-	},
-	bigip: {
-		toolName: "f5xc-api-bigip-apm-create",
-		domain: "bigip",
-		resource: "apm",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/apms",
-		operation: "create",
-	},
+  admin_console_and_ui: {
+    toolName: "f5xc-api-adminconsoleandui-static-component-get",
+    domain: "admin_console_and_ui",
+    resource: "static-component",
+    method: "GET",
+    path: "/api/web/namespaces/{namespace}/static_components/{name}",
+    operation: "get",
+  },
+  ai_services: {
+    toolName: "f5xc-api-aiservices-allocateip-create",
+    domain: "ai_services",
+    resource: "allocateip",
+    method: "POST",
+    path: "/api/gia/gia/allocateip",
+    operation: "create",
+  },
+  api: {
+    toolName: "f5xc-api-api-api-crawler-create",
+    domain: "api",
+    resource: "api-crawler",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/api_crawlers",
+    operation: "create",
+  },
+  authentication: {
+    toolName: "f5xc-api-authentication-api-credential-create",
+    domain: "authentication",
+    resource: "api-credential",
+    method: "POST",
+    path: "/api/web/namespaces/system/bulk_revoke/api_credentials",
+    operation: "create",
+  },
+  bigip: {
+    toolName: "f5xc-api-bigip-apm-create",
+    domain: "bigip",
+    resource: "apm",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/apms",
+    operation: "create",
+  },
 } as const;
 
 /**
  * Sample tools by operation type
  */
 export const SAMPLE_TOOLS_BY_OPERATION = {
-	create: {
-		toolName: "f5xc-api-aiservices-allocateip-create",
-		domain: "ai_services",
-		resource: "allocateip",
-		operation: "create",
-	},
-	get: {
-		toolName: "f5xc-api-adminconsoleandui-static-component-get",
-		domain: "admin_console_and_ui",
-		resource: "static-component",
-		operation: "get",
-	},
-	list: {
-		toolName: "f5xc-api-adminconsoleandui-static-component-list",
-		domain: "admin_console_and_ui",
-		resource: "static-component",
-		operation: "list",
-	},
-	delete: {
-		toolName: "f5xc-api-aiservices-deallocateip-delete",
-		domain: "ai_services",
-		resource: "deallocateip",
-		operation: "delete",
-	},
-	update: {
-		toolName: "f5xc-api-api-api-crawler-update",
-		domain: "api",
-		resource: "api-crawler",
-		operation: "update",
-	},
+  create: {
+    toolName: "f5xc-api-aiservices-allocateip-create",
+    domain: "ai_services",
+    resource: "allocateip",
+    operation: "create",
+  },
+  get: {
+    toolName: "f5xc-api-adminconsoleandui-static-component-get",
+    domain: "admin_console_and_ui",
+    resource: "static-component",
+    operation: "get",
+  },
+  list: {
+    toolName: "f5xc-api-adminconsoleandui-static-component-list",
+    domain: "admin_console_and_ui",
+    resource: "static-component",
+    operation: "list",
+  },
+  delete: {
+    toolName: "f5xc-api-aiservices-deallocateip-delete",
+    domain: "ai_services",
+    resource: "deallocateip",
+    operation: "delete",
+  },
+  update: {
+    toolName: "f5xc-api-api-api-crawler-update",
+    domain: "api",
+    resource: "api-crawler",
+    operation: "update",
+  },
 } as const;
 
 /**
  * Sample resources
  */
-export const SAMPLE_RESOURCES = [
-	"static-component",
-	"allocateip",
-	"api-crawler",
-	"api-credential",
-	"apm",
-] as const;
+export const SAMPLE_RESOURCES = ["static-component", "allocateip", "api-crawler", "api-credential", "apm"] as const;
 
 /**
  * First available tool (for basic tests)
  */
 export const FIRST_TOOL = {
-	toolName: "f5xc-api-adminconsoleandui-static-component-get",
-	domain: "admin_console_and_ui",
-	resource: "static-component",
-	method: "GET",
-	path: "/api/web/namespaces/{namespace}/static_components/{name}",
-	operation: "get",
+  toolName: "f5xc-api-adminconsoleandui-static-component-get",
+  domain: "admin_console_and_ui",
+  resource: "static-component",
+  method: "GET",
+  path: "/api/web/namespaces/{namespace}/static_components/{name}",
+  operation: "get",
 } as const;
 
 /**
  * Tools with rich metadata (for metadata-specific tests)
  */
 export const RICH_METADATA_SAMPLES = {
-	withDangerLevel: null,
-	withOperationMetadata: null,
-	withValidationRules: null,
-	withParameters: {
-		toolName: "f5xc-api-adminconsoleandui-static-component-get",
-		pathParamCount: 2,
-		queryParamCount: 1,
-	},
-	withCurlExample: null,
+  withDangerLevel: null,
+  withOperationMetadata: null,
+  withValidationRules: null,
+  withParameters: {
+    toolName: "f5xc-api-adminconsoleandui-static-component-get",
+    pathParamCount: 2,
+    queryParamCount: 1,
+  },
+  withCurlExample: null,
 } as const;
 
 /**
@@ -230,7 +224,7 @@ export const RICH_METADATA_SAMPLES = {
  * @returns First available tool name from registry
  */
 export function getValidToolName(): string {
-	return FIRST_TOOL.toolName;
+  return FIRST_TOOL.toolName;
 }
 
 /**
@@ -238,32 +232,30 @@ export function getValidToolName(): string {
  * @returns First available domain from registry
  */
 export function getValidDomain(): string {
-	return SAMPLE_DOMAIN;
+  return SAMPLE_DOMAIN;
 }
 
 /**
  * Helper to get sample tool for a specific operation type
  */
-export function getSampleToolByOperation(
-	operation: "create" | "get" | "list" | "delete" | "update",
-): {
-	toolName: string;
-	domain: string;
-	resource: string;
-	operation: string;
+export function getSampleToolByOperation(operation: "create" | "get" | "list" | "delete" | "update"): {
+  toolName: string;
+  domain: string;
+  resource: string;
+  operation: string;
 } | null {
-	return (
-		(
-			SAMPLE_TOOLS_BY_OPERATION as Record<
-				string,
-				| {
-						toolName: string;
-						domain: string;
-						resource: string;
-						operation: string;
-				  }
-				| undefined
-			>
-		)[operation] ?? null
-	);
+  return (
+    (
+      SAMPLE_TOOLS_BY_OPERATION as Record<
+        string,
+        | {
+            toolName: string;
+            domain: string;
+            resource: string;
+            operation: string;
+          }
+        | undefined
+      >
+    )[operation] ?? null
+  );
 }

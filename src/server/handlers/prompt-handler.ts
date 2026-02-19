@@ -10,10 +10,10 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import {
-	getErrorPrompts,
-	getWorkflowPrompts,
-	processErrorTemplate,
-	processPromptTemplate,
+  getErrorPrompts,
+  getWorkflowPrompts,
+  processErrorTemplate,
+  processPromptTemplate,
 } from "../../prompts/index.js";
 import { logger } from "../../utils/logging.js";
 
@@ -24,15 +24,15 @@ import { logger } from "../../utils/logging.js";
  * @returns Record of Zod schemas for each argument
  */
 function buildArgumentSchema(
-	args: Array<{ name: string; description: string; required: boolean }>,
+  args: Array<{ name: string; description: string; required: boolean }>,
 ): Record<string, z.ZodTypeAny> {
-	const schema: Record<string, z.ZodTypeAny> = {};
-	for (const arg of args) {
-		schema[arg.name] = arg.required
-			? z.string().describe(arg.description)
-			: z.string().optional().describe(arg.description);
-	}
-	return schema;
+  const schema: Record<string, z.ZodTypeAny> = {};
+  for (const arg of args) {
+    schema[arg.name] = arg.required
+      ? z.string().describe(arg.description)
+      : z.string().optional().describe(arg.description);
+  }
+  return schema;
 }
 
 /**
@@ -41,16 +41,14 @@ function buildArgumentSchema(
  * @param args - Record of arguments that may contain non-string values
  * @returns Record with only string values
  */
-function extractStringArgs(
-	args: Record<string, unknown>,
-): Record<string, string> {
-	const processedArgs: Record<string, string> = {};
-	for (const [key, value] of Object.entries(args)) {
-		if (typeof value === "string") {
-			processedArgs[key] = value;
-		}
-	}
-	return processedArgs;
+function extractStringArgs(args: Record<string, unknown>): Record<string, string> {
+  const processedArgs: Record<string, string> = {};
+  for (const [key, value] of Object.entries(args)) {
+    if (typeof value === "string") {
+      processedArgs[key] = value;
+    }
+  }
+  return processedArgs;
 }
 
 /**
@@ -60,17 +58,17 @@ function extractStringArgs(
  * @param workflowArgs - Workflow argument definitions
  */
 function applyDefaultValues(
-	processedArgs: Record<string, string>,
-	workflowArgs: Array<{ name: string; required: boolean }>,
+  processedArgs: Record<string, string>,
+  workflowArgs: Array<{ name: string; required: boolean }>,
 ): void {
-	for (const arg of workflowArgs) {
-		if (!processedArgs[arg.name] && !arg.required) {
-			// Set sensible defaults
-			if (arg.name === "backend_port") processedArgs[arg.name] = "80";
-			if (arg.name === "enable_waf") processedArgs[arg.name] = "false";
-			if (arg.name === "mode") processedArgs[arg.name] = "blocking";
-		}
-	}
+  for (const arg of workflowArgs) {
+    if (!processedArgs[arg.name] && !arg.required) {
+      // Set sensible defaults
+      if (arg.name === "backend_port") processedArgs[arg.name] = "80";
+      if (arg.name === "enable_waf") processedArgs[arg.name] = "false";
+      if (arg.name === "mode") processedArgs[arg.name] = "blocking";
+    }
+  }
 }
 
 /**
@@ -79,42 +77,32 @@ function applyDefaultValues(
  * @param server - The MCP server instance
  */
 function registerWorkflowPrompts(server: McpServer): number {
-	const workflowPrompts = getWorkflowPrompts();
+  const workflowPrompts = getWorkflowPrompts();
 
-	for (const workflow of workflowPrompts) {
-		const argSchema = buildArgumentSchema(workflow.arguments);
+  for (const workflow of workflowPrompts) {
+    const argSchema = buildArgumentSchema(workflow.arguments);
 
-		server.prompt(
-			workflow.name,
-			workflow.description,
-			argSchema,
-			async (args) => {
-				const processedArgs = extractStringArgs(
-					args as Record<string, unknown>,
-				);
-				applyDefaultValues(processedArgs, workflow.arguments);
+    server.prompt(workflow.name, workflow.description, argSchema, async (args) => {
+      const processedArgs = extractStringArgs(args as Record<string, unknown>);
+      applyDefaultValues(processedArgs, workflow.arguments);
 
-				const processedTemplate = processPromptTemplate(
-					workflow.template,
-					processedArgs,
-				);
+      const processedTemplate = processPromptTemplate(workflow.template, processedArgs);
 
-				return {
-					messages: [
-						{
-							role: "user" as const,
-							content: {
-								type: "text" as const,
-								text: processedTemplate,
-							},
-						},
-					],
-				};
-			},
-		);
-	}
+      return {
+        messages: [
+          {
+            role: "user" as const,
+            content: {
+              type: "text" as const,
+              text: processedTemplate,
+            },
+          },
+        ],
+      };
+    });
+  }
 
-	return workflowPrompts.length;
+  return workflowPrompts.length;
 }
 
 /**
@@ -123,40 +111,30 @@ function registerWorkflowPrompts(server: McpServer): number {
  * @param server - The MCP server instance
  */
 function registerErrorPrompts(server: McpServer): number {
-	const errorPrompts = getErrorPrompts();
+  const errorPrompts = getErrorPrompts();
 
-	for (const errorPrompt of errorPrompts) {
-		const argSchema = buildArgumentSchema(errorPrompt.arguments);
+  for (const errorPrompt of errorPrompts) {
+    const argSchema = buildArgumentSchema(errorPrompt.arguments);
 
-		server.prompt(
-			errorPrompt.name,
-			errorPrompt.description,
-			argSchema,
-			async (args) => {
-				const processedArgs = extractStringArgs(
-					args as Record<string, unknown>,
-				);
-				const processedTemplate = processErrorTemplate(
-					errorPrompt,
-					processedArgs,
-				);
+    server.prompt(errorPrompt.name, errorPrompt.description, argSchema, async (args) => {
+      const processedArgs = extractStringArgs(args as Record<string, unknown>);
+      const processedTemplate = processErrorTemplate(errorPrompt, processedArgs);
 
-				return {
-					messages: [
-						{
-							role: "user" as const,
-							content: {
-								type: "text" as const,
-								text: processedTemplate,
-							},
-						},
-					],
-				};
-			},
-		);
-	}
+      return {
+        messages: [
+          {
+            role: "user" as const,
+            content: {
+              type: "text" as const,
+              text: processedTemplate,
+            },
+          },
+        ],
+      };
+    });
+  }
 
-	return errorPrompts.length;
+  return errorPrompts.length;
 }
 
 /**
@@ -166,11 +144,11 @@ function registerErrorPrompts(server: McpServer): number {
  * @param server - The MCP server instance
  */
 export function registerPrompts(server: McpServer): void {
-	const workflowCount = registerWorkflowPrompts(server);
-	const errorCount = registerErrorPrompts(server);
+  const workflowCount = registerWorkflowPrompts(server);
+  const errorCount = registerErrorPrompts(server);
 
-	logger.info("Prompt registration completed", {
-		workflows: workflowCount,
-		errorPrompts: errorCount,
-	});
+  logger.info("Prompt registration completed", {
+    workflows: workflowCount,
+    errorPrompts: errorCount,
+  });
 }

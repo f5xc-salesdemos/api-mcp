@@ -25,121 +25,111 @@ const __dirname = dirname(__filename);
  * Configuration
  */
 const CONFIG = {
-	REGISTRY_PATH: join(__dirname, "..", "src", "tools", "registry.ts"),
-	FIXTURES_DIR: join(__dirname, "..", "tests", "fixtures"),
-	FIXTURES_FILE: join(__dirname, "..", "tests", "fixtures", "generated.ts"),
+  REGISTRY_PATH: join(__dirname, "..", "src", "tools", "registry.ts"),
+  FIXTURES_DIR: join(__dirname, "..", "tests", "fixtures"),
+  FIXTURES_FILE: join(__dirname, "..", "tests", "fixtures", "generated.ts"),
 };
 
 /**
  * Prettier configuration
  */
 const PRETTIER_CONFIG: prettier.Options = {
-	parser: "typescript",
-	semi: true,
-	singleQuote: false,
-	trailingComma: "es5",
-	printWidth: 100,
-	tabWidth: 2,
-	useTabs: false,
+  parser: "typescript",
+  semi: true,
+  singleQuote: false,
+  trailingComma: "es5",
+  printWidth: 100,
+  tabWidth: 2,
+  useTabs: false,
 };
 
 /**
  * Format TypeScript code
  */
 async function formatCode(code: string): Promise<string> {
-	try {
-		return await prettier.format(code, PRETTIER_CONFIG);
-	} catch {
-		return code;
-	}
+  try {
+    return await prettier.format(code, PRETTIER_CONFIG);
+  } catch {
+    return code;
+  }
 }
 
 /**
  * Generate test fixtures from registry
  */
 async function generateFixtures(): Promise<void> {
-	console.log("Generating dynamic test fixtures...\n");
+  console.log("Generating dynamic test fixtures...\n");
 
-	// Check if registry exists
-	if (!existsSync(CONFIG.REGISTRY_PATH)) {
-		console.error("Registry not found. Run 'npm run generate' first.");
-		process.exit(1);
-	}
+  // Check if registry exists
+  if (!existsSync(CONFIG.REGISTRY_PATH)) {
+    console.error("Registry not found. Run 'npm run generate' first.");
+    process.exit(1);
+  }
 
-	// Import registry dynamically
-	const { allTools, getAllDomains, getToolsByDomain, getToolCountByDomain } =
-		await import("../src/tools/registry.js");
+  // Import registry dynamically
+  const { allTools, getAllDomains, getToolsByDomain, getToolCountByDomain } = await import("../src/tools/registry.js");
 
-	if (allTools.length === 0) {
-		console.error("No tools found in registry. Run 'npm run generate' first.");
-		process.exit(1);
-	}
+  if (allTools.length === 0) {
+    console.error("No tools found in registry. Run 'npm run generate' first.");
+    process.exit(1);
+  }
 
-	// Gather fixture data
-	const domains = getAllDomains();
-	const domainCounts = getToolCountByDomain();
+  // Gather fixture data
+  const domains = getAllDomains();
+  const domainCounts = getToolCountByDomain();
 
-	// Find sample tools from different domains
-	const sampleTools: Record<string, unknown> = {};
-	const sampleDomains: string[] = [];
-	const sampleResources: string[] = [];
+  // Find sample tools from different domains
+  const sampleTools: Record<string, unknown> = {};
+  const sampleDomains: string[] = [];
+  const sampleResources: string[] = [];
 
-	for (const domain of domains.slice(0, 5)) {
-		const tools = getToolsByDomain(domain);
-		if (tools.length > 0) {
-			sampleDomains.push(domain);
-			const tool = tools[0];
-			sampleTools[domain] = {
-				toolName: tool.toolName,
-				domain: tool.domain,
-				resource: tool.resource,
-				method: tool.method,
-				path: tool.path,
-				operation: tool.operation,
-			};
-			if (!sampleResources.includes(tool.resource)) {
-				sampleResources.push(tool.resource);
-			}
-		}
-	}
+  for (const domain of domains.slice(0, 5)) {
+    const tools = getToolsByDomain(domain);
+    if (tools.length > 0) {
+      sampleDomains.push(domain);
+      const tool = tools[0];
+      sampleTools[domain] = {
+        toolName: tool.toolName,
+        domain: tool.domain,
+        resource: tool.resource,
+        method: tool.method,
+        path: tool.path,
+        operation: tool.operation,
+      };
+      if (!sampleResources.includes(tool.resource)) {
+        sampleResources.push(tool.resource);
+      }
+    }
+  }
 
-	// Find tools with different operations
-	const toolsByOperation: Record<string, unknown> = {};
-	for (const op of ["create", "get", "list", "delete", "update"]) {
-		const tool = allTools.find(
-			(t: { operation: string }) => t.operation === op,
-		);
-		if (tool) {
-			toolsByOperation[op] = {
-				toolName: tool.toolName,
-				domain: tool.domain,
-				resource: tool.resource,
-				operation: tool.operation,
-			};
-		}
-	}
+  // Find tools with different operations
+  const toolsByOperation: Record<string, unknown> = {};
+  for (const op of ["create", "get", "list", "delete", "update"]) {
+    const tool = allTools.find((t: { operation: string }) => t.operation === op);
+    if (tool) {
+      toolsByOperation[op] = {
+        toolName: tool.toolName,
+        domain: tool.domain,
+        resource: tool.resource,
+        operation: tool.operation,
+      };
+    }
+  }
 
-	// Find tools with rich metadata
-	const toolWithDangerLevel = allTools.find(
-		(t: { dangerLevel: string | null }) => t.dangerLevel !== null,
-	);
-	const toolWithMetadata = allTools.find(
-		(t: { operationMetadata: unknown }) => t.operationMetadata !== null,
-	);
-	const toolWithValidation = allTools.find(
-		(t: { validationRules: Record<string, unknown> }) =>
-			t.validationRules && Object.keys(t.validationRules).length > 0,
-	);
-	const toolWithParams = allTools.find(
-		(t: { pathParameters: unknown[]; queryParameters: unknown[] }) =>
-			t.pathParameters.length > 0 || t.queryParameters.length > 0,
-	);
-	const toolWithCurlExample = allTools.find(
-		(t: { curlExample: string | null }) => t.curlExample !== null,
-	);
+  // Find tools with rich metadata
+  const toolWithDangerLevel = allTools.find((t: { dangerLevel: string | null }) => t.dangerLevel !== null);
+  const toolWithMetadata = allTools.find((t: { operationMetadata: unknown }) => t.operationMetadata !== null);
+  const toolWithValidation = allTools.find(
+    (t: { validationRules: Record<string, unknown> }) => t.validationRules && Object.keys(t.validationRules).length > 0,
+  );
+  const toolWithParams = allTools.find(
+    (t: { pathParameters: unknown[]; queryParameters: unknown[] }) =>
+      t.pathParameters.length > 0 || t.queryParameters.length > 0,
+  );
+  const toolWithCurlExample = allTools.find((t: { curlExample: string | null }) => t.curlExample !== null);
 
-	// Generate fixture file content
-	const fixtureContent = `/**
+  // Generate fixture file content
+  const fixtureContent = `/**
  * Auto-Generated Test Fixtures
  * DO NOT EDIT - This file is generated by scripts/generate-test-fixtures.ts
  *
@@ -189,17 +179,17 @@ export const SAMPLE_RESOURCES = ${JSON.stringify(sampleResources)} as const;
  * First available tool (for basic tests)
  */
 export const FIRST_TOOL = ${JSON.stringify(
-		{
-			toolName: allTools[0].toolName,
-			domain: allTools[0].domain,
-			resource: allTools[0].resource,
-			method: allTools[0].method,
-			path: allTools[0].path,
-			operation: allTools[0].operation,
-		},
-		null,
-		2,
-	)} as const;
+    {
+      toolName: allTools[0].toolName,
+      domain: allTools[0].domain,
+      resource: allTools[0].resource,
+      method: allTools[0].method,
+      path: allTools[0].path,
+      operation: allTools[0].operation,
+    },
+    null,
+    2,
+  )} as const;
 
 /**
  * Tools with rich metadata (for metadata-specific tests)
@@ -241,30 +231,27 @@ export function getSampleToolByOperation(operation: "create" | "get" | "list" | 
 }
 `;
 
-	// Ensure fixtures directory exists
-	mkdirSync(CONFIG.FIXTURES_DIR, { recursive: true });
+  // Ensure fixtures directory exists
+  mkdirSync(CONFIG.FIXTURES_DIR, { recursive: true });
 
-	// Write formatted fixture file
-	const formattedContent = await formatCode(fixtureContent);
-	writeFileSync(CONFIG.FIXTURES_FILE, formattedContent);
+  // Write formatted fixture file
+  const formattedContent = await formatCode(fixtureContent);
+  writeFileSync(CONFIG.FIXTURES_FILE, formattedContent);
 
-	console.log("Generated test fixtures:");
-	console.log(`  Total tools: ${allTools.length}`);
-	console.log(`  Total domains: ${domains.length}`);
-	console.log(`  Sample domains: ${sampleDomains.join(", ")}`);
-	console.log(`  Output: ${CONFIG.FIXTURES_FILE}`);
-	console.log("\n✅ Fixtures generated successfully!");
+  console.log("Generated test fixtures:");
+  console.log(`  Total tools: ${allTools.length}`);
+  console.log(`  Total domains: ${domains.length}`);
+  console.log(`  Sample domains: ${sampleDomains.join(", ")}`);
+  console.log(`  Output: ${CONFIG.FIXTURES_FILE}`);
+  console.log("\n✅ Fixtures generated successfully!");
 }
 
 /**
  * Entry point
  */
 generateFixtures()
-	.then(() => process.exit(0))
-	.catch((error: unknown) => {
-		console.error(
-			"Failed to generate fixtures:",
-			error instanceof Error ? error.message : error,
-		);
-		process.exit(1);
-	});
+  .then(() => process.exit(0))
+  .catch((error: unknown) => {
+    console.error("Failed to generate fixtures:", error instanceof Error ? error.message : error);
+    process.exit(1);
+  });

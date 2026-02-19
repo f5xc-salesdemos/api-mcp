@@ -24,21 +24,17 @@ import { logger } from "./logging.js";
  * normalizePath('/config/namespaces/default') // '/config/namespaces/default'
  */
 export function normalizePath(path: string): string {
-	if (path.startsWith("/api/")) {
-		return path.slice(4); // Remove '/api', keep the leading '/'
-	}
-	return path;
+  if (path.startsWith("/api/")) {
+    return path.slice(4); // Remove '/api', keep the leading '/'
+  }
+  return path;
 }
 
 /**
  * Default allowed domain patterns for F5XC API endpoints.
  * These are the legitimate F5 Distributed Cloud domains.
  */
-const F5XC_DEFAULT_ALLOWED_DOMAINS = [
-	".console.ves.volterra.io",
-	".staging.volterra.us",
-	".ves.volterra.io",
-];
+const F5XC_DEFAULT_ALLOWED_DOMAINS = [".console.ves.volterra.io", ".staging.volterra.us", ".ves.volterra.io"];
 
 /**
  * Check whether a hostname belongs to an allowed F5XC domain.
@@ -51,21 +47,21 @@ const F5XC_DEFAULT_ALLOWED_DOMAINS = [
  * @returns true if the hostname matches an allowed domain
  */
 export function isAllowedF5XCDomain(hostname: string): boolean {
-	const lower = hostname.toLowerCase();
+  const lower = hostname.toLowerCase();
 
-	// Build full allowlist: defaults + custom
-	const allowed = [...F5XC_DEFAULT_ALLOWED_DOMAINS];
-	const custom = process.env.F5XC_ALLOWED_DOMAINS;
-	if (custom) {
-		for (const domain of custom.split(",")) {
-			const trimmed = domain.trim();
-			if (trimmed) {
-				allowed.push(trimmed.startsWith(".") ? trimmed : `.${trimmed}`);
-			}
-		}
-	}
+  // Build full allowlist: defaults + custom
+  const allowed = [...F5XC_DEFAULT_ALLOWED_DOMAINS];
+  const custom = process.env.F5XC_ALLOWED_DOMAINS;
+  if (custom) {
+    for (const domain of custom.split(",")) {
+      const trimmed = domain.trim();
+      if (trimmed) {
+        allowed.push(trimmed.startsWith(".") ? trimmed : `.${trimmed}`);
+      }
+    }
+  }
 
-	return allowed.some((suffix) => lower.endsWith(suffix));
+  return allowed.some((suffix) => lower.endsWith(suffix));
 }
 
 /**
@@ -91,50 +87,47 @@ export function isAllowedF5XCDomain(hostname: string): boolean {
  * // 'https://tenant.staging.volterra.us'
  */
 export function normalizeF5XCUrl(input: string): string {
-	let url = input.trim();
+  let url = input.trim();
 
-	// Handle empty string
-	if (!url) {
-		return "";
-	}
+  // Handle empty string
+  if (!url) {
+    return "";
+  }
 
-	// Add https:// protocol if missing
-	if (!url.match(/^https?:\/\//i)) {
-		url = `https://${url}`;
-	}
+  // Add https:// protocol if missing
+  if (!url.match(/^https?:\/\//i)) {
+    url = `https://${url}`;
+  }
 
-	// Remove trailing slashes
-	url = url.replace(/\/+$/, "");
+  // Remove trailing slashes
+  url = url.replace(/\/+$/, "");
 
-	// Remove /api suffix (case-insensitive) - httpClient will add it
-	url = url.replace(/\/api$/i, "");
+  // Remove /api suffix (case-insensitive) - httpClient will add it
+  url = url.replace(/\/api$/i, "");
 
-	// Validate it's a proper URL
-	try {
-		const parsed = new URL(url);
+  // Validate it's a proper URL
+  try {
+    const parsed = new URL(url);
 
-		// SSRF protection: validate hostname against allowed F5XC domains
-		if (!isAllowedF5XCDomain(parsed.hostname)) {
-			throw new Error(
-				`Domain "${parsed.hostname}" is not an allowed F5XC domain. ` +
-					`Allowed: ${F5XC_DEFAULT_ALLOWED_DOMAINS.join(", ")}. ` +
-					`Set F5XC_ALLOWED_DOMAINS to add custom domains.`,
-			);
-		}
+    // SSRF protection: validate hostname against allowed F5XC domains
+    if (!isAllowedF5XCDomain(parsed.hostname)) {
+      throw new Error(
+        `Domain "${parsed.hostname}" is not an allowed F5XC domain. ` +
+          `Allowed: ${F5XC_DEFAULT_ALLOWED_DOMAINS.join(", ")}. ` +
+          `Set F5XC_ALLOWED_DOMAINS to add custom domains.`,
+      );
+    }
 
-		// Reconstruct to ensure consistency
-		return `${parsed.protocol}//${parsed.hostname}${parsed.port ? `:${parsed.port}` : ""}`;
-	} catch (error) {
-		if (
-			error instanceof Error &&
-			error.message.includes("not an allowed F5XC domain")
-		) {
-			throw error; // Re-throw domain validation errors
-		}
-		// If URL parsing fails, return the cleaned input
-		logger.warn(`Could not parse URL: ${input}, returning cleaned input`);
-		return url;
-	}
+    // Reconstruct to ensure consistency
+    return `${parsed.protocol}//${parsed.hostname}${parsed.port ? `:${parsed.port}` : ""}`;
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("not an allowed F5XC domain")) {
+      throw error; // Re-throw domain validation errors
+    }
+    // If URL parsing fails, return the cleaned input
+    logger.warn(`Could not parse URL: ${input}, returning cleaned input`);
+    return url;
+  }
 }
 
 /**
@@ -144,33 +137,33 @@ export function normalizeF5XCUrl(input: string): string {
  * @returns Tenant name or null if not extractable
  */
 export function extractTenantFromUrl(url: string): string | null {
-	try {
-		const normalized = normalizeF5XCUrl(url);
-		const parsed = new URL(normalized);
-		const hostname = parsed.hostname.toLowerCase();
+  try {
+    const normalized = normalizeF5XCUrl(url);
+    const parsed = new URL(normalized);
+    const hostname = parsed.hostname.toLowerCase();
 
-		// Match first subdomain as tenant
-		const match = hostname.match(/^([^.]+)\./);
-		return match?.[1] ?? null;
-	} catch {
-		return null;
-	}
+    // Match first subdomain as tenant
+    const match = hostname.match(/^([^.]+)\./);
+    return match?.[1] ?? null;
+  } catch {
+    return null;
+  }
 }
 
 /**
  * Result of URL verification
  */
 export interface UrlVerificationResult {
-	/** Whether the URL is valid and accessible */
-	valid: boolean;
-	/** Normalized URL */
-	normalizedUrl: string;
-	/** Extracted tenant name */
-	tenant: string | null;
-	/** Error message if invalid */
-	error?: string;
-	/** Suggestions for fixing the URL */
-	suggestions?: string[];
+  /** Whether the URL is valid and accessible */
+  valid: boolean;
+  /** Normalized URL */
+  normalizedUrl: string;
+  /** Extracted tenant name */
+  tenant: string | null;
+  /** Error message if invalid */
+  error?: string;
+  /** Suggestions for fixing the URL */
+  suggestions?: string[];
 }
 
 /**
@@ -186,165 +179,158 @@ export interface UrlVerificationResult {
  * @returns Verification result with status and suggestions
  */
 export async function verifyF5XCEndpoint(
-	url: string,
-	options: { timeoutMs?: number; skipVerification?: boolean } = {},
+  url: string,
+  options: { timeoutMs?: number; skipVerification?: boolean } = {},
 ): Promise<UrlVerificationResult> {
-	const { timeoutMs = 10000, skipVerification = false } = options;
+  const { timeoutMs = 10000, skipVerification = false } = options;
 
-	let normalizedUrl: string;
-	let tenant: string | null;
-	try {
-		normalizedUrl = normalizeF5XCUrl(url);
-		tenant = extractTenantFromUrl(normalizedUrl);
-	} catch (error) {
-		// Domain validation failed (SSRF protection)
-		return {
-			valid: false,
-			normalizedUrl: url,
-			tenant: null,
-			error: error instanceof Error ? error.message : String(error),
-			suggestions: [
-				"Verify the tenant URL is a valid F5XC domain",
-				"Set F5XC_ALLOWED_DOMAINS to add custom domain suffixes",
-			],
-		};
-	}
+  let normalizedUrl: string;
+  let tenant: string | null;
+  try {
+    normalizedUrl = normalizeF5XCUrl(url);
+    tenant = extractTenantFromUrl(normalizedUrl);
+  } catch (error) {
+    // Domain validation failed (SSRF protection)
+    return {
+      valid: false,
+      normalizedUrl: url,
+      tenant: null,
+      error: error instanceof Error ? error.message : String(error),
+      suggestions: [
+        "Verify the tenant URL is a valid F5XC domain",
+        "Set F5XC_ALLOWED_DOMAINS to add custom domain suffixes",
+      ],
+    };
+  }
 
-	// If verification is skipped, just return the normalized URL
-	if (skipVerification) {
-		return {
-			valid: true,
-			normalizedUrl,
-			tenant,
-		};
-	}
+  // If verification is skipped, just return the normalized URL
+  if (skipVerification) {
+    return {
+      valid: true,
+      normalizedUrl,
+      tenant,
+    };
+  }
 
-	const apiUrl = `${normalizedUrl}/api`;
+  const apiUrl = `${normalizedUrl}/api`;
 
-	try {
-		const controller = new AbortController();
-		const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
-		const response = await fetch(apiUrl, {
-			method: "GET",
-			headers: { Accept: "application/json" },
-			signal: controller.signal,
-		});
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      signal: controller.signal,
+    });
 
-		clearTimeout(timeout);
+    clearTimeout(timeout);
 
-		// 401/403 = URL is valid, just needs authentication
-		if (response.status === 401 || response.status === 403) {
-			return {
-				valid: true,
-				normalizedUrl,
-				tenant,
-			};
-		}
+    // 401/403 = URL is valid, just needs authentication
+    if (response.status === 401 || response.status === 403) {
+      return {
+        valid: true,
+        normalizedUrl,
+        tenant,
+      };
+    }
 
-		// 404 = Wrong URL format or path
-		if (response.status === 404) {
-			return {
-				valid: false,
-				normalizedUrl,
-				tenant,
-				error: "API endpoint not found (404). Verify the tenant URL format.",
-				suggestions: tenant
-					? [
-							`Try: https://${tenant}.console.ves.volterra.io`,
-							`Try: https://${tenant}.staging.volterra.us`,
-						]
-					: ["Verify the tenant name is correct"],
-			};
-		}
+    // 404 = Wrong URL format or path
+    if (response.status === 404) {
+      return {
+        valid: false,
+        normalizedUrl,
+        tenant,
+        error: "API endpoint not found (404). Verify the tenant URL format.",
+        suggestions: tenant
+          ? [`Try: https://${tenant}.console.ves.volterra.io`, `Try: https://${tenant}.staging.volterra.us`]
+          : ["Verify the tenant name is correct"],
+      };
+    }
 
-		// Other successful responses - URL is valid
-		if (response.ok) {
-			return {
-				valid: true,
-				normalizedUrl,
-				tenant,
-			};
-		}
+    // Other successful responses - URL is valid
+    if (response.ok) {
+      return {
+        valid: true,
+        normalizedUrl,
+        tenant,
+      };
+    }
 
-		// Other error responses
-		return {
-			valid: false,
-			normalizedUrl,
-			tenant,
-			error: `Unexpected response: HTTP ${response.status}`,
-			suggestions: ["Verify the tenant URL and check F5XC console status"],
-		};
-	} catch (error) {
-		const errorMessage = error instanceof Error ? error.message : String(error);
+    // Other error responses
+    return {
+      valid: false,
+      normalizedUrl,
+      tenant,
+      error: `Unexpected response: HTTP ${response.status}`,
+      suggestions: ["Verify the tenant URL and check F5XC console status"],
+    };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
 
-		// Handle abort/timeout
-		if (errorMessage.includes("abort") || errorMessage.includes("timeout")) {
-			return {
-				valid: false,
-				normalizedUrl,
-				tenant,
-				error: `Connection timed out after ${timeoutMs}ms`,
-				suggestions: [
-					"Check network connectivity",
-					"Verify the F5XC console is accessible",
-					"Try increasing timeout if on slow network",
-				],
-			};
-		}
+    // Handle abort/timeout
+    if (errorMessage.includes("abort") || errorMessage.includes("timeout")) {
+      return {
+        valid: false,
+        normalizedUrl,
+        tenant,
+        error: `Connection timed out after ${timeoutMs}ms`,
+        suggestions: [
+          "Check network connectivity",
+          "Verify the F5XC console is accessible",
+          "Try increasing timeout if on slow network",
+        ],
+      };
+    }
 
-		// Handle SSL/TLS errors
-		if (
-			errorMessage.includes("certificate") ||
-			errorMessage.includes("SSL") ||
-			errorMessage.includes("TLS")
-		) {
-			return {
-				valid: false,
-				normalizedUrl,
-				tenant,
-				error: `SSL/TLS error: ${errorMessage}`,
-				suggestions: [
-					"For staging environments, you may need to configure TLS settings",
-					"Verify the tenant URL is correct",
-				],
-			};
-		}
+    // Handle SSL/TLS errors
+    if (errorMessage.includes("certificate") || errorMessage.includes("SSL") || errorMessage.includes("TLS")) {
+      return {
+        valid: false,
+        normalizedUrl,
+        tenant,
+        error: `SSL/TLS error: ${errorMessage}`,
+        suggestions: [
+          "For staging environments, you may need to configure TLS settings",
+          "Verify the tenant URL is correct",
+        ],
+      };
+    }
 
-		// Handle DNS/network errors
-		if (
-			errorMessage.includes("ENOTFOUND") ||
-			errorMessage.includes("getaddrinfo") ||
-			errorMessage.includes("resolve")
-		) {
-			return {
-				valid: false,
-				normalizedUrl,
-				tenant,
-				error: `Could not resolve hostname: ${errorMessage}`,
-				suggestions: tenant
-					? [
-							`Verify tenant name "${tenant}" is correct`,
-							`Try: https://${tenant}.console.ves.volterra.io`,
-							"Check DNS resolution and network connectivity",
-						]
-					: ["Verify the hostname is correct", "Check DNS resolution"],
-			};
-		}
+    // Handle DNS/network errors
+    if (
+      errorMessage.includes("ENOTFOUND") ||
+      errorMessage.includes("getaddrinfo") ||
+      errorMessage.includes("resolve")
+    ) {
+      return {
+        valid: false,
+        normalizedUrl,
+        tenant,
+        error: `Could not resolve hostname: ${errorMessage}`,
+        suggestions: tenant
+          ? [
+              `Verify tenant name "${tenant}" is correct`,
+              `Try: https://${tenant}.console.ves.volterra.io`,
+              "Check DNS resolution and network connectivity",
+            ]
+          : ["Verify the hostname is correct", "Check DNS resolution"],
+      };
+    }
 
-		// Generic connection error
-		return {
-			valid: false,
-			normalizedUrl,
-			tenant,
-			error: `Connection failed: ${errorMessage}`,
-			suggestions: [
-				"Verify the tenant URL is correct",
-				"Check network connectivity",
-				"Ensure the F5XC console is accessible",
-			],
-		};
-	}
+    // Generic connection error
+    return {
+      valid: false,
+      normalizedUrl,
+      tenant,
+      error: `Connection failed: ${errorMessage}`,
+      suggestions: [
+        "Verify the tenant URL is correct",
+        "Check network connectivity",
+        "Ensure the F5XC console is accessible",
+      ],
+    };
+  }
 }
 
 /**
@@ -358,30 +344,26 @@ export async function verifyF5XCEndpoint(
  * @returns Best verification result from tried patterns
  */
 export async function verifyWithRetry(
-	input: string,
-	options: { timeoutMs?: number } = {},
+  input: string,
+  options: { timeoutMs?: number } = {},
 ): Promise<UrlVerificationResult> {
-	// Try the original input first
-	let result = await verifyF5XCEndpoint(input, options);
-	if (result.valid) return result;
+  // Try the original input first
+  let result = await verifyF5XCEndpoint(input, options);
+  if (result.valid) return result;
 
-	// If input looks like just a tenant name (no dots), try common patterns
-	if (!input.includes(".")) {
-		const patterns = [
-			`${input}.console.ves.volterra.io`,
-			`${input}.staging.volterra.us`,
-			`${input}.volterra.us`,
-		];
+  // If input looks like just a tenant name (no dots), try common patterns
+  if (!input.includes(".")) {
+    const patterns = [`${input}.console.ves.volterra.io`, `${input}.staging.volterra.us`, `${input}.volterra.us`];
 
-		for (const pattern of patterns) {
-			result = await verifyF5XCEndpoint(pattern, options);
-			if (result.valid) {
-				logger.info(`URL verified using pattern: ${pattern}`);
-				return result;
-			}
-		}
-	}
+    for (const pattern of patterns) {
+      result = await verifyF5XCEndpoint(pattern, options);
+      if (result.valid) {
+        logger.info(`URL verified using pattern: ${pattern}`);
+        return result;
+      }
+    }
+  }
 
-	// Return the last result with accumulated suggestions
-	return result;
+  // Return the last result with accumulated suggestions
+  return result;
 }

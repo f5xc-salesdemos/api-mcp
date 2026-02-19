@@ -21,19 +21,14 @@ let acronymMap: Map<string, string> | null = null;
  * Build the acronym map from upstream data
  */
 function buildAcronymMap(): Map<string, string> {
-	if (acronymMap) {
-		return acronymMap;
-	}
+  if (acronymMap) {
+    return acronymMap;
+  }
 
-	const acronyms = getAcronyms();
-	acronymMap = new Map(
-		acronyms.map((entry: AcronymEntry) => [
-			entry.acronym.toLowerCase(),
-			entry.acronym,
-		]),
-	);
+  const acronyms = getAcronyms();
+  acronymMap = new Map(acronyms.map((entry: AcronymEntry) => [entry.acronym.toLowerCase(), entry.acronym]));
 
-	return acronymMap;
+  return acronymMap;
 }
 
 /**
@@ -41,8 +36,8 @@ function buildAcronymMap(): Map<string, string> {
  * Sourced from upstream x-f5xc-acronyms extension
  */
 export function getTechnicalAcronyms(): readonly string[] {
-	const acronyms = getAcronyms();
-	return Object.freeze(acronyms.map((entry: AcronymEntry) => entry.acronym));
+  const acronyms = getAcronyms();
+  return Object.freeze(acronyms.map((entry: AcronymEntry) => entry.acronym));
 }
 
 /**
@@ -52,8 +47,8 @@ export function getTechnicalAcronyms(): readonly string[] {
  * @returns True if the word is a known acronym
  */
 export function isAcronym(word: string): boolean {
-	const map = buildAcronymMap();
-	return map.has(word.toLowerCase());
+  const map = buildAcronymMap();
+  return map.has(word.toLowerCase());
 }
 
 /**
@@ -63,8 +58,8 @@ export function isAcronym(word: string): boolean {
  * @returns Canonical acronym form or null if not an acronym
  */
 export function getCanonicalAcronym(word: string): string | null {
-	const map = buildAcronymMap();
-	return map.get(word.toLowerCase()) ?? null;
+  const map = buildAcronymMap();
+  return map.get(word.toLowerCase()) ?? null;
 }
 
 /**
@@ -76,13 +71,13 @@ export function getCanonicalAcronym(word: string): string | null {
  * @returns Kebab-case string
  */
 export function toKebabCase(text: string): string {
-	return text
-		.trim()
-		.replace(/([a-z])([A-Z])/g, "$1-$2") // camelCase to kebab
-		.replace(/[\s_]+/g, "-") // spaces and underscores to hyphens
-		.replace(/[^a-zA-Z0-9-]/g, "") // remove special characters
-		.replace(/-+/g, "-") // collapse multiple hyphens
-		.toLowerCase();
+  return text
+    .trim()
+    .replace(/([a-z])([A-Z])/g, "$1-$2") // camelCase to kebab
+    .replace(/[\s_]+/g, "-") // spaces and underscores to hyphens
+    .replace(/[^a-zA-Z0-9-]/g, "") // remove special characters
+    .replace(/-+/g, "-") // collapse multiple hyphens
+    .toLowerCase();
 }
 
 /**
@@ -94,13 +89,13 @@ export function toKebabCase(text: string): string {
  * @returns Snake_case string
  */
 export function toSnakeCase(text: string): string {
-	return text
-		.trim()
-		.replace(/([a-z])([A-Z])/g, "$1_$2") // camelCase to snake
-		.replace(/[\s-]+/g, "_") // spaces and hyphens to underscores
-		.replace(/[^a-zA-Z0-9_]/g, "") // remove special characters
-		.replace(/_+/g, "_") // collapse multiple underscores
-		.toLowerCase();
+  return text
+    .trim()
+    .replace(/([a-z])([A-Z])/g, "$1_$2") // camelCase to snake
+    .replace(/[\s-]+/g, "_") // spaces and hyphens to underscores
+    .replace(/[^a-zA-Z0-9_]/g, "") // remove special characters
+    .replace(/_+/g, "_") // collapse multiple underscores
+    .toLowerCase();
 }
 
 /**
@@ -112,20 +107,20 @@ export function toSnakeCase(text: string): string {
  * @returns PascalCase string
  */
 export function toPascalCase(text: string): string {
-	const map = buildAcronymMap();
-	return text
-		.trim()
-		.split(/[\s_-]+/)
-		.map((word) => {
-			const acronym = map.get(word.toLowerCase());
-			if (acronym) {
-				// Keep acronyms as-is for PascalCase
-				return acronym;
-			}
-			// Capitalize first letter
-			return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-		})
-		.join("");
+  const map = buildAcronymMap();
+  return text
+    .trim()
+    .split(/[\s_-]+/)
+    .map((word) => {
+      const acronym = map.get(word.toLowerCase());
+      if (acronym) {
+        // Keep acronyms as-is for PascalCase
+        return acronym;
+      }
+      // Capitalize first letter
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join("");
 }
 
 /**
@@ -137,13 +132,13 @@ export function toPascalCase(text: string): string {
  * @returns camelCase string
  */
 export function toCamelCase(text: string): string {
-	const pascal = toPascalCase(text);
-	return pascal.charAt(0).toLowerCase() + pascal.slice(1);
+  const pascal = toPascalCase(text);
+  return pascal.charAt(0).toLowerCase() + pascal.slice(1);
 }
 
 /**
  * Clear the acronym cache (useful for testing)
  */
 export function clearAcronymCache(): void {
-	acronymMap = null;
+  acronymMap = null;
 }

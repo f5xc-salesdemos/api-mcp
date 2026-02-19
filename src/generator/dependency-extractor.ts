@@ -10,57 +10,53 @@
  */
 
 import type {
-	AddonServiceDefinition,
-	ExtractedDependencies,
-	OneOfGroup,
-	ParsedRef,
-	ResourceReference,
+  AddonServiceDefinition,
+  ExtractedDependencies,
+  OneOfGroup,
+  ParsedRef,
+  ResourceReference,
 } from "./dependency-types.js";
-import {
-	getDomainMetadata,
-	getResourceDomain,
-	getResourceMetadata,
-} from "./domain-metadata.js";
+import { getDomainMetadata, getResourceDomain, getResourceMetadata } from "./domain-metadata.js";
 
 /**
  * Known resource type suffixes to strip from schema names
  * Order matters - more specific suffixes first
  */
 const RESOURCE_SUFFIXES = [
-	"CreateRequest",
-	"CreateResponse",
-	"ReplaceRequest",
-	"ReplaceResponse",
-	"GetRequest",
-	"GetResponse",
-	"ListRequest",
-	"ListResponse",
-	"DeleteRequest",
-	"DeleteResponse",
-	"UpdateRequest",
-	"UpdateResponse",
-	"Spec",
-	"SpecType",
-	"Object",
-	"Type",
+  "CreateRequest",
+  "CreateResponse",
+  "ReplaceRequest",
+  "ReplaceResponse",
+  "GetRequest",
+  "GetResponse",
+  "ListRequest",
+  "ListResponse",
+  "DeleteRequest",
+  "DeleteResponse",
+  "UpdateRequest",
+  "UpdateResponse",
+  "Spec",
+  "SpecType",
+  "Object",
+  "Type",
 ];
 
 /**
  * Known operation types inferred from schema names
  */
 const OPERATION_PATTERNS: Record<string, string> = {
-	CreateRequest: "create",
-	CreateResponse: "create",
-	ReplaceRequest: "replace",
-	ReplaceResponse: "replace",
-	GetRequest: "get",
-	GetResponse: "get",
-	ListRequest: "list",
-	ListResponse: "list",
-	DeleteRequest: "delete",
-	DeleteResponse: "delete",
-	UpdateRequest: "update",
-	UpdateResponse: "update",
+  CreateRequest: "create",
+  CreateResponse: "create",
+  ReplaceRequest: "replace",
+  ReplaceResponse: "replace",
+  GetRequest: "get",
+  GetResponse: "get",
+  ListRequest: "list",
+  ListResponse: "list",
+  DeleteRequest: "delete",
+  DeleteResponse: "delete",
+  UpdateRequest: "update",
+  UpdateResponse: "update",
 };
 
 /**
@@ -72,45 +68,45 @@ const OPERATION_PATTERNS: Record<string, string> = {
  * //      resourceType: "origin_pool", operationType: "create" }
  */
 export function parseRef(refString: string): ParsedRef | null {
-	if (!refString || typeof refString !== "string") {
-		return null;
-	}
+  if (!refString || typeof refString !== "string") {
+    return null;
+  }
 
-	// Match OpenAPI component schema references
-	const match = refString.match(/#\/components\/schemas\/(.+)/);
-	if (!match || !match[1]) {
-		return null;
-	}
+  // Match OpenAPI component schema references
+  const match = refString.match(/#\/components\/schemas\/(.+)/);
+  if (!match || !match[1]) {
+    return null;
+  }
 
-	const schemaName: string = match[1];
-	let resourceType: string | null = null;
-	let operationType: string | null = null;
+  const schemaName: string = match[1];
+  let resourceType: string | null = null;
+  let operationType: string | null = null;
 
-	// Try to extract resource type and operation from schema name
-	for (const [suffix, operation] of Object.entries(OPERATION_PATTERNS)) {
-		if (schemaName.endsWith(suffix)) {
-			resourceType = schemaName.slice(0, -suffix.length);
-			operationType = operation;
-			break;
-		}
-	}
+  // Try to extract resource type and operation from schema name
+  for (const [suffix, operation] of Object.entries(OPERATION_PATTERNS)) {
+    if (schemaName.endsWith(suffix)) {
+      resourceType = schemaName.slice(0, -suffix.length);
+      operationType = operation;
+      break;
+    }
+  }
 
-	// If no operation pattern matched, try just removing known suffixes
-	if (!resourceType) {
-		for (const suffix of RESOURCE_SUFFIXES) {
-			if (schemaName.endsWith(suffix)) {
-				resourceType = schemaName.slice(0, -suffix.length);
-				break;
-			}
-		}
-	}
+  // If no operation pattern matched, try just removing known suffixes
+  if (!resourceType) {
+    for (const suffix of RESOURCE_SUFFIXES) {
+      if (schemaName.endsWith(suffix)) {
+        resourceType = schemaName.slice(0, -suffix.length);
+        break;
+      }
+    }
+  }
 
-	return {
-		fullPath: refString,
-		schemaName,
-		resourceType,
-		operationType,
-	};
+  return {
+    fullPath: refString,
+    schemaName,
+    resourceType,
+    operationType,
+  };
 }
 
 /**
@@ -121,10 +117,10 @@ export function parseRef(refString: string): ParsedRef | null {
  * normalizeResourceType("httpLoadbalancer") // => "http-loadbalancer"
  */
 export function normalizeResourceType(resourceType: string): string {
-	return resourceType
-		.replace(/_/g, "-")
-		.replace(/([a-z])([A-Z])/g, "$1-$2")
-		.toLowerCase();
+  return resourceType
+    .replace(/_/g, "-")
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .toLowerCase();
 }
 
 /**
@@ -138,170 +134,119 @@ export function normalizeResourceType(resourceType: string): string {
  * @throws Error if maxDepth is exceeded
  */
 export function extractRefPatterns(
-	schema: Record<string, unknown>,
-	currentPath = "",
-	depth = 0,
-	maxDepth = 20,
+  schema: Record<string, unknown>,
+  currentPath = "",
+  depth = 0,
+  maxDepth = 20,
 ): ResourceReference[] {
-	// Depth protection
-	if (depth > maxDepth) {
-		throw new Error(
-			`Schema nesting exceeds maximum depth of ${maxDepth} at path: ${currentPath || "root"}`,
-		);
-	}
+  // Depth protection
+  if (depth > maxDepth) {
+    throw new Error(`Schema nesting exceeds maximum depth of ${maxDepth} at path: ${currentPath || "root"}`);
+  }
 
-	const references: ResourceReference[] = [];
+  const references: ResourceReference[] = [];
 
-	if (!schema || typeof schema !== "object") {
-		return references;
-	}
+  if (!schema || typeof schema !== "object") {
+    return references;
+  }
 
-	// Handle direct $ref
-	if ("$ref" in schema && typeof schema.$ref === "string") {
-		const parsed = parseRef(schema.$ref);
-		if (parsed?.resourceType) {
-			references.push({
-				resourceType: normalizeResourceType(parsed.resourceType),
-				domain: "", // Will be resolved later from the full spec context
-				fieldPath: currentPath,
-				required: false, // Will be updated based on parent "required" array
-				inline: false, // Simple refs are not inline
-			});
-		}
-	}
+  // Handle direct $ref
+  if ("$ref" in schema && typeof schema.$ref === "string") {
+    const parsed = parseRef(schema.$ref);
+    if (parsed?.resourceType) {
+      references.push({
+        resourceType: normalizeResourceType(parsed.resourceType),
+        domain: "", // Will be resolved later from the full spec context
+        fieldPath: currentPath,
+        required: false, // Will be updated based on parent "required" array
+        inline: false, // Simple refs are not inline
+      });
+    }
+  }
 
-	// Handle properties object
-	if (
-		"properties" in schema &&
-		typeof schema.properties === "object" &&
-		schema.properties
-	) {
-		const properties = schema.properties as Record<string, unknown>;
-		const requiredFields =
-			Array.isArray(schema.required) &&
-			schema.required.every((r) => typeof r === "string")
-				? (schema.required as string[])
-				: [];
+  // Handle properties object
+  if ("properties" in schema && typeof schema.properties === "object" && schema.properties) {
+    const properties = schema.properties as Record<string, unknown>;
+    const requiredFields =
+      Array.isArray(schema.required) && schema.required.every((r) => typeof r === "string")
+        ? (schema.required as string[])
+        : [];
 
-		for (const [propName, propSchema] of Object.entries(properties)) {
-			if (typeof propSchema === "object" && propSchema !== null) {
-				const propPath = currentPath ? `${currentPath}.${propName}` : propName;
-				const propRefs = extractRefPatterns(
-					propSchema as Record<string, unknown>,
-					propPath,
-					depth + 1,
-					maxDepth,
-				);
+    for (const [propName, propSchema] of Object.entries(properties)) {
+      if (typeof propSchema === "object" && propSchema !== null) {
+        const propPath = currentPath ? `${currentPath}.${propName}` : propName;
+        const propRefs = extractRefPatterns(propSchema as Record<string, unknown>, propPath, depth + 1, maxDepth);
 
-				// Mark as required if in parent's required array
-				for (const ref of propRefs) {
-					if (ref.fieldPath === propPath && requiredFields.includes(propName)) {
-						ref.required = true;
-					}
-				}
+        // Mark as required if in parent's required array
+        for (const ref of propRefs) {
+          if (ref.fieldPath === propPath && requiredFields.includes(propName)) {
+            ref.required = true;
+          }
+        }
 
-				references.push(...propRefs);
-			}
-		}
-	}
+        references.push(...propRefs);
+      }
+    }
+  }
 
-	// Handle allOf
-	if ("allOf" in schema && Array.isArray(schema.allOf)) {
-		for (const [index, item] of schema.allOf.entries()) {
-			if (typeof item === "object" && item !== null) {
-				const allOfPath = currentPath
-					? `${currentPath}.allOf[${index}]`
-					: `allOf[${index}]`;
-				references.push(
-					...extractRefPatterns(
-						item as Record<string, unknown>,
-						allOfPath,
-						depth + 1,
-						maxDepth,
-					),
-				);
-			}
-		}
-	}
+  // Handle allOf
+  if ("allOf" in schema && Array.isArray(schema.allOf)) {
+    for (const [index, item] of schema.allOf.entries()) {
+      if (typeof item === "object" && item !== null) {
+        const allOfPath = currentPath ? `${currentPath}.allOf[${index}]` : `allOf[${index}]`;
+        references.push(...extractRefPatterns(item as Record<string, unknown>, allOfPath, depth + 1, maxDepth));
+      }
+    }
+  }
 
-	// Handle oneOf (inline capability)
-	if ("oneOf" in schema && Array.isArray(schema.oneOf)) {
-		for (const [index, item] of schema.oneOf.entries()) {
-			if (typeof item === "object" && item !== null) {
-				const oneOfPath = currentPath
-					? `${currentPath}.oneOf[${index}]`
-					: `oneOf[${index}]`;
-				const oneOfRefs = extractRefPatterns(
-					item as Record<string, unknown>,
-					oneOfPath,
-					depth + 1,
-					maxDepth,
-				);
-				// Mark oneOf refs as supporting inline definitions
-				for (const ref of oneOfRefs) {
-					ref.inline = true;
-				}
-				references.push(...oneOfRefs);
-			}
-		}
-	}
+  // Handle oneOf (inline capability)
+  if ("oneOf" in schema && Array.isArray(schema.oneOf)) {
+    for (const [index, item] of schema.oneOf.entries()) {
+      if (typeof item === "object" && item !== null) {
+        const oneOfPath = currentPath ? `${currentPath}.oneOf[${index}]` : `oneOf[${index}]`;
+        const oneOfRefs = extractRefPatterns(item as Record<string, unknown>, oneOfPath, depth + 1, maxDepth);
+        // Mark oneOf refs as supporting inline definitions
+        for (const ref of oneOfRefs) {
+          ref.inline = true;
+        }
+        references.push(...oneOfRefs);
+      }
+    }
+  }
 
-	// Handle anyOf (inline capability)
-	if ("anyOf" in schema && Array.isArray(schema.anyOf)) {
-		for (const [index, item] of schema.anyOf.entries()) {
-			if (typeof item === "object" && item !== null) {
-				const anyOfPath = currentPath
-					? `${currentPath}.anyOf[${index}]`
-					: `anyOf[${index}]`;
-				const anyOfRefs = extractRefPatterns(
-					item as Record<string, unknown>,
-					anyOfPath,
-					depth + 1,
-					maxDepth,
-				);
-				for (const ref of anyOfRefs) {
-					ref.inline = true;
-				}
-				references.push(...anyOfRefs);
-			}
-		}
-	}
+  // Handle anyOf (inline capability)
+  if ("anyOf" in schema && Array.isArray(schema.anyOf)) {
+    for (const [index, item] of schema.anyOf.entries()) {
+      if (typeof item === "object" && item !== null) {
+        const anyOfPath = currentPath ? `${currentPath}.anyOf[${index}]` : `anyOf[${index}]`;
+        const anyOfRefs = extractRefPatterns(item as Record<string, unknown>, anyOfPath, depth + 1, maxDepth);
+        for (const ref of anyOfRefs) {
+          ref.inline = true;
+        }
+        references.push(...anyOfRefs);
+      }
+    }
+  }
 
-	// Handle items (arrays)
-	if (
-		"items" in schema &&
-		typeof schema.items === "object" &&
-		schema.items !== null
-	) {
-		const itemsPath = currentPath ? `${currentPath}[]` : "[]";
-		references.push(
-			...extractRefPatterns(
-				schema.items as Record<string, unknown>,
-				itemsPath,
-				depth + 1,
-				maxDepth,
-			),
-		);
-	}
+  // Handle items (arrays)
+  if ("items" in schema && typeof schema.items === "object" && schema.items !== null) {
+    const itemsPath = currentPath ? `${currentPath}[]` : "[]";
+    references.push(...extractRefPatterns(schema.items as Record<string, unknown>, itemsPath, depth + 1, maxDepth));
+  }
 
-	// Handle additionalProperties
-	if (
-		"additionalProperties" in schema &&
-		typeof schema.additionalProperties === "object" &&
-		schema.additionalProperties !== null
-	) {
-		const addPropsPath = currentPath ? `${currentPath}[*]` : "[*]";
-		references.push(
-			...extractRefPatterns(
-				schema.additionalProperties as Record<string, unknown>,
-				addPropsPath,
-				depth + 1,
-				maxDepth,
-			),
-		);
-	}
+  // Handle additionalProperties
+  if (
+    "additionalProperties" in schema &&
+    typeof schema.additionalProperties === "object" &&
+    schema.additionalProperties !== null
+  ) {
+    const addPropsPath = currentPath ? `${currentPath}[*]` : "[*]";
+    references.push(
+      ...extractRefPatterns(schema.additionalProperties as Record<string, unknown>, addPropsPath, depth + 1, maxDepth),
+    );
+  }
 
-	return references;
+  return references;
 }
 
 /**
@@ -318,287 +263,189 @@ export function extractRefPatterns(
  * @returns Array of OneOfGroup definitions with full paths
  */
 export function extractOneOfPatterns(
-	schema: Record<string, unknown>,
-	currentPath = "",
-	depth = 0,
-	maxDepth = 20,
-	componentSchemas: Record<string, unknown> = {},
+  schema: Record<string, unknown>,
+  currentPath = "",
+  depth = 0,
+  maxDepth = 20,
+  componentSchemas: Record<string, unknown> = {},
 ): OneOfGroup[] {
-	const groups: OneOfGroup[] = [];
+  const groups: OneOfGroup[] = [];
 
-	// Depth protection
-	if (depth > maxDepth) {
-		return groups;
-	}
+  // Depth protection
+  if (depth > maxDepth) {
+    return groups;
+  }
 
-	if (!schema || typeof schema !== "object") {
-		return groups;
-	}
+  if (!schema || typeof schema !== "object") {
+    return groups;
+  }
 
-	// Look for x-ves-oneof-field-* keys at current level
-	for (const [key, value] of Object.entries(schema)) {
-		if (key.startsWith("x-ves-oneof-field-") && typeof value === "string") {
-			const choiceField = key.replace("x-ves-oneof-field-", "");
-			const fieldPath = currentPath
-				? `${currentPath}.${choiceField}`
-				: choiceField;
+  // Look for x-ves-oneof-field-* keys at current level
+  for (const [key, value] of Object.entries(schema)) {
+    if (key.startsWith("x-ves-oneof-field-") && typeof value === "string") {
+      const choiceField = key.replace("x-ves-oneof-field-", "");
+      const fieldPath = currentPath ? `${currentPath}.${choiceField}` : choiceField;
 
-			try {
-				// Value is a JSON array string like "[\"option1\",\"option2\"]"
-				const parsedOptions = JSON.parse(value) as unknown;
-				if (
-					Array.isArray(parsedOptions) &&
-					parsedOptions.every((o) => typeof o === "string")
-				) {
-					// Build full paths for options
-					const optionsWithPaths = (parsedOptions as string[]).map((opt) =>
-						currentPath ? `${currentPath}.${opt}` : opt,
-					);
+      try {
+        // Value is a JSON array string like "[\"option1\",\"option2\"]"
+        const parsedOptions = JSON.parse(value) as unknown;
+        if (Array.isArray(parsedOptions) && parsedOptions.every((o) => typeof o === "string")) {
+          // Build full paths for options
+          const optionsWithPaths = (parsedOptions as string[]).map((opt) =>
+            currentPath ? `${currentPath}.${opt}` : opt,
+          );
 
-					const group: OneOfGroup = {
-						choiceField,
-						options: optionsWithPaths,
-						fieldPath,
-						description: undefined, // Could be extracted from property description if available
-						recommendedOption: undefined, // Will be populated below
-					};
+          const group: OneOfGroup = {
+            choiceField,
+            options: optionsWithPaths,
+            fieldPath,
+            description: undefined, // Could be extracted from property description if available
+            recommendedOption: undefined, // Will be populated below
+          };
 
-					// Look for description and recommended option
-					if (
-						"properties" in schema &&
-						typeof schema.properties === "object" &&
-						schema.properties
-					) {
-						const properties = schema.properties as Record<string, unknown>;
+          // Look for description and recommended option
+          if ("properties" in schema && typeof schema.properties === "object" && schema.properties) {
+            const properties = schema.properties as Record<string, unknown>;
 
-						// Check for description on the choice field
-						const prop = properties[choiceField];
-						if (prop && typeof prop === "object" && "description" in prop) {
-							group.description = String(
-								(prop as Record<string, unknown>).description,
-							);
-						}
+            // Check for description on the choice field
+            const prop = properties[choiceField];
+            if (prop && typeof prop === "object" && "description" in prop) {
+              group.description = String((prop as Record<string, unknown>).description);
+            }
 
-						// Method 1: Look for x-f5xc-recommended-oneof-variant-{choiceField} annotation
-						const recommendedKey = `x-f5xc-recommended-oneof-variant-${choiceField}`;
-						if (
-							recommendedKey in schema &&
-							typeof schema[recommendedKey] === "string"
-						) {
-							// Build full path for recommended option
-							const recommendedOpt = schema[recommendedKey] as string;
-							group.recommendedOption = currentPath
-								? `${currentPath}.${recommendedOpt}`
-								: recommendedOpt;
-						}
+            // Method 1: Look for x-f5xc-recommended-oneof-variant-{choiceField} annotation
+            const recommendedKey = `x-f5xc-recommended-oneof-variant-${choiceField}`;
+            if (recommendedKey in schema && typeof schema[recommendedKey] === "string") {
+              // Build full path for recommended option
+              const recommendedOpt = schema[recommendedKey] as string;
+              group.recommendedOption = currentPath ? `${currentPath}.${recommendedOpt}` : recommendedOpt;
+            }
 
-						// Method 2: Infer recommended from x-f5xc-server-default: true on variant properties
-						if (!group.recommendedOption) {
-							for (const option of parsedOptions as string[]) {
-								const optionProp = properties[option];
-								if (optionProp && typeof optionProp === "object") {
-									const optionObj = optionProp as Record<string, unknown>;
-									if (optionObj["x-f5xc-server-default"] === true) {
-										group.recommendedOption = currentPath
-											? `${currentPath}.${option}`
-											: option;
-										break;
-									}
-								}
-							}
-						}
-					}
+            // Method 2: Infer recommended from x-f5xc-server-default: true on variant properties
+            if (!group.recommendedOption) {
+              for (const option of parsedOptions as string[]) {
+                const optionProp = properties[option];
+                if (optionProp && typeof optionProp === "object") {
+                  const optionObj = optionProp as Record<string, unknown>;
+                  if (optionObj["x-f5xc-server-default"] === true) {
+                    group.recommendedOption = currentPath ? `${currentPath}.${option}` : option;
+                    break;
+                  }
+                }
+              }
+            }
+          }
 
-					groups.push(group);
-				}
-			} catch {
-				// Invalid JSON, skip this pattern
-			}
-		}
-	}
+          groups.push(group);
+        }
+      } catch {
+        // Invalid JSON, skip this pattern
+      }
+    }
+  }
 
-	// Recursively traverse properties
-	if (
-		"properties" in schema &&
-		typeof schema.properties === "object" &&
-		schema.properties
-	) {
-		const properties = schema.properties as Record<string, unknown>;
-		for (const [propName, propSchema] of Object.entries(properties)) {
-			if (typeof propSchema === "object" && propSchema !== null) {
-				const propPath = currentPath ? `${currentPath}.${propName}` : propName;
-				const propObj = propSchema as Record<string, unknown>;
+  // Recursively traverse properties
+  if ("properties" in schema && typeof schema.properties === "object" && schema.properties) {
+    const properties = schema.properties as Record<string, unknown>;
+    for (const [propName, propSchema] of Object.entries(properties)) {
+      if (typeof propSchema === "object" && propSchema !== null) {
+        const propPath = currentPath ? `${currentPath}.${propName}` : propName;
+        const propObj = propSchema as Record<string, unknown>;
 
-				// Resolve $ref if present
-				let resolvedSchema = propObj;
-				if ("$ref" in propObj && typeof propObj.$ref === "string") {
-					const parsed = parseRef(propObj.$ref);
-					if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
-						resolvedSchema = componentSchemas[parsed.schemaName] as Record<
-							string,
-							unknown
-						>;
-					}
-				}
+        // Resolve $ref if present
+        let resolvedSchema = propObj;
+        if ("$ref" in propObj && typeof propObj.$ref === "string") {
+          const parsed = parseRef(propObj.$ref);
+          if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
+            resolvedSchema = componentSchemas[parsed.schemaName] as Record<string, unknown>;
+          }
+        }
 
-				groups.push(
-					...extractOneOfPatterns(
-						resolvedSchema,
-						propPath,
-						depth + 1,
-						maxDepth,
-						componentSchemas,
-					),
-				);
-			}
-		}
-	}
+        groups.push(...extractOneOfPatterns(resolvedSchema, propPath, depth + 1, maxDepth, componentSchemas));
+      }
+    }
+  }
 
-	// Recursively traverse allOf
-	if ("allOf" in schema && Array.isArray(schema.allOf)) {
-		for (const item of schema.allOf) {
-			if (typeof item === "object" && item !== null) {
-				// allOf schemas share the same path context
-				let resolvedItem = item as Record<string, unknown>;
-				if ("$ref" in resolvedItem && typeof resolvedItem.$ref === "string") {
-					const parsed = parseRef(resolvedItem.$ref);
-					if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
-						resolvedItem = componentSchemas[parsed.schemaName] as Record<
-							string,
-							unknown
-						>;
-					}
-				}
-				groups.push(
-					...extractOneOfPatterns(
-						resolvedItem,
-						currentPath,
-						depth + 1,
-						maxDepth,
-						componentSchemas,
-					),
-				);
-			}
-		}
-	}
+  // Recursively traverse allOf
+  if ("allOf" in schema && Array.isArray(schema.allOf)) {
+    for (const item of schema.allOf) {
+      if (typeof item === "object" && item !== null) {
+        // allOf schemas share the same path context
+        let resolvedItem = item as Record<string, unknown>;
+        if ("$ref" in resolvedItem && typeof resolvedItem.$ref === "string") {
+          const parsed = parseRef(resolvedItem.$ref);
+          if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
+            resolvedItem = componentSchemas[parsed.schemaName] as Record<string, unknown>;
+          }
+        }
+        groups.push(...extractOneOfPatterns(resolvedItem, currentPath, depth + 1, maxDepth, componentSchemas));
+      }
+    }
+  }
 
-	// Recursively traverse oneOf
-	if ("oneOf" in schema && Array.isArray(schema.oneOf)) {
-		for (const item of schema.oneOf) {
-			if (typeof item === "object" && item !== null) {
-				let resolvedItem = item as Record<string, unknown>;
-				if ("$ref" in resolvedItem && typeof resolvedItem.$ref === "string") {
-					const parsed = parseRef(resolvedItem.$ref);
-					if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
-						resolvedItem = componentSchemas[parsed.schemaName] as Record<
-							string,
-							unknown
-						>;
-					}
-				}
-				groups.push(
-					...extractOneOfPatterns(
-						resolvedItem,
-						currentPath,
-						depth + 1,
-						maxDepth,
-						componentSchemas,
-					),
-				);
-			}
-		}
-	}
+  // Recursively traverse oneOf
+  if ("oneOf" in schema && Array.isArray(schema.oneOf)) {
+    for (const item of schema.oneOf) {
+      if (typeof item === "object" && item !== null) {
+        let resolvedItem = item as Record<string, unknown>;
+        if ("$ref" in resolvedItem && typeof resolvedItem.$ref === "string") {
+          const parsed = parseRef(resolvedItem.$ref);
+          if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
+            resolvedItem = componentSchemas[parsed.schemaName] as Record<string, unknown>;
+          }
+        }
+        groups.push(...extractOneOfPatterns(resolvedItem, currentPath, depth + 1, maxDepth, componentSchemas));
+      }
+    }
+  }
 
-	// Recursively traverse anyOf
-	if ("anyOf" in schema && Array.isArray(schema.anyOf)) {
-		for (const item of schema.anyOf) {
-			if (typeof item === "object" && item !== null) {
-				let resolvedItem = item as Record<string, unknown>;
-				if ("$ref" in resolvedItem && typeof resolvedItem.$ref === "string") {
-					const parsed = parseRef(resolvedItem.$ref);
-					if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
-						resolvedItem = componentSchemas[parsed.schemaName] as Record<
-							string,
-							unknown
-						>;
-					}
-				}
-				groups.push(
-					...extractOneOfPatterns(
-						resolvedItem,
-						currentPath,
-						depth + 1,
-						maxDepth,
-						componentSchemas,
-					),
-				);
-			}
-		}
-	}
+  // Recursively traverse anyOf
+  if ("anyOf" in schema && Array.isArray(schema.anyOf)) {
+    for (const item of schema.anyOf) {
+      if (typeof item === "object" && item !== null) {
+        let resolvedItem = item as Record<string, unknown>;
+        if ("$ref" in resolvedItem && typeof resolvedItem.$ref === "string") {
+          const parsed = parseRef(resolvedItem.$ref);
+          if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
+            resolvedItem = componentSchemas[parsed.schemaName] as Record<string, unknown>;
+          }
+        }
+        groups.push(...extractOneOfPatterns(resolvedItem, currentPath, depth + 1, maxDepth, componentSchemas));
+      }
+    }
+  }
 
-	// Recursively traverse array items
-	if (
-		"items" in schema &&
-		typeof schema.items === "object" &&
-		schema.items !== null
-	) {
-		const itemsPath = currentPath ? `${currentPath}[]` : "[]";
-		let resolvedItems = schema.items as Record<string, unknown>;
-		if ("$ref" in resolvedItems && typeof resolvedItems.$ref === "string") {
-			const parsed = parseRef(resolvedItems.$ref);
-			if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
-				resolvedItems = componentSchemas[parsed.schemaName] as Record<
-					string,
-					unknown
-				>;
-			}
-		}
-		groups.push(
-			...extractOneOfPatterns(
-				resolvedItems,
-				itemsPath,
-				depth + 1,
-				maxDepth,
-				componentSchemas,
-			),
-		);
-	}
+  // Recursively traverse array items
+  if ("items" in schema && typeof schema.items === "object" && schema.items !== null) {
+    const itemsPath = currentPath ? `${currentPath}[]` : "[]";
+    let resolvedItems = schema.items as Record<string, unknown>;
+    if ("$ref" in resolvedItems && typeof resolvedItems.$ref === "string") {
+      const parsed = parseRef(resolvedItems.$ref);
+      if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
+        resolvedItems = componentSchemas[parsed.schemaName] as Record<string, unknown>;
+      }
+    }
+    groups.push(...extractOneOfPatterns(resolvedItems, itemsPath, depth + 1, maxDepth, componentSchemas));
+  }
 
-	// Recursively traverse additionalProperties
-	if (
-		"additionalProperties" in schema &&
-		typeof schema.additionalProperties === "object" &&
-		schema.additionalProperties !== null
-	) {
-		const addPropsPath = currentPath ? `${currentPath}[*]` : "[*]";
-		let resolvedAddProps = schema.additionalProperties as Record<
-			string,
-			unknown
-		>;
-		if (
-			"$ref" in resolvedAddProps &&
-			typeof resolvedAddProps.$ref === "string"
-		) {
-			const parsed = parseRef(resolvedAddProps.$ref);
-			if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
-				resolvedAddProps = componentSchemas[parsed.schemaName] as Record<
-					string,
-					unknown
-				>;
-			}
-		}
-		groups.push(
-			...extractOneOfPatterns(
-				resolvedAddProps,
-				addPropsPath,
-				depth + 1,
-				maxDepth,
-				componentSchemas,
-			),
-		);
-	}
+  // Recursively traverse additionalProperties
+  if (
+    "additionalProperties" in schema &&
+    typeof schema.additionalProperties === "object" &&
+    schema.additionalProperties !== null
+  ) {
+    const addPropsPath = currentPath ? `${currentPath}[*]` : "[*]";
+    let resolvedAddProps = schema.additionalProperties as Record<string, unknown>;
+    if ("$ref" in resolvedAddProps && typeof resolvedAddProps.$ref === "string") {
+      const parsed = parseRef(resolvedAddProps.$ref);
+      if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
+        resolvedAddProps = componentSchemas[parsed.schemaName] as Record<string, unknown>;
+      }
+    }
+    groups.push(...extractOneOfPatterns(resolvedAddProps, addPropsPath, depth + 1, maxDepth, componentSchemas));
+  }
 
-	return groups;
+  return groups;
 }
 
 /**
@@ -607,34 +454,32 @@ export function extractOneOfPatterns(
  * @param subscriptionSchema - The subscriptionSubscribeRequest schema
  * @returns Array of addon service definitions
  */
-export function extractAddonServicesFromSchema(
-	subscriptionSchema: Record<string, unknown>,
-): AddonServiceDefinition[] {
-	const services: AddonServiceDefinition[] = [];
+export function extractAddonServicesFromSchema(subscriptionSchema: Record<string, unknown>): AddonServiceDefinition[] {
+  const services: AddonServiceDefinition[] = [];
 
-	// Look for x-ves-oneof-field-addon_choice
-	const addonChoiceKey = "x-ves-oneof-field-addon_choice";
-	const addonChoiceValue = subscriptionSchema[addonChoiceKey];
+  // Look for x-ves-oneof-field-addon_choice
+  const addonChoiceKey = "x-ves-oneof-field-addon_choice";
+  const addonChoiceValue = subscriptionSchema[addonChoiceKey];
 
-	if (typeof addonChoiceValue === "string") {
-		try {
-			const addons = JSON.parse(addonChoiceValue) as unknown;
-			if (Array.isArray(addons) && addons.every((a) => typeof a === "string")) {
-				for (const addon of addons as string[]) {
-					services.push({
-						serviceId: addon,
-						displayName: formatAddonDisplayName(addon),
-						tier: extractTierFromAddon(addon),
-						description: undefined, // Could be extracted from property description
-					});
-				}
-			}
-		} catch {
-			// Invalid JSON, skip
-		}
-	}
+  if (typeof addonChoiceValue === "string") {
+    try {
+      const addons = JSON.parse(addonChoiceValue) as unknown;
+      if (Array.isArray(addons) && addons.every((a) => typeof a === "string")) {
+        for (const addon of addons as string[]) {
+          services.push({
+            serviceId: addon,
+            displayName: formatAddonDisplayName(addon),
+            tier: extractTierFromAddon(addon),
+            description: undefined, // Could be extracted from property description
+          });
+        }
+      }
+    } catch {
+      // Invalid JSON, skip
+    }
+  }
 
-	return services;
+  return services;
 }
 
 /**
@@ -645,22 +490,18 @@ export function extractAddonServicesFromSchema(
  * // => "F5XC WAAP Advanced"
  */
 export function formatAddonDisplayName(serviceId: string): string {
-	return serviceId
-		.replace(/^f5xc_/, "F5XC ")
-		.replace(/_/g, " ")
-		.split(" ")
-		.map((word) => {
-			// Keep common acronyms uppercase
-			if (
-				["F5XC", "WAAP", "CDN", "API", "WAF", "DNS"].includes(
-					word.toUpperCase(),
-				)
-			) {
-				return word.toUpperCase();
-			}
-			return word.charAt(0).toUpperCase() + word.slice(1);
-		})
-		.join(" ");
+  return serviceId
+    .replace(/^f5xc_/, "F5XC ")
+    .replace(/_/g, " ")
+    .split(" ")
+    .map((word) => {
+      // Keep common acronyms uppercase
+      if (["F5XC", "WAAP", "CDN", "API", "WAF", "DNS"].includes(word.toUpperCase())) {
+        return word.toUpperCase();
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
 }
 
 /**
@@ -671,16 +512,16 @@ export function formatAddonDisplayName(serviceId: string): string {
  * extractTierFromAddon("f5xc_waap_standard") // => "standard"
  */
 export function extractTierFromAddon(serviceId: string): string {
-	const tiers = ["advanced", "standard", "premium", "basic", "enterprise"];
-	const lowerServiceId = serviceId.toLowerCase();
+  const tiers = ["advanced", "standard", "premium", "basic", "enterprise"];
+  const lowerServiceId = serviceId.toLowerCase();
 
-	for (const tier of tiers) {
-		if (lowerServiceId.includes(tier)) {
-			return tier;
-		}
-	}
+  for (const tier of tiers) {
+    if (lowerServiceId.includes(tier)) {
+      return tier;
+    }
+  }
 
-	return "standard"; // Default tier
+  return "standard"; // Default tier
 }
 
 /**
@@ -690,30 +531,28 @@ export function extractTierFromAddon(serviceId: string): string {
  * @returns Array of addon service definitions
  */
 export function extractSubscriptionServices(billingSpec: {
-	schemas: Record<string, unknown>;
+  schemas: Record<string, unknown>;
 }): AddonServiceDefinition[] {
-	const schemas = billingSpec.schemas || {};
+  const schemas = billingSpec.schemas || {};
 
-	// Look for subscriptionSubscribeRequest schema
-	const subscribeSchema = schemas.subscriptionSubscribeRequest;
-	if (subscribeSchema && typeof subscribeSchema === "object") {
-		return extractAddonServicesFromSchema(
-			subscribeSchema as Record<string, unknown>,
-		);
-	}
+  // Look for subscriptionSubscribeRequest schema
+  const subscribeSchema = schemas.subscriptionSubscribeRequest;
+  if (subscribeSchema && typeof subscribeSchema === "object") {
+    return extractAddonServicesFromSchema(subscribeSchema as Record<string, unknown>);
+  }
 
-	// Fallback: look for any schema with x-ves-oneof-field-addon_choice
-	for (const schemaName of Object.keys(schemas)) {
-		const schema = schemas[schemaName];
-		if (schema && typeof schema === "object") {
-			const schemaObj = schema as Record<string, unknown>;
-			if ("x-ves-oneof-field-addon_choice" in schemaObj) {
-				return extractAddonServicesFromSchema(schemaObj);
-			}
-		}
-	}
+  // Fallback: look for any schema with x-ves-oneof-field-addon_choice
+  for (const schemaName of Object.keys(schemas)) {
+    const schema = schemas[schemaName];
+    if (schema && typeof schema === "object") {
+      const schemaObj = schema as Record<string, unknown>;
+      if ("x-ves-oneof-field-addon_choice" in schemaObj) {
+        return extractAddonServicesFromSchema(schemaObj);
+      }
+    }
+  }
 
-	return [];
+  return [];
 }
 
 /**
@@ -724,75 +563,70 @@ export function extractSubscriptionServices(billingSpec: {
  * @returns Extracted dependencies including references and oneOf groups
  */
 export function extractOperationDependencies(
-	requestBodySchema: Record<string, unknown> | null,
-	componentSchemas: Record<string, unknown>,
+  requestBodySchema: Record<string, unknown> | null,
+  componentSchemas: Record<string, unknown>,
 ): ExtractedDependencies {
-	const result: ExtractedDependencies = {
-		references: [],
-		oneOfGroups: [],
-	};
+  const result: ExtractedDependencies = {
+    references: [],
+    oneOfGroups: [],
+  };
 
-	if (!requestBodySchema) {
-		return result;
-	}
+  if (!requestBodySchema) {
+    return result;
+  }
 
-	// Extract references from the request body schema
-	result.references = extractRefPatterns(requestBodySchema);
+  // Extract references from the request body schema
+  result.references = extractRefPatterns(requestBodySchema);
 
-	// If the request body has a $ref, also look in that component schema
-	if (
-		"$ref" in requestBodySchema &&
-		typeof requestBodySchema.$ref === "string"
-	) {
-		const parsed = parseRef(requestBodySchema.$ref);
-		if (parsed?.schemaName) {
-			const componentSchema = componentSchemas[parsed.schemaName];
-			if (componentSchema && typeof componentSchema === "object") {
-				// Extract oneOf patterns from the component schema, passing componentSchemas for $ref resolution
-				result.oneOfGroups = extractOneOfPatterns(
-					componentSchema as Record<string, unknown>,
-					"",
-					0,
-					20,
-					componentSchemas,
-				);
+  // If the request body has a $ref, also look in that component schema
+  if ("$ref" in requestBodySchema && typeof requestBodySchema.$ref === "string") {
+    const parsed = parseRef(requestBodySchema.$ref);
+    if (parsed?.schemaName) {
+      const componentSchema = componentSchemas[parsed.schemaName];
+      if (componentSchema && typeof componentSchema === "object") {
+        // Extract oneOf patterns from the component schema, passing componentSchemas for $ref resolution
+        result.oneOfGroups = extractOneOfPatterns(
+          componentSchema as Record<string, unknown>,
+          "",
+          0,
+          20,
+          componentSchemas,
+        );
 
-				// Also extract nested references from the component schema
-				const componentRefs = extractRefPatterns(
-					componentSchema as Record<string, unknown>,
-				);
-				result.references.push(...componentRefs);
-			}
-		}
-	}
+        // Also extract nested references from the component schema
+        const componentRefs = extractRefPatterns(componentSchema as Record<string, unknown>);
+        result.references.push(...componentRefs);
+      }
+    }
+  }
 
-	// Deduplicate references by resourceType + fieldPath
-	const seenRefs = new Set<string>();
-	result.references = result.references.filter((ref) => {
-		const key = `${ref.resourceType}:${ref.fieldPath}`;
-		if (seenRefs.has(key)) {
-			return false;
-		}
-		seenRefs.add(key);
-		return true;
-	});
+  // Deduplicate references by resourceType + fieldPath
+  const seenRefs = new Set<string>();
+  result.references = result.references.filter((ref) => {
+    const key = `${ref.resourceType}:${ref.fieldPath}`;
+    if (seenRefs.has(key)) {
+      return false;
+    }
+    seenRefs.add(key);
+    return true;
+  });
 
-	return result;
+  return result;
 }
 
 /**
  * Map category to subscription IDs (v1.0.84+)
  */
 const CATEGORY_SUBSCRIPTION_MAP: Record<string, string[]> = {
-	security: ["f5xc_waap_standard", "f5xc_waap_advanced"],
-	"api security": ["f5xc_waap_standard", "f5xc_waap_advanced"],
-	"bot defense": ["f5xc_waap_standard", "f5xc_waap_advanced"],
-	cdn: ["f5xc_content_delivery_network_standard"],
-	"content delivery": ["f5xc_content_delivery_network_standard"],
-	mesh: ["f5xc_securemesh_standard", "f5xc_securemesh_advanced"],
-	"service mesh": ["f5xc_securemesh_standard", "f5xc_securemesh_advanced"],
-	kubernetes: ["f5xc_appstack_standard"],
-	infrastructure: ["f5xc_site_management_standard"],
+  security: ["f5xc_waap_standard", "f5xc_waap_advanced"],
+  "api security": ["f5xc_waap_standard", "f5xc_waap_advanced"],
+  "bot defense": ["f5xc_waap_standard", "f5xc_waap_advanced"],
+  cdn: ["f5xc_content_delivery_network_standard"],
+  "content delivery": ["f5xc_content_delivery_network_standard"],
+  mesh: ["f5xc_securemesh_standard", "f5xc_securemesh_advanced"],
+  "service mesh": ["f5xc_securemesh_standard", "f5xc_securemesh_advanced"],
+  kubernetes: ["f5xc_appstack_standard"],
+  infrastructure: ["f5xc_site_management_standard"],
 };
 
 /**
@@ -807,98 +641,80 @@ const CATEGORY_SUBSCRIPTION_MAP: Record<string, string[]> = {
  * @param domain - Domain name (e.g., "virtual")
  * @returns Array of subscription service IDs that may be required
  */
-export function mapResourceToSubscriptions(
-	resource: string,
-	domain: string,
-): string[] {
-	const subscriptions: string[] = [];
+export function mapResourceToSubscriptions(resource: string, domain: string): string[] {
+  const subscriptions: string[] = [];
 
-	// Normalize resource name
-	const normalizedResource = resource.toLowerCase().replace(/-/g, "_");
+  // Normalize resource name
+  const normalizedResource = resource.toLowerCase().replace(/-/g, "_");
 
-	// Try upstream resource metadata first (v1.0.84+)
-	const resourceMeta = getResourceMetadata(normalizedResource);
+  // Try upstream resource metadata first (v1.0.84+)
+  const resourceMeta = getResourceMetadata(normalizedResource);
 
-	if (resourceMeta && resourceMeta.tier === "Advanced") {
-		const category = resourceMeta.category.toLowerCase();
-		const categorySubscriptions = CATEGORY_SUBSCRIPTION_MAP[category];
-		if (categorySubscriptions) {
-			subscriptions.push(...categorySubscriptions);
-		}
-	}
+  if (resourceMeta && resourceMeta.tier === "Advanced") {
+    const category = resourceMeta.category.toLowerCase();
+    const categorySubscriptions = CATEGORY_SUBSCRIPTION_MAP[category];
+    if (categorySubscriptions) {
+      subscriptions.push(...categorySubscriptions);
+    }
+  }
 
-	// Also check domain metadata for domain-level subscriptions
-	const domainMeta = getDomainMetadata(domain);
-	if (domainMeta && domainMeta.requiresTier === "Advanced") {
-		const uiCategory = domainMeta.uiCategory.toLowerCase();
-		const domainSubscriptions = CATEGORY_SUBSCRIPTION_MAP[uiCategory];
-		if (domainSubscriptions) {
-			subscriptions.push(...domainSubscriptions);
-		}
-	}
+  // Also check domain metadata for domain-level subscriptions
+  const domainMeta = getDomainMetadata(domain);
+  if (domainMeta && domainMeta.requiresTier === "Advanced") {
+    const uiCategory = domainMeta.uiCategory.toLowerCase();
+    const domainSubscriptions = CATEGORY_SUBSCRIPTION_MAP[uiCategory];
+    if (domainSubscriptions) {
+      subscriptions.push(...domainSubscriptions);
+    }
+  }
 
-	// Fallback: Pattern-based heuristics for resources not in upstream specs
-	if (subscriptions.length === 0) {
-		// WAAP-related resources
-		const waapResources = [
-			"app-firewall",
-			"waf",
-			"service-policy",
-			"rate-limiter",
-			"api-definition",
-			"api-security",
-			"data-guard",
-			"trusted-client",
-			"malicious-user",
-			"client-side-defense",
-			"service-policy-set",
-		];
-		const waapDomains = [
-			"waf",
-			"api",
-			"rate_limiting",
-			"bot_and_threat_defense",
-		];
+  // Fallback: Pattern-based heuristics for resources not in upstream specs
+  if (subscriptions.length === 0) {
+    // WAAP-related resources
+    const waapResources = [
+      "app-firewall",
+      "waf",
+      "service-policy",
+      "rate-limiter",
+      "api-definition",
+      "api-security",
+      "data-guard",
+      "trusted-client",
+      "malicious-user",
+      "client-side-defense",
+      "service-policy-set",
+    ];
+    const waapDomains = ["waf", "api", "rate_limiting", "bot_and_threat_defense"];
 
-		if (
-			waapResources.some((r) => resource.includes(r)) ||
-			waapDomains.includes(domain)
-		) {
-			subscriptions.push("f5xc_waap_standard", "f5xc_waap_advanced");
-		}
+    if (waapResources.some((r) => resource.includes(r)) || waapDomains.includes(domain)) {
+      subscriptions.push("f5xc_waap_standard", "f5xc_waap_advanced");
+    }
 
-		// CDN-related resources
-		const cdnResources = ["cdn-loadbalancer", "cdn-origin", "cdn-origin-pool"];
-		if (cdnResources.some((r) => resource.includes(r)) || domain === "cdn") {
-			subscriptions.push("f5xc_content_delivery_network_standard");
-		}
+    // CDN-related resources
+    const cdnResources = ["cdn-loadbalancer", "cdn-origin", "cdn-origin-pool"];
+    if (cdnResources.some((r) => resource.includes(r)) || domain === "cdn") {
+      subscriptions.push("f5xc_content_delivery_network_standard");
+    }
 
-		// SecureMesh-related resources
-		const meshResources = ["site-mesh-group", "mesh-policy", "global-network"];
-		if (
-			meshResources.some((r) => resource.includes(r)) ||
-			domain === "service_mesh" ||
-			domain === "network_security"
-		) {
-			subscriptions.push(
-				"f5xc_securemesh_standard",
-				"f5xc_securemesh_advanced",
-			);
-		}
+    // SecureMesh-related resources
+    const meshResources = ["site-mesh-group", "mesh-policy", "global-network"];
+    if (meshResources.some((r) => resource.includes(r)) || domain === "service_mesh" || domain === "network_security") {
+      subscriptions.push("f5xc_securemesh_standard", "f5xc_securemesh_advanced");
+    }
 
-		// AppStack-related resources
-		if (domain === "managed_kubernetes" || resource.includes("vk8s")) {
-			subscriptions.push("f5xc_appstack_standard");
-		}
+    // AppStack-related resources
+    if (domain === "managed_kubernetes" || resource.includes("vk8s")) {
+      subscriptions.push("f5xc_appstack_standard");
+    }
 
-		// Site management resources
-		const siteResources = ["site", "fleet", "token", "tunnel"];
-		if (siteResources.some((r) => resource.includes(r)) || domain === "sites") {
-			subscriptions.push("f5xc_site_management_standard");
-		}
-	}
+    // Site management resources
+    const siteResources = ["site", "fleet", "token", "tunnel"];
+    if (siteResources.some((r) => resource.includes(r)) || domain === "sites") {
+      subscriptions.push("f5xc_site_management_standard");
+    }
+  }
 
-	return [...new Set(subscriptions)]; // Deduplicate
+  return [...new Set(subscriptions)]; // Deduplicate
 }
 
 /**
@@ -907,32 +723,32 @@ export function mapResourceToSubscriptions(
  * @deprecated Prefer adding resources to upstream specs instead of extending this map
  */
 export const FALLBACK_RESOURCE_DOMAIN_MAP: Record<string, string> = {
-	"origin-pool": "network",
-	origin_pool: "network",
-	"http-loadbalancer": "virtual",
-	http_loadbalancer: "virtual",
-	"tcp-loadbalancer": "virtual",
-	tcp_loadbalancer: "virtual",
-	"dns-lb-pool": "dns",
-	dns_lb_pool: "dns",
-	"dns-zone": "dns",
-	dns_zone: "dns",
-	"app-firewall": "waf",
-	app_firewall: "waf",
-	"service-policy": "network_security",
-	service_policy: "network_security",
-	certificate: "certificates",
-	"api-definition": "api",
-	api_definition: "api",
-	site: "sites",
-	"aws-vpc-site": "sites",
-	"azure-vnet-site": "sites",
-	"gcp-vpc-site": "sites",
-	healthcheck: "network",
-	"virtual-host": "virtual",
-	namespace: "tenant_and_identity",
-	secret: "blindfold",
-	token: "authentication",
+  "origin-pool": "network",
+  origin_pool: "network",
+  "http-loadbalancer": "virtual",
+  http_loadbalancer: "virtual",
+  "tcp-loadbalancer": "virtual",
+  tcp_loadbalancer: "virtual",
+  "dns-lb-pool": "dns",
+  dns_lb_pool: "dns",
+  "dns-zone": "dns",
+  dns_zone: "dns",
+  "app-firewall": "waf",
+  app_firewall: "waf",
+  "service-policy": "network_security",
+  service_policy: "network_security",
+  certificate: "certificates",
+  "api-definition": "api",
+  api_definition: "api",
+  site: "sites",
+  "aws-vpc-site": "sites",
+  "azure-vnet-site": "sites",
+  "gcp-vpc-site": "sites",
+  healthcheck: "network",
+  "virtual-host": "virtual",
+  namespace: "tenant_and_identity",
+  secret: "blindfold",
+  token: "authentication",
 };
 
 /**
@@ -945,23 +761,19 @@ export const FALLBACK_RESOURCE_DOMAIN_MAP: Record<string, string> = {
  * @returns Domain string or empty string if unknown
  */
 export function resolveResourceDomain(resourceType: string): string {
-	// Try upstream specs first (primary source of truth)
-	const domainMeta = getResourceDomain(resourceType);
-	if (domainMeta) {
-		return domainMeta.domain;
-	}
+  // Try upstream specs first (primary source of truth)
+  const domainMeta = getResourceDomain(resourceType);
+  if (domainMeta) {
+    return domainMeta.domain;
+  }
 
-	// Also try with underscore variant
-	const underscoreVariant = resourceType.replace(/-/g, "_");
-	const domainMetaUnderscore = getResourceDomain(underscoreVariant);
-	if (domainMetaUnderscore) {
-		return domainMetaUnderscore.domain;
-	}
+  // Also try with underscore variant
+  const underscoreVariant = resourceType.replace(/-/g, "_");
+  const domainMetaUnderscore = getResourceDomain(underscoreVariant);
+  if (domainMetaUnderscore) {
+    return domainMetaUnderscore.domain;
+  }
 
-	// Fall back to hardcoded mappings for resources not in specs
-	return (
-		FALLBACK_RESOURCE_DOMAIN_MAP[resourceType] ||
-		FALLBACK_RESOURCE_DOMAIN_MAP[underscoreVariant] ||
-		""
-	);
+  // Fall back to hardcoded mappings for resources not in specs
+  return FALLBACK_RESOURCE_DOMAIN_MAP[resourceType] || FALLBACK_RESOURCE_DOMAIN_MAP[underscoreVariant] || "";
 }

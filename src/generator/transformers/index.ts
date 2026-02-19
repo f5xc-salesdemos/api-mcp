@@ -7,7 +7,7 @@
  */
 
 export {
-	hasMyPrefixExamples,
-	normalizeExamples,
-	normalizeParameterExamples,
+  hasMyPrefixExamples,
+  normalizeExamples,
+  normalizeParameterExamples,
 } from "./normalize-examples.js";

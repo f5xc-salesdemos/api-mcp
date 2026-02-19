@@ -8,18 +8,18 @@
  */
 
 export {
-	clearAcronymCache,
-	getCanonicalAcronym,
-	getTechnicalAcronyms,
-	isAcronym,
-	toCamelCase,
-	toKebabCase,
-	toPascalCase,
-	toSnakeCase,
+  clearAcronymCache,
+  getCanonicalAcronym,
+  getTechnicalAcronyms,
+  isAcronym,
+  toCamelCase,
+  toKebabCase,
+  toPascalCase,
+  toSnakeCase,
 } from "./acronyms.js";
 
 export {
-	extractResourceFromPath,
-	generateToolName,
-	methodToOperation,
+  extractResourceFromPath,
+  generateToolName,
+  methodToOperation,
 } from "./volterra-mapping.js";

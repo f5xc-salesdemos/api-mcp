@@ -9,10 +9,7 @@
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { AuthMode, type CredentialManager } from "@robinmordasiewicz/f5xc-auth";
-import {
-	getConsolidationStats,
-	getIndexMetadata,
-} from "../../../tools/discovery/index.js";
+import { getConsolidationStats, getIndexMetadata } from "../../../tools/discovery/index.js";
 import { logger } from "../../../utils/logging.js";
 import { registerAnalysisTools } from "./analysis.js";
 import { registerDiscoveryTools } from "./discovery.js";
@@ -26,7 +23,7 @@ import { registerQuotaTools } from "./quota.js";
  * Context for tool registration containing necessary dependencies.
  */
 export interface ToolRegistrationContext {
-	credentialManager: CredentialManager;
+  credentialManager: CredentialManager;
 }
 
 /**
@@ -40,35 +37,32 @@ export interface ToolRegistrationContext {
  * @param server - The MCP server instance
  * @param context - Context containing credential manager
  */
-export function registerTools(
-	server: McpServer,
-	context: ToolRegistrationContext,
-): void {
-	const { credentialManager } = context;
-	const authMode = credentialManager.getAuthMode();
+export function registerTools(server: McpServer, context: ToolRegistrationContext): void {
+  const { credentialManager } = context;
+  const authMode = credentialManager.getAuthMode();
 
-	// Register all tool categories
-	registerMetadataTools(server, credentialManager);
-	registerDiscoveryTools(server);
-	registerExecutionTools(server, credentialManager);
-	registerAnalysisTools(server);
-	registerPlanningTools(server);
-	registerGuidanceTools(server);
-	registerQuotaTools(server, credentialManager);
+  // Register all tool categories
+  registerMetadataTools(server, credentialManager);
+  registerDiscoveryTools(server);
+  registerExecutionTools(server, credentialManager);
+  registerAnalysisTools(server);
+  registerPlanningTools(server);
+  registerGuidanceTools(server);
+  registerQuotaTools(server, credentialManager);
 
-	// Log registration completion
-	const indexMetadata = getIndexMetadata();
-	const consolidationStats = getConsolidationStats();
-	logger.info("Tool registration completed (dynamic discovery mode)", {
-		authMode,
-		authenticated: authMode !== AuthMode.NONE,
-		registeredTools: 17, // Updated: 14 + 3 quota tools
-		indexedTools: indexMetadata.totalTools,
-		consolidatedResources: consolidationStats.consolidatedCount,
-		consolidationReduction: consolidationStats.reductionPercent,
-		domains: Object.keys(indexMetadata.domains),
-		tokenSavings: "95%+ (535K → ~500 tokens upfront)",
-	});
+  // Log registration completion
+  const indexMetadata = getIndexMetadata();
+  const consolidationStats = getConsolidationStats();
+  logger.info("Tool registration completed (dynamic discovery mode)", {
+    authMode,
+    authenticated: authMode !== AuthMode.NONE,
+    registeredTools: 17, // Updated: 14 + 3 quota tools
+    indexedTools: indexMetadata.totalTools,
+    consolidatedResources: consolidationStats.consolidatedCount,
+    consolidationReduction: consolidationStats.reductionPercent,
+    domains: Object.keys(indexMetadata.domains),
+    tokenSavings: "95%+ (535K → ~500 tokens upfront)",
+  });
 }
 
 export { registerAnalysisTools } from "./analysis.js";

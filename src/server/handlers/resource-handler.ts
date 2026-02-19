@@ -16,10 +16,10 @@ import { logger } from "../../utils/logging.js";
  * Context needed for resource registration.
  */
 export interface ResourceRegistrationContext {
-	/** Credential manager for tenant information */
-	credentialManager: CredentialManager;
-	/** Resource handler for reading resources */
-	resourceHandler: ResourceHandler;
+  /** Credential manager for tenant information */
+  credentialManager: CredentialManager;
+  /** Resource handler for reading resources */
+  resourceHandler: ResourceHandler;
 }
 
 /**
@@ -29,40 +29,37 @@ export interface ResourceRegistrationContext {
  * @param server - The MCP server instance
  * @param context - Context containing credential manager and resource handler
  */
-export function registerResources(
-	server: McpServer,
-	context: ResourceRegistrationContext,
-): void {
-	const tenant = context.credentialManager.getTenant() ?? "{tenant}";
+export function registerResources(server: McpServer, context: ResourceRegistrationContext): void {
+  const tenant = context.credentialManager.getTenant() ?? "{tenant}";
 
-	// Register resource templates for each resource type
-	for (const rt of Object.values(RESOURCE_TYPES)) {
-		const uriTemplate = rt.namespaceScoped
-			? `f5xc://${tenant}/{namespace}/${rt.type}/{name}`
-			: `f5xc://${tenant}/system/${rt.type}/{name}`;
+  // Register resource templates for each resource type
+  for (const rt of Object.values(RESOURCE_TYPES)) {
+    const uriTemplate = rt.namespaceScoped
+      ? `f5xc://${tenant}/{namespace}/${rt.type}/{name}`
+      : `f5xc://${tenant}/system/${rt.type}/{name}`;
 
-		server.resource(uriTemplate, rt.description, async (uri: URL) => {
-			try {
-				const result = await context.resourceHandler.readResource(uri.href);
-				return {
-					contents: [
-						{
-							uri: result.uri,
-							mimeType: result.mimeType,
-							text: result.content,
-						},
-					],
-				};
-			} catch (error) {
-				logger.error(`Failed to read resource: ${uri.href}`, {
-					error: error instanceof Error ? error.message : String(error),
-				});
-				throw error;
-			}
-		});
-	}
+    server.resource(uriTemplate, rt.description, async (uri: URL) => {
+      try {
+        const result = await context.resourceHandler.readResource(uri.href);
+        return {
+          contents: [
+            {
+              uri: result.uri,
+              mimeType: result.mimeType,
+              text: result.content,
+            },
+          ],
+        };
+      } catch (error) {
+        logger.error(`Failed to read resource: ${uri.href}`, {
+          error: error instanceof Error ? error.message : String(error),
+        });
+        throw error;
+      }
+    });
+  }
 
-	logger.info("Resource registration completed", {
-		resourceTypes: Object.keys(RESOURCE_TYPES).length,
-	});
+  logger.info("Resource registration completed", {
+    resourceTypes: Object.keys(RESOURCE_TYPES).length,
+  });
 }

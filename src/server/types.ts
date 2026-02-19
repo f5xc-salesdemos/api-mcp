@@ -8,40 +8,34 @@
  */
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type {
-	CredentialManager,
-	HttpClient,
-} from "@robinmordasiewicz/f5xc-auth";
+import type { CredentialManager, HttpClient } from "@robinmordasiewicz/f5xc-auth";
 
 /**
  * Configuration options for the F5XC API MCP server.
  */
 export interface ServerConfig {
-	/** Server name for MCP identification */
-	name: string;
-	/** Server version */
-	version: string;
-	/** Credential manager for auth handling */
-	credentialManager: CredentialManager;
+  /** Server name for MCP identification */
+  name: string;
+  /** Server version */
+  version: string;
+  /** Credential manager for auth handling */
+  credentialManager: CredentialManager;
 }
 
 /**
  * Context provided to tool handlers for executing operations.
  */
 export interface ToolHandlerContext {
-	/** HTTP client for API calls (null in documentation mode) */
-	httpClient: HttpClient | null;
-	/** Credential manager for authentication status */
-	credentialManager: CredentialManager;
+  /** HTTP client for API calls (null in documentation mode) */
+  httpClient: HttpClient | null;
+  /** Credential manager for authentication status */
+  credentialManager: CredentialManager;
 }
 
 /**
  * Function signature for registering tools with the MCP server.
  */
-export type RegisterToolsFunction = (
-	server: McpServer,
-	context: ToolHandlerContext,
-) => void;
+export type RegisterToolsFunction = (server: McpServer, context: ToolHandlerContext) => void;
 
 /**
  * Re-export types from dependencies for convenience.

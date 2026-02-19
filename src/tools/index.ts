@@ -5,9 +5,9 @@
 
 export type { ParsedOperation } from "../generator/openapi-parser.js";
 export {
-	allTools,
-	getAllDomains,
-	getToolByName,
-	getToolCountByDomain,
-	getToolsByDomain,
+  allTools,
+  getAllDomains,
+  getToolByName,
+  getToolCountByDomain,
+  getToolsByDomain,
 } from "./registry.js";

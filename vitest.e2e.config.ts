@@ -9,29 +9,29 @@ import { defineConfig } from "vitest/config";
  * Run with: npm run test:e2e or npx vitest run --config vitest.e2e.config.ts
  */
 export default defineConfig({
-	test: {
-		// E2E test file patterns
-		include: ["tests/e2e/**/*.test.ts"],
-		exclude: ["node_modules", "dist"],
+  test: {
+    // E2E test file patterns
+    include: ["tests/e2e/**/*.test.ts"],
+    exclude: ["node_modules", "dist"],
 
-		// Environment
-		environment: "node",
+    // Environment
+    environment: "node",
 
-		// Longer timeout for API calls
-		testTimeout: 60000,
+    // Longer timeout for API calls
+    testTimeout: 60000,
 
-		// Verbose reporter for visibility
-		reporters: ["verbose"],
+    // Verbose reporter for visibility
+    reporters: ["verbose"],
 
-		// Sequential execution for CRUD operations
-		fileParallelism: false,
+    // Sequential execution for CRUD operations
+    fileParallelism: false,
 
-		// Setup files
-		setupFiles: ["tests/setup.ts"],
+    // Setup files
+    setupFiles: ["tests/setup.ts"],
 
-		// Type checking disabled for faster execution
-		typecheck: {
-			enabled: false,
-		},
-	},
+    // Type checking disabled for faster execution
+    typecheck: {
+      enabled: false,
+    },
+  },
 });

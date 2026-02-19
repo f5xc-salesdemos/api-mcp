@@ -8,16 +8,16 @@
 
 export { registerPrompts } from "./prompt-handler.js";
 export {
-	type ResourceRegistrationContext,
-	registerResources,
+  type ResourceRegistrationContext,
+  registerResources,
 } from "./resource-handler.js";
 export {
-	registerAnalysisTools,
-	registerDiscoveryTools,
-	registerExecutionTools,
-	registerGuidanceTools,
-	registerMetadataTools,
-	registerPlanningTools,
-	registerTools,
-	type ToolRegistrationContext,
+  registerAnalysisTools,
+  registerDiscoveryTools,
+  registerExecutionTools,
+  registerGuidanceTools,
+  registerMetadataTools,
+  registerPlanningTools,
+  registerTools,
+  type ToolRegistrationContext,
 } from "./tool-handlers/index.js";

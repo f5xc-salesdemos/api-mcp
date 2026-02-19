@@ -47,75 +47,75 @@ import { vpm_and_node_managementTools } from "./generated/vpm_and_node_managemen
  * All registered tools from all domains
  */
 export const allTools: ParsedOperation[] = [
-	...admin_console_and_uiTools,
-	...ai_servicesTools,
-	...apiTools,
-	...authenticationTools,
-	...bigipTools,
-	...billing_and_usageTools,
-	...blindfoldTools,
-	...bot_and_threat_defenseTools,
-	...cdnTools,
-	...ce_managementTools,
-	...certificatesTools,
-	...cloud_infrastructureTools,
-	...container_servicesTools,
-	...data_and_privacy_securityTools,
-	...data_intelligenceTools,
-	...ddosTools,
-	...dnsTools,
-	...managed_kubernetesTools,
-	...marketplaceTools,
-	...networkTools,
-	...network_securityTools,
-	...nginx_oneTools,
-	...object_storageTools,
-	...observabilityTools,
-	...rate_limitingTools,
-	...secops_and_incident_responseTools,
-	...service_meshTools,
-	...shapeTools,
-	...sitesTools,
-	...statisticsTools,
-	...supportTools,
-	...telemetry_and_insightsTools,
-	...tenant_and_identityTools,
-	...threat_campaignTools,
-	...usersTools,
-	...virtualTools,
-	...vpm_and_node_managementTools,
+  ...admin_console_and_uiTools,
+  ...ai_servicesTools,
+  ...apiTools,
+  ...authenticationTools,
+  ...bigipTools,
+  ...billing_and_usageTools,
+  ...blindfoldTools,
+  ...bot_and_threat_defenseTools,
+  ...cdnTools,
+  ...ce_managementTools,
+  ...certificatesTools,
+  ...cloud_infrastructureTools,
+  ...container_servicesTools,
+  ...data_and_privacy_securityTools,
+  ...data_intelligenceTools,
+  ...ddosTools,
+  ...dnsTools,
+  ...managed_kubernetesTools,
+  ...marketplaceTools,
+  ...networkTools,
+  ...network_securityTools,
+  ...nginx_oneTools,
+  ...object_storageTools,
+  ...observabilityTools,
+  ...rate_limitingTools,
+  ...secops_and_incident_responseTools,
+  ...service_meshTools,
+  ...shapeTools,
+  ...sitesTools,
+  ...statisticsTools,
+  ...supportTools,
+  ...telemetry_and_insightsTools,
+  ...tenant_and_identityTools,
+  ...threat_campaignTools,
+  ...usersTools,
+  ...virtualTools,
+  ...vpm_and_node_managementTools,
 ];
 
 /**
  * Get tools by domain
  */
 export function getToolsByDomain(domain: string): ParsedOperation[] {
-	return allTools.filter((tool) => tool.domain === domain);
+  return allTools.filter((tool) => tool.domain === domain);
 }
 
 /**
  * Get tool by name
  */
 export function getToolByName(name: string): ParsedOperation | undefined {
-	return allTools.find((tool) => tool.toolName === name);
+  return allTools.find((tool) => tool.toolName === name);
 }
 
 /**
  * Get all domain names
  */
 export function getAllDomains(): string[] {
-	return [...new Set(allTools.map((tool) => tool.domain))];
+  return [...new Set(allTools.map((tool) => tool.domain))];
 }
 
 /**
  * Get tool count by domain
  */
 export function getToolCountByDomain(): Record<string, number> {
-	const counts: Record<string, number> = {};
-	for (const tool of allTools) {
-		counts[tool.domain] = (counts[tool.domain] ?? 0) + 1;
-	}
-	return counts;
+  const counts: Record<string, number> = {};
+  for (const tool of allTools) {
+    counts[tool.domain] = (counts[tool.domain] ?? 0) + 1;
+  }
+  return counts;
 }
 
 export default allTools;

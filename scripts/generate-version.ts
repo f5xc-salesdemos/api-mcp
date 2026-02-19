@@ -22,22 +22,22 @@ const rootDir = join(__dirname, "..");
  * Generate src/version.ts with version info from package.json
  */
 function generateVersion(): void {
-	const packagePath = join(rootDir, "package.json");
-	const pkg = JSON.parse(readFileSync(packagePath, "utf-8"));
+  const packagePath = join(rootDir, "package.json");
+  const pkg = JSON.parse(readFileSync(packagePath, "utf-8"));
 
-	// Get upstream version from specs if available
-	let upstreamVersion = "unknown";
-	const specPath = join(rootDir, "specs", "index.json");
-	if (existsSync(specPath)) {
-		try {
-			const specIndex = JSON.parse(readFileSync(specPath, "utf-8"));
-			upstreamVersion = specIndex.version || "unknown";
-		} catch {
-			// Ignore errors reading spec file
-		}
-	}
+  // Get upstream version from specs if available
+  let upstreamVersion = "unknown";
+  const specPath = join(rootDir, "specs", "index.json");
+  if (existsSync(specPath)) {
+    try {
+      const specIndex = JSON.parse(readFileSync(specPath, "utf-8"));
+      upstreamVersion = specIndex.version || "unknown";
+    } catch {
+      // Ignore errors reading spec file
+    }
+  }
 
-	const content = `/**
+  const content = `/**
  * Auto-generated version file - DO NOT EDIT MANUALLY
  *
  * This file is regenerated automatically by:
@@ -57,9 +57,9 @@ export const PACKAGE_NAME = "${pkg.name}";
 export const UPSTREAM_VERSION = "${upstreamVersion}";
 `;
 
-	const versionPath = join(rootDir, "src", "version.ts");
-	writeFileSync(versionPath, content);
-	console.log(`Generated src/version.ts with version ${pkg.version}`);
+  const versionPath = join(rootDir, "src", "version.ts");
+  writeFileSync(versionPath, content);
+  console.log(`Generated src/version.ts with version ${pkg.version}`);
 }
 
 generateVersion();

@@ -15,22 +15,22 @@ import { join } from "path";
  * CLI command execution result
  */
 export interface CliResult {
-	/** Standard output */
-	stdout: string;
-	/** Standard error */
-	stderr: string;
-	/** Exit code */
-	exitCode: number;
+  /** Standard output */
+  stdout: string;
+  /** Standard error */
+  stderr: string;
+  /** Exit code */
+  exitCode: number;
 }
 
 /**
  * CURL syntax validation result
  */
 export interface CurlValidationResult {
-	/** Whether syntax is valid */
-	valid: boolean;
-	/** Validation errors */
-	errors: string[];
+  /** Whether syntax is valid */
+  valid: boolean;
+  /** Validation errors */
+  errors: string[];
 }
 
 /**
@@ -46,46 +46,43 @@ export interface CurlValidationResult {
  * expect(result.stdout).toContain("1.0.0");
  * ```
  */
-export async function runCliCommand(
-	args: string[],
-	options?: { timeout?: number },
-): Promise<CliResult> {
-	const timeout = options?.timeout ?? 5000;
+export async function runCliCommand(args: string[], options?: { timeout?: number }): Promise<CliResult> {
+  const timeout = options?.timeout ?? 5000;
 
-	return new Promise((resolve, reject) => {
-		const child = spawn("node", ["dist/index.js", ...args], {
-			cwd: process.cwd(),
-			env: {
-				...process.env,
-				// Use non-existent config directory to avoid loading real profiles
-				XDG_CONFIG_HOME: "/tmp/__nonexistent_test_config__",
-				// Disable colors for cleaner output parsing
-				NO_COLOR: "1",
-				// Suppress any debug logging
-				LOG_LEVEL: "error",
-			},
-			timeout,
-		});
+  return new Promise((resolve, reject) => {
+    const child = spawn("node", ["dist/index.js", ...args], {
+      cwd: process.cwd(),
+      env: {
+        ...process.env,
+        // Use non-existent config directory to avoid loading real profiles
+        XDG_CONFIG_HOME: "/tmp/__nonexistent_test_config__",
+        // Disable colors for cleaner output parsing
+        NO_COLOR: "1",
+        // Suppress any debug logging
+        LOG_LEVEL: "error",
+      },
+      timeout,
+    });
 
-		let stdout = "";
-		let stderr = "";
+    let stdout = "";
+    let stderr = "";
 
-		child.stdout?.on("data", (data: Buffer) => {
-			stdout += data.toString();
-		});
+    child.stdout?.on("data", (data: Buffer) => {
+      stdout += data.toString();
+    });
 
-		child.stderr?.on("data", (data: Buffer) => {
-			stderr += data.toString();
-		});
+    child.stderr?.on("data", (data: Buffer) => {
+      stderr += data.toString();
+    });
 
-		child.on("close", (code) => {
-			resolve({ stdout, stderr, exitCode: code ?? 0 });
-		});
+    child.on("close", (code) => {
+      resolve({ stdout, stderr, exitCode: code ?? 0 });
+    });
 
-		child.on("error", (error) => {
-			reject(error);
-		});
-	});
+    child.on("error", (error) => {
+      reject(error);
+    });
+  });
 }
 
 /**
@@ -107,60 +104,52 @@ export async function runCliCommand(
  * ```
  */
 export function validateCurlSyntax(curl: string): CurlValidationResult {
-	const errors: string[] = [];
+  const errors: string[] = [];
 
-	// Check starts with curl
-	if (
-		!curl.startsWith("curl ") &&
-		!curl.startsWith("curl\n") &&
-		!curl.startsWith("# ")
-	) {
-		// Allow comment-prefixed examples
-		const firstNonComment = curl
-			.split("\n")
-			.find((line) => !line.startsWith("#") && line.trim() !== "");
-		if (firstNonComment && !firstNonComment.startsWith("curl")) {
-			errors.push("Command must start with 'curl'");
-		}
-	}
+  // Check starts with curl
+  if (!curl.startsWith("curl ") && !curl.startsWith("curl\n") && !curl.startsWith("# ")) {
+    // Allow comment-prefixed examples
+    const firstNonComment = curl.split("\n").find((line) => !line.startsWith("#") && line.trim() !== "");
+    if (firstNonComment && !firstNonComment.startsWith("curl")) {
+      errors.push("Command must start with 'curl'");
+    }
+  }
 
-	// Check balanced quotes
-	const singleQuotes = (curl.match(/'/g) || []).length;
-	const doubleQuotes = (curl.match(/"/g) || []).length;
+  // Check balanced quotes
+  const singleQuotes = (curl.match(/'/g) || []).length;
+  const doubleQuotes = (curl.match(/"/g) || []).length;
 
-	if (singleQuotes % 2 !== 0) {
-		errors.push("Unbalanced single quotes");
-	}
-	if (doubleQuotes % 2 !== 0) {
-		errors.push("Unbalanced double quotes");
-	}
+  if (singleQuotes % 2 !== 0) {
+    errors.push("Unbalanced single quotes");
+  }
+  if (doubleQuotes % 2 !== 0) {
+    errors.push("Unbalanced double quotes");
+  }
 
-	// Check HTTP method (should have -X METHOD)
-	if (!curl.match(/-X\s+(GET|POST|PUT|DELETE|PATCH)/i)) {
-		errors.push(
-			"Missing or invalid HTTP method (-X GET|POST|PUT|DELETE|PATCH)",
-		);
-	}
+  // Check HTTP method (should have -X METHOD)
+  if (!curl.match(/-X\s+(GET|POST|PUT|DELETE|PATCH)/i)) {
+    errors.push("Missing or invalid HTTP method (-X GET|POST|PUT|DELETE|PATCH)");
+  }
 
-	// Check URL present - allow template variables like ${TENANT} or {tenant}
-	if (!curl.match(/"https?:\/\/[^"]+"|'https?:\/\/[^']+'/)) {
-		errors.push("Missing or invalid URL in quotes");
-	}
+  // Check URL present - allow template variables like ${TENANT} or {tenant}
+  if (!curl.match(/"https?:\/\/[^"]+"|'https?:\/\/[^']+'/)) {
+    errors.push("Missing or invalid URL in quotes");
+  }
 
-	// Check for valid JSON in -d flag if present
-	const bodyMatch = curl.match(/-d\s+'([^']+)'/s);
-	if (bodyMatch) {
-		try {
-			JSON.parse(bodyMatch[1]);
-		} catch {
-			// Allow template placeholders like ${...}
-			if (!bodyMatch[1].includes("${")) {
-				errors.push("Invalid JSON in request body (-d flag)");
-			}
-		}
-	}
+  // Check for valid JSON in -d flag if present
+  const bodyMatch = curl.match(/-d\s+'([^']+)'/s);
+  if (bodyMatch) {
+    try {
+      JSON.parse(bodyMatch[1]);
+    } catch {
+      // Allow template placeholders like ${...}
+      if (!bodyMatch[1].includes("${")) {
+        errors.push("Invalid JSON in request body (-d flag)");
+      }
+    }
+  }
 
-	return { valid: errors.length === 0, errors };
+  return { valid: errors.length === 0, errors };
 }
 
 /**
@@ -179,48 +168,46 @@ export function validateCurlSyntax(curl: string): CurlValidationResult {
  * expect(table[0].Name).toBe("foo");
  * ```
  */
-export function parseMarkdownTable(
-	markdown: string,
-): Array<Record<string, string>> {
-	const lines = markdown.split("\n");
-	const results: Array<Record<string, string>> = [];
+export function parseMarkdownTable(markdown: string): Array<Record<string, string>> {
+  const lines = markdown.split("\n");
+  const results: Array<Record<string, string>> = [];
 
-	let headers: string[] = [];
-	let inTable = false;
-	let separatorSeen = false;
+  let headers: string[] = [];
+  let inTable = false;
+  let separatorSeen = false;
 
-	for (const line of lines) {
-		const trimmed = line.trim();
+  for (const line of lines) {
+    const trimmed = line.trim();
 
-		// Check if this is a table row
-		if (trimmed.includes("|")) {
-			const cells = trimmed
-				.split("|")
-				.map((c) => c.trim())
-				.filter((c) => c !== "");
+    // Check if this is a table row
+    if (trimmed.includes("|")) {
+      const cells = trimmed
+        .split("|")
+        .map((c) => c.trim())
+        .filter((c) => c !== "");
 
-			if (!inTable) {
-				// First row with | is the header
-				headers = cells;
-				inTable = true;
-			} else if (trimmed.match(/^\|[\s-:|]+\|$/)) {
-				// Separator row (|----|-----|)
-				separatorSeen = true;
-			} else if (separatorSeen) {
-				// Data row
-				const row: Record<string, string> = {};
-				headers.forEach((header, i) => {
-					row[header] = cells[i] ?? "";
-				});
-				results.push(row);
-			}
-		} else if (inTable && trimmed === "") {
-			// Empty line ends the table
-			break;
-		}
-	}
+      if (!inTable) {
+        // First row with | is the header
+        headers = cells;
+        inTable = true;
+      } else if (trimmed.match(/^\|[\s-:|]+\|$/)) {
+        // Separator row (|----|-----|)
+        separatorSeen = true;
+      } else if (separatorSeen) {
+        // Data row
+        const row: Record<string, string> = {};
+        headers.forEach((header, i) => {
+          row[header] = cells[i] ?? "";
+        });
+        results.push(row);
+      }
+    } else if (inTable && trimmed === "") {
+      // Empty line ends the table
+      break;
+    }
+  }
 
-	return results;
+  return results;
 }
 
 /**
@@ -232,9 +219,9 @@ export function parseMarkdownTable(
  * @returns Array of unique environment variable names
  */
 export function extractEnvVarsFromText(text: string): string[] {
-	const envVarPattern = /\b(F5XC_[A-Z_]+|LOG_LEVEL|NODE_ENV)\b/g;
-	const matches = text.match(envVarPattern) || [];
-	return [...new Set(matches)].sort();
+  const envVarPattern = /\b(F5XC_[A-Z_]+|LOG_LEVEL|NODE_ENV)\b/g;
+  const matches = text.match(envVarPattern) || [];
+  return [...new Set(matches)].sort();
 }
 
 /**
@@ -245,11 +232,11 @@ export function extractEnvVarsFromText(text: string): string[] {
  * @throws Error if file not found
  */
 export function readProjectFile(relativePath: string): string {
-	const fullPath = join(process.cwd(), relativePath);
-	if (!existsSync(fullPath)) {
-		throw new Error(`File not found: ${fullPath}`);
-	}
-	return readFileSync(fullPath, "utf-8");
+  const fullPath = join(process.cwd(), relativePath);
+  if (!existsSync(fullPath)) {
+    throw new Error(`File not found: ${fullPath}`);
+  }
+  return readFileSync(fullPath, "utf-8");
 }
 
 /**
@@ -259,60 +246,60 @@ export function readProjectFile(relativePath: string): string {
  * @returns true if file exists
  */
 export function projectFileExists(relativePath: string): boolean {
-	const fullPath = join(process.cwd(), relativePath);
-	return existsSync(fullPath);
+  const fullPath = join(process.cwd(), relativePath);
+  return existsSync(fullPath);
 }
 
 /**
  * Parse package.json and return parsed object
  */
 export function getPackageJson(): {
-	name: string;
-	version: string;
-	scripts: Record<string, string>;
-	[key: string]: unknown;
+  name: string;
+  version: string;
+  scripts: Record<string, string>;
+  [key: string]: unknown;
 } {
-	const content = readProjectFile("package.json");
-	return JSON.parse(content) as {
-		name: string;
-		version: string;
-		scripts: Record<string, string>;
-	};
+  const content = readProjectFile("package.json");
+  return JSON.parse(content) as {
+    name: string;
+    version: string;
+    scripts: Record<string, string>;
+  };
 }
 
 /**
  * Parse manifest.json and return parsed object
  */
 export function getManifestJson(): {
-	name: string;
-	version: string;
-	prompts?: Array<{
-		name: string;
-		description: string;
-		arguments: string[];
-		text: string;
-	}>;
-	tools?: Array<{
-		name: string;
-		description: string;
-	}>;
-	[key: string]: unknown;
+  name: string;
+  version: string;
+  prompts?: Array<{
+    name: string;
+    description: string;
+    arguments: string[];
+    text: string;
+  }>;
+  tools?: Array<{
+    name: string;
+    description: string;
+  }>;
+  [key: string]: unknown;
 } {
-	const content = readProjectFile("manifest.json");
-	return JSON.parse(content) as {
-		name: string;
-		version: string;
-		prompts?: Array<{
-			name: string;
-			description: string;
-			arguments: string[];
-			text: string;
-		}>;
-		tools?: Array<{
-			name: string;
-			description: string;
-		}>;
-	};
+  const content = readProjectFile("manifest.json");
+  return JSON.parse(content) as {
+    name: string;
+    version: string;
+    prompts?: Array<{
+      name: string;
+      description: string;
+      arguments: string[];
+      text: string;
+    }>;
+    tools?: Array<{
+      name: string;
+      description: string;
+    }>;
+  };
 }
 
 /**
@@ -324,17 +311,17 @@ export function getManifestJson(): {
  * @returns Array of invalid placeholders (empty if all valid)
  */
 export function validateTemplateVariables(text: string): string[] {
-	const invalidPlaceholders: string[] = [];
-	const placeholders = text.match(/\$\{[^}]+\}/g) || [];
+  const invalidPlaceholders: string[] = [];
+  const placeholders = text.match(/\$\{[^}]+\}/g) || [];
 
-	for (const placeholder of placeholders) {
-		// Valid format: ${arguments.variableName}
-		if (!placeholder.match(/^\$\{arguments\.\w+\}$/)) {
-			invalidPlaceholders.push(placeholder);
-		}
-	}
+  for (const placeholder of placeholders) {
+    // Valid format: ${arguments.variableName}
+    if (!placeholder.match(/^\$\{arguments\.\w+\}$/)) {
+      invalidPlaceholders.push(placeholder);
+    }
+  }
 
-	return invalidPlaceholders;
+  return invalidPlaceholders;
 }
 
 /**
@@ -344,6 +331,6 @@ export function validateTemplateVariables(text: string): string[] {
  * @returns Array of variable names (without ${arguments.} prefix)
  */
 export function extractTemplateVariables(text: string): string[] {
-	const matches = text.match(/\$\{arguments\.(\w+)\}/g) || [];
-	return matches.map((m) => m.replace(/\$\{arguments\.(\w+)\}/, "$1"));
+  const matches = text.match(/\$\{arguments\.(\w+)\}/g) || [];
+  return matches.map((m) => m.replace(/\$\{arguments\.(\w+)\}/, "$1"));
 }

@@ -12,31 +12,31 @@
  * Map MCP resource type to F5XC quota resource identifier
  */
 export const QUOTA_RESOURCE_MAP: Record<string, string> = {
-	// Load Balancing
-	"http-loadbalancer": "http_loadbalancer",
-	"tcp-loadbalancer": "tcp_loadbalancer",
-	"origin-pool": "origin_pool",
-	healthcheck: "healthcheck",
+  // Load Balancing
+  "http-loadbalancer": "http_loadbalancer",
+  "tcp-loadbalancer": "tcp_loadbalancer",
+  "origin-pool": "origin_pool",
+  healthcheck: "healthcheck",
 
-	// DNS
-	"dns-zone": "dns_zone",
-	"dns-lb-pool": "dns_lb_pool",
+  // DNS
+  "dns-zone": "dns_zone",
+  "dns-lb-pool": "dns_lb_pool",
 
-	// Security
-	"waf-policy": "app_firewall",
-	"service-policy": "service_policy",
-	"app-firewall": "app_firewall",
+  // Security
+  "waf-policy": "app_firewall",
+  "service-policy": "service_policy",
+  "app-firewall": "app_firewall",
 
-	// Infrastructure
-	"aws-vpc-site": "aws_vpc_site",
-	"azure-vnet-site": "azure_vnet_site",
-	"gcp-vpc-site": "gcp_vpc_site",
+  // Infrastructure
+  "aws-vpc-site": "aws_vpc_site",
+  "azure-vnet-site": "azure_vnet_site",
+  "gcp-vpc-site": "gcp_vpc_site",
 
-	// System
-	namespace: "namespace",
-	"api-credential": "api_credential",
+  // System
+  namespace: "namespace",
+  "api-credential": "api_credential",
 
-	// Placeholder for additional mappings discovered from F5XC API responses
+  // Placeholder for additional mappings discovered from F5XC API responses
 };
 
 /**
@@ -46,7 +46,7 @@ export const QUOTA_RESOURCE_MAP: Record<string, string> = {
  * @returns F5XC quota resource type (e.g., "http_loadbalancer")
  */
 export function getQuotaResourceType(mcpResourceType: string): string {
-	return QUOTA_RESOURCE_MAP[mcpResourceType] || mcpResourceType;
+  return QUOTA_RESOURCE_MAP[mcpResourceType] || mcpResourceType;
 }
 
 /**
@@ -56,5 +56,5 @@ export function getQuotaResourceType(mcpResourceType: string): string {
  * @returns true if mapping exists
  */
 export function hasQuotaMapping(mcpResourceType: string): boolean {
-	return mcpResourceType in QUOTA_RESOURCE_MAP;
+  return mcpResourceType in QUOTA_RESOURCE_MAP;
 }

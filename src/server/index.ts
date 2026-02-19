@@ -8,22 +8,22 @@
 
 // Handlers
 export {
-	type ResourceRegistrationContext,
-	registerPrompts,
-	registerResources,
-	registerTools,
-	type ToolRegistrationContext,
+  type ResourceRegistrationContext,
+  registerPrompts,
+  registerResources,
+  registerTools,
+  type ToolRegistrationContext,
 } from "./handlers/index.js";
 
 // Response utilities
 export {
-	createErrorResponse,
-	createTextResponse,
-	extractStringArguments,
+  createErrorResponse,
+  createTextResponse,
+  extractStringArguments,
 } from "./response-utils.js";
 // Types
 export type {
-	RegisterToolsFunction,
-	ServerConfig,
-	ToolHandlerContext,
+  RegisterToolsFunction,
+  ServerConfig,
+  ToolHandlerContext,
 } from "./types.js";

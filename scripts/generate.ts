@@ -18,15 +18,12 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
 import * as prettier from "prettier";
 import { fileURLToPath } from "url";
+import { buildDependencyGraph, serializeDependencyGraph } from "../src/generator/dependency-graph.js";
 import {
-	buildDependencyGraph,
-	serializeDependencyGraph,
-} from "../src/generator/dependency-graph.js";
-import {
-	getAllOperations,
-	groupOperationsByDomain,
-	type ParsedOperation,
-	parseDomainsDirectory,
+  getAllOperations,
+  groupOperationsByDomain,
+  type ParsedOperation,
+  parseDomainsDirectory,
 } from "../src/generator/openapi-parser.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -36,50 +33,43 @@ const __dirname = dirname(__filename);
  * Configuration
  */
 const CONFIG = {
-	/** Directory containing enriched domain OpenAPI specs */
-	SPECS_DIR: join(__dirname, "..", "specs", "domains"),
+  /** Directory containing enriched domain OpenAPI specs */
+  SPECS_DIR: join(__dirname, "..", "specs", "domains"),
 
-	/** Directory for generated tool definitions */
-	GENERATED_DIR: join(__dirname, "..", "src", "tools", "generated"),
+  /** Directory for generated tool definitions */
+  GENERATED_DIR: join(__dirname, "..", "src", "tools", "generated"),
 
-	/** Registry file for all tools */
-	REGISTRY_FILE: join(__dirname, "..", "src", "tools", "registry.ts"),
+  /** Registry file for all tools */
+  REGISTRY_FILE: join(__dirname, "..", "src", "tools", "registry.ts"),
 
-	/** Tool index file */
-	INDEX_FILE: join(__dirname, "..", "src", "tools", "index.ts"),
+  /** Tool index file */
+  INDEX_FILE: join(__dirname, "..", "src", "tools", "index.ts"),
 
-	/** Dependency graph JSON file */
-	DEPENDENCY_GRAPH_FILE: join(
-		__dirname,
-		"..",
-		"src",
-		"tools",
-		"generated",
-		"dependency-graph.json",
-	),
+  /** Dependency graph JSON file */
+  DEPENDENCY_GRAPH_FILE: join(__dirname, "..", "src", "tools", "generated", "dependency-graph.json"),
 };
 
 /**
  * Logger for script output
  */
 const log = {
-	info: (message: string): void => console.log(`[INFO] ${message}`),
-	warn: (message: string): void => console.warn(`[WARN] ${message}`),
-	error: (message: string): void => console.error(`[ERROR] ${message}`),
-	success: (message: string): void => console.log(`[SUCCESS] ${message}`),
+  info: (message: string): void => console.log(`[INFO] ${message}`),
+  warn: (message: string): void => console.warn(`[WARN] ${message}`),
+  error: (message: string): void => console.error(`[ERROR] ${message}`),
+  success: (message: string): void => console.log(`[SUCCESS] ${message}`),
 };
 
 /**
  * Prettier configuration for generated TypeScript files
  */
 const PRETTIER_CONFIG: prettier.Options = {
-	parser: "typescript",
-	semi: true,
-	singleQuote: false,
-	trailingComma: "es5",
-	printWidth: 100,
-	tabWidth: 2,
-	useTabs: false,
+  parser: "typescript",
+  semi: true,
+  singleQuote: false,
+  trailingComma: "es5",
+  printWidth: 100,
+  tabWidth: 2,
+  useTabs: false,
 };
 
 /**
@@ -87,77 +77,61 @@ const PRETTIER_CONFIG: prettier.Options = {
  * Ensures consistent output across different environments
  */
 function deterministicStringify(obj: unknown, indent: number = 2): string {
-	return JSON.stringify(
-		obj,
-		(_, value) => {
-			if (value && typeof value === "object" && !Array.isArray(value)) {
-				// Sort object keys alphabetically
-				return Object.keys(value)
-					.sort()
-					.reduce((sorted: Record<string, unknown>, key) => {
-						sorted[key] = value[key];
-						return sorted;
-					}, {});
-			}
-			return value;
-		},
-		indent,
-	);
+  return JSON.stringify(
+    obj,
+    (_, value) => {
+      if (value && typeof value === "object" && !Array.isArray(value)) {
+        // Sort object keys alphabetically
+        return Object.keys(value)
+          .sort()
+          .reduce((sorted: Record<string, unknown>, key) => {
+            sorted[key] = value[key];
+            return sorted;
+          }, {});
+      }
+      return value;
+    },
+    indent,
+  );
 }
 
 /**
  * Format TypeScript code using Prettier
  */
 async function formatCode(code: string): Promise<string> {
-	try {
-		return await prettier.format(code, PRETTIER_CONFIG);
-	} catch (error) {
-		log.warn(
-			`Prettier formatting failed, using unformatted code: ${error instanceof Error ? error.message : String(error)}`,
-		);
-		return code;
-	}
+  try {
+    return await prettier.format(code, PRETTIER_CONFIG);
+  } catch (error) {
+    log.warn(
+      `Prettier formatting failed, using unformatted code: ${error instanceof Error ? error.message : String(error)}`,
+    );
+    return code;
+  }
 }
 
 /**
  * Write formatted TypeScript file
  */
-async function writeFormattedFile(
-	filePath: string,
-	content: string,
-): Promise<void> {
-	const formattedContent = await formatCode(content);
-	writeFileSync(filePath, formattedContent);
+async function writeFormattedFile(filePath: string, content: string): Promise<void> {
+  const formattedContent = await formatCode(content);
+  writeFileSync(filePath, formattedContent);
 }
 
 /**
  * Generate tool definition file for a domain
  */
-function generateDomainFile(
-	domain: string,
-	operations: ParsedOperation[],
-): string {
-	const toolDefs = operations.map((op) => {
-		// Sort arrays for deterministic output (locale-independent comparison)
-		const sortedPathParams = [...op.pathParameters].sort((a, b) =>
-			a.name < b.name ? -1 : a.name > b.name ? 1 : 0,
-		);
-		const sortedQueryParams = [...op.queryParameters].sort((a, b) =>
-			a.name < b.name ? -1 : a.name > b.name ? 1 : 0,
-		);
-		const sortedRequiredParams = [...op.requiredParams].sort((a, b) =>
-			a < b ? -1 : a > b ? 1 : 0,
-		);
-		const sortedTags = [...op.tags].sort((a, b) =>
-			a < b ? -1 : a > b ? 1 : 0,
-		);
+function generateDomainFile(domain: string, operations: ParsedOperation[]): string {
+  const toolDefs = operations.map((op) => {
+    // Sort arrays for deterministic output (locale-independent comparison)
+    const sortedPathParams = [...op.pathParameters].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+    const sortedQueryParams = [...op.queryParameters].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+    const sortedRequiredParams = [...op.requiredParams].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+    const sortedTags = [...op.tags].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 
-		// Sort new rich metadata arrays for deterministic output
-		const sortedRequiredFields = [...op.requiredFields].sort((a, b) =>
-			a < b ? -1 : a > b ? 1 : 0,
-		);
+    // Sort new rich metadata arrays for deterministic output
+    const sortedRequiredFields = [...op.requiredFields].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 
-		return `  {
+    return `  {
     toolName: "${op.toolName}",
     method: "${op.method}",
     path: "${op.path}",
@@ -187,9 +161,9 @@ function generateDomainFile(
     oneOfGroups: ${deterministicStringify(op.oneOfGroups).replace(/\n/g, "\n    ")},
     subscriptionRequirements: ${deterministicStringify(op.subscriptionRequirements).replace(/\n/g, "\n    ")},
   }`;
-	});
+  });
 
-	return `/**
+  return `/**
  * Generated tool definitions for ${domain} domain
  * DO NOT EDIT - This file is auto-generated by scripts/generate.ts
  */
@@ -208,13 +182,11 @@ export default ${domain}Tools;
  * Generate the tool registry file
  */
 function generateRegistryFile(domains: string[]): string {
-	const imports = domains
-		.map((d) => `import { ${d}Tools } from "./generated/${d}/index.js";`)
-		.join("\n");
+  const imports = domains.map((d) => `import { ${d}Tools } from "./generated/${d}/index.js";`).join("\n");
 
-	const exports = domains.map((d) => `  ...${d}Tools,`).join("\n");
+  const exports = domains.map((d) => `  ...${d}Tools,`).join("\n");
 
-	return `/**
+  return `/**
  * Tool Registry - All generated MCP tools
  * DO NOT EDIT - This file is auto-generated by scripts/generate.ts
  */
@@ -270,7 +242,7 @@ export default allTools;
  * Generate tools index file
  */
 function generateIndexFile(): string {
-	return `/**
+  return `/**
  * Tools Module - Export all tool utilities
  * DO NOT EDIT - This file is auto-generated by scripts/generate.ts
  */
@@ -291,116 +263,102 @@ export type { ParsedOperation } from "../generator/openapi-parser.js";
  * Main generation function
  */
 async function generate(): Promise<void> {
-	console.log("=".repeat(60));
-	console.log("F5XC API MCP Tool Generator");
-	console.log("=".repeat(60));
+  console.log("=".repeat(60));
+  console.log("F5XC API MCP Tool Generator");
+  console.log("=".repeat(60));
 
-	// Check if specs exist
-	if (!existsSync(CONFIG.SPECS_DIR)) {
-		log.warn(`Specs directory not found: ${CONFIG.SPECS_DIR}`);
-		log.info("Run 'npm run sync-specs' first to download OpenAPI specs");
+  // Check if specs exist
+  if (!existsSync(CONFIG.SPECS_DIR)) {
+    log.warn(`Specs directory not found: ${CONFIG.SPECS_DIR}`);
+    log.info("Run 'npm run sync-specs' first to download OpenAPI specs");
 
-		// Create placeholder files for empty state (formatted)
-		mkdirSync(join(CONFIG.GENERATED_DIR, "core"), { recursive: true });
-		await writeFormattedFile(
-			join(CONFIG.GENERATED_DIR, "core", "index.ts"),
-			generateDomainFile("core", []),
-		);
-		await writeFormattedFile(
-			CONFIG.REGISTRY_FILE,
-			generateRegistryFile(["core"]),
-		);
-		await writeFormattedFile(CONFIG.INDEX_FILE, generateIndexFile());
+    // Create placeholder files for empty state (formatted)
+    mkdirSync(join(CONFIG.GENERATED_DIR, "core"), { recursive: true });
+    await writeFormattedFile(join(CONFIG.GENERATED_DIR, "core", "index.ts"), generateDomainFile("core", []));
+    await writeFormattedFile(CONFIG.REGISTRY_FILE, generateRegistryFile(["core"]));
+    await writeFormattedFile(CONFIG.INDEX_FILE, generateIndexFile());
 
-		log.info("Created placeholder tool files (Prettier formatted)");
-		return;
-	}
+    log.info("Created placeholder tool files (Prettier formatted)");
+    return;
+  }
 
-	// Parse all enriched domain specs
-	log.info("Parsing enriched domain specifications...");
-	const specs = parseDomainsDirectory(CONFIG.SPECS_DIR);
+  // Parse all enriched domain specs
+  log.info("Parsing enriched domain specifications...");
+  const specs = parseDomainsDirectory(CONFIG.SPECS_DIR);
 
-	if (specs.length === 0) {
-		log.warn("No valid OpenAPI specs found");
-		return;
-	}
+  if (specs.length === 0) {
+    log.warn("No valid OpenAPI specs found");
+    return;
+  }
 
-	log.info(`Found ${specs.length} spec files`);
+  log.info(`Found ${specs.length} spec files`);
 
-	// Get all unique operations
-	const operations = getAllOperations(specs);
-	log.info(`Extracted ${operations.length} unique operations`);
+  // Get all unique operations
+  const operations = getAllOperations(specs);
+  log.info(`Extracted ${operations.length} unique operations`);
 
-	// Group by domain
-	const domainGroups = groupOperationsByDomain(operations);
-	const domains = Array.from(domainGroups.keys()).sort();
+  // Group by domain
+  const domainGroups = groupOperationsByDomain(operations);
+  const domains = Array.from(domainGroups.keys()).sort();
 
-	log.info(`Domains: ${domains.join(", ")}`);
+  log.info(`Domains: ${domains.join(", ")}`);
 
-	// Generate domain files (formatted with Prettier)
-	log.info("Generating and formatting tool files...");
-	for (const [domain, ops] of domainGroups) {
-		const domainDir = join(CONFIG.GENERATED_DIR, domain);
-		mkdirSync(domainDir, { recursive: true });
+  // Generate domain files (formatted with Prettier)
+  log.info("Generating and formatting tool files...");
+  for (const [domain, ops] of domainGroups) {
+    const domainDir = join(CONFIG.GENERATED_DIR, domain);
+    mkdirSync(domainDir, { recursive: true });
 
-		// Sort operations by toolName for deterministic output (locale-independent)
-		const sortedOps = [...ops].sort((a, b) =>
-			a.toolName < b.toolName ? -1 : a.toolName > b.toolName ? 1 : 0,
-		);
-		const content = generateDomainFile(domain, sortedOps);
-		await writeFormattedFile(join(domainDir, "index.ts"), content);
+    // Sort operations by toolName for deterministic output (locale-independent)
+    const sortedOps = [...ops].sort((a, b) => (a.toolName < b.toolName ? -1 : a.toolName > b.toolName ? 1 : 0));
+    const content = generateDomainFile(domain, sortedOps);
+    await writeFormattedFile(join(domainDir, "index.ts"), content);
 
-		log.info(`Generated ${ops.length} tools for ${domain} domain`);
-	}
+    log.info(`Generated ${ops.length} tools for ${domain} domain`);
+  }
 
-	// Generate registry and index (formatted with Prettier)
-	await writeFormattedFile(CONFIG.REGISTRY_FILE, generateRegistryFile(domains));
-	await writeFormattedFile(CONFIG.INDEX_FILE, generateIndexFile());
-	log.info("All generated files formatted with Prettier");
+  // Generate registry and index (formatted with Prettier)
+  await writeFormattedFile(CONFIG.REGISTRY_FILE, generateRegistryFile(domains));
+  await writeFormattedFile(CONFIG.INDEX_FILE, generateIndexFile());
+  log.info("All generated files formatted with Prettier");
 
-	// Build dependency graph
-	log.info("Building dependency graph...");
-	// Read the spec index to get a deterministic timestamp
-	const specsIndexPath = join(__dirname, "..", "specs", "index.json");
-	const specsIndex = JSON.parse(readFileSync(specsIndexPath, "utf-8")) as {
-		version: string;
-		timestamp: string;
-	};
-	const dependencyGraph = buildDependencyGraph(specs, {
-		generatedAt: specsIndex.timestamp,
-	});
-	const graphJson = serializeDependencyGraph(dependencyGraph);
-	writeFileSync(CONFIG.DEPENDENCY_GRAPH_FILE, graphJson + "\n");
-	log.info(
-		`Dependency graph: ${dependencyGraph.totalResources} resources mapped`,
-	);
+  // Build dependency graph
+  log.info("Building dependency graph...");
+  // Read the spec index to get a deterministic timestamp
+  const specsIndexPath = join(__dirname, "..", "specs", "index.json");
+  const specsIndex = JSON.parse(readFileSync(specsIndexPath, "utf-8")) as {
+    version: string;
+    timestamp: string;
+  };
+  const dependencyGraph = buildDependencyGraph(specs, {
+    generatedAt: specsIndex.timestamp,
+  });
+  const graphJson = serializeDependencyGraph(dependencyGraph);
+  writeFileSync(CONFIG.DEPENDENCY_GRAPH_FILE, graphJson + "\n");
+  log.info(`Dependency graph: ${dependencyGraph.totalResources} resources mapped`);
 
-	// Summary
-	console.log("=".repeat(60));
-	console.log("Generation Summary:");
-	console.log(`  Total operations: ${operations.length}`);
-	console.log(`  Domains: ${domains.length}`);
-	for (const [domain, ops] of domainGroups) {
-		console.log(`    - ${domain}: ${ops.length} tools`);
-	}
-	console.log(
-		`  Dependency graph: ${dependencyGraph.totalResources} resources`,
-	);
-	console.log(`  Output directory: ${CONFIG.GENERATED_DIR}`);
-	console.log("=".repeat(60));
-	log.success("Generation complete!");
+  // Summary
+  console.log("=".repeat(60));
+  console.log("Generation Summary:");
+  console.log(`  Total operations: ${operations.length}`);
+  console.log(`  Domains: ${domains.length}`);
+  for (const [domain, ops] of domainGroups) {
+    console.log(`    - ${domain}: ${ops.length} tools`);
+  }
+  console.log(`  Dependency graph: ${dependencyGraph.totalResources} resources`);
+  console.log(`  Output directory: ${CONFIG.GENERATED_DIR}`);
+  console.log("=".repeat(60));
+  log.success("Generation complete!");
 }
 
 /**
  * Entry point
  */
 generate()
-	.then(() => {
-		process.exit(0);
-	})
-	.catch((error: unknown) => {
-		log.error(
-			`Generation failed: ${error instanceof Error ? error.message : String(error)}`,
-		);
-		process.exit(1);
-	});
+  .then(() => {
+    process.exit(0);
+  })
+  .catch((error: unknown) => {
+    log.error(`Generation failed: ${error instanceof Error ? error.message : String(error)}`);
+    process.exit(1);
+  });

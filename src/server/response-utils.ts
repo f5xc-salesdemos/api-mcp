@@ -17,14 +17,14 @@ import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
  * @returns MCP-compatible CallToolResult
  */
 export function createTextResponse(data: unknown): CallToolResult {
-	return {
-		content: [
-			{
-				type: "text",
-				text: JSON.stringify(data, null, 2),
-			},
-		],
-	};
+  return {
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify(data, null, 2),
+      },
+    ],
+  };
 }
 
 /**
@@ -35,29 +35,26 @@ export function createTextResponse(data: unknown): CallToolResult {
  * @param hint - Optional hint for resolving the error
  * @returns MCP-compatible CallToolResult with isError flag
  */
-export function createErrorResponse(
-	error: string | Error,
-	hint?: string,
-): CallToolResult {
-	const errorMessage = error instanceof Error ? error.message : error;
+export function createErrorResponse(error: string | Error, hint?: string): CallToolResult {
+  const errorMessage = error instanceof Error ? error.message : error;
 
-	const errorPayload: { error: string; hint?: string } = {
-		error: errorMessage,
-	};
+  const errorPayload: { error: string; hint?: string } = {
+    error: errorMessage,
+  };
 
-	if (hint) {
-		errorPayload.hint = hint;
-	}
+  if (hint) {
+    errorPayload.hint = hint;
+  }
 
-	return {
-		content: [
-			{
-				type: "text",
-				text: JSON.stringify(errorPayload, null, 2),
-			},
-		],
-		isError: true,
-	};
+  return {
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify(errorPayload, null, 2),
+      },
+    ],
+    isError: true,
+  };
 }
 
 /**
@@ -67,18 +64,16 @@ export function createErrorResponse(
  * @param args - Record of arguments that may contain non-string values
  * @returns Record with all values converted to strings
  */
-export function extractStringArguments(
-	args: Record<string, unknown> | undefined,
-): Record<string, string> {
-	if (!args) {
-		return {};
-	}
+export function extractStringArguments(args: Record<string, unknown> | undefined): Record<string, string> {
+  if (!args) {
+    return {};
+  }
 
-	const result: Record<string, string> = {};
-	for (const [key, value] of Object.entries(args)) {
-		if (value !== undefined && value !== null) {
-			result[key] = String(value);
-		}
-	}
-	return result;
+  const result: Record<string, string> = {};
+  for (const [key, value] of Object.entries(args)) {
+    if (value !== undefined && value !== null) {
+      result[key] = String(value);
+    }
+  }
+  return result;
 }

@@ -37,19 +37,19 @@ export { VERSION } from "./version.js";
  * Main entry point
  */
 async function main(): Promise<void> {
-	try {
-		// Get command-line arguments (skip node executable and script name)
-		const args = process.argv.slice(2);
+  try {
+    // Get command-line arguments (skip node executable and script name)
+    const args = process.argv.slice(2);
 
-		// Handle version flag
-		if (args.includes("--version") || args.includes("-v")) {
-			console.log(`f5xc-api-mcp v${VERSION}\n`);
-			process.exit(0);
-		}
+    // Handle version flag
+    if (args.includes("--version") || args.includes("-v")) {
+      console.log(`f5xc-api-mcp v${VERSION}\n`);
+      process.exit(0);
+    }
 
-		// Handle help flag
-		if (args.includes("--help") || args.includes("-h")) {
-			console.log(`F5 Distributed Cloud API MCP Server v${VERSION}
+    // Handle help flag
+    if (args.includes("--help") || args.includes("-h")) {
+      console.log(`F5 Distributed Cloud API MCP Server v${VERSION}
 
 Usage: f5xc-api-mcp [options]
 
@@ -72,56 +72,54 @@ Profile Configuration:
 The server runs in documentation mode when no credentials are provided,
 allowing exploration of the API without authentication.
 `);
-			process.exit(0);
-		}
+      process.exit(0);
+    }
 
-		// Start MCP server with STDIO transport
-		const server = await createServer();
-		await server.start();
+    // Start MCP server with STDIO transport
+    const server = await createServer();
+    await server.start();
 
-		// Handle graceful shutdown
-		const shutdown = async (signal: string): Promise<void> => {
-			logger.info(`Received ${signal}, shutting down gracefully`);
-			await server.stop();
-			process.exit(0);
-		};
+    // Handle graceful shutdown
+    const shutdown = async (signal: string): Promise<void> => {
+      logger.info(`Received ${signal}, shutting down gracefully`);
+      await server.stop();
+      process.exit(0);
+    };
 
-		process.on("SIGINT", () => void shutdown("SIGINT"));
-		process.on("SIGTERM", () => void shutdown("SIGTERM"));
+    process.on("SIGINT", () => void shutdown("SIGINT"));
+    process.on("SIGTERM", () => void shutdown("SIGTERM"));
 
-		// Handle uncaught errors
-		process.on("uncaughtException", (error: Error) => {
-			logger.error("Uncaught exception", {
-				error: error.message,
-				stack: error.stack,
-			});
-			process.exit(1);
-		});
+    // Handle uncaught errors
+    process.on("uncaughtException", (error: Error) => {
+      logger.error("Uncaught exception", {
+        error: error.message,
+        stack: error.stack,
+      });
+      process.exit(1);
+    });
 
-		process.on("unhandledRejection", (reason: unknown) => {
-			logger.error("Unhandled rejection", {
-				reason: reason instanceof Error ? reason.message : String(reason),
-			});
-			process.exit(1);
-		});
-	} catch (error) {
-		logger.error("Failed to start server", {
-			error: error instanceof Error ? error.message : String(error),
-		});
-		process.exit(1);
-	}
+    process.on("unhandledRejection", (reason: unknown) => {
+      logger.error("Unhandled rejection", {
+        reason: reason instanceof Error ? reason.message : String(reason),
+      });
+      process.exit(1);
+    });
+  } catch (error) {
+    logger.error("Failed to start server", {
+      error: error instanceof Error ? error.message : String(error),
+    });
+    process.exit(1);
+  }
 }
 
 // Only run main when executed directly, not when imported (e.g., during tests)
-const isMainModule =
-	import.meta.url === `file://${process.argv[1]}` ||
-	process.argv[1]?.endsWith("f5xc-api-mcp");
+const isMainModule = import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith("f5xc-api-mcp");
 
 if (isMainModule) {
-	main().catch((error: unknown) => {
-		logger.error("Fatal error", {
-			error: error instanceof Error ? error.message : String(error),
-		});
-		process.exit(1);
-	});
+  main().catch((error: unknown) => {
+    logger.error("Fatal error", {
+      error: error instanceof Error ? error.message : String(error),
+    });
+    process.exit(1);
+  });
 }

@@ -6,164 +6,158 @@
 import type { ParsedOperation } from "../../../generator/openapi-parser.js";
 
 export const admin_console_and_uiTools: ParsedOperation[] = [
-	{
-		toolName: "f5xc-api-adminconsoleandui-static-component-get",
-		method: "GET",
-		path: "/api/web/namespaces/{namespace}/static_components/{name}",
-		operation: "get",
-		domain: "admin_console_and_ui",
-		resource: "static-component",
-		summary: "GET UI static component.",
-		description: "GET UI static component.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/static_componentGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.ui.static_component.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/admin_console_and_ui.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-adminconsoleandui-static-component-list",
-		method: "GET",
-		path: "/api/web/namespaces/{namespace}/static_components",
-		operation: "list",
-		domain: "admin_console_and_ui",
-		resource: "static-component",
-		summary: "List UI Static Component.",
-		description: "List the set of static_component in a namespace.",
-		pathParameters: [
-			{
-				description:
-					"Namespace\nNamespace to scope the listing of static_component.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/static_componentListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.ui.static_component.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/admin_console_and_ui.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
+  {
+    toolName: "f5xc-api-adminconsoleandui-static-component-get",
+    method: "GET",
+    path: "/api/web/namespaces/{namespace}/static_components/{name}",
+    operation: "get",
+    domain: "admin_console_and_ui",
+    resource: "static-component",
+    summary: "GET UI static component.",
+    description: "GET UI static component.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/static_componentGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.ui.static_component.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/admin_console_and_ui.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-adminconsoleandui-static-component-list",
+    method: "GET",
+    path: "/api/web/namespaces/{namespace}/static_components",
+    operation: "list",
+    domain: "admin_console_and_ui",
+    resource: "static-component",
+    summary: "List UI Static Component.",
+    description: "List the set of static_component in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of static_component.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/static_componentListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.ui.static_component.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/admin_console_and_ui.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
 ];
 
 export default admin_console_and_uiTools;

@@ -8,232 +8,223 @@
  */
 
 import { describe, expect, it } from "vitest";
-import {
-	getManifestJson,
-	getPackageJson,
-} from "../utils/documentation-helpers.js";
+import { getManifestJson, getPackageJson } from "../utils/documentation-helpers.js";
 
 describe("Installation Command Syntax Validation", () => {
-	describe("npm commands", () => {
-		it("should have valid package name in package.json", () => {
-			const pkg = getPackageJson();
-			expect(pkg.name).toBe("@f5xc-salesdemos/api-mcp");
-		});
+  describe("npm commands", () => {
+    it("should have valid package name in package.json", () => {
+      const pkg = getPackageJson();
+      expect(pkg.name).toBe("@f5xc-salesdemos/api-mcp");
+    });
 
-		it("should have scoped package name format", () => {
-			const pkg = getPackageJson();
-			expect(pkg.name).toMatch(/^@[a-z0-9-]+\/[a-z0-9-]+$/);
-		});
+    it("should have scoped package name format", () => {
+      const pkg = getPackageJson();
+      expect(pkg.name).toMatch(/^@[a-z0-9-]+\/[a-z0-9-]+$/);
+    });
 
-		it("npx command should have correct package name", () => {
-			const pkg = getPackageJson();
-			const npxCommand = `npx ${pkg.name}`;
+    it("npx command should have correct package name", () => {
+      const pkg = getPackageJson();
+      const npxCommand = `npx ${pkg.name}`;
 
-			expect(npxCommand).toBe("npx @f5xc-salesdemos/api-mcp");
-		});
+      expect(npxCommand).toBe("npx @f5xc-salesdemos/api-mcp");
+    });
 
-		it("npm install -g command should be valid", () => {
-			const pkg = getPackageJson();
-			const installCommand = `npm install -g ${pkg.name}`;
+    it("npm install -g command should be valid", () => {
+      const pkg = getPackageJson();
+      const installCommand = `npm install -g ${pkg.name}`;
 
-			expect(installCommand).toContain("npm install -g");
-			expect(installCommand).toContain(pkg.name);
-		});
-	});
+      expect(installCommand).toContain("npm install -g");
+      expect(installCommand).toContain(pkg.name);
+    });
+  });
 
-	describe("package.json bin configuration", () => {
-		it("should define bin entry point", () => {
-			const pkg = getPackageJson();
-			expect((pkg as { bin?: Record<string, string> }).bin).toBeDefined();
-		});
+  describe("package.json bin configuration", () => {
+    it("should define bin entry point", () => {
+      const pkg = getPackageJson();
+      expect((pkg as { bin?: Record<string, string> }).bin).toBeDefined();
+    });
 
-		it("should have f5xc-api-mcp as bin name", () => {
-			const pkg = getPackageJson() as { bin?: Record<string, string> };
-			expect(pkg.bin?.["f5xc-api-mcp"]).toBeDefined();
-		});
+    it("should have f5xc-api-mcp as bin name", () => {
+      const pkg = getPackageJson() as { bin?: Record<string, string> };
+      expect(pkg.bin?.["f5xc-api-mcp"]).toBeDefined();
+    });
 
-		it("should point to correct entry file", () => {
-			const pkg = getPackageJson() as { bin?: Record<string, string> };
-			expect(pkg.bin?.["f5xc-api-mcp"]).toBe("./dist/index.js");
-		});
-	});
+    it("should point to correct entry file", () => {
+      const pkg = getPackageJson() as { bin?: Record<string, string> };
+      expect(pkg.bin?.["f5xc-api-mcp"]).toBe("./dist/index.js");
+    });
+  });
 
-	describe("MCP configuration JSON", () => {
-		it("should have valid mcpServers structure example", () => {
-			const config = {
-				mcpServers: {
-					"f5xc-api": {
-						command: "npx",
-						args: ["@f5xc-salesdemos/api-mcp"],
-						env: {
-							F5XC_API_URL: "https://your-tenant.console.ves.volterra.io",
-							F5XC_API_TOKEN: "your-api-token",
-						},
-					},
-				},
-			};
+  describe("MCP configuration JSON", () => {
+    it("should have valid mcpServers structure example", () => {
+      const config = {
+        mcpServers: {
+          "f5xc-api": {
+            command: "npx",
+            args: ["@f5xc-salesdemos/api-mcp"],
+            env: {
+              F5XC_API_URL: "https://your-tenant.console.ves.volterra.io",
+              F5XC_API_TOKEN: "your-api-token",
+            },
+          },
+        },
+      };
 
-			expect(() => JSON.stringify(config)).not.toThrow();
-			expect(config.mcpServers["f5xc-api"].command).toBe("npx");
-		});
+      expect(() => JSON.stringify(config)).not.toThrow();
+      expect(config.mcpServers["f5xc-api"].command).toBe("npx");
+    });
 
-		it("should have valid args array in config example", () => {
-			const pkg = getPackageJson();
-			const args = [pkg.name];
+    it("should have valid args array in config example", () => {
+      const pkg = getPackageJson();
+      const args = [pkg.name];
 
-			expect(Array.isArray(args)).toBe(true);
-			expect(args[0]).toBe("@f5xc-salesdemos/api-mcp");
-		});
+      expect(Array.isArray(args)).toBe(true);
+      expect(args[0]).toBe("@f5xc-salesdemos/api-mcp");
+    });
 
-		it("should have valid env object in config example", () => {
-			const env = {
-				F5XC_API_URL: "https://example.console.ves.volterra.io",
-				F5XC_API_TOKEN: "test-token",
-			};
+    it("should have valid env object in config example", () => {
+      const env = {
+        F5XC_API_URL: "https://example.console.ves.volterra.io",
+        F5XC_API_TOKEN: "test-token",
+      };
 
-			expect(typeof env.F5XC_API_URL).toBe("string");
-			expect(typeof env.F5XC_API_TOKEN).toBe("string");
-		});
-	});
+      expect(typeof env.F5XC_API_URL).toBe("string");
+      expect(typeof env.F5XC_API_TOKEN).toBe("string");
+    });
+  });
 
-	describe("Claude CLI add command", () => {
-		it("should have valid claude mcp add syntax", () => {
-			const pkg = getPackageJson();
-			const command = `claude mcp add f5xc-api -- npx ${pkg.name}`;
+  describe("Claude CLI add command", () => {
+    it("should have valid claude mcp add syntax", () => {
+      const pkg = getPackageJson();
+      const command = `claude mcp add f5xc-api -- npx ${pkg.name}`;
 
-			expect(command).toContain("claude mcp add");
-			expect(command).toContain("--");
-			expect(command).toContain("npx");
-			expect(command).toContain(pkg.name);
-		});
+      expect(command).toContain("claude mcp add");
+      expect(command).toContain("--");
+      expect(command).toContain("npx");
+      expect(command).toContain(pkg.name);
+    });
 
-		it("should use server name without @ prefix", () => {
-			const serverName = "f5xc-api";
+    it("should use server name without @ prefix", () => {
+      const serverName = "f5xc-api";
 
-			// Server name in claude mcp add should not have @ or slashes
-			expect(serverName).not.toContain("@");
-			expect(serverName).not.toContain("/");
-		});
-	});
+      // Server name in claude mcp add should not have @ or slashes
+      expect(serverName).not.toContain("@");
+      expect(serverName).not.toContain("/");
+    });
+  });
 
-	describe("manifest.json server configuration", () => {
-		it("should have valid server type", () => {
-			const manifest = getManifestJson() as {
-				server?: { type: string };
-			};
-			expect(manifest.server?.type).toBe("node");
-		});
+  describe("manifest.json server configuration", () => {
+    it("should have valid server type", () => {
+      const manifest = getManifestJson() as {
+        server?: { type: string };
+      };
+      expect(manifest.server?.type).toBe("node");
+    });
 
-		it("should have valid entry_point", () => {
-			const manifest = getManifestJson() as {
-				server?: { entry_point: string };
-			};
-			expect(manifest.server?.entry_point).toBe("dist/index.js");
-		});
+    it("should have valid entry_point", () => {
+      const manifest = getManifestJson() as {
+        server?: { entry_point: string };
+      };
+      expect(manifest.server?.entry_point).toBe("dist/index.js");
+    });
 
-		it("should have mcp_config with command", () => {
-			const manifest = getManifestJson() as {
-				server?: {
-					mcp_config?: { command: string };
-				};
-			};
-			expect(manifest.server?.mcp_config?.command).toBe("node");
-		});
-	});
+    it("should have mcp_config with command", () => {
+      const manifest = getManifestJson() as {
+        server?: {
+          mcp_config?: { command: string };
+        };
+      };
+      expect(manifest.server?.mcp_config?.command).toBe("node");
+    });
+  });
 
-	describe("Docker commands (if applicable)", () => {
-		it("should have valid docker image name format", () => {
-			// Expected Docker image names
-			const validFormats = [
-				"ghcr.io/f5xc-salesdemos/api-mcp:latest",
-				"f5xc-salesdemos/api-mcp:latest",
-			];
+  describe("Docker commands (if applicable)", () => {
+    it("should have valid docker image name format", () => {
+      // Expected Docker image names
+      const validFormats = ["ghcr.io/f5xc-salesdemos/api-mcp:latest", "f5xc-salesdemos/api-mcp:latest"];
 
-			for (const imageName of validFormats) {
-				expect(imageName).toMatch(/^[a-z0-9./-]+:[a-z0-9.-]+$/);
-			}
-		});
+      for (const imageName of validFormats) {
+        expect(imageName).toMatch(/^[a-z0-9./-]+:[a-z0-9.-]+$/);
+      }
+    });
 
-		it("docker pull command should be valid", () => {
-			const pullCommand = "docker pull ghcr.io/f5xc-salesdemos/api-mcp:latest";
+    it("docker pull command should be valid", () => {
+      const pullCommand = "docker pull ghcr.io/f5xc-salesdemos/api-mcp:latest";
 
-			expect(pullCommand).toContain("docker pull");
-			expect(pullCommand).toMatch(/:latest$/);
-		});
+      expect(pullCommand).toContain("docker pull");
+      expect(pullCommand).toMatch(/:latest$/);
+    });
 
-		it("docker run command should include interactive flags", () => {
-			const runCommand =
-				"docker run -it ghcr.io/f5xc-salesdemos/api-mcp:latest";
+    it("docker run command should include interactive flags", () => {
+      const runCommand = "docker run -it ghcr.io/f5xc-salesdemos/api-mcp:latest";
 
-			expect(runCommand).toContain("docker run");
-			expect(runCommand).toContain("-it");
-		});
-	});
+      expect(runCommand).toContain("docker run");
+      expect(runCommand).toContain("-it");
+    });
+  });
 
-	describe("version consistency", () => {
-		it("should have matching versions in package.json and manifest.json", () => {
-			const pkg = getPackageJson();
-			const manifest = getManifestJson();
+  describe("version consistency", () => {
+    it("should have matching versions in package.json and manifest.json", () => {
+      const pkg = getPackageJson();
+      const manifest = getManifestJson();
 
-			expect(pkg.version).toBe(manifest.version);
-		});
+      expect(pkg.version).toBe(manifest.version);
+    });
 
-		it("should have valid version format", () => {
-			const pkg = getPackageJson();
+    it("should have valid version format", () => {
+      const pkg = getPackageJson();
 
-			// Accept both simple semver (2.0.2) and timestamped versions (2.0.21-2601122116)
-			// Format: MAJOR.MINOR.PATCH[-TIMESTAMP][-BETA]
-			expect(pkg.version).toMatch(/^\d+\.\d+\.\d+(-\d+)?(-[A-Z]+)?$/);
-		});
-	});
+      // Accept both simple semver (2.0.2) and timestamped versions (2.0.21-2601122116)
+      // Format: MAJOR.MINOR.PATCH[-TIMESTAMP][-BETA]
+      expect(pkg.version).toMatch(/^\d+\.\d+\.\d+(-\d+)?(-[A-Z]+)?$/);
+    });
+  });
 
-	describe("repository and homepage URLs", () => {
-		it("should have valid GitHub repository URL", () => {
-			const pkg = getPackageJson() as {
-				repository?: { url: string };
-			};
+  describe("repository and homepage URLs", () => {
+    it("should have valid GitHub repository URL", () => {
+      const pkg = getPackageJson() as {
+        repository?: { url: string };
+      };
 
-			expect(pkg.repository?.url).toMatch(
-				/^https:\/\/github\.com\/[a-z0-9-]+\/[a-z0-9-]+\.git$/,
-			);
-		});
+      expect(pkg.repository?.url).toMatch(/^https:\/\/github\.com\/[a-z0-9-]+\/[a-z0-9-]+\.git$/);
+    });
 
-		it("should have valid homepage URL", () => {
-			const pkg = getPackageJson() as { homepage?: string };
+    it("should have valid homepage URL", () => {
+      const pkg = getPackageJson() as { homepage?: string };
 
-			expect(pkg.homepage).toMatch(/^https:\/\//);
-		});
-	});
+      expect(pkg.homepage).toMatch(/^https:\/\//);
+    });
+  });
 
-	describe("publishConfig", () => {
-		it("should be configured for public access", () => {
-			const pkg = getPackageJson() as {
-				publishConfig?: { access: string };
-			};
+  describe("publishConfig", () => {
+    it("should be configured for public access", () => {
+      const pkg = getPackageJson() as {
+        publishConfig?: { access: string };
+      };
 
-			expect(pkg.publishConfig?.access).toBe("public");
-		});
+      expect(pkg.publishConfig?.access).toBe("public");
+    });
 
-		it("should target npm registry", () => {
-			const pkg = getPackageJson() as {
-				publishConfig?: { registry: string };
-			};
+    it("should target npm registry", () => {
+      const pkg = getPackageJson() as {
+        publishConfig?: { registry: string };
+      };
 
-			expect(pkg.publishConfig?.registry).toBe("https://registry.npmjs.org/");
-		});
-	});
+      expect(pkg.publishConfig?.registry).toBe("https://registry.npmjs.org/");
+    });
+  });
 
-	describe("engine requirements", () => {
-		it("should specify Node.js version requirement", () => {
-			const pkg = getPackageJson() as { engines?: { node: string } };
+  describe("engine requirements", () => {
+    it("should specify Node.js version requirement", () => {
+      const pkg = getPackageJson() as { engines?: { node: string } };
 
-			expect(pkg.engines?.node).toBeDefined();
-		});
+      expect(pkg.engines?.node).toBeDefined();
+    });
 
-		it("should require Node.js 24+", () => {
-			const pkg = getPackageJson() as { engines?: { node: string } };
+    it("should require Node.js 24+", () => {
+      const pkg = getPackageJson() as { engines?: { node: string } };
 
-			expect(pkg.engines?.node).toMatch(/>=24/);
-		});
-	});
+      expect(pkg.engines?.node).toMatch(/>=24/);
+    });
+  });
 });

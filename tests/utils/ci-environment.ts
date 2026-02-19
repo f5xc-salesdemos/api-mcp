@@ -12,25 +12,25 @@
  * Detects common CI platforms: GitHub Actions, GitLab CI, Circle CI, Travis CI, etc.
  */
 export function isCI(): boolean {
-	return !!(
-		(
-			process.env.CI || // Generic CI indicator
-			process.env.GITHUB_ACTIONS || // GitHub Actions
-			process.env.GITLAB_CI || // GitLab CI
-			process.env.CIRCLECI || // Circle CI
-			process.env.TRAVIS || // Travis CI
-			process.env.BUILDKITE || // Buildkite
-			process.env.DRONE || // Drone
-			process.env.APPVEYOR
-		) // AppVeyor
-	);
+  return !!(
+    (
+      process.env.CI || // Generic CI indicator
+      process.env.GITHUB_ACTIONS || // GitHub Actions
+      process.env.GITLAB_CI || // GitLab CI
+      process.env.CIRCLECI || // Circle CI
+      process.env.TRAVIS || // Travis CI
+      process.env.BUILDKITE || // Buildkite
+      process.env.DRONE || // Drone
+      process.env.APPVEYOR
+    ) // AppVeyor
+  );
 }
 
 /**
  * Check if running in GitHub Actions specifically
  */
 export function isGitHubActions(): boolean {
-	return !!process.env.GITHUB_ACTIONS;
+  return !!process.env.GITHUB_ACTIONS;
 }
 
 /**
@@ -38,7 +38,7 @@ export function isGitHubActions(): boolean {
  * Returns true if test should be skipped (in CI environment)
  */
 export function shouldSkipAuthenticatedTests(): boolean {
-	return isCI();
+  return isCI();
 }
 
 /**
@@ -46,14 +46,14 @@ export function shouldSkipAuthenticatedTests(): boolean {
  * Returns true if test should be skipped (in CI environment without real certificates)
  */
 export function shouldSkipP12Tests(): boolean {
-	// Skip if in CI and actual P12 file doesn't exist
-	if (!isCI()) return false;
+  // Skip if in CI and actual P12 file doesn't exist
+  if (!isCI()) return false;
 
-	const p12Bundle = process.env.F5XC_P12_BUNDLE;
-	if (!p12Bundle) return true; // P12 not configured at all
+  const p12Bundle = process.env.F5XC_P12_BUNDLE;
+  if (!p12Bundle) return true; // P12 not configured at all
 
-	// Check if it's a real file path vs a test mock
-	return !p12Bundle.includes("mock");
+  // Check if it's a real file path vs a test mock
+  return !p12Bundle.includes("mock");
 }
 
 /**
@@ -61,11 +61,11 @@ export function shouldSkipP12Tests(): boolean {
  * Returns true if test should be skipped (in CI environment without real token)
  */
 export function shouldSkipTokenAuthTests(): boolean {
-	// Skip if in CI and actual API token doesn't exist (in CI, it won't)
-	if (!isCI()) return false;
+  // Skip if in CI and actual API token doesn't exist (in CI, it won't)
+  if (!isCI()) return false;
 
-	const apiToken = process.env.F5XC_API_TOKEN;
-	return !apiToken || apiToken === "test-token" || apiToken.includes("mock");
+  const apiToken = process.env.F5XC_API_TOKEN;
+  return !apiToken || apiToken === "test-token" || apiToken.includes("mock");
 }
 
 /**
@@ -73,12 +73,12 @@ export function shouldSkipTokenAuthTests(): boolean {
  * Use in test setup/teardown to ensure clean state
  */
 export function clearF5XCEnvVars(): void {
-	delete process.env.F5XC_API_URL;
-	delete process.env.F5XC_API_TOKEN;
-	delete process.env.F5XC_P12_BUNDLE;
-	delete process.env.F5XC_CERT;
-	delete process.env.F5XC_KEY;
-	delete process.env.F5XC_NAMESPACE;
+  delete process.env.F5XC_API_URL;
+  delete process.env.F5XC_API_TOKEN;
+  delete process.env.F5XC_P12_BUNDLE;
+  delete process.env.F5XC_CERT;
+  delete process.env.F5XC_KEY;
+  delete process.env.F5XC_NAMESPACE;
 }
 
 /**
@@ -86,20 +86,16 @@ export function clearF5XCEnvVars(): void {
  * Clears all auth env vars and disables profile loading
  */
 export function setupDocumentationModeEnv(): void {
-	clearF5XCEnvVars();
-	// Set XDG_CONFIG_HOME to a non-existent directory to prevent loading real profiles
-	process.env.XDG_CONFIG_HOME = "/tmp/__nonexistent_test_config__";
+  clearF5XCEnvVars();
+  // Set XDG_CONFIG_HOME to a non-existent directory to prevent loading real profiles
+  process.env.XDG_CONFIG_HOME = "/tmp/__nonexistent_test_config__";
 }
 
 /**
  * Set up environment for authenticated mode testing
  */
-export function setupAuthenticatedModeEnv(options?: {
-	apiUrl?: string;
-	apiToken?: string;
-}): void {
-	clearF5XCEnvVars();
-	process.env.F5XC_API_URL =
-		options?.apiUrl ?? "https://test.console.ves.volterra.io";
-	process.env.F5XC_API_TOKEN = options?.apiToken ?? "test-token";
+export function setupAuthenticatedModeEnv(options?: { apiUrl?: string; apiToken?: string }): void {
+  clearF5XCEnvVars();
+  process.env.F5XC_API_URL = options?.apiUrl ?? "https://test.console.ves.volterra.io";
+  process.env.F5XC_API_TOKEN = options?.apiToken ?? "test-token";
 }

@@ -35,10 +35,10 @@ const MY_PREFIX_PATTERN = /\bmy-(\w+)/g;
  * ```
  */
 export function normalizeExamples(description: string): string {
-	if (!description) {
-		return description;
-	}
-	return description.replace(MY_PREFIX_PATTERN, "example-$1");
+  if (!description) {
+    return description;
+  }
+  return description.replace(MY_PREFIX_PATTERN, "example-$1");
 }
 
 /**
@@ -49,16 +49,14 @@ export function normalizeExamples(description: string): string {
  * @param param - The parameter object to normalize
  * @returns New parameter object with normalized description
  */
-export function normalizeParameterExamples<T extends { description?: string }>(
-	param: T,
-): T {
-	if (!param.description) {
-		return param;
-	}
-	return {
-		...param,
-		description: normalizeExamples(param.description),
-	};
+export function normalizeParameterExamples<T extends { description?: string }>(param: T): T {
+  if (!param.description) {
+    return param;
+  }
+  return {
+    ...param,
+    description: normalizeExamples(param.description),
+  };
 }
 
 /**
@@ -68,7 +66,7 @@ export function normalizeParameterExamples<T extends { description?: string }>(
  * @returns True if "my-" prefixed examples are found
  */
 export function hasMyPrefixExamples(text: string): boolean {
-	// Create new non-global regex for testing to avoid state pollution
-	// Global regex maintains lastIndex between calls
-	return /\bmy-(\w+)/.test(text);
+  // Create new non-global regex for testing to avoid state pollution
+  // Global regex maintains lastIndex between calls
+  return /\bmy-(\w+)/.test(text);
 }

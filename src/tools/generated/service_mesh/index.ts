@@ -6,4686 +6,4455 @@
 import type { ParsedOperation } from "../../../generator/openapi-parser.js";
 
 export const service_meshTools: ParsedOperation[] = [
-	{
-		toolName: "f5xc-api-servicemesh-api-endpoint-create",
-		method: "POST",
-		path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/services/{service_name}/api_endpoints",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "api-endpoint",
-		summary: "GET Service API Endpoints.",
-		description: "GET all autodiscovered API endpoints for Service.",
-		pathParameters: [
-			{
-				description: "App Type\nApp Type for current request.",
-				in: "path",
-				name: "app_type_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "App Type",
-			},
-			{
-				description:
-					"Namespace\nNamespace of the App type for current request.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-			{
-				description: "Service\nIdentifies the destination service.",
-				in: "path",
-				name: "service_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Service Name.",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_typeServiceAPIEndpointsReq",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeAPIEndpointsRsp",
-		},
-		requiredParams: ["app_type_name", "body", "namespace", "service_name"],
-		operationId: "ves.io.schema.app_type.CustomAPI.GetServiceAPIEndpoints",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-api-endpoint-list",
-		method: "GET",
-		path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoints",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "api-endpoint",
-		summary: "GET API endpoints.",
-		description: "GET all auto discovered API endpoints for App type.",
-		pathParameters: [
-			{
-				description: "App Type\nApp Type for current request.",
-				in: "path",
-				name: "app_type_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "App Type",
-			},
-			{
-				description:
-					"Namespace\nNamespace of the App type for current request.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"List of additional things that needs to be sent as part of the request\n\nAPI ENDPOINT INFO NONE option is used to disable any additional info request per API endpoint response\nAPI ENDPOINT INFO PDF SPARKLINES option is used to enable pdf sparkline info along with the API endpoint response.",
-				in: "query",
-				name: "api_endpoint_info_request",
-				required: false,
-				schema: {
-					items: {
-						enum: [
-							"API_ENDPOINT_INFO_NONE",
-							"API_ENDPOINT_INFO_PDF_SPARKLINES",
-						],
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "API Endpoint Info PDF Sparklines.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeAPIEndpointsRsp",
-		},
-		requiredParams: ["app_type_name", "namespace"],
-		operationId: "ves.io.schema.app_type.CustomAPI.APIEndpoints",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-setting-create",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/app_settings",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "app-setting",
-		summary: "Create App Setting.",
-		description:
-			"Create App setting configuration in namespace metadata.namespace.",
-		pathParameters: [
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_settingCreateRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/app_settingCreateResponse",
-		},
-		requiredParams: ["body", "metadata.namespace"],
-		operationId: "ves.io.schema.app_setting.API.Create",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "app-setting",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-create-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemaapp-setting-create",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "learn_from_namespace",
-				fieldPath:
-					"spec.app_type_settings[].business_logic_markup_setting.learn_from_namespace",
-				options: [
-					"spec.app_type_settings[].business_logic_markup_setting.disable",
-					"spec.app_type_settings[].business_logic_markup_setting.enable",
-				],
-			},
-			{
-				choiceField: "learn_from_namespace",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.learn_from_namespace",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.disable_learning",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_learning",
-				],
-			},
-			{
-				choiceField: "malicious_user_detection",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.malicious_user_detection",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.disable_detection",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection",
-				],
-			},
-			{
-				choiceField: "bola_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_detection_automatic",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bola_detection",
-				],
-			},
-			{
-				choiceField: "bot_defense_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bot_defense_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bot_defense_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_bot_defense_activity",
-				],
-			},
-			{
-				choiceField: "cooling_off_period_setting",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period_setting",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period",
-				],
-			},
-			{
-				choiceField: "failed_login_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.failed_login_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_failed_login_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_failed_login_activity",
-				],
-			},
-			{
-				choiceField: "forbidden_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.forbidden_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_forbidden_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_forbidden_activity",
-				],
-			},
-			{
-				choiceField: "ip_reputation_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.ip_reputation_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_ip_reputation",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_ip_reputation",
-				],
-			},
-			{
-				choiceField: "non_existent_url_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.non_existent_url_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_non_existent_url_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_custom",
-				],
-			},
-			{
-				choiceField: "rate_limit_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.rate_limit_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_rate_limit",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_rate_limit",
-				],
-			},
-			{
-				choiceField: "waf_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.waf_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_waf_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_waf_activity",
-				],
-			},
-			{
-				choiceField: "sensitivity",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.sensitivity",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.high",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.low",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.medium",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-setting-delete",
-		method: "DELETE",
-		path: "/api/config/namespaces/{namespace}/app_settings/{name}",
-		operation: "delete",
-		domain: "service_mesh",
-		resource: "app-setting",
-		summary: "DELETE App Setting.",
-		description: "DELETE the specified app_setting.",
-		pathParameters: [
-			{
-				description: "Name\nName of the configuration object.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nNamespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_settingDeleteRequest",
-		},
-		responseSchema: {},
-		requiredParams: ["body", "name", "namespace"],
-		operationId: "ves.io.schema.app_setting.API.Delete",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "app-setting",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-setting-get",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/app_settings/{name}",
-		operation: "get",
-		domain: "service_mesh",
-		resource: "app-setting",
-		summary: "GET App Setting.",
-		description:
-			"GET App setting will retrieve the configuration from namespace metadata.namespace.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_FOR_CREATE",
-						"GET_RSP_FORMAT_FOR_REPLACE",
-						"GET_RSP_FORMAT_STATUS",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/app_settingGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.app_setting.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-setting-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/app_settings",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "app-setting",
-		summary: "List App Setting.",
-		description: "List the set of app_setting in a namespace.",
-		pathParameters: [
-			{
-				description:
-					"Namespace\nNamespace to scope the listing of app_setting.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/app_settingListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.app_setting.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-setting-update",
-		method: "PUT",
-		path: "/api/config/namespaces/{metadata.namespace}/app_settings/{metadata.name}",
-		operation: "update",
-		domain: "service_mesh",
-		resource: "app-setting",
-		summary: "Replace App Setting.",
-		description:
-			"Replacing an App setting will update the configuration by replacing the existing spec with the provided one.\nFor read-then-write operations a resourceVersion mismatch will occur if the object was modified between the read and write.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe configuration object to be replaced will be looked up by name.",
-				in: "path",
-				name: "metadata.name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_settingReplaceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/app_settingReplaceResponse",
-		},
-		requiredParams: ["body", "metadata.name", "metadata.namespace"],
-		operationId: "ves.io.schema.app_setting.API.Replace",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "app-setting",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-replace-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemaapp-setting-replace",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "learn_from_namespace",
-				fieldPath:
-					"spec.app_type_settings[].business_logic_markup_setting.learn_from_namespace",
-				options: [
-					"spec.app_type_settings[].business_logic_markup_setting.disable",
-					"spec.app_type_settings[].business_logic_markup_setting.enable",
-				],
-			},
-			{
-				choiceField: "learn_from_namespace",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.learn_from_namespace",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.disable_learning",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_learning",
-				],
-			},
-			{
-				choiceField: "malicious_user_detection",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.malicious_user_detection",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.disable_detection",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection",
-				],
-			},
-			{
-				choiceField: "bola_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_detection_automatic",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bola_detection",
-				],
-			},
-			{
-				choiceField: "bot_defense_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bot_defense_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bot_defense_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_bot_defense_activity",
-				],
-			},
-			{
-				choiceField: "cooling_off_period_setting",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period_setting",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period",
-				],
-			},
-			{
-				choiceField: "failed_login_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.failed_login_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_failed_login_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_failed_login_activity",
-				],
-			},
-			{
-				choiceField: "forbidden_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.forbidden_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_forbidden_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_forbidden_activity",
-				],
-			},
-			{
-				choiceField: "ip_reputation_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.ip_reputation_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_ip_reputation",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_ip_reputation",
-				],
-			},
-			{
-				choiceField: "non_existent_url_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.non_existent_url_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_non_existent_url_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_custom",
-				],
-			},
-			{
-				choiceField: "rate_limit_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.rate_limit_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_rate_limit",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_rate_limit",
-				],
-			},
-			{
-				choiceField: "waf_activity_choice",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.waf_activity_choice",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_waf_activity",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_waf_activity",
-				],
-			},
-			{
-				choiceField: "sensitivity",
-				fieldPath:
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.sensitivity",
-				options: [
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.high",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.low",
-					"spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.medium",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-type-create",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/app_types",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "app-type",
-		summary: "Create App Type.",
-		description:
-			"Create App type will create the configuration in namespace metadata.namespace.",
-		pathParameters: [
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_typeCreateRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeCreateResponse",
-		},
-		requiredParams: ["body", "metadata.namespace"],
-		operationId: "ves.io.schema.app_type.API.Create",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "app-type",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-create-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "app-type-create",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "learn_from_redirect_traffic",
-				fieldPath:
-					"spec.business_logic_markup_setting.learn_from_redirect_traffic",
-				options: [
-					"spec.business_logic_markup_setting.disable",
-					"spec.business_logic_markup_setting.enable",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-type-delete",
-		method: "DELETE",
-		path: "/api/config/namespaces/{namespace}/app_types/{name}",
-		operation: "delete",
-		domain: "service_mesh",
-		resource: "app-type",
-		summary: "DELETE App Type.",
-		description: "DELETE the specified app_type.",
-		pathParameters: [
-			{
-				description: "Name\nName of the configuration object.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nNamespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_typeDeleteRequest",
-		},
-		responseSchema: {},
-		requiredParams: ["body", "name", "namespace"],
-		operationId: "ves.io.schema.app_type.API.Delete",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "app-type",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-type-get",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/app_types/{name}",
-		operation: "get",
-		domain: "service_mesh",
-		resource: "app-type",
-		summary: "GET App Type.",
-		description:
-			"GET App type will read the configuration from namespace metadata.namespace.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_FOR_CREATE",
-						"GET_RSP_FORMAT_FOR_REPLACE",
-						"GET_RSP_FORMAT_STATUS",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.app_type.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-type-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/app_types",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "app-type",
-		summary: "List App Type.",
-		description: "List the set of app_type in a namespace.",
-		pathParameters: [
-			{
-				description: "Namespace\nNamespace to scope the listing of app_type.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.app_type.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-app-type-update",
-		method: "PUT",
-		path: "/api/config/namespaces/{metadata.namespace}/app_types/{metadata.name}",
-		operation: "update",
-		domain: "service_mesh",
-		resource: "app-type",
-		summary: "Replace App Type.",
-		description:
-			"Update the configuration by replacing the existing spec with the provided one.\nFor read-then-write operations a resourceVersion mismatch will occur if the object was modified between the read and write.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe configuration object to be replaced will be looked up by name.",
-				in: "path",
-				name: "metadata.name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_typeReplaceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeReplaceResponse",
-		},
-		requiredParams: ["body", "metadata.name", "metadata.namespace"],
-		operationId: "ves.io.schema.app_type.API.Replace",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "app-type",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-replace-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "app-type-replace",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "learn_from_redirect_traffic",
-				fieldPath:
-					"spec.business_logic_markup_setting.learn_from_redirect_traffic",
-				options: [
-					"spec.business_logic_markup_setting.disable",
-					"spec.business_logic_markup_setting.enable",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-endpoint-create",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/endpoints",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "endpoint",
-		summary: "Create Endpoint.",
-		description:
-			"Create endpoint will create the object in the storage backend for namespace metadata.namespace.",
-		pathParameters: [
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/endpointCreateRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/endpointCreateResponse",
-		},
-		requiredParams: ["body", "metadata.namespace"],
-		operationId: "ves.io.schema.endpoint.API.Create",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "service_mesh",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "endpoint",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-create-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemaendpoint-create",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "endpoint_address",
-				fieldPath: "spec.endpoint_address",
-				options: [
-					"spec.dns_name",
-					"spec.dns_name_advanced",
-					"spec.ip",
-					"spec.service_info",
-				],
-			},
-			{
-				choiceField: "ttl_choice",
-				fieldPath: "spec.dns_name_advanced.ttl_choice",
-				options: ["spec.dns_name_advanced.refresh_interval"],
-			},
-			{
-				choiceField: "service_info",
-				fieldPath: "spec.service_info.service_info",
-				options: [
-					"spec.service_info.service_name",
-					"spec.service_info.service_selector",
-				],
-			},
-			{
-				choiceField: "snat_pool_choice",
-				fieldPath: "spec.snat_pool.snat_pool_choice",
-				options: ["spec.snat_pool.no_snat_pool", "spec.snat_pool.snat_pool"],
-			},
-			{
-				choiceField: "ref_or_selector",
-				fieldPath: "spec.where.ref_or_selector",
-				options: [
-					"spec.where.site",
-					"spec.where.virtual_network",
-					"spec.where.virtual_site",
-				],
-			},
-			{
-				choiceField: "internet_vip_choice",
-				fieldPath: "spec.where.site.internet_vip_choice",
-				options: [
-					"spec.where.site.disable_internet_vip",
-					"spec.where.site.enable_internet_vip",
-				],
-			},
-			{
-				choiceField: "internet_vip_choice",
-				fieldPath: "spec.where.virtual_site.internet_vip_choice",
-				options: [
-					"spec.where.virtual_site.disable_internet_vip",
-					"spec.where.virtual_site.enable_internet_vip",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-endpoint-delete",
-		method: "DELETE",
-		path: "/api/config/namespaces/{namespace}/endpoints/{name}",
-		operation: "delete",
-		domain: "service_mesh",
-		resource: "endpoint",
-		summary: "DELETE Endpoint.",
-		description: "DELETE the specified endpoint.",
-		pathParameters: [
-			{
-				description: "Name\nName of the configuration object.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nNamespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/endpointDeleteRequest",
-		},
-		responseSchema: {},
-		requiredParams: ["body", "name", "namespace"],
-		operationId: "ves.io.schema.endpoint.API.Delete",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "service_mesh",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "endpoint",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-endpoint-get",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/endpoints/{name}",
-		operation: "get",
-		domain: "service_mesh",
-		resource: "endpoint",
-		summary: "GET Endpoint.",
-		description:
-			"GET endpoint will GET the object from the storage backend for namespace metadata.namespace.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_FOR_CREATE",
-						"GET_RSP_FORMAT_FOR_REPLACE",
-						"GET_RSP_FORMAT_STATUS",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/endpointGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.endpoint.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-endpoint-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/endpoints",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "endpoint",
-		summary: "List Endpoint.",
-		description: "List the set of endpoint in a namespace.",
-		pathParameters: [
-			{
-				description: "Namespace\nNamespace to scope the listing of endpoint.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/endpointListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.endpoint.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-endpoint-update",
-		method: "PUT",
-		path: "/api/config/namespaces/{metadata.namespace}/endpoints/{metadata.name}",
-		operation: "update",
-		domain: "service_mesh",
-		resource: "endpoint",
-		summary: "Replace Endpoint.",
-		description:
-			"Replacing an endpoint object will update the object by replacing the existing spec with the provided one.\nFor read-then-write operations a resourceVersion mismatch will occur if the object was modified between the read and write.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe configuration object to be replaced will be looked up by name.",
-				in: "path",
-				name: "metadata.name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/endpointReplaceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/endpointReplaceResponse",
-		},
-		requiredParams: ["body", "metadata.name", "metadata.namespace"],
-		operationId: "ves.io.schema.endpoint.API.Replace",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "service_mesh",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "endpoint",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-replace-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemaendpoint-replace",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "endpoint_address",
-				fieldPath: "spec.endpoint_address",
-				options: [
-					"spec.dns_name",
-					"spec.dns_name_advanced",
-					"spec.ip",
-					"spec.service_info",
-				],
-			},
-			{
-				choiceField: "ttl_choice",
-				fieldPath: "spec.dns_name_advanced.ttl_choice",
-				options: ["spec.dns_name_advanced.refresh_interval"],
-			},
-			{
-				choiceField: "service_info",
-				fieldPath: "spec.service_info.service_info",
-				options: [
-					"spec.service_info.service_name",
-					"spec.service_info.service_selector",
-				],
-			},
-			{
-				choiceField: "snat_pool_choice",
-				fieldPath: "spec.snat_pool.snat_pool_choice",
-				options: ["spec.snat_pool.no_snat_pool", "spec.snat_pool.snat_pool"],
-			},
-			{
-				choiceField: "ref_or_selector",
-				fieldPath: "spec.where.ref_or_selector",
-				options: [
-					"spec.where.site",
-					"spec.where.virtual_network",
-					"spec.where.virtual_site",
-				],
-			},
-			{
-				choiceField: "internet_vip_choice",
-				fieldPath: "spec.where.site.internet_vip_choice",
-				options: [
-					"spec.where.site.disable_internet_vip",
-					"spec.where.site.enable_internet_vip",
-				],
-			},
-			{
-				choiceField: "internet_vip_choice",
-				fieldPath: "spec.where.virtual_site.internet_vip_choice",
-				options: [
-					"spec.where.virtual_site.disable_internet_vip",
-					"spec.where.virtual_site.enable_internet_vip",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-force-delete-create",
-		method: "POST",
-		path: "/api/config/namespaces/system/nfv_service/{name}/force-delete",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "force-delete",
-		summary: "Force DELETE NFV Service.",
-		description: "Force DELETE NFV Service.",
-		pathParameters: [
-			{
-				description: "Name\nName of the NFV object to be force deleted.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/nfv_serviceForceDeleteNFVServiceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/nfv_serviceForceDeleteNFVServiceResponse",
-		},
-		requiredParams: ["body", "name"],
-		operationId: "ves.io.schema.nfv_service.CustomAPI.ForceDeleteNFVService",
-		tags: ["Service Mesh"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-learnt-schema-create",
-		method: "POST",
-		path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoint/learnt_schema",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "learnt-schema",
-		summary: "GET Learnt Schema per API endpoint.",
-		description:
-			"GET Learnt Schema per API endpoint for a given auto discovered API endpoint for Service.",
-		pathParameters: [
-			{
-				description: "App Type\nApp Type for current request.",
-				in: "path",
-				name: "app_type_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "App Type",
-			},
-			{
-				description:
-					"Namespace\nNamespace of the App type for current request.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_typeAPIEndpointLearntSchemaReq",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeAPIEndpointLearntSchemaRsp",
-		},
-		requiredParams: ["app_type_name", "body", "namespace"],
-		operationId: "ves.io.schema.app_type.CustomAPI.GetAPIEndpointLearntSchema",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-metric-create",
-		method: "POST",
-		path: "/api/data/namespaces/{namespace}/nfv_services/metrics",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "metric",
-		summary: "Metrics",
-		description: "Nfv Service metrics.",
-		pathParameters: [
-			{
-				description: "Namespace\nOnly `system` namespace is supported.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/nfv_serviceMetricsRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/nfv_serviceMetricsResponse",
-		},
-		requiredParams: ["body", "namespace"],
-		operationId: "ves.io.schema.nfv_service.CustomDataAPI.Metrics",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "field_selector[]",
-				inline: false,
-				required: false,
-				resourceType: "schemanfv-service-metric",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-nfv-service-create",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/nfv_services",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "nfv-service",
-		summary: "Create NFV Service.",
-		description: "Creates a new NFV service with configured parameters.",
-		pathParameters: [
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/nfv_serviceCreateRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/nfv_serviceCreateResponse",
-		},
-		requiredParams: ["body", "metadata.namespace"],
-		operationId: "ves.io.schema.nfv_service.API.Create",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "nfv-service",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-create-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemanfv-service-create",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "http_management_choice",
-				fieldPath: "spec.http_management_choice",
-				options: ["spec.disable_https_management", "spec.https_management"],
-			},
-			{
-				choiceField: "service_provider_choice",
-				fieldPath: "spec.service_provider_choice",
-				options: ["spec.f5_big_ip_aws_service", "spec.palo_alto_fw_service"],
-			},
-			{
-				choiceField: "ssh_management_choice",
-				fieldPath: "spec.ssh_management_choice",
-				options: ["spec.disable_ssh_access", "spec.enabled_ssh_access"],
-			},
-			{
-				choiceField: "advertise_choice",
-				fieldPath: "spec.enabled_ssh_access.advertise_choice",
-				options: [
-					"spec.enabled_ssh_access.advertise_on_sli",
-					"spec.enabled_ssh_access.advertise_on_slo",
-					"spec.enabled_ssh_access.advertise_on_slo_sli",
-				],
-			},
-			{
-				choiceField: "image_choice",
-				fieldPath: "spec.f5_big_ip_aws_service.image_choice",
-				options: ["spec.f5_big_ip_aws_service.market_place_image"],
-			},
-			{
-				choiceField: "site_type_choice",
-				fieldPath: "spec.f5_big_ip_aws_service.site_type_choice",
-				options: ["spec.f5_big_ip_aws_service.aws_tgw_site_params"],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.f5_big_ip_aws_service.admin_password.secret_info_oneof",
-				options: [
-					"spec.f5_big_ip_aws_service.admin_password.blindfold_secret_info",
-					"spec.f5_big_ip_aws_service.admin_password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "external_vip_choice",
-				fieldPath:
-					"spec.f5_big_ip_aws_service.endpoint_service.external_vip_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.endpoint_service.advertise_on_slo_ip",
-					"spec.f5_big_ip_aws_service.endpoint_service.advertise_on_slo_ip_external",
-					"spec.f5_big_ip_aws_service.endpoint_service.disable_advertise_on_slo_ip",
-				],
-			},
-			{
-				choiceField: "inside_vip_choice",
-				fieldPath:
-					"spec.f5_big_ip_aws_service.endpoint_service.inside_vip_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.endpoint_service.automatic_vip",
-					"spec.f5_big_ip_aws_service.endpoint_service.configured_vip",
-				],
-			},
-			{
-				choiceField: "tcp_port_choice",
-				fieldPath:
-					"spec.f5_big_ip_aws_service.endpoint_service.tcp_port_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.endpoint_service.custom_tcp_ports",
-					"spec.f5_big_ip_aws_service.endpoint_service.default_tcp_ports",
-					"spec.f5_big_ip_aws_service.endpoint_service.http_port",
-					"spec.f5_big_ip_aws_service.endpoint_service.https_port",
-					"spec.f5_big_ip_aws_service.endpoint_service.no_tcp_ports",
-				],
-			},
-			{
-				choiceField: "udp_port_choice",
-				fieldPath:
-					"spec.f5_big_ip_aws_service.endpoint_service.udp_port_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.endpoint_service.custom_udp_ports",
-					"spec.f5_big_ip_aws_service.endpoint_service.no_udp_ports",
-				],
-			},
-			{
-				choiceField: "ami_choice",
-				fieldPath: "spec.f5_big_ip_aws_service.market_place_image.ami_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.market_place_image.AWAFPayG200Mbps",
-					"spec.f5_big_ip_aws_service.market_place_image.AWAFPayG3Gbps",
-					"spec.f5_big_ip_aws_service.market_place_image.BestPlusPayG200Mbps",
-					"spec.f5_big_ip_aws_service.market_place_image.best_plus_payg_1gbps",
-				],
-			},
-			{
-				choiceField: "mgmt_subnet_choice",
-				fieldPath: "spec.f5_big_ip_aws_service.nodes[].mgmt_subnet_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.nodes[].mgmt_subnet",
-					"spec.f5_big_ip_aws_service.nodes[].reserved_mgmt_subnet",
-				],
-			},
-			{
-				choiceField: "tunnel_prefix_choice",
-				fieldPath: "spec.f5_big_ip_aws_service.nodes[].tunnel_prefix_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.nodes[].automatic_prefix",
-					"spec.f5_big_ip_aws_service.nodes[].tunnel_prefix",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath: "spec.f5_big_ip_aws_service.nodes[].mgmt_subnet.choice",
-				options: [
-					"spec.f5_big_ip_aws_service.nodes[].mgmt_subnet.existing_subnet_id",
-					"spec.f5_big_ip_aws_service.nodes[].mgmt_subnet.subnet_param",
-				],
-			},
-			{
-				choiceField: "advertise_choice",
-				fieldPath: "spec.https_management.advertise_choice",
-				options: [
-					"spec.https_management.advertise_on_internet",
-					"spec.https_management.advertise_on_internet_default_vip",
-					"spec.https_management.advertise_on_sli_vip",
-					"spec.https_management.advertise_on_slo_internet_vip",
-					"spec.https_management.advertise_on_slo_sli",
-					"spec.https_management.advertise_on_slo_vip",
-				],
-			},
-			{
-				choiceField: "internet_choice",
-				fieldPath: "spec.https_management.internet_choice",
-				options: [],
-			},
-			{
-				choiceField: "port_choice",
-				fieldPath: "spec.https_management.port_choice",
-				options: [
-					"spec.https_management.default_https_port",
-					"spec.https_management.https_port",
-				],
-			},
-			{
-				choiceField: "mtls_choice",
-				fieldPath: "spec.https_management.advertise_on_sli_vip.mtls_choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.no_mtls",
-					"spec.https_management.advertise_on_sli_vip.use_mtls",
-				],
-			},
-			{
-				choiceField: "ocsp_stapling_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].custom_hash_algorithms",
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].disable_ocsp_stapling",
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].use_system_defaults",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.blindfold_secret_info",
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.tls_config.choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.tls_config.custom_security",
-					"spec.https_management.advertise_on_sli_vip.tls_config.default_security",
-					"spec.https_management.advertise_on_sli_vip.tls_config.low_security",
-					"spec.https_management.advertise_on_sli_vip.tls_config.medium_security",
-				],
-			},
-			{
-				choiceField: "crl_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.use_mtls.crl_choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.use_mtls.crl",
-					"spec.https_management.advertise_on_sli_vip.use_mtls.no_crl",
-				],
-			},
-			{
-				choiceField: "trusted_ca_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca_choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca",
-					"spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca_url",
-				],
-			},
-			{
-				choiceField: "xfcc_header",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_header",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_disabled",
-					"spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_options",
-				],
-			},
-			{
-				choiceField: "mtls_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.mtls_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.no_mtls",
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls",
-				],
-			},
-			{
-				choiceField: "ocsp_stapling_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].custom_hash_algorithms",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].disable_ocsp_stapling",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].use_system_defaults",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.secret_info_oneof",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.blindfold_secret_info",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.custom_security",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.default_security",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.low_security",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.medium_security",
-				],
-			},
-			{
-				choiceField: "crl_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.crl_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.crl",
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.no_crl",
-				],
-			},
-			{
-				choiceField: "trusted_ca_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca",
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca_url",
-				],
-			},
-			{
-				choiceField: "xfcc_header",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_header",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_disabled",
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_options",
-				],
-			},
-			{
-				choiceField: "mtls_choice",
-				fieldPath: "spec.https_management.advertise_on_slo_sli.mtls_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.no_mtls",
-					"spec.https_management.advertise_on_slo_sli.use_mtls",
-				],
-			},
-			{
-				choiceField: "ocsp_stapling_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].custom_hash_algorithms",
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].disable_ocsp_stapling",
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].use_system_defaults",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.blindfold_secret_info",
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.tls_config.choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.tls_config.custom_security",
-					"spec.https_management.advertise_on_slo_sli.tls_config.default_security",
-					"spec.https_management.advertise_on_slo_sli.tls_config.low_security",
-					"spec.https_management.advertise_on_slo_sli.tls_config.medium_security",
-				],
-			},
-			{
-				choiceField: "crl_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.use_mtls.crl_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.use_mtls.crl",
-					"spec.https_management.advertise_on_slo_sli.use_mtls.no_crl",
-				],
-			},
-			{
-				choiceField: "trusted_ca_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca",
-					"spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca_url",
-				],
-			},
-			{
-				choiceField: "xfcc_header",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_header",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_disabled",
-					"spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_options",
-				],
-			},
-			{
-				choiceField: "mtls_choice",
-				fieldPath: "spec.https_management.advertise_on_slo_vip.mtls_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.no_mtls",
-					"spec.https_management.advertise_on_slo_vip.use_mtls",
-				],
-			},
-			{
-				choiceField: "ocsp_stapling_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].custom_hash_algorithms",
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].disable_ocsp_stapling",
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].use_system_defaults",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.blindfold_secret_info",
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.tls_config.choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.tls_config.custom_security",
-					"spec.https_management.advertise_on_slo_vip.tls_config.default_security",
-					"spec.https_management.advertise_on_slo_vip.tls_config.low_security",
-					"spec.https_management.advertise_on_slo_vip.tls_config.medium_security",
-				],
-			},
-			{
-				choiceField: "crl_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.use_mtls.crl_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.use_mtls.crl",
-					"spec.https_management.advertise_on_slo_vip.use_mtls.no_crl",
-				],
-			},
-			{
-				choiceField: "trusted_ca_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca",
-					"spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca_url",
-				],
-			},
-			{
-				choiceField: "xfcc_header",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_header",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_disabled",
-					"spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_options",
-				],
-			},
-			{
-				choiceField: "ami_choice",
-				fieldPath: "spec.palo_alto_fw_service.ami_choice",
-				options: [
-					"spec.palo_alto_fw_service.pan_ami_bundle1",
-					"spec.palo_alto_fw_service.pan_ami_bundle2",
-				],
-			},
-			{
-				choiceField: "panaroma_connection",
-				fieldPath: "spec.palo_alto_fw_service.panaroma_connection",
-				options: [
-					"spec.palo_alto_fw_service.disable_panaroma",
-					"spec.palo_alto_fw_service.panorama_server",
-				],
-			},
-			{
-				choiceField: "setup_options",
-				fieldPath: "spec.palo_alto_fw_service.setup_options",
-				options: [
-					"spec.palo_alto_fw_service.auto_setup",
-					"spec.palo_alto_fw_service.ssh_key",
-				],
-			},
-			{
-				choiceField: "ssh_keys_choice",
-				fieldPath: "spec.palo_alto_fw_service.auto_setup.ssh_keys_choice",
-				options: ["spec.palo_alto_fw_service.auto_setup.manual_ssh_keys"],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.palo_alto_fw_service.auto_setup.admin_password.secret_info_oneof",
-				options: [
-					"spec.palo_alto_fw_service.auto_setup.admin_password.blindfold_secret_info",
-					"spec.palo_alto_fw_service.auto_setup.admin_password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.secret_info_oneof",
-				options: [
-					"spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.blindfold_secret_info",
-					"spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.palo_alto_fw_service.panorama_server.authorization_key.secret_info_oneof",
-				options: [
-					"spec.palo_alto_fw_service.panorama_server.authorization_key.blindfold_secret_info",
-					"spec.palo_alto_fw_service.panorama_server.authorization_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "mgmt_subnet_choice",
-				fieldPath:
-					"spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet_choice",
-				options: [
-					"spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet",
-					"spec.palo_alto_fw_service.service_nodes.nodes[].reserved_mgmt_subnet",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath:
-					"spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet.choice",
-				options: [
-					"spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet.existing_subnet_id",
-					"spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet.subnet_param",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-nfv-service-delete",
-		method: "DELETE",
-		path: "/api/config/namespaces/{namespace}/nfv_services/{name}",
-		operation: "delete",
-		domain: "service_mesh",
-		resource: "nfv-service",
-		summary: "DELETE NFV Service.",
-		description: "DELETE the specified nfv_service.",
-		pathParameters: [
-			{
-				description: "Name\nName of the configuration object.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nNamespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/nfv_serviceDeleteRequest",
-		},
-		responseSchema: {},
-		requiredParams: ["body", "name", "namespace"],
-		operationId: "ves.io.schema.nfv_service.API.Delete",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "nfv-service",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-nfv-service-get",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/nfv_services/{name}",
-		operation: "get",
-		domain: "service_mesh",
-		resource: "nfv-service",
-		summary: "GET NFV Service.",
-		description: "Gets NFV Service parameters.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_FOR_CREATE",
-						"GET_RSP_FORMAT_FOR_REPLACE",
-						"GET_RSP_FORMAT_STATUS",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/nfv_serviceGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.nfv_service.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-nfv-service-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/nfv_services",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "nfv-service",
-		summary: "List NFV Service.",
-		description: "List the set of nfv_service in a namespace.",
-		pathParameters: [
-			{
-				description:
-					"Namespace\nNamespace to scope the listing of nfv_service.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/nfv_serviceListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.nfv_service.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-nfv-service-update",
-		method: "PUT",
-		path: "/api/config/namespaces/{metadata.namespace}/nfv_services/{metadata.name}",
-		operation: "update",
-		domain: "service_mesh",
-		resource: "nfv-service",
-		summary: "Replace NFV Service.",
-		description: "Replaces configured NFV Service with new set of parameters.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe configuration object to be replaced will be looked up by name.",
-				in: "path",
-				name: "metadata.name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/nfv_serviceReplaceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/nfv_serviceReplaceResponse",
-		},
-		requiredParams: ["body", "metadata.name", "metadata.namespace"],
-		operationId: "ves.io.schema.nfv_service.API.Replace",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "nfv-service",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-replace-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemanfv-service-replace",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "http_management_choice",
-				fieldPath: "spec.http_management_choice",
-				options: ["spec.disable_https_management", "spec.https_management"],
-			},
-			{
-				choiceField: "service_provider_choice",
-				fieldPath: "spec.service_provider_choice",
-				options: ["spec.f5_big_ip_aws_service", "spec.palo_alto_fw_service"],
-			},
-			{
-				choiceField: "ssh_management_choice",
-				fieldPath: "spec.ssh_management_choice",
-				options: ["spec.disable_ssh_access", "spec.enabled_ssh_access"],
-			},
-			{
-				choiceField: "advertise_choice",
-				fieldPath: "spec.enabled_ssh_access.advertise_choice",
-				options: [
-					"spec.enabled_ssh_access.advertise_on_sli",
-					"spec.enabled_ssh_access.advertise_on_slo",
-					"spec.enabled_ssh_access.advertise_on_slo_sli",
-				],
-			},
-			{
-				choiceField: "external_vip_choice",
-				fieldPath:
-					"spec.f5_big_ip_aws_service.endpoint_service.external_vip_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.endpoint_service.advertise_on_slo_ip",
-					"spec.f5_big_ip_aws_service.endpoint_service.advertise_on_slo_ip_external",
-					"spec.f5_big_ip_aws_service.endpoint_service.disable_advertise_on_slo_ip",
-				],
-			},
-			{
-				choiceField: "tcp_port_choice",
-				fieldPath:
-					"spec.f5_big_ip_aws_service.endpoint_service.tcp_port_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.endpoint_service.custom_tcp_ports",
-					"spec.f5_big_ip_aws_service.endpoint_service.default_tcp_ports",
-					"spec.f5_big_ip_aws_service.endpoint_service.http_port",
-					"spec.f5_big_ip_aws_service.endpoint_service.https_port",
-					"spec.f5_big_ip_aws_service.endpoint_service.no_tcp_ports",
-				],
-			},
-			{
-				choiceField: "udp_port_choice",
-				fieldPath:
-					"spec.f5_big_ip_aws_service.endpoint_service.udp_port_choice",
-				options: [
-					"spec.f5_big_ip_aws_service.endpoint_service.custom_udp_ports",
-					"spec.f5_big_ip_aws_service.endpoint_service.no_udp_ports",
-				],
-			},
-			{
-				choiceField: "advertise_choice",
-				fieldPath: "spec.https_management.advertise_choice",
-				options: [
-					"spec.https_management.advertise_on_internet",
-					"spec.https_management.advertise_on_internet_default_vip",
-					"spec.https_management.advertise_on_sli_vip",
-					"spec.https_management.advertise_on_slo_internet_vip",
-					"spec.https_management.advertise_on_slo_sli",
-					"spec.https_management.advertise_on_slo_vip",
-				],
-			},
-			{
-				choiceField: "internet_choice",
-				fieldPath: "spec.https_management.internet_choice",
-				options: [],
-			},
-			{
-				choiceField: "port_choice",
-				fieldPath: "spec.https_management.port_choice",
-				options: [
-					"spec.https_management.default_https_port",
-					"spec.https_management.https_port",
-				],
-			},
-			{
-				choiceField: "mtls_choice",
-				fieldPath: "spec.https_management.advertise_on_sli_vip.mtls_choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.no_mtls",
-					"spec.https_management.advertise_on_sli_vip.use_mtls",
-				],
-			},
-			{
-				choiceField: "ocsp_stapling_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].custom_hash_algorithms",
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].disable_ocsp_stapling",
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].use_system_defaults",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.blindfold_secret_info",
-					"spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.tls_config.choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.tls_config.custom_security",
-					"spec.https_management.advertise_on_sli_vip.tls_config.default_security",
-					"spec.https_management.advertise_on_sli_vip.tls_config.low_security",
-					"spec.https_management.advertise_on_sli_vip.tls_config.medium_security",
-				],
-			},
-			{
-				choiceField: "crl_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.use_mtls.crl_choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.use_mtls.crl",
-					"spec.https_management.advertise_on_sli_vip.use_mtls.no_crl",
-				],
-			},
-			{
-				choiceField: "trusted_ca_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca_choice",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca",
-					"spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca_url",
-				],
-			},
-			{
-				choiceField: "xfcc_header",
-				fieldPath:
-					"spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_header",
-				options: [
-					"spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_disabled",
-					"spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_options",
-				],
-			},
-			{
-				choiceField: "mtls_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.mtls_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.no_mtls",
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls",
-				],
-			},
-			{
-				choiceField: "ocsp_stapling_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].custom_hash_algorithms",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].disable_ocsp_stapling",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].use_system_defaults",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.secret_info_oneof",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.blindfold_secret_info",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.custom_security",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.default_security",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.low_security",
-					"spec.https_management.advertise_on_slo_internet_vip.tls_config.medium_security",
-				],
-			},
-			{
-				choiceField: "crl_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.crl_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.crl",
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.no_crl",
-				],
-			},
-			{
-				choiceField: "trusted_ca_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca",
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca_url",
-				],
-			},
-			{
-				choiceField: "xfcc_header",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_header",
-				options: [
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_disabled",
-					"spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_options",
-				],
-			},
-			{
-				choiceField: "mtls_choice",
-				fieldPath: "spec.https_management.advertise_on_slo_sli.mtls_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.no_mtls",
-					"spec.https_management.advertise_on_slo_sli.use_mtls",
-				],
-			},
-			{
-				choiceField: "ocsp_stapling_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].custom_hash_algorithms",
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].disable_ocsp_stapling",
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].use_system_defaults",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.blindfold_secret_info",
-					"spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.tls_config.choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.tls_config.custom_security",
-					"spec.https_management.advertise_on_slo_sli.tls_config.default_security",
-					"spec.https_management.advertise_on_slo_sli.tls_config.low_security",
-					"spec.https_management.advertise_on_slo_sli.tls_config.medium_security",
-				],
-			},
-			{
-				choiceField: "crl_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.use_mtls.crl_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.use_mtls.crl",
-					"spec.https_management.advertise_on_slo_sli.use_mtls.no_crl",
-				],
-			},
-			{
-				choiceField: "trusted_ca_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca",
-					"spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca_url",
-				],
-			},
-			{
-				choiceField: "xfcc_header",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_header",
-				options: [
-					"spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_disabled",
-					"spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_options",
-				],
-			},
-			{
-				choiceField: "mtls_choice",
-				fieldPath: "spec.https_management.advertise_on_slo_vip.mtls_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.no_mtls",
-					"spec.https_management.advertise_on_slo_vip.use_mtls",
-				],
-			},
-			{
-				choiceField: "ocsp_stapling_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].custom_hash_algorithms",
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].disable_ocsp_stapling",
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].use_system_defaults",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.blindfold_secret_info",
-					"spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.tls_config.choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.tls_config.custom_security",
-					"spec.https_management.advertise_on_slo_vip.tls_config.default_security",
-					"spec.https_management.advertise_on_slo_vip.tls_config.low_security",
-					"spec.https_management.advertise_on_slo_vip.tls_config.medium_security",
-				],
-			},
-			{
-				choiceField: "crl_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.use_mtls.crl_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.use_mtls.crl",
-					"spec.https_management.advertise_on_slo_vip.use_mtls.no_crl",
-				],
-			},
-			{
-				choiceField: "trusted_ca_choice",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca_choice",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca",
-					"spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca_url",
-				],
-			},
-			{
-				choiceField: "xfcc_header",
-				fieldPath:
-					"spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_header",
-				options: [
-					"spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_disabled",
-					"spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_options",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-override-list",
-		method: "GET",
-		path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/overrides",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "override",
-		summary: "GET Override.",
-		description:
-			"GET all override for API endpoints configured for this App type.",
-		pathParameters: [
-			{
-				description: "App Type\nApp Type for current request.",
-				in: "path",
-				name: "app_type_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "App Type",
-			},
-			{
-				description:
-					"Namespace\nNamespace of the App type for current request.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeOverridesRsp",
-		},
-		requiredParams: ["app_type_name", "namespace"],
-		operationId: "ves.io.schema.app_type.CustomAPI.Overrides",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-pdf-create",
-		method: "POST",
-		path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/services/{service_name}/api_endpoint/pdf",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "pdf",
-		summary: "GET Service API Endpoint PDF.",
-		description:
-			"GET PDF of all metrics for a given auto discovered API endpoint for Service.",
-		pathParameters: [
-			{
-				description: "App Type\nApp Type for current request.",
-				in: "path",
-				name: "app_type_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "App Type",
-			},
-			{
-				description:
-					"Namespace\nNamespace of the App type for current request.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-			{
-				description: "Service\nIdentifies the destination service.",
-				in: "path",
-				name: "service_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Service Name.",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_typeServiceAPIEndpointPDFReq",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeAPIEndpointPDFRsp",
-		},
-		requiredParams: ["app_type_name", "body", "namespace", "service_name"],
-		operationId: "ves.io.schema.app_type.CustomAPI.GetServiceAPIEndpointPDF",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-pdf-list",
-		method: "GET",
-		path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoint/pdf",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "pdf",
-		summary: "GET PDF",
-		description:
-			"GET PDF of all metrics for a given auto discovered API endpoint for App type.",
-		pathParameters: [
-			{
-				description: "App Type\nApp Type for current request.",
-				in: "path",
-				name: "app_type_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "App Type",
-			},
-			{
-				description:
-					"Namespace\nNamespace of the App type for current request.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description: "API endpoint for which PDFs are requested.",
-				in: "query",
-				name: "collapsed_url",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "API URL",
-			},
-			{
-				description: "Method of API endpoint for which PDFs are requested.",
-				in: "query",
-				name: "method",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Method",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeAPIEndpointPDFRsp",
-		},
-		requiredParams: ["app_type_name", "namespace"],
-		operationId: "ves.io.schema.app_type.CustomAPI.APIEndpointPDF",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-pop-create",
-		method: "POST",
-		path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/override/pop",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "pop",
-		summary: "Remove Override.",
-		description:
-			"Remove override for dynamic component for API endpoints discovered for this App type.",
-		pathParameters: [
-			{
-				description: "App Type\nApp Type for current request.",
-				in: "path",
-				name: "app_type_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "App Type",
-			},
-			{
-				description:
-					"Namespace\nNamespace of the App type for current request.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_typeOverridePopReq",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeOverridePopRsp",
-		},
-		requiredParams: ["app_type_name", "body", "namespace"],
-		operationId: "ves.io.schema.app_type.CustomAPI.OverridePop",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-push-create",
-		method: "POST",
-		path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/override/push",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "push",
-		summary: "Add Override.",
-		description:
-			"Add override for dynamic component for API endpoints discovered for this App type.",
-		pathParameters: [
-			{
-				description: "App Type\nApp Type for current request.",
-				in: "path",
-				name: "app_type_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "App Type",
-			},
-			{
-				description:
-					"Namespace\nNamespace of the App type for current request.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/app_typeOverridePushReq",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/app_typeOverridePushRsp",
-		},
-		requiredParams: ["app_type_name", "body", "namespace"],
-		operationId: "ves.io.schema.app_type.CustomAPI.OverridePush",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-sid-counter-create",
-		method: "POST",
-		path: "/api/data/namespaces/{namespace}/virtual_network/sid_counters",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "sid-counter",
-		summary: "SID Counters.",
-		description: "API to GET SID Counters.",
-		pathParameters: [
-			{
-				description: "Namespace\nOnly `system` namespace is supported.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/virtual_networkSIDCounterRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/virtual_networkSIDCounterResponse",
-		},
-		requiredParams: ["body", "namespace"],
-		operationId: "ves.io.schema.virtual_network.CustomDataAPI.SIDCounters",
-		tags: ["Networking"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "field_selector[]",
-				inline: false,
-				required: false,
-				resourceType: "virtual-network-sidcounter",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-site-mesh-group-create",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/site_mesh_groups",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "site-mesh-group",
-		summary: "Create Site Mesh Group.",
-		description: "Create a Site Mesh Group in system namespace of user.",
-		pathParameters: [
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/site_mesh_groupCreateRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/site_mesh_groupCreateResponse",
-		},
-		requiredParams: ["body", "metadata.namespace"],
-		operationId: "ves.io.schema.site_mesh_group.API.Create",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "sites",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "site-mesh-group",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-create-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemasite-mesh-group-create",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "mesh_choice",
-				fieldPath: "spec.mesh_choice",
-				options: ["spec.full_mesh", "spec.hub_mesh", "spec.spoke_mesh"],
-			},
-			{
-				choiceField: "re_fallback",
-				fieldPath: "spec.re_fallback",
-				options: ["spec.disable_re_fallback", "spec.enable_re_fallback"],
-			},
-			{
-				choiceField: "full_mesh_choice",
-				fieldPath: "spec.full_mesh.full_mesh_choice",
-				options: [
-					"spec.full_mesh.control_and_data_plane_mesh",
-					"spec.full_mesh.data_plane_mesh",
-				],
-			},
-			{
-				choiceField: "hub_full_mesh_choice",
-				fieldPath: "spec.hub_mesh.hub_full_mesh_choice",
-				options: [
-					"spec.hub_mesh.control_and_data_plane_mesh",
-					"spec.hub_mesh.data_plane_mesh",
-				],
-			},
-			{
-				choiceField: "spoke_hub_mesh_choice",
-				fieldPath: "spec.spoke_mesh.spoke_hub_mesh_choice",
-				options: [
-					"spec.spoke_mesh.control_and_data_plane_mesh",
-					"spec.spoke_mesh.data_plane_mesh",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-site-mesh-group-delete",
-		method: "DELETE",
-		path: "/api/config/namespaces/{namespace}/site_mesh_groups/{name}",
-		operation: "delete",
-		domain: "service_mesh",
-		resource: "site-mesh-group",
-		summary: "DELETE Site Mesh Group.",
-		description: "DELETE the specified site_mesh_group.",
-		pathParameters: [
-			{
-				description: "Name\nName of the configuration object.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nNamespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/site_mesh_groupDeleteRequest",
-		},
-		responseSchema: {},
-		requiredParams: ["body", "name", "namespace"],
-		operationId: "ves.io.schema.site_mesh_group.API.Delete",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "sites",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "site-mesh-group",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-site-mesh-group-get",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/site_mesh_groups/{name}",
-		operation: "get",
-		domain: "service_mesh",
-		resource: "site-mesh-group",
-		summary: "GET Site Mesh Group.",
-		description: "Gets Site Mesh Group object from system namespace.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_FOR_CREATE",
-						"GET_RSP_FORMAT_FOR_REPLACE",
-						"GET_RSP_FORMAT_STATUS",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/site_mesh_groupGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.site_mesh_group.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-site-mesh-group-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/site_mesh_groups",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "site-mesh-group",
-		summary: "List Site Mesh Group.",
-		description: "List the set of site_mesh_group in a namespace.",
-		pathParameters: [
-			{
-				description:
-					"Namespace\nNamespace to scope the listing of site_mesh_group.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/site_mesh_groupListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.site_mesh_group.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-site-mesh-group-update",
-		method: "PUT",
-		path: "/api/config/namespaces/{metadata.namespace}/site_mesh_groups/{metadata.name}",
-		operation: "update",
-		domain: "service_mesh",
-		resource: "site-mesh-group",
-		summary: "Replace Site Mesh Group.",
-		description: "Replace contents of a Site Mesh Group object.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe configuration object to be replaced will be looked up by name.",
-				in: "path",
-				name: "metadata.name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/site_mesh_groupReplaceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/site_mesh_groupReplaceResponse",
-		},
-		requiredParams: ["body", "metadata.name", "metadata.namespace"],
-		operationId: "ves.io.schema.site_mesh_group.API.Replace",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "sites",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "site-mesh-group",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-replace-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemasite-mesh-group-replace",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "mesh_choice",
-				fieldPath: "spec.mesh_choice",
-				options: ["spec.full_mesh", "spec.hub_mesh", "spec.spoke_mesh"],
-			},
-			{
-				choiceField: "re_fallback",
-				fieldPath: "spec.re_fallback",
-				options: ["spec.disable_re_fallback", "spec.enable_re_fallback"],
-			},
-			{
-				choiceField: "full_mesh_choice",
-				fieldPath: "spec.full_mesh.full_mesh_choice",
-				options: [
-					"spec.full_mesh.control_and_data_plane_mesh",
-					"spec.full_mesh.data_plane_mesh",
-				],
-			},
-			{
-				choiceField: "hub_full_mesh_choice",
-				fieldPath: "spec.hub_mesh.hub_full_mesh_choice",
-				options: [
-					"spec.hub_mesh.control_and_data_plane_mesh",
-					"spec.hub_mesh.data_plane_mesh",
-				],
-			},
-			{
-				choiceField: "spoke_hub_mesh_choice",
-				fieldPath: "spec.spoke_mesh.spoke_hub_mesh_choice",
-				options: [
-					"spec.spoke_mesh.control_and_data_plane_mesh",
-					"spec.spoke_mesh.data_plane_mesh",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-software-os-version-create",
-		method: "POST",
-		path: "/api/maurice/software_os_version",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "software-os-version",
-		summary: "GET OS based on SW_VERSION.",
-		description: "API to GET OS IMAGE based on the software version.",
-		pathParameters: [],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/virtual_applianceGetImageRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/virtual_applianceGetImageResponse",
-		},
-		requiredParams: ["body"],
-		operationId:
-			"ves.io.schema.virtual_appliance.SoftwareVersionOsImageCustomApi.GetImage",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-suspicious-user-get",
-		method: "GET",
-		path: "/api/ml/data/namespaces/{namespace}/app_settings/{name}/suspicious_users",
-		operation: "get",
-		domain: "service_mesh",
-		resource: "suspicious-user",
-		summary: "GET Status of Suspicious users.",
-		description: "GET status of suspicious users.",
-		pathParameters: [
-			{
-				description:
-					"Name\nfetch suspicious users based on a given app setting.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\n\nfetch suspicious users for a given namespace.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Suspicious User Status Request.",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"Fetch suspicious users during timestamp <= end_time\nformat: unix_timestamp|RFC 3339\n\nOptional: If not specified, then the end_time will be evaluated to start_time+10m\nIf start_time is not specified, then the end_time will be evaluated to <current time>",
-				in: "query",
-				name: "end_time",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "End Time",
-			},
-			{
-				description:
-					'Blogging_app"}"\nquery is used to specify the list of matchers\nsyntax for query := {[<matcher>]}\n<matcher> := <field_name><operator>"<value>"\n<field_name> := string\nOne or more of these fields in the security event may be specified in the query.\nApp_type - application type\nvh_name - name of the virtual host\n<value> := string\n<operator> := ["="|"!="]\n= : equal to\n!= : not equal to\nWhen more than one matcher is specified in the query, then security events matching ALL the matchers will be returned in the response.\nExample: query={country="United States", city="California"} will return all security events originating from California, United States.\n\nOptional: If not specified, all the security events matching the given tenant and namespace will be returned in the response.',
-				in: "query",
-				name: "query",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Query",
-			},
-			{
-				description:
-					"Fetch suspicious users during timestamp >= start_time\nformat: unix_timestamp|RFC 3339\n\nOptional: If not specified, then the start_time will be evaluated to end_time-10m\nIf end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
-				in: "query",
-				name: "start_time",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Start Time.",
-			},
-			{
-				description:
-					"X-example: 10\nfetch top 10 suspicious users\n\nNumber of top field values to be returned in the response.\nOptional: If not specified, top 5 values will be returned in the response.",
-				in: "query",
-				name: "topn",
-				required: false,
-				schema: {
-					format: "int64",
-					type: "integer",
-				},
-				"x-displayname": "TopN",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/app_settingSuspiciousUserStatusRsp",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.app_setting.CustomAPI.SuspiciousUserStatus",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-swagger-spec-list",
-		method: "GET",
-		path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoints/swagger_spec",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "swagger-spec",
-		summary: "GET Swagger Spec for App Type.",
-		description: "GET the corresponding Swagger spec for the given app type.",
-		pathParameters: [
-			{
-				description: "App Type\nApp Type for current request.",
-				in: "path",
-				name: "app_type_name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "App Type",
-			},
-			{
-				description:
-					"Namespace\nNamespace of the App type for current request.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/apiHttpBody",
-		},
-		requiredParams: ["app_type_name", "namespace"],
-		operationId: "ves.io.schema.app_type.CustomAPI.GetSwaggerSpec",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-virtual-network-create",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/virtual_networks",
-		operation: "create",
-		domain: "service_mesh",
-		resource: "virtual-network",
-		summary: "Create Virtual Network.",
-		description: "Create virtual network in given namespace.",
-		pathParameters: [
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/virtual_networkCreateRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/virtual_networkCreateResponse",
-		},
-		requiredParams: ["body", "metadata.namespace"],
-		operationId: "ves.io.schema.virtual_network.API.Create",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "network",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "virtual-network",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-create-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "virtual-network-create",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "network_choice",
-				fieldPath: "spec.network_choice",
-				options: [
-					"spec.global_network",
-					"spec.legacy_type",
-					"spec.site_local_inside_network",
-					"spec.site_local_network",
-				],
-			},
-			{
-				choiceField: "next_hop_choice",
-				fieldPath: "spec.static_routes[].next_hop_choice",
-				options: [
-					"spec.static_routes[].default_gateway",
-					"spec.static_routes[].ip_address",
-					"spec.static_routes[].node_interface",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-virtual-network-delete",
-		method: "DELETE",
-		path: "/api/config/namespaces/{namespace}/virtual_networks/{name}",
-		operation: "delete",
-		domain: "service_mesh",
-		resource: "virtual-network",
-		summary: "DELETE Virtual Network.",
-		description: "DELETE the specified virtual_network.",
-		pathParameters: [
-			{
-				description: "Name\nName of the configuration object.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nNamespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/virtual_networkDeleteRequest",
-		},
-		responseSchema: {},
-		requiredParams: ["body", "name", "namespace"],
-		operationId: "ves.io.schema.virtual_network.API.Delete",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "network",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "virtual-network",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-virtual-network-get",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/virtual_networks/{name}",
-		operation: "get",
-		domain: "service_mesh",
-		resource: "virtual-network",
-		summary: "GET Virtual Network.",
-		description: "Gets virtual network in given namespace.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_FOR_CREATE",
-						"GET_RSP_FORMAT_FOR_REPLACE",
-						"GET_RSP_FORMAT_STATUS",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/virtual_networkGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.virtual_network.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-virtual-network-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/virtual_networks",
-		operation: "list",
-		domain: "service_mesh",
-		resource: "virtual-network",
-		summary: "List Virtual Network.",
-		description: "List the set of virtual_network in a namespace.",
-		pathParameters: [
-			{
-				description:
-					"Namespace\nNamespace to scope the listing of virtual_network.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/virtual_networkListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.virtual_network.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-servicemesh-virtual-network-update",
-		method: "PUT",
-		path: "/api/config/namespaces/{metadata.namespace}/virtual_networks/{metadata.name}",
-		operation: "update",
-		domain: "service_mesh",
-		resource: "virtual-network",
-		summary: "Replace Virtual Network.",
-		description: "Replace given virtual network in given namespace.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe configuration object to be replaced will be looked up by name.",
-				in: "path",
-				name: "metadata.name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/virtual_networkReplaceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/virtual_networkReplaceResponse",
-		},
-		requiredParams: ["body", "metadata.name", "metadata.namespace"],
-		operationId: "ves.io.schema.virtual_network.API.Replace",
-		tags: ["Other"],
-		sourceFile: "domains/service_mesh.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "network",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "virtual-network",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-replace-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "virtual-network-replace",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "network_choice",
-				fieldPath: "spec.network_choice",
-				options: [
-					"spec.global_network",
-					"spec.legacy_type",
-					"spec.site_local_inside_network",
-					"spec.site_local_network",
-				],
-			},
-			{
-				choiceField: "next_hop_choice",
-				fieldPath: "spec.static_routes[].next_hop_choice",
-				options: [
-					"spec.static_routes[].default_gateway",
-					"spec.static_routes[].ip_address",
-					"spec.static_routes[].node_interface",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
+  {
+    toolName: "f5xc-api-servicemesh-api-endpoint-create",
+    method: "POST",
+    path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/services/{service_name}/api_endpoints",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "api-endpoint",
+    summary: "GET Service API Endpoints.",
+    description: "GET all autodiscovered API endpoints for Service.",
+    pathParameters: [
+      {
+        description: "App Type\nApp Type for current request.",
+        in: "path",
+        name: "app_type_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "App Type",
+      },
+      {
+        description: "Namespace\nNamespace of the App type for current request.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+      {
+        description: "Service\nIdentifies the destination service.",
+        in: "path",
+        name: "service_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Service Name.",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_typeServiceAPIEndpointsReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeAPIEndpointsRsp",
+    },
+    requiredParams: ["app_type_name", "body", "namespace", "service_name"],
+    operationId: "ves.io.schema.app_type.CustomAPI.GetServiceAPIEndpoints",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-api-endpoint-list",
+    method: "GET",
+    path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoints",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "api-endpoint",
+    summary: "GET API endpoints.",
+    description: "GET all auto discovered API endpoints for App type.",
+    pathParameters: [
+      {
+        description: "App Type\nApp Type for current request.",
+        in: "path",
+        name: "app_type_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "App Type",
+      },
+      {
+        description: "Namespace\nNamespace of the App type for current request.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "List of additional things that needs to be sent as part of the request\n\nAPI ENDPOINT INFO NONE option is used to disable any additional info request per API endpoint response\nAPI ENDPOINT INFO PDF SPARKLINES option is used to enable pdf sparkline info along with the API endpoint response.",
+        in: "query",
+        name: "api_endpoint_info_request",
+        required: false,
+        schema: {
+          items: {
+            enum: ["API_ENDPOINT_INFO_NONE", "API_ENDPOINT_INFO_PDF_SPARKLINES"],
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "API Endpoint Info PDF Sparklines.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeAPIEndpointsRsp",
+    },
+    requiredParams: ["app_type_name", "namespace"],
+    operationId: "ves.io.schema.app_type.CustomAPI.APIEndpoints",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-setting-create",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/app_settings",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "app-setting",
+    summary: "Create App Setting.",
+    description: "Create App setting configuration in namespace metadata.namespace.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_settingCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/app_settingCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.app_setting.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "app-setting",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemaapp-setting-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "learn_from_namespace",
+        fieldPath: "spec.app_type_settings[].business_logic_markup_setting.learn_from_namespace",
+        options: [
+          "spec.app_type_settings[].business_logic_markup_setting.disable",
+          "spec.app_type_settings[].business_logic_markup_setting.enable",
+        ],
+      },
+      {
+        choiceField: "learn_from_namespace",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.learn_from_namespace",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.disable_learning",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_learning",
+        ],
+      },
+      {
+        choiceField: "malicious_user_detection",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.malicious_user_detection",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.disable_detection",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection",
+        ],
+      },
+      {
+        choiceField: "bola_activity_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_detection_automatic",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bola_detection",
+        ],
+      },
+      {
+        choiceField: "bot_defense_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bot_defense_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bot_defense_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_bot_defense_activity",
+        ],
+      },
+      {
+        choiceField: "cooling_off_period_setting",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period_setting",
+        options: ["spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period"],
+      },
+      {
+        choiceField: "failed_login_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.failed_login_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_failed_login_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_failed_login_activity",
+        ],
+      },
+      {
+        choiceField: "forbidden_activity_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.forbidden_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_forbidden_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_forbidden_activity",
+        ],
+      },
+      {
+        choiceField: "ip_reputation_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.ip_reputation_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_ip_reputation",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_ip_reputation",
+        ],
+      },
+      {
+        choiceField: "non_existent_url_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.non_existent_url_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_non_existent_url_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_custom",
+        ],
+      },
+      {
+        choiceField: "rate_limit_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.rate_limit_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_rate_limit",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_rate_limit",
+        ],
+      },
+      {
+        choiceField: "waf_activity_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.waf_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_waf_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_waf_activity",
+        ],
+      },
+      {
+        choiceField: "sensitivity",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.sensitivity",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.high",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.low",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.medium",
+        ],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-setting-delete",
+    method: "DELETE",
+    path: "/api/config/namespaces/{namespace}/app_settings/{name}",
+    operation: "delete",
+    domain: "service_mesh",
+    resource: "app-setting",
+    summary: "DELETE App Setting.",
+    description: "DELETE the specified app_setting.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_settingDeleteRequest",
+    },
+    responseSchema: {},
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.app_setting.API.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "app-setting",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-setting-get",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/app_settings/{name}",
+    operation: "get",
+    domain: "service_mesh",
+    resource: "app-setting",
+    summary: "GET App Setting.",
+    description: "GET App setting will retrieve the configuration from namespace metadata.namespace.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_STATUS",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/app_settingGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.app_setting.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-setting-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/app_settings",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "app-setting",
+    summary: "List App Setting.",
+    description: "List the set of app_setting in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of app_setting.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/app_settingListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.app_setting.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-setting-update",
+    method: "PUT",
+    path: "/api/config/namespaces/{metadata.namespace}/app_settings/{metadata.name}",
+    operation: "update",
+    domain: "service_mesh",
+    resource: "app-setting",
+    summary: "Replace App Setting.",
+    description:
+      "Replacing an App setting will update the configuration by replacing the existing spec with the provided one.\nFor read-then-write operations a resourceVersion mismatch will occur if the object was modified between the read and write.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_settingReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/app_settingReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.app_setting.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "app-setting",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemaapp-setting-replace",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "learn_from_namespace",
+        fieldPath: "spec.app_type_settings[].business_logic_markup_setting.learn_from_namespace",
+        options: [
+          "spec.app_type_settings[].business_logic_markup_setting.disable",
+          "spec.app_type_settings[].business_logic_markup_setting.enable",
+        ],
+      },
+      {
+        choiceField: "learn_from_namespace",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.learn_from_namespace",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.disable_learning",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_learning",
+        ],
+      },
+      {
+        choiceField: "malicious_user_detection",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.malicious_user_detection",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.disable_detection",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection",
+        ],
+      },
+      {
+        choiceField: "bola_activity_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_detection_automatic",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bola_detection",
+        ],
+      },
+      {
+        choiceField: "bot_defense_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bot_defense_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bot_defense_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_bot_defense_activity",
+        ],
+      },
+      {
+        choiceField: "cooling_off_period_setting",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period_setting",
+        options: ["spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period"],
+      },
+      {
+        choiceField: "failed_login_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.failed_login_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_failed_login_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_failed_login_activity",
+        ],
+      },
+      {
+        choiceField: "forbidden_activity_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.forbidden_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_forbidden_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_forbidden_activity",
+        ],
+      },
+      {
+        choiceField: "ip_reputation_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.ip_reputation_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_ip_reputation",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_ip_reputation",
+        ],
+      },
+      {
+        choiceField: "non_existent_url_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.non_existent_url_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_non_existent_url_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_custom",
+        ],
+      },
+      {
+        choiceField: "rate_limit_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.rate_limit_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_rate_limit",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_rate_limit",
+        ],
+      },
+      {
+        choiceField: "waf_activity_choice",
+        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.waf_activity_choice",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_waf_activity",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_waf_activity",
+        ],
+      },
+      {
+        choiceField: "sensitivity",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.sensitivity",
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.high",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.low",
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_non_existent_url_activity_automatic.medium",
+        ],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-type-create",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/app_types",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "app-type",
+    summary: "Create App Type.",
+    description: "Create App type will create the configuration in namespace metadata.namespace.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_typeCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.app_type.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "app-type",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "app-type-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "learn_from_redirect_traffic",
+        fieldPath: "spec.business_logic_markup_setting.learn_from_redirect_traffic",
+        options: ["spec.business_logic_markup_setting.disable", "spec.business_logic_markup_setting.enable"],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-type-delete",
+    method: "DELETE",
+    path: "/api/config/namespaces/{namespace}/app_types/{name}",
+    operation: "delete",
+    domain: "service_mesh",
+    resource: "app-type",
+    summary: "DELETE App Type.",
+    description: "DELETE the specified app_type.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_typeDeleteRequest",
+    },
+    responseSchema: {},
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.app_type.API.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "app-type",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-type-get",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/app_types/{name}",
+    operation: "get",
+    domain: "service_mesh",
+    resource: "app-type",
+    summary: "GET App Type.",
+    description: "GET App type will read the configuration from namespace metadata.namespace.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_STATUS",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.app_type.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-type-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/app_types",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "app-type",
+    summary: "List App Type.",
+    description: "List the set of app_type in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of app_type.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.app_type.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-app-type-update",
+    method: "PUT",
+    path: "/api/config/namespaces/{metadata.namespace}/app_types/{metadata.name}",
+    operation: "update",
+    domain: "service_mesh",
+    resource: "app-type",
+    summary: "Replace App Type.",
+    description:
+      "Update the configuration by replacing the existing spec with the provided one.\nFor read-then-write operations a resourceVersion mismatch will occur if the object was modified between the read and write.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_typeReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.app_type.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "app-type",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "app-type-replace",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "learn_from_redirect_traffic",
+        fieldPath: "spec.business_logic_markup_setting.learn_from_redirect_traffic",
+        options: ["spec.business_logic_markup_setting.disable", "spec.business_logic_markup_setting.enable"],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-endpoint-create",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/endpoints",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "endpoint",
+    summary: "Create Endpoint.",
+    description: "Create endpoint will create the object in the storage backend for namespace metadata.namespace.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/endpointCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/endpointCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.endpoint.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "service_mesh",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "endpoint",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemaendpoint-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "endpoint_address",
+        fieldPath: "spec.endpoint_address",
+        options: ["spec.dns_name", "spec.dns_name_advanced", "spec.ip", "spec.service_info"],
+      },
+      {
+        choiceField: "ttl_choice",
+        fieldPath: "spec.dns_name_advanced.ttl_choice",
+        options: ["spec.dns_name_advanced.refresh_interval"],
+      },
+      {
+        choiceField: "service_info",
+        fieldPath: "spec.service_info.service_info",
+        options: ["spec.service_info.service_name", "spec.service_info.service_selector"],
+      },
+      {
+        choiceField: "snat_pool_choice",
+        fieldPath: "spec.snat_pool.snat_pool_choice",
+        options: ["spec.snat_pool.no_snat_pool", "spec.snat_pool.snat_pool"],
+      },
+      {
+        choiceField: "ref_or_selector",
+        fieldPath: "spec.where.ref_or_selector",
+        options: ["spec.where.site", "spec.where.virtual_network", "spec.where.virtual_site"],
+      },
+      {
+        choiceField: "internet_vip_choice",
+        fieldPath: "spec.where.site.internet_vip_choice",
+        options: ["spec.where.site.disable_internet_vip", "spec.where.site.enable_internet_vip"],
+      },
+      {
+        choiceField: "internet_vip_choice",
+        fieldPath: "spec.where.virtual_site.internet_vip_choice",
+        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-endpoint-delete",
+    method: "DELETE",
+    path: "/api/config/namespaces/{namespace}/endpoints/{name}",
+    operation: "delete",
+    domain: "service_mesh",
+    resource: "endpoint",
+    summary: "DELETE Endpoint.",
+    description: "DELETE the specified endpoint.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/endpointDeleteRequest",
+    },
+    responseSchema: {},
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.endpoint.API.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "service_mesh",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "endpoint",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-endpoint-get",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/endpoints/{name}",
+    operation: "get",
+    domain: "service_mesh",
+    resource: "endpoint",
+    summary: "GET Endpoint.",
+    description: "GET endpoint will GET the object from the storage backend for namespace metadata.namespace.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_STATUS",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/endpointGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.endpoint.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-endpoint-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/endpoints",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "endpoint",
+    summary: "List Endpoint.",
+    description: "List the set of endpoint in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of endpoint.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/endpointListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.endpoint.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-endpoint-update",
+    method: "PUT",
+    path: "/api/config/namespaces/{metadata.namespace}/endpoints/{metadata.name}",
+    operation: "update",
+    domain: "service_mesh",
+    resource: "endpoint",
+    summary: "Replace Endpoint.",
+    description:
+      "Replacing an endpoint object will update the object by replacing the existing spec with the provided one.\nFor read-then-write operations a resourceVersion mismatch will occur if the object was modified between the read and write.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/endpointReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/endpointReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.endpoint.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "service_mesh",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "endpoint",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemaendpoint-replace",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "endpoint_address",
+        fieldPath: "spec.endpoint_address",
+        options: ["spec.dns_name", "spec.dns_name_advanced", "spec.ip", "spec.service_info"],
+      },
+      {
+        choiceField: "ttl_choice",
+        fieldPath: "spec.dns_name_advanced.ttl_choice",
+        options: ["spec.dns_name_advanced.refresh_interval"],
+      },
+      {
+        choiceField: "service_info",
+        fieldPath: "spec.service_info.service_info",
+        options: ["spec.service_info.service_name", "spec.service_info.service_selector"],
+      },
+      {
+        choiceField: "snat_pool_choice",
+        fieldPath: "spec.snat_pool.snat_pool_choice",
+        options: ["spec.snat_pool.no_snat_pool", "spec.snat_pool.snat_pool"],
+      },
+      {
+        choiceField: "ref_or_selector",
+        fieldPath: "spec.where.ref_or_selector",
+        options: ["spec.where.site", "spec.where.virtual_network", "spec.where.virtual_site"],
+      },
+      {
+        choiceField: "internet_vip_choice",
+        fieldPath: "spec.where.site.internet_vip_choice",
+        options: ["spec.where.site.disable_internet_vip", "spec.where.site.enable_internet_vip"],
+      },
+      {
+        choiceField: "internet_vip_choice",
+        fieldPath: "spec.where.virtual_site.internet_vip_choice",
+        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-force-delete-create",
+    method: "POST",
+    path: "/api/config/namespaces/system/nfv_service/{name}/force-delete",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "force-delete",
+    summary: "Force DELETE NFV Service.",
+    description: "Force DELETE NFV Service.",
+    pathParameters: [
+      {
+        description: "Name\nName of the NFV object to be force deleted.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/nfv_serviceForceDeleteNFVServiceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/nfv_serviceForceDeleteNFVServiceResponse",
+    },
+    requiredParams: ["body", "name"],
+    operationId: "ves.io.schema.nfv_service.CustomAPI.ForceDeleteNFVService",
+    tags: ["Service Mesh"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-learnt-schema-create",
+    method: "POST",
+    path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoint/learnt_schema",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "learnt-schema",
+    summary: "GET Learnt Schema per API endpoint.",
+    description: "GET Learnt Schema per API endpoint for a given auto discovered API endpoint for Service.",
+    pathParameters: [
+      {
+        description: "App Type\nApp Type for current request.",
+        in: "path",
+        name: "app_type_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "App Type",
+      },
+      {
+        description: "Namespace\nNamespace of the App type for current request.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_typeAPIEndpointLearntSchemaReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeAPIEndpointLearntSchemaRsp",
+    },
+    requiredParams: ["app_type_name", "body", "namespace"],
+    operationId: "ves.io.schema.app_type.CustomAPI.GetAPIEndpointLearntSchema",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-metric-create",
+    method: "POST",
+    path: "/api/data/namespaces/{namespace}/nfv_services/metrics",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "metric",
+    summary: "Metrics",
+    description: "Nfv Service metrics.",
+    pathParameters: [
+      {
+        description: "Namespace\nOnly `system` namespace is supported.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/nfv_serviceMetricsRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/nfv_serviceMetricsResponse",
+    },
+    requiredParams: ["body", "namespace"],
+    operationId: "ves.io.schema.nfv_service.CustomDataAPI.Metrics",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "field_selector[]",
+        inline: false,
+        required: false,
+        resourceType: "schemanfv-service-metric",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-nfv-service-create",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/nfv_services",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "nfv-service",
+    summary: "Create NFV Service.",
+    description: "Creates a new NFV service with configured parameters.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/nfv_serviceCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/nfv_serviceCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.nfv_service.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "nfv-service",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemanfv-service-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "http_management_choice",
+        fieldPath: "spec.http_management_choice",
+        options: ["spec.disable_https_management", "spec.https_management"],
+      },
+      {
+        choiceField: "service_provider_choice",
+        fieldPath: "spec.service_provider_choice",
+        options: ["spec.f5_big_ip_aws_service", "spec.palo_alto_fw_service"],
+      },
+      {
+        choiceField: "ssh_management_choice",
+        fieldPath: "spec.ssh_management_choice",
+        options: ["spec.disable_ssh_access", "spec.enabled_ssh_access"],
+      },
+      {
+        choiceField: "advertise_choice",
+        fieldPath: "spec.enabled_ssh_access.advertise_choice",
+        options: [
+          "spec.enabled_ssh_access.advertise_on_sli",
+          "spec.enabled_ssh_access.advertise_on_slo",
+          "spec.enabled_ssh_access.advertise_on_slo_sli",
+        ],
+      },
+      {
+        choiceField: "image_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.image_choice",
+        options: ["spec.f5_big_ip_aws_service.market_place_image"],
+      },
+      {
+        choiceField: "site_type_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.site_type_choice",
+        options: ["spec.f5_big_ip_aws_service.aws_tgw_site_params"],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.f5_big_ip_aws_service.admin_password.secret_info_oneof",
+        options: [
+          "spec.f5_big_ip_aws_service.admin_password.blindfold_secret_info",
+          "spec.f5_big_ip_aws_service.admin_password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "external_vip_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.endpoint_service.external_vip_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.endpoint_service.advertise_on_slo_ip",
+          "spec.f5_big_ip_aws_service.endpoint_service.advertise_on_slo_ip_external",
+          "spec.f5_big_ip_aws_service.endpoint_service.disable_advertise_on_slo_ip",
+        ],
+      },
+      {
+        choiceField: "inside_vip_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.endpoint_service.inside_vip_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.endpoint_service.automatic_vip",
+          "spec.f5_big_ip_aws_service.endpoint_service.configured_vip",
+        ],
+      },
+      {
+        choiceField: "tcp_port_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.endpoint_service.tcp_port_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.endpoint_service.custom_tcp_ports",
+          "spec.f5_big_ip_aws_service.endpoint_service.default_tcp_ports",
+          "spec.f5_big_ip_aws_service.endpoint_service.http_port",
+          "spec.f5_big_ip_aws_service.endpoint_service.https_port",
+          "spec.f5_big_ip_aws_service.endpoint_service.no_tcp_ports",
+        ],
+      },
+      {
+        choiceField: "udp_port_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.endpoint_service.udp_port_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.endpoint_service.custom_udp_ports",
+          "spec.f5_big_ip_aws_service.endpoint_service.no_udp_ports",
+        ],
+      },
+      {
+        choiceField: "ami_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.market_place_image.ami_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.market_place_image.AWAFPayG200Mbps",
+          "spec.f5_big_ip_aws_service.market_place_image.AWAFPayG3Gbps",
+          "spec.f5_big_ip_aws_service.market_place_image.BestPlusPayG200Mbps",
+          "spec.f5_big_ip_aws_service.market_place_image.best_plus_payg_1gbps",
+        ],
+      },
+      {
+        choiceField: "mgmt_subnet_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.nodes[].mgmt_subnet_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.nodes[].mgmt_subnet",
+          "spec.f5_big_ip_aws_service.nodes[].reserved_mgmt_subnet",
+        ],
+      },
+      {
+        choiceField: "tunnel_prefix_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.nodes[].tunnel_prefix_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.nodes[].automatic_prefix",
+          "spec.f5_big_ip_aws_service.nodes[].tunnel_prefix",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.f5_big_ip_aws_service.nodes[].mgmt_subnet.choice",
+        options: [
+          "spec.f5_big_ip_aws_service.nodes[].mgmt_subnet.existing_subnet_id",
+          "spec.f5_big_ip_aws_service.nodes[].mgmt_subnet.subnet_param",
+        ],
+      },
+      {
+        choiceField: "advertise_choice",
+        fieldPath: "spec.https_management.advertise_choice",
+        options: [
+          "spec.https_management.advertise_on_internet",
+          "spec.https_management.advertise_on_internet_default_vip",
+          "spec.https_management.advertise_on_sli_vip",
+          "spec.https_management.advertise_on_slo_internet_vip",
+          "spec.https_management.advertise_on_slo_sli",
+          "spec.https_management.advertise_on_slo_vip",
+        ],
+      },
+      {
+        choiceField: "internet_choice",
+        fieldPath: "spec.https_management.internet_choice",
+        options: [],
+      },
+      {
+        choiceField: "port_choice",
+        fieldPath: "spec.https_management.port_choice",
+        options: ["spec.https_management.default_https_port", "spec.https_management.https_port"],
+      },
+      {
+        choiceField: "mtls_choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.mtls_choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.no_mtls",
+          "spec.https_management.advertise_on_sli_vip.use_mtls",
+        ],
+      },
+      {
+        choiceField: "ocsp_stapling_choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].custom_hash_algorithms",
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].disable_ocsp_stapling",
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].use_system_defaults",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.blindfold_secret_info",
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_config.choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.tls_config.custom_security",
+          "spec.https_management.advertise_on_sli_vip.tls_config.default_security",
+          "spec.https_management.advertise_on_sli_vip.tls_config.low_security",
+          "spec.https_management.advertise_on_sli_vip.tls_config.medium_security",
+        ],
+      },
+      {
+        choiceField: "crl_choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.use_mtls.crl_choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.use_mtls.crl",
+          "spec.https_management.advertise_on_sli_vip.use_mtls.no_crl",
+        ],
+      },
+      {
+        choiceField: "trusted_ca_choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca_choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca",
+          "spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca_url",
+        ],
+      },
+      {
+        choiceField: "xfcc_header",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_header",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_disabled",
+          "spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_options",
+        ],
+      },
+      {
+        choiceField: "mtls_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.mtls_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.no_mtls",
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls",
+        ],
+      },
+      {
+        choiceField: "ocsp_stapling_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].custom_hash_algorithms",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].disable_ocsp_stapling",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].use_system_defaults",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.secret_info_oneof",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.blindfold_secret_info",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.tls_config.choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.tls_config.custom_security",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_config.default_security",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_config.low_security",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_config.medium_security",
+        ],
+      },
+      {
+        choiceField: "crl_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.use_mtls.crl_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.crl",
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.no_crl",
+        ],
+      },
+      {
+        choiceField: "trusted_ca_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca",
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca_url",
+        ],
+      },
+      {
+        choiceField: "xfcc_header",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_header",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_disabled",
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_options",
+        ],
+      },
+      {
+        choiceField: "mtls_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.mtls_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.no_mtls",
+          "spec.https_management.advertise_on_slo_sli.use_mtls",
+        ],
+      },
+      {
+        choiceField: "ocsp_stapling_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].custom_hash_algorithms",
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].disable_ocsp_stapling",
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].use_system_defaults",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.blindfold_secret_info",
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_config.choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.tls_config.custom_security",
+          "spec.https_management.advertise_on_slo_sli.tls_config.default_security",
+          "spec.https_management.advertise_on_slo_sli.tls_config.low_security",
+          "spec.https_management.advertise_on_slo_sli.tls_config.medium_security",
+        ],
+      },
+      {
+        choiceField: "crl_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.use_mtls.crl_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.use_mtls.crl",
+          "spec.https_management.advertise_on_slo_sli.use_mtls.no_crl",
+        ],
+      },
+      {
+        choiceField: "trusted_ca_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca",
+          "spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca_url",
+        ],
+      },
+      {
+        choiceField: "xfcc_header",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_header",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_disabled",
+          "spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_options",
+        ],
+      },
+      {
+        choiceField: "mtls_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.mtls_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.no_mtls",
+          "spec.https_management.advertise_on_slo_vip.use_mtls",
+        ],
+      },
+      {
+        choiceField: "ocsp_stapling_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].custom_hash_algorithms",
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].disable_ocsp_stapling",
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].use_system_defaults",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.blindfold_secret_info",
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_config.choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.tls_config.custom_security",
+          "spec.https_management.advertise_on_slo_vip.tls_config.default_security",
+          "spec.https_management.advertise_on_slo_vip.tls_config.low_security",
+          "spec.https_management.advertise_on_slo_vip.tls_config.medium_security",
+        ],
+      },
+      {
+        choiceField: "crl_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.use_mtls.crl_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.use_mtls.crl",
+          "spec.https_management.advertise_on_slo_vip.use_mtls.no_crl",
+        ],
+      },
+      {
+        choiceField: "trusted_ca_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca",
+          "spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca_url",
+        ],
+      },
+      {
+        choiceField: "xfcc_header",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_header",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_disabled",
+          "spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_options",
+        ],
+      },
+      {
+        choiceField: "ami_choice",
+        fieldPath: "spec.palo_alto_fw_service.ami_choice",
+        options: ["spec.palo_alto_fw_service.pan_ami_bundle1", "spec.palo_alto_fw_service.pan_ami_bundle2"],
+      },
+      {
+        choiceField: "panaroma_connection",
+        fieldPath: "spec.palo_alto_fw_service.panaroma_connection",
+        options: ["spec.palo_alto_fw_service.disable_panaroma", "spec.palo_alto_fw_service.panorama_server"],
+      },
+      {
+        choiceField: "setup_options",
+        fieldPath: "spec.palo_alto_fw_service.setup_options",
+        options: ["spec.palo_alto_fw_service.auto_setup", "spec.palo_alto_fw_service.ssh_key"],
+      },
+      {
+        choiceField: "ssh_keys_choice",
+        fieldPath: "spec.palo_alto_fw_service.auto_setup.ssh_keys_choice",
+        options: ["spec.palo_alto_fw_service.auto_setup.manual_ssh_keys"],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.palo_alto_fw_service.auto_setup.admin_password.secret_info_oneof",
+        options: [
+          "spec.palo_alto_fw_service.auto_setup.admin_password.blindfold_secret_info",
+          "spec.palo_alto_fw_service.auto_setup.admin_password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.secret_info_oneof",
+        options: [
+          "spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.blindfold_secret_info",
+          "spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.palo_alto_fw_service.panorama_server.authorization_key.secret_info_oneof",
+        options: [
+          "spec.palo_alto_fw_service.panorama_server.authorization_key.blindfold_secret_info",
+          "spec.palo_alto_fw_service.panorama_server.authorization_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "mgmt_subnet_choice",
+        fieldPath: "spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet_choice",
+        options: [
+          "spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet",
+          "spec.palo_alto_fw_service.service_nodes.nodes[].reserved_mgmt_subnet",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet.choice",
+        options: [
+          "spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet.existing_subnet_id",
+          "spec.palo_alto_fw_service.service_nodes.nodes[].mgmt_subnet.subnet_param",
+        ],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-nfv-service-delete",
+    method: "DELETE",
+    path: "/api/config/namespaces/{namespace}/nfv_services/{name}",
+    operation: "delete",
+    domain: "service_mesh",
+    resource: "nfv-service",
+    summary: "DELETE NFV Service.",
+    description: "DELETE the specified nfv_service.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/nfv_serviceDeleteRequest",
+    },
+    responseSchema: {},
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.nfv_service.API.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "nfv-service",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-nfv-service-get",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/nfv_services/{name}",
+    operation: "get",
+    domain: "service_mesh",
+    resource: "nfv-service",
+    summary: "GET NFV Service.",
+    description: "Gets NFV Service parameters.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_STATUS",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/nfv_serviceGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.nfv_service.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-nfv-service-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/nfv_services",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "nfv-service",
+    summary: "List NFV Service.",
+    description: "List the set of nfv_service in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of nfv_service.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/nfv_serviceListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.nfv_service.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-nfv-service-update",
+    method: "PUT",
+    path: "/api/config/namespaces/{metadata.namespace}/nfv_services/{metadata.name}",
+    operation: "update",
+    domain: "service_mesh",
+    resource: "nfv-service",
+    summary: "Replace NFV Service.",
+    description: "Replaces configured NFV Service with new set of parameters.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/nfv_serviceReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/nfv_serviceReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.nfv_service.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "nfv-service",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemanfv-service-replace",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "http_management_choice",
+        fieldPath: "spec.http_management_choice",
+        options: ["spec.disable_https_management", "spec.https_management"],
+      },
+      {
+        choiceField: "service_provider_choice",
+        fieldPath: "spec.service_provider_choice",
+        options: ["spec.f5_big_ip_aws_service", "spec.palo_alto_fw_service"],
+      },
+      {
+        choiceField: "ssh_management_choice",
+        fieldPath: "spec.ssh_management_choice",
+        options: ["spec.disable_ssh_access", "spec.enabled_ssh_access"],
+      },
+      {
+        choiceField: "advertise_choice",
+        fieldPath: "spec.enabled_ssh_access.advertise_choice",
+        options: [
+          "spec.enabled_ssh_access.advertise_on_sli",
+          "spec.enabled_ssh_access.advertise_on_slo",
+          "spec.enabled_ssh_access.advertise_on_slo_sli",
+        ],
+      },
+      {
+        choiceField: "external_vip_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.endpoint_service.external_vip_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.endpoint_service.advertise_on_slo_ip",
+          "spec.f5_big_ip_aws_service.endpoint_service.advertise_on_slo_ip_external",
+          "spec.f5_big_ip_aws_service.endpoint_service.disable_advertise_on_slo_ip",
+        ],
+      },
+      {
+        choiceField: "tcp_port_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.endpoint_service.tcp_port_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.endpoint_service.custom_tcp_ports",
+          "spec.f5_big_ip_aws_service.endpoint_service.default_tcp_ports",
+          "spec.f5_big_ip_aws_service.endpoint_service.http_port",
+          "spec.f5_big_ip_aws_service.endpoint_service.https_port",
+          "spec.f5_big_ip_aws_service.endpoint_service.no_tcp_ports",
+        ],
+      },
+      {
+        choiceField: "udp_port_choice",
+        fieldPath: "spec.f5_big_ip_aws_service.endpoint_service.udp_port_choice",
+        options: [
+          "spec.f5_big_ip_aws_service.endpoint_service.custom_udp_ports",
+          "spec.f5_big_ip_aws_service.endpoint_service.no_udp_ports",
+        ],
+      },
+      {
+        choiceField: "advertise_choice",
+        fieldPath: "spec.https_management.advertise_choice",
+        options: [
+          "spec.https_management.advertise_on_internet",
+          "spec.https_management.advertise_on_internet_default_vip",
+          "spec.https_management.advertise_on_sli_vip",
+          "spec.https_management.advertise_on_slo_internet_vip",
+          "spec.https_management.advertise_on_slo_sli",
+          "spec.https_management.advertise_on_slo_vip",
+        ],
+      },
+      {
+        choiceField: "internet_choice",
+        fieldPath: "spec.https_management.internet_choice",
+        options: [],
+      },
+      {
+        choiceField: "port_choice",
+        fieldPath: "spec.https_management.port_choice",
+        options: ["spec.https_management.default_https_port", "spec.https_management.https_port"],
+      },
+      {
+        choiceField: "mtls_choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.mtls_choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.no_mtls",
+          "spec.https_management.advertise_on_sli_vip.use_mtls",
+        ],
+      },
+      {
+        choiceField: "ocsp_stapling_choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].custom_hash_algorithms",
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].disable_ocsp_stapling",
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].use_system_defaults",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.blindfold_secret_info",
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_config.choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.tls_config.custom_security",
+          "spec.https_management.advertise_on_sli_vip.tls_config.default_security",
+          "spec.https_management.advertise_on_sli_vip.tls_config.low_security",
+          "spec.https_management.advertise_on_sli_vip.tls_config.medium_security",
+        ],
+      },
+      {
+        choiceField: "crl_choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.use_mtls.crl_choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.use_mtls.crl",
+          "spec.https_management.advertise_on_sli_vip.use_mtls.no_crl",
+        ],
+      },
+      {
+        choiceField: "trusted_ca_choice",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca_choice",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca",
+          "spec.https_management.advertise_on_sli_vip.use_mtls.trusted_ca_url",
+        ],
+      },
+      {
+        choiceField: "xfcc_header",
+        fieldPath: "spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_header",
+        options: [
+          "spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_disabled",
+          "spec.https_management.advertise_on_sli_vip.use_mtls.xfcc_options",
+        ],
+      },
+      {
+        choiceField: "mtls_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.mtls_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.no_mtls",
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls",
+        ],
+      },
+      {
+        choiceField: "ocsp_stapling_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].custom_hash_algorithms",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].disable_ocsp_stapling",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].use_system_defaults",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.secret_info_oneof",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.blindfold_secret_info",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.tls_config.choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.tls_config.custom_security",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_config.default_security",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_config.low_security",
+          "spec.https_management.advertise_on_slo_internet_vip.tls_config.medium_security",
+        ],
+      },
+      {
+        choiceField: "crl_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.use_mtls.crl_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.crl",
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.no_crl",
+        ],
+      },
+      {
+        choiceField: "trusted_ca_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca",
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.trusted_ca_url",
+        ],
+      },
+      {
+        choiceField: "xfcc_header",
+        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_header",
+        options: [
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_disabled",
+          "spec.https_management.advertise_on_slo_internet_vip.use_mtls.xfcc_options",
+        ],
+      },
+      {
+        choiceField: "mtls_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.mtls_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.no_mtls",
+          "spec.https_management.advertise_on_slo_sli.use_mtls",
+        ],
+      },
+      {
+        choiceField: "ocsp_stapling_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].custom_hash_algorithms",
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].disable_ocsp_stapling",
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].use_system_defaults",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.blindfold_secret_info",
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_config.choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.tls_config.custom_security",
+          "spec.https_management.advertise_on_slo_sli.tls_config.default_security",
+          "spec.https_management.advertise_on_slo_sli.tls_config.low_security",
+          "spec.https_management.advertise_on_slo_sli.tls_config.medium_security",
+        ],
+      },
+      {
+        choiceField: "crl_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.use_mtls.crl_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.use_mtls.crl",
+          "spec.https_management.advertise_on_slo_sli.use_mtls.no_crl",
+        ],
+      },
+      {
+        choiceField: "trusted_ca_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca",
+          "spec.https_management.advertise_on_slo_sli.use_mtls.trusted_ca_url",
+        ],
+      },
+      {
+        choiceField: "xfcc_header",
+        fieldPath: "spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_header",
+        options: [
+          "spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_disabled",
+          "spec.https_management.advertise_on_slo_sli.use_mtls.xfcc_options",
+        ],
+      },
+      {
+        choiceField: "mtls_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.mtls_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.no_mtls",
+          "spec.https_management.advertise_on_slo_vip.use_mtls",
+        ],
+      },
+      {
+        choiceField: "ocsp_stapling_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].custom_hash_algorithms",
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].disable_ocsp_stapling",
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].use_system_defaults",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.blindfold_secret_info",
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_config.choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.tls_config.custom_security",
+          "spec.https_management.advertise_on_slo_vip.tls_config.default_security",
+          "spec.https_management.advertise_on_slo_vip.tls_config.low_security",
+          "spec.https_management.advertise_on_slo_vip.tls_config.medium_security",
+        ],
+      },
+      {
+        choiceField: "crl_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.use_mtls.crl_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.use_mtls.crl",
+          "spec.https_management.advertise_on_slo_vip.use_mtls.no_crl",
+        ],
+      },
+      {
+        choiceField: "trusted_ca_choice",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca_choice",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca",
+          "spec.https_management.advertise_on_slo_vip.use_mtls.trusted_ca_url",
+        ],
+      },
+      {
+        choiceField: "xfcc_header",
+        fieldPath: "spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_header",
+        options: [
+          "spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_disabled",
+          "spec.https_management.advertise_on_slo_vip.use_mtls.xfcc_options",
+        ],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-override-list",
+    method: "GET",
+    path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/overrides",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "override",
+    summary: "GET Override.",
+    description: "GET all override for API endpoints configured for this App type.",
+    pathParameters: [
+      {
+        description: "App Type\nApp Type for current request.",
+        in: "path",
+        name: "app_type_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "App Type",
+      },
+      {
+        description: "Namespace\nNamespace of the App type for current request.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeOverridesRsp",
+    },
+    requiredParams: ["app_type_name", "namespace"],
+    operationId: "ves.io.schema.app_type.CustomAPI.Overrides",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-pdf-create",
+    method: "POST",
+    path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/services/{service_name}/api_endpoint/pdf",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "pdf",
+    summary: "GET Service API Endpoint PDF.",
+    description: "GET PDF of all metrics for a given auto discovered API endpoint for Service.",
+    pathParameters: [
+      {
+        description: "App Type\nApp Type for current request.",
+        in: "path",
+        name: "app_type_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "App Type",
+      },
+      {
+        description: "Namespace\nNamespace of the App type for current request.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+      {
+        description: "Service\nIdentifies the destination service.",
+        in: "path",
+        name: "service_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Service Name.",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_typeServiceAPIEndpointPDFReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeAPIEndpointPDFRsp",
+    },
+    requiredParams: ["app_type_name", "body", "namespace", "service_name"],
+    operationId: "ves.io.schema.app_type.CustomAPI.GetServiceAPIEndpointPDF",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-pdf-list",
+    method: "GET",
+    path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoint/pdf",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "pdf",
+    summary: "GET PDF",
+    description: "GET PDF of all metrics for a given auto discovered API endpoint for App type.",
+    pathParameters: [
+      {
+        description: "App Type\nApp Type for current request.",
+        in: "path",
+        name: "app_type_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "App Type",
+      },
+      {
+        description: "Namespace\nNamespace of the App type for current request.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "API endpoint for which PDFs are requested.",
+        in: "query",
+        name: "collapsed_url",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "API URL",
+      },
+      {
+        description: "Method of API endpoint for which PDFs are requested.",
+        in: "query",
+        name: "method",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Method",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeAPIEndpointPDFRsp",
+    },
+    requiredParams: ["app_type_name", "namespace"],
+    operationId: "ves.io.schema.app_type.CustomAPI.APIEndpointPDF",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-pop-create",
+    method: "POST",
+    path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/override/pop",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "pop",
+    summary: "Remove Override.",
+    description: "Remove override for dynamic component for API endpoints discovered for this App type.",
+    pathParameters: [
+      {
+        description: "App Type\nApp Type for current request.",
+        in: "path",
+        name: "app_type_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "App Type",
+      },
+      {
+        description: "Namespace\nNamespace of the App type for current request.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_typeOverridePopReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeOverridePopRsp",
+    },
+    requiredParams: ["app_type_name", "body", "namespace"],
+    operationId: "ves.io.schema.app_type.CustomAPI.OverridePop",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-push-create",
+    method: "POST",
+    path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/override/push",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "push",
+    summary: "Add Override.",
+    description: "Add override for dynamic component for API endpoints discovered for this App type.",
+    pathParameters: [
+      {
+        description: "App Type\nApp Type for current request.",
+        in: "path",
+        name: "app_type_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "App Type",
+      },
+      {
+        description: "Namespace\nNamespace of the App type for current request.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/app_typeOverridePushReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/app_typeOverridePushRsp",
+    },
+    requiredParams: ["app_type_name", "body", "namespace"],
+    operationId: "ves.io.schema.app_type.CustomAPI.OverridePush",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-sid-counter-create",
+    method: "POST",
+    path: "/api/data/namespaces/{namespace}/virtual_network/sid_counters",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "sid-counter",
+    summary: "SID Counters.",
+    description: "API to GET SID Counters.",
+    pathParameters: [
+      {
+        description: "Namespace\nOnly `system` namespace is supported.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/virtual_networkSIDCounterRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/virtual_networkSIDCounterResponse",
+    },
+    requiredParams: ["body", "namespace"],
+    operationId: "ves.io.schema.virtual_network.CustomDataAPI.SIDCounters",
+    tags: ["Networking"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "field_selector[]",
+        inline: false,
+        required: false,
+        resourceType: "virtual-network-sidcounter",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-site-mesh-group-create",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/site_mesh_groups",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "site-mesh-group",
+    summary: "Create Site Mesh Group.",
+    description: "Create a Site Mesh Group in system namespace of user.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/site_mesh_groupCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/site_mesh_groupCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.site_mesh_group.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "sites",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "site-mesh-group",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemasite-mesh-group-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "mesh_choice",
+        fieldPath: "spec.mesh_choice",
+        options: ["spec.full_mesh", "spec.hub_mesh", "spec.spoke_mesh"],
+      },
+      {
+        choiceField: "re_fallback",
+        fieldPath: "spec.re_fallback",
+        options: ["spec.disable_re_fallback", "spec.enable_re_fallback"],
+      },
+      {
+        choiceField: "full_mesh_choice",
+        fieldPath: "spec.full_mesh.full_mesh_choice",
+        options: ["spec.full_mesh.control_and_data_plane_mesh", "spec.full_mesh.data_plane_mesh"],
+      },
+      {
+        choiceField: "hub_full_mesh_choice",
+        fieldPath: "spec.hub_mesh.hub_full_mesh_choice",
+        options: ["spec.hub_mesh.control_and_data_plane_mesh", "spec.hub_mesh.data_plane_mesh"],
+      },
+      {
+        choiceField: "spoke_hub_mesh_choice",
+        fieldPath: "spec.spoke_mesh.spoke_hub_mesh_choice",
+        options: ["spec.spoke_mesh.control_and_data_plane_mesh", "spec.spoke_mesh.data_plane_mesh"],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-site-mesh-group-delete",
+    method: "DELETE",
+    path: "/api/config/namespaces/{namespace}/site_mesh_groups/{name}",
+    operation: "delete",
+    domain: "service_mesh",
+    resource: "site-mesh-group",
+    summary: "DELETE Site Mesh Group.",
+    description: "DELETE the specified site_mesh_group.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/site_mesh_groupDeleteRequest",
+    },
+    responseSchema: {},
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.site_mesh_group.API.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "sites",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "site-mesh-group",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-site-mesh-group-get",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/site_mesh_groups/{name}",
+    operation: "get",
+    domain: "service_mesh",
+    resource: "site-mesh-group",
+    summary: "GET Site Mesh Group.",
+    description: "Gets Site Mesh Group object from system namespace.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_STATUS",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/site_mesh_groupGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.site_mesh_group.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-site-mesh-group-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/site_mesh_groups",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "site-mesh-group",
+    summary: "List Site Mesh Group.",
+    description: "List the set of site_mesh_group in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of site_mesh_group.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/site_mesh_groupListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.site_mesh_group.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-site-mesh-group-update",
+    method: "PUT",
+    path: "/api/config/namespaces/{metadata.namespace}/site_mesh_groups/{metadata.name}",
+    operation: "update",
+    domain: "service_mesh",
+    resource: "site-mesh-group",
+    summary: "Replace Site Mesh Group.",
+    description: "Replace contents of a Site Mesh Group object.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/site_mesh_groupReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/site_mesh_groupReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.site_mesh_group.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "sites",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "site-mesh-group",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemasite-mesh-group-replace",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "mesh_choice",
+        fieldPath: "spec.mesh_choice",
+        options: ["spec.full_mesh", "spec.hub_mesh", "spec.spoke_mesh"],
+      },
+      {
+        choiceField: "re_fallback",
+        fieldPath: "spec.re_fallback",
+        options: ["spec.disable_re_fallback", "spec.enable_re_fallback"],
+      },
+      {
+        choiceField: "full_mesh_choice",
+        fieldPath: "spec.full_mesh.full_mesh_choice",
+        options: ["spec.full_mesh.control_and_data_plane_mesh", "spec.full_mesh.data_plane_mesh"],
+      },
+      {
+        choiceField: "hub_full_mesh_choice",
+        fieldPath: "spec.hub_mesh.hub_full_mesh_choice",
+        options: ["spec.hub_mesh.control_and_data_plane_mesh", "spec.hub_mesh.data_plane_mesh"],
+      },
+      {
+        choiceField: "spoke_hub_mesh_choice",
+        fieldPath: "spec.spoke_mesh.spoke_hub_mesh_choice",
+        options: ["spec.spoke_mesh.control_and_data_plane_mesh", "spec.spoke_mesh.data_plane_mesh"],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-software-os-version-create",
+    method: "POST",
+    path: "/api/maurice/software_os_version",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "software-os-version",
+    summary: "GET OS based on SW_VERSION.",
+    description: "API to GET OS IMAGE based on the software version.",
+    pathParameters: [],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/virtual_applianceGetImageRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/virtual_applianceGetImageResponse",
+    },
+    requiredParams: ["body"],
+    operationId: "ves.io.schema.virtual_appliance.SoftwareVersionOsImageCustomApi.GetImage",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-suspicious-user-get",
+    method: "GET",
+    path: "/api/ml/data/namespaces/{namespace}/app_settings/{name}/suspicious_users",
+    operation: "get",
+    domain: "service_mesh",
+    resource: "suspicious-user",
+    summary: "GET Status of Suspicious users.",
+    description: "GET status of suspicious users.",
+    pathParameters: [
+      {
+        description: "Name\nfetch suspicious users based on a given app setting.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\n\nfetch suspicious users for a given namespace.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Suspicious User Status Request.",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "Fetch suspicious users during timestamp <= end_time\nformat: unix_timestamp|RFC 3339\n\nOptional: If not specified, then the end_time will be evaluated to start_time+10m\nIf start_time is not specified, then the end_time will be evaluated to <current time>",
+        in: "query",
+        name: "end_time",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "End Time",
+      },
+      {
+        description:
+          'Blogging_app"}"\nquery is used to specify the list of matchers\nsyntax for query := {[<matcher>]}\n<matcher> := <field_name><operator>"<value>"\n<field_name> := string\nOne or more of these fields in the security event may be specified in the query.\nApp_type - application type\nvh_name - name of the virtual host\n<value> := string\n<operator> := ["="|"!="]\n= : equal to\n!= : not equal to\nWhen more than one matcher is specified in the query, then security events matching ALL the matchers will be returned in the response.\nExample: query={country="United States", city="California"} will return all security events originating from California, United States.\n\nOptional: If not specified, all the security events matching the given tenant and namespace will be returned in the response.',
+        in: "query",
+        name: "query",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Query",
+      },
+      {
+        description:
+          "Fetch suspicious users during timestamp >= start_time\nformat: unix_timestamp|RFC 3339\n\nOptional: If not specified, then the start_time will be evaluated to end_time-10m\nIf end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
+        in: "query",
+        name: "start_time",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Start Time.",
+      },
+      {
+        description:
+          "X-example: 10\nfetch top 10 suspicious users\n\nNumber of top field values to be returned in the response.\nOptional: If not specified, top 5 values will be returned in the response.",
+        in: "query",
+        name: "topn",
+        required: false,
+        schema: {
+          format: "int64",
+          type: "integer",
+        },
+        "x-displayname": "TopN",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/app_settingSuspiciousUserStatusRsp",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.app_setting.CustomAPI.SuspiciousUserStatus",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-swagger-spec-list",
+    method: "GET",
+    path: "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoints/swagger_spec",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "swagger-spec",
+    summary: "GET Swagger Spec for App Type.",
+    description: "GET the corresponding Swagger spec for the given app type.",
+    pathParameters: [
+      {
+        description: "App Type\nApp Type for current request.",
+        in: "path",
+        name: "app_type_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "App Type",
+      },
+      {
+        description: "Namespace\nNamespace of the App type for current request.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/apiHttpBody",
+    },
+    requiredParams: ["app_type_name", "namespace"],
+    operationId: "ves.io.schema.app_type.CustomAPI.GetSwaggerSpec",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-virtual-network-create",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/virtual_networks",
+    operation: "create",
+    domain: "service_mesh",
+    resource: "virtual-network",
+    summary: "Create Virtual Network.",
+    description: "Create virtual network in given namespace.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/virtual_networkCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/virtual_networkCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.virtual_network.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "network",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "virtual-network",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "virtual-network-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "network_choice",
+        fieldPath: "spec.network_choice",
+        options: [
+          "spec.global_network",
+          "spec.legacy_type",
+          "spec.site_local_inside_network",
+          "spec.site_local_network",
+        ],
+      },
+      {
+        choiceField: "next_hop_choice",
+        fieldPath: "spec.static_routes[].next_hop_choice",
+        options: [
+          "spec.static_routes[].default_gateway",
+          "spec.static_routes[].ip_address",
+          "spec.static_routes[].node_interface",
+        ],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-virtual-network-delete",
+    method: "DELETE",
+    path: "/api/config/namespaces/{namespace}/virtual_networks/{name}",
+    operation: "delete",
+    domain: "service_mesh",
+    resource: "virtual-network",
+    summary: "DELETE Virtual Network.",
+    description: "DELETE the specified virtual_network.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/virtual_networkDeleteRequest",
+    },
+    responseSchema: {},
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.virtual_network.API.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "network",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "virtual-network",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-virtual-network-get",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/virtual_networks/{name}",
+    operation: "get",
+    domain: "service_mesh",
+    resource: "virtual-network",
+    summary: "GET Virtual Network.",
+    description: "Gets virtual network in given namespace.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_STATUS",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/virtual_networkGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.virtual_network.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-virtual-network-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/virtual_networks",
+    operation: "list",
+    domain: "service_mesh",
+    resource: "virtual-network",
+    summary: "List Virtual Network.",
+    description: "List the set of virtual_network in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of virtual_network.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/virtual_networkListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.virtual_network.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-servicemesh-virtual-network-update",
+    method: "PUT",
+    path: "/api/config/namespaces/{metadata.namespace}/virtual_networks/{metadata.name}",
+    operation: "update",
+    domain: "service_mesh",
+    resource: "virtual-network",
+    summary: "Replace Virtual Network.",
+    description: "Replace given virtual network in given namespace.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/virtual_networkReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/virtual_networkReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.virtual_network.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/service_mesh.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "network",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "virtual-network",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "virtual-network-replace",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "network_choice",
+        fieldPath: "spec.network_choice",
+        options: [
+          "spec.global_network",
+          "spec.legacy_type",
+          "spec.site_local_inside_network",
+          "spec.site_local_network",
+        ],
+      },
+      {
+        choiceField: "next_hop_choice",
+        fieldPath: "spec.static_routes[].next_hop_choice",
+        options: [
+          "spec.static_routes[].default_gateway",
+          "spec.static_routes[].ip_address",
+          "spec.static_routes[].node_interface",
+        ],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
 ];
 
 export default service_meshTools;

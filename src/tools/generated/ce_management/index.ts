@@ -6,2649 +6,2472 @@
 import type { ParsedOperation } from "../../../generator/openapi-parser.js";
 
 export const ce_managementTools: ParsedOperation[] = [
-	{
-		toolName: "f5xc-api-cemanagement-fleet-create",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/fleets",
-		operation: "create",
-		domain: "ce_management",
-		resource: "fleet",
-		summary: "Create Fleet.",
-		description:
-			"Create fleet will create a fleet object in 'system' namespace of the user.",
-		pathParameters: [
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/fleetCreateRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/fleetCreateResponse",
-		},
-		requiredParams: ["body", "metadata.namespace"],
-		operationId: "ves.io.schema.fleet.API.Create",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "fleet",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-create-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemafleet-create",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "bond_choice",
-				fieldPath: "spec.bond_choice",
-				options: ["spec.bond_device_list", "spec.no_bond_devices"],
-			},
-			{
-				choiceField: "dc_cluster_group_choice",
-				fieldPath: "spec.dc_cluster_group_choice",
-				options: [
-					"spec.dc_cluster_group",
-					"spec.dc_cluster_group_inside",
-					"spec.no_dc_cluster_group",
-				],
-			},
-			{
-				choiceField: "gpu_choice",
-				fieldPath: "spec.gpu_choice",
-				options: ["spec.disable_gpu", "spec.enable_gpu", "spec.enable_vgpu"],
-			},
-			{
-				choiceField: "interface_choice",
-				fieldPath: "spec.interface_choice",
-				options: [
-					"spec.default_config",
-					"spec.device_list",
-					"spec.interface_list",
-				],
-			},
-			{
-				choiceField: "logs_receiver_choice",
-				fieldPath: "spec.logs_receiver_choice",
-				options: ["spec.log_receiver", "spec.logs_streaming_disabled"],
-			},
-			{
-				choiceField: "sriov_interface_choice",
-				fieldPath: "spec.sriov_interface_choice",
-				options: ["spec.default_sriov_interface", "spec.sriov_interfaces"],
-			},
-			{
-				choiceField: "storage_class_choice",
-				fieldPath: "spec.storage_class_choice",
-				options: ["spec.default_storage_class", "spec.storage_class_list"],
-			},
-			{
-				choiceField: "storage_device_choice",
-				fieldPath: "spec.storage_device_choice",
-				options: ["spec.no_storage_device", "spec.storage_device_list"],
-			},
-			{
-				choiceField: "storage_interface_choice",
-				fieldPath: "spec.storage_interface_choice",
-				options: ["spec.no_storage_interfaces", "spec.storage_interface_list"],
-			},
-			{
-				choiceField: "storage_static_routes_choice",
-				fieldPath: "spec.storage_static_routes_choice",
-				options: [
-					"spec.no_storage_static_routes",
-					"spec.storage_static_routes",
-				],
-			},
-			{
-				choiceField: "usb_policy_choice",
-				fieldPath: "spec.usb_policy_choice",
-				options: ["spec.allow_all_usb", "spec.deny_all_usb", "spec.usb_policy"],
-			},
-			{
-				choiceField: "vm_choice",
-				fieldPath: "spec.vm_choice",
-				options: ["spec.disable_vm", "spec.enable_vm"],
-			},
-			{
-				choiceField: "blocked_services_value_type_choice",
-				fieldPath: "spec.blocked_services[].blocked_services_value_type_choice",
-				options: [
-					"spec.blocked_services[].dns",
-					"spec.blocked_services[].ssh",
-					"spec.blocked_services[].web_user_interface",
-				],
-			},
-			{
-				choiceField: "lacp_choice",
-				fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-				options: [
-					"spec.bond_device_list.bond_devices[].active_backup",
-					"spec.bond_device_list.bond_devices[].lacp",
-				],
-			},
-			{
-				choiceField: "device_instance",
-				fieldPath: "spec.device_list.devices[].device_instance",
-				options: ["spec.device_list.devices[].network_device"],
-			},
-			{
-				choiceField: "kubernetes_upgrade_drain_enable_choice",
-				fieldPath:
-					"spec.kubernetes_upgrade_drain.kubernetes_upgrade_drain_enable_choice",
-				options: [
-					"spec.kubernetes_upgrade_drain.disable_upgrade_drain",
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain",
-				],
-			},
-			{
-				choiceField: "drain_max_unavailable_choice",
-				fieldPath:
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-				options: [
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
-				],
-			},
-			{
-				choiceField: "vega_upgrade_mode_toggle_choice",
-				fieldPath:
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
-				options: [
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
-				],
-			},
-			{
-				choiceField: "perf_mode_choice",
-				fieldPath: "spec.performance_enhancement_mode.perf_mode_choice",
-				options: [
-					"spec.performance_enhancement_mode.perf_mode_l3_enhanced",
-					"spec.performance_enhancement_mode.perf_mode_l7_enhanced",
-				],
-			},
-			{
-				choiceField: "perf_mode_choice",
-				fieldPath:
-					"spec.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
-				options: [
-					"spec.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
-					"spec.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
-				],
-			},
-			{
-				choiceField: "device_choice",
-				fieldPath: "spec.storage_class_list.storage_classes[].device_choice",
-				options: [
-					"spec.storage_class_list.storage_classes[].custom_storage",
-					"spec.storage_class_list.storage_classes[].hpe_storage",
-					"spec.storage_class_list.storage_classes[].netapp_trident",
-					"spec.storage_class_list.storage_classes[].pure_service_orchestrator",
-				],
-			},
-			{
-				choiceField: "device_choice",
-				fieldPath: "spec.storage_device_list.storage_devices[].device_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].custom_storage",
-					"spec.storage_device_list.storage_devices[].hpe_storage",
-					"spec.storage_device_list.storage_devices[].netapp_trident",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].hpe_storage.password.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].hpe_storage.password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "backend_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.backend_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san",
-				],
-			},
-			{
-				choiceField: "data_lif",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_dns_name",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_ip",
-				],
-			},
-			{
-				choiceField: "management_lif",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_dns_name",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_ip",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "qos_policy_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.qos_policy_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.adaptive_qos_policy",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.no_qos",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.qos_policy",
-				],
-			},
-			{
-				choiceField: "qos_policy_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.qos_policy_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.adaptive_qos_policy",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.no_qos",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.qos_policy",
-				],
-			},
-			{
-				choiceField: "chap_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.no_chap",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap",
-				],
-			},
-			{
-				choiceField: "data_lif",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_dns_name",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_ip",
-				],
-			},
-			{
-				choiceField: "management_lif",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_dns_name",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_ip",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "qos_policy_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.qos_policy_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.adaptive_qos_policy",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.no_qos",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.qos_policy",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "qos_policy_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.qos_policy_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.adaptive_qos_policy",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.no_qos",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.qos_policy",
-				],
-			},
-			{
-				choiceField: "mgmt_endpoint",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_endpoint",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_dns_name",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_ip",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "mgmt_endpoint",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_endpoint",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_dns_name",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_ip",
-				],
-			},
-			{
-				choiceField: "nfs_endpoint",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint_dns_name",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint_ip",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "ver",
-				fieldPath:
-					"spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ver",
-				options: [
-					"spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ipv4",
-					"spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ipv6",
-				],
-			},
-			{
-				choiceField: "ver",
-				fieldPath: "spec.storage_static_routes.storage_routes[].subnets[].ver",
-				options: [
-					"spec.storage_static_routes.storage_routes[].subnets[].ipv4",
-					"spec.storage_static_routes.storage_routes[].subnets[].ipv6",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-fleet-delete",
-		method: "DELETE",
-		path: "/api/config/namespaces/{namespace}/fleets/{name}",
-		operation: "delete",
-		domain: "ce_management",
-		resource: "fleet",
-		summary: "DELETE Fleet.",
-		description: "DELETE the specified fleet.",
-		pathParameters: [
-			{
-				description: "Name\nName of the configuration object.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nNamespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/fleetDeleteRequest",
-		},
-		responseSchema: {},
-		requiredParams: ["body", "name", "namespace"],
-		operationId: "ves.io.schema.fleet.API.Delete",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "fleet",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-fleet-get",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/fleets/{name}",
-		operation: "get",
-		domain: "ce_management",
-		resource: "fleet",
-		summary: "GET Fleet",
-		description: "GET fleet will GET fleet object from system namespace.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_FOR_CREATE",
-						"GET_RSP_FORMAT_FOR_REPLACE",
-						"GET_RSP_FORMAT_STATUS",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/fleetGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.fleet.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-fleet-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/fleets",
-		operation: "list",
-		domain: "ce_management",
-		resource: "fleet",
-		summary: "List Fleet.",
-		description: "List the set of fleet in a namespace.",
-		pathParameters: [
-			{
-				description: "Namespace\nNamespace to scope the listing of fleet.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/fleetListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.fleet.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-fleet-update",
-		method: "PUT",
-		path: "/api/config/namespaces/{metadata.namespace}/fleets/{metadata.name}",
-		operation: "update",
-		domain: "ce_management",
-		resource: "fleet",
-		summary: "Replace Fleet.",
-		description:
-			"Replace fleet will replace the contents of given fleet object.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe configuration object to be replaced will be looked up by name.",
-				in: "path",
-				name: "metadata.name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/fleetReplaceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/fleetReplaceResponse",
-		},
-		requiredParams: ["body", "metadata.name", "metadata.namespace"],
-		operationId: "ves.io.schema.fleet.API.Replace",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "fleet",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-replace-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "schemafleet-replace",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "bond_choice",
-				fieldPath: "spec.bond_choice",
-				options: ["spec.bond_device_list", "spec.no_bond_devices"],
-			},
-			{
-				choiceField: "dc_cluster_group_choice",
-				fieldPath: "spec.dc_cluster_group_choice",
-				options: [
-					"spec.dc_cluster_group",
-					"spec.dc_cluster_group_inside",
-					"spec.no_dc_cluster_group",
-				],
-			},
-			{
-				choiceField: "gpu_choice",
-				fieldPath: "spec.gpu_choice",
-				options: ["spec.disable_gpu", "spec.enable_gpu", "spec.enable_vgpu"],
-			},
-			{
-				choiceField: "interface_choice",
-				fieldPath: "spec.interface_choice",
-				options: [
-					"spec.default_config",
-					"spec.device_list",
-					"spec.interface_list",
-				],
-			},
-			{
-				choiceField: "logs_receiver_choice",
-				fieldPath: "spec.logs_receiver_choice",
-				options: ["spec.log_receiver", "spec.logs_streaming_disabled"],
-			},
-			{
-				choiceField: "sriov_interface_choice",
-				fieldPath: "spec.sriov_interface_choice",
-				options: ["spec.default_sriov_interface", "spec.sriov_interfaces"],
-			},
-			{
-				choiceField: "storage_class_choice",
-				fieldPath: "spec.storage_class_choice",
-				options: ["spec.default_storage_class", "spec.storage_class_list"],
-			},
-			{
-				choiceField: "storage_device_choice",
-				fieldPath: "spec.storage_device_choice",
-				options: ["spec.no_storage_device", "spec.storage_device_list"],
-			},
-			{
-				choiceField: "storage_interface_choice",
-				fieldPath: "spec.storage_interface_choice",
-				options: ["spec.no_storage_interfaces", "spec.storage_interface_list"],
-			},
-			{
-				choiceField: "storage_static_routes_choice",
-				fieldPath: "spec.storage_static_routes_choice",
-				options: [
-					"spec.no_storage_static_routes",
-					"spec.storage_static_routes",
-				],
-			},
-			{
-				choiceField: "usb_policy_choice",
-				fieldPath: "spec.usb_policy_choice",
-				options: ["spec.allow_all_usb", "spec.deny_all_usb", "spec.usb_policy"],
-			},
-			{
-				choiceField: "vm_choice",
-				fieldPath: "spec.vm_choice",
-				options: ["spec.disable_vm", "spec.enable_vm"],
-			},
-			{
-				choiceField: "blocked_services_value_type_choice",
-				fieldPath: "spec.blocked_services[].blocked_services_value_type_choice",
-				options: [
-					"spec.blocked_services[].dns",
-					"spec.blocked_services[].ssh",
-					"spec.blocked_services[].web_user_interface",
-				],
-			},
-			{
-				choiceField: "lacp_choice",
-				fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-				options: [
-					"spec.bond_device_list.bond_devices[].active_backup",
-					"spec.bond_device_list.bond_devices[].lacp",
-				],
-			},
-			{
-				choiceField: "device_instance",
-				fieldPath: "spec.device_list.devices[].device_instance",
-				options: ["spec.device_list.devices[].network_device"],
-			},
-			{
-				choiceField: "kubernetes_upgrade_drain_enable_choice",
-				fieldPath:
-					"spec.kubernetes_upgrade_drain.kubernetes_upgrade_drain_enable_choice",
-				options: [
-					"spec.kubernetes_upgrade_drain.disable_upgrade_drain",
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain",
-				],
-			},
-			{
-				choiceField: "drain_max_unavailable_choice",
-				fieldPath:
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-				options: [
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
-				],
-			},
-			{
-				choiceField: "vega_upgrade_mode_toggle_choice",
-				fieldPath:
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
-				options: [
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
-					"spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
-				],
-			},
-			{
-				choiceField: "perf_mode_choice",
-				fieldPath: "spec.performance_enhancement_mode.perf_mode_choice",
-				options: [
-					"spec.performance_enhancement_mode.perf_mode_l3_enhanced",
-					"spec.performance_enhancement_mode.perf_mode_l7_enhanced",
-				],
-			},
-			{
-				choiceField: "perf_mode_choice",
-				fieldPath:
-					"spec.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
-				options: [
-					"spec.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
-					"spec.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
-				],
-			},
-			{
-				choiceField: "device_choice",
-				fieldPath: "spec.storage_class_list.storage_classes[].device_choice",
-				options: [
-					"spec.storage_class_list.storage_classes[].custom_storage",
-					"spec.storage_class_list.storage_classes[].hpe_storage",
-					"spec.storage_class_list.storage_classes[].netapp_trident",
-					"spec.storage_class_list.storage_classes[].pure_service_orchestrator",
-				],
-			},
-			{
-				choiceField: "device_choice",
-				fieldPath: "spec.storage_device_list.storage_devices[].device_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].custom_storage",
-					"spec.storage_device_list.storage_devices[].hpe_storage",
-					"spec.storage_device_list.storage_devices[].netapp_trident",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].hpe_storage.password.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].hpe_storage.password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "backend_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.backend_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san",
-				],
-			},
-			{
-				choiceField: "data_lif",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_dns_name",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_ip",
-				],
-			},
-			{
-				choiceField: "management_lif",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_dns_name",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_ip",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "qos_policy_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.qos_policy_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.adaptive_qos_policy",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.no_qos",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.qos_policy",
-				],
-			},
-			{
-				choiceField: "qos_policy_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.qos_policy_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.adaptive_qos_policy",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.no_qos",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.qos_policy",
-				],
-			},
-			{
-				choiceField: "chap_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.no_chap",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap",
-				],
-			},
-			{
-				choiceField: "data_lif",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_dns_name",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_ip",
-				],
-			},
-			{
-				choiceField: "management_lif",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_dns_name",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_ip",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "qos_policy_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.qos_policy_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.adaptive_qos_policy",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.no_qos",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.qos_policy",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "qos_policy_choice",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.qos_policy_choice",
-				options: [
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.adaptive_qos_policy",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.no_qos",
-					"spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.qos_policy",
-				],
-			},
-			{
-				choiceField: "mgmt_endpoint",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_endpoint",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_dns_name",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_ip",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "mgmt_endpoint",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_endpoint",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_dns_name",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_ip",
-				],
-			},
-			{
-				choiceField: "nfs_endpoint",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint_dns_name",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint_ip",
-				],
-			},
-			{
-				choiceField: "secret_info_oneof",
-				fieldPath:
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.secret_info_oneof",
-				options: [
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.blindfold_secret_info",
-					"spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.clear_secret_info",
-				],
-			},
-			{
-				choiceField: "ver",
-				fieldPath:
-					"spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ver",
-				options: [
-					"spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ipv4",
-					"spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ipv6",
-				],
-			},
-			{
-				choiceField: "ver",
-				fieldPath: "spec.storage_static_routes.storage_routes[].subnets[].ver",
-				options: [
-					"spec.storage_static_routes.storage_routes[].subnets[].ipv4",
-					"spec.storage_static_routes.storage_routes[].subnets[].ipv6",
-				],
-			},
-		],
-		subscriptionRequirements: [
-			{
-				addonService: "f5xc_site_management_standard",
-				displayName: "F5XC Site Management Standard",
-				required: false,
-				tier: "standard",
-			},
-		],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-network-interface-create",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/network_interfaces",
-		operation: "create",
-		domain: "ce_management",
-		resource: "network-interface",
-		summary: "Create Network Interface.",
-		description:
-			"Network interface represents configuration of a network device.\nIt is created by users in system namespace.",
-		pathParameters: [
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/network_interfaceCreateRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/network_interfaceCreateResponse",
-		},
-		requiredParams: ["body", "metadata.namespace"],
-		operationId: "ves.io.schema.network_interface.API.Create",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "network-interface",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-create-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "network-interface-create",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "interface_choice",
-				fieldPath: "spec.interface_choice",
-				options: [
-					"spec.dedicated_interface",
-					"spec.dedicated_management_interface",
-					"spec.ethernet_interface",
-					"spec.layer2_interface",
-					"spec.tunnel_interface",
-				],
-			},
-			{
-				choiceField: "monitoring_choice",
-				fieldPath: "spec.dedicated_interface.monitoring_choice",
-				options: [
-					"spec.dedicated_interface.monitor",
-					"spec.dedicated_interface.monitor_disabled",
-				],
-			},
-			{
-				choiceField: "node_choice",
-				fieldPath: "spec.dedicated_interface.node_choice",
-				options: [
-					"spec.dedicated_interface.cluster",
-					"spec.dedicated_interface.node",
-				],
-			},
-			{
-				choiceField: "primary_choice",
-				fieldPath: "spec.dedicated_interface.primary_choice",
-				options: [
-					"spec.dedicated_interface.is_primary",
-					"spec.dedicated_interface.not_primary",
-				],
-			},
-			{
-				choiceField: "node_choice",
-				fieldPath: "spec.dedicated_management_interface.node_choice",
-				options: [
-					"spec.dedicated_management_interface.cluster",
-					"spec.dedicated_management_interface.node",
-				],
-			},
-			{
-				choiceField: "address_choice",
-				fieldPath: "spec.ethernet_interface.address_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_client",
-					"spec.ethernet_interface.dhcp_server",
-					"spec.ethernet_interface.static_ip",
-				],
-			},
-			{
-				choiceField: "ipv6_address_choice",
-				fieldPath: "spec.ethernet_interface.ipv6_address_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config",
-					"spec.ethernet_interface.no_ipv6_address",
-					"spec.ethernet_interface.static_ipv6_address",
-				],
-			},
-			{
-				choiceField: "monitoring_choice",
-				fieldPath: "spec.ethernet_interface.monitoring_choice",
-				options: [
-					"spec.ethernet_interface.monitor",
-					"spec.ethernet_interface.monitor_disabled",
-				],
-			},
-			{
-				choiceField: "network_choice",
-				fieldPath: "spec.ethernet_interface.network_choice",
-				options: [
-					"spec.ethernet_interface.segment_network",
-					"spec.ethernet_interface.site_local_inside_network",
-					"spec.ethernet_interface.site_local_network",
-					"spec.ethernet_interface.storage_network",
-				],
-			},
-			{
-				choiceField: "node_choice",
-				fieldPath: "spec.ethernet_interface.node_choice",
-				options: [
-					"spec.ethernet_interface.cluster",
-					"spec.ethernet_interface.node",
-				],
-			},
-			{
-				choiceField: "primary_choice",
-				fieldPath: "spec.ethernet_interface.primary_choice",
-				options: [
-					"spec.ethernet_interface.is_primary",
-					"spec.ethernet_interface.not_primary",
-				],
-			},
-			{
-				choiceField: "vlan_choice",
-				fieldPath: "spec.ethernet_interface.vlan_choice",
-				options: [
-					"spec.ethernet_interface.untagged",
-					"spec.ethernet_interface.vlan_id",
-				],
-			},
-			{
-				choiceField: "interfaces_addressing_choice",
-				fieldPath:
-					"spec.ethernet_interface.dhcp_server.interfaces_addressing_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_server.automatic_from_end",
-					"spec.ethernet_interface.dhcp_server.automatic_from_start",
-					"spec.ethernet_interface.dhcp_server.interface_ip_map",
-				],
-			},
-			{
-				choiceField: "dns_choice",
-				fieldPath:
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].dns_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].dns_address",
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].same_as_dgw",
-				],
-			},
-			{
-				choiceField: "gateway_choice",
-				fieldPath:
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].gateway_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].dgw_address",
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].first_address",
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].last_address",
-				],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath:
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].network_prefix_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].network_prefix",
-				],
-			},
-			{
-				choiceField: "autoconfig_choice",
-				fieldPath: "spec.ethernet_interface.ipv6_auto_config.autoconfig_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.host",
-					"spec.ethernet_interface.ipv6_auto_config.router",
-				],
-			},
-			{
-				choiceField: "address_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.address_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.network_prefix",
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful",
-				],
-			},
-			{
-				choiceField: "dns_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.dns_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.configured_list",
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns",
-				],
-			},
-			{
-				choiceField: "local_dns_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.configured_address",
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.first_address",
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.last_address",
-				],
-			},
-			{
-				choiceField: "interfaces_addressing_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_end",
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_start",
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.interface_ip_map",
-				],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix",
-				],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath: "spec.ethernet_interface.static_ip.network_prefix_choice",
-				options: [
-					"spec.ethernet_interface.static_ip.cluster_static_ip",
-					"spec.ethernet_interface.static_ip.node_static_ip",
-				],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath:
-					"spec.ethernet_interface.static_ipv6_address.network_prefix_choice",
-				options: [
-					"spec.ethernet_interface.static_ipv6_address.cluster_static_ip",
-					"spec.ethernet_interface.static_ipv6_address.node_static_ip",
-				],
-			},
-			{
-				choiceField: "layer2_interface_choice",
-				fieldPath: "spec.layer2_interface.layer2_interface_choice",
-				options: [
-					"spec.layer2_interface.l2sriov_interface",
-					"spec.layer2_interface.l2vlan_interface",
-					"spec.layer2_interface.l2vlan_slo_interface",
-				],
-			},
-			{
-				choiceField: "vlan_choice",
-				fieldPath: "spec.layer2_interface.l2sriov_interface.vlan_choice",
-				options: [
-					"spec.layer2_interface.l2sriov_interface.untagged",
-					"spec.layer2_interface.l2sriov_interface.vlan_id",
-				],
-			},
-			{
-				choiceField: "network_choice",
-				fieldPath: "spec.tunnel_interface.network_choice",
-				options: [
-					"spec.tunnel_interface.site_local_inside_network",
-					"spec.tunnel_interface.site_local_network",
-				],
-			},
-			{
-				choiceField: "node_choice",
-				fieldPath: "spec.tunnel_interface.node_choice",
-				options: ["spec.tunnel_interface.node"],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath: "spec.tunnel_interface.static_ip.network_prefix_choice",
-				options: [
-					"spec.tunnel_interface.static_ip.cluster_static_ip",
-					"spec.tunnel_interface.static_ip.node_static_ip",
-				],
-			},
-		],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-network-interface-delete",
-		method: "DELETE",
-		path: "/api/config/namespaces/{namespace}/network_interfaces/{name}",
-		operation: "delete",
-		domain: "ce_management",
-		resource: "network-interface",
-		summary: "DELETE Network Interface.",
-		description: "DELETE the specified network_interface.",
-		pathParameters: [
-			{
-				description: "Name\nName of the configuration object.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nNamespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/network_interfaceDeleteRequest",
-		},
-		responseSchema: {},
-		requiredParams: ["body", "name", "namespace"],
-		operationId: "ves.io.schema.network_interface.API.Delete",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "network-interface",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-network-interface-get",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/network_interfaces/{name}",
-		operation: "get",
-		domain: "ce_management",
-		resource: "network-interface",
-		summary: "GET Network Interface.",
-		description: "GET network interface from system namespace.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_FOR_CREATE",
-						"GET_RSP_FORMAT_FOR_REPLACE",
-						"GET_RSP_FORMAT_STATUS",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/network_interfaceGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.network_interface.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-network-interface-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/network_interfaces",
-		operation: "list",
-		domain: "ce_management",
-		resource: "network-interface",
-		summary: "List Network Interface.",
-		description: "List the set of network_interface in a namespace.",
-		pathParameters: [
-			{
-				description:
-					"Namespace\nNamespace to scope the listing of network_interface.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/network_interfaceListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.network_interface.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-network-interface-update",
-		method: "PUT",
-		path: "/api/config/namespaces/{metadata.namespace}/network_interfaces/{metadata.name}",
-		operation: "update",
-		domain: "ce_management",
-		resource: "network-interface",
-		summary: "Replace Network Interface.",
-		description:
-			"Network interface represents configuration of a network device.\nReplace network interface will replace the contents of given network interface object.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe configuration object to be replaced will be looked up by name.",
-				in: "path",
-				name: "metadata.name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/network_interfaceReplaceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/network_interfaceReplaceResponse",
-		},
-		requiredParams: ["body", "metadata.name", "metadata.namespace"],
-		operationId: "ves.io.schema.network_interface.API.Replace",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "network-interface",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-replace-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "network-interface-replace",
-			},
-		],
-		oneOfGroups: [
-			{
-				choiceField: "interface_choice",
-				fieldPath: "spec.interface_choice",
-				options: [
-					"spec.dedicated_interface",
-					"spec.dedicated_management_interface",
-					"spec.ethernet_interface",
-					"spec.layer2_interface",
-					"spec.legacy_interface",
-					"spec.tunnel_interface",
-				],
-			},
-			{
-				choiceField: "monitoring_choice",
-				fieldPath: "spec.dedicated_interface.monitoring_choice",
-				options: [
-					"spec.dedicated_interface.monitor",
-					"spec.dedicated_interface.monitor_disabled",
-				],
-			},
-			{
-				choiceField: "node_choice",
-				fieldPath: "spec.dedicated_interface.node_choice",
-				options: [
-					"spec.dedicated_interface.cluster",
-					"spec.dedicated_interface.node",
-				],
-			},
-			{
-				choiceField: "primary_choice",
-				fieldPath: "spec.dedicated_interface.primary_choice",
-				options: [
-					"spec.dedicated_interface.is_primary",
-					"spec.dedicated_interface.not_primary",
-				],
-			},
-			{
-				choiceField: "node_choice",
-				fieldPath: "spec.dedicated_management_interface.node_choice",
-				options: [
-					"spec.dedicated_management_interface.cluster",
-					"spec.dedicated_management_interface.node",
-				],
-			},
-			{
-				choiceField: "address_choice",
-				fieldPath: "spec.ethernet_interface.address_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_client",
-					"spec.ethernet_interface.dhcp_server",
-					"spec.ethernet_interface.static_ip",
-				],
-			},
-			{
-				choiceField: "ipv6_address_choice",
-				fieldPath: "spec.ethernet_interface.ipv6_address_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config",
-					"spec.ethernet_interface.no_ipv6_address",
-					"spec.ethernet_interface.static_ipv6_address",
-				],
-			},
-			{
-				choiceField: "monitoring_choice",
-				fieldPath: "spec.ethernet_interface.monitoring_choice",
-				options: [
-					"spec.ethernet_interface.monitor",
-					"spec.ethernet_interface.monitor_disabled",
-				],
-			},
-			{
-				choiceField: "network_choice",
-				fieldPath: "spec.ethernet_interface.network_choice",
-				options: [
-					"spec.ethernet_interface.segment_network",
-					"spec.ethernet_interface.site_local_inside_network",
-					"spec.ethernet_interface.site_local_network",
-					"spec.ethernet_interface.storage_network",
-				],
-			},
-			{
-				choiceField: "node_choice",
-				fieldPath: "spec.ethernet_interface.node_choice",
-				options: [
-					"spec.ethernet_interface.cluster",
-					"spec.ethernet_interface.node",
-				],
-			},
-			{
-				choiceField: "primary_choice",
-				fieldPath: "spec.ethernet_interface.primary_choice",
-				options: [
-					"spec.ethernet_interface.is_primary",
-					"spec.ethernet_interface.not_primary",
-				],
-			},
-			{
-				choiceField: "vlan_choice",
-				fieldPath: "spec.ethernet_interface.vlan_choice",
-				options: [
-					"spec.ethernet_interface.untagged",
-					"spec.ethernet_interface.vlan_id",
-				],
-			},
-			{
-				choiceField: "interfaces_addressing_choice",
-				fieldPath:
-					"spec.ethernet_interface.dhcp_server.interfaces_addressing_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_server.automatic_from_end",
-					"spec.ethernet_interface.dhcp_server.automatic_from_start",
-					"spec.ethernet_interface.dhcp_server.interface_ip_map",
-				],
-			},
-			{
-				choiceField: "dns_choice",
-				fieldPath:
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].dns_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].dns_address",
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].same_as_dgw",
-				],
-			},
-			{
-				choiceField: "gateway_choice",
-				fieldPath:
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].gateway_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].dgw_address",
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].first_address",
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].last_address",
-				],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath:
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].network_prefix_choice",
-				options: [
-					"spec.ethernet_interface.dhcp_server.dhcp_networks[].network_prefix",
-				],
-			},
-			{
-				choiceField: "autoconfig_choice",
-				fieldPath: "spec.ethernet_interface.ipv6_auto_config.autoconfig_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.host",
-					"spec.ethernet_interface.ipv6_auto_config.router",
-				],
-			},
-			{
-				choiceField: "address_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.address_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.network_prefix",
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful",
-				],
-			},
-			{
-				choiceField: "dns_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.dns_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.configured_list",
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns",
-				],
-			},
-			{
-				choiceField: "local_dns_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.configured_address",
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.first_address",
-					"spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.last_address",
-				],
-			},
-			{
-				choiceField: "interfaces_addressing_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_end",
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_start",
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.interface_ip_map",
-				],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath:
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
-				options: [
-					"spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix",
-				],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath: "spec.ethernet_interface.static_ip.network_prefix_choice",
-				options: [
-					"spec.ethernet_interface.static_ip.cluster_static_ip",
-					"spec.ethernet_interface.static_ip.node_static_ip",
-				],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath:
-					"spec.ethernet_interface.static_ipv6_address.network_prefix_choice",
-				options: [
-					"spec.ethernet_interface.static_ipv6_address.cluster_static_ip",
-					"spec.ethernet_interface.static_ipv6_address.node_static_ip",
-				],
-			},
-			{
-				choiceField: "layer2_interface_choice",
-				fieldPath: "spec.layer2_interface.layer2_interface_choice",
-				options: [
-					"spec.layer2_interface.l2sriov_interface",
-					"spec.layer2_interface.l2vlan_interface",
-					"spec.layer2_interface.l2vlan_slo_interface",
-				],
-			},
-			{
-				choiceField: "vlan_choice",
-				fieldPath: "spec.layer2_interface.l2sriov_interface.vlan_choice",
-				options: [
-					"spec.layer2_interface.l2sriov_interface.untagged",
-					"spec.layer2_interface.l2sriov_interface.vlan_id",
-				],
-			},
-			{
-				choiceField: "monitoring_choice",
-				fieldPath: "spec.legacy_interface.monitoring_choice",
-				options: [
-					"spec.legacy_interface.monitor",
-					"spec.legacy_interface.monitor_disabled",
-				],
-			},
-			{
-				choiceField: "network_choice",
-				fieldPath: "spec.tunnel_interface.network_choice",
-				options: [
-					"spec.tunnel_interface.site_local_inside_network",
-					"spec.tunnel_interface.site_local_network",
-				],
-			},
-			{
-				choiceField: "node_choice",
-				fieldPath: "spec.tunnel_interface.node_choice",
-				options: ["spec.tunnel_interface.node"],
-			},
-			{
-				choiceField: "network_prefix_choice",
-				fieldPath: "spec.tunnel_interface.static_ip.network_prefix_choice",
-				options: [
-					"spec.tunnel_interface.static_ip.cluster_static_ip",
-					"spec.tunnel_interface.static_ip.node_static_ip",
-				],
-			},
-		],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-pre-upgrade-check-get",
-		method: "GET",
-		path: "/api/maurice/namespaces/{namespace}/sites/{name}/pre_upgrade_check",
-		operation: "get",
-		domain: "ce_management",
-		resource: "pre-upgrade-check",
-		summary: "Pre upgrade check.",
-		description: "API to check if site is ready for upgrade.",
-		pathParameters: [
-			{
-				description: "Name\nFetch upgrade status for the name of site.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Site Name",
-			},
-			{
-				description: "Namespace\nFetch upgrade status for the given namespace.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description: "Software version to upgrade to.",
-				in: "query",
-				name: "sw_version",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "SW Version to upgrade to.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/upgrade_statusPreUpgradeCheckResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId:
-			"ves.io.schema.upgrade_status.UpgradeStatusCustomApi.PreUpgradeCheck",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-setting-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/module_management/settings",
-		operation: "list",
-		domain: "ce_management",
-		resource: "setting",
-		summary: "Module Management Settings.",
-		description: "Receive the module settings.",
-		pathParameters: [
-			{
-				description: "Namespace\nThe namespace this item belongs to.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/module_managementModuleManagementResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId:
-			"ves.io.schema.module_management.ModuleManagementAPI.GetModuleManagementSettings",
-		tags: ["Infrastructure"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-upgradable-sw-version-list",
-		method: "GET",
-		path: "/api/maurice/upgradable_sw_versions",
-		operation: "list",
-		domain: "ce_management",
-		resource: "upgradable-sw-version",
-		summary: "GET Upgradable SW Versions.",
-		description: "API to GET list of sw versions that can be upgraded to.",
-		pathParameters: [],
-		queryParameters: [
-			{
-				description: "Fetch upgradable sw versions for site.",
-				in: "query",
-				name: "current_os_version",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Current OS Version.",
-			},
-			{
-				description: "Fetch upgradable sw versions for site.",
-				in: "query",
-				name: "current_sw_version",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Current SW Version.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/upgrade_statusGetUpgradableSWVersionsResponse",
-		},
-		requiredParams: [],
-		operationId:
-			"ves.io.schema.upgrade_status.UpgradeStatusCustomApi.GetUpgradableSWVersions",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-upgrade-statu-get",
-		method: "GET",
-		path: "/api/maurice/namespaces/{namespace}/sites/{name}/upgrade_status",
-		operation: "get",
-		domain: "ce_management",
-		resource: "upgrade-statu",
-		summary: "GET Upgrade Status.",
-		description: "API to GET upgrade status of a site.",
-		pathParameters: [
-			{
-				description: "Name\nFetch upgrade status for the name of site.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Site Name",
-			},
-			{
-				description: "Namespace\nFetch upgrade status for the given namespace.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/upgrade_statusGetUpgradeStatusResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId:
-			"ves.io.schema.upgrade_status.UpgradeStatusCustomApi.GetUpgradeStatus",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-usb-policy-create",
-		method: "POST",
-		path: "/api/config/namespaces/{metadata.namespace}/usb_policys",
-		operation: "create",
-		domain: "ce_management",
-		resource: "usb-policy",
-		summary: "Create USB policy.",
-		description: "Creates a new USB policy object.",
-		pathParameters: [
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/usb_policyCreateRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/usb_policyCreateResponse",
-		},
-		requiredParams: ["body", "metadata.namespace"],
-		operationId: "ves.io.schema.usb_policy.API.Create",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "usb-policy",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-create-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "usb-policy-create",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-usb-policy-delete",
-		method: "DELETE",
-		path: "/api/config/namespaces/{namespace}/usb_policys/{name}",
-		operation: "delete",
-		domain: "ce_management",
-		resource: "usb-policy",
-		summary: "DELETE USB policy.",
-		description: "DELETE the specified usb_policy.",
-		pathParameters: [
-			{
-				description: "Name\nName of the configuration object.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nNamespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/usb_policyDeleteRequest",
-		},
-		responseSchema: {},
-		requiredParams: ["body", "name", "namespace"],
-		operationId: "ves.io.schema.usb_policy.API.Delete",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "usb-policy",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-usb-policy-get",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/usb_policys/{name}",
-		operation: "get",
-		domain: "ce_management",
-		resource: "usb-policy",
-		summary: "GET USB policy.",
-		description: "GET the USB policy object.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe name of the configuration object to be fetched.",
-				in: "path",
-				name: "name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					"Namespace\nThe namespace in which the configuration object is present.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
-				in: "query",
-				name: "response_format",
-				required: false,
-				schema: {
-					default: "GET_RSP_FORMAT_DEFAULT",
-					enum: [
-						"GET_RSP_FORMAT_DEFAULT",
-						"GET_RSP_FORMAT_FOR_CREATE",
-						"GET_RSP_FORMAT_FOR_REPLACE",
-						"GET_RSP_FORMAT_STATUS",
-						"GET_RSP_FORMAT_READ",
-						"GET_RSP_FORMAT_REFERRING_OBJECTS",
-						"GET_RSP_FORMAT_BROKEN_REFERENCES",
-					],
-					type: "string",
-				},
-				"x-displayname": "Broken Referred Objects.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/usb_policyGetResponse",
-		},
-		requiredParams: ["name", "namespace"],
-		operationId: "ves.io.schema.usb_policy.API.Get",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-usb-policy-list",
-		method: "GET",
-		path: "/api/config/namespaces/{namespace}/usb_policys",
-		operation: "list",
-		domain: "ce_management",
-		resource: "usb-policy",
-		summary: "List USB policy.",
-		description: "List the set of usb_policy in a namespace.",
-		pathParameters: [
-			{
-				description: "Namespace\nNamespace to scope the listing of usb_policy.",
-				in: "path",
-				name: "namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [
-			{
-				description:
-					"A LabelSelectorType expression that every item in list response will satisfy.",
-				in: "query",
-				name: "label_filter",
-				required: false,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Label Filter.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra fields to return along with summary fields.',
-				in: "query",
-				name: "report_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Fields.",
-			},
-			{
-				description:
-					'X-example: ""\nExtra status fields to return along with summary fields.',
-				in: "query",
-				name: "report_status_fields",
-				required: false,
-				schema: {
-					items: {
-						type: "string",
-					},
-					type: "array",
-				},
-				"x-displayname": "Report Status Fields.",
-			},
-		],
-		requestBodySchema: null,
-		responseSchema: {
-			$ref: "#/components/schemas/usb_policyListResponse",
-		},
-		requiredParams: ["namespace"],
-		operationId: "ves.io.schema.usb_policy.API.List",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
-	{
-		toolName: "f5xc-api-cemanagement-usb-policy-update",
-		method: "PUT",
-		path: "/api/config/namespaces/{metadata.namespace}/usb_policys/{metadata.name}",
-		operation: "update",
-		domain: "ce_management",
-		resource: "usb-policy",
-		summary: "Replace USB policy.",
-		description: "Replaces the content of an USB policy object.",
-		pathParameters: [
-			{
-				description:
-					"Name\nThe configuration object to be replaced will be looked up by name.",
-				in: "path",
-				name: "metadata.name",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Name",
-			},
-			{
-				description:
-					'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
-				in: "path",
-				name: "metadata.namespace",
-				required: true,
-				schema: {
-					type: "string",
-				},
-				"x-displayname": "Namespace",
-			},
-		],
-		queryParameters: [],
-		requestBodySchema: {
-			$ref: "#/components/schemas/usb_policyReplaceRequest",
-		},
-		responseSchema: {
-			$ref: "#/components/schemas/usb_policyReplaceResponse",
-		},
-		requiredParams: ["body", "metadata.name", "metadata.namespace"],
-		operationId: "ves.io.schema.usb_policy.API.Replace",
-		tags: ["Other"],
-		sourceFile: "domains/ce_management.json",
-		displayName: null,
-		dangerLevel: null,
-		sideEffects: null,
-		requiredFields: [],
-		confirmationRequired: false,
-		parameterExamples: {},
-		validationRules: {},
-		operationMetadata: null,
-		curlExample: null,
-		dependencies: [
-			{
-				domain: "",
-				fieldPath: "",
-				inline: false,
-				required: false,
-				resourceType: "usb-policy",
-			},
-			{
-				domain: "",
-				fieldPath: "metadata",
-				inline: false,
-				required: false,
-				resourceType: "schema-object-replace-meta",
-			},
-			{
-				domain: "",
-				fieldPath: "spec",
-				inline: false,
-				required: false,
-				resourceType: "usb-policy-replace",
-			},
-		],
-		oneOfGroups: [],
-		subscriptionRequirements: [],
-	},
+  {
+    toolName: "f5xc-api-cemanagement-fleet-create",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/fleets",
+    operation: "create",
+    domain: "ce_management",
+    resource: "fleet",
+    summary: "Create Fleet.",
+    description: "Create fleet will create a fleet object in 'system' namespace of the user.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/fleetCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/fleetCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.fleet.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "fleet",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemafleet-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "bond_choice",
+        fieldPath: "spec.bond_choice",
+        options: ["spec.bond_device_list", "spec.no_bond_devices"],
+      },
+      {
+        choiceField: "dc_cluster_group_choice",
+        fieldPath: "spec.dc_cluster_group_choice",
+        options: ["spec.dc_cluster_group", "spec.dc_cluster_group_inside", "spec.no_dc_cluster_group"],
+      },
+      {
+        choiceField: "gpu_choice",
+        fieldPath: "spec.gpu_choice",
+        options: ["spec.disable_gpu", "spec.enable_gpu", "spec.enable_vgpu"],
+      },
+      {
+        choiceField: "interface_choice",
+        fieldPath: "spec.interface_choice",
+        options: ["spec.default_config", "spec.device_list", "spec.interface_list"],
+      },
+      {
+        choiceField: "logs_receiver_choice",
+        fieldPath: "spec.logs_receiver_choice",
+        options: ["spec.log_receiver", "spec.logs_streaming_disabled"],
+      },
+      {
+        choiceField: "sriov_interface_choice",
+        fieldPath: "spec.sriov_interface_choice",
+        options: ["spec.default_sriov_interface", "spec.sriov_interfaces"],
+      },
+      {
+        choiceField: "storage_class_choice",
+        fieldPath: "spec.storage_class_choice",
+        options: ["spec.default_storage_class", "spec.storage_class_list"],
+      },
+      {
+        choiceField: "storage_device_choice",
+        fieldPath: "spec.storage_device_choice",
+        options: ["spec.no_storage_device", "spec.storage_device_list"],
+      },
+      {
+        choiceField: "storage_interface_choice",
+        fieldPath: "spec.storage_interface_choice",
+        options: ["spec.no_storage_interfaces", "spec.storage_interface_list"],
+      },
+      {
+        choiceField: "storage_static_routes_choice",
+        fieldPath: "spec.storage_static_routes_choice",
+        options: ["spec.no_storage_static_routes", "spec.storage_static_routes"],
+      },
+      {
+        choiceField: "usb_policy_choice",
+        fieldPath: "spec.usb_policy_choice",
+        options: ["spec.allow_all_usb", "spec.deny_all_usb", "spec.usb_policy"],
+      },
+      {
+        choiceField: "vm_choice",
+        fieldPath: "spec.vm_choice",
+        options: ["spec.disable_vm", "spec.enable_vm"],
+      },
+      {
+        choiceField: "blocked_services_value_type_choice",
+        fieldPath: "spec.blocked_services[].blocked_services_value_type_choice",
+        options: [
+          "spec.blocked_services[].dns",
+          "spec.blocked_services[].ssh",
+          "spec.blocked_services[].web_user_interface",
+        ],
+      },
+      {
+        choiceField: "lacp_choice",
+        fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
+        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+      },
+      {
+        choiceField: "device_instance",
+        fieldPath: "spec.device_list.devices[].device_instance",
+        options: ["spec.device_list.devices[].network_device"],
+      },
+      {
+        choiceField: "kubernetes_upgrade_drain_enable_choice",
+        fieldPath: "spec.kubernetes_upgrade_drain.kubernetes_upgrade_drain_enable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.disable_upgrade_drain",
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain",
+        ],
+      },
+      {
+        choiceField: "drain_max_unavailable_choice",
+        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+      },
+      {
+        choiceField: "vega_upgrade_mode_toggle_choice",
+        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
+        ],
+      },
+      {
+        choiceField: "perf_mode_choice",
+        fieldPath: "spec.performance_enhancement_mode.perf_mode_choice",
+        options: [
+          "spec.performance_enhancement_mode.perf_mode_l3_enhanced",
+          "spec.performance_enhancement_mode.perf_mode_l7_enhanced",
+        ],
+      },
+      {
+        choiceField: "perf_mode_choice",
+        fieldPath: "spec.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        options: [
+          "spec.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
+          "spec.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
+        ],
+      },
+      {
+        choiceField: "device_choice",
+        fieldPath: "spec.storage_class_list.storage_classes[].device_choice",
+        options: [
+          "spec.storage_class_list.storage_classes[].custom_storage",
+          "spec.storage_class_list.storage_classes[].hpe_storage",
+          "spec.storage_class_list.storage_classes[].netapp_trident",
+          "spec.storage_class_list.storage_classes[].pure_service_orchestrator",
+        ],
+      },
+      {
+        choiceField: "device_choice",
+        fieldPath: "spec.storage_device_list.storage_devices[].device_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].custom_storage",
+          "spec.storage_device_list.storage_devices[].hpe_storage",
+          "spec.storage_device_list.storage_devices[].netapp_trident",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].hpe_storage.password.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].hpe_storage.password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "backend_choice",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.backend_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san",
+        ],
+      },
+      {
+        choiceField: "data_lif",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_dns_name",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_ip",
+        ],
+      },
+      {
+        choiceField: "management_lif",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_dns_name",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_ip",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "qos_policy_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.qos_policy_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.adaptive_qos_policy",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.no_qos",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.qos_policy",
+        ],
+      },
+      {
+        choiceField: "qos_policy_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.qos_policy_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.adaptive_qos_policy",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.no_qos",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.qos_policy",
+        ],
+      },
+      {
+        choiceField: "chap_choice",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.no_chap",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap",
+        ],
+      },
+      {
+        choiceField: "data_lif",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_dns_name",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_ip",
+        ],
+      },
+      {
+        choiceField: "management_lif",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_dns_name",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_ip",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "qos_policy_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.qos_policy_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.adaptive_qos_policy",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.no_qos",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.qos_policy",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "qos_policy_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.qos_policy_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.adaptive_qos_policy",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.no_qos",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.qos_policy",
+        ],
+      },
+      {
+        choiceField: "mgmt_endpoint",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_endpoint",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_dns_name",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_ip",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "mgmt_endpoint",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_endpoint",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_dns_name",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_ip",
+        ],
+      },
+      {
+        choiceField: "nfs_endpoint",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint_dns_name",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint_ip",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "ver",
+        fieldPath: "spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ver",
+        options: [
+          "spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ipv4",
+          "spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ipv6",
+        ],
+      },
+      {
+        choiceField: "ver",
+        fieldPath: "spec.storage_static_routes.storage_routes[].subnets[].ver",
+        options: [
+          "spec.storage_static_routes.storage_routes[].subnets[].ipv4",
+          "spec.storage_static_routes.storage_routes[].subnets[].ipv6",
+        ],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-fleet-delete",
+    method: "DELETE",
+    path: "/api/config/namespaces/{namespace}/fleets/{name}",
+    operation: "delete",
+    domain: "ce_management",
+    resource: "fleet",
+    summary: "DELETE Fleet.",
+    description: "DELETE the specified fleet.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/fleetDeleteRequest",
+    },
+    responseSchema: {},
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.fleet.API.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "fleet",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-fleet-get",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/fleets/{name}",
+    operation: "get",
+    domain: "ce_management",
+    resource: "fleet",
+    summary: "GET Fleet",
+    description: "GET fleet will GET fleet object from system namespace.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_STATUS",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/fleetGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.fleet.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-fleet-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/fleets",
+    operation: "list",
+    domain: "ce_management",
+    resource: "fleet",
+    summary: "List Fleet.",
+    description: "List the set of fleet in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of fleet.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/fleetListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.fleet.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-fleet-update",
+    method: "PUT",
+    path: "/api/config/namespaces/{metadata.namespace}/fleets/{metadata.name}",
+    operation: "update",
+    domain: "ce_management",
+    resource: "fleet",
+    summary: "Replace Fleet.",
+    description: "Replace fleet will replace the contents of given fleet object.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/fleetReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/fleetReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.fleet.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "fleet",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemafleet-replace",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "bond_choice",
+        fieldPath: "spec.bond_choice",
+        options: ["spec.bond_device_list", "spec.no_bond_devices"],
+      },
+      {
+        choiceField: "dc_cluster_group_choice",
+        fieldPath: "spec.dc_cluster_group_choice",
+        options: ["spec.dc_cluster_group", "spec.dc_cluster_group_inside", "spec.no_dc_cluster_group"],
+      },
+      {
+        choiceField: "gpu_choice",
+        fieldPath: "spec.gpu_choice",
+        options: ["spec.disable_gpu", "spec.enable_gpu", "spec.enable_vgpu"],
+      },
+      {
+        choiceField: "interface_choice",
+        fieldPath: "spec.interface_choice",
+        options: ["spec.default_config", "spec.device_list", "spec.interface_list"],
+      },
+      {
+        choiceField: "logs_receiver_choice",
+        fieldPath: "spec.logs_receiver_choice",
+        options: ["spec.log_receiver", "spec.logs_streaming_disabled"],
+      },
+      {
+        choiceField: "sriov_interface_choice",
+        fieldPath: "spec.sriov_interface_choice",
+        options: ["spec.default_sriov_interface", "spec.sriov_interfaces"],
+      },
+      {
+        choiceField: "storage_class_choice",
+        fieldPath: "spec.storage_class_choice",
+        options: ["spec.default_storage_class", "spec.storage_class_list"],
+      },
+      {
+        choiceField: "storage_device_choice",
+        fieldPath: "spec.storage_device_choice",
+        options: ["spec.no_storage_device", "spec.storage_device_list"],
+      },
+      {
+        choiceField: "storage_interface_choice",
+        fieldPath: "spec.storage_interface_choice",
+        options: ["spec.no_storage_interfaces", "spec.storage_interface_list"],
+      },
+      {
+        choiceField: "storage_static_routes_choice",
+        fieldPath: "spec.storage_static_routes_choice",
+        options: ["spec.no_storage_static_routes", "spec.storage_static_routes"],
+      },
+      {
+        choiceField: "usb_policy_choice",
+        fieldPath: "spec.usb_policy_choice",
+        options: ["spec.allow_all_usb", "spec.deny_all_usb", "spec.usb_policy"],
+      },
+      {
+        choiceField: "vm_choice",
+        fieldPath: "spec.vm_choice",
+        options: ["spec.disable_vm", "spec.enable_vm"],
+      },
+      {
+        choiceField: "blocked_services_value_type_choice",
+        fieldPath: "spec.blocked_services[].blocked_services_value_type_choice",
+        options: [
+          "spec.blocked_services[].dns",
+          "spec.blocked_services[].ssh",
+          "spec.blocked_services[].web_user_interface",
+        ],
+      },
+      {
+        choiceField: "lacp_choice",
+        fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
+        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+      },
+      {
+        choiceField: "device_instance",
+        fieldPath: "spec.device_list.devices[].device_instance",
+        options: ["spec.device_list.devices[].network_device"],
+      },
+      {
+        choiceField: "kubernetes_upgrade_drain_enable_choice",
+        fieldPath: "spec.kubernetes_upgrade_drain.kubernetes_upgrade_drain_enable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.disable_upgrade_drain",
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain",
+        ],
+      },
+      {
+        choiceField: "drain_max_unavailable_choice",
+        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+      },
+      {
+        choiceField: "vega_upgrade_mode_toggle_choice",
+        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
+        ],
+      },
+      {
+        choiceField: "perf_mode_choice",
+        fieldPath: "spec.performance_enhancement_mode.perf_mode_choice",
+        options: [
+          "spec.performance_enhancement_mode.perf_mode_l3_enhanced",
+          "spec.performance_enhancement_mode.perf_mode_l7_enhanced",
+        ],
+      },
+      {
+        choiceField: "perf_mode_choice",
+        fieldPath: "spec.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        options: [
+          "spec.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
+          "spec.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
+        ],
+      },
+      {
+        choiceField: "device_choice",
+        fieldPath: "spec.storage_class_list.storage_classes[].device_choice",
+        options: [
+          "spec.storage_class_list.storage_classes[].custom_storage",
+          "spec.storage_class_list.storage_classes[].hpe_storage",
+          "spec.storage_class_list.storage_classes[].netapp_trident",
+          "spec.storage_class_list.storage_classes[].pure_service_orchestrator",
+        ],
+      },
+      {
+        choiceField: "device_choice",
+        fieldPath: "spec.storage_device_list.storage_devices[].device_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].custom_storage",
+          "spec.storage_device_list.storage_devices[].hpe_storage",
+          "spec.storage_device_list.storage_devices[].netapp_trident",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].hpe_storage.password.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].hpe_storage.password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "backend_choice",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.backend_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san",
+        ],
+      },
+      {
+        choiceField: "data_lif",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_dns_name",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_ip",
+        ],
+      },
+      {
+        choiceField: "management_lif",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_dns_name",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_ip",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.client_private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "qos_policy_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.qos_policy_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.adaptive_qos_policy",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.no_qos",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.storage[].volume_defaults.qos_policy",
+        ],
+      },
+      {
+        choiceField: "qos_policy_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.qos_policy_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.adaptive_qos_policy",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.no_qos",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.volume_defaults.qos_policy",
+        ],
+      },
+      {
+        choiceField: "chap_choice",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.no_chap",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap",
+        ],
+      },
+      {
+        choiceField: "data_lif",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_dns_name",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_ip",
+        ],
+      },
+      {
+        choiceField: "management_lif",
+        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_dns_name",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_ip",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.client_private_key.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.password.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "qos_policy_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.qos_policy_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.adaptive_qos_policy",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.no_qos",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.storage[].volume_defaults.qos_policy",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "qos_policy_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.qos_policy_choice",
+        options: [
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.adaptive_qos_policy",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.no_qos",
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.volume_defaults.qos_policy",
+        ],
+      },
+      {
+        choiceField: "mgmt_endpoint",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_endpoint",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_dns_name",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].mgmt_ip",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_array.flash_arrays[].api_token.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "mgmt_endpoint",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_endpoint",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_dns_name",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].mgmt_ip",
+        ],
+      },
+      {
+        choiceField: "nfs_endpoint",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint_dns_name",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].nfs_endpoint_ip",
+        ],
+      },
+      {
+        choiceField: "secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.secret_info_oneof",
+        options: [
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.blindfold_secret_info",
+          "spec.storage_device_list.storage_devices[].pure_service_orchestrator.arrays.flash_blade.flash_blades[].api_token.clear_secret_info",
+        ],
+      },
+      {
+        choiceField: "ver",
+        fieldPath: "spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ver",
+        options: [
+          "spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ipv4",
+          "spec.storage_static_routes.storage_routes[].nexthop.nexthop_address.ipv6",
+        ],
+      },
+      {
+        choiceField: "ver",
+        fieldPath: "spec.storage_static_routes.storage_routes[].subnets[].ver",
+        options: [
+          "spec.storage_static_routes.storage_routes[].subnets[].ipv4",
+          "spec.storage_static_routes.storage_routes[].subnets[].ipv6",
+        ],
+      },
+    ],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-network-interface-create",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/network_interfaces",
+    operation: "create",
+    domain: "ce_management",
+    resource: "network-interface",
+    summary: "Create Network Interface.",
+    description:
+      "Network interface represents configuration of a network device.\nIt is created by users in system namespace.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/network_interfaceCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/network_interfaceCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.network_interface.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "network-interface",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "network-interface-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "interface_choice",
+        fieldPath: "spec.interface_choice",
+        options: [
+          "spec.dedicated_interface",
+          "spec.dedicated_management_interface",
+          "spec.ethernet_interface",
+          "spec.layer2_interface",
+          "spec.tunnel_interface",
+        ],
+      },
+      {
+        choiceField: "monitoring_choice",
+        fieldPath: "spec.dedicated_interface.monitoring_choice",
+        options: ["spec.dedicated_interface.monitor", "spec.dedicated_interface.monitor_disabled"],
+      },
+      {
+        choiceField: "node_choice",
+        fieldPath: "spec.dedicated_interface.node_choice",
+        options: ["spec.dedicated_interface.cluster", "spec.dedicated_interface.node"],
+      },
+      {
+        choiceField: "primary_choice",
+        fieldPath: "spec.dedicated_interface.primary_choice",
+        options: ["spec.dedicated_interface.is_primary", "spec.dedicated_interface.not_primary"],
+      },
+      {
+        choiceField: "node_choice",
+        fieldPath: "spec.dedicated_management_interface.node_choice",
+        options: ["spec.dedicated_management_interface.cluster", "spec.dedicated_management_interface.node"],
+      },
+      {
+        choiceField: "address_choice",
+        fieldPath: "spec.ethernet_interface.address_choice",
+        options: [
+          "spec.ethernet_interface.dhcp_client",
+          "spec.ethernet_interface.dhcp_server",
+          "spec.ethernet_interface.static_ip",
+        ],
+      },
+      {
+        choiceField: "ipv6_address_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_address_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config",
+          "spec.ethernet_interface.no_ipv6_address",
+          "spec.ethernet_interface.static_ipv6_address",
+        ],
+      },
+      {
+        choiceField: "monitoring_choice",
+        fieldPath: "spec.ethernet_interface.monitoring_choice",
+        options: ["spec.ethernet_interface.monitor", "spec.ethernet_interface.monitor_disabled"],
+      },
+      {
+        choiceField: "network_choice",
+        fieldPath: "spec.ethernet_interface.network_choice",
+        options: [
+          "spec.ethernet_interface.segment_network",
+          "spec.ethernet_interface.site_local_inside_network",
+          "spec.ethernet_interface.site_local_network",
+          "spec.ethernet_interface.storage_network",
+        ],
+      },
+      {
+        choiceField: "node_choice",
+        fieldPath: "spec.ethernet_interface.node_choice",
+        options: ["spec.ethernet_interface.cluster", "spec.ethernet_interface.node"],
+      },
+      {
+        choiceField: "primary_choice",
+        fieldPath: "spec.ethernet_interface.primary_choice",
+        options: ["spec.ethernet_interface.is_primary", "spec.ethernet_interface.not_primary"],
+      },
+      {
+        choiceField: "vlan_choice",
+        fieldPath: "spec.ethernet_interface.vlan_choice",
+        options: ["spec.ethernet_interface.untagged", "spec.ethernet_interface.vlan_id"],
+      },
+      {
+        choiceField: "interfaces_addressing_choice",
+        fieldPath: "spec.ethernet_interface.dhcp_server.interfaces_addressing_choice",
+        options: [
+          "spec.ethernet_interface.dhcp_server.automatic_from_end",
+          "spec.ethernet_interface.dhcp_server.automatic_from_start",
+          "spec.ethernet_interface.dhcp_server.interface_ip_map",
+        ],
+      },
+      {
+        choiceField: "dns_choice",
+        fieldPath: "spec.ethernet_interface.dhcp_server.dhcp_networks[].dns_choice",
+        options: [
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].dns_address",
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].same_as_dgw",
+        ],
+      },
+      {
+        choiceField: "gateway_choice",
+        fieldPath: "spec.ethernet_interface.dhcp_server.dhcp_networks[].gateway_choice",
+        options: [
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].dgw_address",
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].first_address",
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].last_address",
+        ],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.ethernet_interface.dhcp_server.dhcp_networks[].network_prefix_choice",
+        options: ["spec.ethernet_interface.dhcp_server.dhcp_networks[].network_prefix"],
+      },
+      {
+        choiceField: "autoconfig_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.autoconfig_choice",
+        options: ["spec.ethernet_interface.ipv6_auto_config.host", "spec.ethernet_interface.ipv6_auto_config.router"],
+      },
+      {
+        choiceField: "address_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.address_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.network_prefix",
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful",
+        ],
+      },
+      {
+        choiceField: "dns_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.dns_config.dns_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.configured_list",
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns",
+        ],
+      },
+      {
+        choiceField: "local_dns_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.configured_address",
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.first_address",
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.last_address",
+        ],
+      },
+      {
+        choiceField: "interfaces_addressing_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_end",
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_start",
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.interface_ip_map",
+        ],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
+        options: ["spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix"],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.ethernet_interface.static_ip.network_prefix_choice",
+        options: [
+          "spec.ethernet_interface.static_ip.cluster_static_ip",
+          "spec.ethernet_interface.static_ip.node_static_ip",
+        ],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.ethernet_interface.static_ipv6_address.network_prefix_choice",
+        options: [
+          "spec.ethernet_interface.static_ipv6_address.cluster_static_ip",
+          "spec.ethernet_interface.static_ipv6_address.node_static_ip",
+        ],
+      },
+      {
+        choiceField: "layer2_interface_choice",
+        fieldPath: "spec.layer2_interface.layer2_interface_choice",
+        options: [
+          "spec.layer2_interface.l2sriov_interface",
+          "spec.layer2_interface.l2vlan_interface",
+          "spec.layer2_interface.l2vlan_slo_interface",
+        ],
+      },
+      {
+        choiceField: "vlan_choice",
+        fieldPath: "spec.layer2_interface.l2sriov_interface.vlan_choice",
+        options: [
+          "spec.layer2_interface.l2sriov_interface.untagged",
+          "spec.layer2_interface.l2sriov_interface.vlan_id",
+        ],
+      },
+      {
+        choiceField: "network_choice",
+        fieldPath: "spec.tunnel_interface.network_choice",
+        options: ["spec.tunnel_interface.site_local_inside_network", "spec.tunnel_interface.site_local_network"],
+      },
+      {
+        choiceField: "node_choice",
+        fieldPath: "spec.tunnel_interface.node_choice",
+        options: ["spec.tunnel_interface.node"],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.tunnel_interface.static_ip.network_prefix_choice",
+        options: [
+          "spec.tunnel_interface.static_ip.cluster_static_ip",
+          "spec.tunnel_interface.static_ip.node_static_ip",
+        ],
+      },
+    ],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-network-interface-delete",
+    method: "DELETE",
+    path: "/api/config/namespaces/{namespace}/network_interfaces/{name}",
+    operation: "delete",
+    domain: "ce_management",
+    resource: "network-interface",
+    summary: "DELETE Network Interface.",
+    description: "DELETE the specified network_interface.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/network_interfaceDeleteRequest",
+    },
+    responseSchema: {},
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.network_interface.API.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "network-interface",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-network-interface-get",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/network_interfaces/{name}",
+    operation: "get",
+    domain: "ce_management",
+    resource: "network-interface",
+    summary: "GET Network Interface.",
+    description: "GET network interface from system namespace.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_STATUS",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/network_interfaceGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.network_interface.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-network-interface-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/network_interfaces",
+    operation: "list",
+    domain: "ce_management",
+    resource: "network-interface",
+    summary: "List Network Interface.",
+    description: "List the set of network_interface in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of network_interface.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/network_interfaceListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.network_interface.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-network-interface-update",
+    method: "PUT",
+    path: "/api/config/namespaces/{metadata.namespace}/network_interfaces/{metadata.name}",
+    operation: "update",
+    domain: "ce_management",
+    resource: "network-interface",
+    summary: "Replace Network Interface.",
+    description:
+      "Network interface represents configuration of a network device.\nReplace network interface will replace the contents of given network interface object.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/network_interfaceReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/network_interfaceReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.network_interface.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "network-interface",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "network-interface-replace",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "interface_choice",
+        fieldPath: "spec.interface_choice",
+        options: [
+          "spec.dedicated_interface",
+          "spec.dedicated_management_interface",
+          "spec.ethernet_interface",
+          "spec.layer2_interface",
+          "spec.legacy_interface",
+          "spec.tunnel_interface",
+        ],
+      },
+      {
+        choiceField: "monitoring_choice",
+        fieldPath: "spec.dedicated_interface.monitoring_choice",
+        options: ["spec.dedicated_interface.monitor", "spec.dedicated_interface.monitor_disabled"],
+      },
+      {
+        choiceField: "node_choice",
+        fieldPath: "spec.dedicated_interface.node_choice",
+        options: ["spec.dedicated_interface.cluster", "spec.dedicated_interface.node"],
+      },
+      {
+        choiceField: "primary_choice",
+        fieldPath: "spec.dedicated_interface.primary_choice",
+        options: ["spec.dedicated_interface.is_primary", "spec.dedicated_interface.not_primary"],
+      },
+      {
+        choiceField: "node_choice",
+        fieldPath: "spec.dedicated_management_interface.node_choice",
+        options: ["spec.dedicated_management_interface.cluster", "spec.dedicated_management_interface.node"],
+      },
+      {
+        choiceField: "address_choice",
+        fieldPath: "spec.ethernet_interface.address_choice",
+        options: [
+          "spec.ethernet_interface.dhcp_client",
+          "spec.ethernet_interface.dhcp_server",
+          "spec.ethernet_interface.static_ip",
+        ],
+      },
+      {
+        choiceField: "ipv6_address_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_address_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config",
+          "spec.ethernet_interface.no_ipv6_address",
+          "spec.ethernet_interface.static_ipv6_address",
+        ],
+      },
+      {
+        choiceField: "monitoring_choice",
+        fieldPath: "spec.ethernet_interface.monitoring_choice",
+        options: ["spec.ethernet_interface.monitor", "spec.ethernet_interface.monitor_disabled"],
+      },
+      {
+        choiceField: "network_choice",
+        fieldPath: "spec.ethernet_interface.network_choice",
+        options: [
+          "spec.ethernet_interface.segment_network",
+          "spec.ethernet_interface.site_local_inside_network",
+          "spec.ethernet_interface.site_local_network",
+          "spec.ethernet_interface.storage_network",
+        ],
+      },
+      {
+        choiceField: "node_choice",
+        fieldPath: "spec.ethernet_interface.node_choice",
+        options: ["spec.ethernet_interface.cluster", "spec.ethernet_interface.node"],
+      },
+      {
+        choiceField: "primary_choice",
+        fieldPath: "spec.ethernet_interface.primary_choice",
+        options: ["spec.ethernet_interface.is_primary", "spec.ethernet_interface.not_primary"],
+      },
+      {
+        choiceField: "vlan_choice",
+        fieldPath: "spec.ethernet_interface.vlan_choice",
+        options: ["spec.ethernet_interface.untagged", "spec.ethernet_interface.vlan_id"],
+      },
+      {
+        choiceField: "interfaces_addressing_choice",
+        fieldPath: "spec.ethernet_interface.dhcp_server.interfaces_addressing_choice",
+        options: [
+          "spec.ethernet_interface.dhcp_server.automatic_from_end",
+          "spec.ethernet_interface.dhcp_server.automatic_from_start",
+          "spec.ethernet_interface.dhcp_server.interface_ip_map",
+        ],
+      },
+      {
+        choiceField: "dns_choice",
+        fieldPath: "spec.ethernet_interface.dhcp_server.dhcp_networks[].dns_choice",
+        options: [
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].dns_address",
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].same_as_dgw",
+        ],
+      },
+      {
+        choiceField: "gateway_choice",
+        fieldPath: "spec.ethernet_interface.dhcp_server.dhcp_networks[].gateway_choice",
+        options: [
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].dgw_address",
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].first_address",
+          "spec.ethernet_interface.dhcp_server.dhcp_networks[].last_address",
+        ],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.ethernet_interface.dhcp_server.dhcp_networks[].network_prefix_choice",
+        options: ["spec.ethernet_interface.dhcp_server.dhcp_networks[].network_prefix"],
+      },
+      {
+        choiceField: "autoconfig_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.autoconfig_choice",
+        options: ["spec.ethernet_interface.ipv6_auto_config.host", "spec.ethernet_interface.ipv6_auto_config.router"],
+      },
+      {
+        choiceField: "address_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.address_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.network_prefix",
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful",
+        ],
+      },
+      {
+        choiceField: "dns_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.dns_config.dns_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.configured_list",
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns",
+        ],
+      },
+      {
+        choiceField: "local_dns_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.configured_address",
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.first_address",
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.last_address",
+        ],
+      },
+      {
+        choiceField: "interfaces_addressing_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_end",
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_start",
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.interface_ip_map",
+        ],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
+        options: ["spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix"],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.ethernet_interface.static_ip.network_prefix_choice",
+        options: [
+          "spec.ethernet_interface.static_ip.cluster_static_ip",
+          "spec.ethernet_interface.static_ip.node_static_ip",
+        ],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.ethernet_interface.static_ipv6_address.network_prefix_choice",
+        options: [
+          "spec.ethernet_interface.static_ipv6_address.cluster_static_ip",
+          "spec.ethernet_interface.static_ipv6_address.node_static_ip",
+        ],
+      },
+      {
+        choiceField: "layer2_interface_choice",
+        fieldPath: "spec.layer2_interface.layer2_interface_choice",
+        options: [
+          "spec.layer2_interface.l2sriov_interface",
+          "spec.layer2_interface.l2vlan_interface",
+          "spec.layer2_interface.l2vlan_slo_interface",
+        ],
+      },
+      {
+        choiceField: "vlan_choice",
+        fieldPath: "spec.layer2_interface.l2sriov_interface.vlan_choice",
+        options: [
+          "spec.layer2_interface.l2sriov_interface.untagged",
+          "spec.layer2_interface.l2sriov_interface.vlan_id",
+        ],
+      },
+      {
+        choiceField: "monitoring_choice",
+        fieldPath: "spec.legacy_interface.monitoring_choice",
+        options: ["spec.legacy_interface.monitor", "spec.legacy_interface.monitor_disabled"],
+      },
+      {
+        choiceField: "network_choice",
+        fieldPath: "spec.tunnel_interface.network_choice",
+        options: ["spec.tunnel_interface.site_local_inside_network", "spec.tunnel_interface.site_local_network"],
+      },
+      {
+        choiceField: "node_choice",
+        fieldPath: "spec.tunnel_interface.node_choice",
+        options: ["spec.tunnel_interface.node"],
+      },
+      {
+        choiceField: "network_prefix_choice",
+        fieldPath: "spec.tunnel_interface.static_ip.network_prefix_choice",
+        options: [
+          "spec.tunnel_interface.static_ip.cluster_static_ip",
+          "spec.tunnel_interface.static_ip.node_static_ip",
+        ],
+      },
+    ],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-pre-upgrade-check-get",
+    method: "GET",
+    path: "/api/maurice/namespaces/{namespace}/sites/{name}/pre_upgrade_check",
+    operation: "get",
+    domain: "ce_management",
+    resource: "pre-upgrade-check",
+    summary: "Pre upgrade check.",
+    description: "API to check if site is ready for upgrade.",
+    pathParameters: [
+      {
+        description: "Name\nFetch upgrade status for the name of site.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Site Name",
+      },
+      {
+        description: "Namespace\nFetch upgrade status for the given namespace.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "Software version to upgrade to.",
+        in: "query",
+        name: "sw_version",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "SW Version to upgrade to.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/upgrade_statusPreUpgradeCheckResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.upgrade_status.UpgradeStatusCustomApi.PreUpgradeCheck",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-setting-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/module_management/settings",
+    operation: "list",
+    domain: "ce_management",
+    resource: "setting",
+    summary: "Module Management Settings.",
+    description: "Receive the module settings.",
+    pathParameters: [
+      {
+        description: "Namespace\nThe namespace this item belongs to.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/module_managementModuleManagementResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.module_management.ModuleManagementAPI.GetModuleManagementSettings",
+    tags: ["Infrastructure"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-upgradable-sw-version-list",
+    method: "GET",
+    path: "/api/maurice/upgradable_sw_versions",
+    operation: "list",
+    domain: "ce_management",
+    resource: "upgradable-sw-version",
+    summary: "GET Upgradable SW Versions.",
+    description: "API to GET list of sw versions that can be upgraded to.",
+    pathParameters: [],
+    queryParameters: [
+      {
+        description: "Fetch upgradable sw versions for site.",
+        in: "query",
+        name: "current_os_version",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Current OS Version.",
+      },
+      {
+        description: "Fetch upgradable sw versions for site.",
+        in: "query",
+        name: "current_sw_version",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Current SW Version.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/upgrade_statusGetUpgradableSWVersionsResponse",
+    },
+    requiredParams: [],
+    operationId: "ves.io.schema.upgrade_status.UpgradeStatusCustomApi.GetUpgradableSWVersions",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-upgrade-statu-get",
+    method: "GET",
+    path: "/api/maurice/namespaces/{namespace}/sites/{name}/upgrade_status",
+    operation: "get",
+    domain: "ce_management",
+    resource: "upgrade-statu",
+    summary: "GET Upgrade Status.",
+    description: "API to GET upgrade status of a site.",
+    pathParameters: [
+      {
+        description: "Name\nFetch upgrade status for the name of site.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Site Name",
+      },
+      {
+        description: "Namespace\nFetch upgrade status for the given namespace.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/upgrade_statusGetUpgradeStatusResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.upgrade_status.UpgradeStatusCustomApi.GetUpgradeStatus",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-usb-policy-create",
+    method: "POST",
+    path: "/api/config/namespaces/{metadata.namespace}/usb_policys",
+    operation: "create",
+    domain: "ce_management",
+    resource: "usb-policy",
+    summary: "Create USB policy.",
+    description: "Creates a new USB policy object.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/usb_policyCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/usb_policyCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.usb_policy.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "usb-policy",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "usb-policy-create",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-usb-policy-delete",
+    method: "DELETE",
+    path: "/api/config/namespaces/{namespace}/usb_policys/{name}",
+    operation: "delete",
+    domain: "ce_management",
+    resource: "usb-policy",
+    summary: "DELETE USB policy.",
+    description: "DELETE the specified usb_policy.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/usb_policyDeleteRequest",
+    },
+    responseSchema: {},
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.usb_policy.API.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "usb-policy",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-usb-policy-get",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/usb_policys/{name}",
+    operation: "get",
+    domain: "ce_management",
+    resource: "usb-policy",
+    summary: "GET USB policy.",
+    description: "GET the USB policy object.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_STATUS",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/usb_policyGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.usb_policy.API.Get",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-usb-policy-list",
+    method: "GET",
+    path: "/api/config/namespaces/{namespace}/usb_policys",
+    operation: "list",
+    domain: "ce_management",
+    resource: "usb-policy",
+    summary: "List USB policy.",
+    description: "List the set of usb_policy in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of usb_policy.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/usb_policyListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.usb_policy.API.List",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-usb-policy-update",
+    method: "PUT",
+    path: "/api/config/namespaces/{metadata.namespace}/usb_policys/{metadata.name}",
+    operation: "update",
+    domain: "ce_management",
+    resource: "usb-policy",
+    summary: "Replace USB policy.",
+    description: "Replaces the content of an USB policy object.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/usb_policyReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/usb_policyReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.usb_policy.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "usb-policy",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "usb-policy-replace",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
 ];
 
 export default ce_managementTools;

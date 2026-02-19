@@ -17,44 +17,44 @@ import { generateSmartExamplePayload } from "./schema.js";
  * Contains the essential information needed to execute a tool
  */
 export interface ToolDescription {
-	/** Tool name */
-	name: string;
-	/** Human-readable summary */
-	summary: string;
-	/** Detailed description */
-	description: string;
-	/** HTTP method */
-	method: string;
-	/** API path template */
-	path: string;
-	/** Domain category */
-	domain: string;
-	/** Resource type */
-	resource: string;
-	/** Operation type */
-	operation: string;
-	/** Required parameters (path + query + body) */
-	requiredParams: string[];
-	/** Path parameters with descriptions */
-	pathParameters: ParameterDescription[];
-	/** Query parameters with descriptions */
-	queryParameters: ParameterDescription[];
-	/** Whether request body is required */
-	hasRequestBody: boolean;
-	/** Request body schema reference (if any) */
-	requestBodyRef: string | null;
-	/** Example payload for request body (if applicable) */
-	requestBodyExample: unknown | null;
+  /** Tool name */
+  name: string;
+  /** Human-readable summary */
+  summary: string;
+  /** Detailed description */
+  description: string;
+  /** HTTP method */
+  method: string;
+  /** API path template */
+  path: string;
+  /** Domain category */
+  domain: string;
+  /** Resource type */
+  resource: string;
+  /** Operation type */
+  operation: string;
+  /** Required parameters (path + query + body) */
+  requiredParams: string[];
+  /** Path parameters with descriptions */
+  pathParameters: ParameterDescription[];
+  /** Query parameters with descriptions */
+  queryParameters: ParameterDescription[];
+  /** Whether request body is required */
+  hasRequestBody: boolean;
+  /** Request body schema reference (if any) */
+  requestBodyRef: string | null;
+  /** Example payload for request body (if applicable) */
+  requestBodyExample: unknown | null;
 }
 
 /**
  * Simplified parameter description
  */
 export interface ParameterDescription {
-	name: string;
-	description: string;
-	required: boolean;
-	type: string;
+  name: string;
+  description: string;
+  required: boolean;
+  type: string;
 }
 
 /**
@@ -62,10 +62,10 @@ export interface ParameterDescription {
  * These replace verbose OpenAPI descriptions with concise versions
  */
 const COMMON_PARAM_DESCRIPTIONS: Record<string, string> = {
-	namespace: "Target namespace (e.g., 'default')",
-	"metadata.namespace": "Target namespace for the resource",
-	name: "Resource name",
-	"metadata.name": "Resource name identifier",
+  namespace: "Target namespace (e.g., 'default')",
+  "metadata.namespace": "Target namespace for the resource",
+  name: "Resource name",
+  "metadata.name": "Resource name identifier",
 };
 
 /**
@@ -73,38 +73,38 @@ const COMMON_PARAM_DESCRIPTIONS: Record<string, string> = {
  * and truncating verbose descriptions
  */
 function optimizeDescription(name: string, description: string): string {
-	// Use shared description if available
-	if (COMMON_PARAM_DESCRIPTIONS[name]) {
-		return COMMON_PARAM_DESCRIPTIONS[name];
-	}
+  // Use shared description if available
+  if (COMMON_PARAM_DESCRIPTIONS[name]) {
+    return COMMON_PARAM_DESCRIPTIONS[name];
+  }
 
-	// Truncate verbose descriptions (keep first sentence or 100 chars)
-	if (description.length > 100) {
-		const firstSentence = description.split(/[.\n]/)[0];
-		if (firstSentence && firstSentence.length <= 100) {
-			return firstSentence;
-		}
-		return description.slice(0, 97) + "...";
-	}
+  // Truncate verbose descriptions (keep first sentence or 100 chars)
+  if (description.length > 100) {
+    const firstSentence = description.split(/[.\n]/)[0];
+    if (firstSentence && firstSentence.length <= 100) {
+      return firstSentence;
+    }
+    return description.slice(0, 97) + "...";
+  }
 
-	return description;
+  return description;
 }
 
 /**
  * Extract parameter description from OpenAPI parameter
  */
 function extractParameterDescription(param: {
-	name: string;
-	description?: string;
-	required?: boolean;
-	schema?: Record<string, unknown>;
+  name: string;
+  description?: string;
+  required?: boolean;
+  schema?: Record<string, unknown>;
 }): ParameterDescription {
-	return {
-		name: param.name,
-		description: optimizeDescription(param.name, param.description ?? ""),
-		required: param.required ?? false,
-		type: (param.schema?.type as string) ?? "string",
-	};
+  return {
+    name: param.name,
+    description: optimizeDescription(param.name, param.description ?? ""),
+    required: param.required ?? false,
+    type: (param.schema?.type as string) ?? "string",
+  };
 }
 
 /**
@@ -123,40 +123,38 @@ function extractParameterDescription(param: {
  * ```
  */
 export function describeTool(toolName: string): ToolDescription | null {
-	const tool = getToolByName(toolName);
+  const tool = getToolByName(toolName);
 
-	if (!tool) {
-		return null;
-	}
+  if (!tool) {
+    return null;
+  }
 
-	// Extract request body schema reference
-	let requestBodyRef: string | null = null;
-	if (tool.requestBodySchema) {
-		const ref = tool.requestBodySchema.$ref;
-		if (typeof ref === "string") {
-			// Extract just the schema name from the reference
-			requestBodyRef = ref.replace("#/components/schemas/", "");
-		}
-	}
+  // Extract request body schema reference
+  let requestBodyRef: string | null = null;
+  if (tool.requestBodySchema) {
+    const ref = tool.requestBodySchema.$ref;
+    if (typeof ref === "string") {
+      // Extract just the schema name from the reference
+      requestBodyRef = ref.replace("#/components/schemas/", "");
+    }
+  }
 
-	return {
-		name: tool.toolName,
-		summary: tool.summary,
-		description: tool.description,
-		method: tool.method,
-		path: tool.path,
-		domain: tool.domain,
-		resource: tool.resource,
-		operation: tool.operation,
-		requiredParams: tool.requiredParams,
-		pathParameters: tool.pathParameters.map(extractParameterDescription),
-		queryParameters: tool.queryParameters.map(extractParameterDescription),
-		hasRequestBody: tool.requestBodySchema !== null,
-		requestBodyRef,
-		requestBodyExample: tool.requestBodySchema
-			? generateSmartExamplePayload(tool.toolName)
-			: null,
-	};
+  return {
+    name: tool.toolName,
+    summary: tool.summary,
+    description: tool.description,
+    method: tool.method,
+    path: tool.path,
+    domain: tool.domain,
+    resource: tool.resource,
+    operation: tool.operation,
+    requiredParams: tool.requiredParams,
+    pathParameters: tool.pathParameters.map(extractParameterDescription),
+    queryParameters: tool.queryParameters.map(extractParameterDescription),
+    hasRequestBody: tool.requestBodySchema !== null,
+    requestBodyRef,
+    requestBodyExample: tool.requestBodySchema ? generateSmartExamplePayload(tool.toolName) : null,
+  };
 }
 
 /**
@@ -169,7 +167,7 @@ export function describeTool(toolName: string): ToolDescription | null {
  * @returns Full ParsedOperation or null if not found
  */
 export function getFullToolSchema(toolName: string): ParsedOperation | null {
-	return getToolByName(toolName) ?? null;
+  return getToolByName(toolName) ?? null;
 }
 
 /**
@@ -178,19 +176,17 @@ export function getFullToolSchema(toolName: string): ParsedOperation | null {
  * @param toolNames - Array of tool names
  * @returns Map of tool name to description (excludes not found tools)
  */
-export function describeTools(
-	toolNames: string[],
-): Map<string, ToolDescription> {
-	const results = new Map<string, ToolDescription>();
+export function describeTools(toolNames: string[]): Map<string, ToolDescription> {
+  const results = new Map<string, ToolDescription>();
 
-	for (const name of toolNames) {
-		const desc = describeTool(name);
-		if (desc) {
-			results.set(name, desc);
-		}
-	}
+  for (const name of toolNames) {
+    const desc = describeTool(name);
+    if (desc) {
+      results.set(name, desc);
+    }
+  }
 
-	return results;
+  return results;
 }
 
 /**
@@ -200,30 +196,30 @@ export function describeTools(
  * @returns Object with success status and either description or error
  */
 export function describeToolSafe(toolName: string): {
-	success: boolean;
-	description?: ToolDescription;
-	error?: string;
+  success: boolean;
+  description?: ToolDescription;
+  error?: string;
 } {
-	if (!toolExists(toolName)) {
-		// Try to find similar tools
-		const entry = getToolEntry(toolName);
-		if (!entry) {
-			return {
-				success: false,
-				error: `Tool "${toolName}" not found. Use search_tools to find available tools.`,
-			};
-		}
-	}
+  if (!toolExists(toolName)) {
+    // Try to find similar tools
+    const entry = getToolEntry(toolName);
+    if (!entry) {
+      return {
+        success: false,
+        error: `Tool "${toolName}" not found. Use search_tools to find available tools.`,
+      };
+    }
+  }
 
-	const description = describeTool(toolName);
-	if (!description) {
-		return {
-			success: false,
-			error: `Failed to load description for tool "${toolName}".`,
-		};
-	}
+  const description = describeTool(toolName);
+  if (!description) {
+    return {
+      success: false,
+      error: `Failed to load description for tool "${toolName}".`,
+    };
+  }
 
-	return { success: true, description };
+  return { success: true, description };
 }
 
 /**
@@ -231,17 +227,17 @@ export function describeToolSafe(toolName: string): {
  * Omits optional fields and uses abbreviated format
  */
 export interface CompactToolDescription {
-	n: string; // name
-	m: string; // method
-	p: string; // path
-	d: string; // domain
-	r: string; // resource
-	o: string; // operation
-	s: string; // summary
-	rp: string[]; // requiredParams
-	pp: Array<{ n: string; r: boolean }>; // pathParams (name, required only)
-	qp: Array<{ n: string; r: boolean }>; // queryParams
-	rb: boolean; // hasRequestBody
+  n: string; // name
+  m: string; // method
+  p: string; // path
+  d: string; // domain
+  r: string; // resource
+  o: string; // operation
+  s: string; // summary
+  rp: string[]; // requiredParams
+  pp: Array<{ n: string; r: boolean }>; // pathParams (name, required only)
+  qp: Array<{ n: string; r: boolean }>; // queryParams
+  rb: boolean; // hasRequestBody
 }
 
 /**
@@ -251,31 +247,29 @@ export interface CompactToolDescription {
  * @param toolName - The exact tool name
  * @returns Compact description or null if not found
  */
-export function describeToolCompact(
-	toolName: string,
-): CompactToolDescription | null {
-	const tool = getToolByName(toolName);
+export function describeToolCompact(toolName: string): CompactToolDescription | null {
+  const tool = getToolByName(toolName);
 
-	if (!tool) {
-		return null;
-	}
+  if (!tool) {
+    return null;
+  }
 
-	return {
-		n: tool.toolName,
-		m: tool.method,
-		p: tool.path,
-		d: tool.domain,
-		r: tool.resource,
-		o: tool.operation,
-		s: tool.summary,
-		rp: tool.requiredParams,
-		pp: tool.pathParameters.map((p) => ({ n: p.name, r: p.required ?? true })),
-		qp: tool.queryParameters.map((p) => ({
-			n: p.name,
-			r: p.required ?? false,
-		})),
-		rb: tool.requestBodySchema !== null,
-	};
+  return {
+    n: tool.toolName,
+    m: tool.method,
+    p: tool.path,
+    d: tool.domain,
+    r: tool.resource,
+    o: tool.operation,
+    s: tool.summary,
+    rp: tool.requiredParams,
+    pp: tool.pathParameters.map((p) => ({ n: p.name, r: p.required ?? true })),
+    qp: tool.queryParameters.map((p) => ({
+      n: p.name,
+      r: p.required ?? false,
+    })),
+    rb: tool.requestBodySchema !== null,
+  };
 }
 
 /**
@@ -283,48 +277,41 @@ export function describeToolCompact(
  * Uses dynamically selected tools from the registry - no hardcoded tool names
  */
 export function getOptimizationStats(): {
-	avgOriginalParamDescLen: number;
-	avgOptimizedParamDescLen: number;
-	estimatedSavingsPercent: string;
+  avgOriginalParamDescLen: number;
+  avgOptimizedParamDescLen: number;
+  estimatedSavingsPercent: string;
 } {
-	// Dynamically get sample tools with path parameters from the registry
-	const allTools = getToolIndex().tools;
+  // Dynamically get sample tools with path parameters from the registry
+  const allTools = getToolIndex().tools;
 
-	// Find tools that likely have path parameters (create and list operations)
-	const sampleTools = allTools
-		.filter(
-			(t: { operation: string }) =>
-				t.operation === "create" || t.operation === "list",
-		)
-		.slice(0, 5)
-		.map((t: { name: string }) => t.name);
+  // Find tools that likely have path parameters (create and list operations)
+  const sampleTools = allTools
+    .filter((t: { operation: string }) => t.operation === "create" || t.operation === "list")
+    .slice(0, 5)
+    .map((t: { name: string }) => t.name);
 
-	let originalTotal = 0;
-	let optimizedTotal = 0;
-	let count = 0;
+  let originalTotal = 0;
+  let optimizedTotal = 0;
+  let count = 0;
 
-	for (const name of sampleTools) {
-		const tool = getToolByName(name);
-		if (tool && tool.pathParameters.length > 0) {
-			for (const param of tool.pathParameters) {
-				originalTotal += (param.description ?? "").length;
-				optimizedTotal += optimizeDescription(
-					param.name,
-					param.description ?? "",
-				).length;
-				count++;
-			}
-		}
-	}
+  for (const name of sampleTools) {
+    const tool = getToolByName(name);
+    if (tool && tool.pathParameters.length > 0) {
+      for (const param of tool.pathParameters) {
+        originalTotal += (param.description ?? "").length;
+        optimizedTotal += optimizeDescription(param.name, param.description ?? "").length;
+        count++;
+      }
+    }
+  }
 
-	const avgOriginal = count > 0 ? Math.round(originalTotal / count) : 0;
-	const avgOptimized = count > 0 ? Math.round(optimizedTotal / count) : 0;
-	const savings =
-		avgOriginal > 0 ? ((avgOriginal - avgOptimized) / avgOriginal) * 100 : 0;
+  const avgOriginal = count > 0 ? Math.round(originalTotal / count) : 0;
+  const avgOptimized = count > 0 ? Math.round(optimizedTotal / count) : 0;
+  const savings = avgOriginal > 0 ? ((avgOriginal - avgOptimized) / avgOriginal) * 100 : 0;
 
-	return {
-		avgOriginalParamDescLen: avgOriginal,
-		avgOptimizedParamDescLen: avgOptimized,
-		estimatedSavingsPercent: `${savings.toFixed(1)}%`,
-	};
+  return {
+    avgOriginalParamDescLen: avgOriginal,
+    avgOptimizedParamDescLen: avgOptimized,
+    estimatedSavingsPercent: `${savings.toFixed(1)}%`,
+  };
 }

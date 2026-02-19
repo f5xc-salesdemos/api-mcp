@@ -7,63 +7,54 @@
  * errors, and status displays.
  */
 
-import type {
-	QuotaCheckResult,
-	QuotaInfo,
-	QuotaStatus,
-	QuotaThreshold,
-} from "../types/quota.js";
+import type { QuotaCheckResult, QuotaInfo, QuotaStatus, QuotaThreshold } from "../types/quota.js";
 
 /**
  * Get status icon for threshold level
  */
 function getStatusIcon(threshold: QuotaThreshold): string {
-	const icons = {
-		green: "✅",
-		yellow: "⚠️",
-		red: "❌",
-	};
-	return icons[threshold];
+  const icons = {
+    green: "✅",
+    yellow: "⚠️",
+    red: "❌",
+  };
+  return icons[threshold];
 }
 
 /**
  * Get status text for threshold level
  */
 function getStatusText(threshold: QuotaThreshold): string {
-	const texts = {
-		green: "Available capacity",
-		yellow: "Approaching limit",
-		red: "At limit - cannot create resources",
-	};
-	return texts[threshold];
+  const texts = {
+    green: "Available capacity",
+    yellow: "Approaching limit",
+    red: "At limit - cannot create resources",
+  };
+  return texts[threshold];
 }
 
 /**
  * Get recommendation text based on threshold and resource info
  */
-function getRecommendation(
-	threshold: QuotaThreshold,
-	resourceType: string,
-	namespace: string,
-): string {
-	if (threshold === "red") {
-		return `
+function getRecommendation(threshold: QuotaThreshold, resourceType: string, namespace: string): string {
+  if (threshold === "red") {
+    return `
 Action Required:
 1. Delete unused ${resourceType} resources in '${namespace}' namespace
 2. Request quota increase from F5 XC support
 3. Use a different namespace with available quota
     `.trim();
-	}
+  }
 
-	if (threshold === "yellow") {
-		return `
+  if (threshold === "yellow") {
+    return `
 Recommendation:
 Consider reviewing and cleaning up unused ${resourceType} resources
 before reaching the quota limit.
     `.trim();
-	}
+  }
 
-	return "";
+  return "";
 }
 
 /**
@@ -73,11 +64,11 @@ before reaching the quota limit.
  * @returns Formatted quota status string
  */
 export function formatQuotaStatus(status: QuotaStatus): string {
-	const { resourceType, namespace, limits } = status;
-	const icon = getStatusIcon(limits.threshold);
-	const statusText = getStatusText(limits.threshold);
+  const { resourceType, namespace, limits } = status;
+  const icon = getStatusIcon(limits.threshold);
+  const statusText = getStatusText(limits.threshold);
 
-	return `
+  return `
 Quota Status for ${resourceType}
 
 Namespace: ${namespace}
@@ -96,9 +87,9 @@ ${getRecommendation(limits.threshold, resourceType, namespace)}
  * @returns Formatted error message
  */
 export function formatQuotaError(quotaCheck: QuotaCheckResult): string {
-	const { quotaInfo } = quotaCheck;
+  const { quotaInfo } = quotaCheck;
 
-	return `Resource quota limit reached: ${quotaInfo.current}/${quotaInfo.limit} used (${quotaInfo.percentage}%). ${quotaCheck.reason || "Cannot create additional resources."}`;
+  return `Resource quota limit reached: ${quotaInfo.current}/${quotaInfo.limit} used (${quotaInfo.percentage}%). ${quotaCheck.reason || "Cannot create additional resources."}`;
 }
 
 /**
@@ -108,33 +99,33 @@ export function formatQuotaError(quotaCheck: QuotaCheckResult): string {
  * @returns Formatted table string
  */
 export function formatQuotaTable(quotas: QuotaStatus[]): string {
-	if (quotas.length === 0) {
-		return "No quota information available.";
-	}
+  if (quotas.length === 0) {
+    return "No quota information available.";
+  }
 
-	// Calculate column widths
-	const maxResourceLen = Math.max(
-		8, // "Resource" header length
-		...quotas.map((q) => q.resourceType.length),
-	);
+  // Calculate column widths
+  const maxResourceLen = Math.max(
+    8, // "Resource" header length
+    ...quotas.map((q) => q.resourceType.length),
+  );
 
-	// Header
-	const header = `${"Resource".padEnd(maxResourceLen)} | Limit | Current | Remaining | Usage | Status`;
-	const separator = "-".repeat(header.length);
+  // Header
+  const header = `${"Resource".padEnd(maxResourceLen)} | Limit | Current | Remaining | Usage | Status`;
+  const separator = "-".repeat(header.length);
 
-	// Rows
-	const rows = quotas.map((q) => {
-		const resource = q.resourceType.padEnd(maxResourceLen);
-		const limit = String(q.limits.limit).padStart(5);
-		const current = String(q.limits.current).padStart(7);
-		const remaining = String(q.limits.remaining).padStart(9);
-		const usage = `${String(q.limits.percentage)}%`.padStart(5);
-		const status = getStatusIcon(q.limits.threshold);
+  // Rows
+  const rows = quotas.map((q) => {
+    const resource = q.resourceType.padEnd(maxResourceLen);
+    const limit = String(q.limits.limit).padStart(5);
+    const current = String(q.limits.current).padStart(7);
+    const remaining = String(q.limits.remaining).padStart(9);
+    const usage = `${String(q.limits.percentage)}%`.padStart(5);
+    const status = getStatusIcon(q.limits.threshold);
 
-		return `${resource} | ${limit} | ${current} | ${remaining} | ${usage} | ${status}`;
-	});
+    return `${resource} | ${limit} | ${current} | ${remaining} | ${usage} | ${status}`;
+  });
 
-	return [header, separator, ...rows].join("\n");
+  return [header, separator, ...rows].join("\n");
 }
 
 /**
@@ -144,9 +135,6 @@ export function formatQuotaTable(quotas: QuotaStatus[]): string {
  * @param resourceType - Resource type
  * @returns Formatted warning message
  */
-export function formatQuotaWarning(
-	quotaInfo: QuotaInfo,
-	resourceType: string,
-): string {
-	return `Quota approaching limit: ${quotaInfo.current}/${quotaInfo.limit} used (${quotaInfo.percentage}%) for ${resourceType}`;
+export function formatQuotaWarning(quotaInfo: QuotaInfo, resourceType: string): string {
+  return `Quota approaching limit: ${quotaInfo.current}/${quotaInfo.limit} used (${quotaInfo.percentage}%) for ${resourceType}`;
 }
