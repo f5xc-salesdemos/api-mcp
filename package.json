@@ -1,0 +1,123 @@
+{
+	"name": "@f5xc-salesdemos/api-mcp",
+	"version": "2.0.21-2601122132",
+	"description": "F5 Distributed Cloud API MCP Server - Exposes F5XC APIs to AI assistants via Model Context Protocol",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"bin": {
+		"f5xc-api-mcp": "./dist/index.js"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"scripts": {
+		"generate:version": "tsx scripts/generate-version.ts",
+		"prebuild": "npm run generate:version",
+		"build": "tsc && cp src/tools/generated/*.json dist/tools/generated/",
+		"start": "node dist/index.js",
+		"dev": "npm run generate:version && tsx src/index.ts",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"test:uat": "vitest run tests/uat/",
+		"test:docs": "vitest run tests/uat/documentation/",
+		"test:acceptance": "vitest run tests/acceptance/",
+		"test:discover": "vitest run tests/acceptance/tools-comprehensive.test.ts --reporter=verbose",
+		"test:discover:sample": "vitest run tests/acceptance/tools-comprehensive.test.ts -t 'domain: virtual' --reporter=verbose",
+		"test:errors": "vitest run tests/acceptance/error-scenarios.test.ts tests/integration/network-failures.test.ts --reporter=verbose",
+		"test:performance": "vitest run tests/acceptance/performance-baseline.test.ts --reporter=verbose",
+		"test:workflows": "vitest run tests/e2e/ --reporter=verbose",
+		"test:report": "tsx scripts/generate-test-report.ts",
+		"test:cleanup": "tsx tests/e2e/scripts/orphan-cleanup.ts",
+		"test:all": "npm run test:discover && npm run test:errors && npm run test:performance && npm run test:workflows && npm run test:report",
+		"test:interactive": "vitest run tests/uat/interactive-crud/",
+		"test:interactive:watch": "vitest tests/uat/interactive-crud/",
+		"validate:auth": "tsx scripts/validate-auth-integration.ts",
+		"lint": "eslint src/**/*.ts",
+		"lint:fix": "eslint src/**/*.ts --fix",
+		"typecheck": "tsc --noEmit",
+		"sync-specs": "tsx scripts/sync-specs.ts",
+		"generate": "tsx scripts/generate.ts",
+		"generate:fixtures": "tsx scripts/generate-test-fixtures.ts",
+		"validate-generation": "tsx scripts/validate-generation.ts",
+		"generate-docs": "tsx scripts/generate-docs.ts",
+		"validate-cli-syntax": "tsx scripts/validate-cli-syntax.ts",
+		"validate-docs": "npm run generate-docs",
+		"prepare": "npm run build",
+		"bundle": "mcpb pack",
+		"bundle:validate": "mcpb validate",
+		"version:get": "node scripts/version.js",
+		"version:get:beta": "node scripts/version.js --beta",
+		"version:update": "node scripts/version.js update",
+		"version:update:beta": "node scripts/version.js update --beta",
+		"version:upstream": "node scripts/version.js upstream",
+		"setup": "npm run sync-specs && npm run generate"
+	},
+	"keywords": [
+		"f5",
+		"xc",
+		"f5xc",
+		"distributed-cloud",
+		"mcp",
+		"model-context-protocol",
+		"api",
+		"load-balancer",
+		"waf",
+		"dns",
+		"ai-tools"
+	],
+	"author": "Robin Mordasiewicz",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/f5xc-salesdemos/api-mcp.git"
+	},
+	"homepage": "https://f5xc-salesdemos.github.io/api-mcp",
+	"bugs": {
+		"url": "https://github.com/f5xc-salesdemos/api-mcp/issues"
+	},
+	"engines": {
+		"node": ">=24.0.0"
+	},
+	"files": [
+		"dist",
+		"specs",
+		"manifest.json",
+		"README.md",
+		"LICENSE",
+		"CHANGELOG.md"
+	],
+	"devDependencies": {
+		"@anthropic-ai/mcpb": "^2.1.0",
+		"@eslint/js": "^10.0.1",
+		"@typescript-eslint/eslint-plugin": "^8.0.0",
+		"@typescript-eslint/parser": "^8.0.0",
+		"@vitest/coverage-v8": "^4.0.16",
+		"axios": "^1.7.0",
+		"eslint": "^10.0.0",
+		"fast-check": "^4.5.3",
+		"globals": "^17.0.0",
+		"jszip": "^3.10.0",
+		"tsx": "^4.0.0",
+		"typescript": "^5.0.0",
+		"vitest": "^4.0.16"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.0.0",
+		"@robinmordasiewicz/f5xc-auth": "^1.4.1",
+		"@types/node": "^25.0.0",
+		"yaml": "^2.4.0",
+		"zod": "^4.0.0"
+	},
+	"overrides": {
+		"tmp": "^0.2.4"
+	}
+}
