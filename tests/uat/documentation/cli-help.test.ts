@@ -143,20 +143,24 @@ describe("CLI Help Text Validation", () => {
 		});
 	});
 
-	describe("help text consistency with docs", () => {
-		it("should document same environment variables as docs site", async () => {
+	describe("help text consistency with manifest config", () => {
+		it("should document same environment variables as manifest.json", async () => {
 			const helpResult = await runCliCommand(["--help"]);
-			const envDocs = readProjectFile("docs/environment-variables.mdx");
+			const manifest = JSON.parse(readProjectFile("manifest.json")) as {
+				server?: { mcp_config?: { env?: Record<string, string> } };
+			};
 
 			const helpEnvVars = extractEnvVarsFromText(helpResult.stdout);
-			const docsEnvVars = extractEnvVarsFromText(envDocs);
+			const manifestEnvVars = Object.keys(
+				manifest.server?.mcp_config?.env ?? {},
+			);
 
-			// Core env vars in help should also be in docs
+			// Core env vars in help should also be in manifest
 			const coreEnvVars = ["F5XC_API_URL", "F5XC_API_TOKEN", "F5XC_P12_BUNDLE"];
 
 			for (const envVar of coreEnvVars) {
 				if (helpEnvVars.includes(envVar)) {
-					expect(docsEnvVars).toContain(envVar);
+					expect(manifestEnvVars).toContain(envVar);
 				}
 			}
 		});

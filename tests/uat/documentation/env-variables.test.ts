@@ -72,37 +72,47 @@ describe("Environment Variable Recognition", () => {
 		});
 	});
 
-	describe("documentation site consistency", () => {
-		it("should document core environment variables in docs", () => {
-			const envDocs = readProjectFile("docs/environment-variables.mdx");
-			const envVars = extractEnvVarsFromText(envDocs);
+	describe("manifest.json consistency", () => {
+		it("should define core environment variables in manifest user_config", () => {
+			const manifest = JSON.parse(readProjectFile("manifest.json")) as {
+				server?: { mcp_config?: { env?: Record<string, string> } };
+				user_config?: Record<string, { type: string }>;
+			};
 
-			expect(envVars).toContain("F5XC_API_URL");
-			expect(envVars).toContain("F5XC_API_TOKEN");
+			expect(manifest.user_config?.f5xc_api_url).toBeDefined();
+			expect(manifest.user_config?.f5xc_api_token).toBeDefined();
 		});
 
-		it("should explain environment variable usage in docs", () => {
-			const envDocs = readProjectFile("docs/environment-variables.mdx");
+		it("should map user_config to server env in manifest", () => {
+			const manifest = JSON.parse(readProjectFile("manifest.json")) as {
+				server?: { mcp_config?: { env?: Record<string, string> } };
+			};
 
-			// Should have section about configuration or environment variables
-			expect(envDocs.toLowerCase()).toMatch(/environment|configuration|setup/);
+			const env = manifest.server?.mcp_config?.env;
+			expect(env).toBeDefined();
+			expect(env?.F5XC_API_URL).toBeDefined();
+			expect(env?.F5XC_API_TOKEN).toBeDefined();
 		});
 	});
 
-	describe("documentation consistency", () => {
-		it("should document same env vars in help and docs", async () => {
+	describe("CLI help and manifest consistency", () => {
+		it("should document same env vars in help and manifest", async () => {
 			const helpResult = await runCliCommand(["--help"]);
-			const envDocs = readProjectFile("docs/environment-variables.mdx");
+			const manifest = JSON.parse(readProjectFile("manifest.json")) as {
+				server?: { mcp_config?: { env?: Record<string, string> } };
+			};
 
 			const helpEnvVars = extractEnvVarsFromText(helpResult.stdout);
-			const docsEnvVars = extractEnvVarsFromText(envDocs);
+			const manifestEnvVars = Object.keys(
+				manifest.server?.mcp_config?.env ?? {},
+			);
 
-			// Core env vars from help should be in docs
+			// Core env vars from help should be in manifest
 			const requiredEnvVars = ["F5XC_API_URL", "F5XC_API_TOKEN"];
 
 			for (const envVar of requiredEnvVars) {
 				if (helpEnvVars.includes(envVar)) {
-					expect(docsEnvVars).toContain(envVar);
+					expect(manifestEnvVars).toContain(envVar);
 				}
 			}
 		});
