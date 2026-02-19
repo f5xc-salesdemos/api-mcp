@@ -72,37 +72,37 @@ describe("Environment Variable Recognition", () => {
 		});
 	});
 
-	describe("README.md consistency", () => {
-		it("should document core environment variables in README", () => {
-			const readme = readProjectFile("README.md");
-			const envVars = extractEnvVarsFromText(readme);
+	describe("documentation site consistency", () => {
+		it("should document core environment variables in docs", () => {
+			const envDocs = readProjectFile("docs/environment-variables.mdx");
+			const envVars = extractEnvVarsFromText(envDocs);
 
 			expect(envVars).toContain("F5XC_API_URL");
 			expect(envVars).toContain("F5XC_API_TOKEN");
 		});
 
-		it("should explain environment variable usage in README", () => {
-			const readme = readProjectFile("README.md");
+		it("should explain environment variable usage in docs", () => {
+			const envDocs = readProjectFile("docs/environment-variables.mdx");
 
 			// Should have section about configuration or environment variables
-			expect(readme.toLowerCase()).toMatch(/environment|configuration|setup/);
+			expect(envDocs.toLowerCase()).toMatch(/environment|configuration|setup/);
 		});
 	});
 
 	describe("documentation consistency", () => {
-		it("should document same env vars in help and README", async () => {
+		it("should document same env vars in help and docs", async () => {
 			const helpResult = await runCliCommand(["--help"]);
-			const readme = readProjectFile("README.md");
+			const envDocs = readProjectFile("docs/environment-variables.mdx");
 
 			const helpEnvVars = extractEnvVarsFromText(helpResult.stdout);
-			const readmeEnvVars = extractEnvVarsFromText(readme);
+			const docsEnvVars = extractEnvVarsFromText(envDocs);
 
-			// Core env vars from help should be in README
+			// Core env vars from help should be in docs
 			const requiredEnvVars = ["F5XC_API_URL", "F5XC_API_TOKEN"];
 
 			for (const envVar of requiredEnvVars) {
 				if (helpEnvVars.includes(envVar)) {
-					expect(readmeEnvVars).toContain(envVar);
+					expect(docsEnvVars).toContain(envVar);
 				}
 			}
 		});

@@ -143,20 +143,20 @@ describe("CLI Help Text Validation", () => {
 		});
 	});
 
-	describe("help text consistency with README", () => {
-		it("should document same environment variables as README", async () => {
+	describe("help text consistency with docs", () => {
+		it("should document same environment variables as docs site", async () => {
 			const helpResult = await runCliCommand(["--help"]);
-			const readme = readProjectFile("README.md");
+			const envDocs = readProjectFile("docs/environment-variables.mdx");
 
 			const helpEnvVars = extractEnvVarsFromText(helpResult.stdout);
-			const readmeEnvVars = extractEnvVarsFromText(readme);
+			const docsEnvVars = extractEnvVarsFromText(envDocs);
 
-			// Core env vars in help should also be in README
+			// Core env vars in help should also be in docs
 			const coreEnvVars = ["F5XC_API_URL", "F5XC_API_TOKEN", "F5XC_P12_BUNDLE"];
 
 			for (const envVar of coreEnvVars) {
 				if (helpEnvVars.includes(envVar)) {
-					expect(readmeEnvVars).toContain(envVar);
+					expect(docsEnvVars).toContain(envVar);
 				}
 			}
 		});

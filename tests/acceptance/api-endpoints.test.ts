@@ -47,9 +47,10 @@ vi.mock("@modelcontextprotocol/sdk/server/mcp.js", () => {
 });
 
 vi.mock("@modelcontextprotocol/sdk/server/stdio.js", () => {
-	const MockStdioServerTransport = (() => {
+	// Use a function expression (not arrow function) to allow 'new' operator
+	const MockStdioServerTransport = function () {
 		// Empty transport mock
-	}) as unknown as new () => Record<string, never>;
+	} as unknown as new () => Record<string, never>;
 
 	return { StdioServerTransport: MockStdioServerTransport };
 });
