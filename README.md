@@ -1,4 +1,4 @@
-# API MCP
+# F5XC API MCP
 
 [![GitHub Pages Deploy](https://github.com/f5xc-salesdemos/api-mcp/actions/workflows/github-pages-deploy.yml/badge.svg)](https://github.com/f5xc-salesdemos/api-mcp/actions/workflows/github-pages-deploy.yml)
 [![Repo Settings](https://github.com/f5xc-salesdemos/api-mcp/actions/workflows/enforce-repo-settings.yml/badge.svg)](https://github.com/f5xc-salesdemos/api-mcp/actions/workflows/enforce-repo-settings.yml)
