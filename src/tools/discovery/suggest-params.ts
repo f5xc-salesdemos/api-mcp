@@ -49,7 +49,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // HTTP Load Balancer examples
   "f5xc-api-virtual-http-loadbalancer-create": {
     metadata: {
-      name: "my-http-lb",
+      name: "example-http-lb",
       namespace: "default",
       labels: {
         "ves.io/site": "aws-us-west-2",
@@ -81,7 +81,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // Origin Pool examples
   "f5xc-api-virtual-origin-pool-create": {
     metadata: {
-      name: "my-origin-pool",
+      name: "example-origin-pool",
       namespace: "default",
     },
     spec: {
@@ -110,7 +110,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // TCP Load Balancer examples
   "f5xc-api-virtual-tcp-loadbalancer-create": {
     metadata: {
-      name: "my-tcp-lb",
+      name: "example-tcp-lb",
       namespace: "default",
     },
     spec: {
@@ -161,7 +161,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // DNS Load Balancer examples
   "f5xc-api-dns-load-balancer-create": {
     metadata: {
-      name: "my-dns-lb",
+      name: "example-dns-lb",
       namespace: "system",
     },
     spec: {
@@ -188,7 +188,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // Certificate examples
   "f5xc-api-certificates-certificate-create": {
     metadata: {
-      name: "my-certificate",
+      name: "example-certificate",
       namespace: "system",
     },
     spec: {
@@ -206,7 +206,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // Namespace examples
   "f5xc-api-system-namespace-create": {
     metadata: {
-      name: "my-namespace",
+      name: "example-namespace",
       namespace: "system",
     },
     spec: {},
@@ -215,7 +215,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // WAF Policy examples
   "f5xc-api-app-firewall-policy-create": {
     metadata: {
-      name: "my-waf-policy",
+      name: "example-waf-policy",
       namespace: "default",
     },
     spec: {
@@ -230,7 +230,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // Service Policy examples
   "f5xc-api-network-security-service-policy-create": {
     metadata: {
-      name: "my-service-policy",
+      name: "example-service-policy",
       namespace: "default",
     },
     spec: {
@@ -258,14 +258,14 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // Network Firewall examples
   "f5xc-api-network-security-network-firewall-create": {
     metadata: {
-      name: "my-network-firewall",
+      name: "example-network-firewall",
       namespace: "system",
     },
     spec: {
       active_service_policies: {
         policies: [
           {
-            name: "my-service-policy",
+            name: "example-service-policy",
             namespace: "default",
           },
         ],
@@ -276,7 +276,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // Rate Limiter examples
   "f5xc-api-rate-limiting-rate-limiter-create": {
     metadata: {
-      name: "my-rate-limiter",
+      name: "example-rate-limiter",
       namespace: "default",
     },
     spec: {

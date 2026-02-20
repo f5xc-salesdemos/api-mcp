@@ -189,8 +189,8 @@ export function getMutuallyExclusiveFields(toolName: string): MutuallyExclusiveG
  * Smart defaults for common field patterns
  */
 const SMART_DEFAULTS: Record<string, (toolName: string, schema?: ResolvedSchema) => unknown> = {
-  name: (toolName) => `my-${extractResourceFromTool(toolName)}`,
-  "metadata.name": (toolName) => `my-${extractResourceFromTool(toolName)}`,
+  name: (toolName) => `example-${extractResourceFromTool(toolName)}`,
+  "metadata.name": (toolName) => `example-${extractResourceFromTool(toolName)}`,
   namespace: () => "default",
   "metadata.namespace": () => "default",
   port: () => 80,
