@@ -3,8 +3,52 @@ name: Security
 on:
   push:
     branches: [main]
+    paths-ignore:
+      # Documentation and static assets
+      - "docs/**"
+      - "*.md"
+      - "LICENSE"
+      - "icon.png"
+      # GitHub infrastructure (workflows, templates, config)
+      - ".github/**"
+      # Linter and tool configs (validated by Super-Linter, not CI/Security)
+      - ".checkov.yaml"
+      - ".codespellrc"
+      - ".editorconfig"
+      - ".editorconfig-checker.json"
+      - ".gitignore"
+      - ".jscpd.json"
+      - ".markdownlint.json"
+      - ".pre-commit-config.yaml"
+      - ".shellcheckrc"
+      - ".textlintrc"
+      - ".trivyignore"
+      - ".yamllint.yaml"
+      - "zizmor.yaml"
   pull_request:
     branches: [main]
+    paths-ignore:
+      # Documentation and static assets
+      - "docs/**"
+      - "*.md"
+      - "LICENSE"
+      - "icon.png"
+      # GitHub infrastructure (workflows, templates, config)
+      - ".github/**"
+      # Linter and tool configs (validated by Super-Linter, not CI/Security)
+      - ".checkov.yaml"
+      - ".codespellrc"
+      - ".editorconfig"
+      - ".editorconfig-checker.json"
+      - ".gitignore"
+      - ".jscpd.json"
+      - ".markdownlint.json"
+      - ".pre-commit-config.yaml"
+      - ".shellcheckrc"
+      - ".textlintrc"
+      - ".trivyignore"
+      - ".yamllint.yaml"
+      - "zizmor.yaml"
   schedule:
     # Run security scans weekly on Sundays at midnight UTC
     - cron: "0 0 * * 0"
