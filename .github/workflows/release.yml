@@ -4,10 +4,27 @@ on:
   push:
     branches: [main]
     paths-ignore:
+      # Documentation and static assets
       - "docs/**"
-      - "README.md"
-      - "CONTRIBUTING.md"
-      - ".github/workflows/docs.yml"
+      - "*.md"
+      - "LICENSE"
+      - "icon.png"
+      # GitHub infrastructure (workflows, templates, config)
+      - ".github/**"
+      # Linter and tool configs (validated by Super-Linter, not CI/Release)
+      - ".checkov.yaml"
+      - ".codespellrc"
+      - ".editorconfig"
+      - ".editorconfig-checker.json"
+      - ".gitignore"
+      - ".jscpd.json"
+      - ".markdownlint.json"
+      - ".pre-commit-config.yaml"
+      - ".shellcheckrc"
+      - ".textlintrc"
+      - ".trivyignore"
+      - ".yamllint.yaml"
+      - "zizmor.yaml"
   workflow_dispatch:
 
 permissions:
