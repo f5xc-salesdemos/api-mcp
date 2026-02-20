@@ -1,9 +1,9 @@
 ---
 title: Matching Flow
-description: Show Matching Flows.
+description: Manage Matching Flow resources in F5 Distributed Cloud.
 ---
 
-Show VER flows matching the request.
+Matching Flow provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Show VER flows matching the request.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site from which flows are requested. | `-` |
 
 
 ## Configuration Choices
@@ -29,11 +29,11 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `external_service` | - |  |
-| `intf` | - |  |
-| `pod` | - |  |
-| `vn` | - |  |
-| `vn_type` | - |  |
+| `external_service` | External service |  |
+| `intf` | Intf |  |
+| `pod` | Pod |  |
+| `vn` | Vn |  |
+| `vn_type` | Vn type |  |
 
 
 ## Example Usage
@@ -47,23 +47,10 @@ Ask Claude to help you work with Matching Flow resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/matching_flows" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/matching_flows/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/matching_flows" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/ver/matching_flows" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @matching_flow.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/matching_flows/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

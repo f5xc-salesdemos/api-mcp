@@ -1,19 +1,19 @@
 ---
 title: App Firewall
-description: Create Application Firewall.
+description: Manage App Firewall resources in F5 Distributed Cloud.
 ---
 
-List the set of app_firewall in a namespace.
+App Firewall provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-virtual-app-firewall-create` | Create Application Firewall. |
-| `f5xc-api-virtual-app-firewall-get` | GET Application Firewall. |
+| `f5xc-api-virtual-app-firewall-get` | Get Application Firewall. |
 | `f5xc-api-virtual-app-firewall-list` | List Application Firewall. |
-| `f5xc-api-virtual-app-firewall-update` | Replace Application Firewall. |
-| `f5xc-api-virtual-app-firewall-delete` | DELETE Application Firewall. |
+| `f5xc-api-virtual-app-firewall-update` | Update Application Firewall. |
+| `f5xc-api-virtual-app-firewall-delete` | Delete Application Firewall. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of app_firewall in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,8 +42,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.allow_all_response_codes` | - | ✅ Yes |
-| `spec.allowed_response_codes` | - |  |
+| `spec.allow_all_response_codes` | Allow all response codes | ✅ Yes |
+| `spec.allowed_response_codes` | Allowed response codes |  |
 
 :::tip[Recommended Option]
 Use `spec.allow_all_response_codes` for most use cases.
@@ -56,9 +54,9 @@ Use `spec.allow_all_response_codes` for most use cases.
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.custom_anonymization` | - |  |
-| `spec.default_anonymization` | - | ✅ Yes |
-| `spec.disable_anonymization` | - |  |
+| `spec.custom_anonymization` | Custom anonymization |  |
+| `spec.default_anonymization` | Default anonymization | ✅ Yes |
+| `spec.disable_anonymization` | Disable anonymization |  |
 
 :::tip[Recommended Option]
 Use `spec.default_anonymization` for most use cases.
@@ -69,8 +67,8 @@ Use `spec.default_anonymization` for most use cases.
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.blocking_page` | - |  |
-| `spec.use_default_blocking_page` | - | ✅ Yes |
+| `spec.blocking_page` | Blocking page |  |
+| `spec.use_default_blocking_page` | Use default blocking page | ✅ Yes |
 
 :::tip[Recommended Option]
 Use `spec.use_default_blocking_page` for most use cases.
@@ -81,8 +79,8 @@ Use `spec.use_default_blocking_page` for most use cases.
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.bot_protection_setting` | - |  |
-| `spec.default_bot_setting` | - | ✅ Yes |
+| `spec.bot_protection_setting` | Bot protection setting |  |
+| `spec.default_bot_setting` | Default bot setting | ✅ Yes |
 
 :::tip[Recommended Option]
 Use `spec.default_bot_setting` for most use cases.
@@ -93,9 +91,9 @@ Use `spec.default_bot_setting` for most use cases.
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.ai_risk_based_blocking` | - |  |
-| `spec.default_detection_settings` | - | ✅ Yes |
-| `spec.detection_settings` | - |  |
+| `spec.ai_risk_based_blocking` | Ai risk based blocking |  |
+| `spec.default_detection_settings` | Default detection settings | ✅ Yes |
+| `spec.detection_settings` | Detection settings |  |
 
 :::tip[Recommended Option]
 Use `spec.default_detection_settings` for most use cases.
@@ -106,65 +104,13 @@ Use `spec.default_detection_settings` for most use cases.
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.blocking` | - |  |
-| `spec.monitoring` | - | ✅ Yes |
+| `spec.blocking` | Blocking |  |
+| `spec.monitoring` | Monitoring | ✅ Yes |
 
 :::tip[Recommended Option]
 Use `spec.monitoring` for most use cases.
 :::
 
-
-### anonymization_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.custom_anonymization.anonymization_config[].cookie` | - |  |
-| `spec.custom_anonymization.anonymization_config[].http_header` | - |  |
-| `spec.custom_anonymization.anonymization_config[].query_parameter` | - |  |
-
-### false_positive_suppression
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.detection_settings.disable_suppression` | - |  |
-| `spec.detection_settings.enable_suppression` | - |  |
-
-### signatures_staging_settings
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.detection_settings.disable_staging` | - |  |
-| `spec.detection_settings.stage_new_and_updated_signatures` | - |  |
-| `spec.detection_settings.stage_new_signatures` | - |  |
-
-### threat_campaign_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.detection_settings.disable_threat_campaigns` | - |  |
-| `spec.detection_settings.enable_threat_campaigns` | - |  |
-
-### violation_detection_setting
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.detection_settings.default_violation_settings` | - |  |
-| `spec.detection_settings.violation_settings` | - |  |
-
-### attack_type_setting
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.detection_settings.signature_selection_setting.attack_type_settings` | - |  |
-| `spec.detection_settings.signature_selection_setting.default_attack_type_settings` | - |  |
-
-### signature_selection_by_accuracy
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.detection_settings.signature_selection_setting.high_medium_accuracy_signatures` | - |  |
-| `spec.detection_settings.signature_selection_setting.high_medium_low_accuracy_signatures` | - |  |
-| `spec.detection_settings.signature_selection_setting.only_high_accuracy_signatures` | - |  |
 
 
 ## Example Usage
@@ -187,22 +133,20 @@ Ask Claude to help you work with App Firewall resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/app_firewalls" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/app_firewalls" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/app_firewalls/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/app_firewalls/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/app_firewalls" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/app_firewalls" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @app_firewall.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/app_firewalls/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/app_firewalls/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

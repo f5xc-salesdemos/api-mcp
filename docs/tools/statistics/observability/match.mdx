@@ -1,15 +1,15 @@
 ---
 title: Match
-description: GET Alert Policy Match.
+description: Manage Match resources in F5 Distributed Cloud.
 ---
 
-GET Alert Policies that match to a set of alert labels for a namespace.
+Match provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-statistics-match-create` | GET Alert Policy Match. |
+| `f5xc-api-statistics-match-create` | Get Alert Policy Match. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET Alert Policies that match to a set of alert labels for a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Match resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/matchs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/matchs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/matchs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/alert/namespaces/$${PARAM}/alert_policy/match" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @match.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/matchs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

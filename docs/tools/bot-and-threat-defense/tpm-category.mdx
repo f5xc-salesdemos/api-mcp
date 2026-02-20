@@ -1,18 +1,18 @@
 ---
 title: Tpm Category
-description: Create TPM Category.
+description: Manage Tpm Category resources in F5 Distributed Cloud.
 ---
 
-Create a Category object, which is a grouping of APIKeys used for TPM provisioning.
+Tpm Category provides tools for creating, listing, retrieving, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-botandthreatdefense-tpm-category-create` | Create TPM Category. |
-| `f5xc-api-botandthreatdefense-tpm-category-get` | GET TPM Category. |
+| `f5xc-api-botandthreatdefense-tpm-category-get` | Get TPM Category. |
 | `f5xc-api-botandthreatdefense-tpm-category-list` | List TPM Category. |
-| `f5xc-api-botandthreatdefense-tpm-category-update` | Replace TPM Category. |
+| `f5xc-api-botandthreatdefense-tpm-category-update` | Update TPM Category. |
 
 ## Parameters
 
@@ -20,19 +20,17 @@ Create a Category object, which is a grouping of APIKeys used for TPM provisioni
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -55,22 +53,17 @@ Ask Claude to help you work with Tpm Category resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_categorys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/tpm/namespaces/$${PARAM}/tpm_categorys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_categorys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/tpm/namespaces/$${PARAM}/tpm_categorys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_categorys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/tpm/namespaces/$${PARAM}/tpm_categorys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @tpm_category.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_categorys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

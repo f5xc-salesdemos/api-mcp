@@ -1,9 +1,9 @@
 ---
 title: Deployment History
-description: Deployment History.
+description: Manage Deployment History resources in F5 Distributed Cloud.
 ---
 
-GET deployment history.
+Deployment History provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ GET deployment history.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name x-required. | `my-resource` |
+| `namespace` | Namespace x-required. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,8 @@ Ask Claude to help you work with Deployment History resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/deployment_historys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/deployment_historys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/deployment_historys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @deployment_history.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/deployment_historys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/bot_infrastructures/$${PARAM}/deployment_history" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

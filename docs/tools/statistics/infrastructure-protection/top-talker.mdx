@@ -1,9 +1,9 @@
 ---
 title: Top Talker
-description: L3l4 Top talkers Query.
+description: Manage Top Talker resources in F5 Distributed Cloud.
 ---
 
-Request to GET l3l4 Top talkers Traffic data.
+Top Talker provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Request to GET l3l4 Top talkers Traffic data.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `network_id` | NetworkId | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
+| `network_id` | NetworkId The network ID. | `-` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Top Talker resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_talkers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_talkers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_talkers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/graph/l3l4/top_talkers/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @top_talker.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_talkers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

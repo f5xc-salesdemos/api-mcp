@@ -1,19 +1,19 @@
 ---
 title: Filter Set
-description: Create Specification.
+description: Manage Filter Set resources in F5 Distributed Cloud.
 ---
 
-List the set of filter_set in a namespace.
+Filter Set provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-networksecurity-filter-set-create` | Create Specification. |
-| `f5xc-api-networksecurity-filter-set-get` | GET Specification. |
+| `f5xc-api-networksecurity-filter-set-get` | Get Specification. |
 | `f5xc-api-networksecurity-filter-set-list` | List Filter Set. |
-| `f5xc-api-networksecurity-filter-set-update` | Replace Specification. |
-| `f5xc-api-networksecurity-filter-set-delete` | DELETE Filter Set. |
+| `f5xc-api-networksecurity-filter-set-update` | Update Specification. |
+| `f5xc-api-networksecurity-filter-set-delete` | Delete Filter Set. |
 
 ## Parameters
 
@@ -21,39 +21,17 @@ List the set of filter_set in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### field_value
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.filter_fields[].date_field` | - |  |
-| `spec.filter_fields[].filter_expression_field` | - |  |
-| `spec.filter_fields[].string_field` | - |  |
-
-### range_type
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.filter_fields[].date_field.absolute` | - |  |
-| `spec.filter_fields[].date_field.relative` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -76,22 +54,20 @@ Ask Claude to help you work with Filter Set resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/filter_sets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/filter_sets" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/filter_sets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/filter_sets/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/filter_sets" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/filter_sets" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @filter_set.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/filter_sets/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/filter_sets/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

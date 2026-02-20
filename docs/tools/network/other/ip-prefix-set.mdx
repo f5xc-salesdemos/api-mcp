@@ -1,19 +1,19 @@
 ---
 title: IP Prefix Set
-description: Create IP Prefix Set.
+description: Manage IP Prefix Set resources in F5 Distributed Cloud.
 ---
 
-Replace ip_prefix_set replaces an existing object in the storage backend for metadata.namespace.
+IP Prefix Set provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-network-ip-prefix-set-create` | Create IP Prefix Set. |
-| `f5xc-api-network-ip-prefix-set-get` | GET IP Prefix Set. |
+| `f5xc-api-network-ip-prefix-set-get` | Get IP Prefix Set. |
 | `f5xc-api-network-ip-prefix-set-list` | List IP Prefix Set. |
-| `f5xc-api-network-ip-prefix-set-update` | Replace IP Prefix Set. |
-| `f5xc-api-network-ip-prefix-set-delete` | DELETE IP Prefix Set. |
+| `f5xc-api-network-ip-prefix-set-update` | Update IP Prefix Set. |
+| `f5xc-api-network-ip-prefix-set-delete` | Delete IP Prefix Set. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Replace ip_prefix_set replaces an existing object in the storage backend for met
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -56,22 +54,20 @@ Ask Claude to help you work with IP Prefix Set resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ip_prefix_sets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/ip_prefix_sets" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ip_prefix_sets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/ip_prefix_sets/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ip_prefix_sets" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/ip_prefix_sets" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @ip_prefix_set.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ip_prefix_sets/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/ip_prefix_sets/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

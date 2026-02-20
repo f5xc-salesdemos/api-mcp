@@ -1,9 +1,9 @@
 ---
 title: Events Summary
-description: Simple events view.
+description: Manage Events Summary resources in F5 Distributed Cloud.
 ---
 
-Return a list of available event (suitable for an alert)
+Events Summary provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Return a list of available event (suitable for an alert)
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
 
 ### Query Parameters
 
@@ -38,22 +38,7 @@ Ask Claude to help you work with Events Summary resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/events_summarys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/events_summarys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/events_summarys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @events_summary.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/events_summarys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/events_summary" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

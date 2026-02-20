@@ -1,15 +1,15 @@
 ---
 title: HTTP Monitor Detail
-description: GET HTTP Monitor Detail.
+description: Manage HTTP Monitor Detail resources in F5 Distributed Cloud.
 ---
 
-Returns the monitor latency, trend, and health by region.
+HTTP Monitor Detail provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-http-monitor-detail-list` | GET HTTP Monitor Detail. |
+| `f5xc-api-observability-http-monitor-detail-list` | Get HTTP Monitor Detail. |
 
 ## Parameters
 
@@ -17,15 +17,15 @@ Returns the monitor latency, trend, and health by region.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Request namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | End_time. | `-` |
-| `monitor_name` | Monitor_name. X-required | `-` |
-| `start_time` | Start_time. X-required | `-` |
+| `end_time` | End_time. End time for requested monitor data (default: current time) | `-` |
+| `monitor_name` | Monitor_name. X-required Monitor name. | `-` |
+| `start_time` | Start_time. X-required Start time for requested monitor data. | `-` |
 
 
 ## Example Usage
@@ -40,22 +40,7 @@ Ask Claude to help you work with HTTP Monitor Detail resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/http_monitor_details" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/http_monitor_details/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/http_monitor_details" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @http_monitor_detail.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/http_monitor_details/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/http-monitor-detail" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

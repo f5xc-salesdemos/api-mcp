@@ -1,13 +1,9 @@
 ---
 title: Available
-description: List Available API Definitions.
+description: Manage Available resources in F5 Distributed Cloud.
 ---
 
-List API definitions suitable for API Inventory management
-API Definitions which are associated at
-most with one app type.
-DEPRECATED: instead use ListAvailableAPIDefinitions in
-VES.I/o.schema.views.api_definition.publicconfigcustomapi.
+Available provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -21,8 +17,8 @@ VES.I/o.schema.views.api_definition.publicconfigcustomapi.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Name of the HTTP Load Balancer. | `my-resource` |
+| `namespace` | Namespace Namespace of the HTTP Load Balancer. | `system` |
 
 
 ## Example Usage
@@ -36,23 +32,8 @@ Ask Claude to help you work with Available resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/availables" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/availables/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/availables" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @available.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/availables/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/http_loadbalancers/$${PARAM}/api_definitions/available" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

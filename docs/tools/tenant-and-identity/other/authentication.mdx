@@ -1,19 +1,19 @@
 ---
 title: Authentication
-description: Create Authentication.
+description: Manage Authentication resources in F5 Distributed Cloud.
 ---
 
-List the set of authentication in a namespace.
+Authentication provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-tenantandidentity-authentication-create` | Create Authentication. |
-| `f5xc-api-tenantandidentity-authentication-get` | GET Authentication. |
+| `f5xc-api-tenantandidentity-authentication-get` | Get Authentication. |
 | `f5xc-api-tenantandidentity-authentication-list` | List Authentication. |
-| `f5xc-api-tenantandidentity-authentication-update` | Replace Authentication. |
-| `f5xc-api-tenantandidentity-authentication-delete` | DELETE Authentication. |
+| `f5xc-api-tenantandidentity-authentication-update` | Update Authentication. |
+| `f5xc-api-tenantandidentity-authentication-delete` | Delete Authentication. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of authentication in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,28 +42,7 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.oidc_auth` | - |  |
-
-### secret_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cookie_params.auth_hmac` | - |  |
-| `spec.cookie_params.kms_key_hmac` | - |  |
-
-### secret_info_oneof
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cookie_params.auth_hmac.prim_key.blindfold_secret_info` | - |  |
-| `spec.cookie_params.auth_hmac.prim_key.clear_secret_info` | - |  |
-
-### auth_params_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.oidc_auth.oidc_auth_params` | - |  |
-| `spec.oidc_auth.oidc_well_known_config_url` | - |  |
+| `spec.oidc_auth` | Oidc auth |  |
 
 
 ## Example Usage
@@ -88,22 +65,20 @@ Ask Claude to help you work with Authentication resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/authentications" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/authentications" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/authentications/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/authentications/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/authentications" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/authentications" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @authentication.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/authentications/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/authentications/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

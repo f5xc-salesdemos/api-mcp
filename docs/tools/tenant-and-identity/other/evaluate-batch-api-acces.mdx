@@ -1,10 +1,9 @@
 ---
 title: Evaluate Batch API Acces
-description: Evaluate Batch API Access.
+description: Manage Evaluate Batch API Acces resources in F5 Distributed Cloud.
 ---
 
-EvaluateBatchAPIAccess can evaluate multiple lists of API URL, method under a batch of namespaces
-for a given user of a tenant.
+Evaluate Batch API Acces provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,23 +22,10 @@ Ask Claude to help you work with Evaluate Batch API Acces resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/evaluate_batch_api_access" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/evaluate_batch_api_access/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/evaluate_batch_api_access" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/evaluate-batch-api-access" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @evaluate_batch_api_acces.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/evaluate_batch_api_access/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

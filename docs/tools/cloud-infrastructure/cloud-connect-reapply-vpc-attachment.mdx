@@ -1,9 +1,9 @@
 ---
 title: Cloud Connect Reapply VPC Attachment
-description: ReApplyVPCAttachment.
+description: Manage Cloud Connect Reapply VPC Attachment resources in F5 Distributed Cloud.
 ---
 
-RE-applies VPC attachment in a cloud connect config.
+Cloud Connect Reapply VPC Attachment provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Cloud Connect Reapply VPC Attachment resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_connect_reapply_vpc_attachments" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_connect_reapply_vpc_attachments/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_connect_reapply_vpc_attachments" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/sync-cloud-data/namespaces/system/cloud_connect_reapply_vpc_attachment" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @cloud_connect_reapply_vpc_attachment.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_connect_reapply_vpc_attachments/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

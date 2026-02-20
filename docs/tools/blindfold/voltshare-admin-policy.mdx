@@ -1,20 +1,19 @@
 ---
 title: Voltshare Admin Policy
-description: Create VoltShare Admin Policy.
+description: Manage Voltshare Admin Policy resources in F5 Distributed Cloud.
 ---
 
-Replace voltshare_admin_policy replaces an existing object in the storage backend for
-metadata.namespace.
+Voltshare Admin Policy provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-blindfold-voltshare-admin-policy-create` | Create VoltShare Admin Policy. |
-| `f5xc-api-blindfold-voltshare-admin-policy-get` | GET VoltShare Admin Policy. |
+| `f5xc-api-blindfold-voltshare-admin-policy-get` | Get VoltShare Admin Policy. |
 | `f5xc-api-blindfold-voltshare-admin-policy-list` | List VoltShare Admin Policy. |
-| `f5xc-api-blindfold-voltshare-admin-policy-update` | Replace VoltShare Admin Policy. |
-| `f5xc-api-blindfold-voltshare-admin-policy-delete` | DELETE VoltShare Admin Policy. |
+| `f5xc-api-blindfold-voltshare-admin-policy-update` | Update VoltShare Admin Policy. |
+| `f5xc-api-blindfold-voltshare-admin-policy-delete` | Delete VoltShare Admin Policy. |
 
 ## Parameters
 
@@ -22,53 +21,17 @@ metadata.namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### allow_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.author_restrictions.allow_all` | - |  |
-| `spec.author_restrictions.allow_list` | - |  |
-
-### deny_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.author_restrictions.deny_all` | - |  |
-| `spec.author_restrictions.deny_list` | - |  |
-
-### choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.author_restrictions.allow_list.custom_list[].exact_value` | - |  |
-| `spec.author_restrictions.allow_list.custom_list[].regex_pattern` | - |  |
-
-### tenant_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.user_restrictions[].all_tenants` | - |  |
-| `spec.user_restrictions[].individual_users` | - |  |
-| `spec.user_restrictions[].tenant` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -91,22 +54,20 @@ Ask Claude to help you work with Voltshare Admin Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/voltshare_admin_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/secret_management/namespaces/$${PARAM}/voltshare_admin_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/voltshare_admin_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/secret_management/namespaces/$${PARAM}/voltshare_admin_policys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/voltshare_admin_policys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/secret_management/namespaces/$${PARAM}/voltshare_admin_policys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @voltshare_admin_policy.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/voltshare_admin_policys/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/secret_management/namespaces/$${PARAM}/voltshare_admin_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

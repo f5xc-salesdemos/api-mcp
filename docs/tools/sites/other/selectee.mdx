@@ -1,15 +1,15 @@
 ---
 title: Selectee
-description: GET Selectees.
+description: Manage Selectee resources in F5 Distributed Cloud.
 ---
 
-GET the list of objects selected by this Virtual Site based on its selector label expression.
+Selectee provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-sites-selectee-get` | GET Selectees. |
+| `f5xc-api-sites-selectee-get` | Get Selectees. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET the list of objects selected by this Virtual Site based on its selector labe
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Name of the Virtual Site whose Site selections are to be found. | `my-resource` |
+| `namespace` | Namespace Namespace of the Virtual Site whose Site selections are to be found. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,8 @@ Ask Claude to help you work with Selectee resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/selectees" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/selectees/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/selectees" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @selectee.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/selectees/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/virtual_sites/$${PARAM}/selectees" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

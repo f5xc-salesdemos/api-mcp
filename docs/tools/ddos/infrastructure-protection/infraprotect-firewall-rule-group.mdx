@@ -1,19 +1,19 @@
 ---
 title: Infraprotect Firewall Rule Group
-description: Replace DDoS transit Firewall Rule Group.
+description: Manage Infraprotect Firewall Rule Group resources in F5 Distributed Cloud.
 ---
 
-List the set of infraprotect_firewall_rule_group in a namespace.
+Infraprotect Firewall Rule Group provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-ddos-infraprotect-firewall-rule-group-create` | Replace DDoS transit Firewall Rule Group. |
-| `f5xc-api-ddos-infraprotect-firewall-rule-group-get` | GET Infraprotect Firewall Rule Group. |
+| `f5xc-api-ddos-infraprotect-firewall-rule-group-create` | Update DDoS transit Firewall Rule Group. |
+| `f5xc-api-ddos-infraprotect-firewall-rule-group-get` | Get Infraprotect Firewall Rule Group. |
 | `f5xc-api-ddos-infraprotect-firewall-rule-group-list` | List Infraprotect Firewall Rule Group. |
-| `f5xc-api-ddos-infraprotect-firewall-rule-group-update` | Replace DDoS transit Firewall Rule Group. |
-| `f5xc-api-ddos-infraprotect-firewall-rule-group-delete` | DELETE Infraprotect Firewall Rule Group. |
+| `f5xc-api-ddos-infraprotect-firewall-rule-group-update` | Update DDoS transit Firewall Rule Group. |
+| `f5xc-api-ddos-infraprotect-firewall-rule-group-delete` | Delete Infraprotect Firewall Rule Group. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of infraprotect_firewall_rule_group in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -56,22 +54,20 @@ Ask Claude to help you work with Infraprotect Firewall Rule Group resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_firewall_rule_groups" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_firewall_rule_groups" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_firewall_rule_groups/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_firewall_rule_groups/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_firewall_rule_groups" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_firewall_rule_groups" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @infraprotect_firewall_rule_group.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_firewall_rule_groups/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_firewall_rule_groups/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

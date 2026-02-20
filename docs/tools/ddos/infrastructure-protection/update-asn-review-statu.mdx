@@ -1,9 +1,9 @@
 ---
 title: Update Asn Review Statu
-description: Update ASN Review Status.
+description: Manage Update Asn Review Statu resources in F5 Distributed Cloud.
 ---
 
-Update Infraprotect ASN Review Status.
+Update Asn Review Statu provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Update Infraprotect ASN Review Status.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Configuration Choices
@@ -28,9 +28,9 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `review_type_approved` | - |  |
-| `review_type_pending` | - |  |
-| `review_type_rejected` | - |  |
+| `review_type_approved` | Review type approved |  |
+| `review_type_pending` | Review type pending |  |
+| `review_type_rejected` | Review type rejected |  |
 
 
 ## Example Usage
@@ -44,23 +44,10 @@ Ask Claude to help you work with Update Asn Review Statu resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_asn_review_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_asn_review_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_asn_review_status" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_asns/update-asn-review-status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @update_asn_review_statu.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_asn_review_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

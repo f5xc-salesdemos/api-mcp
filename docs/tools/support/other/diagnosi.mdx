@@ -1,15 +1,15 @@
 ---
 title: Diagnosi
-description: Diagnosis
+description: Manage Diagnosi resources in F5 Distributed Cloud.
 ---
 
-GET VPM network information.
+Diagnosi provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-support-diagnosi-list` | Diagnosis |
+| `f5xc-api-support-diagnosi-list` | Diagnosis. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET VPM network information.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `site` | Site Name | `-` |
+| `site` | Site Name Name of the site. | `-` |
 
 ### Query Parameters
 
@@ -38,22 +38,7 @@ Ask Claude to help you work with Diagnosi resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/diagnosis" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/diagnosis/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/diagnosis" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @diagnosi.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/diagnosis/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/system/sites/${PARAM}/vpm/debug/global/diagnosis" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

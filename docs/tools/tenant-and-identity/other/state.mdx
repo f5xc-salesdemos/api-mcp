@@ -1,9 +1,9 @@
 ---
 title: State
-description: List states.
+description: Manage State resources in F5 Distributed Cloud.
 ---
 
-Returns a list of known states of a country. List will be empty if country has no states.
+State provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Returns a list of known states of a country. List will be empty if country has n
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `country_code` | Country code | `-` |
-| `prefix` | Prefix | `-` |
+| `country_code` | Country code 2 characters country code as described in https://en.wikipedia.org/wiki/ISO_3166-1, column `alpha-2`... | `-` |
+| `prefix` | Prefix first two or more characters of the state you look for (can be upper or lower case) | `-` |
 
 
 ## Example Usage
@@ -33,22 +33,7 @@ Ask Claude to help you work with State resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @state.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/countries/${PARAM}/states/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

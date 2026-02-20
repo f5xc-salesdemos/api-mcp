@@ -1,13 +1,9 @@
 ---
 title: Access Log
-description: Access Log Query V2.
+description: Manage Access Log resources in F5 Distributed Cloud.
 ---
 
-Request to GET access logs that matches the criteria in request for a given namespace.
-Typically,
-virtual host is specified as match condition in the request to GET all access logs
-for a virtual
-host. By default, the access logs in the response are sorted in the reverse chronological order.
+Access Log provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -21,7 +17,7 @@ host. By default, the access logs in the response are sorted in the reverse chro
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace fetch access logs for a given namespace. | `system` |
 
 
 ## Example Usage
@@ -35,23 +31,10 @@ Ask Claude to help you work with Access Log resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_logs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_logs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_logs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/access_logs" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @access_log.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_logs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

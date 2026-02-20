@@ -1,15 +1,15 @@
 ---
 title: Get Service Operation Statu
-description: GET Service Operation Status.
+description: Manage Get Service Operation Statu resources in F5 Distributed Cloud.
 ---
 
-GET status of an operation command for a given CDN Loadbalancer.
+Get Service Operation Statu provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-cdn-get-service-operation-statu-create` | GET Service Operation Status. |
+| `f5xc-api-cdn-get-service-operation-statu-create` | Get Service Operation Status. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET status of an operation command for a given CDN Loadbalancer.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Get Service Operation Statu resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_service_operation_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_service_operation_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_service_operation_status" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/cdn/namespaces/$${PARAM}/cdn_loadbalancer/get-service-operation-status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @get_service_operation_statu.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_service_operation_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

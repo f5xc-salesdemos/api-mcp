@@ -1,9 +1,9 @@
 ---
 title: NetworkInteraction
-description: List Network Interactions By Script.
+description: Manage NetworkInteraction resources in F5 Distributed Cloud.
 ---
 
-List all the network interactions for a script depending on start time and end time.
+NetworkInteraction provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,15 +17,15 @@ List all the network interactions for a script depending on start time and end t
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
-| `namespace` | Namespace | `-` |
+| `id` | ID script ID. | `-` |
+| `namespace` | Namespace Namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | X-required | `-` |
-| `start_time` | X-required | `-` |
+| `end_time` | X-required format: unix epoch timestamp in seconds... | `-` |
+| `start_time` | X-required format: unix epoch timestamp in seconds... | `-` |
 
 
 ## Example Usage
@@ -39,23 +39,8 @@ Ask Claude to help you work with NetworkInteraction resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networkInteractions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networkInteractions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networkInteractions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @networkInteraction.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networkInteractions/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/scripts/${PARAM}/networkInteractions" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

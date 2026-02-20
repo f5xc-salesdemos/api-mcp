@@ -1,9 +1,9 @@
 ---
 title: Traceroute
-description: Traceroute.
+description: Manage Traceroute resources in F5 Distributed Cloud.
 ---
 
-Run traceroute to a destination.
+Traceroute provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Run traceroute to a destination.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site from which traceroute is initiated. | `-` |
 
 
 ## Configuration Choices
@@ -29,15 +29,15 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `dest.hostname` | - |  |
-| `dest.ip` | - |  |
+| `dest.hostname` | Hostname |  |
+| `dest.ip` | Ip |  |
 
 ### interface_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `intf.any_intf` | - |  |
-| `intf.intf` | - |  |
+| `intf.any_intf` | Any intf |  |
+| `intf.intf` | Intf |  |
 
 
 ## Example Usage
@@ -51,23 +51,10 @@ Ask Claude to help you work with Traceroute resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/traceroutes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/traceroutes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/traceroutes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/ver/traceroute" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @traceroute.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/traceroutes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

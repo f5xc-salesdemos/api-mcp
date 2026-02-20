@@ -1,9 +1,9 @@
 ---
 title: Verify
-description: Verify Alert Receiver.
+description: Manage Verify resources in F5 Distributed Cloud.
 ---
 
-API to send request to verify Alert Receiver - applicable only for email and sms.
+Verify provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ API to send request to verify Alert Receiver - applicable only for email and sms
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Name of the alert receiver. | `my-resource` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Verify resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/verifys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/verifys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/verifys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/alert/namespaces/$${PARAM}/alert_receivers/$${PARAM}/verify" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @verify.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/verifys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

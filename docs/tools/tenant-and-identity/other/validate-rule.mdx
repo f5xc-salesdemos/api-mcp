@@ -1,9 +1,9 @@
 ---
 title: Validate Rule
-description: Validate Rules.
+description: Manage Validate Rule resources in F5 Distributed Cloud.
 ---
 
-ValidateRules returns whether the value is valid or not for the specified validator rules.
+Validate Rule provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Validate Rule resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_rules" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_rules/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_rules" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/system/validate_rules" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @validate_rule.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_rules/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,13 +1,9 @@
 ---
 title: Validate Contact
-description: Validate contact.
+description: Manage Validate Contact resources in F5 Distributed Cloud.
 ---
 
-It validates that:
-* the provided country and zip code are not empty
-* the provided country is in
-the configured list of countries
-* a provided zip code matches a regexp for a given country.
+Validate Contact provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -26,23 +22,10 @@ Ask Claude to help you work with Validate Contact resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_contacts" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_contacts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_contacts" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/no_auth/validate_contact" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @validate_contact.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_contacts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,16 +1,16 @@
 ---
 title: Bot Detection Rule
-description: Deploy Bot Detection Rules.
+description: Manage Bot Detection Rule resources in F5 Distributed Cloud.
 ---
 
-List the set of bot_detection_rule in a namespace.
+Bot Detection Rule provides tools for creating, listing, and retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-bot-detection-rule-create` | Deploy Bot Detection Rules. |
-| `f5xc-api-shape-bot-detection-rule-get` | GET Bot Detection Rule. |
+| `f5xc-api-shape-bot-detection-rule-get` | Get Bot Detection Rule. |
 | `f5xc-api-shape-bot-detection-rule-list` | List Bot Detection Rule. |
 
 ## Parameters
@@ -19,17 +19,17 @@ List the set of bot_detection_rule in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `name` | Name | `-` |
+| `namespace` | Namespace... | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -52,22 +52,17 @@ Ask Claude to help you work with Bot Detection Rule resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_detection_rules" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/bot_detection_rules" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_detection_rules/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/bot_detection_rules/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_detection_rules" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/bot/custom/namespaces/$${PARAM}/bot_detection_rules" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @bot_detection_rule.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_detection_rules/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

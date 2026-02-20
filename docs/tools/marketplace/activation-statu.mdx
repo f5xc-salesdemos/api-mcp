@@ -1,10 +1,9 @@
 ---
 title: Activation Statu
-description: Addon Service Activation Status.
+description: Manage Activation Statu resources in F5 Distributed Cloud.
 ---
 
-GET current subscription status for an addon service. Response can indicate whether the service was
-successfully subscribed or in pending state.
+Activation Statu provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ successfully subscribed or in pending state.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `addon_service` | Addon_service | `-` |
+| `addon_service` | Addon_service Name of the addon_service. | `-` |
 
 
 ## Example Usage
@@ -33,22 +32,7 @@ Ask Claude to help you work with Activation Statu resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/activation_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/activation_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/activation_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @activation_statu.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/activation_status/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/addon_services/${PARAM}/activation-status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

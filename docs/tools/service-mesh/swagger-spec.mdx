@@ -1,15 +1,15 @@
 ---
 title: Swagger Spec
-description: GET Swagger Spec for App Type.
+description: Manage Swagger Spec resources in F5 Distributed Cloud.
 ---
 
-GET the corresponding Swagger spec for the given app type.
+Swagger Spec provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-servicemesh-swagger-spec-list` | GET Swagger Spec for App Type. |
+| `f5xc-api-servicemesh-swagger-spec-list` | Get Swagger Spec for App Type. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET the corresponding Swagger spec for the given app type.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `app_type_name` | App Type | `-` |
-| `namespace` | Namespace | `-` |
+| `app_type_name` | App Type App Type for current request. | `-` |
+| `namespace` | Namespace Namespace of the App type for current request. | `system` |
 
 
 ## Example Usage
@@ -33,22 +33,7 @@ Ask Claude to help you work with Swagger Spec resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/swagger_specs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/swagger_specs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/swagger_specs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @swagger_spec.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/swagger_specs/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/app_types/${PARAM}/api_endpoints/swagger_spec" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

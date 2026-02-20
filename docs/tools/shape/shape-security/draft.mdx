@@ -1,16 +1,16 @@
 ---
 title: Draft
-description: Save draft.
+description: Manage Draft resources in F5 Distributed Cloud.
 ---
 
-Getbotdetectionrulesdraft CustomAPI.
+Draft provides tools for creating, listing, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-draft-create` | Save draft. |
-| `f5xc-api-shape-draft-list` | GET bot detection rules which are in draft state. |
+| `f5xc-api-shape-draft-list` | Get bot detection rules which are in draft state. |
 | `f5xc-api-shape-draft-delete` | Discard draft. |
 
 ## Parameters
@@ -19,7 +19,7 @@ Getbotdetectionrulesdraft CustomAPI.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -38,22 +38,16 @@ Ask Claude to help you work with Draft resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/drafts" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/drafts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/custom/namespaces/$${PARAM}/bot_detection_rules/draft" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/drafts" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/bot/custom/namespaces/$${PARAM}/bot_detection_rules/draft" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @draft.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/drafts/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/shape/bot/custom/namespaces/$${PARAM}/bot_detection_rules/draft" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

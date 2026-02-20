@@ -1,9 +1,9 @@
 ---
 title: Group
-description: Create group with users.
+description: Manage Group resources in F5 Distributed Cloud.
 ---
 
-List groups based on the given filter.
+Group provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -12,8 +12,8 @@ List groups based on the given filter.
 | `f5xc-api-tenantandidentity-group-create` | Create group with users. |
 | `f5xc-api-tenantandidentity-group-get` | List group based on ID. |
 | `f5xc-api-tenantandidentity-group-list` | List group based on filters. |
-| `f5xc-api-tenantandidentity-group-update` | Replace group based on ID. |
-| `f5xc-api-tenantandidentity-group-delete` | DELETE group based on ID. |
+| `f5xc-api-tenantandidentity-group-update` | Update group based on ID. |
+| `f5xc-api-tenantandidentity-group-delete` | Delete group based on ID. |
 | `f5xc-api-tenantandidentity-group-patch` | PATCH group based on ID. |
 
 ## Parameters
@@ -22,13 +22,13 @@ List groups based on the given filter.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
+| `id` | ID x-required... | `-` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `excludedAttributes` | Members"]" | `-` |
+| `excludedAttributes` | Members"]" A multi-valued list of strings indicating the names of resource attributes... | `-` |
 | `count` | The number of entries after filter. | `-` |
 | `filter` | Filter to be used for filtering objects. | `-` |
 | `page` | Start offset. | `-` |
@@ -54,22 +54,20 @@ Ask Claude to help you work with Group resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Groups" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Groups" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Groups/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Groups/${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Groups" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Groups" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @Group.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Groups/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Groups/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

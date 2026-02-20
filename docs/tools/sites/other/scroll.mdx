@@ -1,13 +1,9 @@
 ---
 title: Scroll
-description: Firewall Logs Scroll Query.
+description: Manage Scroll resources in F5 Distributed Cloud.
 ---
 
-The response for firewall log query contain no more than 500 records.
-Scroll request is used scroll
-through more than 500 records or all records that matched the criteria in the
-firewall log query in
-multiple batches. EOF is indicated by empty scroll_id in the response.
+Scroll provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,7 +18,7 @@ multiple batches. EOF is indicated by empty scroll_id in the response.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace fetch the log messages scoped by namespace. | `system` |
 
 ### Query Parameters
 
@@ -47,22 +43,13 @@ Ask Claude to help you work with Scroll resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/scrolls" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/scrolls/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/firewall_logs/scroll" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/scrolls" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/firewall_logs/scroll" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @scroll.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/scrolls/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

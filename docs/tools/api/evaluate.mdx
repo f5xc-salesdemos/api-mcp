@@ -1,12 +1,9 @@
 ---
 title: Evaluate
-description: Evaluate API Group.
+description: Manage Evaluate resources in F5 Distributed Cloud.
 ---
 
-Evaluate API Group Builder against all API endpoints associated with the referenced object and
-return the resulting API Group.
-For example, if the referenced object is an HTTP LB then all
-discovered and imported endpoints are associated with it.
+Evaluate provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -20,7 +17,7 @@ discovered and imported endpoints are associated with it.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace of the API Group for the current request. | `system` |
 
 
 ## Configuration Choices
@@ -31,9 +28,9 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `api_group.bigip_virtual_server` | - |  |
-| `api_group.cdn_loadbalancer` | - |  |
-| `api_group.http_loadbalancer` | - |  |
+| `api_group.bigip_virtual_server` | Bigip virtual server |  |
+| `api_group.cdn_loadbalancer` | Cdn loadbalancer |  |
+| `api_group.http_loadbalancer` | Http loadbalancer |  |
 
 
 ## Example Usage
@@ -47,23 +44,10 @@ Ask Claude to help you work with Evaluate resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/evaluates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/evaluates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/evaluates" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/app_api_groups/evaluate" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @evaluate.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/evaluates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

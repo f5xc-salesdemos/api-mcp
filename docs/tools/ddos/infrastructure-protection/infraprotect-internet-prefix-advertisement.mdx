@@ -1,19 +1,21 @@
 ---
 title: Infraprotect Internet Prefix Advertisement
-description: Create DDoS transit Internet Prefix.
+description: |-
+  Manage Infraprotect Internet Prefix Advertisement resources in F5 Distributed
+    Cloud.
 ---
 
-List the set of infraprotect_internet_prefix_advertisement in a namespace.
+Infraprotect Internet Prefix Advertisement provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-ddos-infraprotect-internet-prefix-advertisement-create` | Create DDoS transit Internet Prefix. |
-| `f5xc-api-ddos-infraprotect-internet-prefix-advertisement-get` | GET Infraprotect Internet Prefix. |
+| `f5xc-api-ddos-infraprotect-internet-prefix-advertisement-get` | Get Infraprotect Internet Prefix. |
 | `f5xc-api-ddos-infraprotect-internet-prefix-advertisement-list` | List Infraprotect Internet Prefix Advertisement. |
-| `f5xc-api-ddos-infraprotect-internet-prefix-advertisement-update` | Replace DDoS transit Internet Prefix. |
-| `f5xc-api-ddos-infraprotect-internet-prefix-advertisement-delete` | DELETE Infraprotect Internet Prefix Advertisement. |
+| `f5xc-api-ddos-infraprotect-internet-prefix-advertisement-update` | Update DDoS transit Internet Prefix. |
+| `f5xc-api-ddos-infraprotect-internet-prefix-advertisement-delete` | Delete Infraprotect Internet Prefix Advertisement. |
 
 ## Parameters
 
@@ -21,19 +23,17 @@ List the set of infraprotect_internet_prefix_advertisement in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,15 +44,15 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.activation_announce` | - |  |
-| `spec.activation_withdraw` | - |  |
+| `spec.activation_announce` | Activation announce |  |
+| `spec.activation_withdraw` | Activation withdraw |  |
 
 ### expiration
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.expiration_never` | - |  |
-| `spec.expiration_timestamp` | - |  |
+| `spec.expiration_never` | Expiration never |  |
+| `spec.expiration_timestamp` | Expiration timestamp |  |
 
 
 ## Example Usage
@@ -75,22 +75,20 @@ Ask Claude to help you work with Infraprotect Internet Prefix Advertisement reso
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_internet_prefix_advertisements" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_internet_prefix_advertisements" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_internet_prefix_advertisements/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_internet_prefix_advertisements/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_internet_prefix_advertisements" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_internet_prefix_advertisements" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @infraprotect_internet_prefix_advertisement.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_internet_prefix_advertisements/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_internet_prefix_advertisements/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

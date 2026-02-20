@@ -1,15 +1,15 @@
 ---
 title: Health
-description: Health
+description: Manage Health resources in F5 Distributed Cloud.
 ---
 
-GET VPM health information.
+Health provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-support-health-list` | Health |
+| `f5xc-api-support-health-list` | Health. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET VPM health information.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `site` | Site Name | `-` |
+| `site` | Site Name Name of the site. | `-` |
 
 ### Query Parameters
 
@@ -38,22 +38,7 @@ Ask Claude to help you work with Health resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/healths" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/healths/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/healths" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @health.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/healths/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/system/sites/${PARAM}/vpm/debug/global/health" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,9 +1,9 @@
 ---
 title: ServiceProviderConfig
-description: List service provider configs.
+description: Manage ServiceProviderConfig resources in F5 Distributed Cloud.
 ---
 
-Listserviceproviderconfig CustomPublicAPI.
+ServiceProviderConfig provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with ServiceProviderConfig resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ServiceProviderConfigs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ServiceProviderConfigs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ServiceProviderConfigs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @ServiceProviderConfig.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ServiceProviderConfigs/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/ServiceProviderConfig" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

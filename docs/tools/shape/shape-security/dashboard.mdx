@@ -1,15 +1,15 @@
 ---
 title: Dashboard
-description: GET Script Overview.
+description: Manage Dashboard resources in F5 Distributed Cloud.
 ---
 
-GET script overview data for a script depending on start time and end time.
+Dashboard provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-dashboard-get` | GET Script Overview. |
+| `f5xc-api-shape-dashboard-get` | Get Script Overview. |
 
 ## Parameters
 
@@ -17,16 +17,16 @@ GET script overview data for a script depending on start time and end time.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
-| `namespace` | Namespace | `-` |
+| `id` | ID Script ID. | `-` |
+| `namespace` | Namespace Namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | X-required | `-` |
-| `start_time` | X-required | `-` |
-| `type` | X-required | `-` |
+| `end_time` | X-required format: unix epoch timestamp in seconds... | `-` |
+| `start_time` | X-required format: unix epoch timestamp in seconds... | `-` |
+| `type` | X-required Filter events based on type of behaviors... | `-` |
 
 
 ## Example Usage
@@ -40,23 +40,8 @@ Ask Claude to help you work with Dashboard resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dashboards" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dashboards/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dashboards" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @dashboard.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dashboards/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/scripts/${PARAM}/dashboard" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

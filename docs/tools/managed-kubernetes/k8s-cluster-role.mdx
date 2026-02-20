@@ -1,22 +1,19 @@
 ---
 title: K8S Cluster Role
-description: Create Configuration Specification.
+description: Manage K8S Cluster Role resources in F5 Distributed Cloud.
 ---
 
-Replacing an k8s_cluster_role object will update the object by replacing the existing spec with the
-provided one.
-For read-then-write operations a resourceVersion mismatch will occur if the object was
-modified between the read and write.
+K8S Cluster Role provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-managedkubernetes-k8s-cluster-role-create` | Create Configuration Specification. |
-| `f5xc-api-managedkubernetes-k8s-cluster-role-get` | GET Configuration Specification. |
+| `f5xc-api-managedkubernetes-k8s-cluster-role-get` | Get Configuration Specification. |
 | `f5xc-api-managedkubernetes-k8s-cluster-role-list` | List K8s Cluster Role. |
-| `f5xc-api-managedkubernetes-k8s-cluster-role-update` | Replace Configuration Specification. |
-| `f5xc-api-managedkubernetes-k8s-cluster-role-delete` | DELETE K8s Cluster Role. |
+| `f5xc-api-managedkubernetes-k8s-cluster-role-update` | Update Configuration Specification. |
+| `f5xc-api-managedkubernetes-k8s-cluster-role-delete` | Delete K8s Cluster Role. |
 
 ## Parameters
 
@@ -24,19 +21,17 @@ modified between the read and write.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -47,16 +42,9 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.k8s_cluster_role_selector` | - |  |
-| `spec.policy_rule_list` | - |  |
-| `spec.yaml` | - |  |
-
-### resource_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.policy_rule_list.policy_rule[].non_resource_url_list` | - |  |
-| `spec.policy_rule_list.policy_rule[].resource_list` | - |  |
+| `spec.k8s_cluster_role_selector` | K8s cluster role selector |  |
+| `spec.policy_rule_list` | Policy rule list |  |
+| `spec.yaml` | Yaml |  |
 
 
 ## Example Usage
@@ -79,22 +67,20 @@ Ask Claude to help you work with K8S Cluster Role resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_cluster_roles" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_cluster_roles" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_cluster_roles/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_cluster_roles/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_cluster_roles" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_cluster_roles" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @k8s_cluster_role.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_cluster_roles/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_cluster_roles/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

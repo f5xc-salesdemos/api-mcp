@@ -1,9 +1,9 @@
 ---
 title: Bot Network Policie
-description: List All Bot Network Policies And Versions.
+description: Manage Bot Network Policie resources in F5 Distributed Cloud.
 ---
 
-GET all bot network policies and versions.
+Bot Network Policie provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ GET all bot network policies and versions.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace namespace is used to scope the query. | `system` |
 
 
 ## Example Usage
@@ -32,22 +32,7 @@ Ask Claude to help you work with Bot Network Policie resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_network_policies" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_network_policies/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_network_policies" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @bot_network_policie.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_network_policies/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/custom/namespaces/$${PARAM}/bot_network_policies" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

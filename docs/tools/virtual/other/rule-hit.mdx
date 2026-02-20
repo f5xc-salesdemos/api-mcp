@@ -1,13 +1,9 @@
 ---
 title: Rule Hit
-description: Client Rule Hits Metrics.
+description: Manage Rule Hit resources in F5 Distributed Cloud.
 ---
 
-GET number of rule hits per client for a given namespace.
-The rule hits counter can be aggregated
-based on one or more labels listed here.
-NAMESPACE, APP_TYPE, VIRTUAL_HOST, SITE, SERVICE, INSTANCE,
-WAF_INSTANCE_ID, RULE_ID, RULE_SEVERITY, RULE_TAG.
+Rule Hit provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -21,7 +17,7 @@ WAF_INSTANCE_ID, RULE_ID, RULE_SEVERITY, RULE_TAG.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -35,23 +31,10 @@ Ask Claude to help you work with Rule Hit resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/rule_hits" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/rule_hits/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/rule_hits" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/wafs/metrics/client/rule_hits" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @rule_hit.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/rule_hits/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

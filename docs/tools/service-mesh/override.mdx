@@ -1,15 +1,15 @@
 ---
 title: Override
-description: GET Override.
+description: Manage Override resources in F5 Distributed Cloud.
 ---
 
-GET all override for API endpoints configured for this App type.
+Override provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-servicemesh-override-list` | GET Override. |
+| `f5xc-api-servicemesh-override-list` | Get Override. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET all override for API endpoints configured for this App type.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `app_type_name` | App Type | `-` |
-| `namespace` | Namespace | `-` |
+| `app_type_name` | App Type App Type for current request. | `-` |
+| `namespace` | Namespace Namespace of the App type for current request. | `system` |
 
 
 ## Example Usage
@@ -33,22 +33,7 @@ Ask Claude to help you work with Override resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/overrides" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/overrides/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/overrides" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @override.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/overrides/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/app_types/${PARAM}/overrides" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

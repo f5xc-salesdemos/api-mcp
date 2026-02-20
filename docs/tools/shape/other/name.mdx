@@ -1,15 +1,15 @@
 ---
 title: name
-description: GET Mobile SDK.
+description: Manage name resources in F5 Distributed Cloud.
 ---
 
-GetMobileSDK is an API to download particular version of SDK.
+name provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-name-get` | GET Mobile SDK. |
+| `f5xc-api-shape-name-get` | Get Mobile SDK. |
 
 ## Parameters
 
@@ -17,15 +17,15 @@ GetMobileSDK is an API to download particular version of SDK.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `version` | Version | `-` |
+| `name` | Name x-required... | `my-resource` |
+| `namespace` | Namespace x-required... | `system` |
+| `version` | Version Version of the stored_object in "v\{n\}-\{YY\}-\{MM\}-\{DD\}" formatted string, where n is version number and YY/MM/DD is year, month and date. | `-` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `object_type` | X-required | `-` |
+| `object_type` | X-required Type of the stored_object. | `-` |
 
 
 ## Example Usage
@@ -39,23 +39,8 @@ Ask Claude to help you work with name resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/names" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/names/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/names" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @name.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/names/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/object_store/namespaces/$${PARAM}/stored_objects/mobile-sdk/$${PARAM}/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

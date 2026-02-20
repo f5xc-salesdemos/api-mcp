@@ -1,16 +1,16 @@
 ---
 title: Overview
-description: Top Latency Overview.
+description: Manage Overview resources in F5 Distributed Cloud.
 ---
 
-GET SAFE Analyst Station Dashboard Transaction Breakdown request.
+Overview provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-overview-create` | Top Latency Overview. |
-| `f5xc-api-shape-overview-list` | GET SAFE Overview. |
+| `f5xc-api-shape-overview-list` | Get SAFE Overview. |
 
 ## Parameters
 
@@ -18,7 +18,7 @@ GET SAFE Analyst Station Dashboard Transaction Breakdown request.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 ### Query Parameters
 
@@ -45,22 +45,13 @@ Ask Claude to help you work with Overview resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/overviews" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/overviews/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/stats/overview" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/overviews" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/reporting/top/latency/overview" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @overview.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/overviews/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

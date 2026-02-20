@@ -1,15 +1,15 @@
 ---
 title: Ping
-description: Ping
+description: Manage Ping resources in F5 Distributed Cloud.
 ---
 
-Run ping to a destination.
+Ping provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-support-ping-create` | Ping |
+| `f5xc-api-support-ping-create` | Ping. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ Run ping to a destination.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site from which ping is initiated. | `-` |
 
 
 ## Configuration Choices
@@ -29,15 +29,15 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `dest.hostname` | - |  |
-| `dest.ip` | - |  |
+| `dest.hostname` | Hostname |  |
+| `dest.ip` | Ip |  |
 
 ### interface_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `intf.any_intf` | - |  |
-| `intf.intf` | - |  |
+| `intf.any_intf` | Any intf |  |
+| `intf.intf` | Intf |  |
 
 
 ## Example Usage
@@ -51,23 +51,10 @@ Ask Claude to help you work with Ping resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pings" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pings/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pings" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/ver/ping" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @ping.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pings/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

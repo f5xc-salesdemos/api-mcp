@@ -1,9 +1,9 @@
 ---
 title: Force Delete
-description: Force DELETE view.
+description: Manage Force Delete resources in F5 Distributed Cloud.
 ---
 
-Force DELETE view object. This can result in staled objects in cloud provider.
+Force Delete provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,9 +17,9 @@ Force DELETE view object. This can result in staled objects in cloud provider.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `view_kind` | Kind of View | `-` |
-| `view_name` | Name of view | `-` |
+| `namespace` | Namespace Namespace for the label to be retrieved. | `system` |
+| `view_kind` | Kind of View Kind of view of which terraform parameters are requested e.g. Aws_vpc_site, azure_vnet_site. | `-` |
+| `view_name` | Name of view Name of the view for which terraform parameters are requested. | `-` |
 
 
 ## Example Usage
@@ -33,23 +33,10 @@ Ask Claude to help you work with Force Delete resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/force_deletes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/force_deletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/force_deletes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/terraform/namespaces/$${PARAM}/terraform/${PARAM}/${PARAM}/force-delete" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @force_delete.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/force_deletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

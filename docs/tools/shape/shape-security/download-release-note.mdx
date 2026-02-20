@@ -1,9 +1,9 @@
 ---
 title: Download Release Note
-description: Download BotDetection Updates Release Notes.
+description: Manage Download Release Note resources in F5 Distributed Cloud.
 ---
 
-Downloadbotdetectionupdatesreleasenotes CustomAPI.
+Download Release Note provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,13 +17,13 @@ Downloadbotdetectionupdatesreleasenotes CustomAPI.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace x-required... | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `deployment_id` | X-required | `-` |
+| `deployment_id` | X-required Unique identifier for a deployment. | `-` |
 
 
 ## Example Usage
@@ -38,22 +38,7 @@ Ask Claude to help you work with Download Release Note resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/download_release_notes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/download_release_notes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/download_release_notes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @download_release_note.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/download_release_notes/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/bot_detection_updates/download_release_notes" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

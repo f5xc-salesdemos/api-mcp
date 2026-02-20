@@ -1,17 +1,17 @@
 ---
 title: Cloud Region
-description: GET Cloud Region.
+description: Manage Cloud Region resources in F5 Distributed Cloud.
 ---
 
-List the set of cloud_region in a namespace.
+Cloud Region provides tools for listing, retrieving, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-cloudinfrastructure-cloud-region-get` | GET Cloud Region. |
+| `f5xc-api-cloudinfrastructure-cloud-region-get` | Get Cloud Region. |
 | `f5xc-api-cloudinfrastructure-cloud-region-list` | List Cloud Region. |
-| `f5xc-api-cloudinfrastructure-cloud-region-update` | Replace Cloud Region. |
+| `f5xc-api-cloudinfrastructure-cloud-region-update` | Update Cloud Region. |
 
 ## Parameters
 
@@ -19,19 +19,17 @@ List the set of cloud_region in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
-| `metadata.namespace` | Namespace | `-` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
+| `namespace` | Namespace The namespace in which the configuration object is present. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -42,8 +40,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.default_policy_group` | - |  |
-| `spec.policy_group` | - |  |
+| `spec.default_policy_group` | Default policy group |  |
+| `spec.policy_group` | Policy group |  |
 
 
 ## Example Usage
@@ -62,22 +60,11 @@ Ask Claude to help you work with Cloud Region resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_regions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/cloud_regions" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_regions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_regions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @cloud_region.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_regions/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/cloud_regions/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

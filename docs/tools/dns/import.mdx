@@ -1,9 +1,9 @@
 ---
 title: Import
-description: Import F5 Cloud Services DNS Zone.
+description: Manage Import resources in F5 Distributed Cloud.
 ---
 
-Import F5 Cloud Services DNS Zone.
+Import provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -19,8 +19,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `configuration.adns_service` | - |  |
-| `configuration.dns_service` | - |  |
+| `configuration.adns_service` | Adns service |  |
+| `configuration.dns_service` | Dns service |  |
 
 
 ## Example Usage
@@ -34,23 +34,10 @@ Ask Claude to help you work with Import resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/imports" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/imports/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/imports" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/system/dns_zone/import" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @import.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/imports/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

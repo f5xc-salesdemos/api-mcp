@@ -1,11 +1,9 @@
 ---
 title: Unset
-description: Unset admin ntfn preference.
+description: Manage Unset resources in F5 Distributed Cloud.
 ---
 
-Unset admin ntfn preference unsets specific admin notification preference for the user and store it
-in user settings object.
-It can be used in email newsletters to allow easy unsubscribing for users.
+Unset provides tools for updating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -20,23 +18,4 @@ Ask Claude to help you work with Unset resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unsets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unsets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unsets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @unset.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unsets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

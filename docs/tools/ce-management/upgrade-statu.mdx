@@ -1,15 +1,15 @@
 ---
 title: Upgrade Statu
-description: GET Upgrade Status.
+description: Manage Upgrade Statu resources in F5 Distributed Cloud.
 ---
 
-API to GET upgrade status of a site.
+Upgrade Statu provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-cemanagement-upgrade-statu-get` | GET Upgrade Status. |
+| `f5xc-api-cemanagement-upgrade-statu-get` | Get Upgrade Status. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ API to GET upgrade status of a site.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Fetch upgrade status for the name of site. | `my-resource` |
+| `namespace` | Namespace Fetch upgrade status for the given namespace. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,8 @@ Ask Claude to help you work with Upgrade Statu resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgrade_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgrade_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgrade_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @upgrade_statu.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgrade_status/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/maurice/namespaces/$${PARAM}/sites/$${PARAM}/upgrade_status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,17 +1,15 @@
 ---
 title: All Ns Alert
-description: GET Alerts.
+description: Manage All Ns Alert resources in F5 Distributed Cloud.
 ---
 
-For system namespace, all the alerts for the tenant matching the filter specified in the
-request
-will be returned in the response.
+All Ns Alert provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-statistics-all-ns-alert-list` | GET Alerts. |
+| `f5xc-api-statistics-all-ns-alert-list` | Get Alerts. |
 
 ## Parameters
 
@@ -19,10 +17,10 @@ will be returned in the response.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `filter` | HighDiskUsage\", severity=\"critical\"\}" | `-` |
+| `filter` | HighDiskUsage\", severity=\"critical\"\}" List of matchers to filter alerts by. | `-` |
 | `inactive` | If set to true, active alerts will not be returned in the response. | `-` |
 | `inhibited` | Show inhibited alerts - alerts that are suppressed if certain other alerts are firing. | `-` |
-| `namespace` | Namespace to scope the listing of alerts. | `-` |
+| `namespace` | Namespace to scope the listing of alerts. When namespace = "system", all alerts for the tenant will be returned. | `system` |
 | `silenced` | Show silenced alerts - alerts that are muted based on the matchers configured in the alert manager. | `-` |
 | `unprocessed` | Show unprocessed alerts. | `-` |
 
@@ -39,22 +37,7 @@ Ask Claude to help you work with All Ns Alert resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/all_ns_alerts" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/all_ns_alerts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/all_ns_alerts" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @all_ns_alert.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/all_ns_alerts/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/all_ns_alerts" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

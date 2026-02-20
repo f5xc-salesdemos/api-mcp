@@ -1,19 +1,19 @@
 ---
 title: Log Receiver
-description: Create Log Receiver.
+description: Manage Log Receiver resources in F5 Distributed Cloud.
 ---
 
-Replaces the content of an Log Receiver object.
+Log Receiver provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-statistics-log-receiver-create` | Create Log Receiver. |
-| `f5xc-api-statistics-log-receiver-get` | GET Log Receiver. |
+| `f5xc-api-statistics-log-receiver-get` | Get Log Receiver. |
 | `f5xc-api-statistics-log-receiver-list` | List Log Receiver. |
-| `f5xc-api-statistics-log-receiver-update` | Replace Log Receiver. |
-| `f5xc-api-statistics-log-receiver-delete` | DELETE Log Receiver. |
+| `f5xc-api-statistics-log-receiver-update` | Update Log Receiver. |
+| `f5xc-api-statistics-log-receiver-delete` | Delete Log Receiver. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Replaces the content of an Log Receiver object.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,56 +42,13 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.syslog` | - |  |
+| `spec.syslog` | Syslog |  |
 
 ### where_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.site_local` | - |  |
-
-### format_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.syslog.syslog_rfc5424` | - |  |
-
-### mode_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.syslog.tcp_server` | - |  |
-| `spec.syslog.tls_server` | - |  |
-| `spec.syslog.udp_server` | - |  |
-
-### ca_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.syslog.tls_server.trusted_ca_url` | - |  |
-| `spec.syslog.tls_server.volterra_ca` | - |  |
-
-### mtls_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.syslog.tls_server.mtls_disabled` | - |  |
-| `spec.syslog.tls_server.mtls_enable` | - |  |
-
-### port_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.syslog.tls_server.default_https_port` | - |  |
-| `spec.syslog.tls_server.default_syslog_tls_port` | - |  |
-| `spec.syslog.tls_server.port` | - |  |
-
-### secret_info_oneof
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.syslog.tls_server.mtls_enable.key_url.blindfold_secret_info` | - |  |
-| `spec.syslog.tls_server.mtls_enable.key_url.clear_secret_info` | - |  |
+| `spec.site_local` | Site local |  |
 
 
 ## Example Usage
@@ -116,22 +71,20 @@ Ask Claude to help you work with Log Receiver resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/log_receivers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/log_receivers" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/log_receivers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/log_receivers/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/log_receivers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/log_receivers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @log_receiver.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/log_receivers/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/log_receivers/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Set Vpn Tunnel
-description: Configure VPN Tunnels.
+description: Manage Set Vpn Tunnel resources in F5 Distributed Cloud.
 ---
 
-Configure VPC IP prefix set.
+Set Vpn Tunnel provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Configure VPC IP prefix set.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Name of the object to be configured. | `my-resource` |
+| `namespace` | Namespace Namespace for the object to be configured. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Set Vpn Tunnel resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/set_vpn_tunnels" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/set_vpn_tunnels/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/set_vpn_tunnels" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/aws_tgw_site/$${PARAM}/set_vpn_tunnels" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @set_vpn_tunnel.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/set_vpn_tunnels/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

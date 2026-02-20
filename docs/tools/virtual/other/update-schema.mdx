@@ -1,13 +1,9 @@
 ---
 title: Update Schema
-description: Update API Endpoints Schemas.
+description: Manage Update Schema resources in F5 Distributed Cloud.
 ---
 
-Update the payload schema for the specified endpoints or all pending changes if empty list is
-provided.
-NOTE: only API endpoints returned by a call to `GetAPIEndpointsSchemaStates` can be
-updated.
-DEPRECATED. USE virtual host custom API UpdateAPIEndpointsSchemas.
+Update Schema provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -21,8 +17,8 @@ DEPRECATED. USE virtual host custom API UpdateAPIEndpointsSchemas.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name The name of the HTTP Loadbalancer for the current request. | `my-resource` |
+| `namespace` | Namespace The namespace of the HTTP Loadbalancer for the current request. | `system` |
 
 
 ## Example Usage
@@ -36,23 +32,10 @@ Ask Claude to help you work with Update Schema resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_schemas" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_schemas/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_schemas" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/http_loadbalancers/$${PARAM}/api_inventory/api_endpoints/update_schemas" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @update_schema.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_schemas/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

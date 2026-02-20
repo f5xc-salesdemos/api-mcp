@@ -1,16 +1,16 @@
 ---
 title: ResourceType
-description: GET supported resources type.
+description: Manage ResourceType resources in F5 Distributed Cloud.
 ---
 
-Getresourcetypesbyid CustomPublicAPI.
+ResourceType provides tools for listing, and retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-tenantandidentity-resourcetype-get` | GET supported resources type. |
-| `f5xc-api-tenantandidentity-resourcetype-list` | GET supported resources type. |
+| `f5xc-api-tenantandidentity-resourcetype-get` | Get supported resources type. |
+| `f5xc-api-tenantandidentity-resourcetype-list` | Get supported resources type. |
 
 ## Parameters
 
@@ -18,13 +18,13 @@ Getresourcetypesbyid CustomPublicAPI.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
+| `id` | ID x-required... | `-` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `excludedAttributes` | Members"]" | `-` |
+| `excludedAttributes` | Members"]" A multi-valued list of strings indicating the names of resource attributes... | `-` |
 
 
 ## Example Usage
@@ -43,22 +43,11 @@ Ask Claude to help you work with ResourceType resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ResourceTypes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/ResourceTypes" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ResourceTypes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ResourceTypes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @ResourceType.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ResourceTypes/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/ResourceTypes/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

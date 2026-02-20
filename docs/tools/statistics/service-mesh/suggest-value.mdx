@@ -1,10 +1,9 @@
 ---
 title: Suggest Value
-description: Suggest Values.
+description: Manage Suggest Value resources in F5 Distributed Cloud.
 ---
 
-SuggestValues returns suggested values for the specified field in the given Create/Replace/Custom
-request.
+Suggest Value provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ request.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace in which the suggestions are scoped. | `system` |
 
 
 ## Example Usage
@@ -32,23 +31,10 @@ Ask Claude to help you work with Suggest Value resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/suggest_values" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/suggest_values/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/suggest_values" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/discovery/namespaces/$${PARAM}/suggest-values" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @suggest_value.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/suggest_values/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

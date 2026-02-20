@@ -1,9 +1,9 @@
 ---
 title: Subscription Statu
-description: Check subscription status for Flow Collection.
+description: Manage Subscription Statu resources in F5 Distributed Cloud.
 ---
 
-Check subscription status flow Flow Collection.
+Subscription Statu provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with Subscription Statu resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/subscription_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/subscription_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/subscription_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @subscription_statu.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/subscription_status/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/system/flow-collection/addon/subscription-status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

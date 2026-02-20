@@ -1,9 +1,9 @@
 ---
 title: Refresh Token
-description: Refresh Token.
+description: Manage Refresh Token resources in F5 Distributed Cloud.
 ---
 
-Enable service by returning service account details.
+Refresh Token provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Refresh Token resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/refresh_tokens" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/refresh_tokens/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/refresh_tokens" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ai_data/bfdp/namespaces/system/bfdp/refresh_token" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @refresh_token.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/refresh_tokens/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,25 +1,9 @@
 ---
 title: Assign
-description: Assign domain owner.
+description: Manage Assign resources in F5 Distributed Cloud.
 ---
 
-Assign domain owner tries to assign domain owner to user in the request. It checks that requester is
-domain owner as well.
-It implies such steps:
-
-- mark user as domain owner
-
-- if user is SSO
-
-- mark
-user as F5 Distributed Cloud managed
-
-- send update password email
-
-- set admin roles in system,
-shared, * namespaces
-NOTE: previous roles (which was explicitly assigned to this user) will be
-deleted.
+Assign provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -38,23 +22,10 @@ Ask Claude to help you work with Assign resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/assigns" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/assigns/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/assigns" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/domain_owner/assign" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @assign.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/assigns/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

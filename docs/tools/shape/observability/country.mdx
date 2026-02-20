@@ -1,15 +1,15 @@
 ---
 title: Country
-description: GET Devices By Country.
+description: Manage Country resources in F5 Distributed Cloud.
 ---
 
-GET devices country information.
+Country provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-country-create` | GET Devices By Country. |
+| `f5xc-api-shape-country-create` | Get Devices By Country. |
 
 ## Example Usage
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Country resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/countrys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/countrys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/countrys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/dip/namespaces/system/dashboard/country" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @country.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/countrys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

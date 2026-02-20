@@ -1,9 +1,9 @@
 ---
 title: Disconnect
-description: Disconnect.
+description: Manage Disconnect resources in F5 Distributed Cloud.
 ---
 
-Disconnect the node from LTE network.
+Disconnect provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,9 +17,9 @@ Disconnect the node from LTE network.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `node` | Node Name | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `node` | Node Name Name of the node. | `-` |
+| `site` | Site Name Name of the site. | `-` |
 
 
 ## Example Usage
@@ -33,23 +33,10 @@ Ask Claude to help you work with Disconnect resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disconnects" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disconnects/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disconnects" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/vpm/lte/${PARAM}/disconnect" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @disconnect.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disconnects/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,20 +1,19 @@
 ---
 title: Tenant Profile
-description: Create Tenant Profile.
+description: Manage Tenant Profile resources in F5 Distributed Cloud.
 ---
 
-Creates a tenant_profile config instance. Name of the object is the name of the tenant profile to be
-created.
+Tenant Profile provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-tenantandidentity-tenant-profile-create` | Create Tenant Profile. |
-| `f5xc-api-tenantandidentity-tenant-profile-get` | GET Tenant Profile. |
+| `f5xc-api-tenantandidentity-tenant-profile-get` | Get Tenant Profile. |
 | `f5xc-api-tenantandidentity-tenant-profile-list` | List Tenant Profile. |
-| `f5xc-api-tenantandidentity-tenant-profile-update` | Replace Tenant Profile. |
-| `f5xc-api-tenantandidentity-tenant-profile-delete` | DELETE Tenant Profile. |
+| `f5xc-api-tenantandidentity-tenant-profile-update` | Update Tenant Profile. |
+| `f5xc-api-tenantandidentity-tenant-profile-delete` | Delete Tenant Profile. |
 
 ## Parameters
 
@@ -22,30 +21,17 @@ created.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### storage_provider
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.favicon.aws_s3` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -68,22 +54,20 @@ Ask Claude to help you work with Tenant Profile resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tenant_profiles" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/tenant_profiles" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tenant_profiles/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/tenant_profiles/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tenant_profiles" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/tenant_profiles" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @tenant_profile.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tenant_profiles/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/tenant_profiles/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: List Reports History Waap
-description: List Reports History Waap.
+description: Manage List Reports History Waap resources in F5 Distributed Cloud.
 ---
 
-List Reports history waap for the list of report configurations in the given namespace.
+List Reports History Waap provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ List Reports history waap for the list of report configurations in the given nam
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with List Reports History Waap resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_reports_history_waaps" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_reports_history_waaps/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_reports_history_waaps" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/report/namespaces/$${PARAM}/report_configs/list-reports-history-waap" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @list_reports_history_waap.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_reports_history_waaps/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

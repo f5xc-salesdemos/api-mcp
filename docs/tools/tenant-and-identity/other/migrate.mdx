@@ -1,9 +1,9 @@
 ---
 title: Migrate
-description: Migrate CTM child tenants.
+description: Manage Migrate resources in F5 Distributed Cloud.
 ---
 
-Migrate ACTIVE child tenants from existing CTM to a specified new CTM.
+Migrate provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Migrate ACTIVE child tenants from existing CTM to a specified new CTM.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
+| `name` | Name... | `my-resource` |
 
 
 ## Configuration Choices
@@ -28,7 +28,7 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `ct_list_to_target_ctm` | - |  |
+| `ct_list_to_target_ctm` | Ct list to target ctm |  |
 
 
 ## Example Usage
@@ -42,23 +42,10 @@ Ask Claude to help you work with Migrate resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/migrates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/migrates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/migrates" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/partner-management/child_tenant_managers/$${PARAM}/child_tenants/migrate" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @migrate.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/migrates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

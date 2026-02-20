@@ -1,15 +1,15 @@
 ---
 title: Route Table
-description: GET Network Route Tables.
+description: Manage Route Table resources in F5 Distributed Cloud.
 ---
 
-Gets Route Tables Associated with a Network.
+Route Table provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-statistics-route-table-get` | GET Network Route Tables. |
+| `f5xc-api-statistics-route-table-get` | Get Network Route Tables. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ Gets Route Tables Associated with a Network.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
+| `id` | ID x-required... | `-` |
 
 ### Query Parameters
 
@@ -25,7 +25,7 @@ Gets Route Tables Associated with a Network.
 |-----------|-------------|--------|
 | `regions` | Regions used as filters. | `-` |
 | `route_table_ids` | Route Table IDs used as filters. | `-` |
-| `site` | Site Name | `-` |
+| `site` | Site Name... | `-` |
 | `subnet_cidrs` | Subnet cidrs used as filters. | `-` |
 | `subnet_ids` | Subnet IDs used as filters. | `-` |
 
@@ -41,23 +41,8 @@ Ask Claude to help you work with Route Table resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/route_tables" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/route_tables/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/route_tables" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @route_table.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/route_tables/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/topology/network/${PARAM}/route_tables" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

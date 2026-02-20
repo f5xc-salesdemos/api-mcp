@@ -1,9 +1,9 @@
 ---
 title: List Policy
-description: List secret policy.
+description: Manage List Policy resources in F5 Distributed Cloud.
 ---
 
-Listpolicy CustomAPI.
+List Policy provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Listpolicy CustomAPI.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `policy_state` | Policy_state | `-` |
+| `namespace` | Namespace... | `system` |
+| `policy_state` | Policy_state... | `-` |
 
 
 ## Example Usage
@@ -33,22 +33,7 @@ Ask Claude to help you work with List Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @list_policy.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_policys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/secret_management/namespaces/$${PARAM}/secret_policy/list_policy/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

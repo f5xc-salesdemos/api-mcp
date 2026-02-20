@@ -1,21 +1,15 @@
 ---
 title: Known Label
-description: GET
+description: Manage Known Label resources in F5 Distributed Cloud.
 ---
 
-GET is generic label query. Two types of queries are supported
-Return label with exact matching
-entry label key = label value.
-Return list of labels that have prefix of label key = label
-value.
-Returns list of labels. Query will look into current tenants shared namespace and VES-I/O
-shared.
+Known Label provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-users-known-label-list` | GET |
+| `f5xc-api-users-known-label-list` | GET. |
 
 ## Parameters
 
@@ -23,14 +17,14 @@ shared.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace for the label to be retrieved. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
 | `key` | Key of the label to be retrieved. | `-` |
-| `query` | Query type | `-` |
+| `query` | Query type... | `-` |
 | `value` | Value of the label to be retrieved. | `-` |
 
 
@@ -46,22 +40,7 @@ Ask Claude to help you work with Known Label resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/known_labels" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/known_labels/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/known_labels" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @known_label.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/known_labels/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/known_labels" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,19 +1,19 @@
 ---
 title: Alert Receiver
-description: Create Alert Receiver.
+description: Manage Alert Receiver resources in F5 Distributed Cloud.
 ---
 
-Replaces the content of an Alert Receiver object.
+Alert Receiver provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-statistics-alert-receiver-create` | Create Alert Receiver. |
-| `f5xc-api-statistics-alert-receiver-get` | GET Alert Receiver. |
+| `f5xc-api-statistics-alert-receiver-get` | Get Alert Receiver. |
 | `f5xc-api-statistics-alert-receiver-list` | List Alert Receiver. |
-| `f5xc-api-statistics-alert-receiver-update` | Replace Alert Receiver. |
-| `f5xc-api-statistics-alert-receiver-delete` | DELETE Alert Receiver. |
+| `f5xc-api-statistics-alert-receiver-update` | Update Alert Receiver. |
+| `f5xc-api-statistics-alert-receiver-delete` | Delete Alert Receiver. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Replaces the content of an Alert Receiver object.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,49 +42,12 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.email` | - |  |
-| `spec.opsgenie` | - |  |
-| `spec.pagerduty` | - |  |
-| `spec.slack` | - |  |
-| `spec.sms` | - |  |
-| `spec.webhook` | - |  |
-
-### secret_info_oneof
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.opsgenie.api_key.blindfold_secret_info` | - |  |
-| `spec.opsgenie.api_key.clear_secret_info` | - |  |
-
-### auth_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.webhook.http_config.auth_token` | - |  |
-| `spec.webhook.http_config.basic_auth` | - |  |
-| `spec.webhook.http_config.client_cert_obj` | - |  |
-| `spec.webhook.http_config.no_authorization` | - |  |
-
-### tls_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.webhook.http_config.no_tls` | - |  |
-| `spec.webhook.http_config.use_tls` | - |  |
-
-### server_validation_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.webhook.http_config.use_tls.use_server_verification` | - |  |
-| `spec.webhook.http_config.use_tls.volterra_trusted_ca` | - |  |
-
-### sni_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.webhook.http_config.use_tls.disable_sni` | - |  |
-| `spec.webhook.http_config.use_tls.sni` | - |  |
+| `spec.email` | Email |  |
+| `spec.opsgenie` | Opsgenie |  |
+| `spec.pagerduty` | Pagerduty |  |
+| `spec.slack` | Slack |  |
+| `spec.sms` | Sms |  |
+| `spec.webhook` | Webhook |  |
 
 
 ## Example Usage
@@ -109,22 +70,20 @@ Ask Claude to help you work with Alert Receiver resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alert_receivers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/alert_receivers" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alert_receivers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/alert_receivers/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alert_receivers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/alert_receivers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @alert_receiver.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alert_receivers/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/alert_receivers/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

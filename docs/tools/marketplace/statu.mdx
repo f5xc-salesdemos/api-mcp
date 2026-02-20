@@ -1,15 +1,15 @@
 ---
 title: Statu
-description: GET Status of Terraform for view.
+description: Manage Statu resources in F5 Distributed Cloud.
 ---
 
-Returned from list of terraform parameter status objects for a given view.
+Statu provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-marketplace-statu-list` | GET Status of Terraform for view. |
+| `f5xc-api-marketplace-statu-list` | Get Status of Terraform for view. |
 
 ## Parameters
 
@@ -17,9 +17,9 @@ Returned from list of terraform parameter status objects for a given view.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `view_kind` | Kind of View | `-` |
-| `view_name` | Name of view | `-` |
+| `namespace` | Namespace Namespace for the label to be retrieved. | `system` |
+| `view_kind` | Kind of View Kind of view of which terraform parameters are requested e.g. Aws_vpc_site, azure_vnet_site. | `-` |
+| `view_name` | Name of view Name of the view for which terraform parameters are requested. | `-` |
 
 
 ## Example Usage
@@ -34,22 +34,7 @@ Ask Claude to help you work with Statu resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @statu.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/terraform_parameters/${PARAM}/${PARAM}/status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

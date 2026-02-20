@@ -1,12 +1,9 @@
 ---
 title: Enable Visibility
-description: Enable visibility in all workspaces.
+description: Manage Enable Visibility resources in F5 Distributed Cloud.
 ---
 
-Enable Visibility of the service in all workspaces. This action will make the
-discovered service
-visible within WAAP, App Connect where the user can perform
-the workspace specific actions.
+Enable Visibility provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -20,8 +17,8 @@ the workspace specific actions.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Service Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Service Name x-required... | `my-resource` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Example Usage
@@ -35,23 +32,10 @@ Ask Claude to help you work with Enable Visibility resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/enable_visibilitys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/enable_visibilitys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/enable_visibilitys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/discovery/namespaces/$${PARAM}/discovered_services/$${PARAM}/enable_visibility" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @enable_visibility.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/enable_visibilitys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

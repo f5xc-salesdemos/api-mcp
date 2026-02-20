@@ -1,9 +1,9 @@
 ---
 title: Accept To
-description: Accept TOS.
+description: Manage Accept To resources in F5 Distributed Cloud.
 ---
 
-Accept TOS updates version of accepted terms of service.
+Accept To provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Accept TOS updates version of accepted terms of service.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Value of namespace is always "system". | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Accept To resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/accept_tos" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/accept_tos/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/accept_tos" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/accept_tos" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @accept_to.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/accept_tos/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

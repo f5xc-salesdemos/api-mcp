@@ -1,15 +1,15 @@
 ---
 title: Preauth
-description: Preauth
+description: Manage Preauth resources in F5 Distributed Cloud.
 ---
 
-Pre-flight auth checks before calling the Provision API.
+Preauth provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-botandthreatdefense-preauth-create` | Preauth |
+| `f5xc-api-botandthreatdefense-preauth-create` | Preauth. |
 
 ## Example Usage
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Preauth resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/preauths" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/preauths/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/preauths" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/tpm/tpm/preauth" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @preauth.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/preauths/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

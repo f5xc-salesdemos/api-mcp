@@ -1,15 +1,15 @@
 ---
 title: Alert
-description: GET Alerts.
+description: Manage Alert resources in F5 Distributed Cloud.
 ---
 
-GET alerts matching the filter for the given namespace.
+Alert provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-alert-list` | GET Alerts. |
+| `f5xc-api-observability-alert-list` | Get Alerts. |
 
 ## Parameters
 
@@ -17,13 +17,13 @@ GET alerts matching the filter for the given namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace namespace to scope the listing of alerts. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `filter` | HighDiskUsage\", severity=\"critical\"\}" | `-` |
+| `filter` | HighDiskUsage\", severity=\"critical\"\}" List of matchers to filter alerts by. | `-` |
 | `inactive` | If set to true, active alerts will not be returned in the response. | `-` |
 | `inhibited` | Show inhibited alerts - alerts that are suppressed if certain other alerts are firing. | `-` |
 | `silenced` | Show silenced alerts - alerts that are muted based on the matchers configured in the alert manager. | `-` |
@@ -42,22 +42,7 @@ Ask Claude to help you work with Alert resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alerts" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alerts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alerts" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @alert.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alerts/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/alerts" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

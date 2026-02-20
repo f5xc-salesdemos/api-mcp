@@ -1,9 +1,9 @@
 ---
 title: ReadStatu
-description: Update Script FormFields ReadStatus.
+description: Manage ReadStatu resources in F5 Distributed Cloud.
 ---
 
-Allow / block script from reading form fields.
+ReadStatu provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Allow / block script from reading form fields.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
-| `namespace` | Namespace | `-` |
+| `id` | ID Script ID. | `-` |
+| `namespace` | Namespace Namespace. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with ReadStatu resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/readStatus" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/readStatus/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/readStatus" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/scripts/${PARAM}/readStatus" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @readStatu.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/readStatus/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

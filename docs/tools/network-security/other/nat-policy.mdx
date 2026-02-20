@@ -1,22 +1,19 @@
 ---
-title: Nat Policy
-description: Create NAT Policy.
+title: NAT Policy
+description: Manage NAT Policy resources in F5 Distributed Cloud.
 ---
 
-NAT Policy replaces specification condigures NAT Policy with multiple Rules,
-corresponding Match
-Criteria to apply on the packet content and Action to be
-applied ifthe MatchCriteria matches.
+NAT Policy provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-networksecurity-nat-policy-create` | Create NAT Policy. |
-| `f5xc-api-networksecurity-nat-policy-get` | GET NAT Policy. |
+| `f5xc-api-networksecurity-nat-policy-get` | Get NAT Policy. |
 | `f5xc-api-networksecurity-nat-policy-list` | List NAT Policy. |
-| `f5xc-api-networksecurity-nat-policy-update` | Replace NAT Policy. |
-| `f5xc-api-networksecurity-nat-policy-delete` | DELETE NAT Policy. |
+| `f5xc-api-networksecurity-nat-policy-update` | Update NAT Policy. |
+| `f5xc-api-networksecurity-nat-policy-delete` | Delete NAT Policy. |
 
 ## Parameters
 
@@ -24,19 +21,17 @@ applied ifthe MatchCriteria matches.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -47,76 +42,22 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.site` | - |  |
-
-### enable_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].disable` | - |  |
-| `spec.rules[].enable` | - |  |
-
-### scope_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].cloud_connect` | - |  |
-| `spec.rules[].network_interface` | - |  |
-| `spec.rules[].segment` | - |  |
-| `spec.rules[].virtual_network` | - |  |
-
-### source_nat_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].action.dynamic` | - |  |
-| `spec.rules[].action.virtual_cidr` | - |  |
-
-### pool_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].action.dynamic.elastic_ips` | - |  |
-| `spec.rules[].action.dynamic.pools` | - |  |
-
-### network_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].criteria.segment` | - |  |
-| `spec.rules[].criteria.virtual_network` | - |  |
-
-### protocol_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].criteria.any` | - |  |
-| `spec.rules[].criteria.icmp` | - |  |
-| `spec.rules[].criteria.tcp` | - |  |
-| `spec.rules[].criteria.udp` | - |  |
-
-### port_match
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].criteria.destination_port.no_port_match` | - |  |
-| `spec.rules[].criteria.destination_port.port` | - |  |
-| `spec.rules[].criteria.destination_port.port_ranges` | - |  |
+| `spec.site` | Site |  |
 
 
 ## Example Usage
 
-Ask Claude to help you work with Nat Policy resources:
+Ask Claude to help you work with NAT Policy resources:
 
-### Create Nat Policy
+### Create NAT Policy
 
 > "Create a nat-policy named 'example' in the 'production' namespace"
 
-### List Nat Policys
+### List NAT Policys
 
 > "List all nat-policys in the 'production' namespace"
 
-### Get Nat Policy Details
+### Get NAT Policy Details
 
 > "Get details of the nat-policy named 'example' in namespace 'production'"
 
@@ -124,22 +65,20 @@ Ask Claude to help you work with Nat Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nat_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/nat_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nat_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/nat_policys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nat_policys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/nat_policys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @nat_policy.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nat_policys/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/nat_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

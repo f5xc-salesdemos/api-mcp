@@ -1,15 +1,15 @@
 ---
 title: Audit
-description: GET SAFE Block table list.
+description: Manage Audit resources in F5 Distributed Cloud.
 ---
 
-GET SAFE block table list.
+Audit provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-audit-list` | GET SAFE Block table list. |
+| `f5xc-api-shape-audit-list` | Get SAFE Block table list. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET SAFE block table list.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 ### Query Parameters
 
@@ -40,22 +40,7 @@ Ask Claude to help you work with Audit resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/audits" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/audits/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/audits" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @audit.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/audits/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/block/audit" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,9 +1,9 @@
 ---
 title: Site Mesh Group
-description: Site Mesh Topology.
+description: Manage Site Mesh Group resources in F5 Distributed Cloud.
 ---
 
-GET summary of all site mesh groups.
+Site Mesh Group provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +18,7 @@ GET summary of all site mesh groups.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `site_mesh_group` | Site Mesh Group | `-` |
+| `site_mesh_group` | Site Mesh Group Name of the site mesh group. | `-` |
 
 
 ## Example Usage
@@ -37,22 +37,13 @@ Ask Claude to help you work with Site Mesh Group resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/site_mesh_groups" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/site_mesh_groups/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/topology/site_mesh_groups" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/site_mesh_groups" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/topology/site_mesh_group/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @site_mesh_group.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/site_mesh_groups/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

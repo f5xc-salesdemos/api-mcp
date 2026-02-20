@@ -1,10 +1,9 @@
 ---
 title: Signup
-description: Read Signup.
+description: Manage Signup resources in F5 Distributed Cloud.
 ---
 
-GET allows users to query signup and its status. Use this to query for a status of a submitted
-signup object.
+Signup provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ signup object.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Signup name | `-` |
+| `name` | Signup name Name of the signup we want to retrieve . The name is returned after a signup object submission. | `my-resource` |
 
 
 ## Example Usage
@@ -32,23 +31,8 @@ Ask Claude to help you work with Signup resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/signups" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/signups/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/signups" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @signup.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/signups/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/no_auth/signup/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

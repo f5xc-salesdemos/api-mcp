@@ -1,9 +1,9 @@
 ---
 title: Pre Upgrade Check
-description: Pre upgrade check.
+description: Manage Pre Upgrade Check resources in F5 Distributed Cloud.
 ---
 
-API to check if site is ready for upgrade.
+Pre Upgrade Check provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ API to check if site is ready for upgrade.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Fetch upgrade status for the name of site. | `my-resource` |
+| `namespace` | Namespace Fetch upgrade status for the given namespace. | `system` |
 
 ### Query Parameters
 
@@ -38,23 +38,8 @@ Ask Claude to help you work with Pre Upgrade Check resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pre_upgrade_checks" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pre_upgrade_checks/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pre_upgrade_checks" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @pre_upgrade_check.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pre_upgrade_checks/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/maurice/namespaces/$${PARAM}/sites/$${PARAM}/pre_upgrade_check" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,10 +1,9 @@
 ---
 title: Escalate
-description: Escalate a ticket in managed tenant.
+description: Manage Escalate resources in F5 Distributed Cloud.
 ---
 
-Escalates a selected ticket. Only certain customers (depending on their contract) are allowed to
-escalate tickets.
+Escalate provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ escalate tickets.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `tp_id` | Third party ID | `-` |
+| `tp_id` | Third party ID ID assigned to this ticket by our support provider. | `-` |
 
 
 ## Example Usage
@@ -32,23 +31,10 @@ Ask Claude to help you work with Escalate resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/escalates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/escalates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/escalates" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/managed_client/customer_supports/${PARAM}/escalate" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @escalate.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/escalates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,16 +1,16 @@
 ---
 title: User Role
-description: Create User with Role Assignment.
+description: Manage User Role resources in F5 Distributed Cloud.
 ---
 
-Create creates a user and namespace roles binding for this user.
+User Role provides tools for creating, listing, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-tenantandidentity-user-role-create` | Create User with Role Assignment. |
-| `f5xc-api-tenantandidentity-user-role-list` | GET User and Role Assignments. |
+| `f5xc-api-tenantandidentity-user-role-list` | Get User and Role Assignments. |
 | `f5xc-api-tenantandidentity-user-role-update` | Update User and Role Assignments. |
 
 ## Parameters
@@ -19,7 +19,7 @@ Create creates a user and namespace roles binding for this user.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace All users of a tenant must be created in tenant's system namespace. | `system` |
 
 
 ## Example Usage
@@ -38,22 +38,13 @@ Ask Claude to help you work with User Role resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_roles" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_roles/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/user_roles" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_roles" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/user_roles" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @user_role.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_roles/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

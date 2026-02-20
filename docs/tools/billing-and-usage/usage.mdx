@@ -1,15 +1,15 @@
 ---
 title: Usage
-description: GET Quota Usage.
+description: Manage Usage resources in F5 Distributed Cloud.
 ---
 
-GET allows users to query limits and current usage of resources.
+Usage provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-billingandusage-usage-list` | GET Quota Usage. |
+| `f5xc-api-billingandusage-usage-list` | Get Quota Usage. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET allows users to query limits and current usage of resources.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace The tenant this item belongs to. | `system` |
 
 
 ## Example Usage
@@ -32,22 +32,7 @@ Ask Claude to help you work with Usage resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/usages" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/usages/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/usages" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @usage.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/usages/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/quota/usage" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

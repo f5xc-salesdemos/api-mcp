@@ -1,9 +1,9 @@
 ---
 title: Unmerge Sources Openapi Schema
-description: Unmerge Source from API Endpoint.
+description: Manage Unmerge Sources Openapi Schema resources in F5 Distributed Cloud.
 ---
 
-Unmerge Source Discovered schema from API Endpoint merged schema.
+Unmerge Sources Openapi Schema provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Unmerge Source Discovered schema from API Endpoint merged schema.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Virtual Host Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Virtual Host Name Virtual Host name for current request. | `my-resource` |
+| `namespace` | Namespace Namespace of the virtual host for current request. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Unmerge Sources Openapi Schema resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unmerge_sources_openapi_schemas" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unmerge_sources_openapi_schemas/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unmerge_sources_openapi_schemas" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/$${PARAM}/api_endpoint/unmerge_sources_openapi_schema" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @unmerge_sources_openapi_schema.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unmerge_sources_openapi_schemas/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

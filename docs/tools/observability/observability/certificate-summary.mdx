@@ -1,16 +1,15 @@
 ---
 title: Certificate Summary
-description: GET Certificate Summary.
+description: Manage Certificate Summary resources in F5 Distributed Cloud.
 ---
 
-Returns list of TLS certificate expirations in specified time window for HTTPS monitors running in
-namespace.
+Certificate Summary provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-certificate-summary-list` | GET Certificate Summary. |
+| `f5xc-api-observability-certificate-summary-list` | Get Certificate Summary. |
 
 ## Parameters
 
@@ -18,13 +17,13 @@ namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Request namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `period_in_days` | Period_in_days. | `-` |
+| `period_in_days` | Period_in_days. Maximum number of days until certificate expiration. | `-` |
 
 
 ## Example Usage
@@ -39,22 +38,7 @@ Ask Claude to help you work with Certificate Summary resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/certificate_summarys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/certificate_summarys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/certificate_summarys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @certificate_summary.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/certificate_summarys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/certificate-summary" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

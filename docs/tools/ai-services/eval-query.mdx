@@ -1,9 +1,9 @@
 ---
 title: Eval Query
-description: Eval AI Assistant Query.
+description: Manage Eval Query resources in F5 Distributed Cloud.
 ---
 
-Temporarily to be used in place of AIAssistantQuery for evaluating API access/RBAC check.
+Eval Query provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Temporarily to be used in place of AIAssistantQuery for evaluating API access/RB
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace of the HTTP Load Balancer for current request. | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Eval Query resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/eval_querys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/eval_querys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/eval_querys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/gen-ai/namespaces/$${PARAM}/eval_query" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @eval_query.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/eval_querys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

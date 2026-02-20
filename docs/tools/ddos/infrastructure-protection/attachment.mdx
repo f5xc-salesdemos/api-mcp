@@ -1,11 +1,9 @@
 ---
 title: Attachment
-description: Event attachments.
+description: Manage Attachment resources in F5 Distributed Cloud.
 ---
 
-Returns any attachments associated with an event. This could be Pcap files or any other
-document.
-Obsolete - use `GetEvent` to list out attachments.
+Attachment provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -19,8 +17,8 @@ Obsolete - use `GetEvent` to list out attachments.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `event_id` | Event ID | `-` |
-| `namespace` | Namespace | `-` |
+| `event_id` | Event ID ID of the event we want to GET attachments for. | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
 
 
 ## Example Usage
@@ -35,22 +33,7 @@ Ask Claude to help you work with Attachment resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/attachments" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/attachments/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/attachments" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @attachment.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/attachments/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/event/${PARAM}/attachments" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

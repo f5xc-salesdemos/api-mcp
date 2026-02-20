@@ -1,9 +1,9 @@
 ---
 title: Cache Purge
-description: Purge CDN Cache.
+description: Manage Cache Purge resources in F5 Distributed Cloud.
 ---
 
-Initiate Purge for Edge CDN Cache.
+Cache Purge provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Initiate Purge for Edge CDN Cache.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | CDN Distribution Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | CDN Distribution Name x-required... | `my-resource` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Configuration Choices
@@ -29,17 +29,17 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `hostname` | - |  |
-| `pattern` | - |  |
-| `purge_all` | - |  |
-| `url` | - |  |
+| `hostname` | Hostname |  |
+| `pattern` | Pattern |  |
+| `purge_all` | Purge all |  |
+| `url` | Url |  |
 
 ### purge_type
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `hard_purge` | - |  |
-| `soft_purge` | - |  |
+| `hard_purge` | Hard purge |  |
+| `soft_purge` | Soft purge |  |
 
 
 ## Example Usage
@@ -53,23 +53,10 @@ Ask Claude to help you work with Cache Purge resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cache_purges" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cache_purges/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cache_purges" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/cdn/namespaces/$${PARAM}/cdn_loadbalancer/$${PARAM}/cache-purge" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @cache_purge.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cache_purges/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

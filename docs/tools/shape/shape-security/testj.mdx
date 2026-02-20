@@ -1,15 +1,15 @@
 ---
 title: Testj
-description: Test JS
+description: Manage Testj resources in F5 Distributed Cloud.
 ---
 
-Validate JS script tag injection in the target URL.
+Testj provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-testj-create` | Test JS |
+| `f5xc-api-shape-testj-create` | Test JS. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ Validate JS script tag injection in the target URL.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace. | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Testj resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/testjs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/testjs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/testjs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/testjs" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @testj.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/testjs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

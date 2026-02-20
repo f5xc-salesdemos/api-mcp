@@ -1,19 +1,19 @@
 ---
 title: AWS VPC Site
-description: Create AWS VPC site.
+description: Manage AWS VPC Site resources in F5 Distributed Cloud.
 ---
 
-Shape of the AWS VPC site replace specification.
+AWS VPC Site provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-sites-aws-vpc-site-create` | Create AWS VPC site. |
-| `f5xc-api-sites-aws-vpc-site-get` | GET AWS VPC site. |
+| `f5xc-api-sites-aws-vpc-site-get` | Get AWS VPC site. |
 | `f5xc-api-sites-aws-vpc-site-list` | List Configure AWS VPC Site. |
-| `f5xc-api-sites-aws-vpc-site-update` | Replace AWS VPC site. |
-| `f5xc-api-sites-aws-vpc-site-delete` | DELETE Configure AWS VPC Site. |
+| `f5xc-api-sites-aws-vpc-site-update` | Update AWS VPC site. |
+| `f5xc-api-sites-aws-vpc-site-delete` | Delete Configure AWS VPC Site. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Shape of the AWS VPC site replace specification.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,283 +42,75 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.block_all_services` | - |  |
-| `spec.blocked_services` | - |  |
-| `spec.default_blocked_services` | - |  |
+| `spec.block_all_services` | Block all services |  |
+| `spec.blocked_services` | Blocked services |  |
+| `spec.default_blocked_services` | Default blocked services |  |
 
 ### deployment
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.aws_cred` | - |  |
+| `spec.aws_cred` | Aws cred |  |
 
 ### direct_connect_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.direct_connect_disabled` | - |  |
-| `spec.direct_connect_enabled` | - |  |
-| `spec.private_connectivity` | - |  |
+| `spec.direct_connect_disabled` | Direct connect disabled |  |
+| `spec.direct_connect_enabled` | Direct connect enabled |  |
+| `spec.private_connectivity` | Private connectivity |  |
 
 ### egress_gateway_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.egress_gateway_default` | - |  |
-| `spec.egress_nat_gw` | - |  |
-| `spec.egress_virtual_private_gateway` | - |  |
+| `spec.egress_gateway_default` | Egress gateway default |  |
+| `spec.egress_nat_gw` | Egress nat gw |  |
+| `spec.egress_virtual_private_gateway` | Egress virtual private gateway |  |
 
 ### internet_vip_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.disable_internet_vip` | - |  |
-| `spec.enable_internet_vip` | - |  |
+| `spec.disable_internet_vip` | Disable internet vip |  |
+| `spec.enable_internet_vip` | Enable internet vip |  |
 
 ### logs_receiver_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.log_receiver` | - |  |
-| `spec.logs_streaming_disabled` | - |  |
+| `spec.log_receiver` | Log receiver |  |
+| `spec.logs_streaming_disabled` | Logs streaming disabled |  |
 
 ### routing_type
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.f5_orchestrated_routing` | - |  |
-| `spec.manual_routing` | - |  |
+| `spec.f5_orchestrated_routing` | F5 orchestrated routing |  |
+| `spec.manual_routing` | Manual routing |  |
 
 ### security_group_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.custom_security_group` | - |  |
-| `spec.f5xc_security_group` | - |  |
+| `spec.custom_security_group` | Custom security group |  |
+| `spec.f5xc_security_group` | F5xc security group |  |
 
 ### site_type
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.ingress_egress_gw` | - |  |
-| `spec.ingress_gw` | - |  |
-| `spec.voltstack_cluster` | - |  |
+| `spec.ingress_egress_gw` | Ingress egress gw |  |
+| `spec.ingress_gw` | Ingress gw |  |
+| `spec.voltstack_cluster` | Voltstack cluster |  |
 
 ### worker_nodes
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.no_worker_nodes` | - |  |
-| `spec.nodes_per_az` | - |  |
-| `spec.total_nodes` | - |  |
-
-### secret_info_oneof
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.admin_password.blindfold_secret_info` | - |  |
-| `spec.admin_password.clear_secret_info` | - |  |
-
-### blocked_services_value_type_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.blocked_services.blocked_sevice[].dns` | - |  |
-| `spec.blocked_services.blocked_sevice[].ssh` | - |  |
-| `spec.blocked_services.blocked_sevice[].web_user_interface` | - |  |
-
-### asn_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.direct_connect_enabled.auto_asn` | - |  |
-| `spec.direct_connect_enabled.custom_asn` | - |  |
-
-### vif_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.direct_connect_enabled.hosted_vifs` | - |  |
-| `spec.direct_connect_enabled.standard_vifs` | - |  |
-
-### connectivity_options
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.direct_connect_enabled.hosted_vifs.site_registration_over_direct_connect` | - |  |
-| `spec.direct_connect_enabled.hosted_vifs.site_registration_over_internet` | - |  |
-
-### vif_region_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.direct_connect_enabled.hosted_vifs.vif_list[].other_region` | - |  |
-| `spec.direct_connect_enabled.hosted_vifs.vif_list[].same_as_site_region` | - |  |
-
-### choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.egress_nat_gw.nat_gw_id` | - |  |
-
-### dc_cluster_group_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.dc_cluster_group_inside_vn` | - |  |
-| `spec.ingress_egress_gw.dc_cluster_group_outside_vn` | - |  |
-| `spec.ingress_egress_gw.no_dc_cluster_group` | - |  |
-
-### forward_proxy_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.active_forward_proxy_policies` | - |  |
-| `spec.ingress_egress_gw.forward_proxy_allow_all` | - |  |
-| `spec.ingress_egress_gw.no_forward_proxy` | - |  |
-
-### global_network_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.global_network_list` | - |  |
-| `spec.ingress_egress_gw.no_global_network` | - |  |
-
-### inside_static_route_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.inside_static_routes` | - |  |
-| `spec.ingress_egress_gw.no_inside_static_routes` | - |  |
-
-### network_policy_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.active_enhanced_firewall_policies` | - |  |
-| `spec.ingress_egress_gw.active_network_policies` | - |  |
-| `spec.ingress_egress_gw.no_network_policy` | - |  |
-
-### outside_static_route_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.no_outside_static_routes` | - |  |
-| `spec.ingress_egress_gw.outside_static_routes` | - |  |
-
-### site_mesh_group_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.sm_connection_public_ip` | - |  |
-| `spec.ingress_egress_gw.sm_connection_pvt_ip` | - |  |
-
-### port_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.allowed_vip_port.custom_ports` | - |  |
-| `spec.ingress_egress_gw.allowed_vip_port.disable_allowed_vip_port` | - |  |
-| `spec.ingress_egress_gw.allowed_vip_port.use_http_https_port` | - |  |
-| `spec.ingress_egress_gw.allowed_vip_port.use_http_port` | - |  |
-| `spec.ingress_egress_gw.allowed_vip_port.use_https_port` | - |  |
-
-### connection_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.global_network_list.global_network_connections[].sli_to_global_dr` | - |  |
-| `spec.ingress_egress_gw.global_network_list.global_network_connections[].slo_to_global_dr` | - |  |
-
-### config_mode_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route` | - |  |
-| `spec.ingress_egress_gw.inside_static_routes.static_route_list[].simple_static_route` | - |  |
-
-### ver
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.nexthop.nexthop_address.ipv4` | - |  |
-| `spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.nexthop.nexthop_address.ipv6` | - |  |
-
-### perf_mode_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced` | - |  |
-| `spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l7_enhanced` | - |  |
-
-### kubernetes_upgrade_drain_enable_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.kubernetes_upgrade_drain.disable_upgrade_drain` | - |  |
-| `spec.kubernetes_upgrade_drain.enable_upgrade_drain` | - |  |
-
-### drain_max_unavailable_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count` | - |  |
-
-### vega_upgrade_mode_toggle_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode` | - |  |
-| `spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode` | - |  |
-
-### offline_survivability_mode_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.offline_survivability_mode.enable_offline_survivability_mode` | - |  |
-| `spec.offline_survivability_mode.no_offline_survivability_mode` | - |  |
-
-### operating_system_version_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.os.default_os_version` | - |  |
-| `spec.os.operating_system_version` | - |  |
-
-### network_options
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.private_connectivity.inside` | - |  |
-| `spec.private_connectivity.outside` | - |  |
-
-### volterra_sw_version_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.sw.default_sw_version` | - |  |
-| `spec.sw.volterra_software_version` | - |  |
-
-### k8s_cluster_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.voltstack_cluster.k8s_cluster` | - |  |
-| `spec.voltstack_cluster.no_k8s_cluster` | - |  |
-
-### storage_class_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.voltstack_cluster.default_storage` | - |  |
-| `spec.voltstack_cluster.storage_class_list` | - |  |
-
-### name_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.vpc.new_vpc.autogenerate` | - |  |
-| `spec.vpc.new_vpc.name_tag` | - |  |
+| `spec.no_worker_nodes` | No worker nodes |  |
+| `spec.nodes_per_az` | Nodes per az |  |
+| `spec.total_nodes` | Total nodes |  |
 
 
 ## Example Usage
@@ -343,22 +133,20 @@ Ask Claude to help you work with AWS VPC Site resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/aws_vpc_sites" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/aws_vpc_sites" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/aws_vpc_sites/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/aws_vpc_sites/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/aws_vpc_sites" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/aws_vpc_sites" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @aws_vpc_site.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/aws_vpc_sites/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/aws_vpc_sites/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

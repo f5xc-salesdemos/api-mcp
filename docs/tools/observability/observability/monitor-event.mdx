@@ -1,15 +1,15 @@
 ---
 title: Monitor Event
-description: GET Monitor Events.
+description: Manage Monitor Event resources in F5 Distributed Cloud.
 ---
 
-Returns the healthy and critical events for the specified monitor.
+Monitor Event provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-monitor-event-list` | GET Monitor Events. |
+| `f5xc-api-observability-monitor-event-list` | Get Monitor Events. |
 
 ## Parameters
 
@@ -17,16 +17,16 @@ Returns the healthy and critical events for the specified monitor.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Request namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | End_time. | `-` |
-| `monitor_name` | Monitor_name. X-required | `-` |
-| `monitor_type` | Monitor_type. X-required | `-` |
-| `start_time` | Start_time. X-required | `-` |
+| `end_time` | End_time. End time for requested events (default: current time) | `-` |
+| `monitor_name` | Monitor_name. X-required Monitor name. | `-` |
+| `monitor_type` | Monitor_type. X-required Monitor type. | `-` |
+| `start_time` | Start_time. X-required Start time for requested events. | `-` |
 
 
 ## Example Usage
@@ -41,22 +41,7 @@ Ask Claude to help you work with Monitor Event resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/monitor_events" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/monitor_events/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/monitor_events" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @monitor_event.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/monitor_events/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/monitor-events" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

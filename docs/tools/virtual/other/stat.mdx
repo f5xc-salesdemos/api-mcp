@@ -1,15 +1,15 @@
 ---
 title: Stat
-description: GET API Endpoints Stats for Virtual Host.
+description: Manage Stat resources in F5 Distributed Cloud.
 ---
 
-GET API endpoints stats for the given Virtual Host.
+Stat provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-stat-get` | GET API Endpoints Stats for Virtual Host. |
+| `f5xc-api-virtual-stat-get` | Get API Endpoints Stats for Virtual Host. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET API endpoints stats for the given Virtual Host.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Virtual Host Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Virtual Host Name Virtual Host for current request. | `my-resource` |
+| `namespace` | Namespace Namespace of the App type for current request. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,8 @@ Ask Claude to help you work with Stat resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/stats" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/stats/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/stats" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @stat.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/stats/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/$${PARAM}/api_endpoints/stats" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,13 +1,9 @@
 ---
 title: Support Ticket
-description: List of support tickets created for a child tenant.
+description: Manage Support Ticket resources in F5 Distributed Cloud.
 ---
 
-Return list of support tickets for a given child tenant
-Note: Direct API access is restricted.
-Client needs to use the /managed_tenant/&lt;mt_identifier>/ prefix in the URL to
-GET the support
-ticket list for child tenant.
+Support Ticket provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -26,23 +22,10 @@ Ask Claude to help you work with Support Ticket resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/support_tickets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/support_tickets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/support_tickets" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/child_tenant/support_tickets" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @support_ticket.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/support_tickets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

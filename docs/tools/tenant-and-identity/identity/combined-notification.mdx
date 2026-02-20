@@ -1,16 +1,15 @@
 ---
 title: Combined Notification
-description: GET combined ntfn preferences.
+description: Manage Combined Notification resources in F5 Distributed Cloud.
 ---
 
-GET combined ntfn preferences gets user-ntfn-preferences and admin-ntfn-preferences and returns
-combined result.
+Combined Notification provides tools for listing, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-tenantandidentity-combined-notification-list` | GET combined ntfn preferences. |
+| `f5xc-api-tenantandidentity-combined-notification-list` | Get combined ntfn preferences. |
 | `f5xc-api-tenantandidentity-combined-notification-update` | Update combined ntfn preferences. |
 
 ## Example Usage
@@ -25,22 +24,7 @@ Ask Claude to help you work with Combined Notification resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/combined_notifications" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/combined_notifications/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/combined_notifications" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @combined_notification.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/combined_notifications/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/user/combined_notifications" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

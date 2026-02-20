@@ -1,10 +1,9 @@
 ---
 title: All Application Inventory WAF Filter
-description: All Application Objects Inventory with WAF Filters.
+description: Manage All Application Inventory WAF Filter resources in F5 Distributed Cloud.
 ---
 
-AllApplicationInventoryWaf returns inventory of configured application related objects for all
-namespaces with WAF Filters.
+All Application Inventory WAF Filter provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -20,8 +19,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `exclusion_signature_id` | - |  |
-| `exclusion_violation_type` | - |  |
+| `exclusion_signature_id` | Exclusion signature id |  |
+| `exclusion_violation_type` | Exclusion violation type |  |
 
 
 ## Example Usage
@@ -35,23 +34,10 @@ Ask Claude to help you work with All Application Inventory WAF Filter resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/all_application_inventory_waf_filters" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/all_application_inventory_waf_filters/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/all_application_inventory_waf_filters" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/system/all_application_inventory_waf_filters" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @all_application_inventory_waf_filter.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/all_application_inventory_waf_filters/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

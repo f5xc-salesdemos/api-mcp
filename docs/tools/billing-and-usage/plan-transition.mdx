@@ -1,11 +1,9 @@
 ---
 title: Plan Transition
-description: InitiatePlanTransition.
+description: Manage Plan Transition resources in F5 Distributed Cloud.
 ---
 
-API to GET plan transition details by a plan transition request uid returned from
-InitiatePlanTransition.
-For now this one returns only current State.
+Plan Transition provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -20,7 +18,7 @@ For now this one returns only current State.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace This namespace is not used, all requests are stored under system namespace. | `system` |
 
 ### Query Parameters
 
@@ -45,22 +43,13 @@ Ask Claude to help you work with Plan Transition resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/plan_transitions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/plan_transitions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/no_auth/namespaces/system/billing/plan_transition" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/plan_transitions" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/billing/plan_transition" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @plan_transition.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/plan_transitions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

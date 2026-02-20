@@ -1,9 +1,9 @@
 ---
 title: Resync Crl
-description: Resync CRL.
+description: Manage Resync Crl resources in F5 Distributed Cloud.
 ---
 
-Resync CRL by downloading from the server again.
+Resync Crl provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Resync CRL by downloading from the server again.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site for which request is sent. | `-` |
 
 
 ## Configuration Choices
@@ -29,8 +29,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `name` | - |  |
-| `uid` | - |  |
+| `name` | Name |  |
+| `uid` | Uid |  |
 
 
 ## Example Usage
@@ -44,23 +44,10 @@ Ask Claude to help you work with Resync Crl resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/resync_crls" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/resync_crls/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/resync_crls" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/ver/resync_crl" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @resync_crl.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/resync_crls/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

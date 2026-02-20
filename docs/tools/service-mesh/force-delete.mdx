@@ -1,9 +1,9 @@
 ---
 title: Force Delete
-description: Force DELETE NFV Service.
+description: Manage Force Delete resources in F5 Distributed Cloud.
 ---
 
-Force DELETE NFV Service.
+Force Delete provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Force DELETE NFV Service.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
+| `name` | Name Name of the NFV object to be force deleted. | `my-resource` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Force Delete resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/force_deletes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/force_deletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/force_deletes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/system/nfv_service/$${PARAM}/force-delete" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @force_delete.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/force_deletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,10 +1,9 @@
 ---
 title: Access Count
-description: VoltShare Access Count Query.
+description: Manage Access Count resources in F5 Distributed Cloud.
 ---
 
-Request to GET number of VoltShare API calls aggregated across multiple dimensions like OPERATION,
-COUNTRY, RESULT, USER_TENANT.
+Access Count provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ COUNTRY, RESULT, USER_TENANT.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace namespace is used to scope the security events for the given namespace. | `system` |
 
 
 ## Example Usage
@@ -32,23 +31,10 @@ Ask Claude to help you work with Access Count resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_counts" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_counts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_counts" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/secret_management/namespaces/$${PARAM}/voltshare/access_count" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @access_count.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_counts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

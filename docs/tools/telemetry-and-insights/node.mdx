@@ -1,11 +1,9 @@
 ---
 title: Node
-description: Connectivity Node Query.
+description: Manage Node resources in F5 Distributed Cloud.
 ---
 
-Request to GET Connectivity data for a site.
-This query is used to GET time-series data for a given
-site.
+Node provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -19,7 +17,7 @@ site.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
 
 
 ## Example Usage
@@ -33,23 +31,10 @@ Ask Claude to help you work with Node resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nodes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nodes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nodes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/graph/connectivity/node" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @node.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nodes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

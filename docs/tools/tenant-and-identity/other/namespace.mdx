@@ -1,18 +1,18 @@
 ---
 title: Namespace
-description: Create Namespace.
+description: Manage Namespace resources in F5 Distributed Cloud.
 ---
 
-Replaces attributes of a namespace including its metadata like labels, description etc.
+Namespace provides tools for creating, listing, retrieving, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-tenantandidentity-namespace-create` | Create Namespace. |
-| `f5xc-api-tenantandidentity-namespace-get` | GET Namespace. |
+| `f5xc-api-tenantandidentity-namespace-get` | Get Namespace. |
 | `f5xc-api-tenantandidentity-namespace-list` | List Namespace. |
-| `f5xc-api-tenantandidentity-namespace-update` | Replace Namespace. |
+| `f5xc-api-tenantandidentity-namespace-update` | Update Namespace. |
 
 ## Parameters
 
@@ -20,18 +20,17 @@ Replaces attributes of a namespace including its metadata like labels, descripti
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `metadata.name` | Name | `-` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | The namespace in which the configuration object is present. | `-` |
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `namespace` | The namespace in which the configuration object is present. | `system` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -54,22 +53,17 @@ Ask Claude to help you work with Namespace resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/namespaces" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/namespaces/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/namespaces" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @namespace.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/namespaces/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

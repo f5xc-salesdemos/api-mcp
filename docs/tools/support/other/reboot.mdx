@@ -1,9 +1,9 @@
 ---
 title: Reboot
-description: Reboot node.
+description: Manage Reboot resources in F5 Distributed Cloud.
 ---
 
-Reboot specific node in site.
+Reboot provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,9 +17,9 @@ Reboot specific node in site.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `node` | Node Name | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `node` | Node Name Name of the node. | `-` |
+| `site` | Site Name Name of the site. | `-` |
 
 
 ## Example Usage
@@ -33,23 +33,10 @@ Ask Claude to help you work with Reboot resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/reboots" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/reboots/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/reboots" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/vpm/debug/${PARAM}/reboot" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @reboot.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/reboots/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Health Status Change Event
-description: DNS Load Balancer Pool Member Health Status Change Events.
+description: Manage Health Status Change Event resources in F5 Distributed Cloud.
 ---
 
-GET DNS Load Balancer Pool Health Status Changes.
+Health Status Change Event provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,10 +17,10 @@ GET DNS Load Balancer Pool Health Status Changes.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `dns_lb_name` | DNS Load Balancer Name | `-` |
-| `dns_lb_pool_name` | DNS Load Balancer Pool Name | `-` |
-| `namespace` | Namespace | `-` |
-| `pool_member_address` | DNS Load Balancer Pool Member Address | `-` |
+| `dns_lb_name` | DNS Load Balancer Name x-required... | `-` |
+| `dns_lb_pool_name` | DNS Load Balancer Pool Name x-required... | `-` |
+| `namespace` | Namespace x-required... | `system` |
+| `pool_member_address` | DNS Load Balancer Pool Member Address x-required... | `-` |
 
 
 ## Example Usage
@@ -35,22 +35,7 @@ Ask Claude to help you work with Health Status Change Event resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/health_status_change_events" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/health_status_change_events/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/health_status_change_events" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @health_status_change_event.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/health_status_change_events/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/dns_load_balancers/${PARAM}/dns_lb_pools/${PARAM}/pool_members/${PARAM}/health_status_change_events" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

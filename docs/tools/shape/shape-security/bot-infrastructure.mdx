@@ -1,18 +1,18 @@
 ---
 title: Bot Infrastructure
-description: Create Bot Infrastructure.
+description: Manage Bot Infrastructure resources in F5 Distributed Cloud.
 ---
 
-List the set of bot_infrastructure in a namespace.
+Bot Infrastructure provides tools for creating, listing, retrieving, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-bot-infrastructure-create` | Create Bot Infrastructure. |
-| `f5xc-api-shape-bot-infrastructure-get` | GET Bot Infrastructure. |
+| `f5xc-api-shape-bot-infrastructure-get` | Get Bot Infrastructure. |
 | `f5xc-api-shape-bot-infrastructure-list` | List Bot Infrastructure. |
-| `f5xc-api-shape-bot-infrastructure-update` | Replace Bot Infrastructure. |
+| `f5xc-api-shape-bot-infrastructure-update` | Update Bot Infrastructure. |
 
 ## Parameters
 
@@ -20,19 +20,17 @@ List the set of bot_infrastructure in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -43,22 +41,15 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.create_cloud_hosted` | - |  |
-
-### type_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.create_cloud_hosted.production` | - |  |
-| `spec.create_cloud_hosted.testing` | - |  |
+| `spec.create_cloud_hosted` | Create cloud hosted |  |
 
 ### bot_infra_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.cloud_hosted` | - |  |
-| `spec.on_prem` | - |  |
-| `spec.physical_hosted` | - |  |
+| `spec.cloud_hosted` | Cloud hosted |  |
+| `spec.on_prem` | On prem |  |
+| `spec.physical_hosted` | Physical hosted |  |
 
 
 ## Example Usage
@@ -81,22 +72,17 @@ Ask Claude to help you work with Bot Infrastructure resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_infrastructures" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/bot_infrastructures" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_infrastructures/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/bot_infrastructures/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_infrastructures" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/bot_infrastructures" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @bot_infrastructure.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_infrastructures/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

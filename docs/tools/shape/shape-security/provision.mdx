@@ -1,16 +1,16 @@
 ---
 title: Provision
-description: PostSafeProvision.
+description: Manage Provision resources in F5 Distributed Cloud.
 ---
 
-GET Recognize provision status as add-on service.
+Provision provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-provision-create` | PostSafeProvision. |
-| `f5xc-api-shape-provision-list` | GET Recognize Provision Status Addon. |
+| `f5xc-api-shape-provision-list` | Get Recognize Provision Status Addon. |
 
 ## Parameters
 
@@ -18,7 +18,7 @@ GET Recognize provision status as add-on service.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -37,22 +37,13 @@ Ask Claude to help you work with Provision resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/provisions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/provisions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/recognize/namespaces/system/recognize/addon/provision" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/provisions" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/provision" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @provision.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/provisions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

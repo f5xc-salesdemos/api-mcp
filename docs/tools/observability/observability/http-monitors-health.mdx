@@ -1,15 +1,15 @@
 ---
 title: HTTP Monitors Health
-description: GET HTTP Monitor Health.
+description: Manage HTTP Monitors Health resources in F5 Distributed Cloud.
 ---
 
-Returns list of HTTP monitors in namespace with corresponding region health(s)
+HTTP Monitors Health provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-http-monitors-health-create` | GET HTTP Monitor Health. |
+| `f5xc-api-observability-http-monitors-health-create` | Get HTTP Monitor Health. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ Returns list of HTTP monitors in namespace with corresponding region health(s)
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Request namespace. | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with HTTP Monitors Health resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/http_monitors_healths" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/http_monitors_healths/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/http_monitors_healths" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/http-monitors-health" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @http_monitors_health.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/http_monitors_healths/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

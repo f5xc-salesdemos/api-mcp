@@ -1,9 +1,9 @@
 ---
 title: Dhcp Lease
-description: Show DHCP Leases.
+description: Manage Dhcp Lease resources in F5 Distributed Cloud.
 ---
 
-GET DHCP lease information.
+Dhcp Lease provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ GET DHCP lease information.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site. | `-` |
 
 
 ## Example Usage
@@ -33,22 +33,7 @@ Ask Claude to help you work with Dhcp Lease resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dhcp_leases" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dhcp_leases/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dhcp_leases" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @dhcp_lease.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dhcp_leases/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/ver/dhcp_leases" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

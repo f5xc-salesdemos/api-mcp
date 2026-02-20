@@ -1,9 +1,9 @@
 ---
 title: Unmark As Non API
-description: Unmark As Non-API.
+description: Manage Unmark As Non API resources in F5 Distributed Cloud.
 ---
 
-DELETE the provided API endpoints from the API Definition's non-API list.
+Unmark As Non API provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ DELETE the provided API endpoints from the API Definition's non-API list.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name The name of the API Definition for the current request. | `my-resource` |
+| `namespace` | Namespace The namespace of the API Definition for the current request. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Unmark As Non API resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unmark_as_non_apis" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unmark_as_non_apis/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unmark_as_non_apis" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/api_definitions/$${PARAM}/unmark_as_non_api" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @unmark_as_non_api.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unmark_as_non_apis/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

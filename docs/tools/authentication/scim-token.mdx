@@ -1,19 +1,16 @@
 ---
 title: Scim Token
-description: Revoke SCIM API credential.
+description: Manage Scim Token resources in F5 Distributed Cloud.
 ---
 
-GetScimToken implements querying of scim token.
-SCIM API token value will be visible only on create
-API response.
-This detail RPC will show the current token's expiry. Returns API credential object.
+Scim Token provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-authentication-scim-token-create` | Revoke SCIM API credential. |
-| `f5xc-api-authentication-scim-token-list` | GET Scim Token. |
+| `f5xc-api-authentication-scim-token-list` | Get Scim Token. |
 
 ## Parameters
 
@@ -21,7 +18,7 @@ This detail RPC will show the current token's expiry. Returns API credential obj
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -40,22 +37,13 @@ Ask Claude to help you work with Scim Token resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/scim_tokens" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/scim_tokens/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/scim_token" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/scim_tokens" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/revoke/scim_token" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @scim_token.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/scim_tokens/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

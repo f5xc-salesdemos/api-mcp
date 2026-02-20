@@ -1,11 +1,9 @@
 ---
 title: Disable Visibility
-description: Disable visibility in all workspaces.
+description: Manage Disable Visibility resources in F5 Distributed Cloud.
 ---
 
-Disable Visibility of the service in all workspaces. This will remove the discovered service
-from
-being visible in other wokspaces like WAAP.
+Disable Visibility provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -19,8 +17,8 @@ being visible in other wokspaces like WAAP.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Service Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Service Name x-required... | `my-resource` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Example Usage
@@ -34,23 +32,10 @@ Ask Claude to help you work with Disable Visibility resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disable_visibilitys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disable_visibilitys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disable_visibilitys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/discovery/namespaces/$${PARAM}/discovered_services/$${PARAM}/disable_visibility" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @disable_visibility.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disable_visibilitys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

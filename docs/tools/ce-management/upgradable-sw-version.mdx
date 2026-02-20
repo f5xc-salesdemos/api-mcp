@@ -1,15 +1,15 @@
 ---
 title: Upgradable Sw Version
-description: GET Upgradable SW Versions.
+description: Manage Upgradable Sw Version resources in F5 Distributed Cloud.
 ---
 
-API to GET list of sw versions that can be upgraded to.
+Upgradable Sw Version provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-cemanagement-upgradable-sw-version-list` | GET Upgradable SW Versions. |
+| `f5xc-api-cemanagement-upgradable-sw-version-list` | Get Upgradable SW Versions. |
 
 ## Parameters
 
@@ -33,22 +33,7 @@ Ask Claude to help you work with Upgradable Sw Version resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgradable_sw_versions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgradable_sw_versions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgradable_sw_versions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @upgradable_sw_version.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgradable_sw_versions/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/maurice/upgradable_sw_versions" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

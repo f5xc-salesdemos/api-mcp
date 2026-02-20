@@ -1,15 +1,15 @@
 ---
 title: Detail
-description: GET SAFE Block Details.
+description: Manage Detail resources in F5 Distributed Cloud.
 ---
 
-GET SAFE block details.
+Detail provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-detail-list` | GET SAFE Block Details. |
+| `f5xc-api-shape-detail-list` | Get SAFE Block Details. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET SAFE block details.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 ### Query Parameters
 
@@ -40,22 +40,7 @@ Ask Claude to help you work with Detail resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/details" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/details/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/details" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @detail.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/details/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/block/details" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,15 +1,15 @@
 ---
 title: Access Log
-description: GET CDN Access Logs.
+description: Manage Access Log resources in F5 Distributed Cloud.
 ---
 
-Retrieve CDN Load-Balancer Access logs.
+Access Log provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-cdn-access-log-create` | GET CDN Access Logs. |
+| `f5xc-api-cdn-access-log-create` | Get CDN Access Logs. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ Retrieve CDN Load-Balancer Access logs.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace fetch access logs for a given namespace. | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Access Log resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_logs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_logs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_logs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/cdn/namespaces/$${PARAM}/cdn_loadbalancer/access_logs" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @access_log.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access_logs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

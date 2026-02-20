@@ -1,15 +1,15 @@
 ---
 title: Learnt Schema
-description: GET GET Learnt Schema per API endpoint.
+description: Manage Learnt Schema resources in F5 Distributed Cloud.
 ---
 
-GET Learnt Schema per API endpoint for a given auto discovered API endpoint for Virtual Host.
+Learnt Schema provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-learnt-schema-get` | GET GET Learnt Schema per API endpoint. |
+| `f5xc-api-virtual-learnt-schema-get` | Get GET Learnt Schema per API endpoint. |
 
 ## Parameters
 
@@ -17,16 +17,16 @@ GET Learnt Schema per API endpoint for a given auto discovered API endpoint for 
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Virtual Host | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Virtual Host Virtual Host Name for current request. | `my-resource` |
+| `namespace` | Namespace Namespace of the App type for current request. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `api_endpoint_info_request` | List of additional things that needs to be sent as part of the request | `-` |
+| `api_endpoint_info_request` | List of additional things that needs to be sent as part of the request... | `-` |
 | `collapsed_url` | API endpoint for which PDFs are requested. | `-` |
-| `domains` | List of domains that needs to be sent as part of the request | `-` |
+| `domains` | List of domains that needs to be sent as part of the request Optional filter by domains. If absent, all domains are considered. | `-` |
 | `method` | Method of API endpoint for which PDFs are requested. | `-` |
 
 
@@ -41,23 +41,8 @@ Ask Claude to help you work with Learnt Schema resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/learnt_schemas" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/learnt_schemas/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/learnt_schemas" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @learnt_schema.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/learnt_schemas/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/$${PARAM}/api_endpoint/learnt_schema" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

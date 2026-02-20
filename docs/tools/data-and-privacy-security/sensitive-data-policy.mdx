@@ -1,20 +1,19 @@
 ---
 title: Sensitive Data Policy
-description: Create Sensitive Data Discovery.
+description: Manage Sensitive Data Policy resources in F5 Distributed Cloud.
 ---
 
-Replace sensitive_data_policy replaces an existing object in the storage backend for
-metadata.namespace.
+Sensitive Data Policy provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-dataandprivacysecurity-sensitive-data-policy-create` | Create Sensitive Data Discovery. |
-| `f5xc-api-dataandprivacysecurity-sensitive-data-policy-get` | GET Sensitive Data Discovery. |
+| `f5xc-api-dataandprivacysecurity-sensitive-data-policy-get` | Get Sensitive Data Discovery. |
 | `f5xc-api-dataandprivacysecurity-sensitive-data-policy-list` | List Sensitive Data Discovery. |
-| `f5xc-api-dataandprivacysecurity-sensitive-data-policy-update` | Replace Sensitive Data Discovery. |
-| `f5xc-api-dataandprivacysecurity-sensitive-data-policy-delete` | DELETE Sensitive Data Discovery. |
+| `f5xc-api-dataandprivacysecurity-sensitive-data-policy-update` | Update Sensitive Data Discovery. |
+| `f5xc-api-dataandprivacysecurity-sensitive-data-policy-delete` | Delete Sensitive Data Discovery. |
 
 ## Parameters
 
@@ -22,19 +21,17 @@ metadata.namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -57,22 +54,20 @@ Ask Claude to help you work with Sensitive Data Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/sensitive_data_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/sensitive_data_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/sensitive_data_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/sensitive_data_policys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/sensitive_data_policys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/sensitive_data_policys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @sensitive_data_policy.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/sensitive_data_policys/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/sensitive_data_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

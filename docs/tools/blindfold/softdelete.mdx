@@ -1,15 +1,15 @@
 ---
 title: Softdelete
-description: DELETE secret policy with given policy name.
+description: Manage Softdelete resources in F5 Distributed Cloud.
 ---
 
-Deletepolicy CustomAPI.
+Softdelete provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-blindfold-softdelete-create` | DELETE secret policy with given policy name. |
+| `f5xc-api-blindfold-softdelete-create` | Delete secret policy with given policy name. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ Deletepolicy CustomAPI.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name... | `my-resource` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Softdelete resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/softdeletes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/softdeletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/softdeletes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/secret_management/namespaces/$${PARAM}/secret_policy/$${PARAM}/softdelete" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @softdelete.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/softdeletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,19 +1,19 @@
 ---
 title: WAF Exclusion Policy
-description: Create WAF Exclusion Policy.
+description: Manage WAF Exclusion Policy resources in F5 Distributed Cloud.
 ---
 
-List the set of waf_exclusion_policy in a namespace.
+WAF Exclusion Policy provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-virtual-waf-exclusion-policy-create` | Create WAF Exclusion Policy. |
-| `f5xc-api-virtual-waf-exclusion-policy-get` | GET WAF Exclusion Policy. |
+| `f5xc-api-virtual-waf-exclusion-policy-get` | Get WAF Exclusion Policy. |
 | `f5xc-api-virtual-waf-exclusion-policy-list` | List WAF Exclusion Policy. |
-| `f5xc-api-virtual-waf-exclusion-policy-update` | Replace WAF Exclusion Policy. |
-| `f5xc-api-virtual-waf-exclusion-policy-delete` | DELETE WAF Exclusion Policy. |
+| `f5xc-api-virtual-waf-exclusion-policy-update` | Update WAF Exclusion Policy. |
+| `f5xc-api-virtual-waf-exclusion-policy-delete` | Delete WAF Exclusion Policy. |
 
 ## Parameters
 
@@ -21,47 +21,17 @@ List the set of waf_exclusion_policy in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### domain_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.waf_exclusion_rules[].any_domain` | - |  |
-| `spec.waf_exclusion_rules[].exact_value` | - |  |
-| `spec.waf_exclusion_rules[].suffix_value` | - |  |
-
-### path_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.waf_exclusion_rules[].any_path` | - |  |
-| `spec.waf_exclusion_rules[].path_prefix` | - |  |
-| `spec.waf_exclusion_rules[].path_regex` | - |  |
-
-### waf_advanced_configuration
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.waf_exclusion_rules[].app_firewall_detection_control` | - |  |
-| `spec.waf_exclusion_rules[].waf_skip_processing` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -84,22 +54,20 @@ Ask Claude to help you work with WAF Exclusion Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/waf_exclusion_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/waf_exclusion_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/waf_exclusion_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/waf_exclusion_policys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/waf_exclusion_policys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/waf_exclusion_policys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @waf_exclusion_policy.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/waf_exclusion_policys/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/waf_exclusion_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

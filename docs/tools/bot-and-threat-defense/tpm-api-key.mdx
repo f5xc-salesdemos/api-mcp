@@ -1,23 +1,18 @@
 ---
 title: Tpm API Key
-description: Create TPM API Key.
+description: Manage Tpm API Key resources in F5 Distributed Cloud.
 ---
 
-Replace a APIKey object's revocation or enable/disable status. A revoked APIKey is not considered
-disabled.
-Certificates minted using disabled APIKeys are rejected during system
-bring-up/verification stage,
-whereas certificates minted using revoked APIKeys are only rejected if
-they were minted after revocation date.
+Tpm API Key provides tools for creating, listing, retrieving, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-botandthreatdefense-tpm-api-key-create` | Create TPM API Key. |
-| `f5xc-api-botandthreatdefense-tpm-api-key-get` | GET TPM API Key. |
+| `f5xc-api-botandthreatdefense-tpm-api-key-get` | Get TPM API Key. |
 | `f5xc-api-botandthreatdefense-tpm-api-key-list` | List TPM API Key. |
-| `f5xc-api-botandthreatdefense-tpm-api-key-update` | Replace TPM API Key. |
+| `f5xc-api-botandthreatdefense-tpm-api-key-update` | Update TPM API Key. |
 
 ## Parameters
 
@@ -25,19 +20,17 @@ they were minted after revocation date.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -60,22 +53,17 @@ Ask Claude to help you work with Tpm API Key resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_api_keys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/tpm/namespaces/$${PARAM}/tpm_api_keys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_api_keys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/tpm/namespaces/$${PARAM}/tpm_api_keys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_api_keys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/tpm/namespaces/$${PARAM}/tpm_api_keys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @tpm_api_key.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_api_keys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

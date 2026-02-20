@@ -1,19 +1,19 @@
 ---
 title: Cloud Connect
-description: Create Cloud Connect.
+description: Manage Cloud Connect resources in F5 Distributed Cloud.
 ---
 
-List the set of cloud_connect in a namespace.
+Cloud Connect provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-cloudinfrastructure-cloud-connect-create` | Create Cloud Connect. |
-| `f5xc-api-cloudinfrastructure-cloud-connect-get` | GET Cloud Connect. |
+| `f5xc-api-cloudinfrastructure-cloud-connect-get` | Get Cloud Connect. |
 | `f5xc-api-cloudinfrastructure-cloud-connect-list` | List Cloud Connect. |
-| `f5xc-api-cloudinfrastructure-cloud-connect-update` | Replace Cloud Connect. |
-| `f5xc-api-cloudinfrastructure-cloud-connect-delete` | DELETE Cloud Connect. |
+| `f5xc-api-cloudinfrastructure-cloud-connect-update` | Update Cloud Connect. |
+| `f5xc-api-cloudinfrastructure-cloud-connect-delete` | Delete Cloud Connect. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of cloud_connect in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,23 +42,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.aws_tgw_site` | - |  |
-| `spec.azure_vnet_site` | - |  |
-
-### routing_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.aws_tgw_site.vpc_attachments.vpc_list[].custom_routing` | - |  |
-| `spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route` | - |  |
-| `spec.aws_tgw_site.vpc_attachments.vpc_list[].manual_routing` | - |  |
-
-### default_route_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.all_route_tables` | - |  |
-| `spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.selective_route_tables` | - |  |
+| `spec.aws_tgw_site` | Aws tgw site |  |
+| `spec.azure_vnet_site` | Azure vnet site |  |
 
 
 ## Example Usage
@@ -83,22 +66,20 @@ Ask Claude to help you work with Cloud Connect resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_connects" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/cloud_connects" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_connects/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/cloud_connects/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_connects" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/cloud_connects" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @cloud_connect.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cloud_connects/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/cloud_connects/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

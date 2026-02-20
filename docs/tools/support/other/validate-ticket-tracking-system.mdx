@@ -1,9 +1,9 @@
 ---
 title: Validate Ticket Tracking System
-description: Validate Ticket Tracking System.
+description: Manage Validate Ticket Tracking System resources in F5 Distributed Cloud.
 ---
 
-Validate input for the ticket tracking system like the credentials + organization.
+Validate Ticket Tracking System provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -19,13 +19,13 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `jira_config` | - |  |
+| `jira_config` | Jira config |  |
 
 ### config
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `jira_config.adhoc_rest_api` | - |  |
+| `jira_config.adhoc_rest_api` | Adhoc rest api |  |
 
 
 ## Example Usage
@@ -39,23 +39,10 @@ Ask Claude to help you work with Validate Ticket Tracking System resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_ticket_tracking_systems" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_ticket_tracking_systems/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_ticket_tracking_systems" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/shared/ticket_tracking_systems/validate_ticket_tracking_system" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @validate_ticket_tracking_system.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_ticket_tracking_systems/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Dc Cluster Group
-description: DC Cluster Topology.
+description: Manage Dc Cluster Group resources in F5 Distributed Cloud.
 ---
 
-GET summary of all DC Cluster groups.
+Dc Cluster Group provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +18,7 @@ GET summary of all DC Cluster groups.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `dc_cluster_group` | DC Cluster group | `-` |
+| `dc_cluster_group` | DC Cluster group Name of the DC Cluster group. | `-` |
 
 
 ## Example Usage
@@ -37,22 +37,13 @@ Ask Claude to help you work with Dc Cluster Group resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dc_cluster_groups" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dc_cluster_groups/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/topology/dc_cluster_groups" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dc_cluster_groups" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/topology/dc_cluster_group/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @dc_cluster_group.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dc_cluster_groups/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,15 +1,15 @@
 ---
 title: Session
-description: GET Devices By Session.
+description: Manage Session resources in F5 Distributed Cloud.
 ---
 
-GET devices session information.
+Session provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-session-create` | GET Devices By Session. |
+| `f5xc-api-shape-session-create` | Get Devices By Session. |
 
 ## Example Usage
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Session resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/sessions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/sessions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/sessions" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/dip/namespaces/system/dashboard/session" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @session.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/sessions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

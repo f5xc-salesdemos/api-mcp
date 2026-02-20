@@ -1,10 +1,9 @@
 ---
 title: Jira Projects Issue Type
-description: JIRA Projects & Issue Types.
+description: Manage Jira Projects Issue Type resources in F5 Distributed Cloud.
 ---
 
-Returns the available projects and issue types that are available from the Jira ticket tracking
-system.
+Jira Projects Issue Type provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,23 +22,10 @@ Ask Claude to help you work with Jira Projects Issue Type resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/jira_projects_issue_types" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/jira_projects_issue_types/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/jira_projects_issue_types" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/shared/ticket_tracking_systems/jira_projects_issue_types" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @jira_projects_issue_type.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/jira_projects_issue_types/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

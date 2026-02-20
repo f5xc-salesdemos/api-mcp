@@ -1,9 +1,9 @@
 ---
 title: Application
-description: Update Application.
+description: Manage Application resources in F5 Distributed Cloud.
 ---
 
-Update an application's information.
+Application provides tools for creating, listing, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -11,7 +11,7 @@ Update an application's information.
 |------|-------------|
 | `f5xc-api-shape-application-create` | Update Application. |
 | `f5xc-api-shape-application-list` | GetApplications. |
-| `f5xc-api-shape-application-delete` | DELETE Application. |
+| `f5xc-api-shape-application-delete` | Delete Application. |
 
 ## Parameters
 
@@ -38,22 +38,16 @@ Ask Claude to help you work with Application resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/applications" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/applications/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/dip/namespaces/system/applications" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/applications" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/dip/namespaces/system/application" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @application.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/applications/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/shape/dip/namespaces/system/application" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

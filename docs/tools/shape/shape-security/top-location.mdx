@@ -1,16 +1,16 @@
 ---
 title: Top Location
-description: POST SAFE Top Locations.
+description: Manage Top Location resources in F5 Distributed Cloud.
 ---
 
-POST SAFE Analyst Station Dashboard Transaction Breakdown request.
+Top Location provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-top-location-create` | POST SAFE Top Locations. |
-| `f5xc-api-shape-top-location-list` | GET SAFE Top Locations. |
+| `f5xc-api-shape-top-location-list` | Get SAFE Top Locations. |
 
 ## Parameters
 
@@ -18,7 +18,7 @@ POST SAFE Analyst Station Dashboard Transaction Breakdown request.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 ### Query Parameters
 
@@ -46,22 +46,13 @@ Ask Claude to help you work with Top Location resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_locations" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_locations/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/stats/top_locations" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_locations" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/stats/top_locations" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @top_location.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_locations/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

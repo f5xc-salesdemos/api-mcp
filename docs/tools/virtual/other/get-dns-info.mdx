@@ -1,15 +1,15 @@
 ---
 title: Get DNS Info
-description: GET DNS Info.
+description: Manage Get DNS Info resources in F5 Distributed Cloud.
 ---
 
-GetDnsInfo is an API to GET DNS information for a given HTTP load balancer.
+Get DNS Info provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-get-dns-info-get` | GET DNS Info. |
+| `f5xc-api-virtual-get-dns-info-get` | Get DNS Info. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GetDnsInfo is an API to GET DNS information for a given HTTP load balancer.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Name of the HTTP load balancer. | `my-resource` |
+| `namespace` | Namespace Namespace for the HTTP load balancer. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,8 @@ Ask Claude to help you work with Get DNS Info resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_dns_infos" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_dns_infos/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_dns_infos" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @get_dns_info.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_dns_infos/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/http_loadbalancers/$${PARAM}/get-dns-info" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

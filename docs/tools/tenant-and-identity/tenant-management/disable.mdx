@@ -1,10 +1,9 @@
 ---
 title: Disable
-description: Disable tenant level OTP.
+description: Manage Disable resources in F5 Distributed Cloud.
 ---
 
-Disable tenant level OTP disables OTP on tenant-level. After it's disabled it's up to user whether
-to enable OTP.
+Disable provides tools for updating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -19,23 +18,4 @@ Ask Claude to help you work with Disable resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disables" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disables/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disables" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @disable.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/disables/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

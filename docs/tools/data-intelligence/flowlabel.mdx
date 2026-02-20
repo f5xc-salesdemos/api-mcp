@@ -1,9 +1,9 @@
 ---
 title: Flowlabel
-description: List FlowLabels.
+description: Manage Flowlabel resources in F5 Distributed Cloud.
 ---
 
-ListFlowLabels takes a customer name and returns a list of FlowLabel objects.
+Flowlabel provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ ListFlowLabels takes a customer name and returns a list of FlowLabel objects.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace in which the suggestions are scoped. | `system` |
 
 
 ## Example Usage
@@ -32,22 +32,7 @@ Ask Claude to help you work with Flowlabel resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/flowlabels" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/flowlabels/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/flowlabels" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @flowlabel.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/flowlabels/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data-intelligence/namespaces/$${PARAM}/di/flowlabels" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

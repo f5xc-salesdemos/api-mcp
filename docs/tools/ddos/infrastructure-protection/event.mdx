@@ -1,11 +1,9 @@
 ---
 title: Event
-description: List of events.
+description: Manage Event resources in F5 Distributed Cloud.
 ---
 
-Returns a list of events. Events are created when a high priority mitigation is started. Events then
-serve as a
-one stop shop to review activities to mitigate a DDoS attack.
+Event provides tools for creating, listing, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -21,8 +19,8 @@ one stop shop to review activities to mitigate a DDoS attack.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `event_id` | Event ID | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
+| `event_id` | Event ID ID of the event we want to GET details for. | `-` |
 
 
 ## Example Usage
@@ -41,22 +39,13 @@ Ask Claude to help you work with Event resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/events" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/events/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/event/${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/events" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/events" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @event.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/events/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

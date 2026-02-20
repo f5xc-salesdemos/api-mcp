@@ -1,9 +1,9 @@
 ---
 title: Endpoint
-description: Endpoints List.
+description: Manage Endpoint resources in F5 Distributed Cloud.
 ---
 
-API to GET list of endpoints for a given namespace in a site.
+Endpoint provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,13 +17,13 @@ API to GET list of endpoints for a given namespace in a site.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `site` | Site | `-` |
+| `site` | Site Site name. | `-` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace to scope the listing of endpoints in a site. | `-` |
+| `namespace` | Namespace to scope the listing of endpoints in a site. | `system` |
 
 
 ## Example Usage
@@ -38,22 +38,7 @@ Ask Claude to help you work with Endpoint resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/endpoints" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/endpoints/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/endpoints" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @endpoint.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/endpoints/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/site/${PARAM}/api/v1/endpoints" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

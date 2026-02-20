@@ -1,11 +1,9 @@
 ---
 title: API Definitions Without Shared
-description: List Available API Definitions.
+description: Manage API Definitions Without Shared resources in F5 Distributed Cloud.
 ---
 
-List API definitions suitable for API Inventory management
-GET all API Definitions for specific
-namespace exclude shared namespace.
+API Definitions Without Shared provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -19,7 +17,7 @@ namespace exclude shared namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace namespace is used to GET available API Definitions for the given namespace. | `system` |
 
 
 ## Example Usage
@@ -34,22 +32,7 @@ Ask Claude to help you work with API Definitions Without Shared resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_definitions_without_shareds" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_definitions_without_shareds/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_definitions_without_shareds" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @api_definitions_without_shared.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_definitions_without_shareds/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/api_definitions_without_shared" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

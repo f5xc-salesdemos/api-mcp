@@ -1,21 +1,19 @@
 ---
 title: Subnet
-description: Create Subnet.
+description: Manage Subnet resources in F5 Distributed Cloud.
 ---
 
-Subnet object contains configuration for an interface of a VM/pod.
-It is created in user or shared
-namespace.
+Subnet provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-network-subnet-create` | Create Subnet. |
-| `f5xc-api-network-subnet-get` | GET Subnet. |
+| `f5xc-api-network-subnet-get` | Get Subnet. |
 | `f5xc-api-network-subnet-list` | List Subnet. |
-| `f5xc-api-network-subnet-update` | Replace Subnet. |
-| `f5xc-api-network-subnet-delete` | DELETE Subnet. |
+| `f5xc-api-network-subnet-update` | Update Subnet. |
+| `f5xc-api-network-subnet-delete` | Delete Subnet. |
 
 ## Parameters
 
@@ -23,19 +21,17 @@ namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -46,22 +42,9 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.connect_to_layer2` | - |  |
-| `spec.connect_to_slo` | - |  |
-| `spec.isolated_nw` | - |  |
-
-### address_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.site_subnet_params[].dhcp` | - |  |
-| `spec.site_subnet_params[].static_ip` | - |  |
-
-### network_prefix_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.site_subnet_params[].subnet_dhcp_server_params.dhcp_networks[].network_prefix` | - |  |
+| `spec.connect_to_layer2` | Connect to layer2 |  |
+| `spec.connect_to_slo` | Connect to slo |  |
+| `spec.isolated_nw` | Isolated nw |  |
 
 
 ## Example Usage
@@ -84,22 +67,20 @@ Ask Claude to help you work with Subnet resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/subnets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/subnets" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/subnets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/subnets/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/subnets" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/subnets" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @subnet.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/subnets/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/subnets/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

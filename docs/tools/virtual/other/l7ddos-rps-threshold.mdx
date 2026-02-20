@@ -1,9 +1,9 @@
 ---
 title: L7ddos Rps Threshold
-description: Set L7 DDoS RPS Threshold.
+description: Manage L7ddos Rps Threshold resources in F5 Distributed Cloud.
 ---
 
-Sets the L7 DDoS RPS threshold for HTTP load balancer.
+L7ddos Rps Threshold provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Sets the L7 DDoS RPS threshold for HTTP load balancer.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name x-required... | `my-resource` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with L7ddos Rps Threshold resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/l7ddos_rps_thresholds" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/l7ddos_rps_thresholds/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/l7ddos_rps_thresholds" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/http_loadbalancers/$${PARAM}/l7ddos_rps_threshold" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @l7ddos_rps_threshold.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/l7ddos_rps_thresholds/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

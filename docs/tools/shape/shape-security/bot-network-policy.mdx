@@ -1,15 +1,15 @@
 ---
 title: Bot Network Policy
-description: GET Bot network Policy.
+description: Manage Bot Network Policy resources in F5 Distributed Cloud.
 ---
 
-List the set of bot_network_policy in a namespace.
+Bot Network Policy provides tools for listing, retrieving, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-bot-network-policy-get` | GET Bot network Policy. |
+| `f5xc-api-shape-bot-network-policy-get` | Get Bot network Policy. |
 | `f5xc-api-shape-bot-network-policy-list` | List Bot network Policy. |
 | `f5xc-api-shape-bot-network-policy-update` | Custom Replace Bot network Policy. |
 
@@ -19,36 +19,17 @@ List the set of bot_network_policy in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
+| `namespace` | Namespace The namespace in which the configuration object is present. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### domain_operator_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.network_policy_content.manual_routing_list.manual_routing[].http` | - |  |
-| `spec.network_policy_content.manual_routing_list.manual_routing[].https` | - |  |
-
-### outbound_operator_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.network_policy_content.manual_routing_list.manual_routing[].protocol_http` | - |  |
-| `spec.network_policy_content.manual_routing_list.manual_routing[].protocol_https` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -67,22 +48,11 @@ Ask Claude to help you work with Bot Network Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_network_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/bot_network_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_network_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_network_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @bot_network_policy.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bot_network_policys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/bot_network_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```
