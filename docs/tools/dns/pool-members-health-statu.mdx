@@ -1,9 +1,9 @@
 ---
 title: Pool Members Health Statu
-description: DNS Load Balancer Pool Members Health Status List.
+description: Manage Pool Members Health Statu resources in F5 Distributed Cloud.
 ---
 
-GET Health Status of all DNS Load Balancer Pool Members in a namespace.
+Pool Members Health Statu provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ GET Health Status of all DNS Load Balancer Pool Members in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace to scope the listing of DNS LB health status. | `system` |
 
 
 ## Example Usage
@@ -32,22 +32,7 @@ Ask Claude to help you work with Pool Members Health Statu resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pool_members_health_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pool_members_health_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pool_members_health_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @pool_members_health_statu.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pool_members_health_status/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/dns_load_balancers/pool_members_health_status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

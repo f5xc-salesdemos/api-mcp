@@ -1,15 +1,15 @@
 ---
 title: Threat Campaign
-description: GET Threat Campaign by ID.
+description: Manage Threat Campaign resources in F5 Distributed Cloud.
 ---
 
-GET Threat Campaign by ID.
+Threat Campaign provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-threatcampaign-threat-campaign-get` | GET Threat Campaign by ID. |
+| `f5xc-api-threatcampaign-threat-campaign-get` | Get Threat Campaign by ID. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET Threat Campaign by ID.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
+| `id` | ID x-required... | `-` |
 
 
 ## Example Usage
@@ -31,23 +31,8 @@ Ask Claude to help you work with Threat Campaign resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/threat_campaigns" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/threat_campaigns/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/threat_campaigns" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @threat_campaign.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/threat_campaigns/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/waf/threat_campaign/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

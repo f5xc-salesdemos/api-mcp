@@ -1,15 +1,15 @@
 ---
 title: Mobile Integrator
-description: GET List Of Mobile Integrators.
+description: Manage Mobile Integrator resources in F5 Distributed Cloud.
 ---
 
-ListMobileIntegrators is an API to list all mobile integrators available for download.
+Mobile Integrator provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-objectstorage-mobile-integrator-list` | GET List Of Mobile Integrators. |
+| `f5xc-api-objectstorage-mobile-integrator-list` | Get List Of Mobile Integrators. |
 
 ## Parameters
 
@@ -17,16 +17,16 @@ ListMobileIntegrators is an API to list all mobile integrators available for dow
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace x-required... | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
 | `latest_version_only` | Optional query parameter. If passed, returns only latest version of the objects. | `-` |
-| `name` | Optional query parameter. Name of the stored_object. | `-` |
+| `name` | Optional query parameter. Name of the stored_object. | `my-resource` |
 | `object_type` | Optional query parameter. Type of the stored_object. | `-` |
-| `query_type` | Optional query parameter. The type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH. | `-` |
+| `query_type` | Optional query parameter. The type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH. EXACT_MATCH returns the objects with exact match on the name filed, while PREFIX_MATCH returns the list of object matching the 'name' prefix. Default is EXACT_MATCH. | `-` |
 
 
 ## Example Usage
@@ -41,22 +41,7 @@ Ask Claude to help you work with Mobile Integrator resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mobile_integrators" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mobile_integrators/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mobile_integrators" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @mobile_integrator.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mobile_integrators/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/object_store/namespaces/$${PARAM}/stored_objects/mobile-integrator" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

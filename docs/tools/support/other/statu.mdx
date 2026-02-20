@@ -1,15 +1,15 @@
 ---
 title: Statu
-description: Status
+description: Manage Statu resources in F5 Distributed Cloud.
 ---
 
-GET Status of F5XC components.
+Statu provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-support-statu-list` | Status |
+| `f5xc-api-support-statu-list` | Status. |
 
 ## Parameters
 
@@ -17,9 +17,9 @@ GET Status of F5XC components.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
-| `vesnamespace` | F5XC Namespace | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site. | `-` |
+| `vesnamespace` | F5XC Namespace Name of the site's namespace. Default's to VES-system. | `-` |
 
 ### Query Parameters
 
@@ -40,22 +40,7 @@ Ask Claude to help you work with Statu resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @statu.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/vpm/debug/global/${PARAM}/status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

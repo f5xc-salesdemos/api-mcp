@@ -1,9 +1,9 @@
 ---
 title: Confirm
-description: Confirm Alert Receiver.
+description: Manage Confirm resources in F5 Distributed Cloud.
 ---
 
-API to confirm the Alert Receiver - applicable only for email and sms.
+Confirm provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ API to confirm the Alert Receiver - applicable only for email and sms.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Name of the alert receiver. | `my-resource` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Confirm resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/confirms" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/confirms/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/confirms" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/alert/namespaces/$${PARAM}/alert_receivers/$${PARAM}/confirm" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @confirm.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/confirms/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

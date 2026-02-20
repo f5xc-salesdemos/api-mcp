@@ -1,15 +1,15 @@
 ---
 title: Discovered Service
-description: GET Discovered Service Object.
+description: Manage Discovered Service resources in F5 Distributed Cloud.
 ---
 
-List the discovered services of specific type like virtual-servers, K8s, consul, NGINX server, etc.
+Discovered Service provides tools for listing, and retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-statistics-discovered-service-get` | GET Discovered Service Object. |
+| `f5xc-api-statistics-discovered-service-get` | Get Discovered Service Object. |
 | `f5xc-api-statistics-discovered-service-list` | List discovered services of specific type. |
 
 ## Parameters
@@ -18,14 +18,14 @@ List the discovered services of specific type like virtual-servers, K8s, consul,
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
+| `namespace` | Namespace The namespace in which the configuration object is present. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `discovery_name` | Filter results to only include items referencing this discovery object name. | `-` |
 | `service_type` | Identifies the discovered service type. Omit for all types. | `-` |
 
@@ -46,22 +46,11 @@ Ask Claude to help you work with Discovered Service resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/discovered_services" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/discovery/custom/namespaces/$${PARAM}/discovered_services" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/discovered_services/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/discovered_services" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @discovered_service.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/discovered_services/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/discovery/namespaces/$${PARAM}/discovered_services/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

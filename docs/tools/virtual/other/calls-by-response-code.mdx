@@ -1,15 +1,15 @@
 ---
 title: Calls By Response Code
-description: GET Total API Calls for Virtual Host.
+description: Manage Calls By Response Code resources in F5 Distributed Cloud.
 ---
 
-GET total API calls for the given Virtual Host.
+Calls By Response Code provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-calls-by-response-code-create` | GET Total API Calls for Virtual Host. |
+| `f5xc-api-virtual-calls-by-response-code-create` | Get Total API Calls for Virtual Host. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET total API calls for the given Virtual Host.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Virtual Host Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Virtual Host Name Virtual Host name for current request. | `my-resource` |
+| `namespace` | Namespace Namespace of the virtual host for current request. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Calls By Response Code resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/calls_by_response_codes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/calls_by_response_codes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/calls_by_response_codes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/$${PARAM}/api_endpoints/summary/calls_by_response_code" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @calls_by_response_code.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/calls_by_response_codes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

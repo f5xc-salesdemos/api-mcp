@@ -1,9 +1,9 @@
 ---
 title: Verify
-description: Verify DNS Domain.
+description: Manage Verify resources in F5 Distributed Cloud.
 ---
 
-Verify DNS Domain for a given dns_domain object.
+Verify provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Verify DNS Domain for a given dns_domain object.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Name dns_domain object, which also domain name. | `my-resource` |
+| `namespace` | Namespace Namespace is always system for dns_domain. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Verify resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/verifys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/verifys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/verifys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/dns_domain/$${PARAM}/verify" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @verify.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/verifys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

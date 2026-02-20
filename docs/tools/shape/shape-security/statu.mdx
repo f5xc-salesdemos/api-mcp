@@ -1,16 +1,16 @@
 ---
 title: Statu
-description: Clone Alert Template.
+description: Manage Statu resources in F5 Distributed Cloud.
 ---
 
-GET Client-Side Defense status for the tenant.
+Statu provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-statu-create` | Clone Alert Template. |
-| `f5xc-api-shape-statu-list` | GET Status. |
+| `f5xc-api-shape-statu-list` | Get Status. |
 
 ## Parameters
 
@@ -18,8 +18,8 @@ GET Client-Side Defense status for the tenant.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name... | `my-resource` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -38,22 +38,13 @@ Ask Claude to help you work with Statu resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/status" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/alerts/namespaces/$${PARAM}/alert_gen_policy/$${PARAM}/status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @statu.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

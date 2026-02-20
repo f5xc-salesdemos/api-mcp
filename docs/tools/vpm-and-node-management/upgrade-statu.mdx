@@ -1,9 +1,9 @@
 ---
 title: Upgrade Statu
-description: Upgrade Status.
+description: Manage Upgrade Statu resources in F5 Distributed Cloud.
 ---
 
-Request to GET the upgrade status.
+Upgrade Statu provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with Upgrade Statu resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgrade_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgrade_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgrade_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @upgrade_statu.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/upgrade_status/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/upgrade_status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

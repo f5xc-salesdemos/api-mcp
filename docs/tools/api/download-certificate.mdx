@@ -1,19 +1,9 @@
 ---
 title: Download Certificate
-description: Download Certificates.
+description: Manage Download Certificate resources in F5 Distributed Cloud.
 ---
 
-Download the certificates files for the Log Collector.
-In order to establish connection from the
-third party application server to the
-Log Collector the user should download a zip file with the
-certificates files:
-
-- client.crt
-
-- client.key
-
-- server_ca.crt.
+Download Certificate provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -27,8 +17,8 @@ certificates files:
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Discovery Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Discovery Name x-required... | `my-resource` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Example Usage
@@ -42,23 +32,10 @@ Ask Claude to help you work with Download Certificate resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/download_certificates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/download_certificates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/download_certificates" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/discovery/$${PARAM}/download_certificates" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @download_certificate.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/download_certificates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

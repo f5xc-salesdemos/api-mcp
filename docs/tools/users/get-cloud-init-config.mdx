@@ -1,15 +1,15 @@
 ---
 title: Get Cloud Init Config
-description: GET Cloud Init Config.
+description: Manage Get Cloud Init Config resources in F5 Distributed Cloud.
 ---
 
-Returns cloud-init counfig for kvm provider with JWT token.
+Get Cloud Init Config provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-users-get-cloud-init-config-list` | GET Cloud Init Config. |
+| `f5xc-api-users-get-cloud-init-config-list` | Get Cloud Init Config. |
 
 ## Parameters
 
@@ -33,22 +33,7 @@ Ask Claude to help you work with Get Cloud Init Config resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_cloud_init_configs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_cloud_init_configs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_cloud_init_configs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @get_cloud_init_config.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_cloud_init_configs/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/register/namespaces/system/get-cloud-init-config" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

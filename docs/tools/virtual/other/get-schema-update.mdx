@@ -1,20 +1,15 @@
 ---
 title: Get Schema Update
-description: GET API Endpoints Schema Updates.
+description: Manage Get Schema Update resources in F5 Distributed Cloud.
 ---
 
-GET list of schema pairs, current and updated, for each endpoint in the request
-or all pending
-changes if empty list is provided.
-NOTE: any API endpoint defined in user swagger files should be
-ignored
-DEPRECATED. USE virtual host custom API GetAPIEndpointsSchemaUpdates.
+Get Schema Update provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-get-schema-update-create` | GET API Endpoints Schema Updates. |
+| `f5xc-api-virtual-get-schema-update-create` | Get API Endpoints Schema Updates. |
 
 ## Parameters
 
@@ -22,8 +17,8 @@ DEPRECATED. USE virtual host custom API GetAPIEndpointsSchemaUpdates.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name The name of the HTTP Loadbalancer for the current request. | `my-resource` |
+| `namespace` | Namespace The namespace of the HTTP Loadbalancer for the current request. | `system` |
 
 
 ## Example Usage
@@ -37,23 +32,10 @@ Ask Claude to help you work with Get Schema Update resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_schema_updates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_schema_updates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_schema_updates" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/http_loadbalancers/$${PARAM}/api_inventory/api_endpoints/get_schema_updates" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @get_schema_update.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/get_schema_updates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

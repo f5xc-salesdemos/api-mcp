@@ -1,19 +1,19 @@
 ---
 title: Tunnel
-description: Create Tunnel.
+description: Manage Tunnel resources in F5 Distributed Cloud.
 ---
 
-Create tunnel in a given namespace. If one already exist it will give a error.
+Tunnel provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-network-tunnel-create` | Create Tunnel. |
-| `f5xc-api-network-tunnel-get` | GET Tunnel. |
+| `f5xc-api-network-tunnel-get` | Get Tunnel. |
 | `f5xc-api-network-tunnel-list` | List Tunnel. |
-| `f5xc-api-network-tunnel-update` | Replace Tunnel. |
-| `f5xc-api-network-tunnel-delete` | DELETE Tunnel. |
+| `f5xc-api-network-tunnel-update` | Update Tunnel. |
+| `f5xc-api-network-tunnel-delete` | Delete Tunnel. |
 
 ## Parameters
 
@@ -21,53 +21,17 @@ Create tunnel in a given namespace. If one already exist it will give a error.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### type
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.local_ip.intf` | - |  |
-| `spec.local_ip.ip_address` | - |  |
-
-### ver
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.local_ip.ip_address.ip_address.ipv4` | - |  |
-| `spec.local_ip.ip_address.ip_address.ipv6` | - |  |
-
-### vn_type_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.local_ip.ip_address.virtual_network_type.public` | - |  |
-| `spec.local_ip.ip_address.virtual_network_type.site_local` | - |  |
-| `spec.local_ip.ip_address.virtual_network_type.site_local_inside` | - |  |
-
-### secret_info_oneof
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.params.ipsec.ipsec_psk.blindfold_secret_info` | - |  |
-| `spec.params.ipsec.ipsec_psk.clear_secret_info` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -90,22 +54,20 @@ Ask Claude to help you work with Tunnel resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tunnels" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/tunnels" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tunnels/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/tunnels/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tunnels" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/tunnels" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @tunnel.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tunnels/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/tunnels/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

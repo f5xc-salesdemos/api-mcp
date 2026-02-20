@@ -1,15 +1,15 @@
 ---
 title: Remote Zone File
-description: GET Remote Zone File.
+description: Manage Remote Zone File resources in F5 Distributed Cloud.
 ---
 
-GET remote zone file from primary DNS.
+Remote Zone File provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-dns-remote-zone-file-list` | GET Remote Zone File. |
+| `f5xc-api-dns-remote-zone-file-list` | Get Remote Zone File. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET remote zone file from primary DNS.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `dns_zone_name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `dns_zone_name` | Name Name dns_zone object which is also the DNS zone. | `-` |
+| `namespace` | Namespace Namespace is always system for dns_zone. | `system` |
 
 
 ## Example Usage
@@ -33,22 +33,7 @@ Ask Claude to help you work with Remote Zone File resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/remote_zone_files" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/remote_zone_files/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/remote_zone_files" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @remote_zone_file.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/remote_zone_files/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/$${PARAM}/dns_zone/${PARAM}/remote_zone_file" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,9 +1,9 @@
 ---
 title: Unsubscribe
-description: Unsubscribe to CDN Loadbalancer.
+description: Manage Unsubscribe resources in F5 Distributed Cloud.
 ---
 
-Unsubscribe to CDN Loadbalancer.
+Unsubscribe provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Unsubscribe resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unsubscribes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unsubscribes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unsubscribes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/cdn/namespaces/system/lilac-cdn/addon/unsubscribe" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @unsubscribe.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unsubscribes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

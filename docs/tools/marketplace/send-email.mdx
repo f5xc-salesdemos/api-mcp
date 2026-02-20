@@ -1,10 +1,9 @@
 ---
 title: Send Email
-description: Send Signup Email.
+description: Manage Send Email resources in F5 Distributed Cloud.
 ---
 
-Use this API to send a tenant provisioning signup email when the signup URL link in the previously
-sent email has expired or is no longer accessible.
+Send Email provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,23 +22,10 @@ Ask Claude to help you work with Send Email resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/send_emails" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/send_emails/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/send_emails" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/no_auth/namespaces/system/f5xc-saas/signup/send_email" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @send_email.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/send_emails/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,15 +1,15 @@
 ---
 title: Swagger Spec
-description: GET Swagger Spec for HTTP Load Balancer.
+description: Manage Swagger Spec resources in F5 Distributed Cloud.
 ---
 
-GET the corresponding Swagger spec for the given HTTP load balancer.
+Swagger Spec provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-swagger-spec-get` | GET Swagger Spec for HTTP Load Balancer. |
+| `f5xc-api-virtual-swagger-spec-get` | Get Swagger Spec for HTTP Load Balancer. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET the corresponding Swagger spec for the given HTTP load balancer.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name HTTP load balancer for current request. | `my-resource` |
+| `namespace` | Namespace Namespace of the HTTP Load Balancer for current request. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,8 @@ Ask Claude to help you work with Swagger Spec resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/swagger_specs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/swagger_specs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/swagger_specs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @swagger_spec.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/swagger_specs/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/http_loadbalancers/$${PARAM}/api_endpoints/swagger_spec" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

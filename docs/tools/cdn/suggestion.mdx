@@ -1,9 +1,9 @@
 ---
 title: Suggestion
-description: Suggest block client rule.
+description: Manage Suggestion resources in F5 Distributed Cloud.
 ---
 
-Suggest blocking SimpleClientSrcRule for a given IP/ASN.
+Suggestion provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Suggest blocking SimpleClientSrcRule for a given IP/ASN.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name HTTP load balancer for which this WAF exclusion will be applied. | `my-resource` |
+| `namespace` | Namespace Namespace of the App type for current request. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Suggestion resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/suggestions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/suggestions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/suggestions" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/cdn_loadbalancers/$${PARAM}/block_client/suggestion" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @suggestion.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/suggestions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

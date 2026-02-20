@@ -1,15 +1,15 @@
 ---
 title: Delete
-description: DELETE USB Enablement Rules.
+description: Manage Delete resources in F5 Distributed Cloud.
 ---
 
-DELETE USB Enablement Rules.
+Delete provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-support-delete-create` | DELETE USB Enablement Rules. |
+| `f5xc-api-support-delete-create` | Delete USB Enablement Rules. |
 
 ## Parameters
 
@@ -17,9 +17,9 @@ DELETE USB Enablement Rules.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `node` | Node Name | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `node` | Node Name Name of the node. | `-` |
+| `site` | Site Name Name of the site. | `-` |
 
 
 ## Example Usage
@@ -33,23 +33,10 @@ Ask Claude to help you work with Delete resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/deletes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/deletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/deletes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/vpm/usb/${PARAM}/rules/delete" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @delete.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/deletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

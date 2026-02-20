@@ -1,15 +1,15 @@
 ---
 title: Stored Object
-description: GET List Of Stored Objects.
+description: Manage Stored Object resources in F5 Distributed Cloud.
 ---
 
-ListObjects is an API to list objects in object store.
+Stored Object provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-objectstorage-stored-object-list` | GET List Of Stored Objects. |
+| `f5xc-api-objectstorage-stored-object-list` | Get List Of Stored Objects. |
 
 ## Parameters
 
@@ -17,16 +17,16 @@ ListObjects is an API to list objects in object store.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `object_type` | Object_type | `-` |
+| `namespace` | Namespace x-required... | `system` |
+| `object_type` | Object_type Optional query parameter. Type of the stored_object. | `-` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
 | `latest_version_only` | Optional query parameter. If passed, returns only latest version of the objects. | `-` |
-| `name` | Optional query parameter. Name of the stored_object. | `-` |
-| `query_type` | Optional query parameter. The type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH. | `-` |
+| `name` | Optional query parameter. Name of the stored_object. | `my-resource` |
+| `query_type` | Optional query parameter. The type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH. EXACT_MATCH returns the objects with exact match on the name filed, while PREFIX_MATCH returns the list of object matching the 'name' prefix. Default is EXACT_MATCH. | `-` |
 
 
 ## Example Usage
@@ -41,22 +41,7 @@ Ask Claude to help you work with Stored Object resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/stored_objects" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/stored_objects/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/stored_objects" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @stored_object.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/stored_objects/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/object_store/namespaces/$${PARAM}/stored_objects/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,9 +1,9 @@
 ---
 title: Transaction Timeline
-description: PostSafeTransactionTimeline.
+description: Manage Transaction Timeline resources in F5 Distributed Cloud.
 ---
 
-POST Safe Analyst Station specific transaction timeline.
+Transaction Timeline provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ POST Safe Analyst Station specific transaction timeline.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Transaction Timeline resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/transaction_timelines" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/transaction_timelines/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/transaction_timelines" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/transaction_timeline" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @transaction_timeline.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/transaction_timelines/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

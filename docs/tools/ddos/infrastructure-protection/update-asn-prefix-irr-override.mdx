@@ -1,9 +1,9 @@
 ---
 title: Update Asn Prefix Irr Override
-description: Update ASN Prefix IRR Override.
+description: Manage Update Asn Prefix Irr Override resources in F5 Distributed Cloud.
 ---
 
-Update Infraprotect ASN Prefix IRR Override.
+Update Asn Prefix Irr Override provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,17 +17,7 @@ Update Infraprotect ASN Prefix IRR Override.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### irr_override
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -41,23 +31,10 @@ Ask Claude to help you work with Update Asn Prefix Irr Override resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_asn_prefix_irr_overrides" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_asn_prefix_irr_overrides/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_asn_prefix_irr_overrides" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_asn_prefixes/update-asn-prefix-irr-override" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @update_asn_prefix_irr_override.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_asn_prefix_irr_overrides/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

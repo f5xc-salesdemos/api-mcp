@@ -1,15 +1,15 @@
 ---
 title: Global Summary
-description: GET Global Summary.
+description: Manage Global Summary resources in F5 Distributed Cloud.
 ---
 
-Returns a healthy and critical count of all monitors in namespace, based on monitor type.
+Global Summary provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-global-summary-list` | GET Global Summary. |
+| `f5xc-api-observability-global-summary-list` | Get Global Summary. |
 
 ## Parameters
 
@@ -17,13 +17,13 @@ Returns a healthy and critical count of all monitors in namespace, based on moni
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Request namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `monitor_type` | Monitor_type. | `-` |
+| `monitor_type` | Monitor_type. Monitor type. | `-` |
 
 
 ## Example Usage
@@ -38,22 +38,7 @@ Ask Claude to help you work with Global Summary resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/global_summarys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/global_summarys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/global_summarys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @global_summary.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/global_summarys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/global-summary" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

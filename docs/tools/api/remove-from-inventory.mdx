@@ -1,9 +1,9 @@
 ---
 title: Remove From Inventory
-description: Remove From API Inventory.
+description: Manage Remove From Inventory resources in F5 Distributed Cloud.
 ---
 
-Update the API Definition's exclude list with the provided API endpoints.
+Remove From Inventory provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Update the API Definition's exclude list with the provided API endpoints.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name The name of the API Definition for the current request. | `my-resource` |
+| `namespace` | Namespace The namespace of the API Definition for the current request. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Remove From Inventory resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/remove_from_inventorys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/remove_from_inventorys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/remove_from_inventorys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/api_definitions/$${PARAM}/remove_from_inventory" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @remove_from_inventory.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/remove_from_inventorys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,10 +1,9 @@
 ---
 title: Escalate
-description: Escalate a ticket.
+description: Manage Escalate resources in F5 Distributed Cloud.
 ---
 
-Escalates a selected ticket. Only certain customers (depending on their contract) are allowed to
-escalate tickets.
+Escalate provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,8 +17,8 @@ escalate tickets.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name The name of the customer support ticket object to be escalated. | `my-resource` |
+| `namespace` | Namespace The namespace in which the support ticket object is present in. | `system` |
 
 
 ## Example Usage
@@ -33,23 +32,10 @@ Ask Claude to help you work with Escalate resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/escalates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/escalates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/escalates" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/customer_support/$${PARAM}/escalate" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @escalate.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/escalates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Update Allow Advertise On Public
-description: Update allow advertise on public.
+description: Manage Update Allow Advertise On Public resources in F5 Distributed Cloud.
 ---
 
-UpdateAllowAdvertiseOnPublic can update a config to allow advertise on public.
+Update Allow Advertise On Public provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Update Allow Advertise On Public resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_allow_advertise_on_publics" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_allow_advertise_on_publics/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_allow_advertise_on_publics" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/system/update_allow_advertise_on_public" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @update_allow_advertise_on_public.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_allow_advertise_on_publics/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

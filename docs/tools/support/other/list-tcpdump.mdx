@@ -1,9 +1,9 @@
 ---
 title: List Tcpdump
-description: List Tcpdump.
+description: Manage List Tcpdump resources in F5 Distributed Cloud.
 ---
 
-List tcpdump capture status on a ver node.
+List Tcpdump provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ List tcpdump capture status on a ver node.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site on which Tcpdump status is requested. | `-` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with List Tcpdump resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_tcpdumps" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_tcpdumps/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_tcpdumps" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/ver/list_tcpdump" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @list_tcpdump.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/list_tcpdumps/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

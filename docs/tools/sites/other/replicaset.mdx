@@ -1,9 +1,9 @@
 ---
 title: Replicaset
-description: ReplicaSet List.
+description: Manage Replicaset resources in F5 Distributed Cloud.
 ---
 
-API to GET list of replica sets for a given namespace in a site.
+Replicaset provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ API to GET list of replica sets for a given namespace in a site.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site | `-` |
+| `namespace` | Namespace Namespace to scope the listing of replication sets in a site. | `system` |
+| `site` | Site Site name. | `-` |
 
 
 ## Example Usage
@@ -33,22 +33,7 @@ Ask Claude to help you work with Replicaset resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/replicasets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/replicasets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/replicasets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @replicaset.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/replicasets/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/site/${PARAM}/apis/apps/v1/namespaces/$${PARAM}/replicasets" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

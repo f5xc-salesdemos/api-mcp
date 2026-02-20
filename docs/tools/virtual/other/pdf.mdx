@@ -1,15 +1,15 @@
 ---
 title: Pdf
-description: GET API Endpoint PDF.
+description: Manage Pdf resources in F5 Distributed Cloud.
 ---
 
-GET PDF of all metrics for a given auto discovered API endpoint for Virtual Host.
+Pdf provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-pdf-get` | GET API Endpoint PDF. |
+| `f5xc-api-virtual-pdf-get` | Get API Endpoint PDF. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET PDF of all metrics for a given auto discovered API endpoint for Virtual Host
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Virtual Host | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Virtual Host Virtual Host Name for current request. | `my-resource` |
+| `namespace` | Namespace Namespace of the App type for current request. | `system` |
 
 ### Query Parameters
 
@@ -39,23 +39,8 @@ Ask Claude to help you work with Pdf resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pdfs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pdfs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pdfs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @pdf.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pdfs/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/$${PARAM}/api_endpoint/pdf" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

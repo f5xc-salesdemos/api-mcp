@@ -1,15 +1,15 @@
 ---
 title: User Token
-description: GET Web App Scanning Service User Token.
+description: Manage User Token resources in F5 Distributed Cloud.
 ---
 
-GET one time token to connect Web App Scanning Service.
+User Token provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-tenantandidentity-user-token-list` | GET Web App Scanning Service User Token. |
+| `f5xc-api-tenantandidentity-user-token-list` | Get Web App Scanning Service User Token. |
 
 ## Example Usage
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with User Token resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_tokens" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_tokens/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_tokens" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @user_token.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_tokens/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/system/was/user_token" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

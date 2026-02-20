@@ -1,16 +1,16 @@
 ---
 title: Justification
-description: Update Script Justification.
+description: Manage Justification resources in F5 Distributed Cloud.
 ---
 
-DELETE the specified script justification.
+Justification provides tools for creating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-justification-create` | Update Script Justification. |
-| `f5xc-api-shape-justification-delete` | DELETE Script Justification. |
+| `f5xc-api-shape-justification-delete` | Delete Script Justification. |
 
 ## Parameters
 
@@ -18,9 +18,9 @@ DELETE the specified script justification.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `script_id` | Script_id | `-` |
-| `justification_id` | Justification_id | `-` |
+| `namespace` | Namespace Namespace. | `system` |
+| `script_id` | Script_id x-required... | `-` |
+| `justification_id` | Justification_id ID of the justification. | `-` |
 
 
 ## Example Usage
@@ -34,23 +34,13 @@ Ask Claude to help you work with Justification resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/justifications" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/justifications/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/justifications" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/scripts/${PARAM}/justification" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @justification.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/justifications/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/script/justification/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

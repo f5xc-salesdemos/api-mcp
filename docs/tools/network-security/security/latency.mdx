@@ -1,9 +1,9 @@
 ---
 title: Latency
-description: Service Policy Latency.
+description: Manage Latency resources in F5 Distributed Cloud.
 ---
 
-GET the average latency for Service policy evaluation.
+Latency provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ GET the average latency for Service policy evaluation.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace is used to scope Service policy hits for the given namespace. | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Latency resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/latencys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/latencys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/latencys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/service_policy/latency" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @latency.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/latencys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

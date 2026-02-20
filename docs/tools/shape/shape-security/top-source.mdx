@@ -1,16 +1,16 @@
 ---
 title: Top Source
-description: POST SAFE Top Sources.
+description: Manage Top Source resources in F5 Distributed Cloud.
 ---
 
-POST SAFE Analyst Station Dashboard Transaction Breakdown request.
+Top Source provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-top-source-create` | POST SAFE Top Sources. |
-| `f5xc-api-shape-top-source-list` | GET SAFE Top Sources. |
+| `f5xc-api-shape-top-source-list` | Get SAFE Top Sources. |
 
 ## Parameters
 
@@ -18,7 +18,7 @@ POST SAFE Analyst Station Dashboard Transaction Breakdown request.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 ### Query Parameters
 
@@ -46,22 +46,13 @@ Ask Claude to help you work with Top Source resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_sources" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_sources/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/stats/top_sources" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_sources" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/stats/top_sources" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @top_source.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_sources/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

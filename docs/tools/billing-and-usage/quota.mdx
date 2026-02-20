@@ -1,19 +1,19 @@
 ---
 title: Quota
-description: Create Quota.
+description: Manage Quota resources in F5 Distributed Cloud.
 ---
 
-Replace quota updates a given object from storage backend for metadata.namespace.
+Quota provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-billingandusage-quota-create` | Create Quota. |
-| `f5xc-api-billingandusage-quota-get` | GET Quota |
+| `f5xc-api-billingandusage-quota-get` | Get Quota. |
 | `f5xc-api-billingandusage-quota-list` | List Quota. |
-| `f5xc-api-billingandusage-quota-update` | Replace Quota. |
-| `f5xc-api-billingandusage-quota-delete` | DELETE Quota. |
+| `f5xc-api-billingandusage-quota-update` | Update Quota. |
+| `f5xc-api-billingandusage-quota-delete` | Delete Quota. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Replace quota updates a given object from storage backend for metadata.namespace
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -56,22 +54,20 @@ Ask Claude to help you work with Quota resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/quotas" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/quotas" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/quotas/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/quotas/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/quotas" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/quotas" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @quota.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/quotas/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/quotas/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

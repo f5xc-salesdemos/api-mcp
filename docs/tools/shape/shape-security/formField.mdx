@@ -1,16 +1,16 @@
 ---
 title: FormField
-description: List All Form Fields.
+description: Manage FormField resources in F5 Distributed Cloud.
 ---
 
-List form fields for all the scripts depending on start time and end time with GET method.
+FormField provides tools for creating, listing, and retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-formfield-create` | List All Form Fields. |
-| `f5xc-api-shape-formfield-get` | GET Form Field. |
+| `f5xc-api-shape-formfield-get` | Get Form Field. |
 | `f5xc-api-shape-formfield-list` | List All Form Fields with GET method. |
 
 ## Parameters
@@ -19,15 +19,15 @@ List form fields for all the scripts depending on start time and end time with G
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `id` | ID | `-` |
+| `namespace` | Namespace Namespace. | `system` |
+| `id` | ID ID of the form field. | `-` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | X-required | `-` |
-| `start_time` | X-required | `-` |
+| `end_time` | X-required format: unix epoch timestamp in seconds... | `-` |
+| `start_time` | X-required format: unix epoch timestamp in seconds... | `-` |
 
 
 ## Example Usage
@@ -50,22 +50,17 @@ Ask Claude to help you work with FormField resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/formFields" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/formFields" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/formFields/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/formFields/${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/formFields" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/formFields" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @formField.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/formFields/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

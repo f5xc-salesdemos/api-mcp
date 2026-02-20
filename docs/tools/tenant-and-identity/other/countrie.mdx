@@ -1,10 +1,9 @@
 ---
 title: Countrie
-description: List countries.
+description: Manage Countrie resources in F5 Distributed Cloud.
 ---
 
-Returns a list of supported countries along with with additional information such as address
-validation rules.
+Countrie provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ validation rules.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `prefix` | Prefix | `-` |
+| `prefix` | Prefix first two or more characters of the country you look for (can be upper or lower case) | `-` |
 
 
 ## Example Usage
@@ -33,22 +32,7 @@ Ask Claude to help you work with Countrie resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/countries" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/countries/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/countries" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @countrie.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/countries/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/countries/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

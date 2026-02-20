@@ -1,22 +1,19 @@
 ---
 title: K8S Pod Security Policy
-description: Create Configuration Specification.
+description: Manage K8S Pod Security Policy resources in F5 Distributed Cloud.
 ---
 
-Replacing an k8s_pod_security_policy object will update the object by replacing the existing spec
-with the provided one.
-For read-then-write operations a resourceVersion mismatch will occur if the
-object was modified between the read and write.
+K8S Pod Security Policy provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-managedkubernetes-k8s-pod-security-policy-create` | Create Configuration Specification. |
-| `f5xc-api-managedkubernetes-k8s-pod-security-policy-get` | GET Configuration Specification. |
+| `f5xc-api-managedkubernetes-k8s-pod-security-policy-get` | Get Configuration Specification. |
 | `f5xc-api-managedkubernetes-k8s-pod-security-policy-list` | List K8s Pod Security Policy. |
-| `f5xc-api-managedkubernetes-k8s-pod-security-policy-update` | Replace Configuration Specification. |
-| `f5xc-api-managedkubernetes-k8s-pod-security-policy-delete` | DELETE K8s Pod Security Policy. |
+| `f5xc-api-managedkubernetes-k8s-pod-security-policy-update` | Update Configuration Specification. |
+| `f5xc-api-managedkubernetes-k8s-pod-security-policy-delete` | Delete K8s Pod Security Policy. |
 
 ## Parameters
 
@@ -24,19 +21,17 @@ object was modified between the read and write.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -47,69 +42,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.psp_spec` | - |  |
-| `spec.yaml` | - |  |
-
-### allowed_capabilities_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.psp_spec.allowed_capabilities` | - |  |
-| `spec.psp_spec.no_allowed_capabilities` | - |  |
-
-### default_capabilities_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.psp_spec.default_capabilities` | - |  |
-| `spec.psp_spec.no_default_capabilities` | - |  |
-
-### drop_capabilities_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.psp_spec.drop_capabilities` | - |  |
-| `spec.psp_spec.no_drop_capabilities` | - |  |
-
-### fs_group_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.psp_spec.fs_group_strategy_options` | - |  |
-| `spec.psp_spec.no_fs_groups` | - |  |
-
-### group_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.psp_spec.no_run_as_group` | - |  |
-| `spec.psp_spec.run_as_group` | - |  |
-
-### runtime_class_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.psp_spec.no_runtime_class` | - |  |
-
-### se_linux_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.psp_spec.no_se_linux_options` | - |  |
-
-### supplemental_group_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.psp_spec.no_supplemental_groups` | - |  |
-| `spec.psp_spec.supplemental_groups` | - |  |
-
-### user_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.psp_spec.no_run_as_user` | - |  |
-| `spec.psp_spec.run_as_user` | - |  |
+| `spec.psp_spec` | Psp spec |  |
+| `spec.yaml` | Yaml |  |
 
 
 ## Example Usage
@@ -132,22 +66,20 @@ Ask Claude to help you work with K8S Pod Security Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_pod_security_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_pod_security_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_pod_security_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_pod_security_policys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_pod_security_policys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_pod_security_policys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @k8s_pod_security_policy.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_pod_security_policys/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_pod_security_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

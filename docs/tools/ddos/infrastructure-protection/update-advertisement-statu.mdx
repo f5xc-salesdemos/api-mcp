@@ -1,9 +1,9 @@
 ---
 title: Update Advertisement Statu
-description: Update Infraprotect Internet prefix advertisement.
+description: Manage Update Advertisement Statu resources in F5 Distributed Cloud.
 ---
 
-Update Infraprotect Internet prefix advertisement.
+Update Advertisement Statu provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Update Infraprotect Internet prefix advertisement.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Configuration Choices
@@ -28,8 +28,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `activation_announce` | - |  |
-| `activation_withdraw` | - |  |
+| `activation_announce` | Activation announce |  |
+| `activation_withdraw` | Activation withdraw |  |
 
 
 ## Example Usage
@@ -43,23 +43,10 @@ Ask Claude to help you work with Update Advertisement Statu resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_advertisement_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_advertisement_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_advertisement_status" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_internet_prefix_advertisements/update-advertisement-status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @update_advertisement_statu.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_advertisement_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

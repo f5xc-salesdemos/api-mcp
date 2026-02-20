@@ -1,19 +1,19 @@
 ---
 title: Virtual Site
-description: Create Virtual Site.
+description: Manage Virtual Site resources in F5 Distributed Cloud.
 ---
 
-Replace a given virtual site object in a given namespace.
+Virtual Site provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-sites-virtual-site-create` | Create Virtual Site. |
-| `f5xc-api-sites-virtual-site-get` | GET Virtual Site. |
+| `f5xc-api-sites-virtual-site-get` | Get Virtual Site. |
 | `f5xc-api-sites-virtual-site-list` | List Virtual Site. |
-| `f5xc-api-sites-virtual-site-update` | Replace Virtual Site. |
-| `f5xc-api-sites-virtual-site-delete` | DELETE Virtual Site. |
+| `f5xc-api-sites-virtual-site-update` | Update Virtual Site. |
+| `f5xc-api-sites-virtual-site-delete` | Delete Virtual Site. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Replace a given virtual site object in a given namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -56,22 +54,20 @@ Ask Claude to help you work with Virtual Site resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/virtual_sites" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/virtual_sites" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/virtual_sites/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/virtual_sites/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/virtual_sites" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/virtual_sites" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @virtual_site.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/virtual_sites/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/virtual_sites/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

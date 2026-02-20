@@ -1,9 +1,9 @@
 ---
 title: Simplified Route
-description: Show Simplified Routes.
+description: Manage Simplified Route resources in F5 Distributed Cloud.
 ---
 
-Show user-friendly VER routes matching the request.
+Simplified Route provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Show user-friendly VER routes matching the request.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site for which request is sent. | `-` |
 
 
 ## Configuration Choices
@@ -29,17 +29,17 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `all_nodes` | - |  |
-| `node` | - |  |
+| `all_nodes` | All nodes |  |
+| `node` | Node |  |
 
 ### network_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `global_network` | - |  |
-| `segment` | - |  |
-| `sli` | - |  |
-| `slo` | - |  |
+| `global_network` | Global network |  |
+| `segment` | Segment |  |
+| `sli` | Sli |  |
+| `slo` | Slo |  |
 
 
 ## Example Usage
@@ -53,23 +53,10 @@ Ask Claude to help you work with Simplified Route resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/simplified_routes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/simplified_routes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/simplified_routes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/ver/simplified_routes" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @simplified_route.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/simplified_routes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

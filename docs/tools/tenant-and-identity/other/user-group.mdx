@@ -1,14 +1,9 @@
 ---
 title: User Group
-description: Create User Group.
+description: Manage User Group resources in F5 Distributed Cloud.
 ---
 
-Replace allows updating of the different user group fields like the display name, description, user
-associations and RBAC accesses.
-The name of the user group cannot be edited and the sync_id can be
-edited only when SCIM is enabled for the tenant.
-If any of the editable fields are nil / empty in
-the request, it will be considered as the removal of the field value.
+User Group provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -16,9 +11,9 @@ the request, it will be considered as the removal of the field value.
 |------|-------------|
 | `f5xc-api-tenantandidentity-user-group-create` | Create User Group. |
 | `f5xc-api-tenantandidentity-user-group-get` | Fetch all the details for a group provided the group ID. |
-| `f5xc-api-tenantandidentity-user-group-list` | GET all User Groups for the tenant. |
-| `f5xc-api-tenantandidentity-user-group-update` | Replace the User Group fields / accesses / associations. |
-| `f5xc-api-tenantandidentity-user-group-delete` | DELETE a group provided the group ID. |
+| `f5xc-api-tenantandidentity-user-group-list` | Get all User Groups for the tenant. |
+| `f5xc-api-tenantandidentity-user-group-update` | Update the User Group fields / accesses / associations. |
+| `f5xc-api-tenantandidentity-user-group-delete` | Delete a group provided the group ID. |
 
 ## Parameters
 
@@ -26,13 +21,13 @@ the request, it will be considered as the removal of the field value.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name of the user group | `-` |
+| `name` | Name of the user group name of the specific group. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `attempt_remove_references` | The attempt_remove_references parameter | `-` |
+| `attempt_remove_references` | The attempt_remove_references parameter... | `-` |
 
 
 ## Example Usage
@@ -55,22 +50,20 @@ Ask Claude to help you work with User Group resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_groups" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/system/user_groups" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_groups/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/system/user_groups/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_groups" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/system/user_groups" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @user_group.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/user_groups/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/system/user_groups/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

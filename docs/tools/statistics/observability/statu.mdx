@@ -1,9 +1,9 @@
 ---
 title: Statu
-description: Global Log Receiver Status.
+description: Manage Statu resources in F5 Distributed Cloud.
 ---
 
-GET status for global log receivers.
+Statu provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ GET status for global log receivers.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Statu resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/global_log_receiver/status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @statu.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

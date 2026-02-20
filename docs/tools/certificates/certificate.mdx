@@ -1,19 +1,19 @@
 ---
 title: Certificate
-description: Create Certificate.
+description: Manage Certificate resources in F5 Distributed Cloud.
 ---
 
-List the set of certificate in a namespace.
+Certificate provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-certificates-certificate-create` | Create Certificate. |
-| `f5xc-api-certificates-certificate-get` | GET Certificate. |
+| `f5xc-api-certificates-certificate-get` | Get Certificate. |
 | `f5xc-api-certificates-certificate-list` | List Certificate. |
-| `f5xc-api-certificates-certificate-update` | Replace Certificate. |
-| `f5xc-api-certificates-certificate-delete` | DELETE Certificate. |
+| `f5xc-api-certificates-certificate-update` | Update Certificate. |
+| `f5xc-api-certificates-certificate-delete` | Delete Certificate. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of certificate in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,16 +42,9 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.custom_hash_algorithms` | - |  |
-| `spec.disable_ocsp_stapling` | - |  |
-| `spec.use_system_defaults` | - |  |
-
-### secret_info_oneof
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.private_key.blindfold_secret_info` | - |  |
-| `spec.private_key.clear_secret_info` | - |  |
+| `spec.custom_hash_algorithms` | Custom hash algorithms |  |
+| `spec.disable_ocsp_stapling` | Disable ocsp stapling |  |
+| `spec.use_system_defaults` | Use system defaults |  |
 
 
 ## Example Usage
@@ -76,22 +67,20 @@ Ask Claude to help you work with Certificate resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/certificates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/certificates" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/certificates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/certificates/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/certificates" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/certificates" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @certificate.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/certificates/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/certificates/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

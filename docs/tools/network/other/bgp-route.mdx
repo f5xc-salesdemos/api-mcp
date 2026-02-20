@@ -1,9 +1,9 @@
 ---
-title: Bgp Route
-description: Show BGP Routes.
+title: BGP Route
+description: Manage BGP Route resources in F5 Distributed Cloud.
 ---
 
-Show routes exported / imported via BGP.
+BGP Route provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,15 +17,15 @@ Show routes exported / imported via BGP.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site. | `-` |
 
 
 ## Example Usage
 
-Ask Claude to help you work with Bgp Route resources:
+Ask Claude to help you work with BGP Route resources:
 
-### List Bgp Routes
+### List BGP Routes
 
 > "List all bgp-routes in the 'production' namespace"
 
@@ -33,22 +33,7 @@ Ask Claude to help you work with Bgp Route resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_routes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_routes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_routes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @bgp_route.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_routes/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/ver/bgp_routes" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

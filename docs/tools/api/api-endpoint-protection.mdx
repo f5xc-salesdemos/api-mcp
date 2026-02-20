@@ -1,9 +1,9 @@
 ---
 title: API Endpoint Protection
-description: Suggest API endpoint protection rule.
+description: Manage API Endpoint Protection resources in F5 Distributed Cloud.
 ---
 
-Suggest API endpoint protection rule for a given path.
+API Endpoint Protection provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Suggest API endpoint protection rule for a given path.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with API Endpoint Protection resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_endpoint_protections" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_endpoint_protections/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_endpoint_protections" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/api_sec/rule_suggestion/api_endpoint_protection" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @api_endpoint_protection.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_endpoint_protections/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

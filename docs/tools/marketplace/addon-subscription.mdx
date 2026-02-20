@@ -1,19 +1,19 @@
 ---
 title: Addon Subscription
-description: Create Addon Subscription.
+description: Manage Addon Subscription resources in F5 Distributed Cloud.
 ---
 
-GET Addon Subsciption reads a given object from storage backend for metadata.namespace.
+Addon Subscription provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-marketplace-addon-subscription-create` | Create Addon Subscription. |
-| `f5xc-api-marketplace-addon-subscription-get` | GET Addon Subsciption. |
+| `f5xc-api-marketplace-addon-subscription-get` | Get Addon Subsciption. |
 | `f5xc-api-marketplace-addon-subscription-list` | List Addon Subscrption. |
-| `f5xc-api-marketplace-addon-subscription-update` | Replace Addon Subscription. |
-| `f5xc-api-marketplace-addon-subscription-delete` | DELETE Addon Subscrption. |
+| `f5xc-api-marketplace-addon-subscription-update` | Update Addon Subscription. |
+| `f5xc-api-marketplace-addon-subscription-delete` | Delete Addon Subscrption. |
 
 ## Parameters
 
@@ -21,31 +21,17 @@ GET Addon Subsciption reads a given object from storage backend for metadata.nam
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### notification_type
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.notification_preference.emails` | - |  |
-| `spec.notification_preference.support_ticket_id` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -68,22 +54,20 @@ Ask Claude to help you work with Addon Subscription resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/addon_subscriptions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/addon_subscriptions" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/addon_subscriptions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/addon_subscriptions/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/addon_subscriptions" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/addon_subscriptions" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @addon_subscription.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/addon_subscriptions/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/addon_subscriptions/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,16 +1,16 @@
 ---
 title: Schema
-description: Schemas By ID.
+description: Manage Schema resources in F5 Distributed Cloud.
 ---
 
-Getschemabyid CustomPublicAPI.
+Schema provides tools for listing, and retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-tenantandidentity-schema-get` | Schemas By ID. |
-| `f5xc-api-tenantandidentity-schema-list` | Schemas |
+| `f5xc-api-tenantandidentity-schema-list` | Schemas. |
 
 ## Parameters
 
@@ -18,13 +18,13 @@ Getschemabyid CustomPublicAPI.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
+| `id` | ID x-required... | `-` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `excludedAttributes` | Members"]" | `-` |
+| `excludedAttributes` | Members"]" A multi-valued list of strings indicating the names of resource attributes... | `-` |
 
 
 ## Example Usage
@@ -43,22 +43,11 @@ Ask Claude to help you work with Schema resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Schemas" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Schemas" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Schemas/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Schemas" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @Schema.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Schemas/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Schemas/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

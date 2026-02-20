@@ -1,9 +1,9 @@
 ---
 title: Create TCP Load Balancer
-description: Create TCP load balancer.
+description: Manage Create TCP Load Balancer resources in F5 Distributed Cloud.
 ---
 
-Create TCP load balancer using the discovered virtual server as an origin server.
+Create TCP Load Balancer provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Create TCP load balancer using the discovered virtual server as an origin server
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Service Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Service Name x-required... | `my-resource` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Configuration Choices
@@ -29,51 +29,22 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `tcp_lb_request.advertise_custom` | - |  |
-| `tcp_lb_request.advertise_on_public_default_vip` | - |  |
+| `tcp_lb_request.advertise_custom` | Advertise custom |  |
+| `tcp_lb_request.advertise_on_public_default_vip` | Advertise on public default vip |  |
 
 ### port_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `tcp_lb_request.listen_port` | - |  |
-| `tcp_lb_request.port_ranges` | - |  |
+| `tcp_lb_request.listen_port` | Listen port |  |
+| `tcp_lb_request.port_ranges` | Port ranges |  |
 
 ### sni_default_lb_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `tcp_lb_request.no_sni` | - |  |
-| `tcp_lb_request.sni` | - |  |
-
-### choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `tcp_lb_request.advertise_custom.advertise_where[].advertise_on_public` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].cloud_edge_segment` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].segment` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].site` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].site_segment` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].virtual_network` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].virtual_site` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].virtual_site_segment` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].virtual_site_with_vip` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].vk8s_service` | - |  |
-
-### v6_vip_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `tcp_lb_request.advertise_custom.advertise_where[].virtual_network.default_v6_vip` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].virtual_network.specific_v6_vip` | - |  |
-
-### vip_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `tcp_lb_request.advertise_custom.advertise_where[].virtual_network.default_vip` | - |  |
-| `tcp_lb_request.advertise_custom.advertise_where[].virtual_network.specific_vip` | - |  |
+| `tcp_lb_request.no_sni` | No sni |  |
+| `tcp_lb_request.sni` | Sni |  |
 
 
 ## Example Usage
@@ -87,23 +58,10 @@ Ask Claude to help you work with Create TCP Load Balancer resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/create_tcp_load_balancers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/create_tcp_load_balancers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/create_tcp_load_balancers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/discovery/namespaces/$${PARAM}/discovered_services/$${PARAM}/create_tcp_load_balancer" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @create_tcp_load_balancer.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/create_tcp_load_balancers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

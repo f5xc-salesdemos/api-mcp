@@ -1,15 +1,9 @@
 ---
 title: Vk8s Event
-description: VK8s Events Query.
+description: Manage Vk8s Event resources in F5 Distributed Cloud.
 ---
 
-Request to GET Virtual K8s events that matches the criteria in request for a given namespace.
-If no
-match conditions are specified in the request, then the response contains all
-vK8s events in the
-namespace. User with access to the `system` namespace may query for vK8s across
-all namespaces for a
-given tenant.
+Vk8s Event provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,7 +17,7 @@ given tenant.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace fetch vK8s events for the given namespace. | `system` |
 
 
 ## Example Usage
@@ -37,23 +31,10 @@ Ask Claude to help you work with Vk8s Event resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/vk8s_events" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/vk8s_events/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/vk8s_events" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/vk8s_events" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @vk8s_event.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/vk8s_events/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,19 +1,19 @@
 ---
 title: Data Type
-description: Create Data Type.
+description: Manage Data Type resources in F5 Distributed Cloud.
 ---
 
-Replace data_type replaces an existing object in the storage backend for metadata.namespace.
+Data Type provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-dataandprivacysecurity-data-type-create` | Create Data Type. |
-| `f5xc-api-dataandprivacysecurity-data-type-get` | GET Data Type. |
+| `f5xc-api-dataandprivacysecurity-data-type-get` | Get Data Type. |
 | `f5xc-api-dataandprivacysecurity-data-type-list` | List Data Type. |
-| `f5xc-api-dataandprivacysecurity-data-type-update` | Replace Data Type. |
-| `f5xc-api-dataandprivacysecurity-data-type-delete` | DELETE Data Type. |
+| `f5xc-api-dataandprivacysecurity-data-type-update` | Update Data Type. |
+| `f5xc-api-dataandprivacysecurity-data-type-delete` | Delete Data Type. |
 
 ## Parameters
 
@@ -21,40 +21,17 @@ Replace data_type replaces an existing object in the storage backend for metadat
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### pattern_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].key_pattern` | - |  |
-| `spec.rules[].key_value_pattern` | - |  |
-| `spec.rules[].value_pattern` | - |  |
-
-### type_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].key_pattern.exact_values` | - |  |
-| `spec.rules[].key_pattern.regex_value` | - |  |
-| `spec.rules[].key_pattern.substring_value` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -77,22 +54,20 @@ Ask Claude to help you work with Data Type resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/data_types" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/data_types" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/data_types/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/data_types/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/data_types" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/data_types" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @data_type.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/data_types/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/data_types/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Role User
-description: Assign role to User.
+description: Manage Role User resources in F5 Distributed Cloud.
 ---
 
-AssignRole allows customers to assign a namespace/role pair to multiple users.
+Role User provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ AssignRole allows customers to assign a namespace/role pair to multiple users.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace the requesting user is calling the action from. | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Role User resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/role_users" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/role_users/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/role_users" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/role_users" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @role_user.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/role_users/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

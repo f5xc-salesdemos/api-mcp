@@ -1,9 +1,9 @@
 ---
 title: Image
-description: DELETE tenant profile image.
+description: Manage Image resources in F5 Distributed Cloud.
 ---
 
-Uploads new profile image for the tenant entity.
+Image provides tools for listing, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -11,7 +11,7 @@ Uploads new profile image for the tenant entity.
 |------|-------------|
 | `f5xc-api-tenantandidentity-image-list` | Tenant profile image. |
 | `f5xc-api-tenantandidentity-image-update` | Update tenant profile image. |
-| `f5xc-api-tenantandidentity-image-delete` | DELETE tenant profile image. |
+| `f5xc-api-tenantandidentity-image-delete` | Delete tenant profile image. |
 
 ## Example Usage
 
@@ -25,22 +25,10 @@ Ask Claude to help you work with Image resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/images" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/images/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/images" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @image.json
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/settings/tenant/image" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/images/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/settings/tenant/image" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,15 +1,15 @@
 ---
-title: Loadbalancer
-description: GET Referencing Loadbalancers.
+title: Load Balancer
+description: Manage Load Balancer resources in F5 Distributed Cloud.
 ---
 
-List Loadbalancers referenced by the API Definition (backrefrences).
+Load Balancer provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-api-loadbalancer-get` | GET Referencing Loadbalancers. |
+| `f5xc-api-api-loadbalancer-get` | Get Referencing Loadbalancers. |
 
 ## Parameters
 
@@ -17,38 +17,23 @@ List Loadbalancers referenced by the API Definition (backrefrences).
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name The name of the API Definition for the current request. | `my-resource` |
+| `namespace` | Namespace The namespace of the API Definition for the current request. | `system` |
 
 
 ## Example Usage
 
-Ask Claude to help you work with Loadbalancer resources:
+Ask Claude to help you work with Load Balancer resources:
 
-### Get Loadbalancer Details
+### Get Load Balancer Details
 
 > "Get details of the loadbalancer named 'example' in namespace 'production'"
 
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/loadbalancers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/loadbalancers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/loadbalancers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @loadbalancer.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/loadbalancers/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/api_definitions/$${PARAM}/loadbalancers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

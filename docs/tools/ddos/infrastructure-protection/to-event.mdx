@@ -1,10 +1,9 @@
 ---
 title: To Event
-description: Link Alert to Event.
+description: Manage To Event resources in F5 Distributed Cloud.
 ---
 
-Allows customers to link alerts with events. This helps with tracking of any mitigation activity and
-event investigation.
+To Event provides tools for updating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,8 +17,8 @@ event investigation.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `alert_id` | Alert ID | `-` |
-| `namespace` | Namespace | `-` |
+| `alert_id` | Alert ID Alert to be link with an event. | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
 
 
 ## Example Usage
@@ -29,23 +28,4 @@ Ask Claude to help you work with To Event resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/to_events" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/to_events/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/to_events" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @to_event.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/to_events/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

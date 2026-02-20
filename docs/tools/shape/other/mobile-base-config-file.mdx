@@ -1,15 +1,15 @@
 ---
 title: Mobile Base Config File
-description: GET Mobile Base Configuration File.
+description: Manage Mobile Base Config File resources in F5 Distributed Cloud.
 ---
 
-GET Mobile Base Configuration File.
+Mobile Base Config File provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-mobile-base-config-file-get` | GET Mobile Base Configuration File. |
+| `f5xc-api-shape-mobile-base-config-file-get` | Get Mobile Base Configuration File. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET Mobile Base Configuration File.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Mobile SDK Base Configuration name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Mobile SDK Base Configuration name x-required... | `my-resource` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,8 @@ Ask Claude to help you work with Mobile Base Config File resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mobile_base_config_files" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mobile_base_config_files/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mobile_base_config_files" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @mobile_base_config_file.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mobile_base_config_files/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/mobile/security/namespaces/$${PARAM}/mobile_base_config_file/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

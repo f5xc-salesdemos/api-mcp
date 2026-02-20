@@ -1,10 +1,9 @@
 ---
 title: Current Usage
-description: List current usage details.
+description: Manage Current Usage resources in F5 Distributed Cloud.
 ---
 
-List current usage details per tenant and namespace. Some usage have only sense in the system
-namespace and this selector has no effect on it.
+Current Usage provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ namespace and this selector has no effect on it.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace to be considered. | `system` |
 
 
 ## Example Usage
@@ -32,23 +31,10 @@ Ask Claude to help you work with Current Usage resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/current_usages" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/current_usages/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/current_usages" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/current_usage" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @current_usage.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/current_usages/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

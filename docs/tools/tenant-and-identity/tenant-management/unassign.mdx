@@ -1,25 +1,9 @@
 ---
 title: Unassign
-description: Unassign domain owner.
+description: Manage Unassign resources in F5 Distributed Cloud.
 ---
 
-Unassign domain owner tries to remove domain owner privilege from user in the request.
-It checks
-that requester is domain owner.
-It implies such steps:
-
-- remove domain owner boolean flag
-
-- if
-tenant has SSO enabled:
-
-- mark user as SSO
-
-- DELETE password credential
-
-- DELETE OTP credential
-(if exists)
-NOTE: previously granted roles (including admin roles) will be retained.
+Unassign provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -38,23 +22,10 @@ Ask Claude to help you work with Unassign resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unassigns" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unassigns/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unassigns" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/domain_owner/unassign" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @unassign.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unassigns/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Logo
-description: Tenant logo.
+description: Manage Logo resources in F5 Distributed Cloud.
 ---
 
-Receive current tenant logo.
+Logo provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with Logo resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/logos" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/logos/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/logos" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @logo.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/logos/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/settings/tenant/logo" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

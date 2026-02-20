@@ -1,9 +1,9 @@
 ---
 title: Src Tag Injection
-description: Validate JS Injection.
+description: Manage Src Tag Injection resources in F5 Distributed Cloud.
 ---
 
-Validate js src tag injection in the target URL.
+Src Tag Injection provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Src Tag Injection resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/src_tag_injections" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/src_tag_injections/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/src_tag_injections" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/dip/namespaces/system/validate/src_tag_injection" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @src_tag_injection.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/src_tag_injections/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,12 +1,9 @@
 ---
 title: Audit Log
-description: Audit Log Query.
+description: Manage Audit Log resources in F5 Distributed Cloud.
 ---
 
-Request to GET voltshare audit logs that matches the criteria in request.
-If no match conditions are
-specified in the request, then the response contains all
-CRUD operations performed.
+Audit Log provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -20,7 +17,7 @@ CRUD operations performed.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace fetch the log messages scoped by namespace. | `system` |
 
 
 ## Example Usage
@@ -34,23 +31,10 @@ Ask Claude to help you work with Audit Log resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/audit_logs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/audit_logs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/audit_logs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/secret_management/namespaces/$${PARAM}/voltshare/audit_logs" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @audit_log.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/audit_logs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

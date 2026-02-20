@@ -1,9 +1,9 @@
 ---
 title: Setting
-description: Module Management Settings.
+description: Manage Setting resources in F5 Distributed Cloud.
 ---
 
-Receive the module settings.
+Setting provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Receive the module settings.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace The namespace this item belongs to. | `system` |
 
 
 ## Example Usage
@@ -32,22 +32,7 @@ Ask Claude to help you work with Setting resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/settings" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/settings/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/settings" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @setting.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/settings/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/module_management/settings" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

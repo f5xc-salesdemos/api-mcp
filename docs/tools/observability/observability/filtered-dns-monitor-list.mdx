@@ -1,15 +1,15 @@
 ---
 title: Filtered DNS Monitor List
-description: GET Filtered DNS Monitor List.
+description: Manage Filtered DNS Monitor List resources in F5 Distributed Cloud.
 ---
 
-List v1_dns_monitor in a namespace based on filter.
+Filtered DNS Monitor List provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-filtered-dns-monitor-list-list` | GET Filtered DNS Monitor List. |
+| `f5xc-api-observability-filtered-dns-monitor-list-list` | Get Filtered DNS Monitor List. |
 
 ## Parameters
 
@@ -17,16 +17,16 @@ List v1_dns_monitor in a namespace based on filter.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace in which the suggestions are scoped. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `filter` | Monitor filter. | `-` |
+| `filter` | Monitor filter. Filter on monitor name or application name. | `-` |
 | `limit` | Limit. | `-` |
 | `page` | Page. | `-` |
-| `sort` | Sort. | `-` |
+| `sort` | Sort. Return data should by ORDER BY the sort field. | `-` |
 
 
 ## Example Usage
@@ -41,22 +41,7 @@ Ask Claude to help you work with Filtered DNS Monitor List resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/filtered_dns_monitor_lists" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/filtered_dns_monitor_lists/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/filtered_dns_monitor_lists" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @filtered_dns_monitor_list.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/filtered_dns_monitor_lists/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/filtered-dns-monitor-list" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

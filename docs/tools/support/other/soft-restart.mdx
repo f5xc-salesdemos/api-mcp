@@ -1,9 +1,9 @@
 ---
 title: Soft Restart
-description: Soft restart.
+description: Manage Soft Restart resources in F5 Distributed Cloud.
 ---
 
-Soft restart reloads VER instance on the node.
+Soft Restart provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,10 +17,10 @@ Soft restart reloads VER instance on the node.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `node` | Node Name | `-` |
-| `service` | Service Name | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `node` | Node Name Name of the node. | `-` |
+| `service` | Service Name Name of the service. | `-` |
+| `site` | Site Name Name of the site. | `-` |
 
 
 ## Example Usage
@@ -34,23 +34,10 @@ Ask Claude to help you work with Soft Restart resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/soft_restarts" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/soft_restarts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/soft_restarts" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/vpm/debug/${PARAM}/${PARAM}/soft-restart" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @soft_restart.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/soft_restarts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

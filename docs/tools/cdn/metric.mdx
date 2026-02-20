@@ -1,15 +1,15 @@
 ---
 title: Metric
-description: GET CDN Metrics.
+description: Manage Metric resources in F5 Distributed Cloud.
 ---
 
-Initial metrics request for CDN loadbalancers.
+Metric provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-cdn-metric-create` | GET CDN Metrics. |
+| `f5xc-api-cdn-metric-create` | Get CDN Metrics. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ Initial metrics request for CDN loadbalancers.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace x-required... | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Metric resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/metrics" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/metrics/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/metrics" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/cdn/namespaces/$${PARAM}/cdn_loadbalancer/metrics" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @metric.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/metrics/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

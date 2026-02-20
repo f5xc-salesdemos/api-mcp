@@ -1,16 +1,16 @@
 ---
 title: Tpm Manager
-description: Create TPM Manager.
+description: Manage Tpm Manager resources in F5 Distributed Cloud.
 ---
 
-List the set of tpm_manager in a namespace.
+Tpm Manager provides tools for creating, listing, and retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-botandthreatdefense-tpm-manager-create` | Create TPM Manager. |
-| `f5xc-api-botandthreatdefense-tpm-manager-get` | GET TPM Manager. |
+| `f5xc-api-botandthreatdefense-tpm-manager-get` | Get TPM Manager. |
 | `f5xc-api-botandthreatdefense-tpm-manager-list` | List TPM Manager. |
 
 ## Parameters
@@ -19,18 +19,17 @@ List the set of tpm_manager in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -53,22 +52,17 @@ Ask Claude to help you work with Tpm Manager resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_managers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/tpm/namespaces/$${PARAM}/tpm_managers" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_managers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/tpm/namespaces/$${PARAM}/tpm_managers/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_managers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/tpm/namespaces/$${PARAM}/tpm_managers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @tpm_manager.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tpm_managers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

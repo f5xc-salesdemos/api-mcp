@@ -1,10 +1,9 @@
 ---
 title: Validate Registration
-description: Validate Registration.
+description: Manage Validate Registration resources in F5 Distributed Cloud.
 ---
 
-ValidateRegistration validates if the signup registration request is valid when a new customer
-attempts to signup.
+Validate Registration provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,23 +22,10 @@ Ask Claude to help you work with Validate Registration resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_registrations" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_registrations/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_registrations" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/no_auth/login/validate_registration" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @validate_registration.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/validate_registrations/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

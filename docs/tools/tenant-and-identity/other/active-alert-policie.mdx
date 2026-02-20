@@ -1,18 +1,16 @@
 ---
 title: Active Alert Policie
-description: Set Active Alert Policies.
+description: Manage Active Alert Policie resources in F5 Distributed Cloud.
 ---
 
-SetActiveAlertPolicies sets the active alert policies for the namespace
-An emtpy list in the request
-will clear the active alert policies for the namespace.
+Active Alert Policie provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-tenantandidentity-active-alert-policie-create` | Set Active Alert Policies. |
-| `f5xc-api-tenantandidentity-active-alert-policie-list` | GET Active Alert Policies. |
+| `f5xc-api-tenantandidentity-active-alert-policie-list` | Get Active Alert Policies. |
 
 ## Parameters
 
@@ -20,7 +18,7 @@ will clear the active alert policies for the namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace The name of the namespace. | `system` |
 
 
 ## Example Usage
@@ -39,22 +37,13 @@ Ask Claude to help you work with Active Alert Policie resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/active_alert_policies" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/active_alert_policies/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/active_alert_policies" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/active_alert_policies" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/active_alert_policies" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @active_alert_policie.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/active_alert_policies/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,15 +1,15 @@
 ---
 title: TLS Report Summary
-description: GET TLS Report Summary.
+description: Manage TLS Report Summary resources in F5 Distributed Cloud.
 ---
 
-Returns the TLS report summary including grade, score, and protocol names.
+TLS Report Summary provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-tls-report-summary-list` | GET TLS Report Summary. |
+| `f5xc-api-observability-tls-report-summary-list` | Get TLS Report Summary. |
 
 ## Parameters
 
@@ -17,13 +17,13 @@ Returns the TLS report summary including grade, score, and protocol names.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Request namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `monitor_name` | Monitor_name. X-required | `-` |
+| `monitor_name` | Monitor_name. X-required Monitor name. | `-` |
 
 
 ## Example Usage
@@ -38,22 +38,7 @@ Ask Claude to help you work with TLS Report Summary resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tls_report_summarys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tls_report_summarys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tls_report_summarys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @tls_report_summary.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tls_report_summarys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/tls-report-summary" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,19 +1,19 @@
 ---
 title: Infraprotect Asn Prefix
-description: Create DDoS transit Prefix.
+description: Manage Infraprotect Asn Prefix resources in F5 Distributed Cloud.
 ---
 
-List the set of infraprotect_asn_prefix in a namespace.
+Infraprotect Asn Prefix provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-ddos-infraprotect-asn-prefix-create` | Create DDoS transit Prefix. |
-| `f5xc-api-ddos-infraprotect-asn-prefix-get` | GET Infraprotect ASN Prefix. |
+| `f5xc-api-ddos-infraprotect-asn-prefix-get` | Get Infraprotect ASN Prefix. |
 | `f5xc-api-ddos-infraprotect-asn-prefix-list` | List Infraprotect ASN Prefix. |
-| `f5xc-api-ddos-infraprotect-asn-prefix-update` | Replace DDoS transit Prefix. |
-| `f5xc-api-ddos-infraprotect-asn-prefix-delete` | DELETE Infraprotect ASN Prefix. |
+| `f5xc-api-ddos-infraprotect-asn-prefix-update` | Update DDoS transit Prefix. |
+| `f5xc-api-ddos-infraprotect-asn-prefix-delete` | Delete Infraprotect ASN Prefix. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of infraprotect_asn_prefix in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -56,22 +54,20 @@ Ask Claude to help you work with Infraprotect Asn Prefix resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_asn_prefixs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_asn_prefixs" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_asn_prefixs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_asn_prefixs/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_asn_prefixs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_asn_prefixs" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @infraprotect_asn_prefix.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_asn_prefixs/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_asn_prefixs/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

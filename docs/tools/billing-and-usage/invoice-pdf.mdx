@@ -1,9 +1,9 @@
 ---
 title: Invoice Pdf
-description: GetInvoicePdf.
+description: Manage Invoice Pdf resources in F5 Distributed Cloud.
 ---
 
-Retrieve pdf for a paid invoice by its name.
+Invoice Pdf provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,13 +17,13 @@ Retrieve pdf for a paid invoice by its name.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace filter. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name of the invoice to be downloaded. | `-` |
+| `name` | Name of the invoice to be downloaded. | `my-resource` |
 
 
 ## Example Usage
@@ -38,22 +38,7 @@ Ask Claude to help you work with Invoice Pdf resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/invoice_pdfs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/invoice_pdfs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/invoice_pdfs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @invoice_pdf.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/invoice_pdfs/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/usage/invoice_pdf" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

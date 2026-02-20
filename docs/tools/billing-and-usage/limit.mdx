@@ -1,9 +1,9 @@
 ---
 title: Limit
-description: Custom GET Quota Limits.
+description: Manage Limit resources in F5 Distributed Cloud.
 ---
 
-Custom endpoint to return quota limits.
+Limit provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Custom endpoint to return quota limits.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace The namespace this item belongs to. | `system` |
 
 
 ## Example Usage
@@ -32,22 +32,7 @@ Ask Claude to help you work with Limit resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/limits" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/limits/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/limits" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @limit.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/limits/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/quota/limits" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

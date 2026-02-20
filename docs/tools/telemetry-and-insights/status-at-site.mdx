@@ -1,15 +1,15 @@
 ---
 title: Status At Site
-description: GET Status.
+description: Manage Status At Site resources in F5 Distributed Cloud.
 ---
 
-GET status of an object in a given site.
+Status At Site provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-telemetryandinsights-status-at-site-get` | GET Status. |
+| `f5xc-api-telemetryandinsights-status-at-site-get` | Get Status. |
 
 ## Parameters
 
@@ -17,16 +17,16 @@ GET status of an object in a given site.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `kind` | Kind | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `kind` | Kind... | `-` |
+| `name` | Name... | `my-resource` |
+| `namespace` | Namespace... | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `site` | Site name | `-` |
-| `site_type` | Site type indicates whether the site is CE or RE | `-` |
+| `site` | Site name... | `-` |
+| `site_type` | Site type indicates whether the site is CE or RE optional: If not specified, the value for site_type defaults to CUSTOMER_EDGE... | `-` |
 
 
 ## Example Usage
@@ -40,23 +40,8 @@ Ask Claude to help you work with Status At Site resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status_at_sites" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status_at_sites/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status_at_sites" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @status_at_site.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/status_at_sites/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/${PARAM}/$${PARAM}/status_at_site" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

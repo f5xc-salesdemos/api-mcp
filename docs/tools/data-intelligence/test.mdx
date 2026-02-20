@@ -1,9 +1,9 @@
 ---
 title: Test
-description: Test Receiver.
+description: Manage Test resources in F5 Distributed Cloud.
 ---
 
-API to test receiver destination sink connection.
+Test provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ API to test receiver destination sink connection.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
-| `namespace` | Namespace | `-` |
+| `id` | ID Receiver Name. | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Test resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tests" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tests/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tests" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data-intelligence/namespaces/$${PARAM}/receivers/${PARAM}/test" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @test.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tests/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

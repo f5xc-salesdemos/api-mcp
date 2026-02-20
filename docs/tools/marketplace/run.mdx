@@ -1,9 +1,9 @@
 ---
 title: Run
-description: Run Terraform Action for view.
+description: Manage Run resources in F5 Distributed Cloud.
 ---
 
-Perform terraform actions for a given view. Supported actions are apply and plan.
+Run provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,9 +17,9 @@ Perform terraform actions for a given view. Supported actions are apply and plan
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `view_kind` | Kind of View | `-` |
-| `view_name` | Name of view | `-` |
+| `namespace` | Namespace Namespace for the label to be retrieved. | `system` |
+| `view_kind` | Kind of View Kind of view of which terraform parameters are requested e.g. Aws_vpc_site, azure_vnet_site. | `-` |
+| `view_name` | Name of view Name of the view for which terraform parameters are requested. | `-` |
 
 
 ## Example Usage
@@ -33,23 +33,10 @@ Ask Claude to help you work with Run resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/runs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/runs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/runs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/terraform/namespaces/$${PARAM}/terraform/${PARAM}/${PARAM}/run" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @run.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/runs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

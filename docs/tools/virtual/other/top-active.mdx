@@ -1,15 +1,15 @@
 ---
 title: Top Active
-description: GET Top APIs Endpoints for Virtual Host.
+description: Manage Top Active resources in F5 Distributed Cloud.
 ---
 
-Top APIs by requested activity metric. For example most-active APIs or most-attacked APIs.
+Top Active provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-top-active-create` | GET Top APIs Endpoints for Virtual Host. |
+| `f5xc-api-virtual-top-active-create` | Get Top APIs Endpoints for Virtual Host. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ Top APIs by requested activity metric. For example most-active APIs or most-atta
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Virtual Host Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Virtual Host Name Virtual Host name for current request. | `my-resource` |
+| `namespace` | Namespace Namespace of the virtual host for current request. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Top Active resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_actives" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_actives/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_actives" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/$${PARAM}/api_endpoints/summary/top_active" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @top_active.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_actives/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

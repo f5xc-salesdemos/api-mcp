@@ -1,15 +1,15 @@
 ---
 title: DataSet
-description: GET Data Sets.
+description: Manage DataSet resources in F5 Distributed Cloud.
 ---
 
-GET the list of data sets eligible for the tenant.
+DataSet provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-dataintelligence-dataset-list` | GET Data Sets. |
+| `f5xc-api-dataintelligence-dataset-list` | Get Data Sets. |
 
 ## Example Usage
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with DataSet resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dataSets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dataSets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dataSets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @dataSet.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dataSets/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data-intelligence/namespaces/system/dataSets" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

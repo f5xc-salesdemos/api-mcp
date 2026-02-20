@@ -1,9 +1,9 @@
 ---
 title: Top Talker
-description: Top Talkers.
+description: Manage Top Talker resources in F5 Distributed Cloud.
 ---
 
-Request to GET top talkers from the flow records.
+Top Talker provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Top Talker resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_talkers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_talkers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_talkers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/flows/top_talkers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @top_talker.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/top_talkers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

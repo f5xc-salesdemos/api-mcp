@@ -1,9 +1,9 @@
 ---
-title: Bgp Peer Statu
-description: BGP Peer Status.
+title: BGP Peer Statu
+description: Manage BGP Peer Statu resources in F5 Distributed Cloud.
 ---
 
-API to GET routed DDoS BGP peer status information.
+BGP Peer Statu provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,37 +17,24 @@ API to GET routed DDoS BGP peer status information.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
 
-Ask Claude to help you work with Bgp Peer Statu resources:
+Ask Claude to help you work with BGP Peer Statu resources:
 
-### Create Bgp Peer Statu
+### Create BGP Peer Statu
 
 > "Create a bgp-peer-statu named 'example' in the 'production' namespace"
 
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_peer_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_peer_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_peer_status" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/infraprotect/bgp_peer_status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @bgp_peer_statu.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_peer_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

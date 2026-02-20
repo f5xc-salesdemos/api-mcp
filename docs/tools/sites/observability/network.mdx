@@ -1,15 +1,15 @@
 ---
 title: Network
-description: GET Site Networks.
+description: Manage Network resources in F5 Distributed Cloud.
 ---
 
-Gets Networks Associated to Site.
+Network provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-sites-network-get` | GET Site Networks. |
+| `f5xc-api-sites-network-get` | Get Site Networks. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ Gets Networks Associated to Site.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
+| `name` | Name... | `my-resource` |
 
 
 ## Example Usage
@@ -31,23 +31,8 @@ Ask Claude to help you work with Network resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networks" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networks/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networks" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @network.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networks/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/topology/site/$${PARAM}/networks" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

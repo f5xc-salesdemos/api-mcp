@@ -1,11 +1,9 @@
 ---
 title: Admin Reset
-description: Reset password by admin.
+description: Manage Admin Reset resources in F5 Distributed Cloud.
 ---
 
-Reset password by admin resets password for a user specified in request payload.
-This request is
-meant to be executed by the tenant's admin.
+Admin Reset provides tools for creating, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -25,23 +23,10 @@ Ask Claude to help you work with Admin Reset resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/admin_resets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/admin_resets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/admin_resets" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/custom/password/admin_reset" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @admin_reset.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/admin_resets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

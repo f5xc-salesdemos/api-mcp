@@ -1,9 +1,9 @@
 ---
 title: Import Bind Validate
-description: Validate BIND Files.
+description: Manage Import Bind Validate resources in F5 Distributed Cloud.
 ---
 
-Validate BIND Files for Import.
+Import Bind Validate provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Import Bind Validate resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/import_bind_validates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/import_bind_validates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/import_bind_validates" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/system/dns_zone/import_bind_validate" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @import_bind_validate.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/import_bind_validates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

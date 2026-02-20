@@ -1,19 +1,19 @@
 ---
 title: Ike Phase2 Profile
-description: Create IKE Phase2 Profile.
+description: Manage Ike Phase2 Profile resources in F5 Distributed Cloud.
 ---
 
-Shape of the IKE Phase2 Profile configuration specification.
+Ike Phase2 Profile provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-network-ike-phase2-profile-create` | Create IKE Phase2 Profile. |
-| `f5xc-api-network-ike-phase2-profile-get` | GET IKE Phase2 profile configuration. |
+| `f5xc-api-network-ike-phase2-profile-get` | Get IKE Phase2 profile configuration. |
 | `f5xc-api-network-ike-phase2-profile-list` | List IKE Phase 2 Profile. |
-| `f5xc-api-network-ike-phase2-profile-update` | Replace IKE Phase2 Profile configuration. |
-| `f5xc-api-network-ike-phase2-profile-delete` | DELETE IKE Phase 2 Profile. |
+| `f5xc-api-network-ike-phase2-profile-update` | Update IKE Phase2 Profile configuration. |
+| `f5xc-api-network-ike-phase2-profile-delete` | Delete IKE Phase 2 Profile. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Shape of the IKE Phase2 Profile configuration specification.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,16 +42,16 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.ike_keylifetime_hours` | - |  |
-| `spec.ike_keylifetime_minutes` | - |  |
-| `spec.use_default_keylifetime` | - |  |
+| `spec.ike_keylifetime_hours` | Ike keylifetime hours |  |
+| `spec.ike_keylifetime_minutes` | Ike keylifetime minutes |  |
+| `spec.use_default_keylifetime` | Use default keylifetime |  |
 
 ### pfs_mode
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.dh_group_set` | - |  |
-| `spec.disable_pfs` | - |  |
+| `spec.dh_group_set` | Dh group set |  |
+| `spec.disable_pfs` | Disable pfs |  |
 
 
 ## Example Usage
@@ -76,22 +74,20 @@ Ask Claude to help you work with Ike Phase2 Profile resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ike_phase2_profiles" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/ike_phase2_profiles" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ike_phase2_profiles/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/ike_phase2_profiles/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ike_phase2_profiles" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/ike_phase2_profiles" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @ike_phase2_profile.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/ike_phase2_profiles/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/ike_phase2_profiles/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

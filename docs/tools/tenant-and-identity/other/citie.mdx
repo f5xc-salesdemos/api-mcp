@@ -1,9 +1,9 @@
 ---
 title: Citie
-description: List cities.
+description: Manage Citie resources in F5 Distributed Cloud.
 ---
 
-Returns a list of known cities of a country/state.
+Citie provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,9 +17,9 @@ Returns a list of known cities of a country/state.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `country_code` | Country code | `-` |
-| `prefix` | Prefix | `-` |
-| `state_code` | State code | `-` |
+| `country_code` | Country code 2 characters country code as described in https://en.wikipedia.org/wiki/ISO_3166-1, column `alpha-2`... | `-` |
+| `prefix` | Prefix first two or more characters of the city you look for (can be upper or lower case) | `-` |
+| `state_code` | State code 2 characters country code as described in https://en.wikipedia.org/wiki/ISO_3166-2:US/CA/IN, column `code`, excluding the leading country code. | `-` |
 
 
 ## Example Usage
@@ -34,22 +34,7 @@ Ask Claude to help you work with Citie resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cities" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cities/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cities" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @citie.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cities/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/countries/${PARAM}/states/${PARAM}/cities/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

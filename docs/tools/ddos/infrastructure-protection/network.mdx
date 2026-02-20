@@ -1,10 +1,9 @@
 ---
 title: Network
-description: List networks.
+description: Manage Network resources in F5 Distributed Cloud.
 ---
 
-Returns a list available reports to be downloaded. Reports summarise an event or a mitigation in a
-single PDF document.
+Network provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ single PDF document.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
 
 
 ## Example Usage
@@ -33,22 +32,7 @@ Ask Claude to help you work with Network resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networks" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networks/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networks" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @network.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/networks/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/networks" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

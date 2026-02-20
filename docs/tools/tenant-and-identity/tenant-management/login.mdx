@@ -1,11 +1,9 @@
 ---
 title: Login
-description: GetLoginEvents.
+description: Manage Login resources in F5 Distributed Cloud.
 ---
 
-GetLoginEvents returns login events for specified in config period of time. It consider all users
-within current tenant.
-Login events are extracted directly from IDM.
+Login provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -35,22 +33,7 @@ Ask Claude to help you work with Login resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/logins" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/logins/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/logins" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @login.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/logins/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/idm/events/login" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

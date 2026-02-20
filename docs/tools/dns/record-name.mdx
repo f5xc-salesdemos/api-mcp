@@ -1,17 +1,17 @@
 ---
 title: record Name
-description: DELETE
+description: Manage record Name resources in F5 Distributed Cloud.
 ---
 
-Replace CustomAPI.
+record Name provides tools for listing, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-dns-record-name-list` | GET |
-| `f5xc-api-dns-record-name-update` | Replace |
-| `f5xc-api-dns-record-name-delete` | DELETE |
+| `f5xc-api-dns-record-name-list` | GET. |
+| `f5xc-api-dns-record-name-update` | Replace. |
+| `f5xc-api-dns-record-name-delete` | DELETE. |
 
 ## Parameters
 
@@ -19,10 +19,10 @@ Replace CustomAPI.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `dns_zone_name` | Dns_zone_name | `-` |
-| `group_name` | Group_name | `-` |
-| `record_name` | Record_name | `-` |
-| `type` | Type | `-` |
+| `dns_zone_name` | Dns_zone_name... | `-` |
+| `group_name` | Group_name... | `-` |
+| `record_name` | Record_name... | `-` |
+| `type` | Type... | `-` |
 
 
 ## Configuration Choices
@@ -33,42 +33,27 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `rrset.a_record` | - |  |
-| `rrset.aaaa_record` | - |  |
-| `rrset.afsdb_record` | - |  |
-| `rrset.alias_record` | - |  |
-| `rrset.caa_record` | - |  |
-| `rrset.cds_record` | - |  |
-| `rrset.cert_record` | - |  |
-| `rrset.cname_record` | - |  |
-| `rrset.ds_record` | - |  |
-| `rrset.eui48_record` | - |  |
-| `rrset.eui64_record` | - |  |
-| `rrset.lb_record` | - |  |
-| `rrset.loc_record` | - |  |
-| `rrset.mx_record` | - |  |
-| `rrset.naptr_record` | - |  |
-| `rrset.ns_record` | - |  |
-| `rrset.ptr_record` | - |  |
-| `rrset.srv_record` | - |  |
-| `rrset.sshfp_record` | - |  |
-| `rrset.tlsa_record` | - |  |
-| `rrset.txt_record` | - |  |
-
-### digest_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `rrset.cds_record.values[].sha1_digest` | - |  |
-| `rrset.cds_record.values[].sha256_digest` | - |  |
-| `rrset.cds_record.values[].sha384_digest` | - |  |
-
-### fingerprint_type
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `rrset.sshfp_record.values[].sha1_fingerprint` | - |  |
-| `rrset.sshfp_record.values[].sha256_fingerprint` | - |  |
+| `rrset.a_record` | A record |  |
+| `rrset.aaaa_record` | Aaaa record |  |
+| `rrset.afsdb_record` | Afsdb record |  |
+| `rrset.alias_record` | Alias record |  |
+| `rrset.caa_record` | Caa record |  |
+| `rrset.cds_record` | Cds record |  |
+| `rrset.cert_record` | Cert record |  |
+| `rrset.cname_record` | Cname record |  |
+| `rrset.ds_record` | Ds record |  |
+| `rrset.eui48_record` | Eui48 record |  |
+| `rrset.eui64_record` | Eui64 record |  |
+| `rrset.lb_record` | Lb record |  |
+| `rrset.loc_record` | Loc record |  |
+| `rrset.mx_record` | Mx record |  |
+| `rrset.naptr_record` | Naptr record |  |
+| `rrset.ns_record` | Ns record |  |
+| `rrset.ptr_record` | Ptr record |  |
+| `rrset.srv_record` | Srv record |  |
+| `rrset.sshfp_record` | Sshfp record |  |
+| `rrset.tlsa_record` | Tlsa record |  |
+| `rrset.txt_record` | Txt record |  |
 
 
 ## Example Usage
@@ -83,22 +68,10 @@ Ask Claude to help you work with record Name resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/record_names" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/record_names/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/record_names" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @record_name.json
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/system/dns_zones/${PARAM}/rrsets/${PARAM}/${PARAM}/${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/record_names/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/system/dns_zones/${PARAM}/rrsets/${PARAM}/${PARAM}/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

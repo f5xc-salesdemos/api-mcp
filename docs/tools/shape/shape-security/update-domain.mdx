@@ -1,9 +1,9 @@
 ---
 title: Update Domain
-description: Update Domains.
+description: Manage Update Domain resources in F5 Distributed Cloud.
 ---
 
-Update domain from mitigated domains to allowed domains and vice versa.
+Update Domain provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Update domain from mitigated domains to allowed domains and vice versa.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace. | `system` |
 
 
 ## Configuration Choices
@@ -28,8 +28,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `add_to_allowed_domains` | - |  |
-| `add_to_mitigated_domains` | - |  |
+| `add_to_allowed_domains` | Add to allowed domains |  |
+| `add_to_mitigated_domains` | Add to mitigated domains |  |
 
 
 ## Example Usage
@@ -43,23 +43,10 @@ Ask Claude to help you work with Update Domain resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_domains" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_domains/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_domains" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/update_domains" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @update_domain.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/update_domains/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

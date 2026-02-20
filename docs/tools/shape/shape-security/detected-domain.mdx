@@ -1,15 +1,15 @@
 ---
 title: Detected Domain
-description: GET Detected Domains.
+description: Manage Detected Domain resources in F5 Distributed Cloud.
 ---
 
-GET the detected domains data for the tenant.
+Detected Domain provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-detected-domain-list` | GET Detected Domains. |
+| `f5xc-api-shape-detected-domain-list` | Get Detected Domains. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET the detected domains data for the tenant.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace. | `system` |
 
 ### Query Parameters
 
@@ -40,22 +40,7 @@ Ask Claude to help you work with Detected Domain resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/detected_domains" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/detected_domains/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/detected_domains" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @detected_domain.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/detected_domains/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/detected_domains" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

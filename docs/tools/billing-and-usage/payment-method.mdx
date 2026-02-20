@@ -1,16 +1,16 @@
 ---
 title: Payment Method
-description: Create payment method specification.
+description: Manage Payment Method resources in F5 Distributed Cloud.
 ---
 
-Creates a new payment method with a specific role.
+Payment Method provides tools for creating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-billingandusage-payment-method-create` | Create payment method specification. |
-| `f5xc-api-billingandusage-payment-method-delete` | DELETE the specified payment method. |
+| `f5xc-api-billingandusage-payment-method-delete` | Delete the specified payment method. |
 
 ## Parameters
 
@@ -18,8 +18,8 @@ Creates a new payment method with a specific role.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `name` | Name | `-` |
+| `namespace` | Namespace This namespace specifies the namespace in which the payment method will be created. | `system` |
+| `name` | Name Name of the payment method. | `my-resource` |
 
 
 ## Example Usage
@@ -33,23 +33,13 @@ Ask Claude to help you work with Payment Method resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/payment_methods" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/payment_methods/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/payment_methods" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/billing/payment_methods" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @payment_method.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/payment_methods/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/billing/payment_methods/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Lookup User Role
-description: Lookup User Roles.
+description: Manage Lookup User Role resources in F5 Distributed Cloud.
 ---
 
-LookupUserRoles returns roles for the the given user, namespace.
+Lookup User Role provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Lookup User Role resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/lookup_user_roles" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/lookup_user_roles/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/lookup_user_roles" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/lookup-user-roles" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @lookup_user_role.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/lookup_user_roles/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

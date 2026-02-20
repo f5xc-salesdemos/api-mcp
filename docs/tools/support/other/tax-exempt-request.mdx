@@ -1,12 +1,9 @@
 ---
 title: Tax Exempt Request
-description: Tax exemption verification request.
+description: Manage Tax Exempt Request resources in F5 Distributed Cloud.
 ---
 
-Raises a tax exemption verification request. This will ultimately create a support ticket and assign
-it to our billing department.
-If verified and approved then the customer will not be levied sale
-taxes.
+Tax Exempt Request provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -25,23 +22,10 @@ Ask Claude to help you work with Tax Exempt Request resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tax_exempt_requests" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tax_exempt_requests/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tax_exempt_requests" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/customer_support/tax_exempt_request" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @tax_exempt_request.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tax_exempt_requests/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

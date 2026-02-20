@@ -1,9 +1,9 @@
 ---
 title: Init Request
-description: Enable Data Intelligence.
+description: Manage Init Request resources in F5 Distributed Cloud.
 ---
 
-Request to enable Data Intelligence for the tenant.
+Init Request provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Init Request resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/init_requests" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/init_requests/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/init_requests" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data-intelligence/namespaces/system/init-request" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @init_request.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/init_requests/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

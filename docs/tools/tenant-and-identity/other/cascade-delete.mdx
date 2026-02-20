@@ -1,19 +1,15 @@
 ---
 title: Cascade Delete
-description: DELETE User and Related Objects.
+description: Manage Cascade Delete resources in F5 Distributed Cloud.
 ---
 
-CascadeDelete deletes the user and associated namespace roles for this user.
-Use this only if the
-user and its referenced objects need to be wiped out altogether.
-Note: users will always be in the
-system namespace.
+Cascade Delete provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-tenantandidentity-cascade-delete-create` | DELETE User and Related Objects. |
+| `f5xc-api-tenantandidentity-cascade-delete-create` | Delete User and Related Objects. |
 
 ## Parameters
 
@@ -21,7 +17,7 @@ system namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Value of namespace is always "system"... | `system` |
 
 
 ## Example Usage
@@ -35,23 +31,10 @@ Ask Claude to help you work with Cascade Delete resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cascade_deletes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cascade_deletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cascade_deletes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/users/cascade_delete" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @cascade_delete.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/cascade_deletes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

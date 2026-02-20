@@ -1,19 +1,19 @@
 ---
 title: Receiver
-description: Create Data Delivery.
+description: Manage Receiver resources in F5 Distributed Cloud.
 ---
 
-Replaces the content of an Data Delivery object.
+Receiver provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-dataintelligence-receiver-create` | Create Data Delivery. |
-| `f5xc-api-dataintelligence-receiver-get` | GET Data Delivery. |
+| `f5xc-api-dataintelligence-receiver-get` | Get Data Delivery. |
 | `f5xc-api-dataintelligence-receiver-list` | List Data Delivery. |
-| `f5xc-api-dataintelligence-receiver-update` | Replace Data Delivery. |
-| `f5xc-api-dataintelligence-receiver-delete` | DELETE Data Delivery. |
+| `f5xc-api-dataintelligence-receiver-update` | Update Data Delivery. |
+| `f5xc-api-dataintelligence-receiver-delete` | Delete Data Delivery. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Replaces the content of an Data Delivery object.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,97 +42,12 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.azure_receiver` | - |  |
-| `spec.datadog_receiver` | - |  |
-| `spec.gcp_bucket_receiver` | - |  |
-| `spec.http_receiver` | - |  |
-| `spec.s3_receiver` | - |  |
-| `spec.splunk_receiver` | - |  |
-
-### batch_bytes
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.azure_receiver.batch.max_bytes` | - |  |
-| `spec.azure_receiver.batch.max_bytes_disabled` | - |  |
-
-### batch_events
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.azure_receiver.batch.max_events` | - |  |
-| `spec.azure_receiver.batch.max_events_disabled` | - |  |
-
-### batch_timeout
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.azure_receiver.batch.default_timeout_seconds` | - |  |
-| `spec.azure_receiver.batch.timeout_seconds` | - |  |
-
-### compression_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.azure_receiver.compression.gzip_compression` | - |  |
-| `spec.azure_receiver.compression.no_compression` | - |  |
-
-### secret_info_oneof
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.azure_receiver.connection_string.blindfold_secret_info` | - |  |
-| `spec.azure_receiver.connection_string.clear_secret_info` | - |  |
-
-### endpoint_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.datadog_receiver.endpoint` | - |  |
-| `spec.datadog_receiver.site` | - |  |
-
-### tls_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.datadog_receiver.no_tls` | - |  |
-| `spec.datadog_receiver.use_tls` | - |  |
-
-### ca_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.datadog_receiver.use_tls.no_ca` | - |  |
-| `spec.datadog_receiver.use_tls.trusted_ca_url` | - |  |
-
-### mtls_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.datadog_receiver.use_tls.mtls_disabled` | - |  |
-| `spec.datadog_receiver.use_tls.mtls_enable` | - |  |
-
-### verify_certificate
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.datadog_receiver.use_tls.disable_verify_certificate` | - |  |
-| `spec.datadog_receiver.use_tls.enable_verify_certificate` | - |  |
-
-### verify_hostname
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.datadog_receiver.use_tls.disable_verify_hostname` | - |  |
-| `spec.datadog_receiver.use_tls.enable_verify_hostname` | - |  |
-
-### auth_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.http_receiver.auth_basic` | - |  |
-| `spec.http_receiver.auth_none` | - |  |
-| `spec.http_receiver.auth_token` | - |  |
+| `spec.azure_receiver` | Azure receiver |  |
+| `spec.datadog_receiver` | Datadog receiver |  |
+| `spec.gcp_bucket_receiver` | Gcp bucket receiver |  |
+| `spec.http_receiver` | Http receiver |  |
+| `spec.s3_receiver` | S3 receiver |  |
+| `spec.splunk_receiver` | Splunk receiver |  |
 
 
 ## Example Usage
@@ -157,22 +70,20 @@ Ask Claude to help you work with Receiver resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/receivers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data-intelligence/namespaces/$${PARAM}/receivers" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/receivers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data-intelligence/namespaces/$${PARAM}/receivers/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/receivers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data-intelligence/namespaces/$${PARAM}/receivers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @receiver.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/receivers/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/data-intelligence/namespaces/$${PARAM}/receivers/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,19 +1,19 @@
 ---
 title: Rate Limiter Policy
-description: Create Specification.
+description: Manage Rate Limiter Policy resources in F5 Distributed Cloud.
 ---
 
-Shape of the Rate Limiter Policy Replace specification.
+Rate Limiter Policy provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-virtual-rate-limiter-policy-create` | Create Specification. |
-| `f5xc-api-virtual-rate-limiter-policy-get` | GET Specification. |
+| `f5xc-api-virtual-rate-limiter-policy-get` | Get Specification. |
 | `f5xc-api-virtual-rate-limiter-policy-list` | List Rate Limiter Policy. |
-| `f5xc-api-virtual-rate-limiter-policy-update` | Replace Specification. |
-| `f5xc-api-virtual-rate-limiter-policy-delete` | DELETE Rate Limiter Policy. |
+| `f5xc-api-virtual-rate-limiter-policy-update` | Update Specification. |
+| `f5xc-api-virtual-rate-limiter-policy-delete` | Delete Rate Limiter Policy. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Shape of the Rate Limiter Policy Replace specification.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,49 +42,10 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.any_server` | - |  |
-| `spec.server_name` | - |  |
-| `spec.server_name_matcher` | - |  |
-| `spec.server_selector` | - |  |
-
-### action_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].spec.apply_rate_limiter` | - |  |
-| `spec.rules[].spec.bypass_rate_limiter` | - |  |
-| `spec.rules[].spec.custom_rate_limiter` | - |  |
-
-### asn_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].spec.any_asn` | - |  |
-| `spec.rules[].spec.asn_list` | - |  |
-| `spec.rules[].spec.asn_matcher` | - |  |
-
-### country_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].spec.any_country` | - |  |
-| `spec.rules[].spec.country_list` | - |  |
-
-### ip_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].spec.any_ip` | - |  |
-| `spec.rules[].spec.ip_matcher` | - |  |
-| `spec.rules[].spec.ip_prefix_list` | - |  |
-
-### match
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules[].spec.headers[].check_not_present` | - |  |
-| `spec.rules[].spec.headers[].check_present` | - |  |
-| `spec.rules[].spec.headers[].item` | - |  |
+| `spec.any_server` | Any server |  |
+| `spec.server_name` | Server name |  |
+| `spec.server_name_matcher` | Server name matcher |  |
+| `spec.server_selector` | Server selector |  |
 
 
 ## Example Usage
@@ -109,22 +68,20 @@ Ask Claude to help you work with Rate Limiter Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/rate_limiter_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/rate_limiter_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/rate_limiter_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/rate_limiter_policys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/rate_limiter_policys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/rate_limiter_policys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @rate_limiter_policy.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/rate_limiter_policys/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/rate_limiter_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

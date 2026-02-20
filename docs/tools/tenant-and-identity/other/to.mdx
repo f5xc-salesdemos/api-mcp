@@ -1,15 +1,15 @@
 ---
 title: To
-description: GET TOS
+description: Manage To resources in F5 Distributed Cloud.
 ---
 
-GET TOS provides TOS version with text.
+To provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-tenantandidentity-to-list` | GET TOS |
+| `f5xc-api-tenantandidentity-to-list` | Get TOS. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET TOS provides TOS version with text.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Value of namespace is always "system"... | `system` |
 
 
 ## Example Usage
@@ -32,22 +32,7 @@ Ask Claude to help you work with To resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tos" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tos/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tos" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @to.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/tos/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/tos" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

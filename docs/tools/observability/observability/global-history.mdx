@@ -1,15 +1,15 @@
 ---
 title: Global History
-description: GET Global History.
+description: Manage Global History resources in F5 Distributed Cloud.
 ---
 
-Returns a time series of critical monitor counts in namespace.
+Global History provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-global-history-list` | GET Global History. |
+| `f5xc-api-observability-global-history-list` | Get Global History. |
 
 ## Parameters
 
@@ -17,16 +17,16 @@ Returns a time series of critical monitor counts in namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Request namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | End_time. | `-` |
-| `monitor_type` | Monitor_type. | `-` |
-| `start_time` | Start_time. | `-` |
-| `step_size` | Step_size. | `-` |
+| `end_time` | End_time. End time for requested history (default: current time) | `-` |
+| `monitor_type` | Monitor_type. Monitor type. | `-` |
+| `start_time` | Start_time. Start time for requested history. | `-` |
+| `step_size` | Step_size. Step size for time series aggregation. | `-` |
 
 
 ## Example Usage
@@ -41,22 +41,7 @@ Ask Claude to help you work with Global History resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/global_historys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/global_historys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/global_historys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @global_history.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/global_historys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/global-history" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

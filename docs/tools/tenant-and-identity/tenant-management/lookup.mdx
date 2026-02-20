@@ -1,9 +1,9 @@
 ---
 title: Lookup
-description: Lookup cname.
+description: Manage Lookup resources in F5 Distributed Cloud.
 ---
 
-Checks if a cname is available.
+Lookup provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +18,7 @@ Checks if a cname is available.
 | Parameter | Description | Example |
 |-----------|-------------|--------|
 | `cname` | Cname to look-uo. | `-` |
-| `namespace` | Namespace to query. | `-` |
+| `namespace` | Namespace to query. | `system` |
 
 
 ## Example Usage
@@ -33,22 +33,7 @@ Ask Claude to help you work with Lookup resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/lookups" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/lookups/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/lookups" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @lookup.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/lookups/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/lookup" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

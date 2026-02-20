@@ -1,17 +1,15 @@
 ---
 title: Whoami
-description: GET User Details.
+description: Manage Whoami resources in F5 Distributed Cloud.
 ---
 
-GET fetches user information based on the username header from the request context
-this API is also
-called as WhoAmI.
+Whoami provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-tenantandidentity-whoami-list` | GET User Details. |
+| `f5xc-api-tenantandidentity-whoami-list` | Get User Details. |
 
 ## Parameters
 
@@ -19,7 +17,7 @@ called as WhoAmI.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace of the user object (namespace where the user object is stored). | `system` |
 
 
 ## Example Usage
@@ -34,22 +32,7 @@ Ask Claude to help you work with Whoami resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/whoamis" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/whoamis/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/whoamis" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @whoami.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/whoamis/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/whoami" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

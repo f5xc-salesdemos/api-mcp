@@ -1,19 +1,19 @@
 ---
 title: User
-description: Create User with Role Assignment.
+description: Manage User resources in F5 Distributed Cloud.
 ---
 
-Create creates a user and namespace roles binding for this user.
+User provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-tenantandidentity-user-create` | Create User with Role Assignment. |
-| `f5xc-api-tenantandidentity-user-get` | GET User with ID. |
-| `f5xc-api-tenantandidentity-user-list` | GET all users. |
+| `f5xc-api-tenantandidentity-user-get` | Get User with ID. |
+| `f5xc-api-tenantandidentity-user-list` | Get all users. |
 | `f5xc-api-tenantandidentity-user-update` | Update User and Role Assignments. |
-| `f5xc-api-tenantandidentity-user-delete` | DELETE user by ID. |
+| `f5xc-api-tenantandidentity-user-delete` | Delete user by ID. |
 | `f5xc-api-tenantandidentity-user-patch` | PATCH User. |
 
 ## Parameters
@@ -22,13 +22,13 @@ Create creates a user and namespace roles binding for this user.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
+| `id` | ID x-required... | `-` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `excludedAttributes` | Members"]" | `-` |
+| `excludedAttributes` | Members"]" A multi-valued list of strings indicating the names of resource attributes... | `-` |
 | `count` | The number of entries after filter. | `-` |
 | `filter` | Filter to be used for filtering objects. | `-` |
 | `page` | Start offset. | `-` |
@@ -54,22 +54,20 @@ Ask Claude to help you work with User resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Users" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Users" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Users/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Users/${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Users" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Users" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @User.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/Users/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/scim/namespaces/system/v2/Users/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

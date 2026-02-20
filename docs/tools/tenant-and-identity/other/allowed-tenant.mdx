@@ -1,20 +1,19 @@
 ---
 title: Allowed Tenant
-description: Create Allowed Tenant.
+description: Manage Allowed Tenant resources in F5 Distributed Cloud.
 ---
 
-Creates a allowed_tenant config instance. Name of the object is name of the tenant that is allowed
-to manage.
+Allowed Tenant provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-tenantandidentity-allowed-tenant-create` | Create Allowed Tenant. |
-| `f5xc-api-tenantandidentity-allowed-tenant-get` | GET Allowed Tenant. |
+| `f5xc-api-tenantandidentity-allowed-tenant-get` | Get Allowed Tenant. |
 | `f5xc-api-tenantandidentity-allowed-tenant-list` | List Allowed Tenant. |
-| `f5xc-api-tenantandidentity-allowed-tenant-update` | Replace Allowed Tenant. |
-| `f5xc-api-tenantandidentity-allowed-tenant-delete` | DELETE Allowed Tenant. |
+| `f5xc-api-tenantandidentity-allowed-tenant-update` | Update Allowed Tenant. |
+| `f5xc-api-tenantandidentity-allowed-tenant-delete` | Delete Allowed Tenant. |
 
 ## Parameters
 
@@ -22,19 +21,17 @@ to manage.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -57,22 +54,20 @@ Ask Claude to help you work with Allowed Tenant resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/allowed_tenants" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/allowed_tenants" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/allowed_tenants/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/allowed_tenants/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/allowed_tenants" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/allowed_tenants" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @allowed_tenant.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/allowed_tenants/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/allowed_tenants/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

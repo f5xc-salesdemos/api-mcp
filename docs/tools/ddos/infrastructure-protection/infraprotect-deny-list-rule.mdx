@@ -1,19 +1,19 @@
 ---
 title: Infraprotect Deny List Rule
-description: Create DDoS transit Deny List Rule.
+description: Manage Infraprotect Deny List Rule resources in F5 Distributed Cloud.
 ---
 
-List the set of infraprotect_deny_list_rule in a namespace.
+Infraprotect Deny List Rule provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-ddos-infraprotect-deny-list-rule-create` | Create DDoS transit Deny List Rule. |
-| `f5xc-api-ddos-infraprotect-deny-list-rule-get` | GET Infraprotect Deny List Rule. |
+| `f5xc-api-ddos-infraprotect-deny-list-rule-get` | Get Infraprotect Deny List Rule. |
 | `f5xc-api-ddos-infraprotect-deny-list-rule-list` | List Infraprotect Deny List Rule. |
-| `f5xc-api-ddos-infraprotect-deny-list-rule-update` | Replace DDoS transit Deny List Rule. |
-| `f5xc-api-ddos-infraprotect-deny-list-rule-delete` | DELETE Infraprotect Deny List Rule. |
+| `f5xc-api-ddos-infraprotect-deny-list-rule-update` | Update DDoS transit Deny List Rule. |
+| `f5xc-api-ddos-infraprotect-deny-list-rule-delete` | Delete Infraprotect Deny List Rule. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of infraprotect_deny_list_rule in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,12 +42,12 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.expiration_never` | - |  |
-| `spec.expiration_timestamp` | - |  |
-| `spec.one_day` | - |  |
-| `spec.one_hour` | - |  |
-| `spec.one_month` | - |  |
-| `spec.one_year` | - |  |
+| `spec.expiration_never` | Expiration never |  |
+| `spec.expiration_timestamp` | Expiration timestamp |  |
+| `spec.one_day` | One day |  |
+| `spec.one_hour` | One hour |  |
+| `spec.one_month` | One month |  |
+| `spec.one_year` | One year |  |
 
 
 ## Example Usage
@@ -72,22 +70,20 @@ Ask Claude to help you work with Infraprotect Deny List Rule resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_deny_list_rules" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_deny_list_rules" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_deny_list_rules/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_deny_list_rules/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_deny_list_rules" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_deny_list_rules" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @infraprotect_deny_list_rule.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/infraprotect_deny_list_rules/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect_deny_list_rules/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

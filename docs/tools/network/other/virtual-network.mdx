@@ -1,19 +1,19 @@
 ---
 title: Virtual Network
-description: Create Virtual Network.
+description: Manage Virtual Network resources in F5 Distributed Cloud.
 ---
 
-Replace given virtual network in given namespace.
+Virtual Network provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-network-virtual-network-create` | Create Virtual Network. |
-| `f5xc-api-network-virtual-network-get` | GET Virtual Network. |
+| `f5xc-api-network-virtual-network-get` | Get Virtual Network. |
 | `f5xc-api-network-virtual-network-list` | List Virtual Network. |
-| `f5xc-api-network-virtual-network-update` | Replace Virtual Network. |
-| `f5xc-api-network-virtual-network-delete` | DELETE Virtual Network. |
+| `f5xc-api-network-virtual-network-update` | Update Virtual Network. |
+| `f5xc-api-network-virtual-network-delete` | Delete Virtual Network. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Replace given virtual network in given namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,18 +42,10 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.global_network` | - |  |
-| `spec.legacy_type` | - |  |
-| `spec.site_local_inside_network` | - |  |
-| `spec.site_local_network` | - |  |
-
-### next_hop_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.static_routes[].default_gateway` | - |  |
-| `spec.static_routes[].ip_address` | - |  |
-| `spec.static_routes[].node_interface` | - |  |
+| `spec.global_network` | Global network |  |
+| `spec.legacy_type` | Legacy type |  |
+| `spec.site_local_inside_network` | Site local inside network |  |
+| `spec.site_local_network` | Site local network |  |
 
 
 ## Example Usage
@@ -78,22 +68,20 @@ Ask Claude to help you work with Virtual Network resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/virtual_networks" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/virtual_networks" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/virtual_networks/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/virtual_networks/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/virtual_networks" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/virtual_networks" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @virtual_network.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/virtual_networks/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/virtual_networks/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

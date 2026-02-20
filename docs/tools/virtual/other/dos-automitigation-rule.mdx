@@ -1,16 +1,16 @@
 ---
 title: Dos Automitigation Rule
-description: DELETE DoS Auto-Mitigation Rule for HTTP Load Balancer.
+description: Manage Dos Automitigation Rule resources in F5 Distributed Cloud.
 ---
 
-DELETE the corresponding DoS Auto-Mitigation Rule for the given HTTP load balancer.
+Dos Automitigation Rule provides tools for retrieving, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-dos-automitigation-rule-get` | GET DoS Auto-Mitigation Rules for HTTP Load Balancer. |
-| `f5xc-api-virtual-dos-automitigation-rule-delete` | DELETE DoS Auto-Mitigation Rule for HTTP Load Balancer. |
+| `f5xc-api-virtual-dos-automitigation-rule-get` | Get DoS Auto-Mitigation Rules for HTTP Load Balancer. |
+| `f5xc-api-virtual-dos-automitigation-rule-delete` | Delete DoS Auto-Mitigation Rule for HTTP Load Balancer. |
 
 ## Parameters
 
@@ -18,9 +18,9 @@ DELETE the corresponding DoS Auto-Mitigation Rule for the given HTTP load balanc
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `dos_automitigation_rule_name` | DoS Mitigation Rule Name | `-` |
+| `name` | Name Name of the Load Balancer. | `my-resource` |
+| `namespace` | Namespace Namespace of the Load Balancer. | `system` |
+| `dos_automitigation_rule_name` | DoS Mitigation Rule Name Name of the DoS Mitigation Rule. | `-` |
 
 
 ## Example Usage
@@ -34,23 +34,11 @@ Ask Claude to help you work with Dos Automitigation Rule resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dos_automitigation_rules" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dos_automitigation_rules/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dos_automitigation_rules" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @dos_automitigation_rule.json
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/http_loadbalancers/$${PARAM}/dos_automitigation_rules" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dos_automitigation_rules/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/http_loadbalancers/$${PARAM}/dos_automitigation_rules/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,15 +1,15 @@
 ---
 title: Addon Service
-description: GET Addon Service Details.
+description: Manage Addon Service resources in F5 Distributed Cloud.
 ---
 
-Retrieves addon service information for the given addon service name.
+Addon Service provides tools for listing, and retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-marketplace-addon-service-get` | GET Addon Service Details. |
+| `f5xc-api-marketplace-addon-service-get` | Get Addon Service Details. |
 | `f5xc-api-marketplace-addon-service-list` | List Addon Service. |
 
 ## Parameters
@@ -18,16 +18,16 @@ Retrieves addon service information for the given addon service name.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Name of the addon service. | `my-resource` |
+| `namespace` | Namespace Namespace to scope the listing of addon_service. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -46,22 +46,11 @@ Ask Claude to help you work with Addon Service resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/addon_services" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/addon_services" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/addon_services/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/addon_services" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @addon_service.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/addon_services/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/shared/addon_services/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

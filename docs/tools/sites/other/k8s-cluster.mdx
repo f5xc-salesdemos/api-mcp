@@ -1,22 +1,19 @@
 ---
 title: K8S Cluster
-description: Create Configuration Specification.
+description: Manage K8S Cluster resources in F5 Distributed Cloud.
 ---
 
-Replacing an k8s_cluster object will update the object by replacing the existing spec with the
-provided one.
-For read-then-write operations a resourceVersion mismatch will occur if the object was
-modified between the read and write.
+K8S Cluster provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-sites-k8s-cluster-create` | Create Configuration Specification. |
-| `f5xc-api-sites-k8s-cluster-get` | GET Configuration Specification. |
+| `f5xc-api-sites-k8s-cluster-get` | Get Configuration Specification. |
 | `f5xc-api-sites-k8s-cluster-list` | List K8s Cluster. |
-| `f5xc-api-sites-k8s-cluster-update` | Replace Configuration Specification. |
-| `f5xc-api-sites-k8s-cluster-delete` | DELETE K8s Cluster. |
+| `f5xc-api-sites-k8s-cluster-update` | Update Configuration Specification. |
+| `f5xc-api-sites-k8s-cluster-delete` | Delete K8s Cluster. |
 
 ## Parameters
 
@@ -24,19 +21,17 @@ modified between the read and write.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -47,94 +42,71 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.cluster_wide_app_list` | - |  |
-| `spec.no_cluster_wide_apps` | - |  |
+| `spec.cluster_wide_app_list` | Cluster wide app list |  |
+| `spec.no_cluster_wide_apps` | No cluster wide apps |  |
 
 ### cluster_role_bindings_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.use_custom_cluster_role_bindings` | - |  |
-| `spec.use_default_cluster_role_bindings` | - |  |
+| `spec.use_custom_cluster_role_bindings` | Use custom cluster role bindings |  |
+| `spec.use_default_cluster_role_bindings` | Use default cluster role bindings |  |
 
 ### cluster_role_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.use_custom_cluster_role_list` | - |  |
-| `spec.use_default_cluster_roles` | - |  |
+| `spec.use_custom_cluster_role_list` | Use custom cluster role list |  |
+| `spec.use_default_cluster_roles` | Use default cluster roles |  |
 
 ### cluster_scoped_resource_access_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.cluster_scoped_access_deny` | - |  |
-| `spec.cluster_scoped_access_permit` | - |  |
+| `spec.cluster_scoped_access_deny` | Cluster scoped access deny |  |
+| `spec.cluster_scoped_access_permit` | Cluster scoped access permit |  |
 
 ### global_access_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.global_access_enable` | - |  |
-| `spec.no_global_access` | - |  |
+| `spec.global_access_enable` | Global access enable |  |
+| `spec.no_global_access` | No global access |  |
 
 ### insecure_registries_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.insecure_registry_list` | - |  |
-| `spec.no_insecure_registries` | - |  |
+| `spec.insecure_registry_list` | Insecure registry list |  |
+| `spec.no_insecure_registries` | No insecure registries |  |
 
 ### local_access_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.local_access_config` | - |  |
-| `spec.no_local_access` | - |  |
+| `spec.local_access_config` | Local access config |  |
+| `spec.no_local_access` | No local access |  |
 
 ### pod_security_admission_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.use_custom_pod_security_admission` | - |  |
-| `spec.use_default_pod_security_admission` | - |  |
+| `spec.use_custom_pod_security_admission` | Use custom pod security admission |  |
+| `spec.use_default_pod_security_admission` | Use default pod security admission |  |
 
 ### pod_security_policy_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.use_custom_psp_list` | - |  |
-| `spec.use_default_psp` | - |  |
+| `spec.use_custom_psp_list` | Use custom psp list |  |
+| `spec.use_default_psp` | Use default psp |  |
 
 ### vk8s_namespace_access_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.vk8s_namespace_access_deny` | - |  |
-| `spec.vk8s_namespace_access_permit` | - |  |
-
-### app_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd` | - |  |
-| `spec.cluster_wide_app_list.cluster_wide_apps[].dashboard` | - |  |
-| `spec.cluster_wide_app_list.cluster_wide_apps[].metrics_server` | - |  |
-| `spec.cluster_wide_app_list.cluster_wide_apps[].prometheus` | - |  |
-
-### port_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.default_port` | - |  |
-| `spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.port` | - |  |
-
-### secret_info_oneof
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.blindfold_secret_info` | - |  |
-| `spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.clear_secret_info` | - |  |
+| `spec.vk8s_namespace_access_deny` | Vk8s namespace access deny |  |
+| `spec.vk8s_namespace_access_permit` | Vk8s namespace access permit |  |
 
 
 ## Example Usage
@@ -157,22 +129,20 @@ Ask Claude to help you work with K8S Cluster resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_clusters" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_clusters" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_clusters/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_clusters/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_clusters" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_clusters" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @k8s_cluster.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/k8s_clusters/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/k8s_clusters/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

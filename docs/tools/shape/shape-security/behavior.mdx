@@ -1,9 +1,9 @@
 ---
 title: Behavior
-description: List Behaviors By Script.
+description: Manage Behavior resources in F5 Distributed Cloud.
 ---
 
-List all the behaviors for a script depending on start time and end time.
+Behavior provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,16 +17,16 @@ List all the behaviors for a script depending on start time and end time.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `id` | ID | `-` |
-| `namespace` | Namespace | `-` |
+| `id` | ID Script ID. | `-` |
+| `namespace` | Namespace Namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | X-required | `-` |
-| `start_time` | X-required | `-` |
-| `type` | X-required | `-` |
+| `end_time` | X-required format: unix epoch timestamp in seconds... | `-` |
+| `start_time` | X-required format: unix epoch timestamp in seconds... | `-` |
+| `type` | X-required Filter based on type of behaviors... | `-` |
 
 
 ## Example Usage
@@ -40,23 +40,8 @@ Ask Claude to help you work with Behavior resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/behaviors" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/behaviors/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/behaviors" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @behavior.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/behaviors/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/scripts/${PARAM}/behaviors" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,15 +1,15 @@
 ---
 title: Current
-description: GET current usage plan.
+description: Manage Current resources in F5 Distributed Cloud.
 ---
 
-Endpoint to GET current usage plan.
+Current provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-billingandusage-current-list` | GET current usage plan. |
+| `f5xc-api-billingandusage-current-list` | Get current usage plan. |
 
 ## Example Usage
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with Current resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/currents" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/currents/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/currents" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @current.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/currents/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/usage_plans/current" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

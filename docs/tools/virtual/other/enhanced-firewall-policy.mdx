@@ -1,19 +1,19 @@
 ---
 title: Enhanced Firewall Policy
-description: Create Enhanced Firewall Policy.
+description: Manage Enhanced Firewall Policy resources in F5 Distributed Cloud.
 ---
 
-List the set of enhanced_firewall_policy in a namespace.
+Enhanced Firewall Policy provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-virtual-enhanced-firewall-policy-create` | Create Enhanced Firewall Policy. |
-| `f5xc-api-virtual-enhanced-firewall-policy-get` | GET Enhanced Firewall Policy. |
+| `f5xc-api-virtual-enhanced-firewall-policy-get` | Get Enhanced Firewall Policy. |
 | `f5xc-api-virtual-enhanced-firewall-policy-list` | List Enhanced Firewall Policy. |
-| `f5xc-api-virtual-enhanced-firewall-policy-update` | Replace Enhanced Firewall Policy. |
-| `f5xc-api-virtual-enhanced-firewall-policy-delete` | DELETE Enhanced Firewall Policy. |
+| `f5xc-api-virtual-enhanced-firewall-policy-update` | Update Enhanced Firewall Policy. |
+| `f5xc-api-virtual-enhanced-firewall-policy-delete` | Delete Enhanced Firewall Policy. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of enhanced_firewall_policy in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,57 +42,13 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.allow_all` | - |  |
-| `spec.allowed_destinations` | - |  |
-| `spec.allowed_sources` | - |  |
-| `spec.denied_destinations` | - |  |
-| `spec.denied_sources` | - |  |
-| `spec.deny_all` | - |  |
-| `spec.rule_list` | - |  |
-
-### action_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rule_list.rules[].allow` | - |  |
-| `spec.rule_list.rules[].deny` | - |  |
-| `spec.rule_list.rules[].insert_service` | - |  |
-
-### destination_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rule_list.rules[].all_destinations` | - |  |
-| `spec.rule_list.rules[].all_sli_vips` | - |  |
-| `spec.rule_list.rules[].all_slo_vips` | - |  |
-| `spec.rule_list.rules[].destination_aws_vpc_ids` | - |  |
-| `spec.rule_list.rules[].destination_ip_prefix_set` | - |  |
-| `spec.rule_list.rules[].destination_label_selector` | - |  |
-| `spec.rule_list.rules[].destination_prefix_list` | - |  |
-| `spec.rule_list.rules[].inside_destinations` | - |  |
-| `spec.rule_list.rules[].outside_destinations` | - |  |
-
-### source_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rule_list.rules[].all_sources` | - |  |
-| `spec.rule_list.rules[].inside_sources` | - |  |
-| `spec.rule_list.rules[].outside_sources` | - |  |
-| `spec.rule_list.rules[].source_aws_vpc_ids` | - |  |
-| `spec.rule_list.rules[].source_ip_prefix_set` | - |  |
-| `spec.rule_list.rules[].source_label_selector` | - |  |
-| `spec.rule_list.rules[].source_prefix_list` | - |  |
-
-### traffic_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rule_list.rules[].all_tcp_traffic` | - |  |
-| `spec.rule_list.rules[].all_traffic` | - |  |
-| `spec.rule_list.rules[].all_udp_traffic` | - |  |
-| `spec.rule_list.rules[].applications` | - |  |
-| `spec.rule_list.rules[].protocol_port_range` | - |  |
+| `spec.allow_all` | Allow all |  |
+| `spec.allowed_destinations` | Allowed destinations |  |
+| `spec.allowed_sources` | Allowed sources |  |
+| `spec.denied_destinations` | Denied destinations |  |
+| `spec.denied_sources` | Denied sources |  |
+| `spec.deny_all` | Deny all |  |
+| `spec.rule_list` | Rule list |  |
 
 
 ## Example Usage
@@ -117,22 +71,20 @@ Ask Claude to help you work with Enhanced Firewall Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/enhanced_firewall_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/enhanced_firewall_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/enhanced_firewall_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/enhanced_firewall_policys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/enhanced_firewall_policys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/enhanced_firewall_policys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @enhanced_firewall_policy.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/enhanced_firewall_policys/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/enhanced_firewall_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

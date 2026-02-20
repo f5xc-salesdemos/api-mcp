@@ -1,15 +1,15 @@
 ---
 title: view Kind
-description: GET Terraform Parameters for view.
+description: Manage view Kind resources in F5 Distributed Cloud.
 ---
 
-Returned from list of terraform parameter objects for a given view.
+view Kind provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-marketplace-view-kind-list` | GET Terraform Parameters for view. |
+| `f5xc-api-marketplace-view-kind-list` | Get Terraform Parameters for view. |
 
 ## Parameters
 
@@ -17,9 +17,9 @@ Returned from list of terraform parameter objects for a given view.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `view_kind` | Kind of View | `-` |
-| `view_name` | Name of view | `-` |
+| `namespace` | Namespace Namespace for the label to be retrieved. | `system` |
+| `view_kind` | Kind of View Kind of view of which terraform parameters are requested e.g. Aws_vpc_site, azure_vnet_site. | `-` |
+| `view_name` | Name of view Name of the view for which terraform parameters are requested. | `-` |
 
 
 ## Example Usage
@@ -34,22 +34,7 @@ Ask Claude to help you work with view Kind resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/view_kinds" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/view_kinds/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/view_kinds" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @view_kind.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/view_kinds/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/terraform_parameters/${PARAM}/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

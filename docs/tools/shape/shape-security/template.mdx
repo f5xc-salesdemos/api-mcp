@@ -1,9 +1,9 @@
 ---
 title: Template
-description: Template Connector.
+description: Manage Template resources in F5 Distributed Cloud.
 ---
 
-GET iApp template.
+Template provides tools for retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ GET iApp template.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Application Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Application Name Protected application name. | `my-resource` |
+| `namespace` | Namespace namespace is used to scope the query. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,8 @@ Ask Claude to help you work with Template resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/templates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/templates/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/templates" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @template.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/templates/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/protected_applications/$${PARAM}/template" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

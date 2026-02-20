@@ -1,9 +1,9 @@
 ---
 title: Custom List
-description: List Usage Plans.
+description: Manage Custom List resources in F5 Distributed Cloud.
 ---
 
-Endpoint to GET usage plans.
+Custom List provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with Custom List resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/custom_lists" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/custom_lists/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/custom_lists" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @custom_list.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/custom_lists/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/usage_plans/custom_list" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,9 +1,9 @@
 ---
 title: Mitigation
-description: List of mitigations.
+description: Manage Mitigation resources in F5 Distributed Cloud.
 ---
 
-Returns details of a single mitigation.
+Mitigation provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,8 +18,8 @@ Returns details of a single mitigation.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `mitigation_id` | Mitigation ID | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
+| `mitigation_id` | Mitigation ID ID of the mitigation we want to GET the details for. | `-` |
 
 
 ## Example Usage
@@ -38,22 +38,13 @@ Ask Claude to help you work with Mitigation resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mitigations" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mitigations/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/mitigation/${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mitigations" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/mitigations" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @mitigation.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/mitigations/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

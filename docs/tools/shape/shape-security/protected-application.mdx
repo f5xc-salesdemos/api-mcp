@@ -1,19 +1,19 @@
 ---
 title: Protected Application
-description: Create Protected Application.
+description: Manage Protected Application resources in F5 Distributed Cloud.
 ---
 
-List the set of protected_application in a namespace.
+Protected Application provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-protected-application-create` | Create Protected Application. |
-| `f5xc-api-shape-protected-application-get` | GET Protected Application. |
+| `f5xc-api-shape-protected-application-get` | Get Protected Application. |
 | `f5xc-api-shape-protected-application-list` | List Protected Application. |
-| `f5xc-api-shape-protected-application-update` | Replace Protected Application. |
-| `f5xc-api-shape-protected-application-delete` | DELETE Protected Application. |
+| `f5xc-api-shape-protected-application-update` | Update Protected Application. |
+| `f5xc-api-shape-protected-application-delete` | Delete Protected Application. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of protected_application in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,139 +42,13 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.adobe_commerce_connector` | - |  |
-| `spec.big_ip_iapp` | - |  |
-| `spec.cloudflare` | - |  |
-| `spec.cloudfront` | - |  |
-| `spec.custom_connector` | - |  |
-| `spec.f5_big_ip` | - |  |
-| `spec.salesforce_commerce_connector` | - |  |
-
-### java_script_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.disable_js_insert` | - |  |
-| `spec.cloudflare.js_insertion_rules` | - |  |
-| `spec.cloudflare.manual_js_insert` | - |  |
-
-### mobile_sdk_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.disable_mobile_sdk` | - |  |
-| `spec.cloudflare.mobile_sdk_config` | - |  |
-
-### domain_matcher_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.js_insertion_rules.exclude_list[].any_domain` | - |  |
-| `spec.cloudflare.js_insertion_rules.exclude_list[].domain` | - |  |
-
-### domain_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.js_insertion_rules.exclude_list[].domain.exact_value` | - |  |
-| `spec.cloudflare.js_insertion_rules.exclude_list[].domain.regex_value` | - |  |
-| `spec.cloudflare.js_insertion_rules.exclude_list[].domain.suffix_value` | - |  |
-
-### path_match
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.js_insertion_rules.exclude_list[].path.path` | - |  |
-| `spec.cloudflare.js_insertion_rules.exclude_list[].path.prefix` | - |  |
-| `spec.cloudflare.js_insertion_rules.exclude_list[].path.regex` | - |  |
-
-### uri_path
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.js_insertion_rules.rules[].exact_path` | - |  |
-| `spec.cloudflare.js_insertion_rules.rules[].glob` | - |  |
-| `spec.cloudflare.js_insertion_rules.rules[].prefix` | - |  |
-
-### value_match
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.mobile_sdk_config.mobile_identifier.headers[].exact` | - |  |
-| `spec.cloudflare.mobile_sdk_config.mobile_identifier.headers[].regex` | - |  |
-
-### client_type_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.protected_endpoints[].mobile_client` | - |  |
-| `spec.cloudflare.protected_endpoints[].web_client` | - |  |
-| `spec.cloudflare.protected_endpoints[].web_mobile_client` | - |  |
-
-### mitigation
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.protected_endpoints[].mobile_client.block` | - |  |
-| `spec.cloudflare.protected_endpoints[].mobile_client.continue` | - |  |
-
-### add_header_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.protected_endpoints[].mobile_client.continue.add_header` | - |  |
-| `spec.cloudflare.protected_endpoints[].mobile_client.continue.no_header` | - |  |
-
-### mobile_mitigation
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.protected_endpoints[].web_mobile_client.block_mobile` | - |  |
-| `spec.cloudflare.protected_endpoints[].web_mobile_client.continue_mobile` | - |  |
-
-### web_mitigation
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.protected_endpoints[].web_mobile_client.block_web` | - |  |
-| `spec.cloudflare.protected_endpoints[].web_mobile_client.continue_web` | - |  |
-| `spec.cloudflare.protected_endpoints[].web_mobile_client.redirect_web` | - |  |
-
-### client_source_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudflare.trusted_clients[].http_header` | - |  |
-| `spec.cloudflare.trusted_clients[].ip_prefix` | - |  |
-
-### aws_configuration_type_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudfront.aws_configuration_id_selector` | - |  |
-| `spec.cloudfront.aws_configuration_tag_selector` | - |  |
-| `spec.cloudfront.disable_aws_configuration` | - |  |
-
-### flow_label_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudfront.protected_endpoints[].flow_label` | - |  |
-| `spec.cloudfront.protected_endpoints[].undefined_flow_label` | - |  |
-
-### label_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudfront.protected_endpoints[].flow_label.account_management.create` | - |  |
-| `spec.cloudfront.protected_endpoints[].flow_label.account_management.password_reset` | - |  |
-
-### transaction_result_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.cloudfront.protected_endpoints[].flow_label.authentication.login.disable_transaction_result` | - |  |
-| `spec.cloudfront.protected_endpoints[].flow_label.authentication.login.transaction_result` | - |  |
+| `spec.adobe_commerce_connector` | Adobe commerce connector |  |
+| `spec.big_ip_iapp` | Big ip iapp |  |
+| `spec.cloudflare` | Cloudflare |  |
+| `spec.cloudfront` | Cloudfront |  |
+| `spec.custom_connector` | Custom connector |  |
+| `spec.f5_big_ip` | F5 big ip |  |
+| `spec.salesforce_commerce_connector` | Salesforce commerce connector |  |
 
 
 ## Example Usage
@@ -199,22 +71,20 @@ Ask Claude to help you work with Protected Application resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/protected_applications" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/protected_applications" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/protected_applications/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/protected_applications/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/protected_applications" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/protected_applications" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @protected_application.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/protected_applications/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/shape/bot/namespaces/$${PARAM}/protected_applications/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Support Info
-description: Support Info.
+description: Manage Support Info resources in F5 Distributed Cloud.
 ---
 
-Receive support information for tenant.
+Support Info provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with Support Info resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/support_infos" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/support_infos/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/support_infos" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @support_info.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/support_infos/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/support-info" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

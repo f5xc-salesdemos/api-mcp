@@ -1,19 +1,19 @@
 ---
 title: Alert Policy
-description: Create Alert Policy.
+description: Manage Alert Policy resources in F5 Distributed Cloud.
 ---
 
-Replaces the content of the Alert Policy Object.
+Alert Policy provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-statistics-alert-policy-create` | Create Alert Policy. |
-| `f5xc-api-statistics-alert-policy-get` | GET Alert Policy. |
+| `f5xc-api-statistics-alert-policy-get` | Get Alert Policy. |
 | `f5xc-api-statistics-alert-policy-list` | List Alert Policy. |
-| `f5xc-api-statistics-alert-policy-update` | Replace Alert Policy. |
-| `f5xc-api-statistics-alert-policy-delete` | DELETE Alert Policy. |
+| `f5xc-api-statistics-alert-policy-update` | Update Alert Policy. |
+| `f5xc-api-statistics-alert-policy-delete` | Delete Alert Policy. |
 
 ## Parameters
 
@@ -21,58 +21,17 @@ Replaces the content of the Alert Policy Object.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### group_by
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.notification_parameters.custom` | - |  |
-| `spec.notification_parameters.default` | - |  |
-| `spec.notification_parameters.individual` | - |  |
-| `spec.notification_parameters.ves_io_group` | - |  |
-
-### action
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.routes[].dont_send` | - |  |
-| `spec.routes[].send` | - |  |
-
-### matcher
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.routes[].alertname` | - |  |
-| `spec.routes[].alertname_regex` | - |  |
-| `spec.routes[].any` | - |  |
-| `spec.routes[].custom` | - |  |
-| `spec.routes[].group` | - |  |
-| `spec.routes[].severity` | - |  |
-
-### matcher_type
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.routes[].custom.alertname.exact_match` | - |  |
-| `spec.routes[].custom.alertname.regex_match` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -95,22 +54,20 @@ Ask Claude to help you work with Alert Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alert_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/alert_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alert_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/alert_policys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alert_policys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/alert_policys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @alert_policy.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alert_policys/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/alert_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

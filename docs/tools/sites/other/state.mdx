@@ -1,14 +1,9 @@
 ---
 title: State
-description: Set site state.
+description: Manage State resources in F5 Distributed Cloud.
 ---
 
-Request changing site state but this request goes through validation as some
-trainsitions are not
-allowed.
-It can be used to decomission site by sending state DECOMISSIONING. Example of
-forbidden
-state is PROVISIONING and UPGRADING.
+State provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,8 +17,8 @@ state is PROVISIONING and UPGRADING.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name... | `my-resource` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Example Usage
@@ -37,23 +32,10 @@ Ask Claude to help you work with State resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/register/namespaces/$${PARAM}/site/$${PARAM}/state" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @state.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

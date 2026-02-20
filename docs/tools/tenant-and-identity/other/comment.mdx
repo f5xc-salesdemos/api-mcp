@@ -1,10 +1,9 @@
 ---
 title: Comment
-description: Add comment to a customer support ticket in managed tenant.
+description: Manage Comment resources in F5 Distributed Cloud.
 ---
 
-Adds additional comment to a specified customer support ticket. The comment may include an
-attachment.
+Comment provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ attachment.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `tp_id` | Third party ID | `-` |
+| `tp_id` | Third party ID ID assigned to this ticket by our support provider. | `-` |
 
 
 ## Example Usage
@@ -32,23 +31,10 @@ Ask Claude to help you work with Comment resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/comments" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/comments/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/comments" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/managed_client/customer_supports/${PARAM}/comment" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @comment.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/comments/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

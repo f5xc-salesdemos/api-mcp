@@ -1,10 +1,9 @@
 ---
 title: Close
-description: Close a customer support ticket in managed tenant.
+description: Manage Close resources in F5 Distributed Cloud.
 ---
 
-Closes selected customer support ticket (if not already closed). You can always attempt to reopen if
-needed to be.
+Close provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ needed to be.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `tp_id` | Third party ID | `-` |
+| `tp_id` | Third party ID ID assigned to this ticket by our support provider. | `-` |
 
 
 ## Example Usage
@@ -32,23 +31,10 @@ Ask Claude to help you work with Close resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/closes" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/closes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/closes" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/managed_client/customer_supports/${PARAM}/close" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @close.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/closes/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,19 +1,16 @@
 ---
 title: API Endpoint
-description: GET API Endpoints.
+description: Manage API Endpoint resources in F5 Distributed Cloud.
 ---
 
-GET list of all API Endpoints associated with the HTTP loadbalancer in format suitable for API
-Groups management.
-Deprecated: instead use GetAPIEndpoints in
-VES.I/o.schema.virtual_host.apiepcustomapi.
+API Endpoint provides tools for creating, and retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-api-endpoint-create` | GET API Endpoints. |
-| `f5xc-api-virtual-api-endpoint-get` | GET API Endpoints. |
+| `f5xc-api-virtual-api-endpoint-create` | Get API Endpoints. |
+| `f5xc-api-virtual-api-endpoint-get` | Get API Endpoints. |
 
 ## Parameters
 
@@ -21,18 +18,18 @@ VES.I/o.schema.virtual_host.apiepcustomapi.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | HTTP LoadBalancer Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | HTTP LoadBalancer Name HTTP LoadBalancer for the current request. | `my-resource` |
+| `namespace` | Namespace Namespace of the HTTP LoadBalancer for the current request. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `api_endpoint_info_request` | List of additional things that needs to be sent as part of the request | `-` |
-| `apiep_category` | Category of API endpoints. Can be DISCOVERED, INVENTORY or SHADOW API. | `-` |
-| `domains` | List of domains that needs to be sent as part of the request | `-` |
-| `end_time` | Format: unix_timestamp\|RFC 3339 | `-` |
-| `start_time` | Format: unix_timestamp\|RFC 3339 | `-` |
+| `api_endpoint_info_request` | List of additional things that needs to be sent as part of the request... | `-` |
+| `apiep_category` | Category of API endpoints. Can be DISCOVERED, INVENTORY or SHADOW API. Optional filter by api_category. If absent, endpoints of all categories are considered. | `-` |
+| `domains` | List of domains that needs to be sent as part of the request Optional filter by domains. If absent, all domains are considered. | `-` |
+| `end_time` | Format: unix_timestamp\|RFC 3339 Filters the APIEPs with access time &lt; end_time. Considered only to calculate activity metrics, based on #sec-events and #requests. | `-` |
+| `start_time` | Format: unix_timestamp\|RFC 3339 Filters the APIEPs with access time >= start_time. Considered only to calculate activity metrics, based on #sec-events and #requests. | `-` |
 
 
 ## Example Usage
@@ -50,23 +47,14 @@ Ask Claude to help you work with API Endpoint resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_endpoints" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_endpoints/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/$${PARAM}/api_endpoints" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_endpoints" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/http_loadbalancers/$${PARAM}/api_endpoints" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @api_endpoint.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/api_endpoints/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

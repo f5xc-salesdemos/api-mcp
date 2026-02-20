@@ -1,11 +1,9 @@
 ---
 title: Firewall Log
-description: Firewall Logs Query.
+description: Manage Firewall Log resources in F5 Distributed Cloud.
 ---
 
-Request to GET access logs and network logs with policy hits.
-By default, the firewall logs in the
-response are sorted in the reverse chronological order.
+Firewall Log provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -19,7 +17,7 @@ response are sorted in the reverse chronological order.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace fetch Firewall logs for a given namespace. | `system` |
 
 
 ## Example Usage
@@ -33,23 +31,10 @@ Ask Claude to help you work with Firewall Log resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/firewall_logs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/firewall_logs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/firewall_logs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/firewall_logs" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @firewall_log.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/firewall_logs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

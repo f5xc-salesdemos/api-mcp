@@ -1,12 +1,9 @@
 ---
 title: App Type
-description: Application Types.
+description: Manage App Type resources in F5 Distributed Cloud.
 ---
 
-Request to GET list of application types for a given namespace.
-For system namespace, all the
-application types for the tenant
-will be returned in the response.
+App Type provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -20,14 +17,14 @@ will be returned in the response.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace namespace is used to scope the listing of app types... | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | End time of metric collection from which data will be considered to build graph. | `-` |
-| `start_time` | Start time of metric collection from which data will be considered to build graph. | `-` |
+| `end_time` | End time of metric collection from which data will be considered to build graph. Format: unix_timestamp\|RFC 3339... | `-` |
+| `start_time` | Start time of metric collection from which data will be considered to build graph. Format: unix_timestamp\|RFC 3339... | `-` |
 
 
 ## Example Usage
@@ -42,22 +39,7 @@ Ask Claude to help you work with App Type resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/app_types" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/app_types/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/app_types" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @app_type.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/app_types/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/graph/service/app_types" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

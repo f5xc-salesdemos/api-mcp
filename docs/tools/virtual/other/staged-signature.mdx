@@ -1,9 +1,9 @@
 ---
 title: Staged Signature
-description: Staged Signatures.
+description: Manage Staged Signature resources in F5 Distributed Cloud.
 ---
 
-API to GET Staged Signatures.
+Staged Signature provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ API to GET Staged Signatures.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `vh_name` | Vh_name | `-` |
+| `namespace` | Namespace Fetch staged signatures for the given namespace. | `system` |
+| `vh_name` | Vh_name Virtual Host for current request. | `-` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Staged Signature resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/staged_signatures" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/staged_signatures/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/staged_signatures" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/${PARAM}/staged_signatures" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @staged_signature.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/staged_signatures/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

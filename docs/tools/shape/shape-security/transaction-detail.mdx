@@ -1,16 +1,16 @@
 ---
 title: Transaction Detail
-description: PostSafeTransactionDetails.
+description: Manage Transaction Detail resources in F5 Distributed Cloud.
 ---
 
-GET a detailed information about the requested transaction.
+Transaction Detail provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-shape-transaction-detail-create` | PostSafeTransactionDetails. |
-| `f5xc-api-shape-transaction-detail-list` | GET SAFE Anayst Transaction Details. |
+| `f5xc-api-shape-transaction-detail-list` | Get SAFE Anayst Transaction Details. |
 
 ## Parameters
 
@@ -18,7 +18,7 @@ GET a detailed information about the requested transaction.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace... | `system` |
 
 ### Query Parameters
 
@@ -44,22 +44,13 @@ Ask Claude to help you work with Transaction Detail resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/transaction_details" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/transaction_details/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/transaction_details" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/transaction_details" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/safe/namespaces/$${PARAM}/safe/sas/transaction_details" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @transaction_detail.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/transaction_details/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Clone From DNS Domain
-description: Clone from DNSDomain.
+description: Manage Clone From DNS Domain resources in F5 Distributed Cloud.
 ---
 
-Cloning DNS domain to DNSZone.
+Clone From DNS Domain provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Clone From DNS Domain resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/clone_from_dns_domains" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/clone_from_dns_domains/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/clone_from_dns_domains" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/system/dns_zone/clone_from_dns_domain" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @clone_from_dns_domain.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/clone_from_dns_domains/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

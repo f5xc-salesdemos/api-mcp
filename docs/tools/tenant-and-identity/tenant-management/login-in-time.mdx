@@ -1,10 +1,9 @@
 ---
 title: Login In Time
-description: GetLoginEventsInTimeFrame.
+description: Manage Login In Time resources in F5 Distributed Cloud.
 ---
 
-GetLoginEventsInTimeFrame returns login events for specified period of time. It consider all users
-specified by context tenant.
+Login In Time provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,23 +22,10 @@ Ask Claude to help you work with Login In Time resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/login_in_times" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/login_in_times/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/login_in_times" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/idm/events/login_in_time" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @login_in_time.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/login_in_times/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

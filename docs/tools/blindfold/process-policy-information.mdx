@@ -1,10 +1,9 @@
 ---
 title: Process Policy Information
-description: ProcessPolicyInformation.
+description: Manage Process Policy Information resources in F5 Distributed Cloud.
 ---
 
-ProcessPolicyInformation API takes policy and secret name as input and returns a document containing
-.
+Process Policy Information provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,23 +22,10 @@ Ask Claude to help you work with Process Policy Information resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/process_policy_informations" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/process_policy_informations/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/process_policy_informations" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/secret_management/namespaces/system/voltshare/process_policy_information" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @process_policy_information.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/process_policy_informations/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

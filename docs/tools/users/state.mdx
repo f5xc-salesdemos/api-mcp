@@ -1,9 +1,9 @@
 ---
 title: State
-description: Set Token State.
+description: Manage State resources in F5 Distributed Cloud.
 ---
 
-TokenState changes token status, it can be used to disable token.
+State provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ TokenState changes token status, it can be used to disable token.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Token name | `-` |
-| `namespace` | Token namespace | `-` |
+| `name` | Token name Token object name to change, it's usually same as metadata.uid. | `my-resource` |
+| `namespace` | Token namespace Namespace where token is residing. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with State resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/register/namespaces/$${PARAM}/tokens/$${PARAM}/state" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @state.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/states/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

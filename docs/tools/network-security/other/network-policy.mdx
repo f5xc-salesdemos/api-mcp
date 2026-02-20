@@ -1,19 +1,19 @@
 ---
 title: Network Policy
-description: Create Network Policy.
+description: Manage Network Policy resources in F5 Distributed Cloud.
 ---
 
-Replaces configured Network Policy with new set of parameters in specified namespace.
+Network Policy provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-networksecurity-network-policy-create` | Create Network Policy. |
-| `f5xc-api-networksecurity-network-policy-get` | GET Network Policy. |
+| `f5xc-api-networksecurity-network-policy-get` | Get Network Policy. |
 | `f5xc-api-networksecurity-network-policy-list` | List Network Policy. |
-| `f5xc-api-networksecurity-network-policy-update` | Replace Network Policy. |
-| `f5xc-api-networksecurity-network-policy-delete` | DELETE Network Policy. |
+| `f5xc-api-networksecurity-network-policy-update` | Update Network Policy. |
+| `f5xc-api-networksecurity-network-policy-delete` | Delete Network Policy. |
 
 ## Parameters
 
@@ -21,62 +21,29 @@ Replaces configured Network Policy with new set of parameters in specified names
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
 
 This resource includes mutually exclusive configuration options:
 
-### endpoint_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.endpoint.any` | - |  |
-| `spec.endpoint.inside_endpoints` | - |  |
-| `spec.endpoint.label_selector` | - |  |
-| `spec.endpoint.outside_endpoints` | - |  |
-| `spec.endpoint.prefix_list` | - |  |
-
-### other_endpoint
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules.egress_rules[].any` | - |  |
-| `spec.rules.egress_rules[].inside_endpoints` | - |  |
-| `spec.rules.egress_rules[].ip_prefix_set` | - |  |
-| `spec.rules.egress_rules[].label_selector` | - |  |
-| `spec.rules.egress_rules[].outside_endpoints` | - |  |
-| `spec.rules.egress_rules[].prefix_list` | - |  |
-
-### traffic_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rules.egress_rules[].all_tcp_traffic` | - |  |
-| `spec.rules.egress_rules[].all_traffic` | - |  |
-| `spec.rules.egress_rules[].all_udp_traffic` | - |  |
-| `spec.rules.egress_rules[].applications` | - |  |
-| `spec.rules.egress_rules[].protocol_port_range` | - |  |
-
 ### rule_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.legacy_rules` | - |  |
-| `spec.rules` | - |  |
+| `spec.legacy_rules` | Legacy rules |  |
+| `spec.rules` | Rules |  |
 
 
 ## Example Usage
@@ -99,22 +66,20 @@ Ask Claude to help you work with Network Policy resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/network_policys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/network_policys" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/network_policys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/network_policys/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/network_policys" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/network_policys" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @network_policy.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/network_policys/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/network_policys/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,9 +1,9 @@
 ---
 title: Health Statu
-description: DNS Load Balancer Health Status.
+description: Manage Health Statu resources in F5 Distributed Cloud.
 ---
 
-GET Health Status of all DNS Load Balancers in a namespace.
+Health Statu provides tools for listing, and retrieving resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,8 +18,8 @@ GET Health Status of all DNS Load Balancers in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Name Name of the DNS Load Balancer. | `my-resource` |
+| `namespace` | Namespace Namespace in which the DNS Load Balancer is present. | `system` |
 
 
 ## Example Usage
@@ -38,22 +38,11 @@ Ask Claude to help you work with Health Statu resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/health_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/dns_load_balancers/health_status" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/health_status/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/health_status" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @health_statu.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/health_status/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/dns_load_balancers/$${PARAM}/health_status" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

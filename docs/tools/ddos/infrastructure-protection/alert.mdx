@@ -1,11 +1,9 @@
 ---
 title: Alert
-description: DDoS Alerts.
+description: Manage Alert resources in F5 Distributed Cloud.
 ---
 
-RPC to GET a list of Alerts. Alerts are raised when an attack is detected by L3/L4 provider.
-Alerts
-help to start investigate and mitigate any malicious or suspicious activate.
+Alert provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -20,8 +18,8 @@ help to start investigate and mitigate any malicious or suspicious activate.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `alert_id` | Alert ID | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
+| `alert_id` | Alert ID ID of the alert we want to GET details for. | `-` |
 
 
 ## Example Usage
@@ -40,22 +38,13 @@ Ask Claude to help you work with Alert resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alerts" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alerts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/alert/${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alerts" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/alerts" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @alert.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/alerts/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

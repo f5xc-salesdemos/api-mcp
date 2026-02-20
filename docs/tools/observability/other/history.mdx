@@ -1,17 +1,15 @@
 ---
 title: History
-description: GET Alerts History.
+description: Manage History resources in F5 Distributed Cloud.
 ---
 
-GET the history of alert notifications sent to the end-user between the start_time and end_time that
-matches the
-filter specified in the request.
+History provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-history-list` | GET Alerts History. |
+| `f5xc-api-observability-history-list` | Get Alerts History. |
 
 ## Parameters
 
@@ -19,15 +17,15 @@ filter specified in the request.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace namespace to scope the listing of alerts. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | Fetch alerts whose timestamp &lt;= end_time | `-` |
-| `filter` | HighDiskUsage\", severity=\"critical\"\}" | `-` |
-| `start_time` | Fetch alerts whose timestamp >= start_time | `-` |
+| `end_time` | Fetch alerts whose timestamp &lt;= end_time format: unix_timestamp\|RFC 3339... | `-` |
+| `filter` | HighDiskUsage\", severity=\"critical\"\}" List of matchers to filter alert by. | `-` |
+| `start_time` | Fetch alerts whose timestamp >= start_time format: unix_timestamp\|RFC 3339... | `-` |
 
 
 ## Example Usage
@@ -42,22 +40,7 @@ Ask Claude to help you work with History resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/historys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/historys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/historys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @history.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/historys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/alerts/history" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -1,20 +1,17 @@
 ---
 title: Public IP
-description: GET Public IP.
+description: Manage Public IP resources in F5 Distributed Cloud.
 ---
 
-Replacing an public_ip object will update the object by replacing the existing spec with the
-provided one.
-For read-then-write operations a resourceVersion mismatch will occur if the object was
-modified between the read and write.
+Public IP provides tools for listing, retrieving, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-network-public-ip-get` | GET Public IP. |
+| `f5xc-api-network-public-ip-get` | Get Public IP. |
 | `f5xc-api-network-public-ip-list` | List Public IP. |
-| `f5xc-api-network-public-ip-update` | Replace Public IP. |
+| `f5xc-api-network-public-ip-update` | Update Public IP. |
 
 ## Parameters
 
@@ -22,19 +19,17 @@ modified between the read and write.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
-| `metadata.namespace` | Namespace | `-` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
+| `namespace` | Namespace The namespace in which the configuration object is present. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -53,22 +48,11 @@ Ask Claude to help you work with Public IP resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/public_ips" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/public_ips" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/public_ips/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/public_ips" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @public_ip.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/public_ips/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/public_ips/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

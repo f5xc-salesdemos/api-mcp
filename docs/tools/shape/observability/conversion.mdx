@@ -1,9 +1,9 @@
 ---
 title: Conversion
-description: Conversion Dashboard.
+description: Manage Conversion resources in F5 Distributed Cloud.
 ---
 
-GET conversion chart data from shape recognize API.
+Conversion provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -22,23 +22,10 @@ Ask Claude to help you work with Conversion resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/conversions" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/conversions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/conversions" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/shape/recognize/namespaces/system/recognize/addon/dashboard/conversion" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @conversion.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/conversions/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

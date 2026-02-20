@@ -1,10 +1,9 @@
 ---
 title: Usage Detail
-description: List usage details.
+description: Manage Usage Detail resources in F5 Distributed Cloud.
 ---
 
-List usage details per tenant and namespace. Some usage have only sense in the system namespace and
-this selector has no effect on it.
+Usage Detail provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -18,7 +17,7 @@ this selector has no effect on it.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace to be considered. | `system` |
 
 
 ## Example Usage
@@ -32,23 +31,10 @@ Ask Claude to help you work with Usage Detail resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/usage_details" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/usage_details/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/usage_details" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/$${PARAM}/usage_details" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @usage_detail.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/usage_details/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,17 +1,15 @@
 ---
 title: Graph
-description: Segment
+description: Manage Graph resources in F5 Distributed Cloud.
 ---
 
-Request to GET different network segments with given metrics .
-This will give metric data for all
-segments including intra segment metrics.
+Graph provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-networksecurity-graph-create` | Segment |
+| `f5xc-api-networksecurity-graph-create` | Segment. |
 
 ## Parameters
 
@@ -19,7 +17,7 @@ segments including intra segment metrics.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
 
 
 ## Example Usage
@@ -33,23 +31,10 @@ Ask Claude to help you work with Graph resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/graphs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/graphs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/graphs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/$${PARAM}/segments/graph" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @graph.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/graphs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

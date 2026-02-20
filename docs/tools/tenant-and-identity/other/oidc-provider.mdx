@@ -1,41 +1,18 @@
 ---
-title: Oidc Provider
-description: Create
+title: OIDC Provider
+description: Manage OIDC Provider resources in F5 Distributed Cloud.
 ---
 
-Replace updates OIDC provider parameters for a given provider instance.
-Since we never store client
-secret, any time this operation is performed,
-user will need to input the original/new client secret
-along with other existing
-fields as delta operations is not supported.
-
-`NOTE`: Operations performed
-via API client is encouraged to issue a detail GET on the current
-oidc_provider resource to retrieve
-all configured fields and this can be used in constructing payload
-for the update operation. Params
-which are not sent as part of replace operation will GET removed/unset
-if those params were
-configured prior to this operation. So its important that replace operation payload
-needs to have
-complete fields with their values as required in your final configuration.
-For example: admin needs
-to update client secret of an existing SSO configuation - first issue detail GET on the
-current
-oidc_provider resource, use all of the fields in `spec.gc_spec` from response and construct the
-replace
-request spec. Now update only client_secret field with the new value as required and send
-request.
+OIDC Provider provides tools for creating, listing, retrieving, and updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-tenantandidentity-oidc-provider-create` | Create |
-| `f5xc-api-tenantandidentity-oidc-provider-get` | GET |
-| `f5xc-api-tenantandidentity-oidc-provider-list` | List |
-| `f5xc-api-tenantandidentity-oidc-provider-update` | Replace |
+| `f5xc-api-tenantandidentity-oidc-provider-create` | Create. |
+| `f5xc-api-tenantandidentity-oidc-provider-get` | GET. |
+| `f5xc-api-tenantandidentity-oidc-provider-list` | List. |
+| `f5xc-api-tenantandidentity-oidc-provider-update` | Replace. |
 
 ## Parameters
 
@@ -43,8 +20,8 @@ request.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `name` | Name | `-` |
+| `namespace` | Namespace Supports only system namespace. | `system` |
+| `name` | Name Name of OIDC provider object. | `my-resource` |
 
 
 ## Configuration Choices
@@ -55,25 +32,25 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.azure_oidc_spec_type` | - |  |
-| `spec.google_oidc_spec_type` | - |  |
-| `spec.oidc_v10_spec_type` | - |  |
-| `spec.okta_oidc_spec_type` | - |  |
+| `spec.azure_oidc_spec_type` | Azure oidc spec type |  |
+| `spec.google_oidc_spec_type` | Google oidc spec type |  |
+| `spec.oidc_v10_spec_type` | Oidc v10 spec type |  |
+| `spec.okta_oidc_spec_type` | Okta oidc spec type |  |
 
 
 ## Example Usage
 
-Ask Claude to help you work with Oidc Provider resources:
+Ask Claude to help you work with OIDC Provider resources:
 
-### Create Oidc Provider
+### Create OIDC Provider
 
 > "Create a oidc-provider named 'example' in the 'production' namespace"
 
-### List Oidc Providers
+### List OIDC Providers
 
 > "List all oidc-providers in the 'production' namespace"
 
-### Get Oidc Provider Details
+### Get OIDC Provider Details
 
 > "Get details of the oidc-provider named 'example' in namespace 'production'"
 
@@ -81,22 +58,17 @@ Ask Claude to help you work with Oidc Provider resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/oidc_providers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/oidc_providers" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/oidc_providers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/oidc_provider/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/oidc_providers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/custom/namespaces/$${PARAM}/oidc_providers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @oidc_provider.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/oidc_providers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

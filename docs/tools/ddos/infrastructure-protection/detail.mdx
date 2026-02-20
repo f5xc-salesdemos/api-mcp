@@ -1,10 +1,9 @@
 ---
 title: Detail
-description: Add Event Detail.
+description: Manage Detail resources in F5 Distributed Cloud.
 ---
 
-Returns a list of event details. The list contains event details entered by customer and the SOC
-team members, mitigation annotations and any attachments.
+Detail provides tools for creating, listing, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -13,7 +12,7 @@ team members, mitigation annotations and any attachments.
 | `f5xc-api-ddos-detail-create` | Add Event Detail. |
 | `f5xc-api-ddos-detail-list` | List of event details. |
 | `f5xc-api-ddos-detail-update` | Edit event detail. |
-| `f5xc-api-ddos-detail-delete` | DELETE event detail. |
+| `f5xc-api-ddos-detail-delete` | Delete event detail. |
 
 ## Parameters
 
@@ -21,9 +20,9 @@ team members, mitigation annotations and any attachments.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `event_id` | Event ID | `-` |
-| `namespace` | Namespace | `-` |
-| `event_detail_id` | Event Detail ID | `-` |
+| `event_id` | Event ID Event ID we want to list the event details for. | `-` |
+| `namespace` | Namespace This request is supported only in system namespace. | `system` |
+| `event_detail_id` | Event Detail ID Event detail ID we want to update. | `-` |
 
 
 ## Example Usage
@@ -42,22 +41,16 @@ Ask Claude to help you work with Detail resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/details" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/details/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/event/${PARAM}/details" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/details" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/event/${PARAM}/details" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @detail.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/details/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/infraprotect/namespaces/$${PARAM}/infraprotect/event/${PARAM}/detail/${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

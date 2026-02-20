@@ -1,9 +1,9 @@
 ---
-title: Loadbalancer
-description: Search load balancers All Namespaces.
+title: Load Balancer
+description: Manage Load Balancer resources in F5 Distributed Cloud.
 ---
 
-GET list of virtual hosts matching label filter.
+Load Balancer provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -13,32 +13,19 @@ GET list of virtual hosts matching label filter.
 
 ## Example Usage
 
-Ask Claude to help you work with Loadbalancer resources:
+Ask Claude to help you work with Load Balancer resources:
 
-### Create Loadbalancer
+### Create Load Balancer
 
 > "Create a loadbalancer named 'example' in the 'production' namespace"
 
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/loadbalancers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/loadbalancers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/loadbalancers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/data/namespaces/system/app_security/all_ns_search/loadbalancers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @loadbalancer.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/loadbalancers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

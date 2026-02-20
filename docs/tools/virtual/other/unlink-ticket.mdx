@@ -1,11 +1,9 @@
 ---
 title: Unlink Ticket
-description: Unlink Tickets.
+description: Manage Unlink Ticket resources in F5 Distributed Cloud.
 ---
 
-Remove the Ticket from vulnerability in XC platform
-External ticket systems will continue to have
-the record.
+Unlink Ticket provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -19,8 +17,8 @@ the record.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Virtual Host Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Virtual Host Name... | `my-resource` |
+| `namespace` | Namespace... | `system` |
 
 
 ## Configuration Choices
@@ -31,8 +29,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `label_filter` | - |  |
-| `ticket_uid` | - |  |
+| `label_filter` | Label filter |  |
+| `ticket_uid` | Ticket uid |  |
 
 
 ## Example Usage
@@ -46,23 +44,10 @@ Ask Claude to help you work with Unlink Ticket resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unlink_tickets" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unlink_tickets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unlink_tickets" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/$${PARAM}/unlink_tickets" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @unlink_ticket.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/unlink_tickets/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

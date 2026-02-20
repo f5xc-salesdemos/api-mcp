@@ -1,9 +1,9 @@
 ---
 title: Query Feedback
-description: Feedback of AI Assistant Query.
+description: Manage Query Feedback resources in F5 Distributed Cloud.
 ---
 
-Enable service by returning service account details.
+Query Feedback provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,7 +17,7 @@ Enable service by returning service account details.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace of the HTTP Load Balancer for current request. | `system` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Query Feedback resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/query_feedbacks" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/query_feedbacks/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/query_feedbacks" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/gen-ai/namespaces/$${PARAM}/query_feedback" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @query_feedback.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/query_feedbacks/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

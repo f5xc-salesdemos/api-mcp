@@ -1,19 +1,19 @@
 ---
 title: DNS Load Balancer
-description: Create DNS Load Balancer.
+description: Manage DNS Load Balancer resources in F5 Distributed Cloud.
 ---
 
-Create DNS Load Balancer in a given namespace. If one already exist it will give a error.
+DNS Load Balancer provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-dns-dns-load-balancer-create` | Create DNS Load Balancer. |
-| `f5xc-api-dns-dns-load-balancer-get` | GET DNS Load Balancer. |
+| `f5xc-api-dns-dns-load-balancer-get` | Get DNS Load Balancer. |
 | `f5xc-api-dns-dns-load-balancer-list` | List DNS Load Balancer. |
-| `f5xc-api-dns-dns-load-balancer-update` | Replace DNS Load Balancer. |
-| `f5xc-api-dns-dns-load-balancer-delete` | DELETE DNS Load Balancer. |
+| `f5xc-api-dns-dns-load-balancer-update` | Update DNS Load Balancer. |
+| `f5xc-api-dns-dns-load-balancer-delete` | Delete DNS Load Balancer. |
 
 ## Parameters
 
@@ -21,49 +21,17 @@ Create DNS Load Balancer in a given namespace. If one already exist it will give
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
-
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### response_cache_parameters_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.response_cache.default_response_cache_parameters` | - |  |
-| `spec.response_cache.disable` | - |  |
-| `spec.response_cache.response_cache_parameters` | - |  |
-
-### action_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rule_list.rules[].pool` | - |  |
-
-### client_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.rule_list.rules[].asn_list` | - |  |
-| `spec.rule_list.rules[].asn_matcher` | - |  |
-| `spec.rule_list.rules[].geo_location_label_selector` | - |  |
-| `spec.rule_list.rules[].geo_location_set` | - |  |
-| `spec.rule_list.rules[].ip_prefix_list` | - |  |
-| `spec.rule_list.rules[].ip_prefix_set` | - |  |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Example Usage
@@ -86,22 +54,20 @@ Ask Claude to help you work with DNS Load Balancer resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dns_load_balancers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/$${PARAM}/dns_load_balancers" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dns_load_balancers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/$${PARAM}/dns_load_balancers/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dns_load_balancers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/$${PARAM}/dns_load_balancers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @dns_load_balancer.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/dns_load_balancers/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/$${PARAM}/dns_load_balancers/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

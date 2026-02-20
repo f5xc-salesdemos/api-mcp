@@ -1,15 +1,15 @@
 ---
 title: Reapply Config
-description: CloudLink
+description: Manage Reapply Config resources in F5 Distributed Cloud.
 ---
 
-Reapply CloudLink Config.
+Reapply Config provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-cloudinfrastructure-reapply-config-create` | CloudLink |
+| `f5xc-api-cloudinfrastructure-reapply-config-create` | CloudLink. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ Reapply CloudLink Config.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Name | `-` |
+| `name` | Name Name of Cloud Link. | `my-resource` |
 
 
 ## Example Usage
@@ -31,23 +31,10 @@ Ask Claude to help you work with Reapply Config resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/reapply_configs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/reapply_configs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/reapply_configs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/system/cloud_links/$${PARAM}/reapply_config" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @reapply_config.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/reapply_configs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,15 +1,15 @@
 ---
 title: Vulnerabilitie
-description: GET Vulnerabilities for Virtual Host.
+description: Manage Vulnerabilitie resources in F5 Distributed Cloud.
 ---
 
-GET vulnerabilities for the given Virtual Host.
+Vulnerabilitie provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-virtual-vulnerabilitie-create` | GET Vulnerabilities for Virtual Host. |
+| `f5xc-api-virtual-vulnerabilitie-create` | Get Vulnerabilities for Virtual Host. |
 
 ## Parameters
 
@@ -17,8 +17,8 @@ GET vulnerabilities for the given Virtual Host.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Virtual Host Name | `-` |
-| `namespace` | Namespace | `-` |
+| `name` | Virtual Host Name Virtual Host name for current request. | `my-resource` |
+| `namespace` | Namespace Namespace of the virtual host for current request. | `system` |
 
 
 ## Configuration Choices
@@ -29,7 +29,7 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `api_endpoint` | - |  |
+| `api_endpoint` | Api endpoint |  |
 
 
 ## Example Usage
@@ -43,23 +43,10 @@ Ask Claude to help you work with Vulnerabilitie resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/vulnerabilities" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/vulnerabilities/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/vulnerabilities" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/virtual_hosts/$${PARAM}/vulnerabilities" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @vulnerabilitie.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/vulnerabilities/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

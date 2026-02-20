@@ -1,9 +1,9 @@
 ---
 title: Pop
-description: Remove Override.
+description: Manage Pop resources in F5 Distributed Cloud.
 ---
 
-Remove override for dynamic component for API endpoints discovered for this App type.
+Pop provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,8 +17,8 @@ Remove override for dynamic component for API endpoints discovered for this App 
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `app_type_name` | App Type | `-` |
-| `namespace` | Namespace | `-` |
+| `app_type_name` | App Type App Type for current request. | `-` |
+| `namespace` | Namespace Namespace of the App type for current request. | `system` |
 
 
 ## Example Usage
@@ -32,23 +32,10 @@ Ask Claude to help you work with Pop resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pops" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pops/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pops" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/ml/data/namespaces/$${PARAM}/app_types/${PARAM}/override/pop" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @pop.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/pops/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

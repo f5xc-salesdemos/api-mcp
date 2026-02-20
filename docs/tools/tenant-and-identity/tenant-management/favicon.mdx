@@ -1,9 +1,9 @@
 ---
 title: Favicon
-description: Tenant favicon.
+description: Manage Favicon resources in F5 Distributed Cloud.
 ---
 
-Receive current tenant favicon.
+Favicon provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -23,22 +23,7 @@ Ask Claude to help you work with Favicon resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/favicons" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/favicons/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/favicons" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @favicon.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/favicons/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/tenant/settings/tenant/favicon" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

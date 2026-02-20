@@ -1,15 +1,15 @@
 ---
 title: Catalog
-description: List
+description: Manage Catalog resources in F5 Distributed Cloud.
 ---
 
-Retrieves service catalog tailor for the currently logged-in user.
+Catalog provides tools for updating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-statistics-catalog-update` | List |
+| `f5xc-api-statistics-catalog-update` | List. |
 
 ## Configuration Choices
 
@@ -19,8 +19,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `use_case_filter` | - |  |
-| `workspace_filter` | - |  |
+| `use_case_filter` | Use case filter |  |
+| `workspace_filter` | Workspace filter |  |
 
 
 ## Example Usage
@@ -30,23 +30,4 @@ Ask Claude to help you work with Catalog resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/catalogs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/catalogs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/catalogs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @catalog.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/catalogs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,19 +1,19 @@
 ---
 title: Network Firewall
-description: Create Network Firewall.
+description: Manage Network Firewall resources in F5 Distributed Cloud.
 ---
 
-Replace network firewall will replace the contains of given object.
+Network Firewall provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-networksecurity-network-firewall-create` | Create Network Firewall. |
-| `f5xc-api-networksecurity-network-firewall-get` | GET Network Firewall. |
+| `f5xc-api-networksecurity-network-firewall-get` | Get Network Firewall. |
 | `f5xc-api-networksecurity-network-firewall-list` | List Network Firewall. |
-| `f5xc-api-networksecurity-network-firewall-update` | Replace Network Firewall. |
-| `f5xc-api-networksecurity-network-firewall-delete` | DELETE Network Firewall. |
+| `f5xc-api-networksecurity-network-firewall-update` | Update Network Firewall. |
+| `f5xc-api-networksecurity-network-firewall-delete` | Delete Network Firewall. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ Replace network firewall will replace the contains of given object.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,23 +42,23 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.active_fast_acls` | - |  |
-| `spec.disable_fast_acl` | - |  |
+| `spec.active_fast_acls` | Active fast acls |  |
+| `spec.disable_fast_acl` | Disable fast acl |  |
 
 ### forward_proxy_policy_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.active_forward_proxy_policies` | - |  |
-| `spec.disable_forward_proxy_policy` | - |  |
+| `spec.active_forward_proxy_policies` | Active forward proxy policies |  |
+| `spec.disable_forward_proxy_policy` | Disable forward proxy policy |  |
 
 ### network_policy_choice
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.active_enhanced_firewall_policies` | - |  |
-| `spec.active_network_policies` | - |  |
-| `spec.disable_network_policy` | - |  |
+| `spec.active_enhanced_firewall_policies` | Active enhanced firewall policies |  |
+| `spec.active_network_policies` | Active network policies |  |
+| `spec.disable_network_policy` | Disable network policy |  |
 
 
 ## Example Usage
@@ -83,22 +81,20 @@ Ask Claude to help you work with Network Firewall resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/network_firewalls" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/network_firewalls" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/network_firewalls/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/network_firewalls/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/network_firewalls" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/network_firewalls" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @network_firewall.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/network_firewalls/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/network_firewalls/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

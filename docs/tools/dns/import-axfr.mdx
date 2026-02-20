@@ -1,27 +1,15 @@
 ---
 title: Import Axfr
-description: Import DNS Zone.
+description: Manage Import Axfr resources in F5 Distributed Cloud.
 ---
 
-Import DNS Zone via AXFR.
+Import Axfr provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-dns-import-axfr-create` | Import DNS Zone. |
-
-## Configuration Choices
-
-This resource includes mutually exclusive configuration options:
-
-### secret_info_oneof
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `tsig_configuration.tsig_key_value.blindfold_secret_info` | - |  |
-| `tsig_configuration.tsig_key_value.clear_secret_info` | - |  |
-
 
 ## Example Usage
 
@@ -34,23 +22,10 @@ Ask Claude to help you work with Import Axfr resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/import_axfrs" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/import_axfrs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/import_axfrs" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/dns/namespaces/system/dns_zone/import_axfr" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @import_axfr.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/import_axfrs/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

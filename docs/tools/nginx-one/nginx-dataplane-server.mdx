@@ -1,15 +1,15 @@
 ---
 title: Nginx Dataplane Server
-description: GET NGINX One Dataplane Servers.
+description: Manage Nginx Dataplane Server resources in F5 Distributed Cloud.
 ---
 
-GET NGINX One Servers associated to an NGINX dataplane.
+Nginx Dataplane Server provides tools for creating resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-nginxone-nginx-dataplane-server-create` | GET NGINX One Dataplane Servers. |
+| `f5xc-api-nginxone-nginx-dataplane-server-create` | Get NGINX One Dataplane Servers. |
 
 ## Parameters
 
@@ -17,7 +17,7 @@ GET NGINX One Servers associated to an NGINX dataplane.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace of the NGINX One Instance. | `system` |
 
 
 ## Configuration Choices
@@ -28,8 +28,8 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `dataplane_ref.nginx_csg` | - |  |
-| `dataplane_ref.nginx_instance` | - |  |
+| `dataplane_ref.nginx_csg` | Nginx csg |  |
+| `dataplane_ref.nginx_instance` | Nginx instance |  |
 
 
 ## Example Usage
@@ -43,23 +43,10 @@ Ask Claude to help you work with Nginx Dataplane Server resources:
 ## CURL Examples
 
 ```bash
-# List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nginx_dataplane_servers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nginx_dataplane_servers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nginx_dataplane_servers" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/$${PARAM}/nginx_dataplane_servers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @nginx_dataplane_server.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/nginx_dataplane_servers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

@@ -1,15 +1,15 @@
 ---
 title: Monitor History
-description: GET Monitor History.
+description: Manage Monitor History resources in F5 Distributed Cloud.
 ---
 
-Returns the healthy and critical statuses for the specified monitor.
+Monitor History provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-observability-monitor-history-list` | GET Monitor History. |
+| `f5xc-api-observability-monitor-history-list` | Get Monitor History. |
 
 ## Parameters
 
@@ -17,17 +17,17 @@ Returns the healthy and critical statuses for the specified monitor.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Request namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `end_time` | End_time. | `-` |
-| `monitor_name` | Monitor_name. X-required | `-` |
-| `monitor_type` | Monitor_type. X-required | `-` |
-| `start_time` | Start_time. X-required | `-` |
-| `step_size` | Step_size. | `-` |
+| `end_time` | End_time. End time for requested history (default: current time) | `-` |
+| `monitor_name` | Monitor_name. X-required Monitor name. | `-` |
+| `monitor_type` | Monitor_type. X-required Monitor type. | `-` |
+| `start_time` | Start_time. X-required Start time for requested history. | `-` |
+| `step_size` | Step_size. Step size for time series aggregation. | `-` |
 
 
 ## Example Usage
@@ -42,22 +42,7 @@ Ask Claude to help you work with Monitor History resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/monitor_historys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/monitor_historys/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/monitor_historys" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @monitor_history.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/monitor_historys/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/monitor-history" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

@@ -613,37 +613,70 @@ export function subcategoryToDirectory(subcategory: Subcategory): string {
     .replace(/[^a-z0-9-]/g, "");
 }
 
+/** Compound words that should be split into separate title words */
+const COMPOUND_WORDS: Record<string, string> = {
+  loadbalancer: "Load Balancer",
+  healthcheck: "Health Check",
+  allowlist: "Allow List",
+  blocklist: "Block List",
+  ruleset: "Rule Set",
+  logfilter: "Log Filter",
+  ratelimiter: "Rate Limiter",
+  servicepolicy: "Service Policy",
+  nameserver: "Name Server",
+  failover: "Failover",
+};
+
+/** Acronyms that should be fully uppercased */
+const TITLE_ACRONYMS = [
+  "http",
+  "https",
+  "tcp",
+  "udp",
+  "dns",
+  "api",
+  "ip",
+  "waf",
+  "tls",
+  "ssl",
+  "k8s",
+  "vpc",
+  "vnet",
+  "gcp",
+  "aws",
+  "azure",
+  "cdn",
+  "ddos",
+  "sdn",
+  "oidc",
+  "saml",
+  "bgp",
+  "nfv",
+  "nat",
+  "vip",
+  "ssh",
+  "jwt",
+  "ldap",
+];
+
 /**
  * Convert resource name to human-readable title
  */
 export function resourceToTitle(resource: string): string {
   return resource
     .split("-")
-    .map((word) => {
+    .flatMap((word) => {
+      const lower = word.toLowerCase();
+      // Check compound words first
+      if (COMPOUND_WORDS[lower]) {
+        return COMPOUND_WORDS[lower].split(" ");
+      }
       // Handle acronyms
-      const acronyms = [
-        "http",
-        "https",
-        "tcp",
-        "udp",
-        "dns",
-        "api",
-        "ip",
-        "waf",
-        "tls",
-        "ssl",
-        "k8s",
-        "vpc",
-        "vnet",
-        "gcp",
-        "aws",
-        "azure",
-      ];
-      if (acronyms.includes(word.toLowerCase())) {
-        return word.toUpperCase();
+      if (TITLE_ACRONYMS.includes(lower)) {
+        return [word.toUpperCase()];
       }
       // Capitalize first letter
-      return word.charAt(0).toUpperCase() + word.slice(1);
+      return [word.charAt(0).toUpperCase() + word.slice(1)];
     })
     .join(" ");
 }

@@ -1,22 +1,16 @@
 ---
 title: Acces
-description: Update Support Tenant Access.
+description: Manage Acces resources in F5 Distributed Cloud.
 ---
 
-This RPC can be used to manage user access for all flavors of support tenants currently
-supported by
-the platform. Use read-only, read-write with specific namespaces or
-admin can specify custom groups
-to control access by the support tenant user.
-Name is well-known identifier for a specific support
-related tenant.
+Acces provides tools for creating, and listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-tenantandidentity-acces-create` | Update Support Tenant Access. |
-| `f5xc-api-tenantandidentity-acces-list` | GET Support Tenant Access. |
+| `f5xc-api-tenantandidentity-acces-list` | Get Support Tenant Access. |
 
 ## Configuration Choices
 
@@ -26,9 +20,9 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `access_config.read_only` | - |  |
-| `access_config.read_write_all` | - |  |
-| `access_config.read_write_ns` | - |  |
+| `access_config.read_only` | Read only |  |
+| `access_config.read_write_all` | Read write all |  |
+| `access_config.read_write_ns` | Read write ns |  |
 
 
 ## Example Usage
@@ -47,22 +41,13 @@ Ask Claude to help you work with Acces resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/allowed_tenants/support-tenant/access" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/web/namespaces/system/allowed_tenants/support-tenant/access" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @acces.json
 
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/access/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```

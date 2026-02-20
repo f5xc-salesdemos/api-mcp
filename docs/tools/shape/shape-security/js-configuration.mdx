@@ -1,15 +1,15 @@
 ---
 title: Js Configuration
-description: GET JS Injection Configuration.
+description: Manage Js Configuration resources in F5 Distributed Cloud.
 ---
 
-GET JS Injection Configuration for this tenant.
+Js Configuration provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `f5xc-api-shape-js-configuration-list` | GET JS Injection Configuration. |
+| `f5xc-api-shape-js-configuration-list` | Get JS Injection Configuration. |
 
 ## Parameters
 
@@ -17,13 +17,13 @@ GET JS Injection Configuration for this tenant.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
+| `namespace` | Namespace Namespace. | `system` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `name` | Format we want the script to be returned in. | `-` |
+| `name` | Format we want the script to be returned in. | `my-resource` |
 
 
 ## Example Usage
@@ -38,22 +38,7 @@ Ask Claude to help you work with Js Configuration resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/js_configurations" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/js_configurations/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/js_configurations" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @js_configuration.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/js_configurations/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/shape/csd/namespaces/$${PARAM}/js_configuration" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

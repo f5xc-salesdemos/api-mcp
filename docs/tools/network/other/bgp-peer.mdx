@@ -1,9 +1,9 @@
 ---
-title: Bgp Peer
-description: Show BGP Peer Info.
+title: BGP Peer
+description: Manage BGP Peer resources in F5 Distributed Cloud.
 ---
 
-Show BGP Peer information.
+BGP Peer provides tools for listing resources in F5 Distributed Cloud.
 
 ## Tools
 
@@ -17,15 +17,15 @@ Show BGP Peer information.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `namespace` | Namespace | `-` |
-| `site` | Site Name | `-` |
+| `namespace` | Namespace Namespace for which the request is sent (system) | `system` |
+| `site` | Site Name Name of the site. | `-` |
 
 
 ## Example Usage
 
-Ask Claude to help you work with Bgp Peer resources:
+Ask Claude to help you work with BGP Peer resources:
 
-### List Bgp Peers
+### List BGP Peers
 
 > "List all bgp-peers in the 'production' namespace"
 
@@ -33,22 +33,7 @@ Ask Claude to help you work with Bgp Peer resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_peers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_peers/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
-
-# Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_peers" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @bgp_peer.json
-
-# Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/bgp_peers/<name>" \
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/operate/namespaces/$${PARAM}/sites/${PARAM}/ver/bgp_peers" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
 ```

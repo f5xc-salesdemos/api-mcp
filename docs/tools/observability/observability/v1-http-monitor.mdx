@@ -1,19 +1,19 @@
 ---
 title: V1 HTTP Monitor
-description: Create HTTP Monitor.
+description: Manage V1 HTTP Monitor resources in F5 Distributed Cloud.
 ---
 
-List the set of v1_http_monitor in a namespace.
+V1 HTTP Monitor provides tools for creating, listing, retrieving, updating, and deleting resources in F5 Distributed Cloud.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
 | `f5xc-api-observability-v1-http-monitor-create` | Create HTTP Monitor. |
-| `f5xc-api-observability-v1-http-monitor-get` | GET HTTP Monitor. |
+| `f5xc-api-observability-v1-http-monitor-get` | Get HTTP Monitor. |
 | `f5xc-api-observability-v1-http-monitor-list` | List HTTP Monitor. |
 | `f5xc-api-observability-v1-http-monitor-update` | Update HTTP Monitor. |
-| `f5xc-api-observability-v1-http-monitor-delete` | DELETE HTTP Monitor. |
+| `f5xc-api-observability-v1-http-monitor-delete` | Delete HTTP Monitor. |
 
 ## Parameters
 
@@ -21,19 +21,17 @@ List the set of v1_http_monitor in a namespace.
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `metadata.namespace` | Namespace | `-` |
-| `name` | Name | `-` |
-| `namespace` | Namespace | `-` |
-| `metadata.name` | Name | `-` |
+| `namespace` | Namespace This defines the workspace within which each the configuration object is to be created. | `system` |
+| `name` | Name The name of the configuration object to be fetched. | `my-resource` |
 
 ### Query Parameters
 
 | Parameter | Description | Example |
 |-----------|-------------|--------|
-| `response_format` | The format in which the configuration object is to be fetched. This could be for example | `-` |
+| `response_format` | The format in which the configuration object is to be fetched. This could be for example  - in GetSpec form for the contents of object... | `GET_RSP_FORMAT_DEFAULT` |
 | `label_filter` | A LabelSelectorType expression that every item in list response will satisfy. | `-` |
-| `report_fields` | The report_fields parameter | `-` |
-| `report_status_fields` | The report_status_fields parameter | `-` |
+| `report_fields` | The report_fields parameter... | `-` |
+| `report_status_fields` | The report_status_fields parameter... | `-` |
 
 
 ## Configuration Choices
@@ -44,55 +42,27 @@ This resource includes mutually exclusive configuration options:
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.interval_12_hours` | - |  |
-| `spec.interval_15_mins` | - |  |
-| `spec.interval_1_day` | - |  |
-| `spec.interval_1_hour` | - |  |
-| `spec.interval_1_min` | - |  |
-| `spec.interval_30_mins` | - |  |
-| `spec.interval_30_secs` | - |  |
-| `spec.interval_5_mins` | - |  |
-| `spec.interval_6_hours` | - |  |
+| `spec.interval_12_hours` | Interval 12 hours |  |
+| `spec.interval_15_mins` | Interval 15 mins |  |
+| `spec.interval_1_day` | Interval 1 day |  |
+| `spec.interval_1_hour` | Interval 1 hour |  |
+| `spec.interval_1_min` | Interval 1 min |  |
+| `spec.interval_30_mins` | Interval 30 mins |  |
+| `spec.interval_30_secs` | Interval 30 secs |  |
+| `spec.interval_5_mins` | Interval 5 mins |  |
+| `spec.interval_6_hours` | Interval 6 hours |  |
 
 ### method
 
 | Option | Description | Recommended |
 |--------|-------------|-------------|
-| `spec.delete` | - |  |
-| `spec.get` | - |  |
-| `spec.head` | - |  |
-| `spec.options` | - |  |
-| `spec.patch` | - |  |
-| `spec.post` | - |  |
-| `spec.put` | - |  |
-
-### source_choice
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.external_sources[].aws` | - |  |
-| `spec.external_sources[].f5xc` | - |  |
-
-### dynamic_threshold_policy
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.health_policy.dynamic_threshold` | - |  |
-| `spec.health_policy.dynamic_threshold_disabled` | - |  |
-
-### static_max_threshold_policy
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.health_policy.static_max_threshold` | - |  |
-| `spec.health_policy.static_max_threshold_disabled` | - |  |
-
-### static_min_threshold_policy
-
-| Option | Description | Recommended |
-|--------|-------------|-------------|
-| `spec.health_policy.static_min_threshold` | - |  |
-| `spec.health_policy.static_min_threshold_disabled` | - |  |
+| `spec.delete` | Delete |  |
+| `spec.get` | Get |  |
+| `spec.head` | Head |  |
+| `spec.options` | Options |  |
+| `spec.patch` | Patch |  |
+| `spec.post` | Post |  |
+| `spec.put` | Put |  |
 
 
 ## Example Usage
@@ -115,22 +85,20 @@ Ask Claude to help you work with V1 HTTP Monitor resources:
 
 ```bash
 # List resources
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/v1_http_monitors" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/v1_http_monitors" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Get specific resource
-curl -X GET "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/v1_http_monitors/<name>" \
-  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
-  -H "Content-Type: application/json"
+curl -X GET "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/v1_http_monitors/$${PARAM}" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 
 # Create resource
-curl -X POST "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/v1_http_monitors" \
+curl -X POST "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/v1_http_monitors" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
   -H "Content-Type: application/json" \
   -d @v1_http_monitor.json
 
 # Delete resource
-curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/config/namespaces/${NAMESPACE}/v1_http_monitors/<name>" \
+curl -X DELETE "https://${TENANT}.console.ves.volterra.io/api/observability/synthetic_monitor/namespaces/$${PARAM}/v1_http_monitors/$${PARAM}" \
   -H "Authorization: APIToken ${F5XC_API_TOKEN}"
 ```
