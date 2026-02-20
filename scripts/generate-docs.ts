@@ -98,40 +98,50 @@ function escapeJsx(text: string): string {
 }
 
 /**
- * Generate CURL command examples for API operations
+ * Generate CURL examples section using real API paths from parsed operations
  */
-function generateCurlCommand(resource: string, operation: string, domain: string): string {
+function generateCurlExamples(resource: string, tools: ParsedOperation[]): string {
   const normalizedResource = resource.replace(/-/g, "_");
+  const base = `https://\${TENANT}.console.ves.volterra.io`;
 
-  // Build API path - most resources follow /api/config/namespaces/{namespace}/{resource_type}
-  const apiPath = `/api/config/namespaces/\${NAMESPACE}/${normalizedResource}s`;
+  const listOp = tools.find((t) => t.operation === "list");
+  const getOp = tools.find((t) => t.operation === "get");
+  const createOp = tools.find((t) => t.operation === "create");
+  const deleteOp = tools.find((t) => t.operation === "delete");
 
-  switch (operation) {
-    case "list":
-      return `curl -X GET "https://\${TENANT}.console.ves.volterra.io${apiPath}" \\
-  -H "Authorization: APIToken \${F5XC_API_TOKEN}" \\
-  -H "Content-Type: application/json"`;
-    case "get":
-      return `curl -X GET "https://\${TENANT}.console.ves.volterra.io${apiPath}/<name>" \\
-  -H "Authorization: APIToken \${F5XC_API_TOKEN}" \\
-  -H "Content-Type: application/json"`;
-    case "create":
-      return `curl -X POST "https://\${TENANT}.console.ves.volterra.io${apiPath}" \\
-  -H "Authorization: APIToken \${F5XC_API_TOKEN}" \\
-  -H "Content-Type: application/json" \\
-  -d @${normalizedResource}.json`;
-    case "update":
-      return `curl -X PUT "https://\${TENANT}.console.ves.volterra.io${apiPath}/<name>" \\
-  -H "Authorization: APIToken \${F5XC_API_TOKEN}" \\
-  -H "Content-Type: application/json" \\
-  -d @${normalizedResource}.json`;
-    case "delete":
-      return `curl -X DELETE "https://\${TENANT}.console.ves.volterra.io${apiPath}/<name>" \\
-  -H "Authorization: APIToken \${F5XC_API_TOKEN}"`;
-    default:
-      return `curl -X GET "https://\${TENANT}.console.ves.volterra.io${apiPath}" \\
-  -H "Authorization: APIToken \${F5XC_API_TOKEN}"`;
+  // Convert OpenAPI path params to shell variable style
+  const shellPath = (path: string): string =>
+    path
+      .replace(/\{metadata\.namespace\}/g, "${NAMESPACE}")
+      .replace(/\{namespace\}/g, "${NAMESPACE}")
+      .replace(/\{metadata\.name\}/g, "${NAME}")
+      .replace(/\{name\}/g, "${NAME}")
+      .replace(/\{[^}]+\}/g, "${PARAM}");
+
+  let content = "\n## CURL Examples\n\n```bash\n";
+
+  if (listOp) {
+    const path = shellPath(listOp.path);
+    content += `# List resources\ncurl -X GET "${base}${path}" \\\n  -H "Authorization: APIToken \${F5XC_API_TOKEN}"\n\n`;
   }
+
+  if (getOp) {
+    const path = shellPath(getOp.path);
+    content += `# Get specific resource\ncurl -X GET "${base}${path}" \\\n  -H "Authorization: APIToken \${F5XC_API_TOKEN}"\n\n`;
+  }
+
+  if (createOp) {
+    const path = shellPath(createOp.path);
+    content += `# Create resource\ncurl -X POST "${base}${path}" \\\n  -H "Authorization: APIToken \${F5XC_API_TOKEN}" \\\n  -H "Content-Type: application/json" \\\n  -d @${normalizedResource}.json\n\n`;
+  }
+
+  if (deleteOp) {
+    const path = shellPath(deleteOp.path);
+    content += `# Delete resource\ncurl -X DELETE "${base}${path}" \\\n  -H "Authorization: APIToken \${F5XC_API_TOKEN}"\n`;
+  }
+
+  content += "```\n";
+  return content;
 }
 
 /**
@@ -192,17 +202,39 @@ function formatSideEffects(sideEffects: AggregatedMetadata["sideEffects"]): stri
 }
 
 /**
+ * Check if a oneOf group is top-level (not deeply nested)
+ */
+function isTopLevelChoice(group: OneOfGroup): boolean {
+  if (group.options.length === 0) return false;
+  // Count dots in first option to determine depth — only spec.X (2 segments) is top-level
+  const depth = group.options[0].split(".").length;
+  return depth <= 2;
+}
+
+/**
+ * Generate a readable description from an option path
+ */
+function optionDescription(option: string): string {
+  const lastSegment = option.split(".").pop() || option;
+  return lastSegment
+    .replace(/[_-]/g, " ")
+    .replace(/^\w/, (c) => c.toUpperCase());
+}
+
+/**
  * Format configuration choices (oneOf groups) for markdown display (v2.0.34+)
+ * Only shows top-level choices to keep pages manageable.
  */
 function formatConfigurationChoices(oneOfGroups: OneOfGroup[]): string {
-  if (oneOfGroups.length === 0) {
+  const topLevelGroups = oneOfGroups.filter(isTopLevelChoice);
+  if (topLevelGroups.length === 0) {
     return "";
   }
 
   let content = "\n## Configuration Choices\n\n";
   content += "This resource includes mutually exclusive configuration options:\n\n";
 
-  for (const group of oneOfGroups) {
+  for (const group of topLevelGroups) {
     content += `### ${group.choiceField}\n\n`;
 
     if (group.description) {
@@ -213,7 +245,7 @@ function formatConfigurationChoices(oneOfGroups: OneOfGroup[]): string {
 
     for (const option of group.options) {
       const isRecommended = group.recommendedOption === option ? "✅ Yes" : "";
-      const description = group.description || "-";
+      const description = optionDescription(option);
       content += `| \`${option}\` | ${description} | ${isRecommended} |\n`;
     }
 
@@ -228,17 +260,47 @@ function formatConfigurationChoices(oneOfGroups: OneOfGroup[]): string {
 }
 
 /**
+ * Generate a clean intro sentence from available operations
+ */
+function generateIntroText(title: string, tools: ParsedOperation[]): string {
+  const ops = tools.map((t) => t.operation);
+  const capabilities: string[] = [];
+  if (ops.includes("create")) capabilities.push("creating");
+  if (ops.includes("list")) capabilities.push("listing");
+  if (ops.includes("get")) capabilities.push("retrieving");
+  if (ops.includes("update")) capabilities.push("updating");
+  if (ops.includes("delete")) capabilities.push("deleting");
+  const capsText =
+    capabilities.length > 0 ? capabilities.join(", ").replace(/, ([^,]*)$/, ", and $1") : "managing";
+  return `${title} provides tools for ${capsText} resources in F5 Distributed Cloud.`;
+}
+
+/**
+ * Normalize raw API summaries for display in tool tables
+ */
+function normalizeToolSummary(summary: string): string {
+  let s = summary;
+  // Fix raw HTTP verbs used as operation descriptions
+  s = s.replace(/^GET\s+/i, "Get ");
+  s = s.replace(/^DELETE\s+/i, "Delete ");
+  s = s.replace(/^Replace\s+/i, "Update ");
+  // Ensure ends with period
+  if (s && !s.endsWith(".")) s += ".";
+  return s;
+}
+
+/**
  * Generate markdown content for a resource
  */
 function generateMarkdown(resourceDoc: ResourceDoc): string {
-  const { resource: rawResource, categoryPath, title: rawTitle, tools, summary, description, metadata } = resourceDoc;
+  const { resource: rawResource, categoryPath, title: rawTitle, tools, metadata } = resourceDoc;
 
   // Sanitize resource and title: strip curly braces that MDX interprets as JSX expressions
   const resource = rawResource.replace(/[{}]/g, "");
   const title = rawTitle.replace(/[{}]/g, "");
 
-  // Generate front matter - wrap long descriptions to avoid line length issues
-  const rawDescription = summary || `Manage ${title} resources in F5 Distributed Cloud.`;
+  // Generate front matter - always use a consistent resource-level description
+  const rawDescription = `Manage ${title} resources in F5 Distributed Cloud.`;
 
   // Wrap text at specified length, with optional indent for continuation lines
   const wrapText = (text: string, maxLen: number, indent = ""): string => {
@@ -281,16 +343,25 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
       const bOrder = opOrder[b.operation as keyof typeof opOrder] ?? 99;
       return aOrder - bOrder;
     })
-    .map((tool) => `| \`${tool.toolName}\` | ${escapeJsx(tool.summary)} |`)
+    .map((tool) => `| \`${tool.toolName}\` | ${escapeJsx(normalizeToolSummary(tool.summary))} |`)
     .join("\n");
 
-  // Collect unique parameters from all tools
+  // Default examples for common parameters
+  const DEFAULT_EXAMPLES: Record<string, string> = {
+    namespace: "system",
+    name: "my-resource",
+    response_format: "GET_RSP_FORMAT_DEFAULT",
+  };
+
+  // Collect unique parameters from all tools, deduplicating metadata.X → X
   const pathParams = new Map<string, string>();
   const queryParams = new Map<string, string>();
   for (const tool of tools) {
     for (const param of tool.pathParameters) {
-      if (!pathParams.has(param.name)) {
-        pathParams.set(param.name, param.description ?? "");
+      // Normalize: metadata.namespace → namespace, metadata.name → name
+      const canonicalName = param.name.replace(/^metadata\./, "");
+      if (!pathParams.has(canonicalName)) {
+        pathParams.set(canonicalName, param.description ?? "");
       }
     }
     for (const param of tool.queryParameters) {
@@ -312,17 +383,19 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
       parametersSection += "### Path Parameters\n\n";
       parametersSection += "| Parameter | Description | Example |\n|-----------|-------------|--------|\n";
       for (const [name, desc] of pathParams) {
-        // Clean up description - take first sentence only, escape pipes
-        const cleanDesc = escapeJsx(
+        // Clean up description — join first 2 lines, detect truncation
+        const fullDesc = desc.split("\n").slice(0, 2).join(" ").trim();
+        const baseDesc = escapeJsx(
           escapeTableCell(
-            desc
-              .split("\n")[0]
-              .replace(/x-example:.*$/i, "")
-              .trim() || `The ${name} identifier`,
+            fullDesc.replace(/x-example:.*$/i, "").trim() || `The ${name} identifier`,
           ),
         );
-        // Get example from aggregated metadata
-        const example = escapeTableCell(metadata.parameterExamples[name] || "-");
+        // Add ellipsis if description appears truncated (no ending punctuation)
+        const cleanDesc = baseDesc && !/[.!?)]$/.test(baseDesc) ? baseDesc + "..." : baseDesc;
+        // Get example from aggregated metadata, falling back to defaults
+        const example = escapeTableCell(
+          metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || "-",
+        );
         parametersSection += `| \`${name}\` | ${cleanDesc} | \`${example}\` |\n`;
       }
       parametersSection += "\n";
@@ -332,16 +405,16 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
       parametersSection += "### Query Parameters\n\n";
       parametersSection += "| Parameter | Description | Example |\n|-----------|-------------|--------|\n";
       for (const [name, desc] of queryParams) {
-        const cleanDesc = escapeJsx(
+        const fullDesc = desc.split("\n").slice(0, 2).join(" ").trim();
+        const baseDesc = escapeJsx(
           escapeTableCell(
-            desc
-              .split("\n")[0]
-              .replace(/x-example:.*$/i, "")
-              .trim() || `The ${name} parameter`,
+            fullDesc.replace(/x-example:.*$/i, "").trim() || `The ${name} parameter`,
           ),
         );
-        // Get example from aggregated metadata
-        const example = escapeTableCell(metadata.parameterExamples[name] || "-");
+        const cleanDesc = baseDesc && !/[.!?)]$/.test(baseDesc) ? baseDesc + "..." : baseDesc;
+        const example = escapeTableCell(
+          metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || "-",
+        );
         parametersSection += `| \`${name}\` | ${cleanDesc} | \`${example}\` |\n`;
       }
       parametersSection += "\n";
@@ -384,39 +457,11 @@ Ask Claude to help you work with ${title} resources:
 `;
   }
 
-  // CURL examples section
-  const curlSection = `
-## CURL Examples
+  // CURL examples section using real API paths
+  const curlSection = generateCurlExamples(resource, tools);
 
-\`\`\`bash
-# List resources
-${generateCurlCommand(resource, "list", categoryPath.domain)}
-
-# Get specific resource
-${generateCurlCommand(resource, "get", categoryPath.domain)}
-
-# Create resource
-${generateCurlCommand(resource, "create", categoryPath.domain)}
-
-# Delete resource
-${generateCurlCommand(resource, "delete", categoryPath.domain)}
-\`\`\`
-`;
-
-  // Wrap body description too for line length compliance
-  // Sanitize description to fix markdown issues (unbalanced lists, etc.)
-  const sanitizeDescription = (text: string): string => {
-    // Replace numbered list markers that might cause issues
-    let sanitized = text.replace(/^\d+\)\s*/gm, "- ");
-    // Ensure blank lines before list items
-    sanitized = sanitized.replace(/([^\n])\n(- )/g, "$1\n\n$2");
-    return sanitized;
-  };
-
-  const bodyDescription = escapeJsx(
-    sanitizeDescription(description || summary || `Manage ${title} resources in F5 Distributed Cloud.`),
-  );
-  const wrappedBodyDescription = wrapText(bodyDescription, 100);
+  // Generate a clean intro from the available operations
+  const bodyDescription = generateIntroText(title, tools);
 
   // Generate side effects from enriched specs
   const sideEffectsSection = formatSideEffects(metadata.sideEffects);
@@ -429,7 +474,7 @@ ${generateCurlCommand(resource, "delete", categoryPath.domain)}
 ${YAML.stringify(frontMatter, { lineWidth: 100 }).trim()}
 ---
 
-${dangerBadge}${confirmationWarning}${wrappedBodyDescription}
+${dangerBadge}${confirmationWarning}${bodyDescription}
 
 ## Tools
 
