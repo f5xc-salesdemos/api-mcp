@@ -60,7 +60,7 @@ jobs:
         if: steps.update.outputs.updated == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
-          token: ${{ secrets.REPO_ADMIN_TOKEN }}
+          token: ${{ secrets.RELEASE_TOKEN }}
           commit-message: |
             chore(deps): update f5xc-auth to ${{ github.event.client_payload.version }}
 
