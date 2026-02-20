@@ -216,9 +216,7 @@ function isTopLevelChoice(group: OneOfGroup): boolean {
  */
 function optionDescription(option: string): string {
   const lastSegment = option.split(".").pop() || option;
-  return lastSegment
-    .replace(/[_-]/g, " ")
-    .replace(/^\w/, (c) => c.toUpperCase());
+  return lastSegment.replace(/[_-]/g, " ").replace(/^\w/, (c) => c.toUpperCase());
 }
 
 /**
@@ -270,8 +268,7 @@ function generateIntroText(title: string, tools: ParsedOperation[]): string {
   if (ops.includes("get")) capabilities.push("retrieving");
   if (ops.includes("update")) capabilities.push("updating");
   if (ops.includes("delete")) capabilities.push("deleting");
-  const capsText =
-    capabilities.length > 0 ? capabilities.join(", ").replace(/, ([^,]*)$/, ", and $1") : "managing";
+  const capsText = capabilities.length > 0 ? capabilities.join(", ").replace(/, ([^,]*)$/, ", and $1") : "managing";
   return `${title} provides tools for ${capsText} resources in F5 Distributed Cloud.`;
 }
 
@@ -386,16 +383,12 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
         // Clean up description — join first 2 lines, detect truncation
         const fullDesc = desc.split("\n").slice(0, 2).join(" ").trim();
         const baseDesc = escapeJsx(
-          escapeTableCell(
-            fullDesc.replace(/x-example:.*$/i, "").trim() || `The ${name} identifier`,
-          ),
+          escapeTableCell(fullDesc.replace(/x-example:.*$/i, "").trim() || `The ${name} identifier`),
         );
         // Add ellipsis if description appears truncated (no ending punctuation)
         const cleanDesc = baseDesc && !/[.!?)]$/.test(baseDesc) ? baseDesc + "..." : baseDesc;
         // Get example from aggregated metadata, falling back to defaults
-        const example = escapeTableCell(
-          metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || "-",
-        );
+        const example = escapeTableCell(metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || "-");
         parametersSection += `| \`${name}\` | ${cleanDesc} | \`${example}\` |\n`;
       }
       parametersSection += "\n";
@@ -407,14 +400,10 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
       for (const [name, desc] of queryParams) {
         const fullDesc = desc.split("\n").slice(0, 2).join(" ").trim();
         const baseDesc = escapeJsx(
-          escapeTableCell(
-            fullDesc.replace(/x-example:.*$/i, "").trim() || `The ${name} parameter`,
-          ),
+          escapeTableCell(fullDesc.replace(/x-example:.*$/i, "").trim() || `The ${name} parameter`),
         );
         const cleanDesc = baseDesc && !/[.!?)]$/.test(baseDesc) ? baseDesc + "..." : baseDesc;
-        const example = escapeTableCell(
-          metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || "-",
-        );
+        const example = escapeTableCell(metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || "-");
         parametersSection += `| \`${name}\` | ${cleanDesc} | \`${example}\` |\n`;
       }
       parametersSection += "\n";
