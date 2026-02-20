@@ -73,7 +73,17 @@ Just closing the window is not sufficient.
 
 ## Claude Code CLI
 
-### Quick Install
+### Documentation Mode
+
+No credentials required - explore APIs, view schemas, get CURL examples:
+
+```bash
+claude mcp add f5xc-api -- npx @f5xc-salesdemos/api-mcp
+```
+
+### Execution Mode
+
+Add credentials to execute API calls directly:
 
 ```bash
 claude mcp add f5xc-api \
@@ -119,7 +129,11 @@ Create `.mcp.json` in your project root:
 
 ### Global Configuration
 
-For system-wide availability, add to `~/.claude/settings.local.json`.
+For system-wide availability, use `--scope user`:
+
+```bash
+claude mcp add f5xc-api --scope user -- npx @f5xc-salesdemos/api-mcp
+```
 
 ### Usage
 
@@ -456,7 +470,7 @@ The standard MCP configuration schema used by Claude Desktop, Claude Code, Cline
 | Claude Desktop (Windows) | `%APPDATA%\Claude\claude_desktop_config.json`                     |
 | Claude Desktop (Linux)   | `~/.config/Claude/claude_desktop_config.json`                     |
 | Claude Code (Project)    | `.mcp.json` in project root                                       |
-| Claude Code (Global)     | `~/.claude/mcp.json`                                              |
+| Claude Code (User)       | `~/.claude.json`                                                  |
 | OpenCode (Project)       | `opencode.json` or `opencode.jsonc` in project root               |
 | OpenCode (Global)        | `~/.config/opencode/opencode.json`                                |
 | VS Code (Cline)          | Cline extension settings                                          |
