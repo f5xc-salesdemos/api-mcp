@@ -1,16 +1,25 @@
 ---
 title: F5XC API MCP Server
-description: MCP server exposing Cloud APIs to AI assistants
+description: Access 1,500+ F5 Distributed Cloud APIs through AI assistants like Claude
+template: splash
 hero:
   tagline: 1,500+ API tools with dynamic discovery and 95%+ token savings
+  actions:
+    - text: Installation
+      link: /installation/
+      icon: rocket
+      variant: primary
+    - text: Tools Reference
+      link: /tools/
+      variant: secondary
 ---
 
 An MCP server exposing F5 Distributed Cloud APIs to AI assistants like Claude.
 
 ## Features
 
-- **1,500+ API Tools** - Full API coverage across 23 domains
-- **Dynamic Discovery** - 6 meta-tools with 95%+ token savings
+- **1,500+ API Tools** - Full API coverage across 38 domains
+- **Dynamic Discovery** - 13 meta-tools with 95%+ token savings
 - **Dual-Mode** - Works with or without authentication
 - **CURL Examples** - API documentation with ready-to-use commands
 - **Server-Applied Defaults** - Distinguishes user-required fields from server-defaulted fields
@@ -23,46 +32,12 @@ An MCP server exposing F5 Distributed Cloud APIs to AI assistants like Claude.
 | Node.js   | 24.0+ (for npm/npx)  |
 | Docker    | 20.10+ (alternative) |
 
-## Quick Start
-
-### 1. Install
-
-```bash
-npx @f5xc-salesdemos/api-mcp
-```
-
-### 2. Configure Claude Desktop
-
-Add to your [Claude Desktop config](ide-setup/#claude-desktop):
-
-```json
-{
-  "mcpServers": {
-    "f5xc-api": {
-      "command": "npx",
-      "args": ["@f5xc-salesdemos/api-mcp"],
-      "env": {
-        "F5XC_API_URL": "https://your-tenant.console.ves.volterra.io",
-        "F5XC_API_TOKEN": "your-api-token"
-      }
-    }
-  }
-}
-```
-
-### 3. Verify
-
-Ask Claude:
-
-> "What F5XC API tools are available?"
-
 ## Next Steps
 
-- [Installation](installation/) - All installation methods (npx, npm, Docker, source)
-- [IDE Setup](ide-setup/) - Configure Claude Desktop, Claude Code, VS Code, Cursor, OpenCode
-- [Authentication](authentication/) - API token, P12 certificate, and profile-based auth
-- [Environment Variables](environment-variables/) - Complete variable reference
-- [Advanced Features](advanced/) - Quota awareness, server-applied defaults, SSL/TLS
-- [Troubleshooting](troubleshooting/) - Common issues and solutions
-- [Tools Reference](tools/) - Explore available API tools
+- [Installation](/installation/) - All installation methods (npx, npm, Docker, source)
+- [IDE Setup](/ide-setup/) - Configure Claude Desktop, Claude Code, VS Code, Cursor, OpenCode
+- [Authentication](/authentication/) - API token, P12 certificate, and profile-based auth
+- [Tools Reference](/tools/) - Explore available API tools
+- [Environment Variables](/reference/environment-variables/) - Complete variable reference
+- [Troubleshooting](/troubleshooting/) - Common issues and solutions
 - [GitHub Issues](https://github.com/f5xc-salesdemos/api-mcp/issues) - Report bugs or request features

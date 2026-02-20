@@ -1,0 +1,134 @@
+---
+title: Server-Applied Defaults
+description: How the server distinguishes user-required fields from server-defaulted values
+sidebar:
+  order: 2
+---
+
+F5 XC API specifications distinguish between field requirements with
+enhanced metadata, reducing the number of fields you must provide.
+
+> Available since v2.0.28
+
+## Field Requirement Types
+
+1. **User-Required Fields** (`x-f5xc-required-for.create: true`)
+   - Must be provided by user at creation time
+   - Validation returns **error** if missing
+   - Example: `metadata.name`, `http_health_check.path`
+
+2. **Server-Defaulted Fields** (`x-f5xc-server-default: true`)
+   - Optional at creation time
+   - Server applies default value if omitted
+   - Validation returns **warning** with default value info
+   - Example: `healthcheck.jitter_percent` defaults to `0`
+
+3. **Recommended Values** (`x-f5xc-recommended-value`) - _v2.0.32+_
+   - Suggested values matching F5 XC web UI defaults
+   - Provides guidance without enforcing specific values
+   - Example: `spec.timeout` recommended value is `3`
+
+4. **Schema-Required Fields** (`x-ves-required: true`)
+   - Must have non-zero value when API processes the request
+   - Can be user-provided OR server-defaulted
+
+## Healthcheck Defaults (v2.0.32+)
+
+### Server-Applied Defaults
+
+| Field                                              | Default Value          |
+| -------------------------------------------------- | ---------------------- |
+| `spec.jitter_percent`                              | `0`                    |
+| `spec.http_health_check.use_http2`                 | `false`                |
+| `spec.http_health_check.headers`                   | `{}`                   |
+| `spec.http_health_check.expected_status_codes`     | `[]` (accepts 200-299) |
+| `spec.http_health_check.request_headers_to_remove` | `[]`                   |
+
+### Recommended Values (Web UI Defaults)
+
+| Field                      | Recommended        |
+| -------------------------- | ------------------ |
+| `spec.timeout`             | `3` seconds        |
+| `spec.interval`            | `15` seconds       |
+| `spec.unhealthy_threshold` | `1` failure        |
+| `spec.healthy_threshold`   | `3` successes      |
+| `spec.jitter_percent`      | `30`% (production) |
+
+### Minimal Healthcheck Example
+
+```json
+{
+  "metadata": {
+    "name": "example-hc",
+    "namespace": "default"
+  },
+  "spec": {
+    "timeout": 3,
+    "interval": 15,
+    "unhealthy_threshold": 1,
+    "healthy_threshold": 3,
+    "http_health_check": {
+      "use_origin_server_name": {},
+      "path": "/health"
+    }
+  }
+}
+```
+
+Server automatically applies: `jitter_percent` -> `0`, `use_http2` -> `false`,
+`headers` -> `{}`, `expected_status_codes` -> `[]`.
+
+## Origin Pool Defaults (v2.0.33+)
+
+### Server-Applied Defaults
+
+| Field                         | Server Default   | UI Default    | Note                   |
+| ----------------------------- | ---------------- | ------------- | ---------------------- |
+| `spec.loadbalancer_algorithm` | `ROUND_ROBIN`    | `LB_OVERRIDE` | See warning below      |
+| `spec.endpoint_selection`     | `DISTRIBUTED`    | -             | Distributed selection  |
+| TLS to origin (`spec.no_tls`) | Disabled         | -             | No TLS by default      |
+| Connection timeout            | 2000 ms          | -             | 2 second timeout       |
+| HTTP idle timeout             | 300000 ms        | -             | 5 minute timeout       |
+| Circuit breaker               | Default enabled  | -             | Auto-enabled           |
+| Outlier detection             | Disabled         | -             | Must enable explicitly |
+| HTTP protocol                 | Auto-negotiation | -             | `auto_http_config`     |
+| Proxy protocol                | Disabled         | -             | Must enable explicitly |
+
+:::caution[UI vs Server Discrepancy]
+The web console pre-selects `LB_OVERRIDE` for the load balancer algorithm,
+but the server applies `ROUND_ROBIN` when the field is omitted.
+This creates behavior mismatches between UI-created and API-created
+configurations.
+:::
+
+### Minimal Origin Pool Example
+
+```json
+{
+  "metadata": {
+    "name": "example-origin-pool",
+    "namespace": "default"
+  },
+  "spec": {
+    "origin_servers": [
+      {
+        "public_ip": {
+          "ip": "192.0.2.1"
+        }
+      }
+    ],
+    "port": 443,
+    "use_tls": {
+      "use_host_header_as_sni": {}
+    }
+  }
+}
+```
+
+## Validation Behavior
+
+When validating parameters:
+
+- **Missing user-required field** -> Error: "Missing required field: metadata.name"
+- **Missing server-default field** -> Warning: "Field 'jitter_percent' will default to 0"
+- **Recommended values** -> Info: Returned in `recommendedValues` for guidance

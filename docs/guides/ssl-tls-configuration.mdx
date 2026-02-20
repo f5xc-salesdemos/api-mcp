@@ -1,0 +1,56 @@
+---
+title: SSL/TLS Configuration
+description: Configure SSL/TLS for staging environments and custom certificate authorities
+sidebar:
+  order: 2
+---
+
+F5 XC staging environments and organizations with custom certificate authorities
+may require SSL/TLS configuration adjustments.
+
+## Staging Environment Certificate Issue
+
+F5 XC staging environments use URLs like
+`tenant.staging.console.ves.volterra.io`, but the SSL certificate only
+covers `*.console.ves.volterra.io`. Wildcards only match a single
+subdomain level, so `tenant.staging` fails validation.
+
+```text
+Hostname/IP does not match certificate's altnames:
+Host: tenant.staging.console.ves.volterra.io
+Cert covers: DNS:*.console.ves.volterra.io, DNS:console.ves.volterra.io
+```
+
+## Option 1: Custom CA Bundle (Recommended)
+
+If your organization uses a custom CA:
+
+```bash
+export F5XC_CA_BUNDLE=/path/to/your/ca-bundle.crt
+```
+
+## Option 2: Disable Verification (Development Only)
+
+:::danger[Never use in production]
+This disables all certificate validation.
+:::
+
+```bash
+export F5XC_TLS_INSECURE=true
+```
+
+## SSL Error Reference
+
+| Error                                               | Cause                   | Solution                                  |
+| --------------------------------------------------- | ----------------------- | ----------------------------------------- |
+| `Hostname/IP does not match certificate's altnames` | Staging URL mismatch    | Use `F5XC_TLS_INSECURE=true` or custom CA |
+| `self signed certificate`                           | Custom CA not trusted   | Set `F5XC_CA_BUNDLE`                      |
+| `certificate has expired`                           | Expired certificate     | Contact F5 XC admin                       |
+| `unable to verify the first certificate`            | Missing intermediate CA | Add intermediates to CA bundle            |
+
+## Best Practices
+
+1. **Prefer `F5XC_CA_BUNDLE` over `F5XC_TLS_INSECURE`** - maintains validation while trusting your organization's certificates
+2. **Contact F5 Support** for staging environments to request the official staging CA certificate
+3. **Never use `F5XC_TLS_INSECURE=true` in production**
+4. **Rotate credentials regularly** according to your organization's security policies
