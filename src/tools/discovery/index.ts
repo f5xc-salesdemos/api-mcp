@@ -412,7 +412,7 @@ export const DISCOVERY_TOOLS = {
         },
         pathParams: {
           type: "object",
-          description: "Path parameters to validate (e.g., { namespace: 'default', name: 'my-resource' })",
+          description: "Path parameters to validate (e.g., { namespace: 'default', name: 'example-resource' })",
           additionalProperties: { type: "string" },
         },
         queryParams: {

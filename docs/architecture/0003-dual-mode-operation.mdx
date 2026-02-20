@@ -149,7 +149,7 @@ Mode: Documentation (no authentication configured)
 To execute this operation, use:
 
 CLI Command:
-  f5xcctl get http-loadbalancer my-lb --namespace shared
+  f5xcctl get http-loadbalancer example-lb --namespace shared
 
 cURL Equivalent:
   curl -X GET https://tenant.console.ves.volterra.io/api/v1/...
@@ -157,7 +157,7 @@ cURL Equivalent:
 
 Expected Response Structure:
   {
-    "name": "my-lb",
+    "name": "example-lb",
     "domains": ["example.com"],
     ...
   }
@@ -169,14 +169,14 @@ Setup Instructions:
 **Authenticated Mode Response**:
 
 ```text
-Mode: Authenticated (tenant: my-tenant)
+Mode: Authenticated (tenant: example-tenant)
 
-API Call: GET /api/v1/config/namespaces/shared/http-loadbalancers/my-lb
+API Call: GET /api/v1/config/namespaces/shared/http-loadbalancers/example-lb
 Status: 200 OK
 
 Response:
 {
-  "name": "my-lb",
+  "name": "example-lb",
   "domains": ["example.com"],
   "origin_pools": [...]
 }

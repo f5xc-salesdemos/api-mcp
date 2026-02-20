@@ -346,7 +346,7 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
   // Default examples for common parameters
   const DEFAULT_EXAMPLES: Record<string, string> = {
     namespace: "system",
-    name: "my-resource",
+    name: "example-resource",
     response_format: "GET_RSP_FORMAT_DEFAULT",
   };
 
