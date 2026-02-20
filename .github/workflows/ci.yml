@@ -9,8 +9,6 @@ on:
       - "*.md"
       - "LICENSE"
       - "icon.png"
-      # GitHub infrastructure (workflows, templates, config)
-      - ".github/**"
       # Linter and tool configs (validated by Super-Linter, not CI)
       - ".checkov.yaml"
       - ".codespellrc"
@@ -33,8 +31,6 @@ on:
       - "*.md"
       - "LICENSE"
       - "icon.png"
-      # GitHub infrastructure (workflows, templates, config)
-      - ".github/**"
       # Linter and tool configs (validated by Super-Linter, not CI)
       - ".checkov.yaml"
       - ".codespellrc"
