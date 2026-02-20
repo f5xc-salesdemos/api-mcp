@@ -1,6 +1,8 @@
 ---
 title: Environment Variables
-description: Complete reference for F5XC API MCP Server environment variables
+description: Complete reference for all F5XC API MCP Server environment variables
+sidebar:
+  order: 1
 ---
 
 ## Variable Reference
@@ -124,7 +126,7 @@ Path to a custom CA certificate bundle for SSL/TLS verification.
 export F5XC_CA_BUNDLE="/path/to/ca-bundle.crt"
 ```
 
-See [SSL/TLS Configuration](advanced/#ssltls-configuration) for staging environment guidance.
+See [SSL/TLS Configuration](/guides/ssl-tls-configuration/) for staging environment guidance.
 
 ---
 
@@ -170,7 +172,7 @@ Percentage threshold for the red zone (creation blocked). Default is 100.
 export F5XC_QUOTA_RED_THRESHOLD="100"
 ```
 
-See [Quota Awareness](advanced/#quota-awareness) for threshold behavior details.
+See [Quota Management](/guides/quota-management/) for threshold behavior details.
 
 ---
 
@@ -289,5 +291,7 @@ Check for `authenticated: true` and correct `authMethod`.
 
 - [Authentication](authentication/) - Auth setup and profile configuration
 - [IDE Setup](ide-setup/) - MCP JSON configuration for all editors
-- [Advanced Features](advanced/) - Quota awareness, SSL/TLS, server defaults
+- [Quota Management](/guides/quota-management/) - Quota awareness and thresholds
+- [SSL/TLS Configuration](/guides/ssl-tls-configuration/) - Staging environments and custom CAs
+- [Server-Applied Defaults](/reference/server-defaults/) - Field requirement types and defaults
 - [Troubleshooting](troubleshooting/) - Common issues and solutions

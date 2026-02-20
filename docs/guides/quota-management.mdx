@@ -1,0 +1,84 @@
+---
+title: Quota Management
+description: Pre-flight quota validation and configurable threshold management for F5XC resources
+sidebar:
+  order: 1
+---
+
+The MCP server automatically checks resource quota availability before
+executing create operations, preventing failures due to quota limits.
+
+- **Pre-Flight Validation** - Checks quota before API calls
+- **Automatic Blocking** - Prevents creation when quota is at 100%
+- **Warning System** - Warns when quota usage is 80-99%
+- **Caching** - 5-minute cache reduces API calls
+- **Per-Namespace Tracking** - Quota limits checked per namespace
+- **Configurable Thresholds** - Customize warning and blocking levels
+
+> Available since v2.1.0
+
+## Quota MCP Tools
+
+**`f5xc-api-get-quota-status`** - Get quota for a specific resource type:
+
+```typescript
+// Input
+{ "namespace": "production", "resourceType": "healthcheck" }
+
+// Output
+// Quota Status for healthcheck
+// Namespace: production
+// Current Usage: 95/100 (95%)
+// Remaining: 5
+// Status: Warning - Approaching limit
+```
+
+**`f5xc-api-list-namespace-quotas`** - List all quota limits for a namespace:
+
+```typescript
+{ "namespace": "production", "showOnlyLimited": false }
+```
+
+**`f5xc-api-clear-quota-cache`** - Clear cached quota data to force fresh queries:
+
+```typescript
+{ "namespace": "production" }  // optional - clears all if omitted
+```
+
+## Quota Thresholds
+
+| Zone   | Usage  | Behavior                         |
+| ------ | ------ | -------------------------------- |
+| Green  | 0-79%  | Creation allowed, no warnings    |
+| Yellow | 80-99% | Creation allowed, warning logged |
+| Red    | 100%+  | **Creation blocked** with error  |
+
+## Quota Error Messages
+
+When a quota limit is reached:
+
+```text
+ERROR: Resource quota limit reached
+
+Resource Type: healthcheck
+Namespace: production
+Current Usage: 100/100 (100%)
+Status: At limit - cannot create additional resources
+
+Action Required:
+1. Delete unused healthcheck resources in the 'production' namespace
+2. Request quota increase from F5 XC support
+3. Use a different namespace with available quota
+```
+
+## Configuration
+
+Control quota checking behavior with [environment variables](/reference/environment-variables/):
+
+| Variable                      | Default | Description                      |
+| ----------------------------- | ------- | -------------------------------- |
+| `F5XC_QUOTA_CHECK_ENABLED`    | `true`  | Enable/disable quota checking    |
+| `F5XC_QUOTA_CACHE_TTL`        | `300`   | Cache TTL in seconds (5 minutes) |
+| `F5XC_QUOTA_GREEN_THRESHOLD`  | `79`    | Green zone upper bound (%)       |
+| `F5XC_QUOTA_YELLOW_THRESHOLD` | `99`    | Yellow zone upper bound (%)      |
+| `F5XC_QUOTA_RED_THRESHOLD`    | `100`   | Red zone threshold (%)           |
