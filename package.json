@@ -106,6 +106,7 @@
     "fast-check": "^4.5.3",
     "globals": "^17.0.0",
     "jszip": "^3.10.0",
+    "prettier": "^3.8.1",
     "tsx": "^4.0.0",
     "typescript": "^5.0.0",
     "vitest": "^4.0.16"
