@@ -39,9 +39,77 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Check upstream release version (1 lightweight API call)
+  check-upstream:
+    name: Check Upstream Version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.tag }}
+
+    steps:
+      - name: Get latest release tag
+        id: version
+        run: |
+          TAG=$(gh api repos/robinmordasiewicz/f5xc-api-enriched/releases/latest --jq '.tag_name')
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Upstream version: $TAG"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Download specs once with cache — shared by all downstream jobs
+  download-specs:
+    name: Download OpenAPI Specs
+    runs-on: ubuntu-latest
+    needs: check-upstream
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Cache OpenAPI specs
+        id: cache-specs
+        uses: actions/cache@v4
+        with:
+          path: specs/
+          key: specs-${{ needs.check-upstream.outputs.version }}
+
+      - name: Setup Node.js
+        if: steps.cache-specs.outputs.cache-hit != 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        if: steps.cache-specs.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Download OpenAPI specs from upstream
+        if: steps.cache-specs.outputs.cache-hit != 'true'
+        run: npm run sync-specs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify specs
+        run: |
+          if [ ! -f "specs/index.json" ]; then
+            echo "::error::Failed to download OpenAPI specs"
+            exit 1
+          fi
+          echo "OpenAPI specs ready (cache hit: ${{ steps.cache-specs.outputs.cache-hit }})"
+          echo "Version: $(jq -r '.version' specs/index.json)"
+
+      - name: Upload specs for downstream jobs
+        uses: actions/upload-artifact@v6
+        with:
+          name: openapi-specs
+          path: specs/
+          retention-days: 1
+
   release:
     name: Release
     runs-on: ubuntu-latest
+    needs: download-specs
     outputs:
       version: ${{ steps.version.outputs.version }}
       npm_version: ${{ steps.version.outputs.npm_version }}
@@ -53,6 +121,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Download OpenAPI specs
+        uses: actions/download-artifact@v7
+        with:
+          name: openapi-specs
+          path: specs/
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
@@ -62,11 +136,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Download OpenAPI specs from upstream
-        run: npm run sync-specs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: npm run build
@@ -144,11 +213,17 @@ jobs:
   mcpb:
     name: MCPB Bundle
     runs-on: ubuntu-latest
-    needs: release
+    needs: [download-specs, release]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Download OpenAPI specs
+        uses: actions/download-artifact@v7
+        with:
+          name: openapi-specs
+          path: specs/
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -158,11 +233,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci --ignore-scripts
-
-      - name: Download OpenAPI specs from upstream
-        run: npm run sync-specs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update version and build
         run: |
@@ -201,11 +271,17 @@ jobs:
   docker:
     name: Docker Build & Push
     runs-on: ubuntu-latest
-    needs: release
+    needs: [download-specs, release]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Download OpenAPI specs
+        uses: actions/download-artifact@v7
+        with:
+          name: openapi-specs
+          path: specs/
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -216,12 +292,8 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts
 
-      - name: Download OpenAPI specs and update version
-        run: |
-          npm run sync-specs
-          node scripts/version.js update
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update version
+        run: node scripts/version.js update
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
