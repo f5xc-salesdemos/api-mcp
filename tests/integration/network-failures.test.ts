@@ -12,10 +12,7 @@
  * - 429 rate limit response handling
  */
 
-import axios, {
-  type AxiosError,
-  type InternalAxiosRequestConfig,
-} from "axios";
+import axios, { type AxiosError, type InternalAxiosRequestConfig } from "axios";
 import { describe, expect, it } from "vitest";
 
 /** Staging tenant name — override with TEST_TENANT_NAME env var */
@@ -297,12 +294,7 @@ describe("Network Failure Integration Tests", () => {
         const resp = (error as { response?: { status: number } }).response;
         const status = resp?.status;
         // Don't retry 4xx errors except 429
-        if (
-          status !== undefined &&
-          status >= 400 &&
-          status < 500 &&
-          status !== 429
-        ) {
+        if (status !== undefined && status >= 400 && status < 500 && status !== 429) {
           return false;
         }
         return true;

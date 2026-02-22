@@ -207,7 +207,9 @@ export async function waitForResourceDeleted(
       }
 
       // Other error (not 404)
-      console.log(`  ⚠️  Attempt ${attempts}/${maxAttempts}: Unexpected error = ${httpErr.response?.status || "unknown"}`);
+      console.log(
+        `  ⚠️  Attempt ${attempts}/${maxAttempts}: Unexpected error = ${httpErr.response?.status || "unknown"}`,
+      );
 
       if (attempts < maxAttempts) {
         await sleep(interval);
