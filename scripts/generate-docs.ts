@@ -12,9 +12,9 @@
  *   tsx scripts/generate-docs.ts
  */
 
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "fs";
-import { basename, dirname, join } from "path";
-import { fileURLToPath } from "url";
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import YAML from "yaml";
 import type { OneOfGroup } from "../src/generator/dependency-types.js";
 import type { ParsedOperation } from "../src/generator/openapi-parser.js";
@@ -290,7 +290,7 @@ function normalizeToolSummary(summary: string): string {
  * Generate markdown content for a resource
  */
 function generateMarkdown(resourceDoc: ResourceDoc): string {
-  const { resource: rawResource, categoryPath, title: rawTitle, tools, metadata } = resourceDoc;
+  const { resource: rawResource, title: rawTitle, tools, metadata } = resourceDoc;
 
   // Sanitize resource and title: strip curly braces that MDX interprets as JSX expressions
   const resource = rawResource.replace(/[{}]/g, "");
@@ -715,37 +715,6 @@ function generateEnhancedNavigation(resourceDocs: ResourceDoc[]): Array<Record<s
   }
 
   return navigation;
-}
-
-/**
- * Read and parse a .pages file for navigation
- * Returns nav entries with directory path prepended for mkdocs compatibility
- */
-function readPagesFile(dirPath: string): Array<Record<string, unknown>> | null {
-  const pagesFile = join(dirPath, ".pages");
-  if (!existsSync(pagesFile)) {
-    return null;
-  }
-
-  // Extract directory name for path prefix (e.g., "getting-started" from path)
-  const dirName = basename(dirPath);
-
-  try {
-    const content = readFileSync(pagesFile, "utf-8");
-    const parsed = YAML.parse(content);
-    if (parsed && "nav" in parsed && Array.isArray(parsed.nav)) {
-      // Prefix each file entry with directory path for mkdocs
-      return parsed.nav.map((entry: unknown) => {
-        if (typeof entry === "string" && (entry.endsWith(".mdx") || entry.endsWith(".md"))) {
-          return `${dirName}/${entry}`;
-        }
-        return entry;
-      });
-    }
-    return null;
-  } catch {
-    return null;
-  }
 }
 
 /**

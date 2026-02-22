@@ -7,8 +7,8 @@
  * operation metadata for MCP tool generation.
  */
 
-import { existsSync, readdirSync, readFileSync } from "fs";
-import { basename, extname, join, relative } from "path";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { basename, extname, join, relative } from "node:path";
 import { z } from "zod";
 import { logger } from "../utils/logging.js";
 import {

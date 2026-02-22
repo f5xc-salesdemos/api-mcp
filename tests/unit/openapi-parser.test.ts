@@ -8,9 +8,9 @@
  * parseSpecDirectory have been removed.
  */
 
-import { existsSync, mkdirSync, rmSync, writeFileSync } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
+import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   getAllOperations,

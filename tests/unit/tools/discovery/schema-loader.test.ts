@@ -37,7 +37,7 @@ vi.mock("../../../../src/tools/registry.js", () => ({
   getToolByName: vi.fn(),
 }));
 
-import { existsSync, readFileSync } from "fs";
+import { existsSync, readFileSync } from "node:fs";
 import { getToolByName } from "../../../../src/tools/registry.js";
 
 describe("Schema Loader", () => {

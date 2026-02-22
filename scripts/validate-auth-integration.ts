@@ -19,10 +19,10 @@
  *   2 - Script error
  */
 
-import { execSync } from "child_process";
-import { existsSync, readFileSync } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
+import { execSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = join(__dirname, "..");
@@ -82,12 +82,6 @@ const results: ValidationResult[] = [];
 
 function log(message: string, color = colors.reset): void {
   console.log(`${color}${message}${colors.reset}`);
-}
-
-function logVerbose(message: string): void {
-  if (verbose) {
-    console.log(`${colors.dim}  ${message}${colors.reset}`);
-  }
 }
 
 function runCommand(
@@ -471,7 +465,7 @@ async function main(): Promise<void> {
           }
 
           // Try to make a simple API call
-          const https = require('https');
+          const https = require('node:https');
           const url = cm.getApiUrl() + '/web/namespaces';
           const token = cm.getToken();
 

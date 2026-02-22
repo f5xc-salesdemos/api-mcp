@@ -20,8 +20,8 @@
 
 import { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
 import axios, { type AxiosInstance } from "axios";
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { ResourceTracker } from "../e2e/helpers/resource-tracker";
 import { generateTestResourceName } from "../e2e/helpers/test-data-generator";
