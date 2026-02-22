@@ -193,7 +193,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-http-lb");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-http-lb");
       expect(result?.examplePayload).toHaveProperty("spec.domains");
     });
 
@@ -211,7 +211,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-origin-pool");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-origin-pool");
       expect(result?.examplePayload).toHaveProperty("spec.origins");
       expect(result?.examplePayload).toHaveProperty("spec.healthcheck");
     });
@@ -230,7 +230,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-tcp-lb");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-tcp-lb");
       expect(result?.examplePayload).toHaveProperty("spec.listen_port", 3306);
     });
 
@@ -266,7 +266,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-dns-lb");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-dns-lb");
       expect(result?.examplePayload).toHaveProperty("spec.dns_lb_type");
     });
 
@@ -284,7 +284,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-certificate");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-certificate");
       expect(result?.examplePayload).toHaveProperty("spec.certificate_url");
       expect(result?.examplePayload).toHaveProperty("spec.private_key");
     });
@@ -303,7 +303,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-namespace");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-namespace");
     });
 
     it("should return WAF policy example", () => {
@@ -320,7 +320,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-waf-policy");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-waf-policy");
       expect(result?.examplePayload).toHaveProperty("spec.blocking", true);
     });
 
@@ -338,7 +338,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-service-policy");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-service-policy");
       expect(result?.examplePayload).toHaveProperty("spec.rule_list");
     });
 
@@ -356,7 +356,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-network-firewall");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-network-firewall");
       expect(result?.examplePayload).toHaveProperty("spec.active_service_policies");
     });
 
@@ -374,7 +374,7 @@ describe("Parameter Suggestions", () => {
       // Assert
       expect(result).not.toBeNull();
       expect(result?.source).toBe("curated");
-      expect(result?.examplePayload).toHaveProperty("metadata.name", "my-rate-limiter");
+      expect(result?.examplePayload).toHaveProperty("metadata.name", "example-rate-limiter");
       expect(result?.examplePayload).toHaveProperty("spec.limits");
     });
   });
