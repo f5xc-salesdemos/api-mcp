@@ -14,11 +14,11 @@
  *   tsx scripts/sync-specs.ts
  */
 
-import { createWriteStream, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "fs";
-import https from "https";
+import { createWriteStream, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import https from "node:https";
 import JSZip from "jszip";
-import { basename, dirname, join } from "path";
-import { fileURLToPath } from "url";
+import { basename, dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { normalizeExamples } from "../src/generator/transformers/normalize-examples.js";
 
 const __filename = fileURLToPath(import.meta.url);

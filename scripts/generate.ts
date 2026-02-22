@@ -14,10 +14,10 @@
  *   tsx scripts/generate.ts
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
-import { dirname, join } from "path";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import * as prettier from "prettier";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { buildDependencyGraph, serializeDependencyGraph } from "../src/generator/dependency-graph.js";
 import {
   getAllOperations,

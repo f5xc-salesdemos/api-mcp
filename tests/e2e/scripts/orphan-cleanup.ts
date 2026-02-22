@@ -339,8 +339,8 @@ function generateCleanupReport(report: CleanupReport): void {
     errors: report.errors,
   };
 
-  const fs = require("fs");
-  const path = require("path");
+  const fs = require("node:fs");
+  const path = require("node:path");
 
   const reportsDir = path.join(process.cwd(), "test-reports");
   if (!fs.existsSync(reportsDir)) {

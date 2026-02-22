@@ -16,8 +16,8 @@
  *   1 - Validation failed
  */
 
-import { existsSync, readFileSync } from "fs";
-import { join } from "path";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
 // Import from the built output to validate the compiled code
 const SPECS_DIR = join(process.cwd(), "specs", "domains");

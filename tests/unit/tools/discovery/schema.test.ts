@@ -343,7 +343,7 @@ describe("Schema Module", () => {
 
       // Assert
       expect(result).toHaveProperty("metadata.name");
-      expect((result as any).metadata.name).toContain("my-");
+      expect((result as any).metadata.name).toContain("example-");
     });
 
     it("should apply namespace smart default", () => {

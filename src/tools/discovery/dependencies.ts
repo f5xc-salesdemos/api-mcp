@@ -10,9 +10,9 @@
  * operations in the correct order without hallucinating dependencies.
  */
 
-import { existsSync, readFileSync } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { deserializeDependencyGraph, getResourcesBySubscription } from "../../generator/dependency-graph.js";
 import type {
   DependencyDiscoveryAction,
