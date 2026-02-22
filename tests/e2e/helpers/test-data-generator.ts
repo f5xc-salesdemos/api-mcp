@@ -69,7 +69,7 @@ export const TEST_METADATA_LABELS = {
  * @param config - Resource configuration object
  * @returns Configuration with test metadata labels added
  */
-export function applyTestMetadata<T extends { metadata?: any }>(config: T): T {
+export function applyTestMetadata<T extends { metadata?: Record<string, unknown> }>(config: T): T {
   return {
     ...config,
     metadata: {
@@ -111,7 +111,7 @@ export function generateOriginPoolConfig(
     backendCount?: number;
     healthCheck?: boolean;
   },
-): any {
+): Record<string, unknown> {
   const port = options?.port || 80;
   const backendCount = options?.backendCount || 2;
   const healthCheck = options?.healthCheck ?? false;
@@ -121,20 +121,14 @@ export function generateOriginPoolConfig(
     labels: {},
   }));
 
-  const config: any = {
-    metadata: {
-      name: poolName,
-      namespace,
-    },
-    spec: {
-      origin_servers: originServers,
-      port,
-      loadbalancer_algorithm: "ROUND_ROBIN",
-    },
+  const spec: Record<string, unknown> = {
+    origin_servers: originServers,
+    port,
+    loadbalancer_algorithm: "ROUND_ROBIN",
   };
 
   if (healthCheck) {
-    config.spec.healthcheck = [
+    spec.healthcheck = [
       {
         timeout: 3,
         interval: 15,
@@ -147,6 +141,14 @@ export function generateOriginPoolConfig(
       },
     ];
   }
+
+  const config = {
+    metadata: {
+      name: poolName,
+      namespace,
+    },
+    spec,
+  };
 
   return applyTestMetadata(config);
 }
@@ -168,7 +170,7 @@ export function generateHttpLoadBalancerConfig(
     domain?: string;
     port?: number;
   },
-): any {
+): Record<string, unknown> {
   const domain = options?.domain || `${lbName}.example.com`;
   const port = options?.port || 80;
 
@@ -206,7 +208,7 @@ export function generateHttpLoadBalancerConfig(
  * @param namespaceName - Namespace name
  * @returns Namespace configuration
  */
-export function generateNamespaceConfig(namespaceName: string): any {
+export function generateNamespaceConfig(namespaceName: string): Record<string, unknown> {
   return applyTestMetadata({
     metadata: {
       name: namespaceName,

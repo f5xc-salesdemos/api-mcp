@@ -12,7 +12,10 @@
  * - 429 rate limit response handling
  */
 
-import axios, { type AxiosError } from "axios";
+import axios, {
+  type AxiosError,
+  type InternalAxiosRequestConfig,
+} from "axios";
 import { describe, expect, it } from "vitest";
 
 /** Staging tenant name — override with TEST_TENANT_NAME env var */
@@ -30,10 +33,11 @@ describe("Network Failure Integration Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown timeout error");
-      } catch (error: any) {
-        expect(error.code).toBeDefined();
-        expect(["ECONNABORTED", "ETIMEDOUT"]).toContain(error.code);
-        expect(error.message).toContain("timeout");
+      } catch (error: unknown) {
+        const axiosErr = error as AxiosError;
+        expect(axiosErr.code).toBeDefined();
+        expect(["ECONNABORTED", "ETIMEDOUT"]).toContain(axiosErr.code);
+        expect(axiosErr.message).toContain("timeout");
       }
     });
 
@@ -46,11 +50,12 @@ describe("Network Failure Integration Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown timeout error");
-      } catch (error: any) {
+      } catch (error: unknown) {
+        const axiosErr = error as AxiosError;
         // Verify error context
-        expect(error.config).toBeDefined();
-        expect(error.config.timeout).toBe(1);
-        expect(error.config.url).toBeDefined();
+        expect(axiosErr.config).toBeDefined();
+        expect(axiosErr.config?.timeout).toBe(1);
+        expect(axiosErr.config?.url).toBeDefined();
       }
     });
 
@@ -63,10 +68,11 @@ describe("Network Failure Integration Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown timeout error");
-      } catch (error: any) {
+      } catch (error: unknown) {
+        const axiosErr = error as AxiosError;
         // Any timeout error is acceptable
-        expect(error.code).toBeDefined();
-        expect(error.message).toBeDefined();
+        expect(axiosErr.code).toBeDefined();
+        expect(axiosErr.message).toBeDefined();
       }
     });
   });
@@ -81,9 +87,10 @@ describe("Network Failure Integration Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown DNS error");
-      } catch (error: any) {
-        expect(error.code).toBeDefined();
-        expect(["ENOTFOUND", "EAI_AGAIN"]).toContain(error.code);
+      } catch (error: unknown) {
+        const axiosErr = error as AxiosError;
+        expect(axiosErr.code).toBeDefined();
+        expect(["ENOTFOUND", "EAI_AGAIN"]).toContain(axiosErr.code);
       }
     });
 
@@ -96,10 +103,11 @@ describe("Network Failure Integration Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown DNS error");
-      } catch (error: any) {
-        expect(error.code).toBeDefined();
+      } catch (error: unknown) {
+        const axiosErr = error as AxiosError;
+        expect(axiosErr.code).toBeDefined();
         // Could be ENOTFOUND or timeout
-        expect(error.code).toBeDefined();
+        expect(axiosErr.code).toBeDefined();
       }
     });
   });
@@ -114,10 +122,11 @@ describe("Network Failure Integration Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown connection error");
-      } catch (error: any) {
-        expect(error.code).toBeDefined();
+      } catch (error: unknown) {
+        const axiosErr = error as AxiosError;
+        expect(axiosErr.code).toBeDefined();
         // Could be ECONNREFUSED or timeout
-        expect(["ECONNREFUSED", "ETIMEDOUT", "ECONNABORTED"]).toContain(error.code);
+        expect(["ECONNREFUSED", "ETIMEDOUT", "ECONNABORTED"]).toContain(axiosErr.code);
       }
     });
 
@@ -130,11 +139,12 @@ describe("Network Failure Integration Tests", () => {
       try {
         await httpClient.get("/test");
         expect.fail("Should have thrown connection error");
-      } catch (error: any) {
+      } catch (error: unknown) {
+        const axiosErr = error as AxiosError;
         // Verify we have error context
-        expect(error.message).toBeDefined();
-        expect(error.config).toBeDefined();
-        expect(error.config.baseURL).toBe("http://127.0.0.1:9999");
+        expect(axiosErr.message).toBeDefined();
+        expect(axiosErr.config).toBeDefined();
+        expect(axiosErr.config?.baseURL).toBe("http://127.0.0.1:9999");
       }
     });
   });
@@ -150,10 +160,11 @@ describe("Network Failure Integration Tests", () => {
       try {
         await httpClient.get("/api/test");
         expect.fail("Should have thrown network error");
-      } catch (error: any) {
+      } catch (error: unknown) {
+        const axiosErr = error as AxiosError;
         // Should get network error
-        expect(error.code).toBeDefined();
-        expect(["ETIMEDOUT", "ECONNABORTED", "ECONNREFUSED"]).toContain(error.code);
+        expect(axiosErr.code).toBeDefined();
+        expect(["ETIMEDOUT", "ECONNABORTED", "ECONNREFUSED"]).toContain(axiosErr.code);
       }
     });
 
@@ -169,9 +180,10 @@ describe("Network Failure Integration Tests", () => {
 
         // If it succeeds (redirect or upgrade), that's fine
         expect(true).toBe(true);
-      } catch (error: any) {
+      } catch (error: unknown) {
+        const axiosErr = error as AxiosError;
         // Should get SSL/TLS or connection error
-        expect(error.code).toBeDefined();
+        expect(axiosErr.code).toBeDefined();
       }
     });
   });
@@ -185,7 +197,7 @@ describe("Network Failure Integration Tests", () => {
       const mockError: AxiosError = {
         name: "AxiosError",
         message: "Request failed with status code 429",
-        config: {} as any,
+        config: {} as InternalAxiosRequestConfig,
         code: "ERR_BAD_REQUEST",
         request: {},
         response: {
@@ -194,7 +206,7 @@ describe("Network Failure Integration Tests", () => {
           headers: {
             "retry-after": "60",
           },
-          config: {} as any,
+          config: {} as InternalAxiosRequestConfig,
           data: {
             error: "Rate limit exceeded",
           },
@@ -233,7 +245,7 @@ describe("Network Failure Integration Tests", () => {
       const baseDelay = 100;
       let attemptCount = 0;
 
-      const attemptRequest = async (): Promise<any> => {
+      const attemptRequest = async (): Promise<{ data: string }> => {
         attemptCount++;
 
         if (attemptCount < maxRetries) {
@@ -245,7 +257,7 @@ describe("Network Failure Integration Tests", () => {
         return { data: "success" };
       };
 
-      const retryWithBackoff = async (): Promise<any> => {
+      const retryWithBackoff = async (): Promise<{ data: string }> => {
         let lastError: Error | null = null;
 
         for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -272,18 +284,25 @@ describe("Network Failure Integration Tests", () => {
     it("should not retry on client errors (4xx)", async () => {
       let attemptCount = 0;
 
-      const attemptRequest = async (): Promise<any> => {
+      const attemptRequest = async (): Promise<never> => {
         attemptCount++;
 
-        const error: any = new Error("Client error");
-        error.response = { status: 400 };
+        const error = Object.assign(new Error("Client error"), {
+          response: { status: 400 },
+        });
         throw error;
       };
 
-      const shouldRetry = (error: any): boolean => {
-        const status = error.response?.status;
+      const shouldRetry = (error: unknown): boolean => {
+        const resp = (error as { response?: { status: number } }).response;
+        const status = resp?.status;
         // Don't retry 4xx errors except 429
-        if (status >= 400 && status < 500 && status !== 429) {
+        if (
+          status !== undefined &&
+          status >= 400 &&
+          status < 500 &&
+          status !== 429
+        ) {
           return false;
         }
         return true;
@@ -292,7 +311,7 @@ describe("Network Failure Integration Tests", () => {
       try {
         await attemptRequest();
         expect.fail("Should have thrown error");
-      } catch (error: any) {
+      } catch (error: unknown) {
         expect(shouldRetry(error)).toBe(false);
         expect(attemptCount).toBe(1); // No retries
       }
@@ -302,32 +321,34 @@ describe("Network Failure Integration Tests", () => {
       let attemptCount = 0;
       const maxRetries = 3;
 
-      const attemptRequest = async (): Promise<any> => {
+      const attemptRequest = async (): Promise<{ data: string }> => {
         attemptCount++;
 
         if (attemptCount < maxRetries) {
-          const error: any = new Error("Server error");
-          error.response = { status: 500 };
+          const error = Object.assign(new Error("Server error"), {
+            response: { status: 500 },
+          });
           throw error;
         }
 
         return { data: "success" };
       };
 
-      const shouldRetry = (error: any): boolean => {
-        const status = error.response?.status;
+      const shouldRetry = (error: unknown): boolean => {
+        const resp = (error as { response?: { status: number } }).response;
+        const status = resp?.status;
         // Retry 5xx errors
-        return status >= 500;
+        return status !== undefined && status >= 500;
       };
 
-      const retryLogic = async (): Promise<any> => {
+      const retryLogic = async (): Promise<{ data: string } | undefined> => {
         let lastError: Error | null = null;
 
         for (let attempt = 0; attempt < maxRetries; attempt++) {
           try {
             return await attemptRequest();
-          } catch (error: any) {
-            lastError = error;
+          } catch (error: unknown) {
+            lastError = error instanceof Error ? error : new Error(String(error));
 
             if (!shouldRetry(error) || attempt >= maxRetries - 1) {
               throw error;
@@ -339,26 +360,32 @@ describe("Network Failure Integration Tests", () => {
       };
 
       const result = await retryLogic();
-      expect(result.data).toBe("success");
+      expect(result?.data).toBe("success");
       expect(attemptCount).toBe(maxRetries);
     });
   });
 
   describe("Error Context Preservation", () => {
     it("should preserve full error context through retries", async () => {
-      const capturedErrors: any[] = [];
+      interface ErrorWithContext extends Error {
+        config: { url: string; method: string; baseURL: string };
+        response: { status: number; statusText: string };
+      }
+
+      const capturedErrors: ErrorWithContext[] = [];
 
       const attemptWithContext = async (): Promise<void> => {
-        const error: any = new Error("Test error");
-        error.config = {
-          url: "/api/test",
-          method: "GET",
-          baseURL: "https://test.example.com",
-        };
-        error.response = {
-          status: 500,
-          statusText: "Internal Server Error",
-        };
+        const error = Object.assign(new Error("Test error"), {
+          config: {
+            url: "/api/test",
+            method: "GET",
+            baseURL: "https://test.example.com",
+          },
+          response: {
+            status: 500,
+            statusText: "Internal Server Error",
+          },
+        });
 
         capturedErrors.push(error);
         throw error;
@@ -366,7 +393,7 @@ describe("Network Failure Integration Tests", () => {
 
       try {
         await attemptWithContext();
-      } catch (error: any) {
+      } catch (_error: unknown) {
         expect(capturedErrors.length).toBe(1);
         expect(capturedErrors[0].config).toBeDefined();
         expect(capturedErrors[0].config.url).toBe("/api/test");

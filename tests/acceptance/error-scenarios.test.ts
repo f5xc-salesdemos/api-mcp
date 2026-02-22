@@ -37,9 +37,10 @@ describe("Error Scenario Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown 401 error");
-      } catch (error: any) {
-        expect(error.response?.status).toBe(401);
-        expect(error.response?.statusText).toContain("Unauthorized");
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.response?.status).toBe(401);
+        expect(err.response?.statusText).toContain("Unauthorized");
       }
     });
 
@@ -56,9 +57,10 @@ describe("Error Scenario Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown authentication error");
-      } catch (error: any) {
-        expect(error.response?.status).toBeGreaterThanOrEqual(401);
-        expect(error.response?.status).toBeLessThanOrEqual(403);
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.response?.status).toBeGreaterThanOrEqual(401);
+        expect(err.response?.status).toBeLessThanOrEqual(403);
       }
     });
 
@@ -74,8 +76,9 @@ describe("Error Scenario Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown authentication error");
-      } catch (error: any) {
-        expect(error.response?.status).toBe(401);
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.response?.status).toBe(401);
       }
     });
 
@@ -93,8 +96,9 @@ describe("Error Scenario Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown 401 error");
-      } catch (error: any) {
-        expect(error.response?.status).toBe(401);
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.response?.status).toBe(401);
       }
     });
   });
@@ -125,9 +129,10 @@ describe("Error Scenario Tests", () => {
       try {
         await validHttpClient.get("/api/config/namespaces/system/http_loadbalancers/nonexistent-resource-12345");
         expect.fail("Should have thrown 404 error");
-      } catch (error: any) {
-        expect(error.response?.status).toBe(404);
-        expect(error.response?.data).toBeDefined();
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.response?.status).toBe(404);
+        expect(err.response?.data).toBeDefined();
       }
     });
 
@@ -138,9 +143,10 @@ describe("Error Scenario Tests", () => {
 
         // If no error, that's fine (namespace might not exist or we have access)
         expect(true).toBe(true);
-      } catch (error: any) {
+      } catch (error: unknown) {
         // If we get 403 or 404, both are acceptable
-        expect([403, 404]).toContain(error.response?.status);
+        const err = error as AxiosError;
+        expect([403, 404]).toContain(err.response?.status);
       }
     });
 
@@ -148,8 +154,9 @@ describe("Error Scenario Tests", () => {
       try {
         await validHttpClient.get("/api/config/invalid-endpoint-path");
         expect.fail("Should have thrown 404 error");
-      } catch (error: any) {
-        expect(error.response?.status).toBe(404);
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.response?.status).toBe(404);
       }
     });
 
@@ -160,9 +167,10 @@ describe("Error Scenario Tests", () => {
 
         // If succeeds, that's acceptable (endpoint might support PATCH)
         expect(true).toBe(true);
-      } catch (error: any) {
+      } catch (error: unknown) {
         // 405 Method Not Allowed or 400 Bad Request are acceptable
-        expect([405, 400, 404]).toContain(error.response?.status);
+        const err = error as AxiosError;
+        expect([405, 400, 404]).toContain(err.response?.status);
       }
     });
 
@@ -170,13 +178,15 @@ describe("Error Scenario Tests", () => {
       try {
         await validHttpClient.get("/api/config/namespaces/system/http_loadbalancers/nonexistent-12345");
         expect.fail("Should have thrown 404 error");
-      } catch (error: any) {
-        expect(error.response?.status).toBe(404);
-        expect(error.response?.data).toBeDefined();
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.response?.status).toBe(404);
+        expect(err.response?.data).toBeDefined();
 
         // Verify error response structure
-        expect(error.message).toBeDefined();
-        expect(typeof error.message).toBe("string");
+        const message = error instanceof Error ? error.message : String(error);
+        expect(message).toBeDefined();
+        expect(typeof message).toBe("string");
       }
     });
   });
@@ -194,9 +204,10 @@ describe("Error Scenario Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown timeout error");
-      } catch (error: any) {
-        expect(error.code).toBeDefined();
-        expect(["ECONNABORTED", "ETIMEDOUT"]).toContain(error.code);
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.code).toBeDefined();
+        expect(["ECONNABORTED", "ETIMEDOUT"]).toContain(err.code);
       }
     });
 
@@ -209,9 +220,10 @@ describe("Error Scenario Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown DNS error");
-      } catch (error: any) {
-        expect(error.code).toBeDefined();
-        expect(["ENOTFOUND", "EAI_AGAIN"]).toContain(error.code);
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.code).toBeDefined();
+        expect(["ENOTFOUND", "EAI_AGAIN"]).toContain(err.code);
       }
     });
 
@@ -224,10 +236,11 @@ describe("Error Scenario Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown connection error");
-      } catch (error: any) {
-        expect(error.code).toBeDefined();
+      } catch (error: unknown) {
+        const err = error as AxiosError;
+        expect(err.code).toBeDefined();
         // Could be ECONNREFUSED, ETIMEDOUT, or certificate error
-        expect(error.code).toBeDefined();
+        expect(err.code).toBeDefined();
       }
     });
   });
@@ -266,10 +279,11 @@ describe("Error Scenario Tests", () => {
 
         // If it doesn't error, the API is lenient (which is fine)
         expect(true).toBe(true);
-      } catch (error: any) {
+      } catch (error: unknown) {
         // Should get 400 Bad Request for validation errors
-        expect(error.response?.status).toBe(400);
-        expect(error.response?.data).toBeDefined();
+        const err = error as AxiosError;
+        expect(err.response?.status).toBe(400);
+        expect(err.response?.data).toBeDefined();
       }
     });
 
@@ -281,10 +295,11 @@ describe("Error Scenario Tests", () => {
         );
 
         expect.fail("Should have thrown validation error");
-      } catch (error: any) {
+      } catch (error: unknown) {
         // Should get 400 Bad Request or parse error
-        expect(error.response?.status).toBeGreaterThanOrEqual(400);
-        expect(error.response?.status).toBeLessThan(500);
+        const err = error as AxiosError;
+        expect(err.response?.status).toBeGreaterThanOrEqual(400);
+        expect(err.response?.status).toBeLessThan(500);
       }
     });
 
@@ -300,10 +315,11 @@ describe("Error Scenario Tests", () => {
 
         // API might accept it or reject it
         expect(true).toBe(true);
-      } catch (error: any) {
+      } catch (error: unknown) {
         // If rejected, should be 400 Bad Request
-        expect(error.response?.status).toBeGreaterThanOrEqual(400);
-        expect(error.response?.status).toBeLessThan(500);
+        const err = error as AxiosError;
+        expect(err.response?.status).toBeGreaterThanOrEqual(400);
+        expect(err.response?.status).toBeLessThan(500);
       }
     });
   });
@@ -352,12 +368,14 @@ describe("Error Scenario Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown error");
-      } catch (error: any) {
+      } catch (error: unknown) {
         // Verify error has useful information
-        expect(error.message).toBeDefined();
-        expect(error.response?.status).toBeDefined();
-        expect(typeof error.message).toBe("string");
-        expect(error.message.length).toBeGreaterThan(0);
+        const err = error as AxiosError;
+        const message = error instanceof Error ? error.message : String(error);
+        expect(message).toBeDefined();
+        expect(err.response?.status).toBeDefined();
+        expect(typeof message).toBe("string");
+        expect(message.length).toBeGreaterThan(0);
       }
     });
 
@@ -373,12 +391,13 @@ describe("Error Scenario Tests", () => {
       try {
         await httpClient.get("/api/web/namespaces");
         expect.fail("Should have thrown error");
-      } catch (error: any) {
+      } catch (error: unknown) {
         // Verify we have full error context
-        expect(error.config).toBeDefined();
-        expect(error.config?.url).toBeDefined();
-        expect(error.config?.method).toBeDefined();
-        expect(error.response).toBeDefined();
+        const err = error as AxiosError;
+        expect(err.config).toBeDefined();
+        expect(err.config?.url).toBeDefined();
+        expect(err.config?.method).toBeDefined();
+        expect(err.response).toBeDefined();
       }
     });
   });

@@ -171,10 +171,12 @@ describe("Authenticated Healthcheck CRUD Tests", () => {
         );
         console.log(`   ✅ Deleted: ${resourceName}`);
         await delay(500); // Brief pause between deletions
-      } catch (error: any) {
+      } catch (error: unknown) {
         // 404 is acceptable (already deleted)
-        if (error?.response?.status !== 404) {
-          console.log(`   ⚠️  Failed to delete ${resourceName}: ${error.message}`);
+        const axiosErr = error as { response?: { status: number } };
+        if (axiosErr?.response?.status !== 404) {
+          const message = error instanceof Error ? error.message : String(error);
+          console.log(`   ⚠️  Failed to delete ${resourceName}: ${message}`);
         }
       }
     }
@@ -444,10 +446,12 @@ describe("Authenticated Healthcheck CRUD Tests", () => {
           console.log("   ⚠️ API accepted config with both options (may be valid server-side)");
           createdResources.push(testName); // Mark for cleanup
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         // API should reject this configuration
-        console.log(`   ✅ API rejected invalid config: ${error.message}`);
-        expect(error.response?.status).toBeGreaterThanOrEqual(400);
+        const message = error instanceof Error ? error.message : String(error);
+        const axiosErr = error as { response?: { status: number } };
+        console.log(`   ✅ API rejected invalid config: ${message}`);
+        expect(axiosErr.response?.status).toBeGreaterThanOrEqual(400);
       }
     });
   });
@@ -582,8 +586,9 @@ describe("Authenticated Healthcheck CRUD Tests", () => {
         if (isApiResponse(getResponse)) {
           console.log("   ⚠️ Resource still exists after deletion");
         }
-      } catch (error: any) {
-        expect(error.response?.status).toBe(404);
+      } catch (error: unknown) {
+        const axiosErr = error as { response?: { status: number } };
+        expect(axiosErr.response?.status).toBe(404);
         console.log("   ✅ Verified deletion (404 on GET)");
       }
     });

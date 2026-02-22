@@ -20,6 +20,14 @@ export interface CleanupResult {
   skipped: string[];
 }
 
+interface HttpClient {
+  delete(url: string): Promise<unknown>;
+}
+
+interface HttpError extends Error {
+  response?: { status: number };
+}
+
 export class ResourceTracker {
   private resources: TrackedResource[] = [];
   private readonly maxRetries = 3;
@@ -55,7 +63,7 @@ export class ResourceTracker {
   /**
    * Clean up all tracked resources in LIFO order
    */
-  async cleanupAll(httpClient: any): Promise<CleanupResult> {
+  async cleanupAll(httpClient: HttpClient): Promise<CleanupResult> {
     console.log(`\n🧹 Starting cleanup of ${this.resources.length} tracked resources...`);
 
     const result: CleanupResult = {
@@ -73,20 +81,21 @@ export class ResourceTracker {
         await this.deleteResourceWithRetry(httpClient, resource);
         result.deleted.push(this.formatResourceName(resource));
         console.log(`✅ Deleted ${resource.domain}/${resource.type}: ${resource.namespace}/${resource.name}`);
-      } catch (error: any) {
+      } catch (error: unknown) {
+        const httpError = error as HttpError;
         // Check if resource already deleted (404)
-        if (error.response?.status === 404) {
+        if (httpError.response?.status === 404) {
           result.skipped.push(this.formatResourceName(resource));
           console.log(`ℹ️  ${resource.domain}/${resource.type}: ${resource.namespace}/${resource.name} already deleted`);
         } else {
           result.success = false;
           result.failed.push({
             resource: this.formatResourceName(resource),
-            error: error.message || String(error),
+            error: httpError.message || String(error),
           });
           console.error(
             `❌ Failed to delete ${resource.domain}/${resource.type}: ${resource.namespace}/${resource.name}:`,
-            error.message,
+            httpError.message,
           );
           // Continue cleanup even if one fails
         }
@@ -116,7 +125,7 @@ export class ResourceTracker {
   /**
    * Delete a specific resource with retry logic
    */
-  private async deleteResourceWithRetry(httpClient: any, resource: TrackedResource): Promise<void> {
+  private async deleteResourceWithRetry(httpClient: HttpClient, resource: TrackedResource): Promise<void> {
     let lastError: Error | null = null;
 
     for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
@@ -127,11 +136,12 @@ export class ResourceTracker {
         // Wait a bit for deletion to propagate
         await this.sleep(1000);
         return;
-      } catch (error: any) {
-        lastError = error;
+      } catch (error: unknown) {
+        lastError = error instanceof Error ? error : new Error(String(error));
+        const httpError = error as HttpError;
 
         // Don't retry 404 (already deleted)
-        if (error.response?.status === 404) {
+        if (httpError.response?.status === 404) {
           throw error;
         }
 

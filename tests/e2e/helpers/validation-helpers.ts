@@ -5,6 +5,16 @@
  * Supports waiting for resources to become operational and verifying deletion completion.
  */
 
+/** Minimal HTTP client interface matching the methods used in validation helpers */
+export interface HttpClient {
+  get(url: string): Promise<{ data: unknown; status: number }>;
+}
+
+/** HTTP error with optional response metadata, used in catch blocks */
+interface HttpError extends Error {
+  response?: { status: number };
+}
+
 export interface PollOptions {
   maxAttempts?: number;
   interval?: number; // milliseconds
@@ -29,7 +39,7 @@ export interface ValidationResult {
  * @returns Validation result with success status and metadata
  */
 export async function pollResourceStatus(
-  httpClient: any,
+  httpClient: HttpClient,
   url: string,
   expectedStatus: string | ((status: string) => boolean),
   options: PollOptions = {},
@@ -77,12 +87,13 @@ export async function pollResourceStatus(
       }
 
       console.log(`  ⏳ Attempt ${attempts}/${maxAttempts}: Status = ${status}, waiting ${interval}ms...`);
-    } catch (error: any) {
-      lastError = error.message || String(error);
+    } catch (error: unknown) {
+      const httpErr = error as HttpError;
+      lastError = httpErr.message || String(error);
       console.log(`  ⚠️  Attempt ${attempts}/${maxAttempts}: Error = ${lastError}`);
 
       // If resource not found (404), it might be deleted
-      if (error.response?.status === 404) {
+      if (httpErr.response?.status === 404) {
         return {
           success: false,
           status: "NOT_FOUND",
@@ -118,7 +129,7 @@ export async function pollResourceStatus(
  * @returns Validation result
  */
 export async function waitForResourceReady(
-  httpClient: any,
+  httpClient: HttpClient,
   url: string,
   options: PollOptions = {},
 ): Promise<ValidationResult> {
@@ -146,7 +157,7 @@ export async function waitForResourceReady(
  * @returns Validation result
  */
 export async function waitForResourceDeleted(
-  httpClient: any,
+  httpClient: HttpClient,
   url: string,
   options: PollOptions = {},
 ): Promise<ValidationResult> {
@@ -182,9 +193,10 @@ export async function waitForResourceDeleted(
       if (attempts < maxAttempts) {
         await sleep(interval);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const httpErr = error as HttpError;
       // Check if 404 (resource deleted)
-      if (error.response?.status === 404) {
+      if (httpErr.response?.status === 404) {
         console.log(`✅ Resource deleted after ${attempts} attempts (${Math.round((Date.now() - startTime) / 1000)}s)`);
         return {
           success: true,
@@ -195,7 +207,7 @@ export async function waitForResourceDeleted(
       }
 
       // Other error (not 404)
-      console.log(`  ⚠️  Attempt ${attempts}/${maxAttempts}: Unexpected error = ${error.response?.status || "unknown"}`);
+      console.log(`  ⚠️  Attempt ${attempts}/${maxAttempts}: Unexpected error = ${httpErr.response?.status || "unknown"}`);
 
       if (attempts < maxAttempts) {
         await sleep(interval);
@@ -219,12 +231,13 @@ export async function waitForResourceDeleted(
  * @param url - API endpoint to check
  * @returns True if resource exists (200 response)
  */
-export async function resourceExists(httpClient: any, url: string): Promise<boolean> {
+export async function resourceExists(httpClient: HttpClient, url: string): Promise<boolean> {
   try {
     await httpClient.get(url);
     return true;
-  } catch (error: any) {
-    if (error.response?.status === 404) {
+  } catch (error: unknown) {
+    const httpErr = error as HttpError;
+    if (httpErr.response?.status === 404) {
       return false;
     }
     // Other errors (5xx, network, etc.) - rethrow
@@ -241,9 +254,9 @@ export async function resourceExists(httpClient: any, url: string): Promise<bool
  * @returns Validation result
  */
 export async function verifyResource(
-  httpClient: any,
+  httpClient: HttpClient,
   url: string,
-  validator: (data: any) => boolean | string,
+  validator: (data: unknown) => boolean | string,
 ): Promise<ValidationResult> {
   const startTime = Date.now();
 
@@ -268,14 +281,33 @@ export async function verifyResource(
       duration: Date.now() - startTime,
       error,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const httpErr = error as HttpError;
     return {
       success: false,
       attempts: 1,
       duration: Date.now() - startTime,
-      error: error.message || String(error),
+      error: httpErr.message || String(error),
     };
   }
+}
+
+/**
+ * Safely traverse nested object properties
+ *
+ * @param obj - Root object to traverse
+ * @param keys - Property path segments
+ * @returns Value at the nested path, or undefined
+ */
+function getNestedValue(obj: unknown, ...keys: string[]): unknown {
+  let current: unknown = obj;
+  for (const key of keys) {
+    if (current == null || typeof current !== "object") {
+      return undefined;
+    }
+    current = (current as Record<string, unknown>)[key];
+  }
+  return current;
 }
 
 /**
@@ -284,22 +316,26 @@ export async function verifyResource(
  * @param data - API response data
  * @returns Status string
  */
-function extractStatus(data: any): string {
+function extractStatus(data: unknown): string {
   // Try common status field locations
-  if (data?.system_metadata?.status?.status) {
-    return data.system_metadata.status.status;
+  const systemStatus = getNestedValue(data, "system_metadata", "status", "status");
+  if (typeof systemStatus === "string") {
+    return systemStatus;
   }
 
-  if (data?.status?.status) {
-    return data.status.status;
+  const statusStatus = getNestedValue(data, "status", "status");
+  if (typeof statusStatus === "string") {
+    return statusStatus;
   }
 
-  if (data?.system_metadata?.state) {
-    return data.system_metadata.state;
+  const systemState = getNestedValue(data, "system_metadata", "state");
+  if (typeof systemState === "string") {
+    return systemState;
   }
 
-  if (data?.state) {
-    return data.state;
+  const state = getNestedValue(data, "state");
+  if (typeof state === "string") {
+    return state;
   }
 
   return "UNKNOWN";
@@ -335,7 +371,7 @@ function sleep(ms: number): Promise<void> {
  * @returns Array of validation results
  */
 export async function waitForMultipleResourcesReady(
-  httpClient: any,
+  httpClient: HttpClient,
   urls: string[],
   options: PollOptions = {},
 ): Promise<ValidationResult[]> {

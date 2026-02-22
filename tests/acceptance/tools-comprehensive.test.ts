@@ -27,6 +27,35 @@ import { ResourceTracker } from "../e2e/helpers/resource-tracker";
 import { generateTestResourceName } from "../e2e/helpers/test-data-generator";
 import { RateLimiter } from "../utils/rate-limiter";
 
+/** Shape of a tool definition from the generated tool registry */
+interface ToolDefinition {
+  toolName: string;
+  description: string;
+  path?: string;
+  operation?: string;
+  resourceType?: string;
+  endpoint?: string;
+  parameters?: {
+    properties: Record<string, unknown>;
+  };
+}
+
+/** Return type for loadToolRegistrySync */
+interface ToolRegistry {
+  domains: string[];
+  toolsByDomain: Map<string, ToolDefinition[]>;
+  totalTools: number;
+}
+
+/** Type guard to extract HTTP status from an axios error */
+function getErrorStatus(error: unknown): number | undefined {
+  if (error instanceof Error && "response" in error) {
+    const resp = (error as { response?: { status?: number } }).response;
+    return resp?.status;
+  }
+  return undefined;
+}
+
 // Test configuration
 const TEST_CONFIG = {
   rateLimit: {
@@ -62,12 +91,12 @@ const stats = {
 /**
  * Load tool registry from generated tool modules synchronously
  */
-function loadToolRegistrySync(): any {
+function loadToolRegistrySync(): ToolRegistry {
   const distDir = path.join(process.cwd(), "dist", "tools", "generated");
 
   // Load all domain directories
   const domains: string[] = [];
-  const toolsByDomain = new Map<string, any[]>();
+  const toolsByDomain = new Map<string, ToolDefinition[]>();
   let totalTools = 0;
 
   if (fs.existsSync(distDir)) {
@@ -295,7 +324,7 @@ async function executeWithRateLimit<T>(fn: () => Promise<T>): Promise<T> {
 /**
  * Validate LIST operation
  */
-async function validateListOperation(tool: any, domain: string): Promise<void> {
+async function validateListOperation(tool: ToolDefinition, domain: string): Promise<void> {
   // Verify tool has required path property
   if (!tool.path) {
     console.warn(`⚠️  Tool ${tool.toolName} missing path property, skipping`);
@@ -319,8 +348,8 @@ async function validateListOperation(tool: any, domain: string): Promise<void> {
 
     updateDomainStats(domain, true, false);
     stats.passed++;
-  } catch (error: any) {
-    const status = error.response?.status;
+  } catch (error: unknown) {
+    const status = getErrorStatus(error);
 
     // 403 Forbidden = RBAC restriction, skip gracefully
     if (status === 403) {
@@ -342,7 +371,7 @@ async function validateListOperation(tool: any, domain: string): Promise<void> {
 /**
  * Validate GET operation
  */
-async function validateGetOperation(tool: any, domain: string): Promise<void> {
+async function validateGetOperation(tool: ToolDefinition, domain: string): Promise<void> {
   // Verify tool has required path property
   if (!tool.path) {
     console.warn(`⚠️  Tool ${tool.toolName} missing path property, skipping`);
@@ -365,8 +394,8 @@ async function validateGetOperation(tool: any, domain: string): Promise<void> {
 
     updateDomainStats(domain, true, false);
     stats.passed++;
-  } catch (error: any) {
-    const status = error.response?.status;
+  } catch (error: unknown) {
+    const status = getErrorStatus(error);
 
     // 403 Forbidden = RBAC restriction, skip gracefully
     if (status === 403) {
@@ -394,7 +423,7 @@ async function validateGetOperation(tool: any, domain: string): Promise<void> {
 /**
  * Validate CREATE operation (with cleanup)
  */
-async function validateCreateOperation(tool: any, domain: string): Promise<void> {
+async function validateCreateOperation(tool: ToolDefinition, domain: string): Promise<void> {
   // Verify tool has required path property
   if (!tool.path) {
     console.warn(`⚠️  Tool ${tool.toolName} missing path property, skipping`);
@@ -433,10 +462,10 @@ async function validateCreateOperation(tool: any, domain: string): Promise<void>
 
     updateDomainStats(domain, true, false);
     stats.passed++;
-  } catch (error: any) {
+  } catch (error: unknown) {
     // CREATE failures are expected for many tools (missing required fields, etc.)
     // We're primarily testing that the endpoint exists and responds
-    const status = error.response?.status;
+    const status = getErrorStatus(error);
 
     // 403 Forbidden = RBAC restriction, skip gracefully
     if (status === 403) {
@@ -463,7 +492,7 @@ async function validateCreateOperation(tool: any, domain: string): Promise<void>
 /**
  * Validate UPDATE/DELETE operations in documentation mode
  */
-async function validateDocumentationMode(tool: any, domain: string): Promise<void> {
+async function validateDocumentationMode(tool: ToolDefinition, domain: string): Promise<void> {
   // For UPDATE/DELETE, we just verify the tool is properly registered
   // We don't make actual API calls to avoid destructive operations
 
@@ -521,7 +550,7 @@ describe("F5XC API Comprehensive Tool Validation", () => {
 
             // Log progress
             logProgress();
-          } catch (error: any) {
+          } catch (error: unknown) {
             stats.failed++;
             updateDomainStats(domain, false);
             logProgress();

@@ -51,7 +51,7 @@ import {
 
 describe("Planning Tool Handlers", () => {
   let mockServer: McpServer;
-  let toolHandlers: Map<string, (args: any) => Promise<any>>;
+  let toolHandlers: Map<string, (args: Record<string, unknown>) => Promise<unknown>>;
 
   beforeEach(() => {
     vi.clearAllMocks();
