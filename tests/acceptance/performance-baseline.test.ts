@@ -268,7 +268,7 @@ describe("Performance Baseline Tests", () => {
       const { duration } = await measurePerformance(async () => {
         const searchTerm = "loadbalancer";
         return tools.filter(
-          (tool: any) =>
+          (tool: { name: string; description: string }) =>
             tool.name.toLowerCase().includes(searchTerm) || tool.description.toLowerCase().includes(searchTerm),
         );
       });

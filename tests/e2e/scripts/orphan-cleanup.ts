@@ -165,8 +165,9 @@ async function scanResourceType(
     }
 
     await scanEndpoint(httpClient, url, resourceType, "system", report);
-  } catch (error: any) {
-    console.log(`  ⚠️  Error scanning ${resourceType.domain}/${resourceType.type}: ${error.message}`);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.log(`  ⚠️  Error scanning ${resourceType.domain}/${resourceType.type}: ${message}`);
   }
 }
 
@@ -215,10 +216,12 @@ async function scanEndpoint(
         }
       }
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     // 404 is acceptable (endpoint may not exist in namespace)
-    if (error.response?.status !== 404) {
-      console.log(`  ⚠️  Error scanning ${url}: ${error.message}`);
+    const axiosErr = error as { response?: { status: number }; message?: string };
+    if (axiosErr.response?.status !== 404) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.log(`  ⚠️  Error scanning ${url}: ${message}`);
     }
   }
 }
@@ -230,7 +233,7 @@ async function listNamespaces(httpClient: AxiosInstance): Promise<string[]> {
   try {
     const response = await httpClient.get("/api/web/namespaces");
     const items = response.data?.items || [];
-    return items.map((item: any) => item.name).filter(Boolean);
+    return items.map((item: { name: string }) => item.name).filter(Boolean);
   } catch (error) {
     console.log("  ⚠️  Error listing namespaces, using default namespaces");
     return ["default", "system"];
@@ -250,14 +253,15 @@ async function deleteOrphan(httpClient: AxiosInstance, orphan: OrphanResource, r
 
     // Brief pause between deletions
     await sleep(500);
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const axiosErr = error as { response?: { status: number }; message?: string };
     // 404 is acceptable (already deleted)
-    if (error.response?.status === 404) {
+    if (axiosErr.response?.status === 404) {
       report.deleted++;
       console.log(`  ℹ️  ${orphan.domain}/${orphan.type}/${orphan.namespace}/${orphan.name} already deleted`);
     } else {
       report.failed++;
-      const errorMsg = error.message || String(error);
+      const errorMsg = error instanceof Error ? error.message : String(error);
       report.errors.push({
         resource: `${orphan.domain}/${orphan.type}/${orphan.namespace}/${orphan.name}`,
         error: errorMsg,

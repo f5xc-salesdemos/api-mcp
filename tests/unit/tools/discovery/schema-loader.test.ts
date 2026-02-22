@@ -320,16 +320,16 @@ describe("Schema Loader", () => {
       expect(result.type).toBe("object");
       expect(result.properties?.self).toBeDefined();
       // Circular ref should be marked
-      expect((result.properties?.self as any)._circular).toBe(true);
+      expect((result.properties?.self as unknown as Record<string, unknown>)._circular).toBe(true);
     });
 
     it("should respect max depth limit", () => {
       // Arrange
-      const deeplyNested: any = { type: "object", properties: {} };
-      let current = deeplyNested.properties;
+      const deeplyNested: Record<string, unknown> = { type: "object", properties: {} as Record<string, unknown> };
+      let current = deeplyNested.properties as Record<string, unknown>;
       for (let i = 0; i < 15; i++) {
-        current.nested = { type: "object", properties: {} };
-        current = current.nested.properties;
+        current.nested = { type: "object", properties: {} as Record<string, unknown> };
+        current = (current.nested as Record<string, unknown>).properties as Record<string, unknown>;
       }
 
       // Act
