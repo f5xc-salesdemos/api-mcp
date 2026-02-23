@@ -1,0 +1,413 @@
+---
+title: RBAC Certificate Management Role
+description: Create a custom role restricting users to SSL/TLS certificate management via API
+sidebar:
+  order: 503
+---
+
+Create a custom RBAC role that restricts a user to only managing SSL/TLS
+certificates and certificate chains across all namespaces. This guide uses
+JSON payloads and curl commands for the complete workflow.
+
+## RBAC Model
+
+F5 XC RBAC uses a layered model:
+
+1. **API Group Elements** — individual API path + method combinations
+2. **API Groups** — collections of API group elements
+3. **Roles** — reference one or more API groups
+4. **User Assignment** — bind a role to a user
+
+## Prerequisites
+
+- API token with admin privileges (to create RBAC objects)
+- Access to the `system` namespace
+
+Set environment variables used throughout this guide:
+
+```bash
+export F5XC_API_URL="https://<tenant>.console.ves.volterra.io"
+export F5XC_API_TOKEN="<your-api-token>"
+```
+
+## Step 1: Create API Group Elements
+
+Each element defines an HTTP method and path regex. Create one element per
+API operation you want to allow.
+
+:::note[MCP Server Gap]
+The MCP server cannot create API group elements yet because the upstream
+OpenAPI spec is missing CREATE/UPDATE/DELETE for these objects. Use curl
+directly. Tracked in
+[f5xc-api-fixed#110](https://github.com/robinmordasiewicz/f5xc-api-fixed/issues/110).
+:::
+
+### Certificate create element
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/api_group_elements" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "example-cert-create",
+      "namespace": "system"
+    },
+    "spec": {
+      "methods": ["POST"],
+      "path_regex": "^/api/config/namespaces/[^/]+/certificates$"
+    }
+  }'
+```
+
+### Certificate replace element
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/api_group_elements" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "example-cert-replace",
+      "namespace": "system"
+    },
+    "spec": {
+      "methods": ["PUT"],
+      "path_regex": "^/api/config/namespaces/[^/]+/certificates/[^/]+$"
+    }
+  }'
+```
+
+### Certificate chain create element
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/api_group_elements" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "example-cert-chain-create",
+      "namespace": "system"
+    },
+    "spec": {
+      "methods": ["POST"],
+      "path_regex": "^/api/config/namespaces/[^/]+/certificate_chains$"
+    }
+  }'
+```
+
+### Certificate chain replace element
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/api_group_elements" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "example-cert-chain-replace",
+      "namespace": "system"
+    },
+    "spec": {
+      "methods": ["PUT"],
+      "path_regex": "^/api/config/namespaces/[^/]+/certificate_chains/[^/]+$"
+    }
+  }'
+```
+
+### Certificate list element (optional)
+
+Allows the user to view certificates in the console UI:
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/api_group_elements" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "example-cert-list",
+      "namespace": "system"
+    },
+    "spec": {
+      "methods": ["GET"],
+      "path_regex": "^/api/config/namespaces/[^/]+/certificates(/[^/]+)?$"
+    }
+  }'
+```
+
+### Certificate chain list element (optional)
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/api_group_elements" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "example-cert-chain-list",
+      "namespace": "system"
+    },
+    "spec": {
+      "methods": ["GET"],
+      "path_regex": "^/api/config/namespaces/[^/]+/certificate_chains(/[^/]+)?$"
+    }
+  }'
+```
+
+### Verify elements were created
+
+Use the MCP server to list API group elements:
+
+```text
+Tool: f5xc-api-api-api-group-element-list
+Input: { "namespace": "system" }
+```
+
+Or with curl:
+
+```bash
+curl -s "${F5XC_API_URL}/api/web/namespaces/system/api_group_elements" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" | jq '.items[] | select(.name | startswith("example-"))'
+```
+
+## Step 2: Create API Group
+
+Group the elements into a single API group:
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/api_groups" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "example-cert-management-group",
+      "namespace": "system"
+    },
+    "spec": {
+      "elements": [
+        {
+          "name": "example-cert-create",
+          "namespace": "system",
+          "kind": "api_group_element"
+        },
+        {
+          "name": "example-cert-replace",
+          "namespace": "system",
+          "kind": "api_group_element"
+        },
+        {
+          "name": "example-cert-chain-create",
+          "namespace": "system",
+          "kind": "api_group_element"
+        },
+        {
+          "name": "example-cert-chain-replace",
+          "namespace": "system",
+          "kind": "api_group_element"
+        },
+        {
+          "name": "example-cert-list",
+          "namespace": "system",
+          "kind": "api_group_element"
+        },
+        {
+          "name": "example-cert-chain-list",
+          "namespace": "system",
+          "kind": "api_group_element"
+        }
+      ]
+    }
+  }'
+```
+
+### Verify the group
+
+```text
+Tool: f5xc-api-api-api-group-get
+Input: { "namespace": "system", "name": "example-cert-management-group" }
+```
+
+## Step 3: Create Custom Role
+
+Create a role that references the API group. This step can use the MCP
+server:
+
+```text
+Tool: f5xc-api-tenantandidentity-role-create
+Input: {
+  "namespace": "system",
+  "name": "example-cert-uploader",
+  "body": {
+    "metadata": {
+      "name": "example-cert-uploader",
+      "namespace": "system"
+    },
+    "spec": {
+      "api_groups": [
+        {
+          "name": "example-cert-management-group",
+          "namespace": "system",
+          "kind": "api_group"
+        }
+      ]
+    }
+  }
+}
+```
+
+Or with curl:
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/roles" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "example-cert-uploader",
+      "namespace": "system"
+    },
+    "spec": {
+      "api_groups": [
+        {
+          "name": "example-cert-management-group",
+          "namespace": "system",
+          "kind": "api_group"
+        }
+      ]
+    }
+  }'
+```
+
+## Step 4: Assign Role to User
+
+Bind the role to a user. This step can also use the MCP server:
+
+```text
+Tool: f5xc-api-tenantandidentity-role-user-create
+Input: {
+  "namespace": "system",
+  "body": {
+    "namespace": "system",
+    "user": "user@example.com",
+    "role": "example-cert-uploader"
+  }
+}
+```
+
+Or with curl:
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/users/roles" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "namespace": "system",
+    "user": "user@example.com",
+    "role": "example-cert-uploader"
+  }'
+```
+
+## Step 5: Verify Access
+
+Test that the role grants the expected permissions using the evaluate API
+access endpoint:
+
+```text
+Tool: f5xc-api-tenantandidentity-evaluate-api-acces-create
+Input: {
+  "namespace": "system",
+  "body": {
+    "namespace": "system",
+    "user": "user@example.com",
+    "method": "POST",
+    "path": "/api/config/namespaces/production/certificates"
+  }
+}
+```
+
+Or with curl:
+
+```bash
+curl -s -X POST \
+  "${F5XC_API_URL}/api/web/namespaces/system/evaluate/api_access" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "namespace": "system",
+    "user": "user@example.com",
+    "method": "POST",
+    "path": "/api/config/namespaces/production/certificates"
+  }'
+```
+
+Verify that access is **allowed** for certificate paths and **denied** for
+unrelated paths (e.g., `/api/config/namespaces/production/http_loadbalancers`).
+
+## Path Regex Reference
+
+| Element | Methods | Path Regex |
+| --- | --- | --- |
+| `example-cert-create` | POST | `^/api/config/namespaces/[^/]+/certificates$` |
+| `example-cert-replace` | PUT | `^/api/config/namespaces/[^/]+/certificates/[^/]+$` |
+| `example-cert-chain-create` | POST | `^/api/config/namespaces/[^/]+/certificate_chains$` |
+| `example-cert-chain-replace` | PUT | `^/api/config/namespaces/[^/]+/certificate_chains/[^/]+$` |
+| `example-cert-list` | GET | `^/api/config/namespaces/[^/]+/certificates(/[^/]+)?$` |
+| `example-cert-chain-list` | GET | `^/api/config/namespaces/[^/]+/certificate_chains(/[^/]+)?$` |
+
+The `[^/]+` pattern matches any namespace name. To restrict to a specific
+namespace, replace it with the namespace name (e.g., `production`).
+
+## Cleanup
+
+Delete objects in reverse order of creation:
+
+```bash
+# Remove role assignment
+curl -s -X DELETE \
+  "${F5XC_API_URL}/api/web/namespaces/system/users/roles" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{ "namespace": "system", "user": "user@example.com", "role": "example-cert-uploader" }'
+
+# Delete role
+curl -s -X DELETE \
+  "${F5XC_API_URL}/api/web/namespaces/system/roles/example-cert-uploader" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
+# Delete API group
+curl -s -X DELETE \
+  "${F5XC_API_URL}/api/web/namespaces/system/api_groups/example-cert-management-group" \
+  -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+
+# Delete API group elements
+for name in example-cert-create example-cert-replace \
+            example-cert-chain-create example-cert-chain-replace \
+            example-cert-list example-cert-chain-list; do
+  curl -s -X DELETE \
+    "${F5XC_API_URL}/api/web/namespaces/system/api_group_elements/${name}" \
+    -H "Authorization: APIToken ${F5XC_API_TOKEN}"
+done
+```
+
+## MCP Server Coverage
+
+| Step | Operation | MCP Tool Available |
+| --- | --- | --- |
+| 1 | Create API group elements | No — use curl |
+| 2 | Create API group | No — use curl |
+| 3 | Create role | Yes — `f5xc-api-tenantandidentity-role-create` |
+| 4 | Assign role to user | Yes — `f5xc-api-tenantandidentity-role-user-create` |
+| 5 | Verify access | Yes — `f5xc-api-tenantandidentity-evaluate-api-acces-create` |
+| — | List/get API group elements | Yes — `f5xc-api-api-api-group-element-list/get` |
+| — | List/get API groups | Yes — `f5xc-api-api-api-group-list/get` |
+
+Once the upstream spec adds CRUD for API group elements and API groups
+([f5xc-api-fixed#110](https://github.com/robinmordasiewicz/f5xc-api-fixed/issues/110)),
+the MCP server will support the full RBAC workflow natively.
