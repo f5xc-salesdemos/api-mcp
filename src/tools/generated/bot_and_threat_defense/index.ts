@@ -80,12 +80,18 @@ export const bot_and_threat_defenseTools: ParsedOperation[] = [
       {
         choiceField: "type_choice",
         fieldPath: "spec.cloud_hosted.ingress[].type_choice",
-        options: ["spec.cloud_hosted.ingress[].host_name", "spec.cloud_hosted.ingress[].ip_address"],
+        options: [
+          "spec.cloud_hosted.ingress[].host_name",
+          "spec.cloud_hosted.ingress[].ip_address",
+        ],
       },
       {
         choiceField: "type_choice",
         fieldPath: "spec.data_center_hosted.ingress[].type_choice",
-        options: ["spec.data_center_hosted.ingress[].host_name", "spec.data_center_hosted.ingress[].ip_address"],
+        options: [
+          "spec.data_center_hosted.ingress[].host_name",
+          "spec.data_center_hosted.ingress[].ip_address",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -287,7 +293,8 @@ export const bot_and_threat_defenseTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -441,12 +448,18 @@ export const bot_and_threat_defenseTools: ParsedOperation[] = [
       {
         choiceField: "type_choice",
         fieldPath: "spec.cloud_hosted.ingress[].type_choice",
-        options: ["spec.cloud_hosted.ingress[].host_name", "spec.cloud_hosted.ingress[].ip_address"],
+        options: [
+          "spec.cloud_hosted.ingress[].host_name",
+          "spec.cloud_hosted.ingress[].ip_address",
+        ],
       },
       {
         choiceField: "type_choice",
         fieldPath: "spec.data_center_hosted.ingress[].type_choice",
-        options: ["spec.data_center_hosted.ingress[].host_name", "spec.data_center_hosted.ingress[].ip_address"],
+        options: [
+          "spec.data_center_hosted.ingress[].host_name",
+          "spec.data_center_hosted.ingress[].ip_address",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -666,7 +679,8 @@ export const bot_and_threat_defenseTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -929,7 +943,8 @@ export const bot_and_threat_defenseTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1099,7 +1114,8 @@ export const bot_and_threat_defenseTools: ParsedOperation[] = [
     domain: "bot_and_threat_defense",
     resource: "tpm-category",
     summary: "Create TPM Category.",
-    description: "Create a Category object, which is a grouping of APIKeys used for TPM provisioning.",
+    description:
+      "Create a Category object, which is a grouping of APIKeys used for TPM provisioning.",
     pathParameters: [
       {
         description:
@@ -1283,7 +1299,8 @@ export const bot_and_threat_defenseTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1635,7 +1652,8 @@ export const bot_and_threat_defenseTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,

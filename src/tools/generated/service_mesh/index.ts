@@ -238,7 +238,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "malicious_user_detection",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.malicious_user_detection",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.malicious_user_detection",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.disable_detection",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection",
@@ -246,7 +247,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "bola_activity_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_activity_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_detection_automatic",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bola_detection",
@@ -265,7 +267,9 @@ export const service_meshTools: ParsedOperation[] = [
         choiceField: "cooling_off_period_setting",
         fieldPath:
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period_setting",
-        options: ["spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period"],
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period",
+        ],
       },
       {
         choiceField: "failed_login_activity_choice",
@@ -278,7 +282,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "forbidden_activity_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.forbidden_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.forbidden_activity_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_forbidden_activity",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_forbidden_activity",
@@ -286,7 +291,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ip_reputation_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.ip_reputation_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.ip_reputation_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_ip_reputation",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_ip_reputation",
@@ -304,7 +310,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "rate_limit_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.rate_limit_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.rate_limit_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_rate_limit",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_rate_limit",
@@ -312,7 +319,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "waf_activity_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.waf_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.waf_activity_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_waf_activity",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_waf_activity",
@@ -414,7 +422,8 @@ export const service_meshTools: ParsedOperation[] = [
     domain: "service_mesh",
     resource: "app-setting",
     summary: "GET App Setting.",
-    description: "GET App setting will retrieve the configuration from namespace metadata.namespace.",
+    description:
+      "GET App setting will retrieve the configuration from namespace metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -511,7 +520,8 @@ export const service_meshTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -670,7 +680,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "malicious_user_detection",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.malicious_user_detection",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.malicious_user_detection",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.disable_detection",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection",
@@ -678,7 +689,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "bola_activity_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_activity_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.bola_detection_automatic",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_bola_detection",
@@ -697,7 +709,9 @@ export const service_meshTools: ParsedOperation[] = [
         choiceField: "cooling_off_period_setting",
         fieldPath:
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period_setting",
-        options: ["spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period"],
+        options: [
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.cooling_off_period",
+        ],
       },
       {
         choiceField: "failed_login_activity_choice",
@@ -710,7 +724,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "forbidden_activity_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.forbidden_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.forbidden_activity_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_forbidden_activity",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_forbidden_activity",
@@ -718,7 +733,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ip_reputation_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.ip_reputation_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.ip_reputation_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_ip_reputation",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_ip_reputation",
@@ -736,7 +752,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "rate_limit_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.rate_limit_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.rate_limit_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_rate_limit",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_rate_limit",
@@ -744,7 +761,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "waf_activity_choice",
-        fieldPath: "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.waf_activity_choice",
+        fieldPath:
+          "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.waf_activity_choice",
         options: [
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.exclude_waf_activity",
           "spec.app_type_settings[].user_behavior_analysis_setting.enable_detection.include_waf_activity",
@@ -839,7 +857,10 @@ export const service_meshTools: ParsedOperation[] = [
       {
         choiceField: "learn_from_redirect_traffic",
         fieldPath: "spec.business_logic_markup_setting.learn_from_redirect_traffic",
-        options: ["spec.business_logic_markup_setting.disable", "spec.business_logic_markup_setting.enable"],
+        options: [
+          "spec.business_logic_markup_setting.disable",
+          "spec.business_logic_markup_setting.enable",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -1024,7 +1045,8 @@ export const service_meshTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1168,7 +1190,10 @@ export const service_meshTools: ParsedOperation[] = [
       {
         choiceField: "learn_from_redirect_traffic",
         fieldPath: "spec.business_logic_markup_setting.learn_from_redirect_traffic",
-        options: ["spec.business_logic_markup_setting.disable", "spec.business_logic_markup_setting.enable"],
+        options: [
+          "spec.business_logic_markup_setting.disable",
+          "spec.business_logic_markup_setting.enable",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -1188,7 +1213,8 @@ export const service_meshTools: ParsedOperation[] = [
     domain: "service_mesh",
     resource: "endpoint",
     summary: "Create Endpoint.",
-    description: "Create endpoint will create the object in the storage backend for namespace metadata.namespace.",
+    description:
+      "Create endpoint will create the object in the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -1279,7 +1305,10 @@ export const service_meshTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -1367,7 +1396,8 @@ export const service_meshTools: ParsedOperation[] = [
     domain: "service_mesh",
     resource: "endpoint",
     summary: "GET Endpoint.",
-    description: "GET endpoint will GET the object from the storage backend for namespace metadata.namespace.",
+    description:
+      "GET endpoint will GET the object from the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1464,7 +1494,8 @@ export const service_meshTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1638,7 +1669,10 @@ export const service_meshTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -1710,7 +1744,8 @@ export const service_meshTools: ParsedOperation[] = [
     domain: "service_mesh",
     resource: "learnt-schema",
     summary: "GET Learnt Schema per API endpoint.",
-    description: "GET Learnt Schema per API endpoint for a given auto discovered API endpoint for Service.",
+    description:
+      "GET Learnt Schema per API endpoint for a given auto discovered API endpoint for Service.",
     pathParameters: [
       {
         description: "App Type\nApp Type for current request.",
@@ -2034,7 +2069,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].disable_ocsp_stapling",
@@ -2043,7 +2079,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.clear_secret_info",
@@ -2093,7 +2130,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].disable_ocsp_stapling",
@@ -2153,7 +2191,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].disable_ocsp_stapling",
@@ -2162,7 +2201,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.clear_secret_info",
@@ -2212,7 +2252,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].disable_ocsp_stapling",
@@ -2221,7 +2262,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.clear_secret_info",
@@ -2264,12 +2306,18 @@ export const service_meshTools: ParsedOperation[] = [
       {
         choiceField: "ami_choice",
         fieldPath: "spec.palo_alto_fw_service.ami_choice",
-        options: ["spec.palo_alto_fw_service.pan_ami_bundle1", "spec.palo_alto_fw_service.pan_ami_bundle2"],
+        options: [
+          "spec.palo_alto_fw_service.pan_ami_bundle1",
+          "spec.palo_alto_fw_service.pan_ami_bundle2",
+        ],
       },
       {
         choiceField: "panaroma_connection",
         fieldPath: "spec.palo_alto_fw_service.panaroma_connection",
-        options: ["spec.palo_alto_fw_service.disable_panaroma", "spec.palo_alto_fw_service.panorama_server"],
+        options: [
+          "spec.palo_alto_fw_service.disable_panaroma",
+          "spec.palo_alto_fw_service.panorama_server",
+        ],
       },
       {
         choiceField: "setup_options",
@@ -2291,7 +2339,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.secret_info_oneof",
+        fieldPath:
+          "spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.secret_info_oneof",
         options: [
           "spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.blindfold_secret_info",
           "spec.palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key.clear_secret_info",
@@ -2504,7 +2553,8 @@ export const service_meshTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2728,7 +2778,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].disable_ocsp_stapling",
@@ -2737,7 +2788,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.clear_secret_info",
@@ -2787,7 +2839,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].disable_ocsp_stapling",
@@ -2847,7 +2900,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].disable_ocsp_stapling",
@@ -2856,7 +2910,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.clear_secret_info",
@@ -2906,7 +2961,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].disable_ocsp_stapling",
@@ -2915,7 +2971,8 @@ export const service_meshTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.clear_secret_info",
@@ -3186,7 +3243,8 @@ export const service_meshTools: ParsedOperation[] = [
     domain: "service_mesh",
     resource: "pop",
     summary: "Remove Override.",
-    description: "Remove override for dynamic component for API endpoints discovered for this App type.",
+    description:
+      "Remove override for dynamic component for API endpoints discovered for this App type.",
     pathParameters: [
       {
         description: "App Type\nApp Type for current request.",
@@ -3248,7 +3306,8 @@ export const service_meshTools: ParsedOperation[] = [
     domain: "service_mesh",
     resource: "push",
     summary: "Add Override.",
-    description: "Add override for dynamic component for API endpoints discovered for this App type.",
+    description:
+      "Add override for dynamic component for API endpoints discovered for this App type.",
     pathParameters: [
       {
         description: "App Type\nApp Type for current request.",
@@ -3636,7 +3695,8 @@ export const service_meshTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4286,7 +4346,8 @@ export const service_meshTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
