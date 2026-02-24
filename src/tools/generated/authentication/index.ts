@@ -392,7 +392,8 @@ export const authenticationTools: ParsedOperation[] = [
         "x-displayname": "Name",
       },
       {
-        description: 'Namespace\nNamespace of the service credential user.\nValue of namespace is always "system".',
+        description:
+          'Namespace\nNamespace of the service credential user.\nValue of namespace is always "system".',
         in: "path",
         name: "namespace",
         required: true,
