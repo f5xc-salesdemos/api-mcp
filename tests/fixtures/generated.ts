@@ -5,7 +5,7 @@
  * These fixtures are dynamically generated from the current OpenAPI specs
  * to ensure tests always use real values and don't hardcode spec content.
  *
- * Generated at: 2026-02-19T18:22:44.941Z
+ * Generated at: 2026-02-25T01:08:39.672Z
  * Total tools: 1536
  * Total domains: 37
  */
@@ -190,7 +190,13 @@ export const SAMPLE_TOOLS_BY_OPERATION = {
 /**
  * Sample resources
  */
-export const SAMPLE_RESOURCES = ["static-component", "allocateip", "api-crawler", "api-credential", "apm"] as const;
+export const SAMPLE_RESOURCES = [
+  "static-component",
+  "allocateip",
+  "api-crawler",
+  "api-credential",
+  "apm",
+] as const;
 
 /**
  * First available tool (for basic tests)
@@ -238,7 +244,9 @@ export function getValidDomain(): string {
 /**
  * Helper to get sample tool for a specific operation type
  */
-export function getSampleToolByOperation(operation: "create" | "get" | "list" | "delete" | "update"): {
+export function getSampleToolByOperation(
+  operation: "create" | "get" | "list" | "delete" | "update"
+): {
   toolName: string;
   domain: string;
   resource: string;
@@ -248,13 +256,7 @@ export function getSampleToolByOperation(operation: "create" | "get" | "list" | 
     (
       SAMPLE_TOOLS_BY_OPERATION as Record<
         string,
-        | {
-            toolName: string;
-            domain: string;
-            resource: string;
-            operation: string;
-          }
-        | undefined
+        { toolName: string; domain: string; resource: string; operation: string } | undefined
       >
     )[operation] ?? null
   );

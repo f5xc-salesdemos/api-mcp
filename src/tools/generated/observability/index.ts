@@ -144,7 +144,8 @@ export const observabilityTools: ParsedOperation[] = [
         "x-displayname": "Inactive",
       },
       {
-        description: "Show inhibited alerts - alerts that are suppressed if certain other alerts are firing.",
+        description:
+          "Show inhibited alerts - alerts that are suppressed if certain other alerts are firing.",
         in: "query",
         name: "inhibited",
         required: false,
@@ -234,7 +235,8 @@ export const observabilityTools: ParsedOperation[] = [
         "x-displayname": "Inactive",
       },
       {
-        description: "Show inhibited alerts - alerts that are suppressed if certain other alerts are firing.",
+        description:
+          "Show inhibited alerts - alerts that are suppressed if certain other alerts are firing.",
         in: "query",
         name: "inhibited",
         required: false,
@@ -373,7 +375,8 @@ export const observabilityTools: ParsedOperation[] = [
       $ref: "#/components/schemas/synthetic_monitorGetCertificateReportDetailResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.observability.synthetic_monitor.CustomAPI.GetCertificateReportDetail",
+    operationId:
+      "ves.io.schema.observability.synthetic_monitor.CustomAPI.GetCertificateReportDetail",
     tags: ["Observability"],
     sourceFile: "domains/observability.json",
     displayName: null,
@@ -597,7 +600,8 @@ export const observabilityTools: ParsedOperation[] = [
         "x-displayname": "Filter",
       },
       {
-        description: "Limit. X-example: 10\nLimits the number of items to return per page. (default: 100)",
+        description:
+          "Limit. X-example: 10\nLimits the number of items to return per page. (default: 100)",
         in: "query",
         name: "limit",
         required: false,
@@ -608,7 +612,8 @@ export const observabilityTools: ParsedOperation[] = [
         "x-displayname": "Limit",
       },
       {
-        description: "Page. X-example: 5\nThe number of page to return. Ignore if limit parameter is absent.",
+        description:
+          "Page. X-example: 5\nThe number of page to return. Ignore if limit parameter is absent.",
         in: "query",
         name: "page",
         required: false,
@@ -634,7 +639,8 @@ export const observabilityTools: ParsedOperation[] = [
       $ref: "#/components/schemas/v1_dns_monitorGetFilteredDNSMonitorListResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.observability.synthetic_monitor.v1_dns_monitor.CustomAPI.GetFilteredDNSMonitorList",
+    operationId:
+      "ves.io.schema.observability.synthetic_monitor.v1_dns_monitor.CustomAPI.GetFilteredDNSMonitorList",
     tags: ["Observability"],
     sourceFile: "domains/observability.json",
     displayName: null,
@@ -683,7 +689,8 @@ export const observabilityTools: ParsedOperation[] = [
         "x-displayname": "Filter",
       },
       {
-        description: "Limit. X-example: 10\nLimits the number of items to return per page. (default: 100)",
+        description:
+          "Limit. X-example: 10\nLimits the number of items to return per page. (default: 100)",
         in: "query",
         name: "limit",
         required: false,
@@ -694,7 +701,8 @@ export const observabilityTools: ParsedOperation[] = [
         "x-displayname": "Limit",
       },
       {
-        description: "Page. X-example: 5\nThe number of page to return. Ignore if limit parameter is absent.",
+        description:
+          "Page. X-example: 5\nThe number of page to return. Ignore if limit parameter is absent.",
         in: "query",
         name: "page",
         required: false,
@@ -720,7 +728,8 @@ export const observabilityTools: ParsedOperation[] = [
       $ref: "#/components/schemas/v1_http_monitorGetFilteredHTTPMonitorListResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.observability.synthetic_monitor.v1_http_monitor.CustomAPI.GetFilteredHTTPMonitorList",
+    operationId:
+      "ves.io.schema.observability.synthetic_monitor.v1_http_monitor.CustomAPI.GetFilteredHTTPMonitorList",
     tags: ["Observability"],
     sourceFile: "domains/observability.json",
     displayName: null,
@@ -874,7 +883,8 @@ export const observabilityTools: ParsedOperation[] = [
     domain: "observability",
     resource: "global-summary",
     summary: "GET Global Summary.",
-    description: "Returns a healthy and critical count of all monitors in namespace, based on monitor type.",
+    description:
+      "Returns a healthy and critical count of all monitors in namespace, based on monitor type.",
     pathParameters: [
       {
         description: "Namespace\nRequest namespace.",
@@ -1616,7 +1626,8 @@ export const observabilityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Long Base-64 encoded string which can be used to retrieve next batch of log messages.",
+        description:
+          "Long Base-64 encoded string which can be used to retrieve next batch of log messages.",
         in: "query",
         name: "scroll_id",
         required: false,
@@ -1655,7 +1666,8 @@ export const observabilityTools: ParsedOperation[] = [
     domain: "observability",
     resource: "source-summary",
     summary: "GET Source Summary.",
-    description: "Returns the healthy and critical status count, latency, and coordinates for each source region.",
+    description:
+      "Returns the healthy and critical status count, latency, and coordinates for each source region.",
     pathParameters: [
       {
         description: "Namespace\nRequest namespace.",
@@ -1769,7 +1781,8 @@ export const observabilityTools: ParsedOperation[] = [
     domain: "observability",
     resource: "suggest-value",
     summary: "Suggest Values.",
-    description: "Returns suggested values for the specified field in the given Create/Replace/Custom request.",
+    description:
+      "Returns suggested values for the specified field in the given Create/Replace/Custom request.",
     pathParameters: [
       {
         description: "Namespace\nNamespace in which the suggestions are scoped.",
@@ -2091,17 +2104,26 @@ export const observabilityTools: ParsedOperation[] = [
       {
         choiceField: "dynamic_threshold_policy",
         fieldPath: "spec.health_policy.dynamic_threshold_policy",
-        options: ["spec.health_policy.dynamic_threshold", "spec.health_policy.dynamic_threshold_disabled"],
+        options: [
+          "spec.health_policy.dynamic_threshold",
+          "spec.health_policy.dynamic_threshold_disabled",
+        ],
       },
       {
         choiceField: "static_max_threshold_policy",
         fieldPath: "spec.health_policy.static_max_threshold_policy",
-        options: ["spec.health_policy.static_max_threshold", "spec.health_policy.static_max_threshold_disabled"],
+        options: [
+          "spec.health_policy.static_max_threshold",
+          "spec.health_policy.static_max_threshold_disabled",
+        ],
       },
       {
         choiceField: "static_min_threshold_policy",
         fieldPath: "spec.health_policy.static_min_threshold_policy",
-        options: ["spec.health_policy.static_min_threshold", "spec.health_policy.static_min_threshold_disabled"],
+        options: [
+          "spec.health_policy.static_min_threshold",
+          "spec.health_policy.static_min_threshold_disabled",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -2265,7 +2287,8 @@ export const observabilityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2426,17 +2449,26 @@ export const observabilityTools: ParsedOperation[] = [
       {
         choiceField: "dynamic_threshold_policy",
         fieldPath: "spec.health_policy.dynamic_threshold_policy",
-        options: ["spec.health_policy.dynamic_threshold", "spec.health_policy.dynamic_threshold_disabled"],
+        options: [
+          "spec.health_policy.dynamic_threshold",
+          "spec.health_policy.dynamic_threshold_disabled",
+        ],
       },
       {
         choiceField: "static_max_threshold_policy",
         fieldPath: "spec.health_policy.static_max_threshold_policy",
-        options: ["spec.health_policy.static_max_threshold", "spec.health_policy.static_max_threshold_disabled"],
+        options: [
+          "spec.health_policy.static_max_threshold",
+          "spec.health_policy.static_max_threshold_disabled",
+        ],
       },
       {
         choiceField: "static_min_threshold_policy",
         fieldPath: "spec.health_policy.static_min_threshold_policy",
-        options: ["spec.health_policy.static_min_threshold", "spec.health_policy.static_min_threshold_disabled"],
+        options: [
+          "spec.health_policy.static_min_threshold",
+          "spec.health_policy.static_min_threshold_disabled",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -2525,7 +2557,15 @@ export const observabilityTools: ParsedOperation[] = [
       {
         choiceField: "method",
         fieldPath: "spec.method",
-        options: ["spec.delete", "spec.get", "spec.head", "spec.options", "spec.patch", "spec.post", "spec.put"],
+        options: [
+          "spec.delete",
+          "spec.get",
+          "spec.head",
+          "spec.options",
+          "spec.patch",
+          "spec.post",
+          "spec.put",
+        ],
       },
       {
         choiceField: "source_choice",
@@ -2535,17 +2575,26 @@ export const observabilityTools: ParsedOperation[] = [
       {
         choiceField: "dynamic_threshold_policy",
         fieldPath: "spec.health_policy.dynamic_threshold_policy",
-        options: ["spec.health_policy.dynamic_threshold", "spec.health_policy.dynamic_threshold_disabled"],
+        options: [
+          "spec.health_policy.dynamic_threshold",
+          "spec.health_policy.dynamic_threshold_disabled",
+        ],
       },
       {
         choiceField: "static_max_threshold_policy",
         fieldPath: "spec.health_policy.static_max_threshold_policy",
-        options: ["spec.health_policy.static_max_threshold", "spec.health_policy.static_max_threshold_disabled"],
+        options: [
+          "spec.health_policy.static_max_threshold",
+          "spec.health_policy.static_max_threshold_disabled",
+        ],
       },
       {
         choiceField: "static_min_threshold_policy",
         fieldPath: "spec.health_policy.static_min_threshold_policy",
-        options: ["spec.health_policy.static_min_threshold", "spec.health_policy.static_min_threshold_disabled"],
+        options: [
+          "spec.health_policy.static_min_threshold",
+          "spec.health_policy.static_min_threshold_disabled",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -2709,7 +2758,8 @@ export const observabilityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2860,7 +2910,15 @@ export const observabilityTools: ParsedOperation[] = [
       {
         choiceField: "method",
         fieldPath: "spec.method",
-        options: ["spec.delete", "spec.get", "spec.head", "spec.options", "spec.patch", "spec.post", "spec.put"],
+        options: [
+          "spec.delete",
+          "spec.get",
+          "spec.head",
+          "spec.options",
+          "spec.patch",
+          "spec.post",
+          "spec.put",
+        ],
       },
       {
         choiceField: "source_choice",
@@ -2870,17 +2928,26 @@ export const observabilityTools: ParsedOperation[] = [
       {
         choiceField: "dynamic_threshold_policy",
         fieldPath: "spec.health_policy.dynamic_threshold_policy",
-        options: ["spec.health_policy.dynamic_threshold", "spec.health_policy.dynamic_threshold_disabled"],
+        options: [
+          "spec.health_policy.dynamic_threshold",
+          "spec.health_policy.dynamic_threshold_disabled",
+        ],
       },
       {
         choiceField: "static_max_threshold_policy",
         fieldPath: "spec.health_policy.static_max_threshold_policy",
-        options: ["spec.health_policy.static_max_threshold", "spec.health_policy.static_max_threshold_disabled"],
+        options: [
+          "spec.health_policy.static_max_threshold",
+          "spec.health_policy.static_max_threshold_disabled",
+        ],
       },
       {
         choiceField: "static_min_threshold_policy",
         fieldPath: "spec.health_policy.static_min_threshold_policy",
-        options: ["spec.health_policy.static_min_threshold", "spec.health_policy.static_min_threshold_disabled"],
+        options: [
+          "spec.health_policy.static_min_threshold",
+          "spec.health_policy.static_min_threshold_disabled",
+        ],
       },
     ],
     subscriptionRequirements: [],
