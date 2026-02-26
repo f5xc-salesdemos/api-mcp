@@ -272,7 +272,8 @@ export const rate_limitingTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -712,7 +713,8 @@ export const rate_limitingTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -893,7 +895,8 @@ export const rate_limitingTools: ParsedOperation[] = [
     domain: "rate_limiting",
     resource: "rate-limiter",
     summary: "Create Rate Limiter.",
-    description: "Create rate_limiter creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create rate_limiter creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -1068,7 +1071,8 @@ export const rate_limitingTools: ParsedOperation[] = [
     domain: "rate_limiting",
     resource: "rate-limiter",
     summary: "GET Rate Limiter.",
-    description: "GET rate_limiter reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET rate_limiter reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1171,7 +1175,8 @@ export const rate_limitingTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1249,7 +1254,8 @@ export const rate_limitingTools: ParsedOperation[] = [
     domain: "rate_limiting",
     resource: "rate-limiter",
     summary: "Replace Rate Limiter.",
-    description: "Replace rate_limiter replaces an existing object in the storage backend for metadata.namespace.",
+    description:
+      "Replace rate_limiter replaces an existing object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",

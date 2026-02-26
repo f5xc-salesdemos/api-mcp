@@ -128,12 +128,20 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "blocked_services_choice",
         fieldPath: "spec.blocked_services_choice",
-        options: ["spec.block_all_services", "spec.blocked_services", "spec.default_blocked_services"],
+        options: [
+          "spec.block_all_services",
+          "spec.blocked_services",
+          "spec.default_blocked_services",
+        ],
       },
       {
         choiceField: "direct_connect_choice",
         fieldPath: "spec.direct_connect_choice",
-        options: ["spec.direct_connect_disabled", "spec.direct_connect_enabled", "spec.private_connectivity"],
+        options: [
+          "spec.direct_connect_disabled",
+          "spec.direct_connect_enabled",
+          "spec.private_connectivity",
+        ],
       },
       {
         choiceField: "logs_receiver_choice",
@@ -148,12 +156,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.aws_parameters.internet_vip_choice",
-        options: ["spec.aws_parameters.disable_internet_vip", "spec.aws_parameters.enable_internet_vip"],
+        options: [
+          "spec.aws_parameters.disable_internet_vip",
+          "spec.aws_parameters.enable_internet_vip",
+        ],
       },
       {
         choiceField: "security_group_choice",
         fieldPath: "spec.aws_parameters.security_group_choice",
-        options: ["spec.aws_parameters.custom_security_group", "spec.aws_parameters.f5xc_security_group"],
+        options: [
+          "spec.aws_parameters.custom_security_group",
+          "spec.aws_parameters.f5xc_security_group",
+        ],
       },
       {
         choiceField: "service_vpc_choice",
@@ -222,12 +236,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "asn_choice",
         fieldPath: "spec.aws_parameters.new_tgw.asn_choice",
-        options: ["spec.aws_parameters.new_tgw.system_generated", "spec.aws_parameters.new_tgw.user_assigned"],
+        options: [
+          "spec.aws_parameters.new_tgw.system_generated",
+          "spec.aws_parameters.new_tgw.user_assigned",
+        ],
       },
       {
         choiceField: "name_choice",
         fieldPath: "spec.aws_parameters.new_vpc.name_choice",
-        options: ["spec.aws_parameters.new_vpc.autogenerate", "spec.aws_parameters.new_vpc.name_tag"],
+        options: [
+          "spec.aws_parameters.new_vpc.autogenerate",
+          "spec.aws_parameters.new_vpc.name_tag",
+        ],
       },
       {
         choiceField: "blocked_services_value_type_choice",
@@ -246,7 +266,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "vif_choice",
         fieldPath: "spec.direct_connect_enabled.vif_choice",
-        options: ["spec.direct_connect_enabled.hosted_vifs", "spec.direct_connect_enabled.standard_vifs"],
+        options: [
+          "spec.direct_connect_enabled.hosted_vifs",
+          "spec.direct_connect_enabled.standard_vifs",
+        ],
       },
       {
         choiceField: "connectivity_options",
@@ -274,12 +297,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -373,7 +400,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.vn_config.outside_static_route_choice",
-        options: ["spec.vn_config.no_outside_static_routes", "spec.vn_config.outside_static_routes"],
+        options: [
+          "spec.vn_config.no_outside_static_routes",
+          "spec.vn_config.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
@@ -404,7 +434,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.vn_config.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.vn_config.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.vn_config.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.vn_config.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -412,7 +443,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.vn_config.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.vn_config.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -434,7 +466,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.vn_config.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.vn_config.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.vn_config.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.vn_config.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -459,7 +492,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.vn_config.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.vn_config.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.vn_config.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.vn_config.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -648,7 +682,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -791,12 +826,20 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "blocked_services_choice",
         fieldPath: "spec.blocked_services_choice",
-        options: ["spec.block_all_services", "spec.blocked_services", "spec.default_blocked_services"],
+        options: [
+          "spec.block_all_services",
+          "spec.blocked_services",
+          "spec.default_blocked_services",
+        ],
       },
       {
         choiceField: "direct_connect_choice",
         fieldPath: "spec.direct_connect_choice",
-        options: ["spec.direct_connect_disabled", "spec.direct_connect_enabled", "spec.private_connectivity"],
+        options: [
+          "spec.direct_connect_disabled",
+          "spec.direct_connect_enabled",
+          "spec.private_connectivity",
+        ],
       },
       {
         choiceField: "logs_receiver_choice",
@@ -811,12 +854,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.aws_parameters.internet_vip_choice",
-        options: ["spec.aws_parameters.disable_internet_vip", "spec.aws_parameters.enable_internet_vip"],
+        options: [
+          "spec.aws_parameters.disable_internet_vip",
+          "spec.aws_parameters.enable_internet_vip",
+        ],
       },
       {
         choiceField: "security_group_choice",
         fieldPath: "spec.aws_parameters.security_group_choice",
-        options: ["spec.aws_parameters.custom_security_group", "spec.aws_parameters.f5xc_security_group"],
+        options: [
+          "spec.aws_parameters.custom_security_group",
+          "spec.aws_parameters.f5xc_security_group",
+        ],
       },
       {
         choiceField: "service_vpc_choice",
@@ -872,12 +921,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "asn_choice",
         fieldPath: "spec.aws_parameters.new_tgw.asn_choice",
-        options: ["spec.aws_parameters.new_tgw.system_generated", "spec.aws_parameters.new_tgw.user_assigned"],
+        options: [
+          "spec.aws_parameters.new_tgw.system_generated",
+          "spec.aws_parameters.new_tgw.user_assigned",
+        ],
       },
       {
         choiceField: "name_choice",
         fieldPath: "spec.aws_parameters.new_vpc.name_choice",
-        options: ["spec.aws_parameters.new_vpc.autogenerate", "spec.aws_parameters.new_vpc.name_tag"],
+        options: [
+          "spec.aws_parameters.new_vpc.autogenerate",
+          "spec.aws_parameters.new_vpc.name_tag",
+        ],
       },
       {
         choiceField: "blocked_services_value_type_choice",
@@ -896,7 +951,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "vif_choice",
         fieldPath: "spec.direct_connect_enabled.vif_choice",
-        options: ["spec.direct_connect_enabled.hosted_vifs", "spec.direct_connect_enabled.standard_vifs"],
+        options: [
+          "spec.direct_connect_enabled.hosted_vifs",
+          "spec.direct_connect_enabled.standard_vifs",
+        ],
       },
       {
         choiceField: "connectivity_options",
@@ -924,12 +982,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -1013,7 +1075,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.vn_config.outside_static_route_choice",
-        options: ["spec.vn_config.no_outside_static_routes", "spec.vn_config.outside_static_routes"],
+        options: [
+          "spec.vn_config.no_outside_static_routes",
+          "spec.vn_config.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
@@ -1044,7 +1109,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.vn_config.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.vn_config.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.vn_config.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.vn_config.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -1052,7 +1118,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.vn_config.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.vn_config.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -1074,7 +1141,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.vn_config.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.vn_config.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.vn_config.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.vn_config.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -1099,7 +1167,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.vn_config.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.vn_config.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.vn_config.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.vn_config.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -1184,7 +1253,11 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "blocked_services_choice",
         fieldPath: "spec.blocked_services_choice",
-        options: ["spec.block_all_services", "spec.blocked_services", "spec.default_blocked_services"],
+        options: [
+          "spec.block_all_services",
+          "spec.blocked_services",
+          "spec.default_blocked_services",
+        ],
       },
       {
         choiceField: "deployment",
@@ -1194,12 +1267,20 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "direct_connect_choice",
         fieldPath: "spec.direct_connect_choice",
-        options: ["spec.direct_connect_disabled", "spec.direct_connect_enabled", "spec.private_connectivity"],
+        options: [
+          "spec.direct_connect_disabled",
+          "spec.direct_connect_enabled",
+          "spec.private_connectivity",
+        ],
       },
       {
         choiceField: "egress_gateway_choice",
         fieldPath: "spec.egress_gateway_choice",
-        options: ["spec.egress_gateway_default", "spec.egress_nat_gw", "spec.egress_virtual_private_gateway"],
+        options: [
+          "spec.egress_gateway_default",
+          "spec.egress_nat_gw",
+          "spec.egress_virtual_private_gateway",
+        ],
       },
       {
         choiceField: "internet_vip_choice",
@@ -1234,7 +1315,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.admin_password.secret_info_oneof",
-        options: ["spec.admin_password.blindfold_secret_info", "spec.admin_password.clear_secret_info"],
+        options: [
+          "spec.admin_password.blindfold_secret_info",
+          "spec.admin_password.clear_secret_info",
+        ],
       },
       {
         choiceField: "blocked_services_value_type_choice",
@@ -1253,7 +1337,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "vif_choice",
         fieldPath: "spec.direct_connect_enabled.vif_choice",
-        options: ["spec.direct_connect_enabled.hosted_vifs", "spec.direct_connect_enabled.standard_vifs"],
+        options: [
+          "spec.direct_connect_enabled.hosted_vifs",
+          "spec.direct_connect_enabled.standard_vifs",
+        ],
       },
       {
         choiceField: "connectivity_options",
@@ -1302,12 +1389,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.ingress_egress_gw.global_network_choice",
-        options: ["spec.ingress_egress_gw.global_network_list", "spec.ingress_egress_gw.no_global_network"],
+        options: [
+          "spec.ingress_egress_gw.global_network_list",
+          "spec.ingress_egress_gw.no_global_network",
+        ],
       },
       {
         choiceField: "inside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.inside_static_route_choice",
-        options: ["spec.ingress_egress_gw.inside_static_routes", "spec.ingress_egress_gw.no_inside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.inside_static_routes",
+          "spec.ingress_egress_gw.no_inside_static_routes",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -1321,12 +1414,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.outside_static_route_choice",
-        options: ["spec.ingress_egress_gw.no_outside_static_routes", "spec.ingress_egress_gw.outside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.no_outside_static_routes",
+          "spec.ingress_egress_gw.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.ingress_egress_gw.site_mesh_group_choice",
-        options: ["spec.ingress_egress_gw.sm_connection_public_ip", "spec.ingress_egress_gw.sm_connection_pvt_ip"],
+        options: [
+          "spec.ingress_egress_gw.sm_connection_public_ip",
+          "spec.ingress_egress_gw.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "port_choice",
@@ -1384,7 +1483,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -1392,12 +1492,14 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].simple_static_route",
@@ -1414,7 +1516,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -1422,7 +1525,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].simple_static_route",
@@ -1439,7 +1543,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -1455,7 +1560,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -1490,7 +1596,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -1506,12 +1613,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -1543,7 +1654,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.voltstack_cluster.dc_cluster_group_choice",
-        options: ["spec.voltstack_cluster.dc_cluster_group", "spec.voltstack_cluster.no_dc_cluster_group"],
+        options: [
+          "spec.voltstack_cluster.dc_cluster_group",
+          "spec.voltstack_cluster.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -1557,7 +1671,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.voltstack_cluster.global_network_choice",
-        options: ["spec.voltstack_cluster.global_network_list", "spec.voltstack_cluster.no_global_network"],
+        options: [
+          "spec.voltstack_cluster.global_network_list",
+          "spec.voltstack_cluster.no_global_network",
+        ],
       },
       {
         choiceField: "k8s_cluster_choice",
@@ -1576,17 +1693,26 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.voltstack_cluster.outside_static_route_choice",
-        options: ["spec.voltstack_cluster.no_outside_static_routes", "spec.voltstack_cluster.outside_static_routes"],
+        options: [
+          "spec.voltstack_cluster.no_outside_static_routes",
+          "spec.voltstack_cluster.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.voltstack_cluster.site_mesh_group_choice",
-        options: ["spec.voltstack_cluster.sm_connection_public_ip", "spec.voltstack_cluster.sm_connection_pvt_ip"],
+        options: [
+          "spec.voltstack_cluster.sm_connection_public_ip",
+          "spec.voltstack_cluster.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "storage_class_choice",
         fieldPath: "spec.voltstack_cluster.storage_class_choice",
-        options: ["spec.voltstack_cluster.default_storage", "spec.voltstack_cluster.storage_class_list"],
+        options: [
+          "spec.voltstack_cluster.default_storage",
+          "spec.voltstack_cluster.storage_class_list",
+        ],
       },
       {
         choiceField: "port_choice",
@@ -1609,7 +1735,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.voltstack_cluster.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.voltstack_cluster.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -1617,12 +1744,14 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].simple_static_route",
@@ -1639,7 +1768,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -1838,7 +1968,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1981,7 +2112,11 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "blocked_services_choice",
         fieldPath: "spec.blocked_services_choice",
-        options: ["spec.block_all_services", "spec.blocked_services", "spec.default_blocked_services"],
+        options: [
+          "spec.block_all_services",
+          "spec.blocked_services",
+          "spec.default_blocked_services",
+        ],
       },
       {
         choiceField: "deployment",
@@ -1991,12 +2126,20 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "direct_connect_choice",
         fieldPath: "spec.direct_connect_choice",
-        options: ["spec.direct_connect_disabled", "spec.direct_connect_enabled", "spec.private_connectivity"],
+        options: [
+          "spec.direct_connect_disabled",
+          "spec.direct_connect_enabled",
+          "spec.private_connectivity",
+        ],
       },
       {
         choiceField: "egress_gateway_choice",
         fieldPath: "spec.egress_gateway_choice",
-        options: ["spec.egress_gateway_default", "spec.egress_nat_gw", "spec.egress_virtual_private_gateway"],
+        options: [
+          "spec.egress_gateway_default",
+          "spec.egress_nat_gw",
+          "spec.egress_virtual_private_gateway",
+        ],
       },
       {
         choiceField: "internet_vip_choice",
@@ -2040,7 +2183,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "vif_choice",
         fieldPath: "spec.direct_connect_enabled.vif_choice",
-        options: ["spec.direct_connect_enabled.hosted_vifs", "spec.direct_connect_enabled.standard_vifs"],
+        options: [
+          "spec.direct_connect_enabled.hosted_vifs",
+          "spec.direct_connect_enabled.standard_vifs",
+        ],
       },
       {
         choiceField: "connectivity_options",
@@ -2089,12 +2235,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.ingress_egress_gw.global_network_choice",
-        options: ["spec.ingress_egress_gw.global_network_list", "spec.ingress_egress_gw.no_global_network"],
+        options: [
+          "spec.ingress_egress_gw.global_network_list",
+          "spec.ingress_egress_gw.no_global_network",
+        ],
       },
       {
         choiceField: "inside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.inside_static_route_choice",
-        options: ["spec.ingress_egress_gw.inside_static_routes", "spec.ingress_egress_gw.no_inside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.inside_static_routes",
+          "spec.ingress_egress_gw.no_inside_static_routes",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -2108,12 +2260,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.outside_static_route_choice",
-        options: ["spec.ingress_egress_gw.no_outside_static_routes", "spec.ingress_egress_gw.outside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.no_outside_static_routes",
+          "spec.ingress_egress_gw.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.ingress_egress_gw.site_mesh_group_choice",
-        options: ["spec.ingress_egress_gw.sm_connection_public_ip", "spec.ingress_egress_gw.sm_connection_pvt_ip"],
+        options: [
+          "spec.ingress_egress_gw.sm_connection_public_ip",
+          "spec.ingress_egress_gw.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "port_choice",
@@ -2171,7 +2329,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -2179,12 +2338,14 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].simple_static_route",
@@ -2201,7 +2362,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -2209,7 +2371,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].simple_static_route",
@@ -2226,7 +2389,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -2242,7 +2406,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -2277,7 +2442,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -2293,12 +2459,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -2320,7 +2490,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.voltstack_cluster.dc_cluster_group_choice",
-        options: ["spec.voltstack_cluster.dc_cluster_group", "spec.voltstack_cluster.no_dc_cluster_group"],
+        options: [
+          "spec.voltstack_cluster.dc_cluster_group",
+          "spec.voltstack_cluster.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -2334,7 +2507,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.voltstack_cluster.global_network_choice",
-        options: ["spec.voltstack_cluster.global_network_list", "spec.voltstack_cluster.no_global_network"],
+        options: [
+          "spec.voltstack_cluster.global_network_list",
+          "spec.voltstack_cluster.no_global_network",
+        ],
       },
       {
         choiceField: "k8s_cluster_choice",
@@ -2353,12 +2529,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.voltstack_cluster.outside_static_route_choice",
-        options: ["spec.voltstack_cluster.no_outside_static_routes", "spec.voltstack_cluster.outside_static_routes"],
+        options: [
+          "spec.voltstack_cluster.no_outside_static_routes",
+          "spec.voltstack_cluster.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.voltstack_cluster.site_mesh_group_choice",
-        options: ["spec.voltstack_cluster.sm_connection_public_ip", "spec.voltstack_cluster.sm_connection_pvt_ip"],
+        options: [
+          "spec.voltstack_cluster.sm_connection_public_ip",
+          "spec.voltstack_cluster.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "port_choice",
@@ -2381,7 +2563,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.voltstack_cluster.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.voltstack_cluster.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -2389,12 +2572,14 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].simple_static_route",
@@ -2411,7 +2596,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -2506,7 +2692,11 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "blocked_services_choice",
         fieldPath: "spec.blocked_services_choice",
-        options: ["spec.block_all_services", "spec.blocked_services", "spec.default_blocked_services"],
+        options: [
+          "spec.block_all_services",
+          "spec.blocked_services",
+          "spec.default_blocked_services",
+        ],
       },
       {
         choiceField: "deployment",
@@ -2543,7 +2733,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.admin_password.secret_info_oneof",
-        options: ["spec.admin_password.blindfold_secret_info", "spec.admin_password.clear_secret_info"],
+        options: [
+          "spec.admin_password.blindfold_secret_info",
+          "spec.admin_password.clear_secret_info",
+        ],
       },
       {
         choiceField: "blocked_services_value_type_choice",
@@ -2575,7 +2768,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.ingress_egress_gw.global_network_choice",
-        options: ["spec.ingress_egress_gw.global_network_list", "spec.ingress_egress_gw.no_global_network"],
+        options: [
+          "spec.ingress_egress_gw.global_network_list",
+          "spec.ingress_egress_gw.no_global_network",
+        ],
       },
       {
         choiceField: "hub_choice",
@@ -2585,7 +2781,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "inside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.inside_static_route_choice",
-        options: ["spec.ingress_egress_gw.inside_static_routes", "spec.ingress_egress_gw.no_inside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.inside_static_routes",
+          "spec.ingress_egress_gw.no_inside_static_routes",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -2599,12 +2798,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.outside_static_route_choice",
-        options: ["spec.ingress_egress_gw.no_outside_static_routes", "spec.ingress_egress_gw.outside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.no_outside_static_routes",
+          "spec.ingress_egress_gw.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.ingress_egress_gw.site_mesh_group_choice",
-        options: ["spec.ingress_egress_gw.sm_connection_public_ip", "spec.ingress_egress_gw.sm_connection_pvt_ip"],
+        options: [
+          "spec.ingress_egress_gw.sm_connection_public_ip",
+          "spec.ingress_egress_gw.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "accelerated_networking",
@@ -2648,7 +2853,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -2656,7 +2862,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -2703,7 +2910,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "subscription_choice",
-        fieldPath: "spec.ingress_egress_gw.hub.express_route_enabled.connections[].subscription_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.hub.express_route_enabled.connections[].subscription_choice",
         options: [
           "spec.ingress_egress_gw.hub.express_route_enabled.connections[].circuit_id",
           "spec.ingress_egress_gw.hub.express_route_enabled.connections[].other_subscription",
@@ -2729,7 +2937,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "resource_group_choice",
-        fieldPath: "spec.ingress_egress_gw.hub.express_route_enabled.gateway_subnet.subnet.resource_group_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.hub.express_route_enabled.gateway_subnet.subnet.resource_group_choice",
         options: [
           "spec.ingress_egress_gw.hub.express_route_enabled.gateway_subnet.subnet.subnet_resource_grp",
           "spec.ingress_egress_gw.hub.express_route_enabled.gateway_subnet.subnet.vnet_resource_group",
@@ -2746,7 +2955,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "resource_group_choice",
-        fieldPath: "spec.ingress_egress_gw.hub.express_route_enabled.route_server_subnet.subnet.resource_group_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.hub.express_route_enabled.route_server_subnet.subnet.resource_group_choice",
         options: [
           "spec.ingress_egress_gw.hub.express_route_enabled.route_server_subnet.subnet.subnet_resource_grp",
           "spec.ingress_egress_gw.hub.express_route_enabled.route_server_subnet.subnet.vnet_resource_group",
@@ -2755,7 +2965,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "routing_choice",
         fieldPath: "spec.ingress_egress_gw.hub.spoke_vnets[].routing_choice",
-        options: ["spec.ingress_egress_gw.hub.spoke_vnets[].auto", "spec.ingress_egress_gw.hub.spoke_vnets[].manual"],
+        options: [
+          "spec.ingress_egress_gw.hub.spoke_vnets[].auto",
+          "spec.ingress_egress_gw.hub.spoke_vnets[].manual",
+        ],
       },
       {
         choiceField: "routing_type",
@@ -2767,7 +2980,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].simple_static_route",
@@ -2784,7 +2998,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -2792,7 +3007,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].simple_static_route",
@@ -2809,7 +3025,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -2825,7 +3042,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -2852,7 +3070,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.ingress_egress_gw_ar.global_network_choice",
-        options: ["spec.ingress_egress_gw_ar.global_network_list", "spec.ingress_egress_gw_ar.no_global_network"],
+        options: [
+          "spec.ingress_egress_gw_ar.global_network_list",
+          "spec.ingress_egress_gw_ar.no_global_network",
+        ],
       },
       {
         choiceField: "hub_choice",
@@ -2902,7 +3123,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -2910,7 +3132,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -2957,7 +3180,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "subscription_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.hub.express_route_enabled.connections[].subscription_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.hub.express_route_enabled.connections[].subscription_choice",
         options: [
           "spec.ingress_egress_gw_ar.hub.express_route_enabled.connections[].circuit_id",
           "spec.ingress_egress_gw_ar.hub.express_route_enabled.connections[].other_subscription",
@@ -2983,7 +3207,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "resource_group_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet.subnet.resource_group_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet.subnet.resource_group_choice",
         options: [
           "spec.ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet.subnet.subnet_resource_grp",
           "spec.ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet.subnet.vnet_resource_group",
@@ -3025,7 +3250,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.inside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.inside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw_ar.inside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw_ar.inside_static_routes.static_route_list[].simple_static_route",
@@ -3083,7 +3309,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw_ar.outside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw_ar.outside_static_routes.static_route_list[].simple_static_route",
@@ -3117,7 +3344,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_egress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_egress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -3126,7 +3354,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "accelerated_networking",
         fieldPath: "spec.ingress_gw.accelerated_networking.accelerated_networking",
-        options: ["spec.ingress_gw.accelerated_networking.disable", "spec.ingress_gw.accelerated_networking.enable"],
+        options: [
+          "spec.ingress_gw.accelerated_networking.disable",
+          "spec.ingress_gw.accelerated_networking.enable",
+        ],
       },
       {
         choiceField: "choice",
@@ -3154,7 +3385,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -3171,7 +3403,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.ingress_gw_ar.node.local_subnet.choice",
-        options: ["spec.ingress_gw_ar.node.local_subnet.subnet", "spec.ingress_gw_ar.node.local_subnet.subnet_param"],
+        options: [
+          "spec.ingress_gw_ar.node.local_subnet.subnet",
+          "spec.ingress_gw_ar.node.local_subnet.subnet_param",
+        ],
       },
       {
         choiceField: "resource_group_choice",
@@ -3191,7 +3426,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -3207,12 +3443,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -3244,7 +3484,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "routing_type",
         fieldPath: "spec.vnet.existing_vnet.routing_type",
-        options: ["spec.vnet.existing_vnet.f5_orchestrated_routing", "spec.vnet.existing_vnet.manual_routing"],
+        options: [
+          "spec.vnet.existing_vnet.f5_orchestrated_routing",
+          "spec.vnet.existing_vnet.manual_routing",
+        ],
       },
       {
         choiceField: "name_choice",
@@ -3254,7 +3497,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.voltstack_cluster.dc_cluster_group_choice",
-        options: ["spec.voltstack_cluster.dc_cluster_group", "spec.voltstack_cluster.no_dc_cluster_group"],
+        options: [
+          "spec.voltstack_cluster.dc_cluster_group",
+          "spec.voltstack_cluster.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -3268,7 +3514,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.voltstack_cluster.global_network_choice",
-        options: ["spec.voltstack_cluster.global_network_list", "spec.voltstack_cluster.no_global_network"],
+        options: [
+          "spec.voltstack_cluster.global_network_list",
+          "spec.voltstack_cluster.no_global_network",
+        ],
       },
       {
         choiceField: "k8s_cluster_choice",
@@ -3287,17 +3536,26 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.voltstack_cluster.outside_static_route_choice",
-        options: ["spec.voltstack_cluster.no_outside_static_routes", "spec.voltstack_cluster.outside_static_routes"],
+        options: [
+          "spec.voltstack_cluster.no_outside_static_routes",
+          "spec.voltstack_cluster.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.voltstack_cluster.site_mesh_group_choice",
-        options: ["spec.voltstack_cluster.sm_connection_public_ip", "spec.voltstack_cluster.sm_connection_pvt_ip"],
+        options: [
+          "spec.voltstack_cluster.sm_connection_public_ip",
+          "spec.voltstack_cluster.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "storage_class_choice",
         fieldPath: "spec.voltstack_cluster.storage_class_choice",
-        options: ["spec.voltstack_cluster.default_storage", "spec.voltstack_cluster.storage_class_list"],
+        options: [
+          "spec.voltstack_cluster.default_storage",
+          "spec.voltstack_cluster.storage_class_list",
+        ],
       },
       {
         choiceField: "accelerated_networking",
@@ -3325,7 +3583,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.voltstack_cluster.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.voltstack_cluster.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -3333,12 +3592,14 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].simple_static_route",
@@ -3355,7 +3616,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -3364,7 +3626,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.voltstack_cluster_ar.dc_cluster_group_choice",
-        options: ["spec.voltstack_cluster_ar.dc_cluster_group", "spec.voltstack_cluster_ar.no_dc_cluster_group"],
+        options: [
+          "spec.voltstack_cluster_ar.dc_cluster_group",
+          "spec.voltstack_cluster_ar.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -3378,12 +3643,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.voltstack_cluster_ar.global_network_choice",
-        options: ["spec.voltstack_cluster_ar.global_network_list", "spec.voltstack_cluster_ar.no_global_network"],
+        options: [
+          "spec.voltstack_cluster_ar.global_network_list",
+          "spec.voltstack_cluster_ar.no_global_network",
+        ],
       },
       {
         choiceField: "k8s_cluster_choice",
         fieldPath: "spec.voltstack_cluster_ar.k8s_cluster_choice",
-        options: ["spec.voltstack_cluster_ar.k8s_cluster", "spec.voltstack_cluster_ar.no_k8s_cluster"],
+        options: [
+          "spec.voltstack_cluster_ar.k8s_cluster",
+          "spec.voltstack_cluster_ar.no_k8s_cluster",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -3413,7 +3684,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "storage_class_choice",
         fieldPath: "spec.voltstack_cluster_ar.storage_class_choice",
-        options: ["spec.voltstack_cluster_ar.default_storage", "spec.voltstack_cluster_ar.storage_class_list"],
+        options: [
+          "spec.voltstack_cluster_ar.default_storage",
+          "spec.voltstack_cluster_ar.storage_class_list",
+        ],
       },
       {
         choiceField: "accelerated_networking",
@@ -3425,7 +3699,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -3433,7 +3708,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -3454,7 +3730,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.voltstack_cluster_ar.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.voltstack_cluster_ar.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.voltstack_cluster_ar.outside_static_routes.static_route_list[].custom_static_route",
           "spec.voltstack_cluster_ar.outside_static_routes.static_route_list[].simple_static_route",
@@ -3661,7 +3938,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3804,7 +4082,11 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "blocked_services_choice",
         fieldPath: "spec.blocked_services_choice",
-        options: ["spec.block_all_services", "spec.blocked_services", "spec.default_blocked_services"],
+        options: [
+          "spec.block_all_services",
+          "spec.blocked_services",
+          "spec.default_blocked_services",
+        ],
       },
       {
         choiceField: "deployment",
@@ -3868,7 +4150,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.ingress_egress_gw.global_network_choice",
-        options: ["spec.ingress_egress_gw.global_network_list", "spec.ingress_egress_gw.no_global_network"],
+        options: [
+          "spec.ingress_egress_gw.global_network_list",
+          "spec.ingress_egress_gw.no_global_network",
+        ],
       },
       {
         choiceField: "hub_choice",
@@ -3878,7 +4163,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "inside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.inside_static_route_choice",
-        options: ["spec.ingress_egress_gw.inside_static_routes", "spec.ingress_egress_gw.no_inside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.inside_static_routes",
+          "spec.ingress_egress_gw.no_inside_static_routes",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -3892,12 +4180,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.outside_static_route_choice",
-        options: ["spec.ingress_egress_gw.no_outside_static_routes", "spec.ingress_egress_gw.outside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.no_outside_static_routes",
+          "spec.ingress_egress_gw.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.ingress_egress_gw.site_mesh_group_choice",
-        options: ["spec.ingress_egress_gw.sm_connection_public_ip", "spec.ingress_egress_gw.sm_connection_pvt_ip"],
+        options: [
+          "spec.ingress_egress_gw.sm_connection_public_ip",
+          "spec.ingress_egress_gw.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "choice",
@@ -3933,7 +4227,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -3941,7 +4236,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -3988,7 +4284,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "subscription_choice",
-        fieldPath: "spec.ingress_egress_gw.hub.express_route_enabled.connections[].subscription_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.hub.express_route_enabled.connections[].subscription_choice",
         options: [
           "spec.ingress_egress_gw.hub.express_route_enabled.connections[].circuit_id",
           "spec.ingress_egress_gw.hub.express_route_enabled.connections[].other_subscription",
@@ -4014,7 +4311,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "resource_group_choice",
-        fieldPath: "spec.ingress_egress_gw.hub.express_route_enabled.gateway_subnet.subnet.resource_group_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.hub.express_route_enabled.gateway_subnet.subnet.resource_group_choice",
         options: [
           "spec.ingress_egress_gw.hub.express_route_enabled.gateway_subnet.subnet.subnet_resource_grp",
           "spec.ingress_egress_gw.hub.express_route_enabled.gateway_subnet.subnet.vnet_resource_group",
@@ -4031,7 +4329,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "resource_group_choice",
-        fieldPath: "spec.ingress_egress_gw.hub.express_route_enabled.route_server_subnet.subnet.resource_group_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.hub.express_route_enabled.route_server_subnet.subnet.resource_group_choice",
         options: [
           "spec.ingress_egress_gw.hub.express_route_enabled.route_server_subnet.subnet.subnet_resource_grp",
           "spec.ingress_egress_gw.hub.express_route_enabled.route_server_subnet.subnet.vnet_resource_group",
@@ -4040,7 +4339,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "routing_choice",
         fieldPath: "spec.ingress_egress_gw.hub.spoke_vnets[].routing_choice",
-        options: ["spec.ingress_egress_gw.hub.spoke_vnets[].auto", "spec.ingress_egress_gw.hub.spoke_vnets[].manual"],
+        options: [
+          "spec.ingress_egress_gw.hub.spoke_vnets[].auto",
+          "spec.ingress_egress_gw.hub.spoke_vnets[].manual",
+        ],
       },
       {
         choiceField: "routing_type",
@@ -4052,7 +4354,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].simple_static_route",
@@ -4069,7 +4372,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -4077,7 +4381,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].simple_static_route",
@@ -4094,7 +4399,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -4110,7 +4416,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -4137,7 +4444,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.ingress_egress_gw_ar.global_network_choice",
-        options: ["spec.ingress_egress_gw_ar.global_network_list", "spec.ingress_egress_gw_ar.no_global_network"],
+        options: [
+          "spec.ingress_egress_gw_ar.global_network_list",
+          "spec.ingress_egress_gw_ar.no_global_network",
+        ],
       },
       {
         choiceField: "hub_choice",
@@ -4179,7 +4489,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -4187,7 +4498,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -4234,7 +4546,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "subscription_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.hub.express_route_enabled.connections[].subscription_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.hub.express_route_enabled.connections[].subscription_choice",
         options: [
           "spec.ingress_egress_gw_ar.hub.express_route_enabled.connections[].circuit_id",
           "spec.ingress_egress_gw_ar.hub.express_route_enabled.connections[].other_subscription",
@@ -4260,7 +4573,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "resource_group_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet.subnet.resource_group_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet.subnet.resource_group_choice",
         options: [
           "spec.ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet.subnet.subnet_resource_grp",
           "spec.ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet.subnet.vnet_resource_group",
@@ -4302,7 +4616,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.inside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.inside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw_ar.inside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw_ar.inside_static_routes.static_route_list[].simple_static_route",
@@ -4360,7 +4675,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw_ar.outside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw_ar.outside_static_routes.static_route_list[].simple_static_route",
@@ -4394,7 +4710,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_egress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_egress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_egress_gw_ar.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -4419,7 +4736,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.ingress_gw_ar.node.local_subnet.choice",
-        options: ["spec.ingress_gw_ar.node.local_subnet.subnet", "spec.ingress_gw_ar.node.local_subnet.subnet_param"],
+        options: [
+          "spec.ingress_gw_ar.node.local_subnet.subnet",
+          "spec.ingress_gw_ar.node.local_subnet.subnet_param",
+        ],
       },
       {
         choiceField: "resource_group_choice",
@@ -4439,12 +4759,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -4466,7 +4790,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "routing_type",
         fieldPath: "spec.vnet.existing_vnet.routing_type",
-        options: ["spec.vnet.existing_vnet.f5_orchestrated_routing", "spec.vnet.existing_vnet.manual_routing"],
+        options: [
+          "spec.vnet.existing_vnet.f5_orchestrated_routing",
+          "spec.vnet.existing_vnet.manual_routing",
+        ],
       },
       {
         choiceField: "name_choice",
@@ -4476,7 +4803,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.voltstack_cluster.dc_cluster_group_choice",
-        options: ["spec.voltstack_cluster.dc_cluster_group", "spec.voltstack_cluster.no_dc_cluster_group"],
+        options: [
+          "spec.voltstack_cluster.dc_cluster_group",
+          "spec.voltstack_cluster.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -4490,7 +4820,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.voltstack_cluster.global_network_choice",
-        options: ["spec.voltstack_cluster.global_network_list", "spec.voltstack_cluster.no_global_network"],
+        options: [
+          "spec.voltstack_cluster.global_network_list",
+          "spec.voltstack_cluster.no_global_network",
+        ],
       },
       {
         choiceField: "k8s_cluster_choice",
@@ -4509,12 +4842,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.voltstack_cluster.outside_static_route_choice",
-        options: ["spec.voltstack_cluster.no_outside_static_routes", "spec.voltstack_cluster.outside_static_routes"],
+        options: [
+          "spec.voltstack_cluster.no_outside_static_routes",
+          "spec.voltstack_cluster.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.voltstack_cluster.site_mesh_group_choice",
-        options: ["spec.voltstack_cluster.sm_connection_public_ip", "spec.voltstack_cluster.sm_connection_pvt_ip"],
+        options: [
+          "spec.voltstack_cluster.sm_connection_public_ip",
+          "spec.voltstack_cluster.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "choice",
@@ -4534,7 +4873,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.voltstack_cluster.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.voltstack_cluster.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -4542,12 +4882,14 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].simple_static_route",
@@ -4564,7 +4906,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -4573,7 +4916,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.voltstack_cluster_ar.dc_cluster_group_choice",
-        options: ["spec.voltstack_cluster_ar.dc_cluster_group", "spec.voltstack_cluster_ar.no_dc_cluster_group"],
+        options: [
+          "spec.voltstack_cluster_ar.dc_cluster_group",
+          "spec.voltstack_cluster_ar.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -4587,12 +4933,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.voltstack_cluster_ar.global_network_choice",
-        options: ["spec.voltstack_cluster_ar.global_network_list", "spec.voltstack_cluster_ar.no_global_network"],
+        options: [
+          "spec.voltstack_cluster_ar.global_network_list",
+          "spec.voltstack_cluster_ar.no_global_network",
+        ],
       },
       {
         choiceField: "k8s_cluster_choice",
         fieldPath: "spec.voltstack_cluster_ar.k8s_cluster_choice",
-        options: ["spec.voltstack_cluster_ar.k8s_cluster", "spec.voltstack_cluster_ar.no_k8s_cluster"],
+        options: [
+          "spec.voltstack_cluster_ar.k8s_cluster",
+          "spec.voltstack_cluster_ar.no_k8s_cluster",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -4621,7 +4973,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -4629,7 +4982,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.voltstack_cluster_ar.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -4650,7 +5004,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.voltstack_cluster_ar.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.voltstack_cluster_ar.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.voltstack_cluster_ar.outside_static_routes.static_route_list[].custom_static_route",
           "spec.voltstack_cluster_ar.outside_static_routes.static_route_list[].simple_static_route",
@@ -5255,7 +5610,11 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "blocked_services_choice",
         fieldPath: "spec.blocked_services_choice",
-        options: ["spec.block_all_services", "spec.blocked_services", "spec.default_blocked_services"],
+        options: [
+          "spec.block_all_services",
+          "spec.blocked_services",
+          "spec.default_blocked_services",
+        ],
       },
       {
         choiceField: "deployment",
@@ -5280,7 +5639,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.admin_password.secret_info_oneof",
-        options: ["spec.admin_password.blindfold_secret_info", "spec.admin_password.clear_secret_info"],
+        options: [
+          "spec.admin_password.blindfold_secret_info",
+          "spec.admin_password.clear_secret_info",
+        ],
       },
       {
         choiceField: "blocked_services_value_type_choice",
@@ -5312,12 +5674,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.ingress_egress_gw.global_network_choice",
-        options: ["spec.ingress_egress_gw.global_network_list", "spec.ingress_egress_gw.no_global_network"],
+        options: [
+          "spec.ingress_egress_gw.global_network_list",
+          "spec.ingress_egress_gw.no_global_network",
+        ],
       },
       {
         choiceField: "inside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.inside_static_route_choice",
-        options: ["spec.ingress_egress_gw.inside_static_routes", "spec.ingress_egress_gw.no_inside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.inside_static_routes",
+          "spec.ingress_egress_gw.no_inside_static_routes",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -5331,16 +5699,23 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.outside_static_route_choice",
-        options: ["spec.ingress_egress_gw.no_outside_static_routes", "spec.ingress_egress_gw.outside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.no_outside_static_routes",
+          "spec.ingress_egress_gw.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.ingress_egress_gw.site_mesh_group_choice",
-        options: ["spec.ingress_egress_gw.sm_connection_public_ip", "spec.ingress_egress_gw.sm_connection_pvt_ip"],
+        options: [
+          "spec.ingress_egress_gw.sm_connection_public_ip",
+          "spec.ingress_egress_gw.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -5348,7 +5723,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -5367,7 +5743,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].simple_static_route",
@@ -5384,7 +5761,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -5414,7 +5792,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].simple_static_route",
@@ -5431,7 +5810,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -5455,7 +5835,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -5478,7 +5859,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.ingress_gw.local_subnet.choice",
-        options: ["spec.ingress_gw.local_subnet.existing_subnet", "spec.ingress_gw.local_subnet.new_subnet"],
+        options: [
+          "spec.ingress_gw.local_subnet.existing_subnet",
+          "spec.ingress_gw.local_subnet.new_subnet",
+        ],
       },
       {
         choiceField: "perf_mode_choice",
@@ -5490,7 +5874,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -5506,12 +5891,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -5543,7 +5932,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.voltstack_cluster.dc_cluster_group_choice",
-        options: ["spec.voltstack_cluster.dc_cluster_group", "spec.voltstack_cluster.no_dc_cluster_group"],
+        options: [
+          "spec.voltstack_cluster.dc_cluster_group",
+          "spec.voltstack_cluster.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -5557,7 +5949,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.voltstack_cluster.global_network_choice",
-        options: ["spec.voltstack_cluster.global_network_list", "spec.voltstack_cluster.no_global_network"],
+        options: [
+          "spec.voltstack_cluster.global_network_list",
+          "spec.voltstack_cluster.no_global_network",
+        ],
       },
       {
         choiceField: "k8s_cluster_choice",
@@ -5576,21 +5971,31 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.voltstack_cluster.outside_static_route_choice",
-        options: ["spec.voltstack_cluster.no_outside_static_routes", "spec.voltstack_cluster.outside_static_routes"],
+        options: [
+          "spec.voltstack_cluster.no_outside_static_routes",
+          "spec.voltstack_cluster.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.voltstack_cluster.site_mesh_group_choice",
-        options: ["spec.voltstack_cluster.sm_connection_public_ip", "spec.voltstack_cluster.sm_connection_pvt_ip"],
+        options: [
+          "spec.voltstack_cluster.sm_connection_public_ip",
+          "spec.voltstack_cluster.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "storage_class_choice",
         fieldPath: "spec.voltstack_cluster.storage_class_choice",
-        options: ["spec.voltstack_cluster.default_storage", "spec.voltstack_cluster.storage_class_list"],
+        options: [
+          "spec.voltstack_cluster.default_storage",
+          "spec.voltstack_cluster.storage_class_list",
+        ],
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.voltstack_cluster.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.voltstack_cluster.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -5598,12 +6003,14 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].simple_static_route",
@@ -5620,7 +6027,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -5831,7 +6239,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5974,7 +6383,11 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "blocked_services_choice",
         fieldPath: "spec.blocked_services_choice",
-        options: ["spec.block_all_services", "spec.blocked_services", "spec.default_blocked_services"],
+        options: [
+          "spec.block_all_services",
+          "spec.blocked_services",
+          "spec.default_blocked_services",
+        ],
       },
       {
         choiceField: "deployment",
@@ -6026,12 +6439,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.ingress_egress_gw.global_network_choice",
-        options: ["spec.ingress_egress_gw.global_network_list", "spec.ingress_egress_gw.no_global_network"],
+        options: [
+          "spec.ingress_egress_gw.global_network_list",
+          "spec.ingress_egress_gw.no_global_network",
+        ],
       },
       {
         choiceField: "inside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.inside_static_route_choice",
-        options: ["spec.ingress_egress_gw.inside_static_routes", "spec.ingress_egress_gw.no_inside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.inside_static_routes",
+          "spec.ingress_egress_gw.no_inside_static_routes",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -6045,16 +6464,23 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.ingress_egress_gw.outside_static_route_choice",
-        options: ["spec.ingress_egress_gw.no_outside_static_routes", "spec.ingress_egress_gw.outside_static_routes"],
+        options: [
+          "spec.ingress_egress_gw.no_outside_static_routes",
+          "spec.ingress_egress_gw.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.ingress_egress_gw.site_mesh_group_choice",
-        options: ["spec.ingress_egress_gw.sm_connection_public_ip", "spec.ingress_egress_gw.sm_connection_pvt_ip"],
+        options: [
+          "spec.ingress_egress_gw.sm_connection_public_ip",
+          "spec.ingress_egress_gw.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.ingress_egress_gw.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -6062,7 +6488,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -6081,7 +6508,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].simple_static_route",
@@ -6098,7 +6526,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.inside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -6128,7 +6557,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].simple_static_route",
@@ -6145,7 +6575,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.ingress_egress_gw.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -6169,7 +6600,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_egress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -6192,7 +6624,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.ingress_gw.local_subnet.choice",
-        options: ["spec.ingress_gw.local_subnet.existing_subnet", "spec.ingress_gw.local_subnet.new_subnet"],
+        options: [
+          "spec.ingress_gw.local_subnet.existing_subnet",
+          "spec.ingress_gw.local_subnet.new_subnet",
+        ],
       },
       {
         choiceField: "perf_mode_choice",
@@ -6204,7 +6639,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "perf_mode_choice",
-        fieldPath: "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
+        fieldPath:
+          "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.perf_mode_choice",
         options: [
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.jumbo",
           "spec.ingress_gw.performance_enhancement_mode.perf_mode_l3_enhanced.no_jumbo",
@@ -6220,12 +6656,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -6247,7 +6687,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.voltstack_cluster.dc_cluster_group_choice",
-        options: ["spec.voltstack_cluster.dc_cluster_group", "spec.voltstack_cluster.no_dc_cluster_group"],
+        options: [
+          "spec.voltstack_cluster.dc_cluster_group",
+          "spec.voltstack_cluster.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -6261,7 +6704,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.voltstack_cluster.global_network_choice",
-        options: ["spec.voltstack_cluster.global_network_list", "spec.voltstack_cluster.no_global_network"],
+        options: [
+          "spec.voltstack_cluster.global_network_list",
+          "spec.voltstack_cluster.no_global_network",
+        ],
       },
       {
         choiceField: "k8s_cluster_choice",
@@ -6280,16 +6726,23 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "outside_static_route_choice",
         fieldPath: "spec.voltstack_cluster.outside_static_route_choice",
-        options: ["spec.voltstack_cluster.no_outside_static_routes", "spec.voltstack_cluster.outside_static_routes"],
+        options: [
+          "spec.voltstack_cluster.no_outside_static_routes",
+          "spec.voltstack_cluster.outside_static_routes",
+        ],
       },
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.voltstack_cluster.site_mesh_group_choice",
-        options: ["spec.voltstack_cluster.sm_connection_public_ip", "spec.voltstack_cluster.sm_connection_pvt_ip"],
+        options: [
+          "spec.voltstack_cluster.sm_connection_public_ip",
+          "spec.voltstack_cluster.sm_connection_pvt_ip",
+        ],
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.voltstack_cluster.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.voltstack_cluster.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -6297,12 +6750,14 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.voltstack_cluster.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
         choiceField: "config_mode_choice",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].config_mode_choice",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].simple_static_route",
@@ -6319,7 +6774,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ver",
-        fieldPath: "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
+        fieldPath:
+          "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ver",
         options: [
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv4",
           "spec.voltstack_cluster.outside_static_routes.static_route_list[].custom_static_route.subnets[].ipv6",
@@ -6653,7 +7109,8 @@ export const sitesTools: ParsedOperation[] = [
     domain: "sites",
     resource: "k8s-cluster",
     summary: "Create Configuration Specification.",
-    description: "Create k8s_cluster will create the object in the storage backend for namespace metadata.namespace.",
+    description:
+      "Create k8s_cluster will create the object in the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -6719,7 +7176,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "cluster_role_bindings_choice",
         fieldPath: "spec.cluster_role_bindings_choice",
-        options: ["spec.use_custom_cluster_role_bindings", "spec.use_default_cluster_role_bindings"],
+        options: [
+          "spec.use_custom_cluster_role_bindings",
+          "spec.use_default_cluster_role_bindings",
+        ],
       },
       {
         choiceField: "cluster_role_choice",
@@ -6749,7 +7209,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "pod_security_admission_choice",
         fieldPath: "spec.pod_security_admission_choice",
-        options: ["spec.use_custom_pod_security_admission", "spec.use_default_pod_security_admission"],
+        options: [
+          "spec.use_custom_pod_security_admission",
+          "spec.use_default_pod_security_admission",
+        ],
       },
       {
         choiceField: "pod_security_policy_choice",
@@ -6773,7 +7236,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.port_choice",
+        fieldPath:
+          "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.port_choice",
         options: [
           "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.default_port",
           "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.port",
@@ -6781,7 +7245,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.secret_info_oneof",
+        fieldPath:
+          "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.secret_info_oneof",
         options: [
           "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.blindfold_secret_info",
           "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.clear_secret_info",
@@ -6878,7 +7343,8 @@ export const sitesTools: ParsedOperation[] = [
     domain: "sites",
     resource: "k8s-cluster",
     summary: "GET Configuration Specification.",
-    description: "GET k8s_cluster will GET the object from the storage backend for namespace metadata.namespace.",
+    description:
+      "GET k8s_cluster will GET the object from the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -6975,7 +7441,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -7124,7 +7591,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "cluster_role_bindings_choice",
         fieldPath: "spec.cluster_role_bindings_choice",
-        options: ["spec.use_custom_cluster_role_bindings", "spec.use_default_cluster_role_bindings"],
+        options: [
+          "spec.use_custom_cluster_role_bindings",
+          "spec.use_default_cluster_role_bindings",
+        ],
       },
       {
         choiceField: "cluster_role_choice",
@@ -7154,7 +7624,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "pod_security_admission_choice",
         fieldPath: "spec.pod_security_admission_choice",
-        options: ["spec.use_custom_pod_security_admission", "spec.use_default_pod_security_admission"],
+        options: [
+          "spec.use_custom_pod_security_admission",
+          "spec.use_default_pod_security_admission",
+        ],
       },
       {
         choiceField: "pod_security_policy_choice",
@@ -7178,7 +7651,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.port_choice",
+        fieldPath:
+          "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.port_choice",
         options: [
           "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.default_port",
           "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.port",
@@ -7186,7 +7660,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.secret_info_oneof",
+        fieldPath:
+          "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.secret_info_oneof",
         options: [
           "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.blindfold_secret_info",
           "spec.cluster_wide_app_list.cluster_wide_apps[].argo_cd.local_domain.password.clear_secret_info",
@@ -8200,7 +8675,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Long Base-64 encoded string which can be used to retrieve next batch of log messages.",
+        description:
+          "Long Base-64 encoded string which can be used to retrieve next batch of log messages.",
         in: "query",
         name: "scroll_id",
         required: false,
@@ -8396,7 +8872,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "lacp_choice",
         fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+        options: [
+          "spec.bond_device_list.bond_devices[].active_backup",
+          "spec.bond_device_list.bond_devices[].lacp",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -8410,12 +8889,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.custom_network_config.global_network_choice",
-        options: ["spec.custom_network_config.global_network_list", "spec.custom_network_config.no_global_network"],
+        options: [
+          "spec.custom_network_config.global_network_list",
+          "spec.custom_network_config.no_global_network",
+        ],
       },
       {
         choiceField: "interface_choice",
         fieldPath: "spec.custom_network_config.interface_choice",
-        options: ["spec.custom_network_config.default_interface_config", "spec.custom_network_config.interface_list"],
+        options: [
+          "spec.custom_network_config.default_interface_config",
+          "spec.custom_network_config.interface_list",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -8437,16 +8922,23 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "sli_choice",
         fieldPath: "spec.custom_network_config.sli_choice",
-        options: ["spec.custom_network_config.default_sli_config", "spec.custom_network_config.sli_config"],
+        options: [
+          "spec.custom_network_config.default_sli_config",
+          "spec.custom_network_config.sli_config",
+        ],
       },
       {
         choiceField: "slo_choice",
         fieldPath: "spec.custom_network_config.slo_choice",
-        options: ["spec.custom_network_config.default_config", "spec.custom_network_config.slo_config"],
+        options: [
+          "spec.custom_network_config.default_config",
+          "spec.custom_network_config.slo_config",
+        ],
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.custom_network_config.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.custom_network_config.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.custom_network_config.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.custom_network_config.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -8454,7 +8946,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.custom_network_config.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.custom_network_config.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -8477,7 +8970,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "monitoring_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitoring_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitoring_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitor",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitor_disabled",
@@ -8485,7 +8979,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node",
@@ -8493,7 +8988,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "primary_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.primary_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.primary_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.is_primary",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.not_primary",
@@ -8501,7 +8997,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node",
@@ -8509,7 +9006,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.address_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.address_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.dhcp_client",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.dhcp_server",
@@ -8518,7 +9016,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ipv6_address_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_address_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_address_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_auto_config",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.no_ipv6_address",
@@ -8527,7 +9026,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "monitoring_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitoring_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitoring_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitor",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitor_disabled",
@@ -8535,7 +9035,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.network_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.network_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.segment_network",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.site_local_inside_network",
@@ -8545,7 +9046,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node",
@@ -8553,7 +9055,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "primary_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.primary_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.primary_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.is_primary",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.not_primary",
@@ -8561,7 +9064,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "vlan_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.untagged",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_id",
@@ -8703,7 +9207,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.sli_config.static_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.sli_config.static_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.sli_config.static_routes.static_routes[].default_gateway",
           "spec.custom_network_config.sli_config.static_routes.static_routes[].ip_address",
@@ -8712,7 +9217,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].default_gateway",
           "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].ip_address",
@@ -8745,7 +9251,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.slo_config.static_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.slo_config.static_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.slo_config.static_routes.static_routes[].default_gateway",
           "spec.custom_network_config.slo_config.static_routes.static_routes[].ip_address",
@@ -8754,7 +9261,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].default_gateway",
           "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].ip_address",
@@ -8771,12 +9279,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -8999,7 +9511,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -9171,7 +9684,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "lacp_choice",
         fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+        options: [
+          "spec.bond_device_list.bond_devices[].active_backup",
+          "spec.bond_device_list.bond_devices[].lacp",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -9185,12 +9701,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.custom_network_config.global_network_choice",
-        options: ["spec.custom_network_config.global_network_list", "spec.custom_network_config.no_global_network"],
+        options: [
+          "spec.custom_network_config.global_network_list",
+          "spec.custom_network_config.no_global_network",
+        ],
       },
       {
         choiceField: "interface_choice",
         fieldPath: "spec.custom_network_config.interface_choice",
-        options: ["spec.custom_network_config.default_interface_config", "spec.custom_network_config.interface_list"],
+        options: [
+          "spec.custom_network_config.default_interface_config",
+          "spec.custom_network_config.interface_list",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -9212,16 +9734,23 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "sli_choice",
         fieldPath: "spec.custom_network_config.sli_choice",
-        options: ["spec.custom_network_config.default_sli_config", "spec.custom_network_config.sli_config"],
+        options: [
+          "spec.custom_network_config.default_sli_config",
+          "spec.custom_network_config.sli_config",
+        ],
       },
       {
         choiceField: "slo_choice",
         fieldPath: "spec.custom_network_config.slo_choice",
-        options: ["spec.custom_network_config.default_config", "spec.custom_network_config.slo_config"],
+        options: [
+          "spec.custom_network_config.default_config",
+          "spec.custom_network_config.slo_config",
+        ],
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.custom_network_config.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.custom_network_config.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.custom_network_config.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.custom_network_config.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -9229,7 +9758,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.custom_network_config.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.custom_network_config.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -9252,7 +9782,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "monitoring_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitoring_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitoring_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitor",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitor_disabled",
@@ -9260,7 +9791,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node",
@@ -9268,7 +9800,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "primary_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.primary_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.primary_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.is_primary",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.not_primary",
@@ -9276,7 +9809,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node",
@@ -9284,7 +9818,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.address_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.address_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.dhcp_client",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.dhcp_server",
@@ -9293,7 +9828,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ipv6_address_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_address_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_address_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_auto_config",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.no_ipv6_address",
@@ -9302,7 +9838,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "monitoring_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitoring_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitoring_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitor",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitor_disabled",
@@ -9310,7 +9847,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.network_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.network_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.segment_network",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.site_local_inside_network",
@@ -9320,7 +9858,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node",
@@ -9328,7 +9867,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "primary_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.primary_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.primary_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.is_primary",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.not_primary",
@@ -9336,7 +9876,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "vlan_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.untagged",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_id",
@@ -9478,7 +10019,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.sli_config.static_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.sli_config.static_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.sli_config.static_routes.static_routes[].default_gateway",
           "spec.custom_network_config.sli_config.static_routes.static_routes[].ip_address",
@@ -9487,7 +10029,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].default_gateway",
           "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].ip_address",
@@ -9520,7 +10063,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.slo_config.static_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.slo_config.static_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.slo_config.static_routes.static_routes[].default_gateway",
           "spec.custom_network_config.slo_config.static_routes.static_routes[].ip_address",
@@ -9529,7 +10073,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].default_gateway",
           "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].ip_address",
@@ -9546,12 +10091,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -9726,7 +10275,11 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "s2s_connectivity_slo_choice",
         fieldPath: "spec.s2s_connectivity_slo_choice",
-        options: ["spec.dc_cluster_group_slo", "spec.no_s2s_connectivity_slo", "spec.site_mesh_group_on_slo"],
+        options: [
+          "spec.dc_cluster_group_slo",
+          "spec.no_s2s_connectivity_slo",
+          "spec.site_mesh_group_on_slo",
+        ],
       },
       {
         choiceField: "url_categorization_choice",
@@ -9783,7 +10336,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.aws.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -9799,7 +10353,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -9807,7 +10362,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -9815,7 +10371,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -9851,7 +10408,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.aws.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -9860,7 +10418,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.aws.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -9908,7 +10467,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.azure.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -9924,7 +10484,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -9932,7 +10493,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -9940,7 +10502,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -9976,7 +10539,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.azure.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -9985,7 +10549,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.azure.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -10033,7 +10598,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.baremetal.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -10041,7 +10607,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.baremetal.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -10049,7 +10616,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -10057,7 +10625,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -10102,7 +10671,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.baremetal.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -10111,7 +10681,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.baremetal.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -10134,7 +10705,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.custom_proxy.password.secret_info_oneof",
-        options: ["spec.custom_proxy.password.blindfold_secret_info", "spec.custom_proxy.password.clear_secret_info"],
+        options: [
+          "spec.custom_proxy.password.blindfold_secret_info",
+          "spec.custom_proxy.password.clear_secret_info",
+        ],
       },
       {
         choiceField: "dns_server_choice",
@@ -10188,7 +10762,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.equinix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -10196,7 +10771,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.equinix.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -10204,7 +10780,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -10212,7 +10789,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -10257,7 +10835,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.equinix.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -10266,7 +10845,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.equinix.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -10314,7 +10894,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.gcp.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -10330,7 +10911,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -10338,7 +10920,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -10346,7 +10929,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -10382,7 +10966,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.gcp.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -10391,7 +10976,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.gcp.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -10439,7 +11025,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.kvm.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -10455,7 +11042,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -10463,7 +11051,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -10471,7 +11060,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -10507,7 +11097,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.kvm.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -10516,7 +11107,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.kvm.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -10535,12 +11127,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "static_route_choice",
         fieldPath: "spec.local_vrf.sli_config.static_route_choice",
-        options: ["spec.local_vrf.sli_config.no_static_routes", "spec.local_vrf.sli_config.static_routes"],
+        options: [
+          "spec.local_vrf.sli_config.no_static_routes",
+          "spec.local_vrf.sli_config.static_routes",
+        ],
       },
       {
         choiceField: "static_v6_route_choice",
         fieldPath: "spec.local_vrf.sli_config.static_v6_route_choice",
-        options: ["spec.local_vrf.sli_config.no_v6_static_routes", "spec.local_vrf.sli_config.static_v6_routes"],
+        options: [
+          "spec.local_vrf.sli_config.no_v6_static_routes",
+          "spec.local_vrf.sli_config.static_v6_routes",
+        ],
       },
       {
         choiceField: "next_hop_choice",
@@ -10563,12 +11161,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "static_route_choice",
         fieldPath: "spec.local_vrf.slo_config.static_route_choice",
-        options: ["spec.local_vrf.slo_config.no_static_routes", "spec.local_vrf.slo_config.static_routes"],
+        options: [
+          "spec.local_vrf.slo_config.no_static_routes",
+          "spec.local_vrf.slo_config.static_routes",
+        ],
       },
       {
         choiceField: "static_v6_route_choice",
         fieldPath: "spec.local_vrf.slo_config.static_v6_route_choice",
-        options: ["spec.local_vrf.slo_config.no_v6_static_routes", "spec.local_vrf.slo_config.static_v6_routes"],
+        options: [
+          "spec.local_vrf.slo_config.no_v6_static_routes",
+          "spec.local_vrf.slo_config.static_v6_routes",
+        ],
       },
       {
         choiceField: "next_hop_choice",
@@ -10630,7 +11234,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.nutanix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -10638,7 +11243,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.nutanix.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -10646,7 +11252,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -10654,7 +11261,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -10699,7 +11307,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.nutanix.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -10708,7 +11317,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.nutanix.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -10756,7 +11366,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.oci.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -10772,7 +11383,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -10780,7 +11392,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -10788,7 +11401,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -10824,7 +11438,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.oci.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -10833,7 +11448,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.oci.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -10889,7 +11505,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.openstack.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -10897,7 +11514,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.openstack.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -10905,7 +11523,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -10913,7 +11532,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -10958,7 +11578,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.openstack.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -10967,7 +11588,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.openstack.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -10997,7 +11619,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.site_mesh_group_on_slo.site_mesh_group_choice",
-        options: ["spec.site_mesh_group_on_slo.no_site_mesh_group", "spec.site_mesh_group_on_slo.site_mesh_group"],
+        options: [
+          "spec.site_mesh_group_on_slo.no_site_mesh_group",
+          "spec.site_mesh_group_on_slo.site_mesh_group",
+        ],
       },
       {
         choiceField: "site_mesh_group_ip_choice",
@@ -11010,7 +11635,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "operating_system_version_choice",
         fieldPath: "spec.software_settings.os.operating_system_version_choice",
-        options: ["spec.software_settings.os.default_os_version", "spec.software_settings.os.operating_system_version"],
+        options: [
+          "spec.software_settings.os.default_os_version",
+          "spec.software_settings.os.operating_system_version",
+        ],
       },
       {
         choiceField: "volterra_sw_version_choice",
@@ -11022,7 +11650,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "kubernetes_upgrade_drain_enable_choice",
-        fieldPath: "spec.upgrade_settings.kubernetes_upgrade_drain.kubernetes_upgrade_drain_enable_choice",
+        fieldPath:
+          "spec.upgrade_settings.kubernetes_upgrade_drain.kubernetes_upgrade_drain_enable_choice",
         options: [
           "spec.upgrade_settings.kubernetes_upgrade_drain.disable_upgrade_drain",
           "spec.upgrade_settings.kubernetes_upgrade_drain.enable_upgrade_drain",
@@ -11030,7 +11659,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.upgrade_settings.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        fieldPath:
+          "spec.upgrade_settings.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
         options: [
           "spec.upgrade_settings.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
         ],
@@ -11086,7 +11716,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.vmware.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -11094,7 +11725,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.vmware.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -11102,7 +11734,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -11110,7 +11743,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -11118,7 +11752,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -11154,7 +11789,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.vmware.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -11163,7 +11799,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.vmware.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -11352,7 +11989,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -11551,7 +12189,11 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "s2s_connectivity_slo_choice",
         fieldPath: "spec.s2s_connectivity_slo_choice",
-        options: ["spec.dc_cluster_group_slo", "spec.no_s2s_connectivity_slo", "spec.site_mesh_group_on_slo"],
+        options: [
+          "spec.dc_cluster_group_slo",
+          "spec.no_s2s_connectivity_slo",
+          "spec.site_mesh_group_on_slo",
+        ],
       },
       {
         choiceField: "url_categorization_choice",
@@ -11608,7 +12250,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.aws.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -11624,7 +12267,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -11632,7 +12276,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -11640,7 +12285,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.aws.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -11676,7 +12322,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.aws.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -11685,7 +12332,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.aws.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.aws.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.aws.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.aws.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -11733,7 +12381,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.azure.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -11749,7 +12398,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -11757,7 +12407,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -11765,7 +12416,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.azure.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -11801,7 +12453,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.azure.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -11810,7 +12463,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.azure.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.azure.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.azure.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.azure.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -11858,7 +12512,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.baremetal.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -11866,7 +12521,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.baremetal.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -11874,7 +12530,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -11882,7 +12539,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.baremetal.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -11927,7 +12585,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.baremetal.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -11936,7 +12595,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.baremetal.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.baremetal.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.baremetal.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.baremetal.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -11959,7 +12619,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.custom_proxy.password.secret_info_oneof",
-        options: ["spec.custom_proxy.password.blindfold_secret_info", "spec.custom_proxy.password.clear_secret_info"],
+        options: [
+          "spec.custom_proxy.password.blindfold_secret_info",
+          "spec.custom_proxy.password.clear_secret_info",
+        ],
       },
       {
         choiceField: "dns_server_choice",
@@ -12013,7 +12676,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.equinix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -12021,7 +12685,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.equinix.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -12029,7 +12694,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -12037,7 +12703,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.equinix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -12082,7 +12749,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.equinix.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -12091,7 +12759,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.equinix.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.equinix.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.equinix.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.equinix.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -12139,7 +12808,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.gcp.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -12155,7 +12825,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -12163,7 +12834,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -12171,7 +12843,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.gcp.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -12207,7 +12880,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.gcp.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -12216,7 +12890,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.gcp.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.gcp.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.gcp.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.gcp.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -12264,7 +12939,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.kvm.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -12280,7 +12956,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -12288,7 +12965,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -12296,7 +12974,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.kvm.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -12332,7 +13011,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.kvm.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -12341,7 +13021,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.kvm.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.kvm.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.kvm.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.kvm.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -12360,12 +13041,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "static_route_choice",
         fieldPath: "spec.local_vrf.sli_config.static_route_choice",
-        options: ["spec.local_vrf.sli_config.no_static_routes", "spec.local_vrf.sli_config.static_routes"],
+        options: [
+          "spec.local_vrf.sli_config.no_static_routes",
+          "spec.local_vrf.sli_config.static_routes",
+        ],
       },
       {
         choiceField: "static_v6_route_choice",
         fieldPath: "spec.local_vrf.sli_config.static_v6_route_choice",
-        options: ["spec.local_vrf.sli_config.no_v6_static_routes", "spec.local_vrf.sli_config.static_v6_routes"],
+        options: [
+          "spec.local_vrf.sli_config.no_v6_static_routes",
+          "spec.local_vrf.sli_config.static_v6_routes",
+        ],
       },
       {
         choiceField: "next_hop_choice",
@@ -12388,12 +13075,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "static_route_choice",
         fieldPath: "spec.local_vrf.slo_config.static_route_choice",
-        options: ["spec.local_vrf.slo_config.no_static_routes", "spec.local_vrf.slo_config.static_routes"],
+        options: [
+          "spec.local_vrf.slo_config.no_static_routes",
+          "spec.local_vrf.slo_config.static_routes",
+        ],
       },
       {
         choiceField: "static_v6_route_choice",
         fieldPath: "spec.local_vrf.slo_config.static_v6_route_choice",
-        options: ["spec.local_vrf.slo_config.no_v6_static_routes", "spec.local_vrf.slo_config.static_v6_routes"],
+        options: [
+          "spec.local_vrf.slo_config.no_v6_static_routes",
+          "spec.local_vrf.slo_config.static_v6_routes",
+        ],
       },
       {
         choiceField: "next_hop_choice",
@@ -12455,7 +13148,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.nutanix.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -12463,7 +13157,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.nutanix.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -12471,7 +13166,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -12479,7 +13175,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.nutanix.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -12524,7 +13221,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.nutanix.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -12533,7 +13231,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.nutanix.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.nutanix.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.nutanix.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.nutanix.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -12581,7 +13280,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.oci.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -12597,7 +13297,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -12605,7 +13306,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -12613,7 +13315,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.oci.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -12649,7 +13352,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.oci.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -12658,7 +13362,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.oci.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.oci.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.oci.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.oci.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -12714,7 +13419,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.openstack.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -12722,7 +13428,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.openstack.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -12730,7 +13437,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -12738,7 +13446,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.openstack.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -12783,7 +13492,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.openstack.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -12792,7 +13502,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.openstack.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.openstack.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.openstack.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.openstack.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -12822,7 +13533,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "site_mesh_group_choice",
         fieldPath: "spec.site_mesh_group_on_slo.site_mesh_group_choice",
-        options: ["spec.site_mesh_group_on_slo.no_site_mesh_group", "spec.site_mesh_group_on_slo.site_mesh_group"],
+        options: [
+          "spec.site_mesh_group_on_slo.no_site_mesh_group",
+          "spec.site_mesh_group_on_slo.site_mesh_group",
+        ],
       },
       {
         choiceField: "site_mesh_group_ip_choice",
@@ -12835,7 +13549,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "operating_system_version_choice",
         fieldPath: "spec.software_settings.os.operating_system_version_choice",
-        options: ["spec.software_settings.os.default_os_version", "spec.software_settings.os.operating_system_version"],
+        options: [
+          "spec.software_settings.os.default_os_version",
+          "spec.software_settings.os.operating_system_version",
+        ],
       },
       {
         choiceField: "volterra_sw_version_choice",
@@ -12847,7 +13564,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "kubernetes_upgrade_drain_enable_choice",
-        fieldPath: "spec.upgrade_settings.kubernetes_upgrade_drain.kubernetes_upgrade_drain_enable_choice",
+        fieldPath:
+          "spec.upgrade_settings.kubernetes_upgrade_drain.kubernetes_upgrade_drain_enable_choice",
         options: [
           "spec.upgrade_settings.kubernetes_upgrade_drain.disable_upgrade_drain",
           "spec.upgrade_settings.kubernetes_upgrade_drain.enable_upgrade_drain",
@@ -12855,7 +13573,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.upgrade_settings.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        fieldPath:
+          "spec.upgrade_settings.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
         options: [
           "spec.upgrade_settings.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
         ],
@@ -12911,7 +13630,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "site_to_site_connectivity_interface_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_disabled",
           "spec.vmware.not_managed.node_list[].interface_list[].site_to_site_connectivity_interface_enabled",
@@ -12919,7 +13639,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "lacp_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].bond_interface.lacp_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].bond_interface.active_backup",
           "spec.vmware.not_managed.node_list[].interface_list[].bond_interface.lacp",
@@ -12927,7 +13648,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "autoconfig_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.autoconfig_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.host",
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router",
@@ -12935,7 +13657,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.address_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.network_prefix",
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.stateful",
@@ -12943,7 +13666,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "dns_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.dns_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.configured_list",
           "spec.vmware.not_managed.node_list[].interface_list[].ipv6_auto_config.router.dns_config.local_dns",
@@ -12979,7 +13703,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].network_option.network_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].network_option.network_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].network_option.segment_network",
           "spec.vmware.not_managed.node_list[].interface_list[].network_option.site_local_inside_network",
@@ -12988,7 +13713,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.vmware.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
+        fieldPath:
+          "spec.vmware.not_managed.node_list[].interface_list[].static_ipv6_address.network_prefix_choice",
         options: [
           "spec.vmware.not_managed.node_list[].interface_list[].static_ipv6_address.cluster_static_ip",
           "spec.vmware.not_managed.node_list[].interface_list[].static_ipv6_address.node_static_ip",
@@ -13072,7 +13798,8 @@ export const sitesTools: ParsedOperation[] = [
     domain: "sites",
     resource: "selectee",
     summary: "GET Selectees.",
-    description: "GET the list of objects selected by this Virtual Site based on its selector label expression.",
+    description:
+      "GET the list of objects selected by this Virtual Site based on its selector label expression.",
     pathParameters: [
       {
         description: "Name\nName of the Virtual Site whose Site selections are to be found.",
@@ -13085,7 +13812,8 @@ export const sitesTools: ParsedOperation[] = [
         "x-displayname": "Name",
       },
       {
-        description: "Namespace\nNamespace of the Virtual Site whose Site selections are to be found.",
+        description:
+          "Namespace\nNamespace of the Virtual Site whose Site selections are to be found.",
         in: "path",
         name: "namespace",
         required: true,
@@ -13192,7 +13920,8 @@ export const sitesTools: ParsedOperation[] = [
     domain: "sites",
     resource: "set-cloud-site-info",
     summary: "Configure AWS VPC Site Information.",
-    description: "Configure AWS VPC Site Information like public, private ips, subnet IDs and others.",
+    description:
+      "Configure AWS VPC Site Information like public, private ips, subnet IDs and others.",
     pathParameters: [
       {
         description: "Name\nName of the object to be configured.",
@@ -13729,7 +14458,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -13978,12 +14708,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -14368,7 +15102,8 @@ export const sitesTools: ParsedOperation[] = [
     domain: "sites",
     resource: "virtual-k8s",
     summary: "Create Virtual Kubernetes.",
-    description: "Create virtual_k8s will create the object in the storage backend for namespace metadata.namespace.",
+    description:
+      "Create virtual_k8s will create the object in the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -14517,7 +15252,8 @@ export const sitesTools: ParsedOperation[] = [
     domain: "sites",
     resource: "virtual-k8s",
     summary: "GET Virtual Kubernetes.",
-    description: "GET virtual_k8s will GET the object from the storage backend for namesapce metadata.namespace.",
+    description:
+      "GET virtual_k8s will GET the object from the storage backend for namesapce metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -14614,7 +15350,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -15018,7 +15755,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -15418,7 +16156,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "lacp_choice",
         fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+        options: [
+          "spec.bond_device_list.bond_devices[].active_backup",
+          "spec.bond_device_list.bond_devices[].lacp",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -15432,12 +16173,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.custom_network_config.global_network_choice",
-        options: ["spec.custom_network_config.global_network_list", "spec.custom_network_config.no_global_network"],
+        options: [
+          "spec.custom_network_config.global_network_list",
+          "spec.custom_network_config.no_global_network",
+        ],
       },
       {
         choiceField: "interface_choice",
         fieldPath: "spec.custom_network_config.interface_choice",
-        options: ["spec.custom_network_config.default_interface_config", "spec.custom_network_config.interface_list"],
+        options: [
+          "spec.custom_network_config.default_interface_config",
+          "spec.custom_network_config.interface_list",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -15460,16 +16207,23 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "sli_choice",
         fieldPath: "spec.custom_network_config.sli_choice",
-        options: ["spec.custom_network_config.default_sli_config", "spec.custom_network_config.sli_config"],
+        options: [
+          "spec.custom_network_config.default_sli_config",
+          "spec.custom_network_config.sli_config",
+        ],
       },
       {
         choiceField: "slo_choice",
         fieldPath: "spec.custom_network_config.slo_choice",
-        options: ["spec.custom_network_config.default_config", "spec.custom_network_config.slo_config"],
+        options: [
+          "spec.custom_network_config.default_config",
+          "spec.custom_network_config.slo_config",
+        ],
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.custom_network_config.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.custom_network_config.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.custom_network_config.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.custom_network_config.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -15477,7 +16231,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.custom_network_config.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.custom_network_config.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -15501,7 +16256,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "monitoring_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitoring_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitoring_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitor",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitor_disabled",
@@ -15509,7 +16265,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node",
@@ -15517,7 +16274,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "primary_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.primary_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.primary_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.is_primary",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.not_primary",
@@ -15525,7 +16283,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node",
@@ -15533,7 +16292,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.address_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.address_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.dhcp_client",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.dhcp_server",
@@ -15542,7 +16302,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ipv6_address_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_address_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_address_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_auto_config",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.no_ipv6_address",
@@ -15551,7 +16312,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "monitoring_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitoring_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitoring_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitor",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitor_disabled",
@@ -15559,7 +16321,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.network_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.network_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.segment_network",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.site_local_inside_network",
@@ -15569,7 +16332,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node",
@@ -15577,7 +16341,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "primary_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.primary_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.primary_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.is_primary",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.not_primary",
@@ -15585,7 +16350,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "vlan_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.untagged",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_id",
@@ -15703,7 +16469,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.network_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.network_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.site_local_inside_network",
           "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.site_local_network",
@@ -15711,7 +16478,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.node_choice",
         options: ["spec.custom_network_config.interface_list.interfaces[].tunnel_interface.node"],
       },
       {
@@ -15741,7 +16509,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.sli_config.static_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.sli_config.static_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.sli_config.static_routes.static_routes[].default_gateway",
           "spec.custom_network_config.sli_config.static_routes.static_routes[].ip_address",
@@ -15750,7 +16519,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].default_gateway",
           "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].ip_address",
@@ -15783,7 +16553,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.slo_config.static_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.slo_config.static_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.slo_config.static_routes.static_routes[].default_gateway",
           "spec.custom_network_config.slo_config.static_routes.static_routes[].ip_address",
@@ -15792,7 +16563,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].default_gateway",
           "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].ip_address",
@@ -15802,17 +16574,26 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "static_route_choice",
         fieldPath: "spec.custom_storage_config.static_route_choice",
-        options: ["spec.custom_storage_config.no_static_routes", "spec.custom_storage_config.static_routes"],
+        options: [
+          "spec.custom_storage_config.no_static_routes",
+          "spec.custom_storage_config.static_routes",
+        ],
       },
       {
         choiceField: "storage_class_choice",
         fieldPath: "spec.custom_storage_config.storage_class_choice",
-        options: ["spec.custom_storage_config.default_storage_class", "spec.custom_storage_config.storage_class_list"],
+        options: [
+          "spec.custom_storage_config.default_storage_class",
+          "spec.custom_storage_config.storage_class_list",
+        ],
       },
       {
         choiceField: "storage_device_choice",
         fieldPath: "spec.custom_storage_config.storage_device_choice",
-        options: ["spec.custom_storage_config.no_storage_device", "spec.custom_storage_config.storage_device_list"],
+        options: [
+          "spec.custom_storage_config.no_storage_device",
+          "spec.custom_storage_config.storage_device_list",
+        ],
       },
       {
         choiceField: "storage_interface_choice",
@@ -15871,7 +16652,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "backend_choice",
-        fieldPath: "spec.custom_storage_config.storage_device_list.storage_devices[].netapp_trident.backend_choice",
+        fieldPath:
+          "spec.custom_storage_config.storage_device_list.storage_devices[].netapp_trident.backend_choice",
         options: [
           "spec.custom_storage_config.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas",
           "spec.custom_storage_config.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san",
@@ -16248,12 +17030,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -16344,7 +17130,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "direction",
-        fieldPath: "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].direction",
+        fieldPath:
+          "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].direction",
         options: [
           "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].inbound",
           "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].outbound",
@@ -16352,7 +17139,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].node_choice",
+        fieldPath:
+          "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].node_choice",
         options: [
           "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].all_nodes",
           "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].node_name",
@@ -16559,7 +17347,8 @@ export const sitesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -16766,7 +17555,10 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "lacp_choice",
         fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+        options: [
+          "spec.bond_device_list.bond_devices[].active_backup",
+          "spec.bond_device_list.bond_devices[].lacp",
+        ],
       },
       {
         choiceField: "forward_proxy_choice",
@@ -16780,12 +17572,18 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "global_network_choice",
         fieldPath: "spec.custom_network_config.global_network_choice",
-        options: ["spec.custom_network_config.global_network_list", "spec.custom_network_config.no_global_network"],
+        options: [
+          "spec.custom_network_config.global_network_list",
+          "spec.custom_network_config.no_global_network",
+        ],
       },
       {
         choiceField: "interface_choice",
         fieldPath: "spec.custom_network_config.interface_choice",
-        options: ["spec.custom_network_config.default_interface_config", "spec.custom_network_config.interface_list"],
+        options: [
+          "spec.custom_network_config.default_interface_config",
+          "spec.custom_network_config.interface_list",
+        ],
       },
       {
         choiceField: "network_policy_choice",
@@ -16808,16 +17606,23 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "sli_choice",
         fieldPath: "spec.custom_network_config.sli_choice",
-        options: ["spec.custom_network_config.default_sli_config", "spec.custom_network_config.sli_config"],
+        options: [
+          "spec.custom_network_config.default_sli_config",
+          "spec.custom_network_config.sli_config",
+        ],
       },
       {
         choiceField: "slo_choice",
         fieldPath: "spec.custom_network_config.slo_choice",
-        options: ["spec.custom_network_config.default_config", "spec.custom_network_config.slo_config"],
+        options: [
+          "spec.custom_network_config.default_config",
+          "spec.custom_network_config.slo_config",
+        ],
       },
       {
         choiceField: "connection_choice",
-        fieldPath: "spec.custom_network_config.global_network_list.global_network_connections[].connection_choice",
+        fieldPath:
+          "spec.custom_network_config.global_network_list.global_network_connections[].connection_choice",
         options: [
           "spec.custom_network_config.global_network_list.global_network_connections[].sli_to_global_dr",
           "spec.custom_network_config.global_network_list.global_network_connections[].slo_to_global_dr",
@@ -16825,7 +17630,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "forward_proxy_choice",
-        fieldPath: "spec.custom_network_config.global_network_list.global_network_connections[].forward_proxy_choice",
+        fieldPath:
+          "spec.custom_network_config.global_network_list.global_network_connections[].forward_proxy_choice",
         options: [],
       },
       {
@@ -16849,7 +17655,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "monitoring_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitoring_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitoring_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitor",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.monitor_disabled",
@@ -16857,7 +17664,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.node",
@@ -16865,7 +17673,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "primary_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.primary_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.primary_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.is_primary",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_interface.not_primary",
@@ -16873,7 +17682,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].dedicated_management_interface.node",
@@ -16881,7 +17691,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "address_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.address_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.address_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.dhcp_client",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.dhcp_server",
@@ -16890,7 +17701,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "ipv6_address_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_address_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_address_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.ipv6_auto_config",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.no_ipv6_address",
@@ -16899,7 +17711,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "monitoring_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitoring_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitoring_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitor",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.monitor_disabled",
@@ -16907,7 +17720,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.network_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.network_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.segment_network",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.site_local_inside_network",
@@ -16917,7 +17731,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.cluster",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.node",
@@ -16925,7 +17740,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "primary_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.primary_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.primary_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.is_primary",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.not_primary",
@@ -16933,7 +17749,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "vlan_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.untagged",
           "spec.custom_network_config.interface_list.interfaces[].ethernet_interface.vlan_id",
@@ -17051,7 +17868,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.network_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.network_choice",
         options: [
           "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.site_local_inside_network",
           "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.site_local_network",
@@ -17059,7 +17877,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.node_choice",
+        fieldPath:
+          "spec.custom_network_config.interface_list.interfaces[].tunnel_interface.node_choice",
         options: ["spec.custom_network_config.interface_list.interfaces[].tunnel_interface.node"],
       },
       {
@@ -17089,7 +17908,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.sli_config.static_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.sli_config.static_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.sli_config.static_routes.static_routes[].default_gateway",
           "spec.custom_network_config.sli_config.static_routes.static_routes[].ip_address",
@@ -17098,7 +17918,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].default_gateway",
           "spec.custom_network_config.sli_config.static_v6_routes.static_routes[].ip_address",
@@ -17131,7 +17952,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.slo_config.static_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.slo_config.static_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.slo_config.static_routes.static_routes[].default_gateway",
           "spec.custom_network_config.slo_config.static_routes.static_routes[].ip_address",
@@ -17140,7 +17962,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "next_hop_choice",
-        fieldPath: "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].next_hop_choice",
+        fieldPath:
+          "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].next_hop_choice",
         options: [
           "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].default_gateway",
           "spec.custom_network_config.slo_config.static_v6_routes.static_routes[].ip_address",
@@ -17150,17 +17973,26 @@ export const sitesTools: ParsedOperation[] = [
       {
         choiceField: "static_route_choice",
         fieldPath: "spec.custom_storage_config.static_route_choice",
-        options: ["spec.custom_storage_config.no_static_routes", "spec.custom_storage_config.static_routes"],
+        options: [
+          "spec.custom_storage_config.no_static_routes",
+          "spec.custom_storage_config.static_routes",
+        ],
       },
       {
         choiceField: "storage_class_choice",
         fieldPath: "spec.custom_storage_config.storage_class_choice",
-        options: ["spec.custom_storage_config.default_storage_class", "spec.custom_storage_config.storage_class_list"],
+        options: [
+          "spec.custom_storage_config.default_storage_class",
+          "spec.custom_storage_config.storage_class_list",
+        ],
       },
       {
         choiceField: "storage_device_choice",
         fieldPath: "spec.custom_storage_config.storage_device_choice",
-        options: ["spec.custom_storage_config.no_storage_device", "spec.custom_storage_config.storage_device_list"],
+        options: [
+          "spec.custom_storage_config.no_storage_device",
+          "spec.custom_storage_config.storage_device_list",
+        ],
       },
       {
         choiceField: "storage_interface_choice",
@@ -17219,7 +18051,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "backend_choice",
-        fieldPath: "spec.custom_storage_config.storage_device_list.storage_devices[].netapp_trident.backend_choice",
+        fieldPath:
+          "spec.custom_storage_config.storage_device_list.storage_devices[].netapp_trident.backend_choice",
         options: [
           "spec.custom_storage_config.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas",
           "spec.custom_storage_config.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san",
@@ -17596,12 +18429,16 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -17692,7 +18529,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "direction",
-        fieldPath: "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].direction",
+        fieldPath:
+          "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].direction",
         options: [
           "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].inbound",
           "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].outbound",
@@ -17700,7 +18538,8 @@ export const sitesTools: ParsedOperation[] = [
       },
       {
         choiceField: "node_choice",
-        fieldPath: "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].node_choice",
+        fieldPath:
+          "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].node_choice",
         options: [
           "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].all_nodes",
           "spec.local_control_plane.bgp_config.peers[].routing_policies.route_policy[].node_name",

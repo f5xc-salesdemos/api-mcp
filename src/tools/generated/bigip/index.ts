@@ -165,7 +165,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.baremetal_site_type_choice.f5_bare_metal_site.admin_password.secret_info_oneof",
+        fieldPath:
+          "spec.baremetal_site_type_choice.f5_bare_metal_site.admin_password.secret_info_oneof",
         options: [
           "spec.baremetal_site_type_choice.f5_bare_metal_site.admin_password.blindfold_secret_info",
           "spec.baremetal_site_type_choice.f5_bare_metal_site.admin_password.clear_secret_info",
@@ -173,7 +174,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.baremetal_site_type_choice.f5_bare_metal_site.bigiq_instance.password.secret_info_oneof",
+        fieldPath:
+          "spec.baremetal_site_type_choice.f5_bare_metal_site.bigiq_instance.password.secret_info_oneof",
         options: [
           "spec.baremetal_site_type_choice.f5_bare_metal_site.bigiq_instance.password.blindfold_secret_info",
           "spec.baremetal_site_type_choice.f5_bare_metal_site.bigiq_instance.password.clear_secret_info",
@@ -211,7 +213,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].disable_ocsp_stapling",
@@ -220,7 +223,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.clear_secret_info",
@@ -270,7 +274,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].disable_ocsp_stapling",
@@ -330,7 +335,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].disable_ocsp_stapling",
@@ -339,7 +345,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.clear_secret_info",
@@ -389,7 +396,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].disable_ocsp_stapling",
@@ -398,7 +406,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.clear_secret_info",
@@ -600,7 +609,8 @@ export const bigipTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -803,7 +813,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].disable_ocsp_stapling",
@@ -812,7 +823,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_sli_vip.tls_certificates[].private_key.clear_secret_info",
@@ -862,7 +874,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_internet_vip.tls_certificates[].disable_ocsp_stapling",
@@ -922,7 +935,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].disable_ocsp_stapling",
@@ -931,7 +945,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_slo_sli.tls_certificates[].private_key.clear_secret_info",
@@ -981,7 +996,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].custom_hash_algorithms",
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].disable_ocsp_stapling",
@@ -990,7 +1006,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https_management.advertise_on_slo_vip.tls_certificates[].private_key.clear_secret_info",
@@ -1260,7 +1277,8 @@ export const bigipTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1492,7 +1510,8 @@ export const bigipTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1656,7 +1675,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom",
@@ -1684,12 +1704,14 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "fail_configuration",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
         options: [],
       },
       {
         choiceField: "oversized_body_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_fail_validation",
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_skip_validation",
@@ -1697,7 +1719,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom",
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_default",
@@ -1723,7 +1746,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "validation_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.skip_validation",
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_active",
@@ -1754,7 +1778,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom",
@@ -1782,7 +1807,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "condition_type_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_endpoint",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_group",
@@ -1791,7 +1817,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].any_domain",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].specific_domain",
@@ -1848,7 +1875,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_custom",
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_default",
@@ -1898,7 +1926,8 @@ export const bigipTools: ParsedOperation[] = [
       },
       {
         choiceField: "api_repos_choice",
-        fieldPath: "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
+        fieldPath:
+          "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
         options: [
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].all_repos",
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].selected_repos",
@@ -1915,7 +1944,8 @@ export const bigipTools: ParsedOperation[] = [
     domain: "bigip",
     resource: "data-group",
     summary: "Create Data group.",
-    description: "Create data group in a given namespace. If one already exists it will give an error.",
+    description:
+      "Create data group in a given namespace. If one already exists it will give an error.",
     pathParameters: [
       {
         description:
@@ -2139,7 +2169,8 @@ export const bigipTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2291,7 +2322,8 @@ export const bigipTools: ParsedOperation[] = [
     description: "Fetch the corresponding Security Config for the given BIG-IP load balancers.",
     pathParameters: [
       {
-        description: "Namespace\nx-required\nNamespace of the BIG-IP Load Balancer for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the BIG-IP Load Balancer for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -2557,7 +2589,8 @@ export const bigipTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
