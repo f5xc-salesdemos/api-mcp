@@ -34,7 +34,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/reportingMaliciousTrafficOverviewActionsResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousTrafficOverviewActions",
+    operationId:
+      "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousTrafficOverviewActions",
     tags: ["Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -444,7 +445,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -870,7 +872,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1205,7 +1208,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1658,7 +1662,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/reportingMaliciousReportTransactionsResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsASN",
+    operationId:
+      "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsASN",
     tags: ["Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -1905,7 +1910,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/reportingTopAttackIntentResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.reporting.CustomAPI.TopMaliciousBotByAttackIntent",
+    operationId:
+      "ves.io.schema.shape.bot_defense.reporting.CustomAPI.TopMaliciousBotByAttackIntent",
     tags: ["Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -2320,7 +2326,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/bot_allowlist_policyGetPoliciesAndVersionsListResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.bot_allowlist_policy.CustomAPI.GetAllowlistPoliciesAndVersionsList",
+    operationId:
+      "ves.io.schema.shape.bot_defense.bot_allowlist_policy.CustomAPI.GetAllowlistPoliciesAndVersionsList",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -2459,7 +2466,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2786,7 +2794,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2940,7 +2949,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/bot_endpoint_policyGetPoliciesAndVersionsListResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.bot_endpoint_policy.CustomAPI.GetEndpointPoliciesAndVersionsList",
+    operationId:
+      "ves.io.schema.shape.bot_defense.bot_endpoint_policy.CustomAPI.GetEndpointPoliciesAndVersionsList",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -3079,7 +3089,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4897,7 +4908,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5051,7 +5063,10 @@ export const shapeTools: ParsedOperation[] = [
       {
         choiceField: "type_choice",
         fieldPath: "spec.cloud_hosted.ingress[].type_choice",
-        options: ["spec.cloud_hosted.ingress[].host_name", "spec.cloud_hosted.ingress[].ip_address"],
+        options: [
+          "spec.cloud_hosted.ingress[].host_name",
+          "spec.cloud_hosted.ingress[].ip_address",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -5096,7 +5111,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/bot_network_policyGetPoliciesAndVersionsListResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.bot_network_policy.CustomAPI.GetNetworkPoliciesAndVersionsList",
+    operationId:
+      "ves.io.schema.shape.bot_defense.bot_network_policy.CustomAPI.GetNetworkPoliciesAndVersionsList",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -5235,7 +5251,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5375,7 +5392,8 @@ export const shapeTools: ParsedOperation[] = [
     oneOfGroups: [
       {
         choiceField: "domain_operator_choice",
-        fieldPath: "spec.network_policy_content.manual_routing_list.manual_routing[].domain_operator_choice",
+        fieldPath:
+          "spec.network_policy_content.manual_routing_list.manual_routing[].domain_operator_choice",
         options: [
           "spec.network_policy_content.manual_routing_list.manual_routing[].http",
           "spec.network_policy_content.manual_routing_list.manual_routing[].https",
@@ -5383,7 +5401,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "outbound_operator_choice",
-        fieldPath: "spec.network_policy_content.manual_routing_list.manual_routing[].outbound_operator_choice",
+        fieldPath:
+          "spec.network_policy_content.manual_routing_list.manual_routing[].outbound_operator_choice",
         options: [
           "spec.network_policy_content.manual_routing_list.manual_routing[].protocol_http",
           "spec.network_policy_content.manual_routing_list.manual_routing[].protocol_https",
@@ -5433,7 +5452,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/reportingMaliciousReportTransactionsResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsBrowser",
+    operationId:
+      "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsBrowser",
     tags: ["Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -6185,7 +6205,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/bot_infrastructureDeploymentStatusResponse",
     },
     requiredParams: ["name", "namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.bot_infrastructure.CustomAPI.DeploymentStatusOverview",
+    operationId:
+      "ves.io.schema.shape.bot_defense.bot_infrastructure.CustomAPI.DeploymentStatusOverview",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -6607,7 +6628,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/bot_detection_ruleSaveDraftResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.threat_intelligence.bot_detection_rule.CustomAPI.SaveDraft",
+    operationId:
+      "ves.io.schema.shape.bot_defense.threat_intelligence.bot_detection_rule.CustomAPI.SaveDraft",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -6663,7 +6685,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/ioschemaEmpty",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.threat_intelligence.bot_detection_rule.CustomAPI.DiscardDraft",
+    operationId:
+      "ves.io.schema.shape.bot_defense.threat_intelligence.bot_detection_rule.CustomAPI.DiscardDraft",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -7321,7 +7344,8 @@ export const shapeTools: ParsedOperation[] = [
     domain: "shape",
     resource: "formField",
     summary: "List All Form Fields with GET method.",
-    description: "List form fields for all the scripts depending on start time and end time with GET method.",
+    description:
+      "List form fields for all the scripts depending on start time and end time with GET method.",
     pathParameters: [
       {
         description: "Namespace\nNamespace.",
@@ -8127,7 +8151,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/reportingMaliciousReportTransactionsResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsIP",
+    operationId:
+      "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsIP",
     tags: ["Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -8489,7 +8514,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/reportingMaliciousTrafficOverviewMetricsResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousTrafficOverviewMetrics",
+    operationId:
+      "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousTrafficOverviewMetrics",
     tags: ["Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -8783,7 +8809,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -9019,7 +9046,8 @@ export const shapeTools: ParsedOperation[] = [
     description: "GET Mobile Base Configuration File.",
     pathParameters: [
       {
-        description: "Mobile SDK Base Configuration name\nx-required\nMobile SDK Base Configuration name.",
+        description:
+          "Mobile SDK Base Configuration name\nx-required\nMobile SDK Base Configuration name.",
         in: "path",
         name: "name",
         required: true,
@@ -9045,7 +9073,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/mobile_base_configMobileBaseConfigurationFileResponse",
     },
     requiredParams: ["name", "namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.mobile_base_config.CustomAPI.GetMobileBaseConfigurationFile",
+    operationId:
+      "ves.io.schema.shape.bot_defense.mobile_base_config.CustomAPI.GetMobileBaseConfigurationFile",
     tags: ["Other"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -9184,7 +9213,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -9368,7 +9398,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Optional query parameter. If passed, returns only latest version of the objects.",
+        description:
+          "Optional query parameter. If passed, returns only latest version of the objects.",
         in: "query",
         name: "latest_version_only",
         required: false,
@@ -9542,7 +9573,8 @@ export const shapeTools: ParsedOperation[] = [
     domain: "shape",
     resource: "networkInteraction",
     summary: "List Network Interactions By Script.",
-    description: "List all the network interactions for a script depending on start time and end time.",
+    description:
+      "List all the network interactions for a script depending on start time and end time.",
     pathParameters: [
       {
         description: "ID\nscript ID.",
@@ -9594,7 +9626,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/client_side_defenseListNetworkInteractionsByScriptResponse",
     },
     requiredParams: ["id", "namespace"],
-    operationId: "ves.io.schema.shape.client_side_defense.CustomAPI.ListNetworkInteractionsByScript",
+    operationId:
+      "ves.io.schema.shape.client_side_defense.CustomAPI.ListNetworkInteractionsByScript",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -9651,7 +9684,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/reportingMaliciousReportTransactionsResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsOS",
+    operationId:
+      "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsOS",
     tags: ["Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -9978,7 +10012,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/bot_infrastructureDeployPoliciesResponse",
     },
     requiredParams: ["body", "name", "namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.bot_infrastructure.CustomAPI.DeployPoliciesToBotInfra",
+    operationId:
+      "ves.io.schema.shape.bot_defense.bot_infrastructure.CustomAPI.DeployPoliciesToBotInfra",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -10172,7 +10207,10 @@ export const shapeTools: ParsedOperation[] = [
       {
         choiceField: "domain_matcher_choice",
         fieldPath: "spec.cloudflare.protected_endpoints[].domain_matcher_choice",
-        options: ["spec.cloudflare.protected_endpoints[].any_domain", "spec.cloudflare.protected_endpoints[].domain"],
+        options: [
+          "spec.cloudflare.protected_endpoints[].any_domain",
+          "spec.cloudflare.protected_endpoints[].domain",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -10235,7 +10273,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "add_header_choice",
-        fieldPath: "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_mobile.add_header_choice",
+        fieldPath:
+          "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_mobile.add_header_choice",
         options: [
           "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_mobile.add_header",
           "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_mobile.no_header",
@@ -10243,7 +10282,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "add_header_choice",
-        fieldPath: "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_web.add_header_choice",
+        fieldPath:
+          "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_web.add_header_choice",
         options: [
           "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_web.add_header",
           "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_web.no_header",
@@ -10252,7 +10292,10 @@ export const shapeTools: ParsedOperation[] = [
       {
         choiceField: "client_source_choice",
         fieldPath: "spec.cloudflare.trusted_clients[].client_source_choice",
-        options: ["spec.cloudflare.trusted_clients[].http_header", "spec.cloudflare.trusted_clients[].ip_prefix"],
+        options: [
+          "spec.cloudflare.trusted_clients[].http_header",
+          "spec.cloudflare.trusted_clients[].ip_prefix",
+        ],
       },
       {
         choiceField: "value_match",
@@ -10357,7 +10400,10 @@ export const shapeTools: ParsedOperation[] = [
       {
         choiceField: "domain_matcher_choice",
         fieldPath: "spec.cloudfront.protected_endpoints[].domain_matcher_choice",
-        options: ["spec.cloudfront.protected_endpoints[].any_domain", "spec.cloudfront.protected_endpoints[].domain"],
+        options: [
+          "spec.cloudfront.protected_endpoints[].any_domain",
+          "spec.cloudfront.protected_endpoints[].domain",
+        ],
       },
       {
         choiceField: "flow_label_choice",
@@ -10391,7 +10437,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.account_management.label_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.account_management.label_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.account_management.create",
           "spec.cloudfront.protected_endpoints[].flow_label.account_management.password_reset",
@@ -10410,7 +10457,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "transaction_result_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.authentication.login.transaction_result_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.authentication.login.transaction_result_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.authentication.login.disable_transaction_result",
           "spec.cloudfront.protected_endpoints[].flow_label.authentication.login.transaction_result",
@@ -10418,7 +10466,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.financial_services.label_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.financial_services.label_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.financial_services.apply",
           "spec.cloudfront.protected_endpoints[].flow_label.financial_services.money_transfer",
@@ -10431,7 +10480,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.profile_management.label_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.profile_management.label_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.profile_management.create",
           "spec.cloudfront.protected_endpoints[].flow_label.profile_management.update",
@@ -10450,7 +10500,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.shopping_gift_cards.label_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.shopping_gift_cards.label_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.shopping_gift_cards.gift_card_make_purchase_with_gift_card",
           "spec.cloudfront.protected_endpoints[].flow_label.shopping_gift_cards.gift_card_validation",
@@ -10518,7 +10569,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "add_header_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_mobile.add_header_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_mobile.add_header_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_mobile.add_header",
           "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_mobile.no_header",
@@ -10526,7 +10578,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "add_header_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_web.add_header_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_web.add_header_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_web.add_header",
           "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_web.no_header",
@@ -10535,7 +10588,10 @@ export const shapeTools: ParsedOperation[] = [
       {
         choiceField: "client_source_choice",
         fieldPath: "spec.cloudfront.trusted_clients[].client_source_choice",
-        options: ["spec.cloudfront.trusted_clients[].http_header", "spec.cloudfront.trusted_clients[].ip_prefix"],
+        options: [
+          "spec.cloudfront.trusted_clients[].http_header",
+          "spec.cloudfront.trusted_clients[].ip_prefix",
+        ],
       },
       {
         choiceField: "value_match",
@@ -10746,7 +10802,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -10993,7 +11050,10 @@ export const shapeTools: ParsedOperation[] = [
       {
         choiceField: "domain_matcher_choice",
         fieldPath: "spec.cloudflare.protected_endpoints[].domain_matcher_choice",
-        options: ["spec.cloudflare.protected_endpoints[].any_domain", "spec.cloudflare.protected_endpoints[].domain"],
+        options: [
+          "spec.cloudflare.protected_endpoints[].any_domain",
+          "spec.cloudflare.protected_endpoints[].domain",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -11056,7 +11116,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "add_header_choice",
-        fieldPath: "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_mobile.add_header_choice",
+        fieldPath:
+          "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_mobile.add_header_choice",
         options: [
           "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_mobile.add_header",
           "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_mobile.no_header",
@@ -11064,7 +11125,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "add_header_choice",
-        fieldPath: "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_web.add_header_choice",
+        fieldPath:
+          "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_web.add_header_choice",
         options: [
           "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_web.add_header",
           "spec.cloudflare.protected_endpoints[].web_mobile_client.continue_web.no_header",
@@ -11073,7 +11135,10 @@ export const shapeTools: ParsedOperation[] = [
       {
         choiceField: "client_source_choice",
         fieldPath: "spec.cloudflare.trusted_clients[].client_source_choice",
-        options: ["spec.cloudflare.trusted_clients[].http_header", "spec.cloudflare.trusted_clients[].ip_prefix"],
+        options: [
+          "spec.cloudflare.trusted_clients[].http_header",
+          "spec.cloudflare.trusted_clients[].ip_prefix",
+        ],
       },
       {
         choiceField: "value_match",
@@ -11178,7 +11243,10 @@ export const shapeTools: ParsedOperation[] = [
       {
         choiceField: "domain_matcher_choice",
         fieldPath: "spec.cloudfront.protected_endpoints[].domain_matcher_choice",
-        options: ["spec.cloudfront.protected_endpoints[].any_domain", "spec.cloudfront.protected_endpoints[].domain"],
+        options: [
+          "spec.cloudfront.protected_endpoints[].any_domain",
+          "spec.cloudfront.protected_endpoints[].domain",
+        ],
       },
       {
         choiceField: "flow_label_choice",
@@ -11212,7 +11280,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.account_management.label_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.account_management.label_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.account_management.create",
           "spec.cloudfront.protected_endpoints[].flow_label.account_management.password_reset",
@@ -11231,7 +11300,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "transaction_result_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.authentication.login.transaction_result_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.authentication.login.transaction_result_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.authentication.login.disable_transaction_result",
           "spec.cloudfront.protected_endpoints[].flow_label.authentication.login.transaction_result",
@@ -11239,7 +11309,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.financial_services.label_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.financial_services.label_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.financial_services.apply",
           "spec.cloudfront.protected_endpoints[].flow_label.financial_services.money_transfer",
@@ -11252,7 +11323,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.profile_management.label_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.profile_management.label_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.profile_management.create",
           "spec.cloudfront.protected_endpoints[].flow_label.profile_management.update",
@@ -11271,7 +11343,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].flow_label.shopping_gift_cards.label_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].flow_label.shopping_gift_cards.label_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].flow_label.shopping_gift_cards.gift_card_make_purchase_with_gift_card",
           "spec.cloudfront.protected_endpoints[].flow_label.shopping_gift_cards.gift_card_validation",
@@ -11339,7 +11412,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "add_header_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_mobile.add_header_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_mobile.add_header_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_mobile.add_header",
           "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_mobile.no_header",
@@ -11347,7 +11421,8 @@ export const shapeTools: ParsedOperation[] = [
       },
       {
         choiceField: "add_header_choice",
-        fieldPath: "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_web.add_header_choice",
+        fieldPath:
+          "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_web.add_header_choice",
         options: [
           "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_web.add_header",
           "spec.cloudfront.protected_endpoints[].web_mobile_client.continue_web.no_header",
@@ -11356,7 +11431,10 @@ export const shapeTools: ParsedOperation[] = [
       {
         choiceField: "client_source_choice",
         fieldPath: "spec.cloudfront.trusted_clients[].client_source_choice",
-        options: ["spec.cloudfront.trusted_clients[].http_header", "spec.cloudfront.trusted_clients[].ip_prefix"],
+        options: [
+          "spec.cloudfront.trusted_clients[].http_header",
+          "spec.cloudfront.trusted_clients[].ip_prefix",
+        ],
       },
       {
         choiceField: "value_match",
@@ -11647,7 +11725,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -12166,7 +12245,8 @@ export const shapeTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "X-required\nformat: unix epoch timestamp in seconds\nfetch scripts whose timestamp <= end_time.",
+        description:
+          "X-required\nformat: unix epoch timestamp in seconds\nfetch scripts whose timestamp <= end_time.",
         in: "query",
         name: "end_time",
         required: false,
@@ -12199,7 +12279,8 @@ export const shapeTools: ParsedOperation[] = [
         "x-displayname": "Page Size",
       },
       {
-        description: "Page_token is the value of listscriptsresponse.next_page_token from previous request.",
+        description:
+          "Page_token is the value of listscriptsresponse.next_page_token from previous request.",
         in: "query",
         name: "page_token",
         required: false,
@@ -12572,7 +12653,8 @@ export const shapeTools: ParsedOperation[] = [
     domain: "shape",
     resource: "suggest-value",
     summary: "Suggest Values.",
-    description: "Returns suggested values for the specified field in the given Create/Replace/Custom request.",
+    description:
+      "Returns suggested values for the specified field in the given Create/Replace/Custom request.",
     pathParameters: [
       {
         description: "Namespace\nNamespace in which the suggestions are scoped.",
@@ -12872,7 +12954,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/protected_applicationTemplateConnectorResponse",
     },
     requiredParams: ["name", "namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.protected_application.CustomAPI.TemplateConnector",
+    operationId:
+      "ves.io.schema.shape.bot_defense.protected_application.CustomAPI.TemplateConnector",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -14077,7 +14160,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/reportingMaliciousReportTransactionsResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsUA",
+    operationId:
+      "ves.io.schema.shape.bot_defense.reporting.CustomAPI.MaliciousReportTransactionsUA",
     tags: ["Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -14133,7 +14217,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/reportingInsightUnaddressedAutomationsResponse",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.reporting.CustomAPI.InsightUnaddressedAutomations",
+    operationId:
+      "ves.io.schema.shape.bot_defense.reporting.CustomAPI.InsightUnaddressedAutomations",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,
@@ -14404,7 +14489,8 @@ export const shapeTools: ParsedOperation[] = [
       $ref: "#/components/schemas/bot_allowlist_policyPolicyVersionsResponse",
     },
     requiredParams: ["name", "namespace"],
-    operationId: "ves.io.schema.shape.bot_defense.bot_allowlist_policy.CustomAPI.GetAllowlistPolicyVersions",
+    operationId:
+      "ves.io.schema.shape.bot_defense.bot_allowlist_policy.CustomAPI.GetAllowlistPolicyVersions",
     tags: ["Shape Security"],
     sourceFile: "domains/shape.json",
     displayName: null,

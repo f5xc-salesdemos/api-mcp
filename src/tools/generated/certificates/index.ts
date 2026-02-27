@@ -233,7 +233,8 @@ export const certificatesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -437,7 +438,11 @@ export const certificatesTools: ParsedOperation[] = [
       {
         choiceField: "ocsp_stapling_choice",
         fieldPath: "spec.ocsp_stapling_choice",
-        options: ["spec.custom_hash_algorithms", "spec.disable_ocsp_stapling", "spec.use_system_defaults"],
+        options: [
+          "spec.custom_hash_algorithms",
+          "spec.disable_ocsp_stapling",
+          "spec.use_system_defaults",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -606,7 +611,8 @@ export const certificatesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -742,7 +748,11 @@ export const certificatesTools: ParsedOperation[] = [
       {
         choiceField: "ocsp_stapling_choice",
         fieldPath: "spec.ocsp_stapling_choice",
-        options: ["spec.custom_hash_algorithms", "spec.disable_ocsp_stapling", "spec.use_system_defaults"],
+        options: [
+          "spec.custom_hash_algorithms",
+          "spec.disable_ocsp_stapling",
+          "spec.use_system_defaults",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -985,7 +995,8 @@ export const certificatesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1353,7 +1364,8 @@ export const certificatesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
