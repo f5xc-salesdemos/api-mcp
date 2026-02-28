@@ -14,7 +14,8 @@ export const secops_and_incident_responseTools: ParsedOperation[] = [
     domain: "secops_and_incident_response",
     resource: "malicious-user-mitigation",
     summary: "Create Malicious User Mitigation.",
-    description: "Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -188,7 +189,8 @@ export const secops_and_incident_responseTools: ParsedOperation[] = [
     domain: "secops_and_incident_response",
     resource: "malicious-user-mitigation",
     summary: "GET Malicious User Mitigation.",
-    description: "GET malicious_user_mitigation reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET malicious_user_mitigation reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -291,7 +293,8 @@ export const secops_and_incident_responseTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,

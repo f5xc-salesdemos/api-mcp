@@ -18,7 +18,8 @@ export const blindfoldTools: ParsedOperation[] = [
       "Request to GET number of VoltShare API calls aggregated across multiple dimensions like OPERATION, COUNTRY, RESULT, USER_TENANT.",
     pathParameters: [
       {
-        description: "Namespace\nnamespace is used to scope the security events for the given namespace.",
+        description:
+          "Namespace\nnamespace is used to scope the security events for the given namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -73,7 +74,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "aggregation",
     summary: "Audit Log Aggregation Query.",
-    description: "Request to GET summary/analytics data for the audit logs that matches the criteria in request.",
+    description:
+      "Request to GET summary/analytics data for the audit logs that matches the criteria in request.",
     pathParameters: [
       {
         description: "Namespace\nfetch aggregation data scoped by namespace.",
@@ -637,7 +639,8 @@ export const blindfoldTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Long Base-64 encoded string which can be used to retrieve next batch of log messages.",
+        description:
+          "Long Base-64 encoded string which can be used to retrieve next batch of log messages.",
         in: "query",
         name: "scroll_id",
         required: false,
@@ -689,7 +692,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "secret-management-access",
     summary: "Create Secret Management Access.",
-    description: "Create secret_management_access creates a new object in storage backend for metadata.namespace.",
+    description:
+      "Create secret_management_access creates a new object in storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -790,7 +794,10 @@ export const blindfoldTools: ParsedOperation[] = [
       {
         choiceField: "tls_params_choice",
         fieldPath: "spec.access_info.tls_config.tls_params_choice",
-        options: ["spec.access_info.tls_config.cert_params", "spec.access_info.tls_config.common_params"],
+        options: [
+          "spec.access_info.tls_config.cert_params",
+          "spec.access_info.tls_config.common_params",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -802,7 +809,8 @@ export const blindfoldTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.access_info.tls_config.common_params.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.access_info.tls_config.common_params.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.access_info.tls_config.common_params.tls_certificates[].custom_hash_algorithms",
           "spec.access_info.tls_config.common_params.tls_certificates[].disable_ocsp_stapling",
@@ -811,7 +819,8 @@ export const blindfoldTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.access_info.tls_config.common_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.access_info.tls_config.common_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.access_info.tls_config.common_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.access_info.tls_config.common_params.tls_certificates[].private_key.clear_secret_info",
@@ -828,7 +837,10 @@ export const blindfoldTools: ParsedOperation[] = [
       {
         choiceField: "auth_params",
         fieldPath: "spec.access_info.vault_auth_info.auth_params",
-        options: ["spec.access_info.vault_auth_info.app_role_auth", "spec.access_info.vault_auth_info.token"],
+        options: [
+          "spec.access_info.vault_auth_info.app_role_auth",
+          "spec.access_info.vault_auth_info.token",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -859,7 +871,10 @@ export const blindfoldTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -959,7 +974,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "secret-management-access",
     summary: "GET Secret Management Access.",
-    description: "GET secret_management_access reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET secret_management_access reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1062,7 +1078,8 @@ export const blindfoldTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1252,7 +1269,10 @@ export const blindfoldTools: ParsedOperation[] = [
       {
         choiceField: "tls_params_choice",
         fieldPath: "spec.access_info.tls_config.tls_params_choice",
-        options: ["spec.access_info.tls_config.cert_params", "spec.access_info.tls_config.common_params"],
+        options: [
+          "spec.access_info.tls_config.cert_params",
+          "spec.access_info.tls_config.common_params",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -1264,7 +1284,8 @@ export const blindfoldTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.access_info.tls_config.common_params.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.access_info.tls_config.common_params.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.access_info.tls_config.common_params.tls_certificates[].custom_hash_algorithms",
           "spec.access_info.tls_config.common_params.tls_certificates[].disable_ocsp_stapling",
@@ -1273,7 +1294,8 @@ export const blindfoldTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.access_info.tls_config.common_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.access_info.tls_config.common_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.access_info.tls_config.common_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.access_info.tls_config.common_params.tls_certificates[].private_key.clear_secret_info",
@@ -1290,7 +1312,10 @@ export const blindfoldTools: ParsedOperation[] = [
       {
         choiceField: "auth_params",
         fieldPath: "spec.access_info.vault_auth_info.auth_params",
-        options: ["spec.access_info.vault_auth_info.app_role_auth", "spec.access_info.vault_auth_info.token"],
+        options: [
+          "spec.access_info.vault_auth_info.app_role_auth",
+          "spec.access_info.vault_auth_info.token",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -1321,7 +1346,10 @@ export const blindfoldTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -1347,7 +1375,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "secret-policy",
     summary: "Create Secret Policy.",
-    description: "Create secret_policy creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create secret_policy creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -1517,7 +1546,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "secret-policy",
     summary: "GET Secret Policy.",
-    description: "GET secret_policy reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET secret_policy reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1620,7 +1650,8 @@ export const blindfoldTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1698,7 +1729,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "secret-policy-rule",
     summary: "Create Secret Policy Rule.",
-    description: "Create secret_policy_rule creates a new object in storage backend for metadata.namespace.",
+    description:
+      "Create secret_policy_rule creates a new object in storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -1859,7 +1891,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "secret-policy-rule",
     summary: "GET Secret Policy Rule.",
-    description: "GET secret_policy_rule reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET secret_policy_rule reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1962,7 +1995,8 @@ export const blindfoldTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2040,7 +2074,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "secret-policy-rule",
     summary: "Replace Secret Policy Rule.",
-    description: "Replace secret_policy_rule creates a new object in storage backend for metadata.namespace.",
+    description:
+      "Replace secret_policy_rule creates a new object in storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -2137,7 +2172,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "secret-policy",
     summary: "Replace Secret Policy.",
-    description: "Replace secret_policy replaces an existing object in the storage backend for metadata.namespace.",
+    description:
+      "Replace secret_policy replaces an existing object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -2319,7 +2355,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "voltshare-admin-policy",
     summary: "Create VoltShare Admin Policy.",
-    description: "Create voltshare_admin_policy creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create voltshare_admin_policy creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -2542,7 +2579,8 @@ export const blindfoldTools: ParsedOperation[] = [
     domain: "blindfold",
     resource: "voltshare-admin-policy",
     summary: "GET VoltShare Admin Policy.",
-    description: "GET voltshare_admin_policy reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET voltshare_admin_policy reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -2645,7 +2683,8 @@ export const blindfoldTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
