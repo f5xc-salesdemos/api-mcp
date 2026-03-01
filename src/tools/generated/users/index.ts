@@ -14,7 +14,8 @@ export const usersTools: ParsedOperation[] = [
     domain: "users",
     resource: "create",
     summary: "Create",
-    description: "Create creates a new label in shared namespace. Any other namespace requested will return error.",
+    description:
+      "Create creates a new label in shared namespace. Any other namespace requested will return error.",
     pathParameters: [
       {
         description: "Namespace\nNamespace in which to create the label.",
@@ -67,7 +68,8 @@ export const usersTools: ParsedOperation[] = [
     domain: "users",
     resource: "delete",
     summary: "DELETE",
-    description: "DELETE will DELETE a given label label key = label value from current tenants shared namespace.",
+    description:
+      "DELETE will DELETE a given label label key = label value from current tenants shared namespace.",
     pathParameters: [
       {
         description: "Namespace\nNamespace of the label to be deleted.",
@@ -373,7 +375,12 @@ export const usersTools: ParsedOperation[] = [
         required: false,
         schema: {
           default: "QUERY_ALL_LABELS",
-          enum: ["QUERY_ALL_LABELS", "QUERY_EXACT_LABEL", "QUERY_VALUE_PREFIX_LABELS", "QUERY_KEY_PREFIX_LABELS"],
+          enum: [
+            "QUERY_ALL_LABELS",
+            "QUERY_EXACT_LABEL",
+            "QUERY_VALUE_PREFIX_LABELS",
+            "QUERY_KEY_PREFIX_LABELS",
+          ],
           type: "string",
         },
         "x-displayname": "Label Key Prefix.",
@@ -715,7 +722,8 @@ export const usersTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,

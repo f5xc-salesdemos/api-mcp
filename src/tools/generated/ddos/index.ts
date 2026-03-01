@@ -723,7 +723,8 @@ export const ddosTools: ParsedOperation[] = [
     domain: "ddos",
     resource: "event",
     summary: "Event details.",
-    description: "Returns details of an event. This allows customers to review any activity related to a DDoS attack.",
+    description:
+      "Returns details of an event. This allows customers to review any activity related to a DDoS attack.",
     pathParameters: [
       {
         description: "Event ID\nID of the event we want to GET details for.",
@@ -789,7 +790,8 @@ export const ddosTools: ParsedOperation[] = [
     domain: "ddos",
     resource: "event",
     summary: "Edit event.",
-    description: "Allows editing of an event, setting its end date and upload any relevant pieces of information.",
+    description:
+      "Allows editing of an event, setting its end date and upload any relevant pieces of information.",
     pathParameters: [
       {
         description: "Alert ID\nID of the event we want to edit.",
@@ -1189,7 +1191,8 @@ export const ddosTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1525,7 +1528,8 @@ export const ddosTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2056,7 +2060,8 @@ export const ddosTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2344,7 +2349,10 @@ export const ddosTools: ParsedOperation[] = [
       {
         choiceField: "destination_port",
         fieldPath: "spec.protocol_tcp.destination_port",
-        options: ["spec.protocol_tcp.destination_port_all", "spec.protocol_tcp.destination_port_range"],
+        options: [
+          "spec.protocol_tcp.destination_port_all",
+          "spec.protocol_tcp.destination_port_range",
+        ],
       },
       {
         choiceField: "source_port",
@@ -2354,7 +2362,10 @@ export const ddosTools: ParsedOperation[] = [
       {
         choiceField: "destination_port",
         fieldPath: "spec.protocol_udp.destination_port",
-        options: ["spec.protocol_udp.destination_port_all", "spec.protocol_udp.destination_port_range"],
+        options: [
+          "spec.protocol_udp.destination_port_all",
+          "spec.protocol_udp.destination_port_range",
+        ],
       },
       {
         choiceField: "source_port",
@@ -2793,7 +2804,8 @@ export const ddosTools: ParsedOperation[] = [
     description: "List the set of infraprotect_firewall_rule_group in a namespace.",
     pathParameters: [
       {
-        description: "Namespace\nNamespace to scope the listing of infraprotect_firewall_rule_group.",
+        description:
+          "Namespace\nNamespace to scope the listing of infraprotect_firewall_rule_group.",
         in: "path",
         name: "namespace",
         required: true,
@@ -2805,7 +2817,8 @@ export const ddosTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2989,7 +3002,8 @@ export const ddosTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3183,7 +3197,10 @@ export const ddosTools: ParsedOperation[] = [
       {
         choiceField: "destination_port",
         fieldPath: "spec.protocol_tcp.destination_port",
-        options: ["spec.protocol_tcp.destination_port_all", "spec.protocol_tcp.destination_port_range"],
+        options: [
+          "spec.protocol_tcp.destination_port_all",
+          "spec.protocol_tcp.destination_port_range",
+        ],
       },
       {
         choiceField: "source_port",
@@ -3193,7 +3210,10 @@ export const ddosTools: ParsedOperation[] = [
       {
         choiceField: "destination_port",
         fieldPath: "spec.protocol_udp.destination_port",
-        options: ["spec.protocol_udp.destination_port_all", "spec.protocol_udp.destination_port_range"],
+        options: [
+          "spec.protocol_udp.destination_port_all",
+          "spec.protocol_udp.destination_port_range",
+        ],
       },
       {
         choiceField: "source_port",
@@ -3326,7 +3346,8 @@ export const ddosTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3838,7 +3859,8 @@ export const ddosTools: ParsedOperation[] = [
     description: "List the set of infraprotect_internet_prefix_advertisement in a namespace.",
     pathParameters: [
       {
-        description: "Namespace\nNamespace to scope the listing of infraprotect_internet_prefix_advertisement.",
+        description:
+          "Namespace\nNamespace to scope the listing of infraprotect_internet_prefix_advertisement.",
         in: "path",
         name: "namespace",
         required: true,
@@ -3850,7 +3872,8 @@ export const ddosTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4118,7 +4141,10 @@ export const ddosTools: ParsedOperation[] = [
       {
         choiceField: "ipv6_interconnect_choice",
         fieldPath: "spec.gre_ipv4.ipv6_interconnect_choice",
-        options: ["spec.gre_ipv4.ipv6_interconnect_disabled", "spec.gre_ipv4.ipv6_interconnect_enabled"],
+        options: [
+          "spec.gre_ipv4.ipv6_interconnect_disabled",
+          "spec.gre_ipv4.ipv6_interconnect_enabled",
+        ],
       },
       {
         choiceField: "keepalive_choice",
@@ -4128,7 +4154,10 @@ export const ddosTools: ParsedOperation[] = [
       {
         choiceField: "ipv4_interconnect_choice",
         fieldPath: "spec.gre_ipv6.ipv4_interconnect_choice",
-        options: ["spec.gre_ipv6.ipv4_interconnect_disabled", "spec.gre_ipv6.ipv4_interconnect_enabled"],
+        options: [
+          "spec.gre_ipv6.ipv4_interconnect_disabled",
+          "spec.gre_ipv6.ipv4_interconnect_enabled",
+        ],
       },
       {
         choiceField: "zone",
@@ -4336,7 +4365,8 @@ export const ddosTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4495,7 +4525,10 @@ export const ddosTools: ParsedOperation[] = [
       {
         choiceField: "ipv6_interconnect_choice",
         fieldPath: "spec.gre_ipv4.ipv6_interconnect_choice",
-        options: ["spec.gre_ipv4.ipv6_interconnect_disabled", "spec.gre_ipv4.ipv6_interconnect_enabled"],
+        options: [
+          "spec.gre_ipv4.ipv6_interconnect_disabled",
+          "spec.gre_ipv4.ipv6_interconnect_enabled",
+        ],
       },
       {
         choiceField: "keepalive_choice",
@@ -4505,7 +4538,10 @@ export const ddosTools: ParsedOperation[] = [
       {
         choiceField: "ipv4_interconnect_choice",
         fieldPath: "spec.gre_ipv6.ipv4_interconnect_choice",
-        options: ["spec.gre_ipv6.ipv4_interconnect_disabled", "spec.gre_ipv6.ipv4_interconnect_enabled"],
+        options: [
+          "spec.gre_ipv6.ipv4_interconnect_disabled",
+          "spec.gre_ipv6.ipv4_interconnect_enabled",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -4531,7 +4567,8 @@ export const ddosTools: ParsedOperation[] = [
     domain: "ddos",
     resource: "ip",
     summary: "Mitigation IPs.",
-    description: "Returns list of IPs involved in a mitigation (and allows for searching through it)",
+    description:
+      "Returns list of IPs involved in a mitigation (and allows for searching through it)",
     pathParameters: [
       {
         description: "Mitigation ID\nID of the mitigation we want to GET the IPs for.",
@@ -5362,7 +5399,8 @@ export const ddosTools: ParsedOperation[] = [
     description: "Update Infraprotect ASN Review Status.",
     pathParameters: [
       {
-        description: "Namespace\n\nx-required\nNamespace in which the infraprotect ASN review status is to be updated.",
+        description:
+          "Namespace\n\nx-required\nNamespace in which the infraprotect ASN review status is to be updated.",
         in: "path",
         name: "namespace",
         required: true,
@@ -5426,7 +5464,8 @@ export const ddosTools: ParsedOperation[] = [
     description: "Update Tunnel Status.",
     pathParameters: [
       {
-        description: "Namespace\n\nx-required\nNamespace in which the tunnel status is to be updated.",
+        description:
+          "Namespace\n\nx-required\nNamespace in which the tunnel status is to be updated.",
         in: "path",
         name: "namespace",
         required: true,

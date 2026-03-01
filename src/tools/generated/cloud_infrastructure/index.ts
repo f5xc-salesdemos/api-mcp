@@ -102,7 +102,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -241,7 +242,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
       },
       {
         choiceField: "default_route_choice",
-        fieldPath: "spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.default_route_choice",
+        fieldPath:
+          "spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.default_route_choice",
         options: [
           "spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.all_route_tables",
           "spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.selective_route_tables",
@@ -258,7 +260,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
       },
       {
         choiceField: "default_route_choice",
-        fieldPath: "spec.azure_vnet_site.vnet_attachments.vnet_list[].default_route.default_route_choice",
+        fieldPath:
+          "spec.azure_vnet_site.vnet_attachments.vnet_list[].default_route.default_route_choice",
         options: [
           "spec.azure_vnet_site.vnet_attachments.vnet_list[].default_route.all_route_tables",
           "spec.azure_vnet_site.vnet_attachments.vnet_list[].default_route.selective_route_tables",
@@ -426,7 +429,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -624,7 +628,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
       },
       {
         choiceField: "default_route_choice",
-        fieldPath: "spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.default_route_choice",
+        fieldPath:
+          "spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.default_route_choice",
         options: [
           "spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.all_route_tables",
           "spec.aws_tgw_site.vpc_attachments.vpc_list[].default_route.selective_route_tables",
@@ -641,7 +646,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
       },
       {
         choiceField: "default_route_choice",
-        fieldPath: "spec.azure_vnet_site.vnet_attachments.vnet_list[].default_route.default_route_choice",
+        fieldPath:
+          "spec.azure_vnet_site.vnet_attachments.vnet_list[].default_route.default_route_choice",
         options: [
           "spec.azure_vnet_site.vnet_attachments.vnet_list[].default_route.all_route_tables",
           "spec.azure_vnet_site.vnet_attachments.vnet_list[].default_route.selective_route_tables",
@@ -930,7 +936,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1126,7 +1133,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
     domain: "cloud_infrastructure",
     resource: "cloud-elastic-ip",
     summary: "Create Cloud Elastic IP.",
-    description: "Create Cloud Elastic IP creates Cloud Elastic IP object\nObject is attached to a site.",
+    description:
+      "Create Cloud Elastic IP creates Cloud Elastic IP object\nObject is attached to a site.",
     pathParameters: [
       {
         description:
@@ -1255,7 +1263,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
     domain: "cloud_infrastructure",
     resource: "cloud-elastic-ip",
     summary: "GET Cloud Elastic IP.",
-    description: "GET cloud elastic IP will GET the object from the storage backend for namespace metadata.namespace.",
+    description:
+      "GET cloud elastic IP will GET the object from the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1345,7 +1354,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1595,7 +1605,10 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
       {
         choiceField: "project_choice",
         fieldPath: "spec.gcp.byoc.connections[].project_choice",
-        options: ["spec.gcp.byoc.connections[].project", "spec.gcp.byoc.connections[].same_as_credential"],
+        options: [
+          "spec.gcp.byoc.connections[].project",
+          "spec.gcp.byoc.connections[].same_as_credential",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -1759,7 +1772,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1941,7 +1955,10 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
       {
         choiceField: "project_choice",
         fieldPath: "spec.gcp.byoc.connections[].project_choice",
-        options: ["spec.gcp.byoc.connections[].project", "spec.gcp.byoc.connections[].same_as_credential"],
+        options: [
+          "spec.gcp.byoc.connections[].project",
+          "spec.gcp.byoc.connections[].same_as_credential",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -2043,7 +2060,8 @@ export const cloud_infrastructureTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
