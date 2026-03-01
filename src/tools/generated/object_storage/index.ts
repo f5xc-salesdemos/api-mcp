@@ -14,7 +14,8 @@ export const object_storageTools: ParsedOperation[] = [
     domain: "object_storage",
     resource: "mobile-app-shield",
     summary: "GET List Of Mobile App Shields.",
-    description: "ListMobileAppShields is an API to list all mobile app shields available for download.",
+    description:
+      "ListMobileAppShields is an API to list all mobile app shields available for download.",
     pathParameters: [
       {
         description: "Namespace\nx-required\nNamespace of the stored_object.",
@@ -29,7 +30,8 @@ export const object_storageTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Optional query parameter. If passed, returns only latest version of the objects.",
+        description:
+          "Optional query parameter. If passed, returns only latest version of the objects.",
         in: "query",
         name: "latest_version_only",
         required: false,
@@ -102,7 +104,8 @@ export const object_storageTools: ParsedOperation[] = [
     domain: "object_storage",
     resource: "mobile-integrator",
     summary: "GET List Of Mobile Integrators.",
-    description: "ListMobileIntegrators is an API to list all mobile integrators available for download.",
+    description:
+      "ListMobileIntegrators is an API to list all mobile integrators available for download.",
     pathParameters: [
       {
         description: "Namespace\nx-required\nNamespace of the stored_object.",
@@ -117,7 +120,8 @@ export const object_storageTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Optional query parameter. If passed, returns only latest version of the objects.",
+        description:
+          "Optional query parameter. If passed, returns only latest version of the objects.",
         in: "query",
         name: "latest_version_only",
         required: false,
@@ -236,7 +240,8 @@ export const object_storageTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Optional query parameter. If provided will DELETE all the versions of the specified object.",
+        description:
+          "Optional query parameter. If provided will DELETE all the versions of the specified object.",
         in: "query",
         name: "force_delete",
         required: false,
@@ -277,7 +282,8 @@ export const object_storageTools: ParsedOperation[] = [
     domain: "object_storage",
     resource: "{name}",
     summary: "GET Mobile App Shield.",
-    description: "GetMobileAppShield is an API to download particular version of mobile app shield.",
+    description:
+      "GetMobileAppShield is an API to download particular version of mobile app shield.",
     pathParameters: [
       {
         description: "Name\nx-required\nName of the stored_object.",
@@ -387,7 +393,8 @@ export const object_storageTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Optional query parameter. If provided will DELETE all the versions of the specified object.",
+        description:
+          "Optional query parameter. If provided will DELETE all the versions of the specified object.",
         in: "query",
         name: "force_delete",
         required: false,
@@ -540,7 +547,8 @@ export const object_storageTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Optional query parameter. If passed, returns only latest version of the objects.",
+        description:
+          "Optional query parameter. If passed, returns only latest version of the objects.",
         in: "query",
         name: "latest_version_only",
         required: false,

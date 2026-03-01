@@ -297,7 +297,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "cache_operator",
-        fieldPath: "spec.cache_rules.rule_expression_list[].cache_rule_expression[].path_match.operator.cache_operator",
+        fieldPath:
+          "spec.cache_rules.rule_expression_list[].cache_rule_expression[].path_match.operator.cache_operator",
         options: [
           "spec.cache_rules.rule_expression_list[].cache_rule_expression[].path_match.operator.Contains",
           "spec.cache_rules.rule_expression_list[].cache_rule_expression[].path_match.operator.DoesNotContain",
@@ -508,7 +509,8 @@ export const cdnTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -695,7 +697,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "cache_operator",
-        fieldPath: "spec.cache_rules.rule_expression_list[].cache_rule_expression[].path_match.operator.cache_operator",
+        fieldPath:
+          "spec.cache_rules.rule_expression_list[].cache_rule_expression[].path_match.operator.cache_operator",
         options: [
           "spec.cache_rules.rule_expression_list[].cache_rule_expression[].path_match.operator.Contains",
           "spec.cache_rules.rule_expression_list[].cache_rule_expression[].path_match.operator.DoesNotContain",
@@ -839,7 +842,11 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "l7_ddos_auto_mitigation_action",
         fieldPath: "spec.l7_ddos_auto_mitigation_action",
-        options: ["spec.l7_ddos_action_block", "spec.l7_ddos_action_default", "spec.l7_ddos_action_js_challenge"],
+        options: [
+          "spec.l7_ddos_action_block",
+          "spec.l7_ddos_action_default",
+          "spec.l7_ddos_action_js_challenge",
+        ],
       },
       {
         choiceField: "loadbalancer_type",
@@ -864,7 +871,11 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "service_policy_choice",
         fieldPath: "spec.service_policy_choice",
-        options: ["spec.active_service_policies", "spec.no_service_policies", "spec.service_policies_from_namespace"],
+        options: [
+          "spec.active_service_policies",
+          "spec.no_service_policies",
+          "spec.service_policies_from_namespace",
+        ],
       },
       {
         choiceField: "slow_ddos_mitigation_choice",
@@ -942,7 +953,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
+        fieldPath:
+          "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
         options: [
           "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].check_not_present",
           "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].check_present",
@@ -978,7 +990,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "destination_type",
-        fieldPath: "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].destination_type",
+        fieldPath:
+          "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].destination_type",
         options: [
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].any_url",
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].api_endpoint",
@@ -988,7 +1001,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].domain_choice",
+        fieldPath:
+          "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].domain_choice",
         options: [
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].any_domain",
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].specific_domain",
@@ -1152,7 +1166,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom",
@@ -1180,12 +1195,14 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "fail_configuration",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
         options: [],
       },
       {
         choiceField: "oversized_body_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_fail_validation",
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_skip_validation",
@@ -1193,7 +1210,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom",
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_default",
@@ -1219,7 +1237,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "validation_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.skip_validation",
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_active",
@@ -1250,7 +1269,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom",
@@ -1278,7 +1298,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "condition_type_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_endpoint",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_group",
@@ -1287,7 +1308,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].any_domain",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].specific_domain",
@@ -1344,7 +1366,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_custom",
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_default",
@@ -1406,11 +1429,15 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "mobile_sdk_choice",
         fieldPath: "spec.bot_defense.policy.mobile_sdk_choice",
-        options: ["spec.bot_defense.policy.disable_mobile_sdk", "spec.bot_defense.policy.mobile_sdk_config"],
+        options: [
+          "spec.bot_defense.policy.disable_mobile_sdk",
+          "spec.bot_defense.policy.mobile_sdk_config",
+        ],
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain",
@@ -1418,7 +1445,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -1427,7 +1455,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -1436,7 +1465,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense.policy.js_insertion_rules.exclude_list[].any_domain",
           "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain",
@@ -1552,7 +1582,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.create",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.password_reset",
@@ -1560,7 +1591,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.login",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.login_mfa",
@@ -1580,7 +1612,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.apply",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.money_transfer",
@@ -1588,12 +1621,14 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.label_choice",
         options: ["spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.checkin"],
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.create",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.update",
@@ -1602,7 +1637,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.flight_search",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.product_search",
@@ -1612,7 +1648,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.gift_card_make_purchase_with_gift_card",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.gift_card_validation",
@@ -1648,7 +1685,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "send_headers_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.send_headers_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.send_headers_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.append_headers",
           "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.no_headers",
@@ -1684,7 +1722,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain",
@@ -1692,7 +1731,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -1701,7 +1741,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -1710,7 +1751,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].any_domain",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain",
@@ -1718,7 +1760,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.exact_value",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.regex_value",
@@ -1727,7 +1770,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path_match",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.prefix",
@@ -1736,7 +1780,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.rules[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.rules[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.rules[].any_domain",
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain",
@@ -1744,7 +1789,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.exact_value",
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.regex_value",
@@ -1772,7 +1818,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "action_choice",
         fieldPath: "spec.data_guard_rules[].action_choice",
-        options: ["spec.data_guard_rules[].apply_data_guard", "spec.data_guard_rules[].skip_data_guard"],
+        options: [
+          "spec.data_guard_rules[].apply_data_guard",
+          "spec.data_guard_rules[].skip_data_guard",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -1800,7 +1849,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "mitigation_choice",
         fieldPath: "spec.ddos_mitigation_rules[].mitigation_choice",
-        options: ["spec.ddos_mitigation_rules[].ddos_client_source", "spec.ddos_mitigation_rules[].ip_prefix_list"],
+        options: [
+          "spec.ddos_mitigation_rules[].ddos_client_source",
+          "spec.ddos_mitigation_rules[].ip_prefix_list",
+        ],
       },
       {
         choiceField: "cache_actions",
@@ -1846,7 +1898,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "api_repos_choice",
-        fieldPath: "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
+        fieldPath:
+          "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
         options: [
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].all_repos",
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].selected_repos",
@@ -1906,7 +1959,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "tls_certificates_choice",
         fieldPath: "spec.https.tls_cert_options.tls_certificates_choice",
-        options: ["spec.https.tls_cert_options.tls_cert_params", "spec.https.tls_cert_options.tls_inline_params"],
+        options: [
+          "spec.https.tls_cert_options.tls_cert_params",
+          "spec.https.tls_cert_options.tls_inline_params",
+        ],
       },
       {
         choiceField: "mtls_choice",
@@ -1960,7 +2016,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].custom_hash_algorithms",
           "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].disable_ocsp_stapling",
@@ -1969,7 +2026,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].private_key.clear_secret_info",
@@ -2012,7 +2070,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.https_auto_cert.tls_config.choice",
-        options: ["spec.https_auto_cert.tls_config.tls_11_plus", "spec.https_auto_cert.tls_config.tls_12_plus"],
+        options: [
+          "spec.https_auto_cert.tls_config.tls_11_plus",
+          "spec.https_auto_cert.tls_config.tls_12_plus",
+        ],
       },
       {
         choiceField: "jwks_configuration",
@@ -2035,7 +2096,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "issuer_validation",
         fieldPath: "spec.jwt_validation.reserved_claims.issuer_validation",
-        options: ["spec.jwt_validation.reserved_claims.issuer", "spec.jwt_validation.reserved_claims.issuer_disable"],
+        options: [
+          "spec.jwt_validation.reserved_claims.issuer",
+          "spec.jwt_validation.reserved_claims.issuer_disable",
+        ],
       },
       {
         choiceField: "validate_period",
@@ -2067,7 +2131,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.origin_pool.origin_servers[].choice",
-        options: ["spec.origin_pool.origin_servers[].public_ip", "spec.origin_pool.origin_servers[].public_name"],
+        options: [
+          "spec.origin_pool.origin_servers[].public_ip",
+          "spec.origin_pool.origin_servers[].public_name",
+        ],
       },
       {
         choiceField: "public_ip_choice",
@@ -2131,7 +2198,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.origin_pool.use_tls.use_mtls.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.origin_pool.use_tls.use_mtls.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.origin_pool.use_tls.use_mtls.tls_certificates[].private_key.blindfold_secret_info",
           "spec.origin_pool.use_tls.use_mtls.tls_certificates[].private_key.clear_secret_info",
@@ -2155,7 +2223,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.other_settings.header_options.request_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.other_settings.header_options.request_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.other_settings.header_options.request_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.other_settings.header_options.request_headers_to_add[].secret_value.clear_secret_info",
@@ -2171,7 +2240,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.other_settings.header_options.response_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.other_settings.header_options.response_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.other_settings.header_options.response_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.other_settings.header_options.response_headers_to_add[].secret_value.clear_secret_info",
@@ -2305,12 +2375,18 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "httponly",
         fieldPath: "spec.protected_cookies[].httponly",
-        options: ["spec.protected_cookies[].add_httponly", "spec.protected_cookies[].ignore_httponly"],
+        options: [
+          "spec.protected_cookies[].add_httponly",
+          "spec.protected_cookies[].ignore_httponly",
+        ],
       },
       {
         choiceField: "max_age",
         fieldPath: "spec.protected_cookies[].max_age",
-        options: ["spec.protected_cookies[].ignore_max_age", "spec.protected_cookies[].max_age_value"],
+        options: [
+          "spec.protected_cookies[].ignore_max_age",
+          "spec.protected_cookies[].max_age_value",
+        ],
       },
       {
         choiceField: "samesite",
@@ -2344,12 +2420,18 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "action_choice",
         fieldPath: "spec.rate_limit.rate_limiter.action_choice",
-        options: ["spec.rate_limit.rate_limiter.action_block", "spec.rate_limit.rate_limiter.disabled"],
+        options: [
+          "spec.rate_limit.rate_limiter.action_block",
+          "spec.rate_limit.rate_limiter.disabled",
+        ],
       },
       {
         choiceField: "algorithm",
         fieldPath: "spec.rate_limit.rate_limiter.algorithm",
-        options: ["spec.rate_limit.rate_limiter.leaky_bucket", "spec.rate_limit.rate_limiter.token_bucket"],
+        options: [
+          "spec.rate_limit.rate_limiter.leaky_bucket",
+          "spec.rate_limit.rate_limiter.token_bucket",
+        ],
       },
       {
         choiceField: "block_duration_choice",
@@ -2363,7 +2445,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "request_timeout_choice",
         fieldPath: "spec.slow_ddos_mitigation.request_timeout_choice",
-        options: ["spec.slow_ddos_mitigation.disable_request_timeout", "spec.slow_ddos_mitigation.request_timeout"],
+        options: [
+          "spec.slow_ddos_mitigation.disable_request_timeout",
+          "spec.slow_ddos_mitigation.request_timeout",
+        ],
       },
       {
         choiceField: "action_choice",
@@ -2397,7 +2482,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "waf_exclusion_choice",
         fieldPath: "spec.waf_exclusion.waf_exclusion_choice",
-        options: ["spec.waf_exclusion.waf_exclusion_inline_rules", "spec.waf_exclusion.waf_exclusion_policy"],
+        options: [
+          "spec.waf_exclusion.waf_exclusion_inline_rules",
+          "spec.waf_exclusion.waf_exclusion_policy",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -2419,7 +2507,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "waf_advanced_configuration",
-        fieldPath: "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_advanced_configuration",
+        fieldPath:
+          "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_advanced_configuration",
         options: [
           "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].app_firewall_detection_control",
           "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_skip_processing",
@@ -2608,7 +2697,8 @@ export const cdnTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2787,7 +2877,11 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "l7_ddos_auto_mitigation_action",
         fieldPath: "spec.l7_ddos_auto_mitigation_action",
-        options: ["spec.l7_ddos_action_block", "spec.l7_ddos_action_default", "spec.l7_ddos_action_js_challenge"],
+        options: [
+          "spec.l7_ddos_action_block",
+          "spec.l7_ddos_action_default",
+          "spec.l7_ddos_action_js_challenge",
+        ],
       },
       {
         choiceField: "loadbalancer_type",
@@ -2812,7 +2906,11 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "service_policy_choice",
         fieldPath: "spec.service_policy_choice",
-        options: ["spec.active_service_policies", "spec.no_service_policies", "spec.service_policies_from_namespace"],
+        options: [
+          "spec.active_service_policies",
+          "spec.no_service_policies",
+          "spec.service_policies_from_namespace",
+        ],
       },
       {
         choiceField: "slow_ddos_mitigation_choice",
@@ -2890,7 +2988,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
+        fieldPath:
+          "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
         options: [
           "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].check_not_present",
           "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].check_present",
@@ -2926,7 +3025,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "destination_type",
-        fieldPath: "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].destination_type",
+        fieldPath:
+          "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].destination_type",
         options: [
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].any_url",
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].api_endpoint",
@@ -2936,7 +3036,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].domain_choice",
+        fieldPath:
+          "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].domain_choice",
         options: [
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].any_domain",
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].specific_domain",
@@ -3100,7 +3201,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom",
@@ -3128,12 +3230,14 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "fail_configuration",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
         options: [],
       },
       {
         choiceField: "oversized_body_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_fail_validation",
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_skip_validation",
@@ -3141,7 +3245,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom",
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_default",
@@ -3167,7 +3272,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "validation_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.skip_validation",
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_active",
@@ -3198,7 +3304,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom",
@@ -3226,7 +3333,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "condition_type_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_endpoint",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_group",
@@ -3235,7 +3343,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].any_domain",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].specific_domain",
@@ -3292,7 +3401,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_custom",
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_default",
@@ -3354,11 +3464,15 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "mobile_sdk_choice",
         fieldPath: "spec.bot_defense.policy.mobile_sdk_choice",
-        options: ["spec.bot_defense.policy.disable_mobile_sdk", "spec.bot_defense.policy.mobile_sdk_config"],
+        options: [
+          "spec.bot_defense.policy.disable_mobile_sdk",
+          "spec.bot_defense.policy.mobile_sdk_config",
+        ],
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain",
@@ -3366,7 +3480,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -3375,7 +3490,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -3384,7 +3500,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense.policy.js_insertion_rules.exclude_list[].any_domain",
           "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain",
@@ -3500,7 +3617,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.create",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.password_reset",
@@ -3508,7 +3626,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.login",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.login_mfa",
@@ -3528,7 +3647,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.apply",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.money_transfer",
@@ -3536,12 +3656,14 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.label_choice",
         options: ["spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.checkin"],
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.create",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.update",
@@ -3550,7 +3672,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.flight_search",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.product_search",
@@ -3560,7 +3683,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.gift_card_make_purchase_with_gift_card",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.gift_card_validation",
@@ -3596,7 +3720,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "send_headers_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.send_headers_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.send_headers_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.append_headers",
           "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.no_headers",
@@ -3632,7 +3757,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain",
@@ -3640,7 +3766,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -3649,7 +3776,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -3658,7 +3786,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].any_domain",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain",
@@ -3666,7 +3795,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.exact_value",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.regex_value",
@@ -3675,7 +3805,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path_match",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.prefix",
@@ -3684,7 +3815,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.rules[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.rules[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.rules[].any_domain",
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain",
@@ -3692,7 +3824,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.exact_value",
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.regex_value",
@@ -3720,7 +3853,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "action_choice",
         fieldPath: "spec.data_guard_rules[].action_choice",
-        options: ["spec.data_guard_rules[].apply_data_guard", "spec.data_guard_rules[].skip_data_guard"],
+        options: [
+          "spec.data_guard_rules[].apply_data_guard",
+          "spec.data_guard_rules[].skip_data_guard",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -3748,7 +3884,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "mitigation_choice",
         fieldPath: "spec.ddos_mitigation_rules[].mitigation_choice",
-        options: ["spec.ddos_mitigation_rules[].ddos_client_source", "spec.ddos_mitigation_rules[].ip_prefix_list"],
+        options: [
+          "spec.ddos_mitigation_rules[].ddos_client_source",
+          "spec.ddos_mitigation_rules[].ip_prefix_list",
+        ],
       },
       {
         choiceField: "cache_actions",
@@ -3794,7 +3933,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "api_repos_choice",
-        fieldPath: "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
+        fieldPath:
+          "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
         options: [
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].all_repos",
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].selected_repos",
@@ -3854,7 +3994,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "tls_certificates_choice",
         fieldPath: "spec.https.tls_cert_options.tls_certificates_choice",
-        options: ["spec.https.tls_cert_options.tls_cert_params", "spec.https.tls_cert_options.tls_inline_params"],
+        options: [
+          "spec.https.tls_cert_options.tls_cert_params",
+          "spec.https.tls_cert_options.tls_inline_params",
+        ],
       },
       {
         choiceField: "mtls_choice",
@@ -3908,7 +4051,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].custom_hash_algorithms",
           "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].disable_ocsp_stapling",
@@ -3917,7 +4061,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.https.tls_cert_options.tls_inline_params.tls_certificates[].private_key.clear_secret_info",
@@ -3960,7 +4105,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.https_auto_cert.tls_config.choice",
-        options: ["spec.https_auto_cert.tls_config.tls_11_plus", "spec.https_auto_cert.tls_config.tls_12_plus"],
+        options: [
+          "spec.https_auto_cert.tls_config.tls_11_plus",
+          "spec.https_auto_cert.tls_config.tls_12_plus",
+        ],
       },
       {
         choiceField: "jwks_configuration",
@@ -3983,7 +4131,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "issuer_validation",
         fieldPath: "spec.jwt_validation.reserved_claims.issuer_validation",
-        options: ["spec.jwt_validation.reserved_claims.issuer", "spec.jwt_validation.reserved_claims.issuer_disable"],
+        options: [
+          "spec.jwt_validation.reserved_claims.issuer",
+          "spec.jwt_validation.reserved_claims.issuer_disable",
+        ],
       },
       {
         choiceField: "validate_period",
@@ -4015,7 +4166,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.origin_pool.origin_servers[].choice",
-        options: ["spec.origin_pool.origin_servers[].public_ip", "spec.origin_pool.origin_servers[].public_name"],
+        options: [
+          "spec.origin_pool.origin_servers[].public_ip",
+          "spec.origin_pool.origin_servers[].public_name",
+        ],
       },
       {
         choiceField: "public_ip_choice",
@@ -4079,7 +4233,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.origin_pool.use_tls.use_mtls.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.origin_pool.use_tls.use_mtls.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.origin_pool.use_tls.use_mtls.tls_certificates[].private_key.blindfold_secret_info",
           "spec.origin_pool.use_tls.use_mtls.tls_certificates[].private_key.clear_secret_info",
@@ -4103,7 +4258,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.other_settings.header_options.request_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.other_settings.header_options.request_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.other_settings.header_options.request_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.other_settings.header_options.request_headers_to_add[].secret_value.clear_secret_info",
@@ -4119,7 +4275,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.other_settings.header_options.response_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.other_settings.header_options.response_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.other_settings.header_options.response_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.other_settings.header_options.response_headers_to_add[].secret_value.clear_secret_info",
@@ -4253,12 +4410,18 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "httponly",
         fieldPath: "spec.protected_cookies[].httponly",
-        options: ["spec.protected_cookies[].add_httponly", "spec.protected_cookies[].ignore_httponly"],
+        options: [
+          "spec.protected_cookies[].add_httponly",
+          "spec.protected_cookies[].ignore_httponly",
+        ],
       },
       {
         choiceField: "max_age",
         fieldPath: "spec.protected_cookies[].max_age",
-        options: ["spec.protected_cookies[].ignore_max_age", "spec.protected_cookies[].max_age_value"],
+        options: [
+          "spec.protected_cookies[].ignore_max_age",
+          "spec.protected_cookies[].max_age_value",
+        ],
       },
       {
         choiceField: "samesite",
@@ -4292,12 +4455,18 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "action_choice",
         fieldPath: "spec.rate_limit.rate_limiter.action_choice",
-        options: ["spec.rate_limit.rate_limiter.action_block", "spec.rate_limit.rate_limiter.disabled"],
+        options: [
+          "spec.rate_limit.rate_limiter.action_block",
+          "spec.rate_limit.rate_limiter.disabled",
+        ],
       },
       {
         choiceField: "algorithm",
         fieldPath: "spec.rate_limit.rate_limiter.algorithm",
-        options: ["spec.rate_limit.rate_limiter.leaky_bucket", "spec.rate_limit.rate_limiter.token_bucket"],
+        options: [
+          "spec.rate_limit.rate_limiter.leaky_bucket",
+          "spec.rate_limit.rate_limiter.token_bucket",
+        ],
       },
       {
         choiceField: "block_duration_choice",
@@ -4311,7 +4480,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "request_timeout_choice",
         fieldPath: "spec.slow_ddos_mitigation.request_timeout_choice",
-        options: ["spec.slow_ddos_mitigation.disable_request_timeout", "spec.slow_ddos_mitigation.request_timeout"],
+        options: [
+          "spec.slow_ddos_mitigation.disable_request_timeout",
+          "spec.slow_ddos_mitigation.request_timeout",
+        ],
       },
       {
         choiceField: "action_choice",
@@ -4345,7 +4517,10 @@ export const cdnTools: ParsedOperation[] = [
       {
         choiceField: "waf_exclusion_choice",
         fieldPath: "spec.waf_exclusion.waf_exclusion_choice",
-        options: ["spec.waf_exclusion.waf_exclusion_inline_rules", "spec.waf_exclusion.waf_exclusion_policy"],
+        options: [
+          "spec.waf_exclusion.waf_exclusion_inline_rules",
+          "spec.waf_exclusion.waf_exclusion_policy",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -4367,7 +4542,8 @@ export const cdnTools: ParsedOperation[] = [
       },
       {
         choiceField: "waf_advanced_configuration",
-        fieldPath: "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_advanced_configuration",
+        fieldPath:
+          "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_advanced_configuration",
         options: [
           "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].app_firewall_detection_control",
           "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_skip_processing",
@@ -4391,7 +4567,8 @@ export const cdnTools: ParsedOperation[] = [
     domain: "cdn",
     resource: "dos-automitigation-rule",
     summary: "DELETE DoS Auto-Mitigation Rule for CDN Load Balancer.",
-    description: "DELETE the corresponding DoS Auto-Mitigation Rule for the given CDN load balancer.",
+    description:
+      "DELETE the corresponding DoS Auto-Mitigation Rule for the given CDN load balancer.",
     pathParameters: [
       {
         description: "DoS Mitigation Rule Name\nName of the DoS Mitigation Rule.",
@@ -4430,7 +4607,8 @@ export const cdnTools: ParsedOperation[] = [
       $ref: "#/components/schemas/common_securityDeleteDoSAutoMitigationRuleRsp",
     },
     requiredParams: ["dos_automitigation_rule_name", "name", "namespace"],
-    operationId: "ves.io.schema.views.cdn_loadbalancer.CustomCDNWAAPAPI.DeleteCDNDoSAutoMitigationRule",
+    operationId:
+      "ves.io.schema.views.cdn_loadbalancer.CustomCDNWAAPAPI.DeleteCDNDoSAutoMitigationRule",
     tags: ["Other"],
     sourceFile: "domains/cdn.json",
     displayName: null,
@@ -4490,7 +4668,8 @@ export const cdnTools: ParsedOperation[] = [
       $ref: "#/components/schemas/common_securityGetDoSAutoMitigationRulesRsp",
     },
     requiredParams: ["name", "namespace"],
-    operationId: "ves.io.schema.views.cdn_loadbalancer.CustomCDNWAAPAPI.GetCDNDoSAutoMitigationRules",
+    operationId:
+      "ves.io.schema.views.cdn_loadbalancer.CustomCDNWAAPAPI.GetCDNDoSAutoMitigationRules",
     tags: ["Other"],
     sourceFile: "domains/cdn.json",
     displayName: null,
@@ -4811,7 +4990,8 @@ export const cdnTools: ParsedOperation[] = [
       $ref: "#/components/schemas/app_securityGetSuggestedBlockClientRuleRsp",
     },
     requiredParams: ["name", "namespace"],
-    operationId: "ves.io.schema.app_security.AppSecurityClientRuleAPI.GetSuggestedBlockClientRuleForCDN",
+    operationId:
+      "ves.io.schema.app_security.AppSecurityClientRuleAPI.GetSuggestedBlockClientRuleForCDN",
     tags: ["Other"],
     sourceFile: "domains/cdn.json",
     displayName: null,

@@ -14,7 +14,8 @@ export const data_and_privacy_securityTools: ParsedOperation[] = [
     domain: "data_and_privacy_security",
     resource: "data-type",
     summary: "Create Data Type.",
-    description: "Create data_type creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create data_type creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -75,7 +76,11 @@ export const data_and_privacy_securityTools: ParsedOperation[] = [
       {
         choiceField: "pattern_choice",
         fieldPath: "spec.rules[].pattern_choice",
-        options: ["spec.rules[].key_pattern", "spec.rules[].key_value_pattern", "spec.rules[].value_pattern"],
+        options: [
+          "spec.rules[].key_pattern",
+          "spec.rules[].key_value_pattern",
+          "spec.rules[].value_pattern",
+        ],
       },
       {
         choiceField: "type_choice",
@@ -314,7 +319,8 @@ export const data_and_privacy_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -392,7 +398,8 @@ export const data_and_privacy_securityTools: ParsedOperation[] = [
     domain: "data_and_privacy_security",
     resource: "data-type",
     summary: "Replace Data Type.",
-    description: "Replace data_type replaces an existing object in the storage backend for metadata.namespace.",
+    description:
+      "Replace data_type replaces an existing object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -463,7 +470,11 @@ export const data_and_privacy_securityTools: ParsedOperation[] = [
       {
         choiceField: "pattern_choice",
         fieldPath: "spec.rules[].pattern_choice",
-        options: ["spec.rules[].key_pattern", "spec.rules[].key_value_pattern", "spec.rules[].value_pattern"],
+        options: [
+          "spec.rules[].key_pattern",
+          "spec.rules[].key_value_pattern",
+          "spec.rules[].value_pattern",
+        ],
       },
       {
         choiceField: "type_choice",
@@ -712,7 +723,8 @@ export const data_and_privacy_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -790,7 +802,8 @@ export const data_and_privacy_securityTools: ParsedOperation[] = [
     domain: "data_and_privacy_security",
     resource: "sensitive-data-policy",
     summary: "Create Sensitive Data Discovery.",
-    description: "Create sensitive_data_policy creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create sensitive_data_policy creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -945,7 +958,8 @@ export const data_and_privacy_securityTools: ParsedOperation[] = [
     domain: "data_and_privacy_security",
     resource: "sensitive-data-policy",
     summary: "GET Sensitive Data Discovery.",
-    description: "GET sensitive_data_policy reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET sensitive_data_policy reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1048,7 +1062,8 @@ export const data_and_privacy_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
