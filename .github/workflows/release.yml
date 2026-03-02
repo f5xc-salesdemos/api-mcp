@@ -100,7 +100,7 @@ jobs:
           echo "Version: $(jq -r '.version' specs/index.json)"
 
       - name: Upload specs for downstream jobs
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: openapi-specs
           path: specs/
