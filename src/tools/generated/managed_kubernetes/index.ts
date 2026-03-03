@@ -260,7 +260,8 @@ export const managed_kubernetesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -485,7 +486,11 @@ export const managed_kubernetesTools: ParsedOperation[] = [
       {
         choiceField: "subject_choice",
         fieldPath: "spec.subjects[].subject_choice",
-        options: ["spec.subjects[].group", "spec.subjects[].service_account", "spec.subjects[].user"],
+        options: [
+          "spec.subjects[].group",
+          "spec.subjects[].service_account",
+          "spec.subjects[].user",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -671,7 +676,8 @@ export const managed_kubernetesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -815,7 +821,11 @@ export const managed_kubernetesTools: ParsedOperation[] = [
       {
         choiceField: "subject_choice",
         fieldPath: "spec.subjects[].subject_choice",
-        options: ["spec.subjects[].group", "spec.subjects[].service_account", "spec.subjects[].user"],
+        options: [
+          "spec.subjects[].group",
+          "spec.subjects[].service_account",
+          "spec.subjects[].user",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -993,7 +1003,8 @@ export const managed_kubernetesTools: ParsedOperation[] = [
     domain: "managed_kubernetes",
     resource: "k8s-cluster-role",
     summary: "GET Configuration Specification.",
-    description: "GET k8s_cluster_role will GET the object from the storage backend for namespace metadata.namespace.",
+    description:
+      "GET k8s_cluster_role will GET the object from the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1090,7 +1101,8 @@ export const managed_kubernetesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1521,7 +1533,8 @@ export const managed_kubernetesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1991,7 +2004,8 @@ export const managed_kubernetesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
