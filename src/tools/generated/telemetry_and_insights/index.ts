@@ -159,7 +159,8 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
     domain: "telemetry_and_insights",
     resource: "create-http-load-balancer",
     summary: "Create HTTP/HTTPS load balancer.",
-    description: "Create HTTP/HTTPS load balancer using the discovered virtual server as an origin server.",
+    description:
+      "Create HTTP/HTTPS load balancer using the discovered virtual server as an origin server.",
     pathParameters: [
       {
         description: "Service Name\nx-required\nIdentifies the discovered service name.",
@@ -172,7 +173,8 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
         "x-displayname": "Service Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -212,7 +214,11 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
       {
         choiceField: "loadbalancer_type",
         fieldPath: "http_lb_request.loadbalancer_type",
-        options: ["http_lb_request.http", "http_lb_request.https", "http_lb_request.https_auto_cert"],
+        options: [
+          "http_lb_request.http",
+          "http_lb_request.https",
+          "http_lb_request.https_auto_cert",
+        ],
       },
       {
         choiceField: "server_validation_choice",
@@ -248,7 +254,8 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
     domain: "telemetry_and_insights",
     resource: "create-tcp-load-balancer",
     summary: "Create TCP load balancer.",
-    description: "Create TCP load balancer using the discovered virtual server as an origin server.",
+    description:
+      "Create TCP load balancer using the discovered virtual server as an origin server.",
     pathParameters: [
       {
         description: "Service Name\nx-required\nIdentifies the discovered service name.",
@@ -261,7 +268,8 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
         "x-displayname": "Service Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -296,7 +304,10 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
       {
         choiceField: "advertise_choice",
         fieldPath: "tcp_lb_request.advertise_choice",
-        options: ["tcp_lb_request.advertise_custom", "tcp_lb_request.advertise_on_public_default_vip"],
+        options: [
+          "tcp_lb_request.advertise_custom",
+          "tcp_lb_request.advertise_on_public_default_vip",
+        ],
       },
       {
         choiceField: "port_choice",
@@ -335,7 +346,8 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
       },
       {
         choiceField: "v6_vip_choice",
-        fieldPath: "tcp_lb_request.advertise_custom.advertise_where[].virtual_network.v6_vip_choice",
+        fieldPath:
+          "tcp_lb_request.advertise_custom.advertise_where[].virtual_network.v6_vip_choice",
         options: [
           "tcp_lb_request.advertise_custom.advertise_where[].virtual_network.default_v6_vip",
           "tcp_lb_request.advertise_custom.advertise_where[].virtual_network.specific_v6_vip",
@@ -382,7 +394,8 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
         "x-displayname": "Service Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -496,10 +509,12 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
     domain: "telemetry_and_insights",
     resource: "discovered-service",
     summary: "List discovered services of specific type.",
-    description: "List the discovered services of specific type like virtual-servers, K8s, consul, NGINX server, etc.",
+    description:
+      "List the discovered services of specific type like virtual-servers, K8s, consul, NGINX server, etc.",
     pathParameters: [
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -620,7 +635,8 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
         "x-displayname": "Service Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -707,7 +723,8 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
         "x-displayname": "Name",
       },
       {
-        description: "Namespace\n\nx-required\nNamespace in which the Discovered Service is present.",
+        description:
+          "Namespace\n\nx-required\nNamespace in which the Discovered Service is present.",
         in: "path",
         name: "namespace",
         required: true,
@@ -750,7 +767,8 @@ export const telemetry_and_insightsTools: ParsedOperation[] = [
     description: "Request to GET time-series data for a service instance.",
     pathParameters: [
       {
-        description: "Namespace\nnamespace is used to scope application traffic to a given namespace.",
+        description:
+          "Namespace\nnamespace is used to scope application traffic to a given namespace.",
         in: "path",
         name: "namespace",
         required: true,
