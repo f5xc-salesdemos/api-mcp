@@ -115,7 +115,7 @@ jobs:
           echo "Version: $(jq -r '.version' specs/index.json)"
 
       - name: Upload specs for downstream jobs
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: openapi-specs
           path: specs/
@@ -179,7 +179,7 @@ jobs:
         run: npm run test:coverage
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-report
           path: coverage/
@@ -216,7 +216,7 @@ jobs:
         run: npx @anthropic-ai/mcpb validate manifest.json
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist/
