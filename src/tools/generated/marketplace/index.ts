@@ -116,7 +116,8 @@ export const marketplaceTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -242,7 +243,10 @@ export const marketplaceTools: ParsedOperation[] = [
       {
         choiceField: "notification_type",
         fieldPath: "spec.notification_preference.notification_type",
-        options: ["spec.notification_preference.emails", "spec.notification_preference.support_ticket_id"],
+        options: [
+          "spec.notification_preference.emails",
+          "spec.notification_preference.support_ticket_id",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -316,7 +320,8 @@ export const marketplaceTools: ParsedOperation[] = [
     domain: "marketplace",
     resource: "addon-subscription",
     summary: "GET Addon Subsciption.",
-    description: "GET Addon Subsciption reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET Addon Subsciption reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -405,7 +410,8 @@ export const marketplaceTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -541,7 +547,10 @@ export const marketplaceTools: ParsedOperation[] = [
       {
         choiceField: "notification_type",
         fieldPath: "spec.notification_preference.notification_type",
-        options: ["spec.notification_preference.emails", "spec.notification_preference.support_ticket_id"],
+        options: [
+          "spec.notification_preference.emails",
+          "spec.notification_preference.support_ticket_id",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -828,7 +837,8 @@ export const marketplaceTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1049,7 +1059,10 @@ export const marketplaceTools: ParsedOperation[] = [
       {
         choiceField: "dpd_choice",
         fieldPath: "spec.ipsec.ike_parameters.dpd_choice",
-        options: ["spec.ipsec.ike_parameters.dpd_disabled", "spec.ipsec.ike_parameters.dpd_keep_alive_timer"],
+        options: [
+          "spec.ipsec.ike_parameters.dpd_disabled",
+          "spec.ipsec.ike_parameters.dpd_keep_alive_timer",
+        ],
       },
       {
         choiceField: "local_ike_id",
@@ -1073,7 +1086,10 @@ export const marketplaceTools: ParsedOperation[] = [
       {
         choiceField: "ver",
         fieldPath: "spec.ipsec.ike_parameters.rm_ip_address.ver",
-        options: ["spec.ipsec.ike_parameters.rm_ip_address.ipv4", "spec.ipsec.ike_parameters.rm_ip_address.ipv6"],
+        options: [
+          "spec.ipsec.ike_parameters.rm_ip_address.ipv4",
+          "spec.ipsec.ike_parameters.rm_ip_address.ipv6",
+        ],
       },
       {
         choiceField: "tunnel_source_vn",
@@ -1246,7 +1262,8 @@ export const marketplaceTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1387,7 +1404,10 @@ export const marketplaceTools: ParsedOperation[] = [
       {
         choiceField: "dpd_choice",
         fieldPath: "spec.ipsec.ike_parameters.dpd_choice",
-        options: ["spec.ipsec.ike_parameters.dpd_disabled", "spec.ipsec.ike_parameters.dpd_keep_alive_timer"],
+        options: [
+          "spec.ipsec.ike_parameters.dpd_disabled",
+          "spec.ipsec.ike_parameters.dpd_keep_alive_timer",
+        ],
       },
       {
         choiceField: "local_ike_id",
@@ -1411,7 +1431,10 @@ export const marketplaceTools: ParsedOperation[] = [
       {
         choiceField: "ver",
         fieldPath: "spec.ipsec.ike_parameters.rm_ip_address.ver",
-        options: ["spec.ipsec.ike_parameters.rm_ip_address.ipv4", "spec.ipsec.ike_parameters.rm_ip_address.ipv6"],
+        options: [
+          "spec.ipsec.ike_parameters.rm_ip_address.ipv4",
+          "spec.ipsec.ike_parameters.rm_ip_address.ipv6",
+        ],
       },
       {
         choiceField: "tunnel_source_vn",
@@ -1520,7 +1543,8 @@ export const marketplaceTools: ParsedOperation[] = [
         "x-displayname": "Service Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -1570,7 +1594,8 @@ export const marketplaceTools: ParsedOperation[] = [
     description: "Fetch the corresponding Security Config for the given Third Party Application.",
     pathParameters: [
       {
-        description: "Namespace\nx-required\nNamespace of the Third Party Application for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the Third Party Application for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -1618,7 +1643,8 @@ export const marketplaceTools: ParsedOperation[] = [
     domain: "marketplace",
     resource: "navigation-tile",
     summary: "GET Navigation Tile.",
-    description: "GET navigation_tile reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET navigation_tile reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1706,7 +1732,8 @@ export const marketplaceTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1859,7 +1886,8 @@ export const marketplaceTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2002,7 +2030,8 @@ export const marketplaceTools: ParsedOperation[] = [
     domain: "marketplace",
     resource: "run",
     summary: "Run Terraform Action for view.",
-    description: "Perform terraform actions for a given view. Supported actions are apply and plan.",
+    description:
+      "Perform terraform actions for a given view. Supported actions are apply and plan.",
     pathParameters: [
       {
         description: "Namespace\nNamespace for the label to be retrieved.",
@@ -2290,7 +2319,8 @@ export const marketplaceTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2454,7 +2484,8 @@ export const marketplaceTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom",
@@ -2482,12 +2513,14 @@ export const marketplaceTools: ParsedOperation[] = [
       },
       {
         choiceField: "fail_configuration",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
         options: [],
       },
       {
         choiceField: "oversized_body_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_fail_validation",
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_skip_validation",
@@ -2495,7 +2528,8 @@ export const marketplaceTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom",
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_default",
@@ -2521,7 +2555,8 @@ export const marketplaceTools: ParsedOperation[] = [
       },
       {
         choiceField: "validation_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.skip_validation",
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_active",
@@ -2552,7 +2587,8 @@ export const marketplaceTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom",
@@ -2580,7 +2616,8 @@ export const marketplaceTools: ParsedOperation[] = [
       },
       {
         choiceField: "condition_type_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_endpoint",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_group",
@@ -2589,7 +2626,8 @@ export const marketplaceTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].any_domain",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].specific_domain",
@@ -2646,7 +2684,8 @@ export const marketplaceTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_custom",
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_default",
@@ -2696,7 +2735,8 @@ export const marketplaceTools: ParsedOperation[] = [
       },
       {
         choiceField: "api_repos_choice",
-        fieldPath: "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
+        fieldPath:
+          "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
         options: [
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].all_repos",
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].selected_repos",
