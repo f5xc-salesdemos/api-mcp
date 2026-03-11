@@ -101,7 +101,8 @@ export const nginx_oneTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -304,7 +305,8 @@ export const nginx_oneTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -457,7 +459,8 @@ export const nginx_oneTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -522,7 +525,8 @@ export const nginx_oneTools: ParsedOperation[] = [
     domain: "nginx_one",
     resource: "nginx-service-discovery",
     summary: "Create NGINX Service Discovery.",
-    description: "API to create NGINX Service Discovery object for a site or virtual site in system namespace.",
+    description:
+      "API to create NGINX Service Discovery object for a site or virtual site in system namespace.",
     pathParameters: [
       {
         description:
@@ -583,7 +587,10 @@ export const nginx_oneTools: ParsedOperation[] = [
       {
         choiceField: "target",
         fieldPath: "spec.discovery_target.target",
-        options: ["spec.discovery_target.config_sync_group", "spec.discovery_target.nginx_instance"],
+        options: [
+          "spec.discovery_target.config_sync_group",
+          "spec.discovery_target.nginx_instance",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -657,7 +664,8 @@ export const nginx_oneTools: ParsedOperation[] = [
     domain: "nginx_one",
     resource: "nginx-service-discovery",
     summary: "GET NGINX Service Discovery.",
-    description: "API to GET NGINX Service Discovery object for a site or virtual site in system namespace.",
+    description:
+      "API to GET NGINX Service Discovery object for a site or virtual site in system namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -747,7 +755,8 @@ export const nginx_oneTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -812,7 +821,8 @@ export const nginx_oneTools: ParsedOperation[] = [
     domain: "nginx_one",
     resource: "nginx-service-discovery",
     summary: "Replace NGINX Service Discovery.",
-    description: "API to replace NGINX Service Discovery object for a site or virtual site in system namespace.",
+    description:
+      "API to replace NGINX Service Discovery object for a site or virtual site in system namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -883,7 +893,10 @@ export const nginx_oneTools: ParsedOperation[] = [
       {
         choiceField: "target",
         fieldPath: "spec.discovery_target.target",
-        options: ["spec.discovery_target.config_sync_group", "spec.discovery_target.nginx_instance"],
+        options: [
+          "spec.discovery_target.config_sync_group",
+          "spec.discovery_target.nginx_instance",
+        ],
       },
     ],
     subscriptionRequirements: [],
