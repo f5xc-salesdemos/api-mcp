@@ -80,7 +80,11 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.dc_cluster_group_choice",
-        options: ["spec.dc_cluster_group", "spec.dc_cluster_group_inside", "spec.no_dc_cluster_group"],
+        options: [
+          "spec.dc_cluster_group",
+          "spec.dc_cluster_group_inside",
+          "spec.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "gpu_choice",
@@ -144,7 +148,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "lacp_choice",
         fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+        options: [
+          "spec.bond_device_list.bond_devices[].active_backup",
+          "spec.bond_device_list.bond_devices[].lacp",
+        ],
       },
       {
         choiceField: "device_instance",
@@ -161,12 +168,16 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -210,7 +221,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
         options: [
           "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.blindfold_secret_info",
           "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.clear_secret_info",
@@ -218,7 +230,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
         options: [
           "spec.storage_device_list.storage_devices[].hpe_storage.password.blindfold_secret_info",
           "spec.storage_device_list.storage_devices[].hpe_storage.password.clear_secret_info",
@@ -234,7 +247,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "data_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_ip",
@@ -242,7 +256,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "management_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_ip",
@@ -288,7 +303,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "chap_choice",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.no_chap",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap",
@@ -296,7 +312,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "data_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_ip",
@@ -304,7 +321,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "management_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_ip",
@@ -610,7 +628,8 @@ export const ce_managementTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -758,7 +777,11 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.dc_cluster_group_choice",
-        options: ["spec.dc_cluster_group", "spec.dc_cluster_group_inside", "spec.no_dc_cluster_group"],
+        options: [
+          "spec.dc_cluster_group",
+          "spec.dc_cluster_group_inside",
+          "spec.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "gpu_choice",
@@ -822,7 +845,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "lacp_choice",
         fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+        options: [
+          "spec.bond_device_list.bond_devices[].active_backup",
+          "spec.bond_device_list.bond_devices[].lacp",
+        ],
       },
       {
         choiceField: "device_instance",
@@ -839,12 +865,16 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -888,7 +918,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
         options: [
           "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.blindfold_secret_info",
           "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.clear_secret_info",
@@ -896,7 +927,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
         options: [
           "spec.storage_device_list.storage_devices[].hpe_storage.password.blindfold_secret_info",
           "spec.storage_device_list.storage_devices[].hpe_storage.password.clear_secret_info",
@@ -912,7 +944,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "data_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_ip",
@@ -920,7 +953,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "management_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_ip",
@@ -966,7 +1000,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "chap_choice",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.no_chap",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap",
@@ -974,7 +1009,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "data_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_ip",
@@ -982,7 +1018,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "management_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_ip",
@@ -1211,7 +1248,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "node_choice",
         fieldPath: "spec.dedicated_management_interface.node_choice",
-        options: ["spec.dedicated_management_interface.cluster", "spec.dedicated_management_interface.node"],
+        options: [
+          "spec.dedicated_management_interface.cluster",
+          "spec.dedicated_management_interface.node",
+        ],
       },
       {
         choiceField: "address_choice",
@@ -1295,7 +1335,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "autoconfig_choice",
         fieldPath: "spec.ethernet_interface.ipv6_auto_config.autoconfig_choice",
-        options: ["spec.ethernet_interface.ipv6_auto_config.host", "spec.ethernet_interface.ipv6_auto_config.router"],
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.host",
+          "spec.ethernet_interface.ipv6_auto_config.router",
+        ],
       },
       {
         choiceField: "address_choice",
@@ -1315,7 +1358,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "local_dns_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
         options: [
           "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.configured_address",
           "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.first_address",
@@ -1324,7 +1368,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "interfaces_addressing_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
         options: [
           "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_end",
           "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_start",
@@ -1333,8 +1378,11 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
-        options: ["spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix"],
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix",
+        ],
       },
       {
         choiceField: "network_prefix_choice",
@@ -1372,7 +1420,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "network_choice",
         fieldPath: "spec.tunnel_interface.network_choice",
-        options: ["spec.tunnel_interface.site_local_inside_network", "spec.tunnel_interface.site_local_network"],
+        options: [
+          "spec.tunnel_interface.site_local_inside_network",
+          "spec.tunnel_interface.site_local_network",
+        ],
       },
       {
         choiceField: "node_choice",
@@ -1549,7 +1600,8 @@ export const ce_managementTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1713,7 +1765,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "node_choice",
         fieldPath: "spec.dedicated_management_interface.node_choice",
-        options: ["spec.dedicated_management_interface.cluster", "spec.dedicated_management_interface.node"],
+        options: [
+          "spec.dedicated_management_interface.cluster",
+          "spec.dedicated_management_interface.node",
+        ],
       },
       {
         choiceField: "address_choice",
@@ -1797,7 +1852,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "autoconfig_choice",
         fieldPath: "spec.ethernet_interface.ipv6_auto_config.autoconfig_choice",
-        options: ["spec.ethernet_interface.ipv6_auto_config.host", "spec.ethernet_interface.ipv6_auto_config.router"],
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.host",
+          "spec.ethernet_interface.ipv6_auto_config.router",
+        ],
       },
       {
         choiceField: "address_choice",
@@ -1817,7 +1875,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "local_dns_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
         options: [
           "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.configured_address",
           "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.first_address",
@@ -1826,7 +1885,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "interfaces_addressing_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
         options: [
           "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_end",
           "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_start",
@@ -1835,8 +1895,11 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
-        options: ["spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix"],
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix",
+        ],
       },
       {
         choiceField: "network_prefix_choice",
@@ -1879,7 +1942,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "network_choice",
         fieldPath: "spec.tunnel_interface.network_choice",
-        options: ["spec.tunnel_interface.site_local_inside_network", "spec.tunnel_interface.site_local_network"],
+        options: [
+          "spec.tunnel_interface.site_local_inside_network",
+          "spec.tunnel_interface.site_local_network",
+        ],
       },
       {
         choiceField: "node_choice",
@@ -2337,7 +2403,8 @@ export const ce_managementTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
