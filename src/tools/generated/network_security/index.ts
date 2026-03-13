@@ -81,12 +81,19 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "vip_choice",
         fieldPath: "spec.re_acl.vip_choice",
-        options: ["spec.re_acl.all_public_vips", "spec.re_acl.default_tenant_vip", "spec.re_acl.selected_tenant_vip"],
+        options: [
+          "spec.re_acl.all_public_vips",
+          "spec.re_acl.default_tenant_vip",
+          "spec.re_acl.selected_tenant_vip",
+        ],
       },
       {
         choiceField: "source",
         fieldPath: "spec.re_acl.fast_acl_rules[].source",
-        options: ["spec.re_acl.fast_acl_rules[].ip_prefix_set", "spec.re_acl.fast_acl_rules[].prefix"],
+        options: [
+          "spec.re_acl.fast_acl_rules[].ip_prefix_set",
+          "spec.re_acl.fast_acl_rules[].prefix",
+        ],
       },
       {
         choiceField: "action",
@@ -114,12 +121,19 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "vip_choice",
         fieldPath: "spec.site_acl.vip_choice",
-        options: ["spec.site_acl.all_services", "spec.site_acl.interface_services", "spec.site_acl.vip_services"],
+        options: [
+          "spec.site_acl.all_services",
+          "spec.site_acl.interface_services",
+          "spec.site_acl.vip_services",
+        ],
       },
       {
         choiceField: "source",
         fieldPath: "spec.site_acl.fast_acl_rules[].source",
-        options: ["spec.site_acl.fast_acl_rules[].ip_prefix_set", "spec.site_acl.fast_acl_rules[].prefix"],
+        options: [
+          "spec.site_acl.fast_acl_rules[].ip_prefix_set",
+          "spec.site_acl.fast_acl_rules[].prefix",
+        ],
       },
       {
         choiceField: "action",
@@ -340,7 +354,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -485,7 +500,11 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "action",
         fieldPath: "spec.action.action",
-        options: ["spec.action.policer_action", "spec.action.protocol_policer_action", "spec.action.simple_action"],
+        options: [
+          "spec.action.policer_action",
+          "spec.action.protocol_policer_action",
+          "spec.action.simple_action",
+        ],
       },
       {
         choiceField: "port_value_type_choice",
@@ -693,7 +712,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -848,7 +868,11 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "action",
         fieldPath: "spec.action.action",
-        options: ["spec.action.policer_action", "spec.action.protocol_policer_action", "spec.action.simple_action"],
+        options: [
+          "spec.action.policer_action",
+          "spec.action.protocol_policer_action",
+          "spec.action.simple_action",
+        ],
       },
       {
         choiceField: "port_value_type_choice",
@@ -956,12 +980,19 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "vip_choice",
         fieldPath: "spec.re_acl.vip_choice",
-        options: ["spec.re_acl.all_public_vips", "spec.re_acl.default_tenant_vip", "spec.re_acl.selected_tenant_vip"],
+        options: [
+          "spec.re_acl.all_public_vips",
+          "spec.re_acl.default_tenant_vip",
+          "spec.re_acl.selected_tenant_vip",
+        ],
       },
       {
         choiceField: "source",
         fieldPath: "spec.re_acl.fast_acl_rules[].source",
-        options: ["spec.re_acl.fast_acl_rules[].ip_prefix_set", "spec.re_acl.fast_acl_rules[].prefix"],
+        options: [
+          "spec.re_acl.fast_acl_rules[].ip_prefix_set",
+          "spec.re_acl.fast_acl_rules[].prefix",
+        ],
       },
       {
         choiceField: "action",
@@ -989,12 +1020,19 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "vip_choice",
         fieldPath: "spec.site_acl.vip_choice",
-        options: ["spec.site_acl.all_services", "spec.site_acl.interface_services", "spec.site_acl.vip_services"],
+        options: [
+          "spec.site_acl.all_services",
+          "spec.site_acl.interface_services",
+          "spec.site_acl.vip_services",
+        ],
       },
       {
         choiceField: "source",
         fieldPath: "spec.site_acl.fast_acl_rules[].source",
-        options: ["spec.site_acl.fast_acl_rules[].ip_prefix_set", "spec.site_acl.fast_acl_rules[].prefix"],
+        options: [
+          "spec.site_acl.fast_acl_rules[].ip_prefix_set",
+          "spec.site_acl.fast_acl_rules[].prefix",
+        ],
       },
       {
         choiceField: "action",
@@ -1108,7 +1146,10 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "range_type",
         fieldPath: "spec.filter_fields[].date_field.range_type",
-        options: ["spec.filter_fields[].date_field.absolute", "spec.filter_fields[].date_field.relative"],
+        options: [
+          "spec.filter_fields[].date_field.absolute",
+          "spec.filter_fields[].date_field.relative",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -1311,7 +1352,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1469,7 +1511,10 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "range_type",
         fieldPath: "spec.filter_fields[].date_field.range_type",
-        options: ["spec.filter_fields[].date_field.absolute", "spec.filter_fields[].date_field.relative"],
+        options: [
+          "spec.filter_fields[].date_field.absolute",
+          "spec.filter_fields[].date_field.relative",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -1614,7 +1659,12 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "proxy_choice",
         fieldPath: "spec.proxy_choice",
-        options: ["spec.any_proxy", "spec.drp_http_connect", "spec.network_connector", "spec.proxy_label_selector"],
+        options: [
+          "spec.any_proxy",
+          "spec.drp_http_connect",
+          "spec.network_connector",
+          "spec.proxy_label_selector",
+        ],
       },
       {
         choiceField: "rule_choice",
@@ -1713,7 +1763,10 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "http_connect_choice",
         fieldPath: "spec.rule_list.rules[].http_connect_choice",
-        options: ["spec.rule_list.rules[].no_http_connect_port", "spec.rule_list.rules[].port_matcher"],
+        options: [
+          "spec.rule_list.rules[].no_http_connect_port",
+          "spec.rule_list.rules[].port_matcher",
+        ],
       },
       {
         choiceField: "source_choice",
@@ -1954,7 +2007,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2103,7 +2157,12 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "proxy_choice",
         fieldPath: "spec.proxy_choice",
-        options: ["spec.any_proxy", "spec.drp_http_connect", "spec.network_connector", "spec.proxy_label_selector"],
+        options: [
+          "spec.any_proxy",
+          "spec.drp_http_connect",
+          "spec.network_connector",
+          "spec.proxy_label_selector",
+        ],
       },
       {
         choiceField: "rule_choice",
@@ -2202,7 +2261,10 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "http_connect_choice",
         fieldPath: "spec.rule_list.rules[].http_connect_choice",
-        options: ["spec.rule_list.rules[].no_http_connect_port", "spec.rule_list.rules[].port_matcher"],
+        options: [
+          "spec.rule_list.rules[].no_http_connect_port",
+          "spec.rule_list.rules[].port_matcher",
+        ],
       },
       {
         choiceField: "source_choice",
@@ -2386,7 +2448,8 @@ export const network_securityTools: ParsedOperation[] = [
     description: "GET the average latency for Service policy evaluation.",
     pathParameters: [
       {
-        description: "Namespace\nNamespace is used to scope Service policy hits for the given namespace.",
+        description:
+          "Namespace\nNamespace is used to scope Service policy hits for the given namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -2798,7 +2861,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3346,7 +3410,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3851,7 +3916,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4193,7 +4259,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4271,7 +4338,8 @@ export const network_securityTools: ParsedOperation[] = [
     domain: "network_security",
     resource: "network-policy-rule",
     summary: "Replace Network Policy Rule.",
-    description: "Replaces a network policy rule with configured parameters in specified namespace.",
+    description:
+      "Replaces a network policy rule with configured parameters in specified namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -4469,7 +4537,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4547,7 +4616,8 @@ export const network_securityTools: ParsedOperation[] = [
     domain: "network_security",
     resource: "network-policy",
     summary: "Replace Network Policy.",
-    description: "Replaces configured Network Policy with new set of parameters in specified namespace.",
+    description:
+      "Replaces configured Network Policy with new set of parameters in specified namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -5017,7 +5087,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5328,7 +5399,8 @@ export const network_securityTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].domain_choice",
+        fieldPath:
+          "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].domain_choice",
         options: [
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].exact_value",
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].regex_value",
@@ -5337,7 +5409,8 @@ export const network_securityTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_choice",
-        fieldPath: "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].path_choice",
+        fieldPath:
+          "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].path_choice",
         options: [
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].any_path",
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].path_exact_value",
@@ -5347,7 +5420,8 @@ export const network_securityTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].tls_list.tls_list[].domain_choice",
+        fieldPath:
+          "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].tls_list.tls_list[].domain_choice",
         options: [
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].tls_list.tls_list[].exact_value",
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].tls_list.tls_list[].regex_value",
@@ -5357,7 +5431,11 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "source_choice",
         fieldPath: "spec.network_pbr.source_choice",
-        options: ["spec.network_pbr.any", "spec.network_pbr.label_selector", "spec.network_pbr.prefix_list"],
+        options: [
+          "spec.network_pbr.any",
+          "spec.network_pbr.label_selector",
+          "spec.network_pbr.prefix_list",
+        ],
       },
       {
         choiceField: "destination",
@@ -5581,7 +5659,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5753,7 +5832,8 @@ export const network_securityTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].domain_choice",
+        fieldPath:
+          "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].domain_choice",
         options: [
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].exact_value",
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].regex_value",
@@ -5762,7 +5842,8 @@ export const network_securityTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_choice",
-        fieldPath: "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].path_choice",
+        fieldPath:
+          "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].path_choice",
         options: [
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].any_path",
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].http_list.http_list[].path_exact_value",
@@ -5772,7 +5853,8 @@ export const network_securityTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].tls_list.tls_list[].domain_choice",
+        fieldPath:
+          "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].tls_list.tls_list[].domain_choice",
         options: [
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].tls_list.tls_list[].exact_value",
           "spec.forward_proxy_pbr.forward_proxy_pbr_rules[].tls_list.tls_list[].regex_value",
@@ -5782,7 +5864,11 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "source_choice",
         fieldPath: "spec.network_pbr.source_choice",
-        options: ["spec.network_pbr.any", "spec.network_pbr.label_selector", "spec.network_pbr.prefix_list"],
+        options: [
+          "spec.network_pbr.any",
+          "spec.network_pbr.label_selector",
+          "spec.network_pbr.prefix_list",
+        ],
       },
       {
         choiceField: "destination",
@@ -5931,7 +6017,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -6370,7 +6457,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -6545,7 +6633,8 @@ export const network_securityTools: ParsedOperation[] = [
     domain: "network_security",
     resource: "service-policy",
     summary: "Create Service Policy.",
-    description: "Create service_policy creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create service_policy creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -6617,7 +6706,12 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "server_choice",
         fieldPath: "spec.server_choice",
-        options: ["spec.any_server", "spec.server_name", "spec.server_name_matcher", "spec.server_selector"],
+        options: [
+          "spec.any_server",
+          "spec.server_name",
+          "spec.server_name_matcher",
+          "spec.server_selector",
+        ],
       },
       {
         choiceField: "default_action_choice",
@@ -6811,7 +6905,8 @@ export const network_securityTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_parameter_value_size_choice",
-        fieldPath: "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_choice",
+        fieldPath:
+          "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_choice",
         options: [
           "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_exceeds",
           "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_none",
@@ -6956,7 +7051,8 @@ export const network_securityTools: ParsedOperation[] = [
     domain: "network_security",
     resource: "service-policy",
     summary: "GET Service Policy.",
-    description: "GET service_policy reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET service_policy reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -7059,7 +7155,8 @@ export const network_securityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -7137,7 +7234,8 @@ export const network_securityTools: ParsedOperation[] = [
     domain: "network_security",
     resource: "service-policy",
     summary: "Replace Service Policy.",
-    description: "Replace service_policy replaces an existing object in the storage backend for metadata.namespace.",
+    description:
+      "Replace service_policy replaces an existing object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -7220,7 +7318,12 @@ export const network_securityTools: ParsedOperation[] = [
       {
         choiceField: "server_choice",
         fieldPath: "spec.server_choice",
-        options: ["spec.any_server", "spec.server_name", "spec.server_name_matcher", "spec.server_selector"],
+        options: [
+          "spec.any_server",
+          "spec.server_name",
+          "spec.server_name_matcher",
+          "spec.server_selector",
+        ],
       },
       {
         choiceField: "default_action_choice",
@@ -7414,7 +7517,8 @@ export const network_securityTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_parameter_value_size_choice",
-        fieldPath: "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_choice",
+        fieldPath:
+          "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_choice",
         options: [
           "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_exceeds",
           "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_none",
