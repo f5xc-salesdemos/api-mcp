@@ -116,7 +116,8 @@ export const ai_servicesTools: ParsedOperation[] = [
     domain: "ai_services",
     resource: "eval-query",
     summary: "Eval AI Assistant Query.",
-    description: "Temporarily to be used in place of AIAssistantQuery for evaluating API access/RBAC check.",
+    description:
+      "Temporarily to be used in place of AIAssistantQuery for evaluating API access/RBAC check.",
     pathParameters: [
       {
         description: "Namespace\nNamespace of the HTTP Load Balancer for current request.",
@@ -159,7 +160,8 @@ export const ai_servicesTools: ParsedOperation[] = [
     domain: "ai_services",
     resource: "eval-query-feedback",
     summary: "Eval Feedback of AI Assistant Query.",
-    description: "Temporarily to be used in place of AIAssistantFeedback for evaluating API access/RBAC check.",
+    description:
+      "Temporarily to be used in place of AIAssistantFeedback for evaluating API access/RBAC check.",
     pathParameters: [
       {
         description: "Namespace\nNamespace of the HTTP Load Balancer for current request.",
