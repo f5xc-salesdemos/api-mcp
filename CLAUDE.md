@@ -1,5 +1,33 @@
 # Claude Code Project Instructions
 
+## Organization Overview
+
+This repository is part of the **f5xc-salesdemos** GitHub
+organization (21 repositories). Understanding the full
+ecosystem helps when navigating cross-repo dependencies.
+
+### Infrastructure repos
+
+| Repo | Role |
+| ---- | ---- |
+| `docs-control` | Source-of-truth — CI workflows, governance, settings enforcement |
+| `docs-theme` | npm package — Starlight plugin, Astro config, CSS, fonts, layout |
+| `docs-builder` | Docker image — build orchestration, npm deps, Puppeteer PDF |
+| `docs-icons` | npm packages — Iconify JSON icon sets, Astro icon components |
+| `terraform-provider-f5xc` | Custom Go Terraform provider for F5 XC |
+| `terraform-provider-mcp` | MCP server exposing Terraform provider schemas |
+| `api-mcp` | MCP server for the F5 XC API |
+
+### Content repos
+
+All content repos follow the same pattern: a `docs/`
+directory with Markdown/MDX content, built by the shared
+Docker image and deployed to GitHub Pages.
+
+`docs` · `administration` · `nginx` · `observability` ·
+`was` · `mcn` · `dns` · `cdn` · `bot-standard` ·
+`bot-advanced` · `ddos` · `waf` · `api-protection` · `csd`
+
 ## Repository Workflow
 
 This repository enforces a strict governance workflow.
@@ -36,8 +64,18 @@ workflows succeed, and local branches are cleaned.
    are green, merge the PR yourself. Do not wait for
    manual approval (none is required).
 
+   Poll PR checks using single-shot queries (never
+   `--watch`) per the **Polling Protocol**:
+
    ```
-   gh pr checks <NUMBER> --watch
+   gh pr checks <NUMBER> --json bucket \
+     --jq 'map(.bucket) | unique | if . == ["pass"] then "pass"
+     elif any(. == "fail") then "fail" else "pending" end'
+   ```
+
+   Once all checks pass:
+
+   ```
    gh pr merge <NUMBER> --squash --delete-branch
    ```
 
@@ -52,15 +90,27 @@ workflows succeed, and local branches are cleaned.
 8. **Monitor post-merge workflows** — merging to
    `main` triggers additional workflows (docs
    builds, governance sync, etc.). Discover and
-   watch them:
+   poll them using single-shot checks (never
+   `--watch`):
 
    ```
    git checkout main && git pull origin main
    MERGE_SHA=$(git rev-parse HEAD)
-   sleep 10
+   sleep 15
    gh run list --branch main --commit $MERGE_SHA
-   gh run watch <RUN-ID> --exit-status
    ```
+
+   Then poll each run using the **Polling Protocol**
+   from the rate limit section:
+
+   ```
+   gh run view <RUN-ID> --json status,conclusion \
+     --jq '"\(.status) \(.conclusion)"'
+   ```
+
+   Sleep for the interval matching the current
+   consumption zone (30s GREEN, 60s YELLOW).
+   Maximum 20 iterations — then report to user.
 
 9. **Iterate on failures** — if any workflow fails:
    - View logs: `gh run view <RUN-ID> --log-failed`
@@ -86,7 +136,6 @@ workflows succeed, and local branches are cleaned.
     ```
     git status
     git branch
-    gh run list --branch main --commit $MERGE_SHA
     ```
 
 ### Verification (Steps 12-13)
@@ -114,7 +163,14 @@ workflows succeed, and local branches are cleaned.
       && echo "OK" || echo "FAIL"
     ```
 
-    If governance or config files changed:
+    If governance or config files changed, check
+    rate limits first and adapt scope:
+
+    - **GREEN** (>1,000 remaining): check all repos
+    - **YELLOW** (200–1,000): spot-check 3 repos
+      (first, middle, last from the list)
+    - **RED** (<200): skip entirely, report deferral
+      to user
 
     ```
     # Downstream repos were dispatched successfully
@@ -180,13 +236,124 @@ Use the format `<prefix>/<issue-number>-short-description`:
 - Always delete local feature branches after successful merge
 - Always clean up stale merged branches and workspace clutter when noticed
 
+## GitHub API Rate Limit Management
+
+The GitHub REST API allows 5,000 calls per hour.
+Unthrottled polling (`--watch` flags) can consume
+hundreds to thousands of calls per task cycle,
+triggering HTTP 403 errors that block all further
+operations until the hourly window resets.
+
+### Rate Limit Check
+
+Run this before any polling loop or when budget
+is uncertain (costs 1 API call):
+
+```
+gh api rate_limit --jq '{
+  remaining: .rate.remaining,
+  limit: .rate.limit,
+  reset_minutes: ((.rate.reset - now) / 60 | ceil)
+}'
+```
+
+### When to Check
+
+Check rate limits at exactly these 4 points:
+
+1. **Before starting any new task** (Step 1)
+2. **Before entering a polling loop** (Steps 7, 8)
+3. **Before the downstream verification loop**
+   (Step 12)
+4. **After any HTTP 403 or 429 response**
+
+### Consumption Zones
+
+| Zone | Remaining | Poll Interval | Behavior |
+| ---- | --------- | ------------- | -------- |
+| GREEN | >1,000 | 30s | Normal operation |
+| YELLOW | 200–1,000 | 60s | Spot-check 3 downstream repos (first, middle, last); skip redundant verification |
+| RED | <200 | No polling | Stop and report to user; wait for reset if <15 min away |
+
+### Banned Commands
+
+Never use these — they poll every 3-10 seconds
+and consume API calls rapidly:
+
+- `gh pr checks <NUMBER> --watch`
+- `gh run watch <RUN-ID>`
+- `gh run watch <RUN-ID> --exit-status`
+
+### Polling Protocol
+
+Replace all `--watch` patterns with single-shot
+checks in a sleep loop:
+
+**PR checks** (pass/fail/pending in one call):
+
+```
+gh pr checks <NUMBER> --json bucket \
+  --jq 'map(.bucket) | unique | if . == ["pass"] then "pass"
+  elif any(. == "fail") then "fail" else "pending" end'
+```
+
+**Workflow run status** (one call per run):
+
+```
+gh run view <RUN-ID> --json status,conclusion \
+  --jq '"\(.status) \(.conclusion)"'
+```
+
+**Loop rules**:
+
+- Sleep for the interval defined by the current
+  consumption zone (30s GREEN, 60s YELLOW)
+- Maximum 20 iterations per polling loop — if
+  still pending, report status to user and ask
+  whether to continue
+- Poll all triggered workflows in one iteration
+  before sleeping (batch, not sequential)
+- Re-check rate limit every 5 iterations
+
+### Budget Estimates
+
+Approximate API calls per operation:
+
+| Operation | Calls |
+| --------- | ----- |
+| Rate limit check | 1 |
+| PR checks (single-shot) | 1 |
+| Workflow run status | 1 |
+| PR merge | 1 |
+| Run list (discover workflows) | 1 |
+| Run view (logs) | 1 |
+| Issue view | 1 |
+| Branch protection check | 1 |
+| Downstream repo check (per repo) | 1 |
+| Full polling loop (20 iter, 3 runs) | ~65 |
+| Full task cycle (standard) | ~100 |
+| Full task cycle (governance, 18 repos) | ~150 |
+
+### 403 Recovery Protocol
+
+When an HTTP 403 or 429 response is encountered:
+
+1. Run the rate limit check to extract reset time
+2. Calculate minutes until reset
+3. Report to user: remaining calls, reset time,
+   and what operation was blocked
+4. If reset is <15 minutes away, recommend waiting
+5. If reset is >15 minutes away, stop all `gh`
+   operations and ask user how to proceed
+
 ## Managed Files
 
 The following files are centrally managed by the
 [docs-control](https://github.com/f5xc-salesdemos/docs-control)
-repository and automatically synced to this repository.
-**Do not modify these files here** — local changes
-will be overwritten on the next enforcement run.
+repository and automatically synced to all repos in the
+`f5xc-salesdemos` organization. **Do not modify these
+files here** — local changes will be overwritten on the
+next enforcement run.
 
 To change any of these files, open a PR in
 `f5xc-salesdemos/docs-control` instead.
@@ -216,6 +383,7 @@ To change any of these files, open a PR in
 - `.checkov.yaml`
 - `zizmor.yaml`
 - `.shellcheckrc`
+- `.codespellrc`
 
 ## Planning Before Execution
 
@@ -253,7 +421,7 @@ is always cheaper than undoing unwanted changes.
 When monitoring CI workflows, focus only on
 workflows triggered by your current changes.
 Use the merge commit SHA (`$MERGE_SHA`) to scope
-`gh run list` and `gh run watch` commands.
+`gh run list` and `gh run view` commands.
 
 If a workflow triggered by your commit fails:
 
@@ -267,6 +435,13 @@ If a workflow triggered by your commit fails:
 Do not investigate or report on workflow failures
 from other commits. Historical failures are out
 of scope for the current task.
+
+Rate limit awareness applies to all `gh` commands
+during CI monitoring. Before entering any polling
+loop, check remaining API budget per the
+**GitHub API Rate Limit Management** section. Use
+single-shot status checks with sleep intervals —
+never `--watch` flags.
 
 ## Workspace Hygiene
 
@@ -294,8 +469,8 @@ git branch --merged main | grep -v '^\*\|main' | xargs -r git branch -d
 
 ## Documentation Pipeline
 
-All repositories publish docs to GitHub Pages using a
-shared pipeline:
+All `f5xc-salesdemos` repositories publish docs to
+GitHub Pages using a shared pipeline:
 
 | Repository | Role | Owns |
 | ---- | ---- | ---- |
@@ -405,6 +580,19 @@ If a theme or icon change does not appear on live
 sites, check each step in this chain for failures —
 do not manually trigger `github-pages-deploy.yml`
 as a workaround.
+
+### Other infrastructure repos
+
+The organization also contains repos with their own
+CI pipelines that are not part of the docs theme/build
+dispatch chain but do receive managed files and publish
+docs sites:
+
+| Repo | Role |
+| ---- | ---- |
+| `terraform-provider-f5xc` | Go Terraform provider for F5 Distributed Cloud |
+| `terraform-provider-mcp` | MCP server exposing Terraform provider schemas |
+| `api-mcp` | MCP server for the F5 XC API |
 
 ## Content Authoring
 
