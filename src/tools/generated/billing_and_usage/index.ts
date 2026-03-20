@@ -421,7 +421,8 @@ export const billing_and_usageTools: ParsedOperation[] = [
     description: "API to create a plan transition request in db.",
     pathParameters: [
       {
-        description: "Namespace\nThis namespace is not used, all requests are stored under system namespace.",
+        description:
+          "Namespace\nThis namespace is not used, all requests are stored under system namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -780,7 +781,8 @@ export const billing_and_usageTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -845,7 +847,8 @@ export const billing_and_usageTools: ParsedOperation[] = [
     domain: "billing_and_usage",
     resource: "quota",
     summary: "Replace Quota.",
-    description: "Replace quota updates a given object from storage backend for metadata.namespace.",
+    description:
+      "Replace quota updates a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
