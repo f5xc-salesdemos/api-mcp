@@ -592,7 +592,8 @@ export const supportTools: ParsedOperation[] = [
     domain: "support",
     resource: "customer-support",
     summary: "List all tenant tickets.",
-    description: "Similar to the List rpc but returns all tenant tickets regardless of their author.",
+    description:
+      "Similar to the List rpc but returns all tenant tickets regardless of their author.",
     pathParameters: [
       {
         description: "Namespace\nNamespace to scope the listing of customer_support.",
@@ -607,7 +608,8 @@ export const supportTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1455,7 +1457,8 @@ export const supportTools: ParsedOperation[] = [
       $ref: "#/components/schemas/ticket_tracking_systemJiraProjectsIssueTypesResponse",
     },
     requiredParams: ["body"],
-    operationId: "ves.io.schema.ticket_management.ticket_tracking_system.CustomAPI.JiraProjectsIssueTypes",
+    operationId:
+      "ves.io.schema.ticket_management.ticket_tracking_system.CustomAPI.JiraProjectsIssueTypes",
     tags: ["Other"],
     sourceFile: "domains/support.json",
     displayName: null,
@@ -1812,7 +1815,8 @@ export const supportTools: ParsedOperation[] = [
     description: "Changes priority of a selected ticket. Not possible if ticket's already closed.",
     pathParameters: [
       {
-        description: "Name\nThe name of the customer support ticket object to have its priority changed.",
+        description:
+          "Name\nThe name of the customer support ticket object to have its priority changed.",
         in: "path",
         name: "name",
         required: true,
@@ -2186,7 +2190,8 @@ export const supportTools: ParsedOperation[] = [
     description: "Start collecting a zip file of debug info from node.",
     pathParameters: [
       {
-        description: "Node Name\nName of the node\nIf using global, debug info will be collected for all nodes.",
+        description:
+          "Node Name\nName of the node\nIf using global, debug info will be collected for all nodes.",
         in: "path",
         name: "node",
         required: true,
@@ -2730,7 +2735,8 @@ export const supportTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2884,7 +2890,8 @@ export const supportTools: ParsedOperation[] = [
     domain: "support",
     resource: "validate-ticket-tracking-system",
     summary: "Validate Ticket Tracking System.",
-    description: "Validate input for the ticket tracking system like the credentials + organization.",
+    description:
+      "Validate input for the ticket tracking system like the credentials + organization.",
     pathParameters: [],
     queryParameters: [],
     requestBodySchema: {
@@ -2894,7 +2901,8 @@ export const supportTools: ParsedOperation[] = [
       $ref: "#/components/schemas/ticket_tracking_systemValidateTicketTrackingSystemResponse",
     },
     requiredParams: ["body"],
-    operationId: "ves.io.schema.ticket_management.ticket_tracking_system.CustomAPI.ValidateTicketTrackingSystem",
+    operationId:
+      "ves.io.schema.ticket_management.ticket_tracking_system.CustomAPI.ValidateTicketTrackingSystem",
     tags: ["Other"],
     sourceFile: "domains/support.json",
     displayName: null,
