@@ -148,17 +148,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "matcher_type",
         fieldPath: "spec.routes[].custom.alertname.matcher_type",
-        options: ["spec.routes[].custom.alertname.exact_match", "spec.routes[].custom.alertname.regex_match"],
+        options: [
+          "spec.routes[].custom.alertname.exact_match",
+          "spec.routes[].custom.alertname.regex_match",
+        ],
       },
       {
         choiceField: "matcher_type",
         fieldPath: "spec.routes[].custom.group.matcher_type",
-        options: ["spec.routes[].custom.group.exact_match", "spec.routes[].custom.group.regex_match"],
+        options: [
+          "spec.routes[].custom.group.exact_match",
+          "spec.routes[].custom.group.regex_match",
+        ],
       },
       {
         choiceField: "matcher_type",
         fieldPath: "spec.routes[].custom.severity.matcher_type",
-        options: ["spec.routes[].custom.severity.exact_match", "spec.routes[].custom.severity.regex_match"],
+        options: [
+          "spec.routes[].custom.severity.exact_match",
+          "spec.routes[].custom.severity.regex_match",
+        ],
       },
       {
         choiceField: "group_by",
@@ -332,7 +341,8 @@ export const statisticsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -495,17 +505,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "matcher_type",
         fieldPath: "spec.routes[].custom.alertname.matcher_type",
-        options: ["spec.routes[].custom.alertname.exact_match", "spec.routes[].custom.alertname.regex_match"],
+        options: [
+          "spec.routes[].custom.alertname.exact_match",
+          "spec.routes[].custom.alertname.regex_match",
+        ],
       },
       {
         choiceField: "matcher_type",
         fieldPath: "spec.routes[].custom.group.matcher_type",
-        options: ["spec.routes[].custom.group.exact_match", "spec.routes[].custom.group.regex_match"],
+        options: [
+          "spec.routes[].custom.group.exact_match",
+          "spec.routes[].custom.group.regex_match",
+        ],
       },
       {
         choiceField: "matcher_type",
         fieldPath: "spec.routes[].custom.severity.matcher_type",
-        options: ["spec.routes[].custom.severity.exact_match", "spec.routes[].custom.severity.regex_match"],
+        options: [
+          "spec.routes[].custom.severity.exact_match",
+          "spec.routes[].custom.severity.regex_match",
+        ],
       },
       {
         choiceField: "group_by",
@@ -589,17 +608,30 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "receiver",
         fieldPath: "spec.receiver",
-        options: ["spec.email", "spec.opsgenie", "spec.pagerduty", "spec.slack", "spec.sms", "spec.webhook"],
+        options: [
+          "spec.email",
+          "spec.opsgenie",
+          "spec.pagerduty",
+          "spec.slack",
+          "spec.sms",
+          "spec.webhook",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.opsgenie.api_key.secret_info_oneof",
-        options: ["spec.opsgenie.api_key.blindfold_secret_info", "spec.opsgenie.api_key.clear_secret_info"],
+        options: [
+          "spec.opsgenie.api_key.blindfold_secret_info",
+          "spec.opsgenie.api_key.clear_secret_info",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.pagerduty.routing_key.secret_info_oneof",
-        options: ["spec.pagerduty.routing_key.blindfold_secret_info", "spec.pagerduty.routing_key.clear_secret_info"],
+        options: [
+          "spec.pagerduty.routing_key.blindfold_secret_info",
+          "spec.pagerduty.routing_key.clear_secret_info",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -648,7 +680,10 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "sni_choice",
         fieldPath: "spec.webhook.http_config.use_tls.sni_choice",
-        options: ["spec.webhook.http_config.use_tls.disable_sni", "spec.webhook.http_config.use_tls.sni"],
+        options: [
+          "spec.webhook.http_config.use_tls.disable_sni",
+          "spec.webhook.http_config.use_tls.sni",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -817,7 +852,8 @@ export const statisticsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -953,17 +989,30 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "receiver",
         fieldPath: "spec.receiver",
-        options: ["spec.email", "spec.opsgenie", "spec.pagerduty", "spec.slack", "spec.sms", "spec.webhook"],
+        options: [
+          "spec.email",
+          "spec.opsgenie",
+          "spec.pagerduty",
+          "spec.slack",
+          "spec.sms",
+          "spec.webhook",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.opsgenie.api_key.secret_info_oneof",
-        options: ["spec.opsgenie.api_key.blindfold_secret_info", "spec.opsgenie.api_key.clear_secret_info"],
+        options: [
+          "spec.opsgenie.api_key.blindfold_secret_info",
+          "spec.opsgenie.api_key.clear_secret_info",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.pagerduty.routing_key.secret_info_oneof",
-        options: ["spec.pagerduty.routing_key.blindfold_secret_info", "spec.pagerduty.routing_key.clear_secret_info"],
+        options: [
+          "spec.pagerduty.routing_key.blindfold_secret_info",
+          "spec.pagerduty.routing_key.clear_secret_info",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -1012,7 +1061,10 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "sni_choice",
         fieldPath: "spec.webhook.http_config.use_tls.sni_choice",
-        options: ["spec.webhook.http_config.use_tls.disable_sni", "spec.webhook.http_config.use_tls.sni"],
+        options: [
+          "spec.webhook.http_config.use_tls.disable_sni",
+          "spec.webhook.http_config.use_tls.sni",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -1057,7 +1109,8 @@ export const statisticsTools: ParsedOperation[] = [
         "x-displayname": "Inactive",
       },
       {
-        description: "Show inhibited alerts - alerts that are suppressed if certain other alerts are firing.",
+        description:
+          "Show inhibited alerts - alerts that are suppressed if certain other alerts are firing.",
         in: "query",
         name: "inhibited",
         required: false,
@@ -1444,7 +1497,8 @@ export const statisticsTools: ParsedOperation[] = [
         "x-displayname": "Name",
       },
       {
-        description: "Namespace\n\nx-required\nNamespace in which the alert receiver is configured.",
+        description:
+          "Namespace\n\nx-required\nNamespace in which the alert receiver is configured.",
         in: "path",
         name: "namespace",
         required: true,
@@ -1486,7 +1540,8 @@ export const statisticsTools: ParsedOperation[] = [
     domain: "statistics",
     resource: "create-http-load-balancer",
     summary: "Create HTTP/HTTPS load balancer.",
-    description: "Create HTTP/HTTPS load balancer using the discovered virtual server as an origin server.",
+    description:
+      "Create HTTP/HTTPS load balancer using the discovered virtual server as an origin server.",
     pathParameters: [
       {
         description: "Service Name\nx-required\nIdentifies the discovered service name.",
@@ -1499,7 +1554,8 @@ export const statisticsTools: ParsedOperation[] = [
         "x-displayname": "Service Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -1539,7 +1595,11 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "loadbalancer_type",
         fieldPath: "http_lb_request.loadbalancer_type",
-        options: ["http_lb_request.http", "http_lb_request.https", "http_lb_request.https_auto_cert"],
+        options: [
+          "http_lb_request.http",
+          "http_lb_request.https",
+          "http_lb_request.https_auto_cert",
+        ],
       },
       {
         choiceField: "server_validation_choice",
@@ -1575,7 +1635,8 @@ export const statisticsTools: ParsedOperation[] = [
     domain: "statistics",
     resource: "create-tcp-load-balancer",
     summary: "Create TCP load balancer.",
-    description: "Create TCP load balancer using the discovered virtual server as an origin server.",
+    description:
+      "Create TCP load balancer using the discovered virtual server as an origin server.",
     pathParameters: [
       {
         description: "Service Name\nx-required\nIdentifies the discovered service name.",
@@ -1588,7 +1649,8 @@ export const statisticsTools: ParsedOperation[] = [
         "x-displayname": "Service Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -1623,7 +1685,10 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "advertise_choice",
         fieldPath: "tcp_lb_request.advertise_choice",
-        options: ["tcp_lb_request.advertise_custom", "tcp_lb_request.advertise_on_public_default_vip"],
+        options: [
+          "tcp_lb_request.advertise_custom",
+          "tcp_lb_request.advertise_on_public_default_vip",
+        ],
       },
       {
         choiceField: "port_choice",
@@ -1662,7 +1727,8 @@ export const statisticsTools: ParsedOperation[] = [
       },
       {
         choiceField: "v6_vip_choice",
-        fieldPath: "tcp_lb_request.advertise_custom.advertise_where[].virtual_network.v6_vip_choice",
+        fieldPath:
+          "tcp_lb_request.advertise_custom.advertise_where[].virtual_network.v6_vip_choice",
         options: [
           "tcp_lb_request.advertise_custom.advertise_where[].virtual_network.default_v6_vip",
           "tcp_lb_request.advertise_custom.advertise_where[].virtual_network.specific_v6_vip",
@@ -1786,7 +1852,8 @@ export const statisticsTools: ParsedOperation[] = [
         "x-displayname": "Service Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -1900,10 +1967,12 @@ export const statisticsTools: ParsedOperation[] = [
     domain: "statistics",
     resource: "discovered-service",
     summary: "List discovered services of specific type.",
-    description: "List the discovered services of specific type like virtual-servers, K8s, consul, NGINX server, etc.",
+    description:
+      "List the discovered services of specific type like virtual-servers, K8s, consul, NGINX server, etc.",
     pathParameters: [
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -2031,7 +2100,8 @@ export const statisticsTools: ParsedOperation[] = [
         "x-displayname": "Service Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -2263,7 +2333,8 @@ export const statisticsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2331,7 +2402,8 @@ export const statisticsTools: ParsedOperation[] = [
     description: "Generate report now.",
     pathParameters: [
       {
-        description: "Name\n\nx-required\nName of the report config for which report has to be generated.",
+        description:
+          "Name\n\nx-required\nName of the report config for which report has to be generated.",
         in: "path",
         name: "name",
         required: true,
@@ -2513,17 +2585,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.azure_receiver.batch.batch_bytes",
-        options: ["spec.azure_receiver.batch.max_bytes", "spec.azure_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.azure_receiver.batch.max_bytes",
+          "spec.azure_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.azure_receiver.batch.batch_events",
-        options: ["spec.azure_receiver.batch.max_events", "spec.azure_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.azure_receiver.batch.max_events",
+          "spec.azure_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.azure_receiver.batch.batch_timeout",
-        options: ["spec.azure_receiver.batch.timeout_seconds", "spec.azure_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.azure_receiver.batch.timeout_seconds",
+          "spec.azure_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -2564,17 +2645,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.datadog_receiver.batch.batch_bytes",
-        options: ["spec.datadog_receiver.batch.max_bytes", "spec.datadog_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.datadog_receiver.batch.max_bytes",
+          "spec.datadog_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.datadog_receiver.batch.batch_events",
-        options: ["spec.datadog_receiver.batch.max_events", "spec.datadog_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.datadog_receiver.batch.max_events",
+          "spec.datadog_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.datadog_receiver.batch.batch_timeout",
-        options: ["spec.datadog_receiver.batch.timeout_seconds", "spec.datadog_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.datadog_receiver.batch.timeout_seconds",
+          "spec.datadog_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -2596,12 +2686,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.datadog_receiver.use_tls.ca_choice",
-        options: ["spec.datadog_receiver.use_tls.no_ca", "spec.datadog_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.datadog_receiver.use_tls.no_ca",
+          "spec.datadog_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.datadog_receiver.use_tls.mtls_choice",
-        options: ["spec.datadog_receiver.use_tls.mtls_disabled", "spec.datadog_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.datadog_receiver.use_tls.mtls_disabled",
+          "spec.datadog_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -2630,12 +2726,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.gcp_bucket_receiver.batch.batch_bytes",
-        options: ["spec.gcp_bucket_receiver.batch.max_bytes", "spec.gcp_bucket_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.gcp_bucket_receiver.batch.max_bytes",
+          "spec.gcp_bucket_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.gcp_bucket_receiver.batch.batch_events",
-        options: ["spec.gcp_bucket_receiver.batch.max_events", "spec.gcp_bucket_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.gcp_bucket_receiver.batch.max_events",
+          "spec.gcp_bucket_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
@@ -2666,7 +2768,11 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "auth_choice",
         fieldPath: "spec.http_receiver.auth_choice",
-        options: ["spec.http_receiver.auth_basic", "spec.http_receiver.auth_none", "spec.http_receiver.auth_token"],
+        options: [
+          "spec.http_receiver.auth_basic",
+          "spec.http_receiver.auth_none",
+          "spec.http_receiver.auth_token",
+        ],
       },
       {
         choiceField: "tls_choice",
@@ -2692,17 +2798,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.http_receiver.batch.batch_bytes",
-        options: ["spec.http_receiver.batch.max_bytes", "spec.http_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.http_receiver.batch.max_bytes",
+          "spec.http_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.http_receiver.batch.batch_events",
-        options: ["spec.http_receiver.batch.max_events", "spec.http_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.http_receiver.batch.max_events",
+          "spec.http_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.http_receiver.batch.batch_timeout",
-        options: ["spec.http_receiver.batch.timeout_seconds", "spec.http_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.http_receiver.batch.timeout_seconds",
+          "spec.http_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -2721,7 +2836,10 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.http_receiver.use_tls.mtls_choice",
-        options: ["spec.http_receiver.use_tls.mtls_disabled", "spec.http_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.http_receiver.use_tls.mtls_disabled",
+          "spec.http_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -2755,17 +2873,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.kafka_receiver.batch.batch_bytes",
-        options: ["spec.kafka_receiver.batch.max_bytes", "spec.kafka_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.kafka_receiver.batch.max_bytes",
+          "spec.kafka_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.kafka_receiver.batch.batch_events",
-        options: ["spec.kafka_receiver.batch.max_events", "spec.kafka_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.kafka_receiver.batch.max_events",
+          "spec.kafka_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.kafka_receiver.batch.batch_timeout",
-        options: ["spec.kafka_receiver.batch.timeout_seconds", "spec.kafka_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.kafka_receiver.batch.timeout_seconds",
+          "spec.kafka_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -2779,12 +2906,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.kafka_receiver.use_tls.ca_choice",
-        options: ["spec.kafka_receiver.use_tls.no_ca", "spec.kafka_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.kafka_receiver.use_tls.no_ca",
+          "spec.kafka_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.kafka_receiver.use_tls.mtls_choice",
-        options: ["spec.kafka_receiver.use_tls.mtls_disabled", "spec.kafka_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.kafka_receiver.use_tls.mtls_disabled",
+          "spec.kafka_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -2831,17 +2964,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.qradar_receiver.batch.batch_bytes",
-        options: ["spec.qradar_receiver.batch.max_bytes", "spec.qradar_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.qradar_receiver.batch.max_bytes",
+          "spec.qradar_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.qradar_receiver.batch.batch_events",
-        options: ["spec.qradar_receiver.batch.max_events", "spec.qradar_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.qradar_receiver.batch.max_events",
+          "spec.qradar_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.qradar_receiver.batch.batch_timeout",
-        options: ["spec.qradar_receiver.batch.timeout_seconds", "spec.qradar_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.qradar_receiver.batch.timeout_seconds",
+          "spec.qradar_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -2855,12 +2997,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.qradar_receiver.use_tls.ca_choice",
-        options: ["spec.qradar_receiver.use_tls.no_ca", "spec.qradar_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.qradar_receiver.use_tls.no_ca",
+          "spec.qradar_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.qradar_receiver.use_tls.mtls_choice",
-        options: ["spec.qradar_receiver.use_tls.mtls_disabled", "spec.qradar_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.qradar_receiver.use_tls.mtls_disabled",
+          "spec.qradar_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -2894,12 +3042,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_events",
         fieldPath: "spec.s3_receiver.batch.batch_events",
-        options: ["spec.s3_receiver.batch.max_events", "spec.s3_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.s3_receiver.batch.max_events",
+          "spec.s3_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.s3_receiver.batch.batch_timeout",
-        options: ["spec.s3_receiver.batch.timeout_seconds", "spec.s3_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.s3_receiver.batch.timeout_seconds",
+          "spec.s3_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -2927,17 +3081,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.splunk_receiver.batch.batch_bytes",
-        options: ["spec.splunk_receiver.batch.max_bytes", "spec.splunk_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.splunk_receiver.batch.max_bytes",
+          "spec.splunk_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.splunk_receiver.batch.batch_events",
-        options: ["spec.splunk_receiver.batch.max_events", "spec.splunk_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.splunk_receiver.batch.max_events",
+          "spec.splunk_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.splunk_receiver.batch.batch_timeout",
-        options: ["spec.splunk_receiver.batch.timeout_seconds", "spec.splunk_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.splunk_receiver.batch.timeout_seconds",
+          "spec.splunk_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -2959,12 +3122,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.splunk_receiver.use_tls.ca_choice",
-        options: ["spec.splunk_receiver.use_tls.no_ca", "spec.splunk_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.splunk_receiver.use_tls.no_ca",
+          "spec.splunk_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.splunk_receiver.use_tls.mtls_choice",
-        options: ["spec.splunk_receiver.use_tls.mtls_disabled", "spec.splunk_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.splunk_receiver.use_tls.mtls_disabled",
+          "spec.splunk_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -3160,7 +3329,8 @@ export const statisticsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3365,17 +3535,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.azure_receiver.batch.batch_bytes",
-        options: ["spec.azure_receiver.batch.max_bytes", "spec.azure_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.azure_receiver.batch.max_bytes",
+          "spec.azure_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.azure_receiver.batch.batch_events",
-        options: ["spec.azure_receiver.batch.max_events", "spec.azure_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.azure_receiver.batch.max_events",
+          "spec.azure_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.azure_receiver.batch.batch_timeout",
-        options: ["spec.azure_receiver.batch.timeout_seconds", "spec.azure_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.azure_receiver.batch.timeout_seconds",
+          "spec.azure_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -3416,17 +3595,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.datadog_receiver.batch.batch_bytes",
-        options: ["spec.datadog_receiver.batch.max_bytes", "spec.datadog_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.datadog_receiver.batch.max_bytes",
+          "spec.datadog_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.datadog_receiver.batch.batch_events",
-        options: ["spec.datadog_receiver.batch.max_events", "spec.datadog_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.datadog_receiver.batch.max_events",
+          "spec.datadog_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.datadog_receiver.batch.batch_timeout",
-        options: ["spec.datadog_receiver.batch.timeout_seconds", "spec.datadog_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.datadog_receiver.batch.timeout_seconds",
+          "spec.datadog_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -3448,12 +3636,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.datadog_receiver.use_tls.ca_choice",
-        options: ["spec.datadog_receiver.use_tls.no_ca", "spec.datadog_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.datadog_receiver.use_tls.no_ca",
+          "spec.datadog_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.datadog_receiver.use_tls.mtls_choice",
-        options: ["spec.datadog_receiver.use_tls.mtls_disabled", "spec.datadog_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.datadog_receiver.use_tls.mtls_disabled",
+          "spec.datadog_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -3482,12 +3676,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.gcp_bucket_receiver.batch.batch_bytes",
-        options: ["spec.gcp_bucket_receiver.batch.max_bytes", "spec.gcp_bucket_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.gcp_bucket_receiver.batch.max_bytes",
+          "spec.gcp_bucket_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.gcp_bucket_receiver.batch.batch_events",
-        options: ["spec.gcp_bucket_receiver.batch.max_events", "spec.gcp_bucket_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.gcp_bucket_receiver.batch.max_events",
+          "spec.gcp_bucket_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
@@ -3518,7 +3718,11 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "auth_choice",
         fieldPath: "spec.http_receiver.auth_choice",
-        options: ["spec.http_receiver.auth_basic", "spec.http_receiver.auth_none", "spec.http_receiver.auth_token"],
+        options: [
+          "spec.http_receiver.auth_basic",
+          "spec.http_receiver.auth_none",
+          "spec.http_receiver.auth_token",
+        ],
       },
       {
         choiceField: "tls_choice",
@@ -3544,17 +3748,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.http_receiver.batch.batch_bytes",
-        options: ["spec.http_receiver.batch.max_bytes", "spec.http_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.http_receiver.batch.max_bytes",
+          "spec.http_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.http_receiver.batch.batch_events",
-        options: ["spec.http_receiver.batch.max_events", "spec.http_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.http_receiver.batch.max_events",
+          "spec.http_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.http_receiver.batch.batch_timeout",
-        options: ["spec.http_receiver.batch.timeout_seconds", "spec.http_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.http_receiver.batch.timeout_seconds",
+          "spec.http_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -3573,7 +3786,10 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.http_receiver.use_tls.mtls_choice",
-        options: ["spec.http_receiver.use_tls.mtls_disabled", "spec.http_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.http_receiver.use_tls.mtls_disabled",
+          "spec.http_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -3607,17 +3823,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.kafka_receiver.batch.batch_bytes",
-        options: ["spec.kafka_receiver.batch.max_bytes", "spec.kafka_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.kafka_receiver.batch.max_bytes",
+          "spec.kafka_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.kafka_receiver.batch.batch_events",
-        options: ["spec.kafka_receiver.batch.max_events", "spec.kafka_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.kafka_receiver.batch.max_events",
+          "spec.kafka_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.kafka_receiver.batch.batch_timeout",
-        options: ["spec.kafka_receiver.batch.timeout_seconds", "spec.kafka_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.kafka_receiver.batch.timeout_seconds",
+          "spec.kafka_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -3631,12 +3856,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.kafka_receiver.use_tls.ca_choice",
-        options: ["spec.kafka_receiver.use_tls.no_ca", "spec.kafka_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.kafka_receiver.use_tls.no_ca",
+          "spec.kafka_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.kafka_receiver.use_tls.mtls_choice",
-        options: ["spec.kafka_receiver.use_tls.mtls_disabled", "spec.kafka_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.kafka_receiver.use_tls.mtls_disabled",
+          "spec.kafka_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -3683,17 +3914,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.qradar_receiver.batch.batch_bytes",
-        options: ["spec.qradar_receiver.batch.max_bytes", "spec.qradar_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.qradar_receiver.batch.max_bytes",
+          "spec.qradar_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.qradar_receiver.batch.batch_events",
-        options: ["spec.qradar_receiver.batch.max_events", "spec.qradar_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.qradar_receiver.batch.max_events",
+          "spec.qradar_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.qradar_receiver.batch.batch_timeout",
-        options: ["spec.qradar_receiver.batch.timeout_seconds", "spec.qradar_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.qradar_receiver.batch.timeout_seconds",
+          "spec.qradar_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -3707,12 +3947,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.qradar_receiver.use_tls.ca_choice",
-        options: ["spec.qradar_receiver.use_tls.no_ca", "spec.qradar_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.qradar_receiver.use_tls.no_ca",
+          "spec.qradar_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.qradar_receiver.use_tls.mtls_choice",
-        options: ["spec.qradar_receiver.use_tls.mtls_disabled", "spec.qradar_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.qradar_receiver.use_tls.mtls_disabled",
+          "spec.qradar_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -3746,12 +3992,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_events",
         fieldPath: "spec.s3_receiver.batch.batch_events",
-        options: ["spec.s3_receiver.batch.max_events", "spec.s3_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.s3_receiver.batch.max_events",
+          "spec.s3_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.s3_receiver.batch.batch_timeout",
-        options: ["spec.s3_receiver.batch.timeout_seconds", "spec.s3_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.s3_receiver.batch.timeout_seconds",
+          "spec.s3_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -3779,17 +4031,26 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.splunk_receiver.batch.batch_bytes",
-        options: ["spec.splunk_receiver.batch.max_bytes", "spec.splunk_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.splunk_receiver.batch.max_bytes",
+          "spec.splunk_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.splunk_receiver.batch.batch_events",
-        options: ["spec.splunk_receiver.batch.max_events", "spec.splunk_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.splunk_receiver.batch.max_events",
+          "spec.splunk_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.splunk_receiver.batch.batch_timeout",
-        options: ["spec.splunk_receiver.batch.timeout_seconds", "spec.splunk_receiver.batch.timeout_seconds_default"],
+        options: [
+          "spec.splunk_receiver.batch.timeout_seconds",
+          "spec.splunk_receiver.batch.timeout_seconds_default",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -3811,12 +4072,18 @@ export const statisticsTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.splunk_receiver.use_tls.ca_choice",
-        options: ["spec.splunk_receiver.use_tls.no_ca", "spec.splunk_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.splunk_receiver.use_tls.no_ca",
+          "spec.splunk_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.splunk_receiver.use_tls.mtls_choice",
-        options: ["spec.splunk_receiver.use_tls.mtls_disabled", "spec.splunk_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.splunk_receiver.use_tls.mtls_disabled",
+          "spec.splunk_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -3861,7 +4128,8 @@ export const statisticsTools: ParsedOperation[] = [
     domain: "statistics",
     resource: "list-reports-history-bot-defence",
     summary: "List Reports History Bot Defence.",
-    description: "List Reports history bot defence for the list of report configurations in the given namespace.",
+    description:
+      "List Reports history bot defence for the list of report configurations in the given namespace.",
     pathParameters: [
       {
         description: "Namespace\n\nx-required\nNamespace for this request.",
@@ -3904,7 +4172,8 @@ export const statisticsTools: ParsedOperation[] = [
     domain: "statistics",
     resource: "list-reports-history",
     summary: "List Reports History.",
-    description: "List Reports history for the list of report configurations in the given namespace.",
+    description:
+      "List Reports history for the list of report configurations in the given namespace.",
     pathParameters: [
       {
         description: "Namespace\n\nx-required\nNamespace for this request.",
@@ -3947,7 +4216,8 @@ export const statisticsTools: ParsedOperation[] = [
     domain: "statistics",
     resource: "list-reports-history-waap",
     summary: "List Reports History Waap.",
-    description: "List Reports history waap for the list of report configurations in the given namespace.",
+    description:
+      "List Reports history waap for the list of report configurations in the given namespace.",
     pathParameters: [
       {
         description: "Namespace\n\nx-required\nNamespace for this request.",
@@ -4257,7 +4527,8 @@ export const statisticsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4451,7 +4722,8 @@ export const statisticsTools: ParsedOperation[] = [
     description: "GET Alert Policies that match to a set of alert labels for a namespace.",
     pathParameters: [
       {
-        description: "Namespace\n\nx-required\nThe namespace in which the configuration object is present.",
+        description:
+          "Namespace\n\nx-required\nThe namespace in which the configuration object is present.",
         in: "path",
         name: "namespace",
         required: true,
@@ -4608,7 +4880,8 @@ export const statisticsTools: ParsedOperation[] = [
     domain: "statistics",
     resource: "report-config",
     summary: "Create Report Configuration.",
-    description: "Report configuration is used to schedule report generation at a later point in time.",
+    description:
+      "Report configuration is used to schedule report generation at a later point in time.",
     pathParameters: [
       {
         description:
@@ -4843,7 +5116,8 @@ export const statisticsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5242,7 +5516,8 @@ export const statisticsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Long Base-64 encoded string which can be used to retrieve next batch of log messages.",
+        description:
+          "Long Base-64 encoded string which can be used to retrieve next batch of log messages.",
         in: "query",
         name: "scroll_id",
         required: false,
@@ -5550,7 +5825,8 @@ export const statisticsTools: ParsedOperation[] = [
         "x-displayname": "Name",
       },
       {
-        description: "Namespace\n\nx-required\nNamespace in which the alert receiver is configured.",
+        description:
+          "Namespace\n\nx-required\nNamespace in which the alert receiver is configured.",
         in: "path",
         name: "namespace",
         required: true,
@@ -5697,7 +5973,8 @@ export const statisticsTools: ParsedOperation[] = [
     domain: "statistics",
     resource: "verify",
     summary: "Verify Alert Receiver.",
-    description: "API to send request to verify Alert Receiver - applicable only for email and sms.",
+    description:
+      "API to send request to verify Alert Receiver - applicable only for email and sms.",
     pathParameters: [
       {
         description: "Name\nName of the alert receiver.",
@@ -5710,7 +5987,8 @@ export const statisticsTools: ParsedOperation[] = [
         "x-displayname": "Name",
       },
       {
-        description: "Namespace\n\nx-required\nNamespace in which the alert receiver is configured.",
+        description:
+          "Namespace\n\nx-required\nNamespace in which the alert receiver is configured.",
         in: "path",
         name: "namespace",
         required: true,
