@@ -14,7 +14,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "address-allocator",
     summary: "Create Address Allocator.",
-    description: "Create Address Allocator will create an address allocator object in 'system' namespace of the user.",
+    description:
+      "Create Address Allocator will create an address allocator object in 'system' namespace of the user.",
     pathParameters: [
       {
         description:
@@ -232,7 +233,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -381,7 +383,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.tls_parameters.common_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.tls_parameters.common_params.tls_certificates[].private_key.clear_secret_info",
@@ -408,7 +411,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -482,7 +488,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "advertise-policy",
     summary: "GET Advertise Policy.",
-    description: "GET advertise_policy read a given object from storage backend for metadata.namespace.",
+    description:
+      "GET advertise_policy read a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -572,7 +579,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -731,7 +739,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.tls_parameters.common_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.tls_parameters.common_params.tls_certificates[].private_key.clear_secret_info",
@@ -758,7 +767,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -771,7 +783,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "bgp-asn-set",
     summary: "Create BGP ASN Set.",
-    description: "Create bgp_asn_set creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create bgp_asn_set creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -900,7 +913,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "bgp-asn-set",
     summary: "GET BGP ASN Set.",
-    description: "GET bgp_asn_set reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET bgp_asn_set reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -990,7 +1004,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1055,7 +1070,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "bgp-asn-set",
     summary: "Replace BGP ASN Set.",
-    description: "Replace bgp_asn_set replaces an existing object in the storage backend for metadata.namespace.",
+    description:
+      "Replace bgp_asn_set replaces an existing object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -1259,7 +1275,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "enable_choice",
         fieldPath: "spec.peers[].external.family_inet.enable_choice",
-        options: ["spec.peers[].external.family_inet.disable", "spec.peers[].external.family_inet.enable"],
+        options: [
+          "spec.peers[].external.family_inet.disable",
+          "spec.peers[].external.family_inet.enable",
+        ],
       },
       {
         choiceField: "direction",
@@ -1290,7 +1309,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -1455,7 +1477,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1701,7 +1724,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "type_of_match",
         fieldPath: "spec.rules[].match.type_of_match",
-        options: ["spec.rules[].match.as_path", "spec.rules[].match.community", "spec.rules[].match.ip_prefixes"],
+        options: [
+          "spec.rules[].match.as_path",
+          "spec.rules[].match.community",
+          "spec.rules[].match.ip_prefixes",
+        ],
       },
       {
         choiceField: "prefix_length_match",
@@ -1874,7 +1901,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2024,7 +2052,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "type_of_match",
         fieldPath: "spec.rules[].match.type_of_match",
-        options: ["spec.rules[].match.as_path", "spec.rules[].match.community", "spec.rules[].match.ip_prefixes"],
+        options: [
+          "spec.rules[].match.as_path",
+          "spec.rules[].match.community",
+          "spec.rules[].match.ip_prefixes",
+        ],
       },
       {
         choiceField: "prefix_length_match",
@@ -2182,7 +2214,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "enable_choice",
         fieldPath: "spec.peers[].external.family_inet.enable_choice",
-        options: ["spec.peers[].external.family_inet.disable", "spec.peers[].external.family_inet.enable"],
+        options: [
+          "spec.peers[].external.family_inet.disable",
+          "spec.peers[].external.family_inet.enable",
+        ],
       },
       {
         choiceField: "direction",
@@ -2213,7 +2248,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -2515,7 +2553,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2899,7 +2938,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3119,7 +3159,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ike_key_lifetime",
         fieldPath: "spec.ike_key_lifetime",
-        options: ["spec.ike_keylifetime_hours", "spec.ike_keylifetime_minutes", "spec.use_default_keylifetime"],
+        options: [
+          "spec.ike_keylifetime_hours",
+          "spec.ike_keylifetime_minutes",
+          "spec.use_default_keylifetime",
+        ],
       },
       {
         choiceField: "ike_reauth_timeout",
@@ -3288,7 +3332,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3424,7 +3469,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ike_key_lifetime",
         fieldPath: "spec.ike_key_lifetime",
-        options: ["spec.ike_keylifetime_hours", "spec.ike_keylifetime_minutes", "spec.use_default_keylifetime"],
+        options: [
+          "spec.ike_keylifetime_hours",
+          "spec.ike_keylifetime_minutes",
+          "spec.use_default_keylifetime",
+        ],
       },
       {
         choiceField: "ike_reauth_timeout",
@@ -3503,7 +3552,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ike_key_lifetime",
         fieldPath: "spec.ike_key_lifetime",
-        options: ["spec.ike_keylifetime_hours", "spec.ike_keylifetime_minutes", "spec.use_default_keylifetime"],
+        options: [
+          "spec.ike_keylifetime_hours",
+          "spec.ike_keylifetime_minutes",
+          "spec.use_default_keylifetime",
+        ],
       },
       {
         choiceField: "pfs_mode",
@@ -3672,7 +3725,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3808,7 +3862,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ike_key_lifetime",
         fieldPath: "spec.ike_key_lifetime",
-        options: ["spec.ike_keylifetime_hours", "spec.ike_keylifetime_minutes", "spec.use_default_keylifetime"],
+        options: [
+          "spec.ike_keylifetime_hours",
+          "spec.ike_keylifetime_minutes",
+          "spec.use_default_keylifetime",
+        ],
       },
       {
         choiceField: "pfs_mode",
@@ -3887,7 +3945,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ike_key_lifetime",
         fieldPath: "spec.ike_key_lifetime",
-        options: ["spec.ike_keylifetime_hours", "spec.ike_keylifetime_minutes", "spec.use_default_keylifetime"],
+        options: [
+          "spec.ike_keylifetime_hours",
+          "spec.ike_keylifetime_minutes",
+          "spec.use_default_keylifetime",
+        ],
       },
       {
         choiceField: "ike_reauth_timeout",
@@ -4056,7 +4118,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4192,7 +4255,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ike_key_lifetime",
         fieldPath: "spec.ike_key_lifetime",
-        options: ["spec.ike_keylifetime_hours", "spec.ike_keylifetime_minutes", "spec.use_default_keylifetime"],
+        options: [
+          "spec.ike_keylifetime_hours",
+          "spec.ike_keylifetime_minutes",
+          "spec.use_default_keylifetime",
+        ],
       },
       {
         choiceField: "ike_reauth_timeout",
@@ -4271,7 +4338,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ike_key_lifetime",
         fieldPath: "spec.ike_key_lifetime",
-        options: ["spec.ike_keylifetime_hours", "spec.ike_keylifetime_minutes", "spec.use_default_keylifetime"],
+        options: [
+          "spec.ike_keylifetime_hours",
+          "spec.ike_keylifetime_minutes",
+          "spec.use_default_keylifetime",
+        ],
       },
       {
         choiceField: "pfs_mode",
@@ -4440,7 +4511,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4576,7 +4648,11 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ike_key_lifetime",
         fieldPath: "spec.ike_key_lifetime",
-        options: ["spec.ike_keylifetime_hours", "spec.ike_keylifetime_minutes", "spec.use_default_keylifetime"],
+        options: [
+          "spec.ike_keylifetime_hours",
+          "spec.ike_keylifetime_minutes",
+          "spec.use_default_keylifetime",
+        ],
       },
       {
         choiceField: "pfs_mode",
@@ -4594,7 +4670,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "ip-prefix-set",
     summary: "Create IP Prefix Set.",
-    description: "Create ip_prefix_set creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create ip_prefix_set creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -4723,7 +4800,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "ip-prefix-set",
     summary: "GET IP Prefix Set.",
-    description: "GET ip_prefix_set reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET ip_prefix_set reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -4813,7 +4891,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4878,7 +4957,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "ip-prefix-set",
     summary: "Replace IP Prefix Set.",
-    description: "Replace ip_prefix_set replaces an existing object in the storage backend for metadata.namespace.",
+    description:
+      "Replace ip_prefix_set replaces an existing object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -5080,7 +5160,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "tls_interception_choice",
         fieldPath: "spec.enable_forward_proxy.tls_interception_choice",
-        options: ["spec.enable_forward_proxy.no_interception", "spec.enable_forward_proxy.tls_intercept"],
+        options: [
+          "spec.enable_forward_proxy.no_interception",
+          "spec.enable_forward_proxy.tls_intercept",
+        ],
       },
       {
         choiceField: "interception_policy_choice",
@@ -5108,7 +5191,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.enable_forward_proxy.tls_intercept.custom_certificate.ocsp_stapling_choice",
+        fieldPath:
+          "spec.enable_forward_proxy.tls_intercept.custom_certificate.ocsp_stapling_choice",
         options: [
           "spec.enable_forward_proxy.tls_intercept.custom_certificate.custom_hash_algorithms",
           "spec.enable_forward_proxy.tls_intercept.custom_certificate.disable_ocsp_stapling",
@@ -5117,7 +5201,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.enable_forward_proxy.tls_intercept.custom_certificate.private_key.secret_info_oneof",
+        fieldPath:
+          "spec.enable_forward_proxy.tls_intercept.custom_certificate.private_key.secret_info_oneof",
         options: [
           "spec.enable_forward_proxy.tls_intercept.custom_certificate.private_key.blindfold_secret_info",
           "spec.enable_forward_proxy.tls_intercept.custom_certificate.private_key.clear_secret_info",
@@ -5125,7 +5210,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "enable_disable_choice",
-        fieldPath: "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].enable_disable_choice",
+        fieldPath:
+          "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].enable_disable_choice",
         options: [
           "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].disable_interception",
           "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].enable_interception",
@@ -5133,7 +5219,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].domain_match.domain_choice",
+        fieldPath:
+          "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].domain_match.domain_choice",
         options: [
           "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].domain_match.exact_value",
           "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].domain_match.regex_value",
@@ -5312,7 +5399,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5458,7 +5546,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "tls_interception_choice",
         fieldPath: "spec.enable_forward_proxy.tls_interception_choice",
-        options: ["spec.enable_forward_proxy.no_interception", "spec.enable_forward_proxy.tls_intercept"],
+        options: [
+          "spec.enable_forward_proxy.no_interception",
+          "spec.enable_forward_proxy.tls_intercept",
+        ],
       },
       {
         choiceField: "interception_policy_choice",
@@ -5486,7 +5577,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.enable_forward_proxy.tls_intercept.custom_certificate.ocsp_stapling_choice",
+        fieldPath:
+          "spec.enable_forward_proxy.tls_intercept.custom_certificate.ocsp_stapling_choice",
         options: [
           "spec.enable_forward_proxy.tls_intercept.custom_certificate.custom_hash_algorithms",
           "spec.enable_forward_proxy.tls_intercept.custom_certificate.disable_ocsp_stapling",
@@ -5495,7 +5587,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.enable_forward_proxy.tls_intercept.custom_certificate.private_key.secret_info_oneof",
+        fieldPath:
+          "spec.enable_forward_proxy.tls_intercept.custom_certificate.private_key.secret_info_oneof",
         options: [
           "spec.enable_forward_proxy.tls_intercept.custom_certificate.private_key.blindfold_secret_info",
           "spec.enable_forward_proxy.tls_intercept.custom_certificate.private_key.clear_secret_info",
@@ -5503,7 +5596,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "enable_disable_choice",
-        fieldPath: "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].enable_disable_choice",
+        fieldPath:
+          "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].enable_disable_choice",
         options: [
           "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].disable_interception",
           "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].enable_interception",
@@ -5511,7 +5605,8 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].domain_match.domain_choice",
+        fieldPath:
+          "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].domain_match.domain_choice",
         options: [
           "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].domain_match.exact_value",
           "spec.enable_forward_proxy.tls_intercept.policy.interception_rules[].domain_match.regex_value",
@@ -5539,7 +5634,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "public-ip",
     summary: "GET Public IP.",
-    description: "GET public_ip will GET the object from the storage backend for namespace metadata.namespace.",
+    description:
+      "GET public_ip will GET the object from the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -5628,7 +5724,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5883,7 +5980,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "value_match",
         fieldPath: "spec.routes[].match[].query_params[].value_match",
-        options: ["spec.routes[].match[].query_params[].exact", "spec.routes[].match[].query_params[].regex"],
+        options: [
+          "spec.routes[].match[].query_params[].exact",
+          "spec.routes[].match[].query_params[].regex",
+        ],
       },
       {
         choiceField: "value_choice",
@@ -6027,12 +6127,18 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "host_rewrite_params",
         fieldPath: "spec.routes[].route_destination.host_rewrite_params",
-        options: ["spec.routes[].route_destination.auto_host_rewrite", "spec.routes[].route_destination.host_rewrite"],
+        options: [
+          "spec.routes[].route_destination.auto_host_rewrite",
+          "spec.routes[].route_destination.host_rewrite",
+        ],
       },
       {
         choiceField: "route_destination_rewrite",
         fieldPath: "spec.routes[].route_destination.route_destination_rewrite",
-        options: ["spec.routes[].route_destination.prefix_rewrite", "spec.routes[].route_destination.regex_rewrite"],
+        options: [
+          "spec.routes[].route_destination.prefix_rewrite",
+          "spec.routes[].route_destination.regex_rewrite",
+        ],
       },
       {
         choiceField: "allowed_domains",
@@ -6099,7 +6205,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "redirect_path_choice",
         fieldPath: "spec.routes[].route_redirect.redirect_path_choice",
-        options: ["spec.routes[].route_redirect.path_redirect", "spec.routes[].route_redirect.prefix_rewrite"],
+        options: [
+          "spec.routes[].route_redirect.path_redirect",
+          "spec.routes[].route_redirect.prefix_rewrite",
+        ],
       },
       {
         choiceField: "service_policy_choice",
@@ -6278,7 +6387,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -6464,7 +6574,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "value_match",
         fieldPath: "spec.routes[].match[].query_params[].value_match",
-        options: ["spec.routes[].match[].query_params[].exact", "spec.routes[].match[].query_params[].regex"],
+        options: [
+          "spec.routes[].match[].query_params[].exact",
+          "spec.routes[].match[].query_params[].regex",
+        ],
       },
       {
         choiceField: "value_choice",
@@ -6608,12 +6721,18 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "host_rewrite_params",
         fieldPath: "spec.routes[].route_destination.host_rewrite_params",
-        options: ["spec.routes[].route_destination.auto_host_rewrite", "spec.routes[].route_destination.host_rewrite"],
+        options: [
+          "spec.routes[].route_destination.auto_host_rewrite",
+          "spec.routes[].route_destination.host_rewrite",
+        ],
       },
       {
         choiceField: "route_destination_rewrite",
         fieldPath: "spec.routes[].route_destination.route_destination_rewrite",
-        options: ["spec.routes[].route_destination.prefix_rewrite", "spec.routes[].route_destination.regex_rewrite"],
+        options: [
+          "spec.routes[].route_destination.prefix_rewrite",
+          "spec.routes[].route_destination.regex_rewrite",
+        ],
       },
       {
         choiceField: "allowed_domains",
@@ -6680,7 +6799,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "redirect_path_choice",
         fieldPath: "spec.routes[].route_redirect.redirect_path_choice",
-        options: ["spec.routes[].route_redirect.path_redirect", "spec.routes[].route_redirect.prefix_rewrite"],
+        options: [
+          "spec.routes[].route_redirect.path_redirect",
+          "spec.routes[].route_redirect.prefix_rewrite",
+        ],
       },
       {
         choiceField: "service_policy_choice",
@@ -6781,7 +6903,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "srv6-network-slice",
     summary: "Create SRv6 Network Slice.",
-    description: "Create srv6_network_slice creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create srv6_network_slice creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -6910,7 +7033,8 @@ export const networkTools: ParsedOperation[] = [
     domain: "network",
     resource: "srv6-network-slice",
     summary: "GET SRv6 Network Slice.",
-    description: "GET srv6_network_slice reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET srv6_network_slice reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -7000,7 +7124,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -7215,8 +7340,11 @@ export const networkTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.site_subnet_params[].subnet_dhcp_server_params.dhcp_networks[].network_prefix_choice",
-        options: ["spec.site_subnet_params[].subnet_dhcp_server_params.dhcp_networks[].network_prefix"],
+        fieldPath:
+          "spec.site_subnet_params[].subnet_dhcp_server_params.dhcp_networks[].network_prefix_choice",
+        options: [
+          "spec.site_subnet_params[].subnet_dhcp_server_params.dhcp_networks[].network_prefix",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -7380,7 +7508,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -7666,7 +7795,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ver",
         fieldPath: "spec.local_ip.ip_address.ip_address.ver",
-        options: ["spec.local_ip.ip_address.ip_address.ipv4", "spec.local_ip.ip_address.ip_address.ipv6"],
+        options: [
+          "spec.local_ip.ip_address.ip_address.ipv4",
+          "spec.local_ip.ip_address.ip_address.ipv6",
+        ],
       },
       {
         choiceField: "vn_type_choice",
@@ -7685,7 +7817,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.params.ipsec.ipsec_psk.secret_info_oneof",
-        options: ["spec.params.ipsec.ipsec_psk.blindfold_secret_info", "spec.params.ipsec.ipsec_psk.clear_secret_info"],
+        options: [
+          "spec.params.ipsec.ipsec_psk.blindfold_secret_info",
+          "spec.params.ipsec.ipsec_psk.clear_secret_info",
+        ],
       },
       {
         choiceField: "type",
@@ -7880,7 +8015,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -8033,7 +8169,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "ver",
         fieldPath: "spec.local_ip.ip_address.ip_address.ver",
-        options: ["spec.local_ip.ip_address.ip_address.ipv4", "spec.local_ip.ip_address.ip_address.ipv6"],
+        options: [
+          "spec.local_ip.ip_address.ip_address.ipv4",
+          "spec.local_ip.ip_address.ip_address.ipv6",
+        ],
       },
       {
         choiceField: "vn_type_choice",
@@ -8052,7 +8191,10 @@ export const networkTools: ParsedOperation[] = [
       {
         choiceField: "secret_info_oneof",
         fieldPath: "spec.params.ipsec.ipsec_psk.secret_info_oneof",
-        options: ["spec.params.ipsec.ipsec_psk.blindfold_secret_info", "spec.params.ipsec.ipsec_psk.clear_secret_info"],
+        options: [
+          "spec.params.ipsec.ipsec_psk.blindfold_secret_info",
+          "spec.params.ipsec.ipsec_psk.clear_secret_info",
+        ],
       },
       {
         choiceField: "type",
@@ -8321,7 +8463,8 @@ export const networkTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,

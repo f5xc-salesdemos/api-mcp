@@ -7,6 +7,83 @@ import type { ParsedOperation } from "../../../generator/openapi-parser.js";
 
 export const ce_managementTools: ParsedOperation[] = [
   {
+    toolName: "f5xc-api-cemanagement-approve-create",
+    method: "POST",
+    path: "/api/register/namespaces/{namespace}/registration/{name}/approve",
+    operation: "create",
+    domain: "ce_management",
+    resource: "approve",
+    summary: "Registration Approve.",
+    description:
+      "RegistrationApprove approved pending registration and it can also decommission by changing state to RETIRED.",
+    pathParameters: [
+      {
+        description:
+          'Name\n\nx-required\nRegistration name (= "r-" + uid) to approve. Registration name is taken from listing pending registrations.',
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\n\nx-required\nRegistration namespace, only "system" namespaces is accepted.',
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/registrationApprovalReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/registrationObjectChangeResp",
+    },
+    requiredParams: ["body", "name", "namespace"],
+    operationId: "ves.io.schema.registration.CustomAPI.RegistrationApprove",
+    tags: ["Infrastructure"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "tunnel_type",
+        inline: false,
+        required: false,
+        resourceType: "schema-site-to-site-tunnel",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "operating_system_version_choice",
+        fieldPath: "passport.operating_system_version_choice",
+        options: ["passport.default_os_version", "passport.operating_system_version"],
+      },
+      {
+        choiceField: "volterra_sw_version_choice",
+        fieldPath: "passport.volterra_sw_version_choice",
+        options: ["passport.default_sw_version", "passport.volterra_software_version"],
+      },
+    ],
+    subscriptionRequirements: [],
+  },
+  {
     toolName: "f5xc-api-cemanagement-fleet-create",
     method: "POST",
     path: "/api/config/namespaces/{metadata.namespace}/fleets",
@@ -80,7 +157,11 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.dc_cluster_group_choice",
-        options: ["spec.dc_cluster_group", "spec.dc_cluster_group_inside", "spec.no_dc_cluster_group"],
+        options: [
+          "spec.dc_cluster_group",
+          "spec.dc_cluster_group_inside",
+          "spec.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "gpu_choice",
@@ -144,7 +225,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "lacp_choice",
         fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+        options: [
+          "spec.bond_device_list.bond_devices[].active_backup",
+          "spec.bond_device_list.bond_devices[].lacp",
+        ],
       },
       {
         choiceField: "device_instance",
@@ -161,12 +245,16 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -210,7 +298,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
         options: [
           "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.blindfold_secret_info",
           "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.clear_secret_info",
@@ -218,7 +307,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
         options: [
           "spec.storage_device_list.storage_devices[].hpe_storage.password.blindfold_secret_info",
           "spec.storage_device_list.storage_devices[].hpe_storage.password.clear_secret_info",
@@ -234,7 +324,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "data_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_ip",
@@ -242,7 +333,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "management_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_ip",
@@ -288,7 +380,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "chap_choice",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.no_chap",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap",
@@ -296,7 +389,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "data_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_ip",
@@ -304,7 +398,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "management_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_ip",
@@ -610,7 +705,8 @@ export const ce_managementTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -758,7 +854,11 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "dc_cluster_group_choice",
         fieldPath: "spec.dc_cluster_group_choice",
-        options: ["spec.dc_cluster_group", "spec.dc_cluster_group_inside", "spec.no_dc_cluster_group"],
+        options: [
+          "spec.dc_cluster_group",
+          "spec.dc_cluster_group_inside",
+          "spec.no_dc_cluster_group",
+        ],
       },
       {
         choiceField: "gpu_choice",
@@ -822,7 +922,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "lacp_choice",
         fieldPath: "spec.bond_device_list.bond_devices[].lacp_choice",
-        options: ["spec.bond_device_list.bond_devices[].active_backup", "spec.bond_device_list.bond_devices[].lacp"],
+        options: [
+          "spec.bond_device_list.bond_devices[].active_backup",
+          "spec.bond_device_list.bond_devices[].lacp",
+        ],
       },
       {
         choiceField: "device_instance",
@@ -839,12 +942,16 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "drain_max_unavailable_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
-        options: ["spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count"],
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_choice",
+        options: [
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.drain_max_unavailable_node_count",
+        ],
       },
       {
         choiceField: "vega_upgrade_mode_toggle_choice",
-        fieldPath: "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
+        fieldPath:
+          "spec.kubernetes_upgrade_drain.enable_upgrade_drain.vega_upgrade_mode_toggle_choice",
         options: [
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.disable_vega_upgrade_mode",
           "spec.kubernetes_upgrade_drain.enable_upgrade_drain.enable_vega_upgrade_mode",
@@ -888,7 +995,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.secret_info_oneof",
         options: [
           "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.blindfold_secret_info",
           "spec.storage_device_list.storage_devices[].hpe_storage.iscsi_chap_password.clear_secret_info",
@@ -896,7 +1004,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].hpe_storage.password.secret_info_oneof",
         options: [
           "spec.storage_device_list.storage_devices[].hpe_storage.password.blindfold_secret_info",
           "spec.storage_device_list.storage_devices[].hpe_storage.password.clear_secret_info",
@@ -912,7 +1021,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "data_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.data_lif_ip",
@@ -920,7 +1030,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "management_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_nas.management_lif_ip",
@@ -966,7 +1077,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "chap_choice",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.chap_choice",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.no_chap",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.use_chap",
@@ -974,7 +1086,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "data_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.data_lif_ip",
@@ -982,7 +1095,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "management_lif",
-        fieldPath: "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
+        fieldPath:
+          "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif",
         options: [
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_dns_name",
           "spec.storage_device_list.storage_devices[].netapp_trident.netapp_backend_ontap_san.management_lif_ip",
@@ -1116,6 +1230,128 @@ export const ce_managementTools: ParsedOperation[] = [
     ],
   },
   {
+    toolName: "f5xc-api-cemanagement-get-image-download-url-create",
+    method: "POST",
+    path: "/api/register/namespaces/system/get-image-download-url",
+    operation: "create",
+    domain: "ce_management",
+    resource: "get-image-download-url",
+    summary: "GET Image Download URL.",
+    description: "Returns image download URL for each provider.",
+    pathParameters: [],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/registrationGetImageDownloadUrlReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/registrationGetImageDownloadUrlResp",
+    },
+    requiredParams: ["body"],
+    operationId: "ves.io.schema.registration.CustomAPI.GetImageDownloadUrl",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-get-registrations-by-token-create",
+    method: "POST",
+    path: "/api/register/namespaces/system/get-registrations-by-token",
+    operation: "create",
+    domain: "ce_management",
+    resource: "get-registrations-by-token",
+    summary: "GET Registration UID by Site Token.",
+    description: "Returns list of registration uids that are using particular site token.",
+    pathParameters: [],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/registrationGetRegistrationsBySiteTokenReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/registrationGetRegistrationsBySiteTokenResp",
+    },
+    requiredParams: ["body"],
+    operationId: "ves.io.schema.registration.CustomAPI.GetRegistrationsBySiteToken",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-listregistrationsbystate-create",
+    method: "POST",
+    path: "/api/register/namespaces/{namespace}/listregistrationsbystate",
+    operation: "create",
+    domain: "ce_management",
+    resource: "listregistrationsbystate",
+    summary: "List Registrations By State.",
+    description:
+      "API endpoint for returning Registrations by status, e.g APPROVED, NEW, or RETIRED.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\n\nx-required\nRegistration namespace, only "system" namespaces is accepted.',
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/registrationListStateReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/registrationListResponse",
+    },
+    requiredParams: ["body", "namespace"],
+    operationId: "ves.io.schema.registration.CustomAPI.ListRegistrationsByState",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
     toolName: "f5xc-api-cemanagement-network-interface-create",
     method: "POST",
     path: "/api/config/namespaces/{metadata.namespace}/network_interfaces",
@@ -1211,7 +1447,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "node_choice",
         fieldPath: "spec.dedicated_management_interface.node_choice",
-        options: ["spec.dedicated_management_interface.cluster", "spec.dedicated_management_interface.node"],
+        options: [
+          "spec.dedicated_management_interface.cluster",
+          "spec.dedicated_management_interface.node",
+        ],
       },
       {
         choiceField: "address_choice",
@@ -1295,7 +1534,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "autoconfig_choice",
         fieldPath: "spec.ethernet_interface.ipv6_auto_config.autoconfig_choice",
-        options: ["spec.ethernet_interface.ipv6_auto_config.host", "spec.ethernet_interface.ipv6_auto_config.router"],
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.host",
+          "spec.ethernet_interface.ipv6_auto_config.router",
+        ],
       },
       {
         choiceField: "address_choice",
@@ -1315,7 +1557,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "local_dns_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
         options: [
           "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.configured_address",
           "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.first_address",
@@ -1324,7 +1567,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "interfaces_addressing_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
         options: [
           "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_end",
           "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_start",
@@ -1333,8 +1577,11 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
-        options: ["spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix"],
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix",
+        ],
       },
       {
         choiceField: "network_prefix_choice",
@@ -1372,7 +1619,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "network_choice",
         fieldPath: "spec.tunnel_interface.network_choice",
-        options: ["spec.tunnel_interface.site_local_inside_network", "spec.tunnel_interface.site_local_network"],
+        options: [
+          "spec.tunnel_interface.site_local_inside_network",
+          "spec.tunnel_interface.site_local_network",
+        ],
       },
       {
         choiceField: "node_choice",
@@ -1549,7 +1799,8 @@ export const ce_managementTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1713,7 +1964,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "node_choice",
         fieldPath: "spec.dedicated_management_interface.node_choice",
-        options: ["spec.dedicated_management_interface.cluster", "spec.dedicated_management_interface.node"],
+        options: [
+          "spec.dedicated_management_interface.cluster",
+          "spec.dedicated_management_interface.node",
+        ],
       },
       {
         choiceField: "address_choice",
@@ -1797,7 +2051,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "autoconfig_choice",
         fieldPath: "spec.ethernet_interface.ipv6_auto_config.autoconfig_choice",
-        options: ["spec.ethernet_interface.ipv6_auto_config.host", "spec.ethernet_interface.ipv6_auto_config.router"],
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.host",
+          "spec.ethernet_interface.ipv6_auto_config.router",
+        ],
       },
       {
         choiceField: "address_choice",
@@ -1817,7 +2074,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "local_dns_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.local_dns_choice",
         options: [
           "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.configured_address",
           "spec.ethernet_interface.ipv6_auto_config.router.dns_config.local_dns.first_address",
@@ -1826,7 +2084,8 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "interfaces_addressing_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.interfaces_addressing_choice",
         options: [
           "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_end",
           "spec.ethernet_interface.ipv6_auto_config.router.stateful.automatic_from_start",
@@ -1835,8 +2094,11 @@ export const ce_managementTools: ParsedOperation[] = [
       },
       {
         choiceField: "network_prefix_choice",
-        fieldPath: "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
-        options: ["spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix"],
+        fieldPath:
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix_choice",
+        options: [
+          "spec.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks[].network_prefix",
+        ],
       },
       {
         choiceField: "network_prefix_choice",
@@ -1879,7 +2141,10 @@ export const ce_managementTools: ParsedOperation[] = [
       {
         choiceField: "network_choice",
         fieldPath: "spec.tunnel_interface.network_choice",
-        options: ["spec.tunnel_interface.site_local_inside_network", "spec.tunnel_interface.site_local_network"],
+        options: [
+          "spec.tunnel_interface.site_local_inside_network",
+          "spec.tunnel_interface.site_local_network",
+        ],
       },
       {
         choiceField: "node_choice",
@@ -1962,6 +2227,545 @@ export const ce_managementTools: ParsedOperation[] = [
     subscriptionRequirements: [],
   },
   {
+    toolName: "f5xc-api-cemanagement-registerbootstrap-create",
+    method: "POST",
+    path: "/api/register/registerBootstrap",
+    operation: "create",
+    domain: "ce_management",
+    resource: "registerBootstrap",
+    summary: "Registration Create.",
+    description:
+      "Registration request to create registration is sent by the node on first boot. User never creates registration on her own.",
+    pathParameters: [],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/registrationRegistrationCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/registrationObject",
+    },
+    requiredParams: ["body"],
+    operationId: "ves.io.schema.registration.CustomAPI.RegistrationCreate",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "registration-registration",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemaregistration-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "operating_system_version_choice",
+        fieldPath: "spec.passport.operating_system_version_choice",
+        options: ["spec.passport.default_os_version", "spec.passport.operating_system_version"],
+      },
+      {
+        choiceField: "volterra_sw_version_choice",
+        fieldPath: "spec.passport.volterra_sw_version_choice",
+        options: ["spec.passport.default_sw_version", "spec.passport.volterra_software_version"],
+      },
+    ],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-registration-create",
+    method: "POST",
+    path: "/api/register/namespaces/{metadata.namespace}/registrations",
+    operation: "create",
+    domain: "ce_management",
+    resource: "registration",
+    summary: "Create Registration.",
+    description: "VPM creates registration using this message, never used by users.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/registrationCreateRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/registrationCreateResponse",
+    },
+    requiredParams: ["body", "metadata.namespace"],
+    operationId: "ves.io.schema.registration.API.Create",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "registration",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-create-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemaregistration-create",
+      },
+    ],
+    oneOfGroups: [
+      {
+        choiceField: "operating_system_version_choice",
+        fieldPath: "spec.passport.operating_system_version_choice",
+        options: ["spec.passport.default_os_version", "spec.passport.operating_system_version"],
+      },
+      {
+        choiceField: "volterra_sw_version_choice",
+        fieldPath: "spec.passport.volterra_sw_version_choice",
+        options: ["spec.passport.default_sw_version", "spec.passport.volterra_software_version"],
+      },
+    ],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-registration-delete",
+    method: "DELETE",
+    path: "/api/register/namespaces/{namespace}/registrations/{name}",
+    operation: "delete",
+    domain: "ce_management",
+    resource: "registration",
+    summary: "DELETE Registration.",
+    description: "DELETE the specified registration.",
+    pathParameters: [
+      {
+        description: "Name\nName of the configuration object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nNamespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description: "Fail the DELETE operation if this object is being referred by other objects.",
+        in: "query",
+        name: "fail_if_referred",
+        required: false,
+        schema: {
+          format: "boolean",
+          type: "boolean",
+        },
+        "x-displayname": "Fail-If-Referred.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {},
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.registration.CustomAPI.Delete",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-registration-get",
+    method: "GET",
+    path: "/api/register/namespaces/{namespace}/registrations/{name}",
+    operation: "get",
+    domain: "ce_management",
+    resource: "registration",
+    summary: "GET Registration.",
+    description: "GET registration specification.",
+    pathParameters: [
+      {
+        description: "Name\nThe name of the configuration object to be fetched.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description: "Namespace\nThe namespace in which the configuration object is present.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+        in: "query",
+        name: "response_format",
+        required: false,
+        schema: {
+          default: "GET_RSP_FORMAT_DEFAULT",
+          enum: [
+            "GET_RSP_FORMAT_DEFAULT",
+            "GET_RSP_FORMAT_FOR_CREATE",
+            "GET_RSP_FORMAT_FOR_REPLACE",
+            "GET_RSP_FORMAT_READ",
+            "GET_RSP_FORMAT_REFERRING_OBJECTS",
+            "GET_RSP_FORMAT_BROKEN_REFERENCES",
+          ],
+          type: "string",
+        },
+        "x-displayname": "Broken Referred Objects.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/registrationGetResponse",
+    },
+    requiredParams: ["name", "namespace"],
+    operationId: "ves.io.schema.registration.CustomAPI.Get",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-registration-list",
+    method: "GET",
+    path: "/api/register/namespaces/{namespace}/registrations",
+    operation: "list",
+    domain: "ce_management",
+    resource: "registration",
+    summary: "List Registration.",
+    description: "List the set of registration in a namespace.",
+    pathParameters: [
+      {
+        description: "Namespace\nNamespace to scope the listing of registration.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [
+      {
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
+        in: "query",
+        name: "label_filter",
+        required: false,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Label Filter.",
+      },
+      {
+        description: 'X-example: ""\nExtra fields to return along with summary fields.',
+        in: "query",
+        name: "report_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Fields.",
+      },
+      {
+        description: 'X-example: ""\nExtra status fields to return along with summary fields.',
+        in: "query",
+        name: "report_status_fields",
+        required: false,
+        schema: {
+          items: {
+            type: "string",
+          },
+          type: "array",
+        },
+        "x-displayname": "Report Status Fields.",
+      },
+    ],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/registrationListResponse",
+    },
+    requiredParams: ["namespace"],
+    operationId: "ves.io.schema.registration.CustomAPI.List",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-registration-update",
+    method: "PUT",
+    path: "/api/register/namespaces/{metadata.namespace}/registrations/{metadata.name}",
+    operation: "update",
+    domain: "ce_management",
+    resource: "registration",
+    summary: "Replace Registration.",
+    description: "NO fields are allowed to be replaced.",
+    pathParameters: [
+      {
+        description: "Name\nThe configuration object to be replaced will be looked up by name.",
+        in: "path",
+        name: "metadata.name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+      {
+        description:
+          'Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be ""',
+        in: "path",
+        name: "metadata.namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/registrationReplaceRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/registrationReplaceResponse",
+    },
+    requiredParams: ["body", "metadata.name", "metadata.namespace"],
+    operationId: "ves.io.schema.registration.API.Replace",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [
+      {
+        domain: "",
+        fieldPath: "",
+        inline: false,
+        required: false,
+        resourceType: "registration",
+      },
+      {
+        domain: "",
+        fieldPath: "metadata",
+        inline: false,
+        required: false,
+        resourceType: "schema-object-replace-meta",
+      },
+      {
+        domain: "",
+        fieldPath: "spec",
+        inline: false,
+        required: false,
+        resourceType: "schemaregistration-replace",
+      },
+    ],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-registrations-by-site-list",
+    method: "GET",
+    path: "/api/register/namespaces/{namespace}/registrations_by_site/{site_name}",
+    operation: "list",
+    domain: "ce_management",
+    resource: "registrations-by-site",
+    summary: "List registrations by site.",
+    description: "List all registration in site.",
+    pathParameters: [
+      {
+        description:
+          'Namespace\n\nx-required\nRegistration namespace, only "system" namespaces is accepted.',
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+      {
+        description: "SiteName\n\nx-required\nSite name to be used for registration filtering.",
+        in: "path",
+        name: "site_name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Site name",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/registrationListResponse",
+    },
+    requiredParams: ["namespace", "site_name"],
+    operationId: "ves.io.schema.registration.CustomAPI.ListRegistrationsBySite",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [
+      {
+        addonService: "f5xc_site_management_standard",
+        displayName: "F5XC Site Management Standard",
+        required: false,
+        tier: "standard",
+      },
+    ],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-requestconfig-create",
+    method: "POST",
+    path: "/api/register/requestConfig",
+    operation: "create",
+    domain: "ce_management",
+    resource: "requestConfig",
+    summary: "Registration Config.",
+    description:
+      "API endpoint for returning configuration for admitted registrations.\nIt will fail with known error for non-ADMITTED registration.",
+    pathParameters: [],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/registrationConfigReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/registrationConfigResp",
+    },
+    requiredParams: ["body"],
+    operationId: "ves.io.schema.registration.CustomAPI.RegistrationConfig",
+    tags: ["Other"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
     toolName: "f5xc-api-cemanagement-setting-list",
     method: "GET",
     path: "/api/config/namespaces/{namespace}/module_management/settings",
@@ -1990,6 +2794,41 @@ export const ce_managementTools: ParsedOperation[] = [
     requiredParams: ["namespace"],
     operationId: "ves.io.schema.module_management.ModuleManagementAPI.GetModuleManagementSettings",
     tags: ["Infrastructure"],
+    sourceFile: "domains/ce_management.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-cemanagement-suggest-value-create",
+    method: "POST",
+    path: "/api/register/namespaces/system/suggest-values",
+    operation: "create",
+    domain: "ce_management",
+    resource: "suggest-value",
+    summary: "Suggest Values.",
+    description:
+      "Returns suggested values for the specified field in the given Create/Replace/Custom request.",
+    pathParameters: [],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/registrationSuggestValuesReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/schemaregistrationSuggestValuesResp",
+    },
+    requiredParams: ["body"],
+    operationId: "ves.io.schema.registration.CustomAPI.SuggestValues",
+    tags: ["Other"],
     sourceFile: "domains/ce_management.json",
     displayName: null,
     dangerLevel: null,
@@ -2337,7 +3176,8 @@ export const ce_managementTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
