@@ -122,7 +122,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download OpenAPI specs
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: openapi-specs
           path: specs/
@@ -220,7 +220,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download OpenAPI specs
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: openapi-specs
           path: specs/
@@ -278,7 +278,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download OpenAPI specs
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: openapi-specs
           path: specs/
