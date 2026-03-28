@@ -239,22 +239,34 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.azure_receiver.batch.batch_bytes",
-        options: ["spec.azure_receiver.batch.max_bytes", "spec.azure_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.azure_receiver.batch.max_bytes",
+          "spec.azure_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.azure_receiver.batch.batch_events",
-        options: ["spec.azure_receiver.batch.max_events", "spec.azure_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.azure_receiver.batch.max_events",
+          "spec.azure_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.azure_receiver.batch.batch_timeout",
-        options: ["spec.azure_receiver.batch.default_timeout_seconds", "spec.azure_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.azure_receiver.batch.default_timeout_seconds",
+          "spec.azure_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
         fieldPath: "spec.azure_receiver.compression.compression_choice",
-        options: ["spec.azure_receiver.compression.gzip_compression", "spec.azure_receiver.compression.no_compression"],
+        options: [
+          "spec.azure_receiver.compression.gzip_compression",
+          "spec.azure_receiver.compression.no_compression",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -277,17 +289,26 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.datadog_receiver.batch.batch_bytes",
-        options: ["spec.datadog_receiver.batch.max_bytes", "spec.datadog_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.datadog_receiver.batch.max_bytes",
+          "spec.datadog_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.datadog_receiver.batch.batch_events",
-        options: ["spec.datadog_receiver.batch.max_events", "spec.datadog_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.datadog_receiver.batch.max_events",
+          "spec.datadog_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.datadog_receiver.batch.batch_timeout",
-        options: ["spec.datadog_receiver.batch.default_timeout_seconds", "spec.datadog_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.datadog_receiver.batch.default_timeout_seconds",
+          "spec.datadog_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -308,12 +329,18 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.datadog_receiver.use_tls.ca_choice",
-        options: ["spec.datadog_receiver.use_tls.no_ca", "spec.datadog_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.datadog_receiver.use_tls.no_ca",
+          "spec.datadog_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.datadog_receiver.use_tls.mtls_choice",
-        options: ["spec.datadog_receiver.use_tls.mtls_disabled", "spec.datadog_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.datadog_receiver.use_tls.mtls_disabled",
+          "spec.datadog_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -342,12 +369,18 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.gcp_bucket_receiver.batch.batch_bytes",
-        options: ["spec.gcp_bucket_receiver.batch.max_bytes", "spec.gcp_bucket_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.gcp_bucket_receiver.batch.max_bytes",
+          "spec.gcp_bucket_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.gcp_bucket_receiver.batch.batch_events",
-        options: ["spec.gcp_bucket_receiver.batch.max_events", "spec.gcp_bucket_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.gcp_bucket_receiver.batch.max_events",
+          "spec.gcp_bucket_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
@@ -368,7 +401,11 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "auth_choice",
         fieldPath: "spec.http_receiver.auth_choice",
-        options: ["spec.http_receiver.auth_basic", "spec.http_receiver.auth_none", "spec.http_receiver.auth_token"],
+        options: [
+          "spec.http_receiver.auth_basic",
+          "spec.http_receiver.auth_none",
+          "spec.http_receiver.auth_token",
+        ],
       },
       {
         choiceField: "tls_choice",
@@ -394,22 +431,34 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.http_receiver.batch.batch_bytes",
-        options: ["spec.http_receiver.batch.max_bytes", "spec.http_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.http_receiver.batch.max_bytes",
+          "spec.http_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.http_receiver.batch.batch_events",
-        options: ["spec.http_receiver.batch.max_events", "spec.http_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.http_receiver.batch.max_events",
+          "spec.http_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.http_receiver.batch.batch_timeout",
-        options: ["spec.http_receiver.batch.default_timeout_seconds", "spec.http_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.http_receiver.batch.default_timeout_seconds",
+          "spec.http_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
         fieldPath: "spec.http_receiver.compression.compression_choice",
-        options: ["spec.http_receiver.compression.gzip_compression", "spec.http_receiver.compression.no_compression"],
+        options: [
+          "spec.http_receiver.compression.gzip_compression",
+          "spec.http_receiver.compression.no_compression",
+        ],
       },
       {
         choiceField: "ca_choice",
@@ -419,7 +468,10 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.http_receiver.use_tls.mtls_choice",
-        options: ["spec.http_receiver.use_tls.mtls_disabled", "spec.http_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.http_receiver.use_tls.mtls_disabled",
+          "spec.http_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -453,17 +505,26 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_events",
         fieldPath: "spec.s3_receiver.batch.batch_events",
-        options: ["spec.s3_receiver.batch.max_events", "spec.s3_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.s3_receiver.batch.max_events",
+          "spec.s3_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.s3_receiver.batch.batch_timeout",
-        options: ["spec.s3_receiver.batch.default_timeout_seconds", "spec.s3_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.s3_receiver.batch.default_timeout_seconds",
+          "spec.s3_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
         fieldPath: "spec.s3_receiver.compression.compression_choice",
-        options: ["spec.s3_receiver.compression.gzip_compression", "spec.s3_receiver.compression.no_compression"],
+        options: [
+          "spec.s3_receiver.compression.gzip_compression",
+          "spec.s3_receiver.compression.no_compression",
+        ],
       },
       {
         choiceField: "tls_choice",
@@ -473,17 +534,26 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.splunk_receiver.batch.batch_bytes",
-        options: ["spec.splunk_receiver.batch.max_bytes", "spec.splunk_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.splunk_receiver.batch.max_bytes",
+          "spec.splunk_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.splunk_receiver.batch.batch_events",
-        options: ["spec.splunk_receiver.batch.max_events", "spec.splunk_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.splunk_receiver.batch.max_events",
+          "spec.splunk_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.splunk_receiver.batch.batch_timeout",
-        options: ["spec.splunk_receiver.batch.default_timeout_seconds", "spec.splunk_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.splunk_receiver.batch.default_timeout_seconds",
+          "spec.splunk_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -504,12 +574,18 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.splunk_receiver.use_tls.ca_choice",
-        options: ["spec.splunk_receiver.use_tls.no_ca", "spec.splunk_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.splunk_receiver.use_tls.no_ca",
+          "spec.splunk_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.splunk_receiver.use_tls.mtls_choice",
-        options: ["spec.splunk_receiver.use_tls.mtls_disabled", "spec.splunk_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.splunk_receiver.use_tls.mtls_disabled",
+          "spec.splunk_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -697,7 +773,8 @@ export const data_intelligenceTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -845,22 +922,34 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.azure_receiver.batch.batch_bytes",
-        options: ["spec.azure_receiver.batch.max_bytes", "spec.azure_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.azure_receiver.batch.max_bytes",
+          "spec.azure_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.azure_receiver.batch.batch_events",
-        options: ["spec.azure_receiver.batch.max_events", "spec.azure_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.azure_receiver.batch.max_events",
+          "spec.azure_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.azure_receiver.batch.batch_timeout",
-        options: ["spec.azure_receiver.batch.default_timeout_seconds", "spec.azure_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.azure_receiver.batch.default_timeout_seconds",
+          "spec.azure_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
         fieldPath: "spec.azure_receiver.compression.compression_choice",
-        options: ["spec.azure_receiver.compression.gzip_compression", "spec.azure_receiver.compression.no_compression"],
+        options: [
+          "spec.azure_receiver.compression.gzip_compression",
+          "spec.azure_receiver.compression.no_compression",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -883,17 +972,26 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.datadog_receiver.batch.batch_bytes",
-        options: ["spec.datadog_receiver.batch.max_bytes", "spec.datadog_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.datadog_receiver.batch.max_bytes",
+          "spec.datadog_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.datadog_receiver.batch.batch_events",
-        options: ["spec.datadog_receiver.batch.max_events", "spec.datadog_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.datadog_receiver.batch.max_events",
+          "spec.datadog_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.datadog_receiver.batch.batch_timeout",
-        options: ["spec.datadog_receiver.batch.default_timeout_seconds", "spec.datadog_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.datadog_receiver.batch.default_timeout_seconds",
+          "spec.datadog_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -914,12 +1012,18 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.datadog_receiver.use_tls.ca_choice",
-        options: ["spec.datadog_receiver.use_tls.no_ca", "spec.datadog_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.datadog_receiver.use_tls.no_ca",
+          "spec.datadog_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.datadog_receiver.use_tls.mtls_choice",
-        options: ["spec.datadog_receiver.use_tls.mtls_disabled", "spec.datadog_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.datadog_receiver.use_tls.mtls_disabled",
+          "spec.datadog_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -948,12 +1052,18 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.gcp_bucket_receiver.batch.batch_bytes",
-        options: ["spec.gcp_bucket_receiver.batch.max_bytes", "spec.gcp_bucket_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.gcp_bucket_receiver.batch.max_bytes",
+          "spec.gcp_bucket_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.gcp_bucket_receiver.batch.batch_events",
-        options: ["spec.gcp_bucket_receiver.batch.max_events", "spec.gcp_bucket_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.gcp_bucket_receiver.batch.max_events",
+          "spec.gcp_bucket_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
@@ -974,7 +1084,11 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "auth_choice",
         fieldPath: "spec.http_receiver.auth_choice",
-        options: ["spec.http_receiver.auth_basic", "spec.http_receiver.auth_none", "spec.http_receiver.auth_token"],
+        options: [
+          "spec.http_receiver.auth_basic",
+          "spec.http_receiver.auth_none",
+          "spec.http_receiver.auth_token",
+        ],
       },
       {
         choiceField: "tls_choice",
@@ -1000,22 +1114,34 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.http_receiver.batch.batch_bytes",
-        options: ["spec.http_receiver.batch.max_bytes", "spec.http_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.http_receiver.batch.max_bytes",
+          "spec.http_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.http_receiver.batch.batch_events",
-        options: ["spec.http_receiver.batch.max_events", "spec.http_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.http_receiver.batch.max_events",
+          "spec.http_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.http_receiver.batch.batch_timeout",
-        options: ["spec.http_receiver.batch.default_timeout_seconds", "spec.http_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.http_receiver.batch.default_timeout_seconds",
+          "spec.http_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
         fieldPath: "spec.http_receiver.compression.compression_choice",
-        options: ["spec.http_receiver.compression.gzip_compression", "spec.http_receiver.compression.no_compression"],
+        options: [
+          "spec.http_receiver.compression.gzip_compression",
+          "spec.http_receiver.compression.no_compression",
+        ],
       },
       {
         choiceField: "ca_choice",
@@ -1025,7 +1151,10 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.http_receiver.use_tls.mtls_choice",
-        options: ["spec.http_receiver.use_tls.mtls_disabled", "spec.http_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.http_receiver.use_tls.mtls_disabled",
+          "spec.http_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -1059,17 +1188,26 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_events",
         fieldPath: "spec.s3_receiver.batch.batch_events",
-        options: ["spec.s3_receiver.batch.max_events", "spec.s3_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.s3_receiver.batch.max_events",
+          "spec.s3_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.s3_receiver.batch.batch_timeout",
-        options: ["spec.s3_receiver.batch.default_timeout_seconds", "spec.s3_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.s3_receiver.batch.default_timeout_seconds",
+          "spec.s3_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
         fieldPath: "spec.s3_receiver.compression.compression_choice",
-        options: ["spec.s3_receiver.compression.gzip_compression", "spec.s3_receiver.compression.no_compression"],
+        options: [
+          "spec.s3_receiver.compression.gzip_compression",
+          "spec.s3_receiver.compression.no_compression",
+        ],
       },
       {
         choiceField: "tls_choice",
@@ -1079,17 +1217,26 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "batch_bytes",
         fieldPath: "spec.splunk_receiver.batch.batch_bytes",
-        options: ["spec.splunk_receiver.batch.max_bytes", "spec.splunk_receiver.batch.max_bytes_disabled"],
+        options: [
+          "spec.splunk_receiver.batch.max_bytes",
+          "spec.splunk_receiver.batch.max_bytes_disabled",
+        ],
       },
       {
         choiceField: "batch_events",
         fieldPath: "spec.splunk_receiver.batch.batch_events",
-        options: ["spec.splunk_receiver.batch.max_events", "spec.splunk_receiver.batch.max_events_disabled"],
+        options: [
+          "spec.splunk_receiver.batch.max_events",
+          "spec.splunk_receiver.batch.max_events_disabled",
+        ],
       },
       {
         choiceField: "batch_timeout",
         fieldPath: "spec.splunk_receiver.batch.batch_timeout",
-        options: ["spec.splunk_receiver.batch.default_timeout_seconds", "spec.splunk_receiver.batch.timeout_seconds"],
+        options: [
+          "spec.splunk_receiver.batch.default_timeout_seconds",
+          "spec.splunk_receiver.batch.timeout_seconds",
+        ],
       },
       {
         choiceField: "compression_choice",
@@ -1110,12 +1257,18 @@ export const data_intelligenceTools: ParsedOperation[] = [
       {
         choiceField: "ca_choice",
         fieldPath: "spec.splunk_receiver.use_tls.ca_choice",
-        options: ["spec.splunk_receiver.use_tls.no_ca", "spec.splunk_receiver.use_tls.trusted_ca_url"],
+        options: [
+          "spec.splunk_receiver.use_tls.no_ca",
+          "spec.splunk_receiver.use_tls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "mtls_choice",
         fieldPath: "spec.splunk_receiver.use_tls.mtls_choice",
-        options: ["spec.splunk_receiver.use_tls.mtls_disabled", "spec.splunk_receiver.use_tls.mtls_enable"],
+        options: [
+          "spec.splunk_receiver.use_tls.mtls_disabled",
+          "spec.splunk_receiver.use_tls.mtls_enable",
+        ],
       },
       {
         choiceField: "verify_certificate",
@@ -1249,7 +1402,8 @@ export const data_intelligenceTools: ParsedOperation[] = [
     domain: "data_intelligence",
     resource: "suggest-value",
     summary: "Suggest Values.",
-    description: "Returns suggested values for the specified field in the given Create/Replace/Custom request.",
+    description:
+      "Returns suggested values for the specified field in the given Create/Replace/Custom request.",
     pathParameters: [
       {
         description: "Namespace\nNamespace in which the suggestions are scoped.",
