@@ -281,7 +281,8 @@ export const apiTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -723,7 +724,8 @@ export const apiTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -902,7 +904,8 @@ export const apiTools: ParsedOperation[] = [
       "List API definitions suitable for API Inventory management\nGET all API Definitions for specific namespace exclude shared namespace.",
     pathParameters: [
       {
-        description: "Namespace\nnamespace is used to GET available API Definitions for the given namespace.",
+        description:
+          "Namespace\nnamespace is used to GET available API Definitions for the given namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -918,7 +921,8 @@ export const apiTools: ParsedOperation[] = [
       $ref: "#/components/schemas/api_definitionListAvailableAPIDefinitionsResp",
     },
     requiredParams: ["namespace"],
-    operationId: "ves.io.schema.views.api_definition.PublicConfigCustomAPI.ListAvailableAPIDefinitions",
+    operationId:
+      "ves.io.schema.views.api_definition.PublicConfigCustomAPI.ListAvailableAPIDefinitions",
     tags: ["Other"],
     sourceFile: "domains/api.json",
     displayName: null,
@@ -955,7 +959,8 @@ export const apiTools: ParsedOperation[] = [
     domain: "api",
     resource: "api-discovery",
     summary: "Create API Discovery.",
-    description: "Create API discovery creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create API discovery creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -1110,7 +1115,8 @@ export const apiTools: ParsedOperation[] = [
     domain: "api",
     resource: "api-discovery",
     summary: "GET API Discovery.",
-    description: "GET api_discovery reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET api_discovery reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1213,7 +1219,8 @@ export const apiTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1291,7 +1298,8 @@ export const apiTools: ParsedOperation[] = [
     domain: "api",
     resource: "api-discovery",
     summary: "Replace API Discovery.",
-    description: "Replace api_discovery replaces an existing object in the storage backend for metadata.namespace.",
+    description:
+      "Replace api_discovery replaces an existing object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -1403,7 +1411,8 @@ export const apiTools: ParsedOperation[] = [
       $ref: "#/components/schemas/rule_suggestionGetSuggestedAPIEndpointProtectionRuleRsp",
     },
     requiredParams: ["body", "namespace"],
-    operationId: "ves.io.schema.api_sec.rule_suggestion.RuleSuggestionAPI.GetSuggestedAPIEndpointProtectionRule",
+    operationId:
+      "ves.io.schema.api_sec.rule_suggestion.RuleSuggestionAPI.GetSuggestedAPIEndpointProtectionRule",
     tags: ["API Security"],
     sourceFile: "domains/api.json",
     displayName: null,
@@ -1440,7 +1449,8 @@ export const apiTools: ParsedOperation[] = [
     domain: "api",
     resource: "api-group-element",
     summary: "GET API Group Element.",
-    description: "GET api_group_element reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET api_group_element reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1541,7 +1551,8 @@ export const apiTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1720,7 +1731,8 @@ export const apiTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2109,7 +2121,8 @@ export const apiTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2331,7 +2344,8 @@ export const apiTools: ParsedOperation[] = [
     domain: "api",
     resource: "app-api-group",
     summary: "Create API Group.",
-    description: "Create app_api_group creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create app_api_group creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -2492,7 +2506,8 @@ export const apiTools: ParsedOperation[] = [
     domain: "api",
     resource: "app-api-group",
     summary: "GET API Group.",
-    description: "GET app_api_group reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET app_api_group reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -2595,7 +2610,8 @@ export const apiTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2673,7 +2689,8 @@ export const apiTools: ParsedOperation[] = [
     domain: "api",
     resource: "app-api-group",
     summary: "Replace API Group.",
-    description: "Replace app_api_group replaces an existing object in the storage backend for metadata.namespace.",
+    description:
+      "Replace app_api_group replaces an existing object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -3098,7 +3115,8 @@ export const apiTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3358,7 +3376,8 @@ export const apiTools: ParsedOperation[] = [
       $ref: "#/components/schemas/rule_suggestionGetSuggestedSensitiveDataRuleRsp",
     },
     requiredParams: ["body", "namespace"],
-    operationId: "ves.io.schema.api_sec.rule_suggestion.RuleSuggestionAPI.GetSuggestedSensitiveDataRule",
+    operationId:
+      "ves.io.schema.api_sec.rule_suggestion.RuleSuggestionAPI.GetSuggestedSensitiveDataRule",
     tags: ["API Security"],
     sourceFile: "domains/api.json",
     displayName: null,
@@ -3470,7 +3489,8 @@ export const apiTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.discovery_consul.access_info.connection_info.tls_info.key_url.secret_info_oneof",
+        fieldPath:
+          "spec.discovery_consul.access_info.connection_info.tls_info.key_url.secret_info_oneof",
         options: [
           "spec.discovery_consul.access_info.connection_info.tls_info.key_url.blindfold_secret_info",
           "spec.discovery_consul.access_info.connection_info.tls_info.key_url.clear_secret_info",
@@ -3478,7 +3498,8 @@ export const apiTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.discovery_consul.access_info.http_basic_auth_info.passwd_url.secret_info_oneof",
+        fieldPath:
+          "spec.discovery_consul.access_info.http_basic_auth_info.passwd_url.secret_info_oneof",
         options: [
           "spec.discovery_consul.access_info.http_basic_auth_info.passwd_url.blindfold_secret_info",
           "spec.discovery_consul.access_info.http_basic_auth_info.passwd_url.clear_secret_info",
@@ -3487,7 +3508,10 @@ export const apiTools: ParsedOperation[] = [
       {
         choiceField: "publish_choice",
         fieldPath: "spec.discovery_consul.publish_info.publish_choice",
-        options: ["spec.discovery_consul.publish_info.disable", "spec.discovery_consul.publish_info.publish"],
+        options: [
+          "spec.discovery_consul.publish_info.disable",
+          "spec.discovery_consul.publish_info.publish",
+        ],
       },
       {
         choiceField: "namespace_mapping_choice",
@@ -3497,16 +3521,23 @@ export const apiTools: ParsedOperation[] = [
       {
         choiceField: "config_type",
         fieldPath: "spec.discovery_k8s.access_info.config_type",
-        options: ["spec.discovery_k8s.access_info.connection_info", "spec.discovery_k8s.access_info.kubeconfig_url"],
+        options: [
+          "spec.discovery_k8s.access_info.connection_info",
+          "spec.discovery_k8s.access_info.kubeconfig_url",
+        ],
       },
       {
         choiceField: "k8s_pod_network_choice",
         fieldPath: "spec.discovery_k8s.access_info.k8s_pod_network_choice",
-        options: ["spec.discovery_k8s.access_info.isolated", "spec.discovery_k8s.access_info.reachable"],
+        options: [
+          "spec.discovery_k8s.access_info.isolated",
+          "spec.discovery_k8s.access_info.reachable",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.discovery_k8s.access_info.connection_info.tls_info.key_url.secret_info_oneof",
+        fieldPath:
+          "spec.discovery_k8s.access_info.connection_info.tls_info.key_url.secret_info_oneof",
         options: [
           "spec.discovery_k8s.access_info.connection_info.tls_info.key_url.blindfold_secret_info",
           "spec.discovery_k8s.access_info.connection_info.tls_info.key_url.clear_secret_info",
@@ -3543,7 +3574,10 @@ export const apiTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -3746,7 +3780,8 @@ export const apiTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3909,7 +3944,8 @@ export const apiTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.discovery_consul.access_info.connection_info.tls_info.key_url.secret_info_oneof",
+        fieldPath:
+          "spec.discovery_consul.access_info.connection_info.tls_info.key_url.secret_info_oneof",
         options: [
           "spec.discovery_consul.access_info.connection_info.tls_info.key_url.blindfold_secret_info",
           "spec.discovery_consul.access_info.connection_info.tls_info.key_url.clear_secret_info",
@@ -3917,7 +3953,8 @@ export const apiTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.discovery_consul.access_info.http_basic_auth_info.passwd_url.secret_info_oneof",
+        fieldPath:
+          "spec.discovery_consul.access_info.http_basic_auth_info.passwd_url.secret_info_oneof",
         options: [
           "spec.discovery_consul.access_info.http_basic_auth_info.passwd_url.blindfold_secret_info",
           "spec.discovery_consul.access_info.http_basic_auth_info.passwd_url.clear_secret_info",
@@ -3926,7 +3963,10 @@ export const apiTools: ParsedOperation[] = [
       {
         choiceField: "publish_choice",
         fieldPath: "spec.discovery_consul.publish_info.publish_choice",
-        options: ["spec.discovery_consul.publish_info.disable", "spec.discovery_consul.publish_info.publish"],
+        options: [
+          "spec.discovery_consul.publish_info.disable",
+          "spec.discovery_consul.publish_info.publish",
+        ],
       },
       {
         choiceField: "namespace_mapping_choice",
@@ -3936,16 +3976,23 @@ export const apiTools: ParsedOperation[] = [
       {
         choiceField: "config_type",
         fieldPath: "spec.discovery_k8s.access_info.config_type",
-        options: ["spec.discovery_k8s.access_info.connection_info", "spec.discovery_k8s.access_info.kubeconfig_url"],
+        options: [
+          "spec.discovery_k8s.access_info.connection_info",
+          "spec.discovery_k8s.access_info.kubeconfig_url",
+        ],
       },
       {
         choiceField: "k8s_pod_network_choice",
         fieldPath: "spec.discovery_k8s.access_info.k8s_pod_network_choice",
-        options: ["spec.discovery_k8s.access_info.isolated", "spec.discovery_k8s.access_info.reachable"],
+        options: [
+          "spec.discovery_k8s.access_info.isolated",
+          "spec.discovery_k8s.access_info.reachable",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.discovery_k8s.access_info.connection_info.tls_info.key_url.secret_info_oneof",
+        fieldPath:
+          "spec.discovery_k8s.access_info.connection_info.tls_info.key_url.secret_info_oneof",
         options: [
           "spec.discovery_k8s.access_info.connection_info.tls_info.key_url.blindfold_secret_info",
           "spec.discovery_k8s.access_info.connection_info.tls_info.key_url.clear_secret_info",
@@ -3982,7 +4029,10 @@ export const apiTools: ParsedOperation[] = [
       {
         choiceField: "internet_vip_choice",
         fieldPath: "spec.where.virtual_site.internet_vip_choice",
-        options: ["spec.where.virtual_site.disable_internet_vip", "spec.where.virtual_site.enable_internet_vip"],
+        options: [
+          "spec.where.virtual_site.disable_internet_vip",
+          "spec.where.virtual_site.enable_internet_vip",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -4022,7 +4072,8 @@ export const apiTools: ParsedOperation[] = [
         "x-displayname": "Discovery Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace of the discovered service for current request.",
+        description:
+          "Namespace\nx-required\nNamespace of the discovered service for current request.",
         in: "path",
         name: "namespace",
         required: true,
@@ -4124,7 +4175,11 @@ export const apiTools: ParsedOperation[] = [
       {
         choiceField: "scope_choice",
         fieldPath: "api_group.scope_choice",
-        options: ["api_group.bigip_virtual_server", "api_group.cdn_loadbalancer", "api_group.http_loadbalancer"],
+        options: [
+          "api_group.bigip_virtual_server",
+          "api_group.cdn_loadbalancer",
+          "api_group.http_loadbalancer",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -4179,7 +4234,8 @@ export const apiTools: ParsedOperation[] = [
       $ref: "#/components/schemas/api_definitionGetReferencingAllLoadbalancersResp",
     },
     requiredParams: ["name", "namespace"],
-    operationId: "ves.io.schema.views.api_definition.PublicConfigCustomAPI.GetReferencingLoadbalancers",
+    operationId:
+      "ves.io.schema.views.api_definition.PublicConfigCustomAPI.GetReferencingLoadbalancers",
     tags: ["Other"],
     sourceFile: "domains/api.json",
     displayName: null,
@@ -4369,7 +4425,8 @@ export const apiTools: ParsedOperation[] = [
       $ref: "#/components/schemas/rule_suggestionGetSuggestedOasValidationRuleRsp",
     },
     requiredParams: ["body", "namespace"],
-    operationId: "ves.io.schema.api_sec.rule_suggestion.RuleSuggestionAPI.GetSuggestedOasValidationRule",
+    operationId:
+      "ves.io.schema.api_sec.rule_suggestion.RuleSuggestionAPI.GetSuggestedOasValidationRule",
     tags: ["API Security"],
     sourceFile: "domains/api.json",
     displayName: null,
@@ -4427,7 +4484,8 @@ export const apiTools: ParsedOperation[] = [
       $ref: "#/components/schemas/rule_suggestionGetSuggestedRateLimitRuleRsp",
     },
     requiredParams: ["body", "namespace"],
-    operationId: "ves.io.schema.api_sec.rule_suggestion.RuleSuggestionAPI.GetSuggestedRateLimitRule",
+    operationId:
+      "ves.io.schema.api_sec.rule_suggestion.RuleSuggestionAPI.GetSuggestedRateLimitRule",
     tags: ["API Security"],
     sourceFile: "domains/api.json",
     displayName: null,
