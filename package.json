@@ -108,7 +108,7 @@
     "jszip": "^3.10.0",
     "prettier": "^3.8.1",
     "tsx": "^4.0.0",
-    "typescript": "^5.0.0",
+    "typescript": "^6.0.2",
     "vitest": "^4.0.16"
   },
   "dependencies": {
