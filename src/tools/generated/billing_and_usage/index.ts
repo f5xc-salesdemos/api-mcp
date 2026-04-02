@@ -421,7 +421,8 @@ export const billing_and_usageTools: ParsedOperation[] = [
     description: "API to create a plan transition request in db.",
     pathParameters: [
       {
-        description: "Namespace\nThis namespace is not used, all requests are stored under system namespace.",
+        description:
+          "Namespace\nThis namespace is not used, all requests are stored under system namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -780,7 +781,8 @@ export const billing_and_usageTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -845,7 +847,8 @@ export const billing_and_usageTools: ParsedOperation[] = [
     domain: "billing_and_usage",
     resource: "quota",
     summary: "Replace Quota.",
-    description: "Replace quota updates a given object from storage backend for metadata.namespace.",
+    description:
+      "Replace quota updates a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -1205,6 +1208,41 @@ export const billing_and_usageTools: ParsedOperation[] = [
     },
     requiredParams: ["namespace"],
     operationId: "ves.io.schema.quota.CustomAPI.GetQuotaUsage",
+    tags: ["Billing"],
+    sourceFile: "domains/billing_and_usage.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-billingandusage-usage-summary-create",
+    method: "POST",
+    path: "/api/data/namespaces/system/billing/usage_summary",
+    operation: "create",
+    domain: "billing_and_usage",
+    resource: "usage-summary",
+    summary: "Billing Usage Summary.",
+    description:
+      "GET the aggregated billing usage data for each feature/SKU over the specified duration.",
+    pathParameters: [],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/billingBillingUsageSummaryRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/billingBillingUsageSummaryResponse",
+    },
+    requiredParams: ["body"],
+    operationId: "ves.io.schema.billing.CustomPublicAPI.BillingUsageSummary",
     tags: ["Billing"],
     sourceFile: "domains/billing_and_usage.json",
     displayName: null,
