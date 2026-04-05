@@ -268,7 +268,8 @@ export const dnsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -411,7 +412,8 @@ export const dnsTools: ParsedOperation[] = [
     domain: "dns",
     resource: "dns-domain",
     summary: "Create DNS Domain.",
-    description: "Create DNS Domain in a given namespace. If one already exist it will give a error.",
+    description:
+      "Create DNS Domain in a given namespace. If one already exist it will give a error.",
     pathParameters: [
       {
         description:
@@ -636,7 +638,8 @@ export const dnsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1018,7 +1021,8 @@ export const dnsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1174,7 +1178,8 @@ export const dnsTools: ParsedOperation[] = [
     domain: "dns",
     resource: "dns-lb-pool",
     summary: "Create DNS Load Balancer Pool.",
-    description: "Create DNS Load Balancer Pool in a given namespace. If one already exist it will give a error.",
+    description:
+      "Create DNS Load Balancer Pool in a given namespace. If one already exist it will give a error.",
     pathParameters: [
       {
         description:
@@ -1235,7 +1240,13 @@ export const dnsTools: ParsedOperation[] = [
       {
         choiceField: "pool_type_choice",
         fieldPath: "spec.pool_type_choice",
-        options: ["spec.a_pool", "spec.aaaa_pool", "spec.cname_pool", "spec.mx_pool", "spec.srv_pool"],
+        options: [
+          "spec.a_pool",
+          "spec.aaaa_pool",
+          "spec.cname_pool",
+          "spec.mx_pool",
+          "spec.srv_pool",
+        ],
       },
       {
         choiceField: "ttl_choice",
@@ -1409,7 +1420,8 @@ export const dnsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1545,7 +1557,13 @@ export const dnsTools: ParsedOperation[] = [
       {
         choiceField: "pool_type_choice",
         fieldPath: "spec.pool_type_choice",
-        options: ["spec.a_pool", "spec.aaaa_pool", "spec.cname_pool", "spec.mx_pool", "spec.srv_pool"],
+        options: [
+          "spec.a_pool",
+          "spec.aaaa_pool",
+          "spec.cname_pool",
+          "spec.mx_pool",
+          "spec.srv_pool",
+        ],
       },
       {
         choiceField: "ttl_choice",
@@ -1568,7 +1586,8 @@ export const dnsTools: ParsedOperation[] = [
     domain: "dns",
     resource: "dns-load-balancer",
     summary: "Create DNS Load Balancer.",
-    description: "Create DNS Load Balancer in a given namespace. If one already exist it will give a error.",
+    description:
+      "Create DNS Load Balancer in a given namespace. If one already exist it will give a error.",
     pathParameters: [
       {
         description:
@@ -1814,7 +1833,8 @@ export const dnsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2333,7 +2353,8 @@ export const dnsTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2778,7 +2799,8 @@ export const dnsTools: ParsedOperation[] = [
         "x-displayname": "DNS Load Balancer Pool Name.",
       },
       {
-        description: "Namespace\nx-required\nNamespace in which the DNS Load Balancer Pool is present.",
+        description:
+          "Namespace\nx-required\nNamespace in which the DNS Load Balancer Pool is present.",
         in: "path",
         name: "namespace",
         required: true,
@@ -2805,7 +2827,8 @@ export const dnsTools: ParsedOperation[] = [
       $ref: "#/components/schemas/dns_load_balancerDNSLBPoolMemberHealthStatusResponse",
     },
     requiredParams: ["dns_lb_name", "dns_lb_pool_name", "namespace", "pool_member_address"],
-    operationId: "ves.io.schema.dns_load_balancer.CustomDataAPI.DNSLBPoolMemberHealthStatusChangeEvents",
+    operationId:
+      "ves.io.schema.dns_load_balancer.CustomDataAPI.DNSLBPoolMemberHealthStatusChangeEvents",
     tags: ["Other"],
     sourceFile: "domains/dns.json",
     displayName: null,
@@ -3396,7 +3419,10 @@ export const dnsTools: ParsedOperation[] = [
       {
         choiceField: "fingerprint_type",
         fieldPath: "rrset.sshfp_record.values[].fingerprint_type",
-        options: ["rrset.sshfp_record.values[].sha1_fingerprint", "rrset.sshfp_record.values[].sha256_fingerprint"],
+        options: [
+          "rrset.sshfp_record.values[].sha1_fingerprint",
+          "rrset.sshfp_record.values[].sha256_fingerprint",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -3608,7 +3634,10 @@ export const dnsTools: ParsedOperation[] = [
       {
         choiceField: "fingerprint_type",
         fieldPath: "rrset.sshfp_record.values[].fingerprint_type",
-        options: ["rrset.sshfp_record.values[].sha1_fingerprint", "rrset.sshfp_record.values[].sha256_fingerprint"],
+        options: [
+          "rrset.sshfp_record.values[].sha1_fingerprint",
+          "rrset.sshfp_record.values[].sha256_fingerprint",
+        ],
       },
     ],
     subscriptionRequirements: [],
