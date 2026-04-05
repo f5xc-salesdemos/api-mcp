@@ -70,7 +70,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
       $ref: "#/components/schemas/allowed_tenantUpdateSupportTenantAccessResp",
     },
     requiredParams: ["body"],
-    operationId: "ves.io.schema.tenant_management.allowed_tenant.CustomAPI.UpdateSupportTenantAccess",
+    operationId:
+      "ves.io.schema.tenant_management.allowed_tenant.CustomAPI.UpdateSupportTenantAccess",
     tags: ["Other"],
     sourceFile: "domains/tenant_and_identity.json",
     displayName: null,
@@ -87,7 +88,11 @@ export const tenant_and_identityTools: ParsedOperation[] = [
       {
         choiceField: "access_type_choice",
         fieldPath: "access_config.access_type_choice",
-        options: ["access_config.read_only", "access_config.read_write_all", "access_config.read_write_ns"],
+        options: [
+          "access_config.read_only",
+          "access_config.read_write_all",
+          "access_config.read_write_ns",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -186,7 +191,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "active-alert-policie",
     summary: "GET Active Alert Policies.",
-    description: "GetActiveAlertPolicies returns the list of active alert policies for the namespace.",
+    description:
+      "GetActiveAlertPolicies returns the list of active alert policies for the namespace.",
     pathParameters: [
       {
         description: "Namespace\nThe name of the namespace.",
@@ -283,7 +289,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "active-network-policie",
     summary: "GET Active Network Policies.",
-    description: "GetActiveNetworkPolicies resturn the list of active network policies for the namespace.",
+    description:
+      "GetActiveNetworkPolicies resturn the list of active network policies for the namespace.",
     pathParameters: [
       {
         description: "Namespace\nThe name of the namespace.",
@@ -380,7 +387,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "active-service-policie",
     summary: "GET Active Service Policies.",
-    description: "GetActiveServicePolicies resturn the list of active service policies for the namespace.",
+    description:
+      "GetActiveServicePolicies resturn the list of active service policies for the namespace.",
     pathParameters: [
       {
         description: "Namespace\nThe name of the namespace.",
@@ -703,7 +711,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "all-ns-stat",
     summary: "GET API Endpoints Stats for All Namespaces.",
-    description: "GET API endpoints stats for all Namespaces. This API is specific to system namespace.",
+    description:
+      "GET API endpoints stats for all Namespaces. This API is specific to system namespace.",
     pathParameters: [],
     queryParameters: [],
     requestBodySchema: {
@@ -867,7 +876,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "allowed-tenant",
     summary: "GET Allowed Tenant.",
-    description: "GET allowed_tenant reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET allowed_tenant reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -957,7 +967,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1101,7 +1112,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "analyze-for-deletion",
     summary: "Analyze For Deletion.",
-    description: "AnalyzeForDeletion checks the references of the object to make sure it is deletable.",
+    description:
+      "AnalyzeForDeletion checks the references of the object to make sure it is deletable.",
     pathParameters: [],
     queryParameters: [],
     requestBodySchema: {
@@ -1292,6 +1304,72 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     },
     requiredParams: ["name"],
     operationId: "ves.io.schema.user_group.CustomAPI.AssignRole",
+    tags: ["Other"],
+    sourceFile: "domains/tenant_and_identity.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-tenantandidentity-attachment-list",
+    method: "GET",
+    path: "/api/web/namespaces/system/managed_client/customer_supports/{tp_id}/comment/{comment_id}/attachment/{attachment_id}",
+    operation: "list",
+    domain: "tenant_and_identity",
+    resource: "attachment",
+    summary: "GET attachment.",
+    description:
+      "GET a specific attachment included in the comment from a customer support ticket.",
+    pathParameters: [
+      {
+        description:
+          "Attachment_id\nThe ID of the attachment included in the comment from a customer support ticket.",
+        in: "path",
+        name: "attachment_id",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Attachment ID.",
+      },
+      {
+        description: "Comment_id\nThe ID of the comment containing the attachment.",
+        in: "path",
+        name: "comment_id",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Comment ID.",
+      },
+      {
+        description: "Third party ID\nID assigned to this ticket by support provider.",
+        in: "path",
+        name: "tp_id",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Third Party ID.",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/apiHttpBody",
+    },
+    requiredParams: ["attachment_id", "comment_id", "tp_id"],
+    operationId:
+      "ves.io.schema.tenant_management.managed_tenant.CustomerSupportCustomAPI.GetAttachment",
     tags: ["Other"],
     sourceFile: "domains/tenant_and_identity.json",
     displayName: null,
@@ -1574,7 +1652,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2010,7 +2089,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
         "x-displayname": "Name",
       },
       {
-        description: "PageLimit will hold the limit of items required per query.\nDefault value is set as 100.",
+        description:
+          "PageLimit will hold the limit of items required per query.\nDefault value is set as 100.",
         in: "query",
         name: "page_limit",
         required: false,
@@ -2197,7 +2277,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "child-tenant-manager",
     summary: "GET Child Tenant Manager.",
-    description: "GET child_tenant_manager reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET child_tenant_manager reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -2286,7 +2367,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2532,7 +2614,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
         "x-displayname": "Country code.",
       },
       {
-        description: "Prefix\nfirst two or more characters of the city you look for (can be upper or lower case)",
+        description:
+          "Prefix\nfirst two or more characters of the city you look for (can be upper or lower case)",
         in: "path",
         name: "prefix",
         required: true,
@@ -2661,7 +2744,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "combined-notification",
     summary: "Update combined ntfn preferences.",
-    description: "Update combined ntfn preferences updates both user-ntfn-preferences and admin-ntfn-preferences.",
+    description:
+      "Update combined ntfn preferences updates both user-ntfn-preferences and admin-ntfn-preferences.",
     pathParameters: [],
     queryParameters: [],
     requestBodySchema: null,
@@ -2747,7 +2831,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "contact",
     summary: "Create Contact.",
-    description: "Creates a new customer's contact detail record with us, including address and phone number.",
+    description:
+      "Creates a new customer's contact detail record with us, including address and phone number.",
     pathParameters: [
       {
         description:
@@ -2876,7 +2961,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "contact",
     summary: "GET Contact.",
-    description: "Retrieves existing customer's contact details, including address and phone number.",
+    description:
+      "Retrieves existing customer's contact details, including address and phone number.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -2966,7 +3052,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3113,7 +3200,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
       "Returns a list of supported countries along with with additional information such as address validation rules.",
     pathParameters: [
       {
-        description: "Prefix\nfirst two or more characters of the country you look for (can be upper or lower case)",
+        description:
+          "Prefix\nfirst two or more characters of the country you look for (can be upper or lower case)",
         in: "path",
         name: "prefix",
         required: true,
@@ -3357,6 +3445,85 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     subscriptionRequirements: [],
   },
   {
+    toolName: "f5xc-api-tenantandidentity-discover-network-create",
+    method: "POST",
+    path: "/api/cloud-data/namespaces/system/cloud_user_accounts/discover_networks",
+    operation: "create",
+    domain: "tenant_and_identity",
+    resource: "discover-network",
+    summary: "Discover Cloud Networks.",
+    description: "API to perform cloud network discovery for given cloud user account.",
+    pathParameters: [],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/cloud_user_accountDiscoverCloudNetworksRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/cloud_user_accountDiscoverCloudNetworksResponse",
+    },
+    requiredParams: ["body"],
+    operationId: "ves.io.schema.cloud_user_account.CustomAPI.DiscoverCloudNetworks",
+    tags: ["Other"],
+    sourceFile: "domains/tenant_and_identity.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-tenantandidentity-dynamic-data-create",
+    method: "POST",
+    path: "/api/config/namespaces/{namespace}/dynamic-data",
+    operation: "create",
+    domain: "tenant_and_identity",
+    resource: "dynamic-data",
+    summary: "Dynamic Data.",
+    description: "DynamicData returns data that should be populated in a table.",
+    pathParameters: [
+      {
+        description: "Namespace\n\nNamespace in which the data is scoped.",
+        in: "path",
+        name: "namespace",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Namespace",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/namespaceDynamicDataReq",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/namespaceDynamicDataResp",
+    },
+    requiredParams: ["body", "namespace"],
+    operationId: "ves.io.schema.namespace.NamespaceCustomAPI.DynamicData",
+    tags: ["Other"],
+    sourceFile: "domains/tenant_and_identity.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
     toolName: "f5xc-api-tenantandidentity-enable-update",
     method: "PUT",
     path: "/api/web/namespaces/system/tenant/settings/otp/enable",
@@ -3573,7 +3740,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "fast-acls-for-internet-vip",
     summary: "GET FastACLs For Internet VIPs.",
-    description: "GetFastACLsForInternetVIPs Returns the list of Active FastACLs for Internet VIPs.",
+    description:
+      "GetFastACLsForInternetVIPs Returns the list of Active FastACLs for Internet VIPs.",
     pathParameters: [
       {
         description: "Namespace\nThe name of the namespace.",
@@ -4541,7 +4709,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "managed-tenant",
     summary: "GET Managed Tenant.",
-    description: "GET managed_tenant reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET managed_tenant reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -4621,7 +4790,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     pathParameters: [],
     queryParameters: [
       {
-        description: "PageLimit will hold the limit of items required per query.\nDefault value is set as 100.",
+        description:
+          "PageLimit will hold the limit of items required per query.\nDefault value is set as 100.",
         in: "query",
         name: "page_limit",
         required: false,
@@ -4766,7 +4936,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     pathParameters: [],
     queryParameters: [
       {
-        description: "PageLimit will hold the limit of items required per query.\nDefault value is set as 100.",
+        description:
+          "PageLimit will hold the limit of items required per query.\nDefault value is set as 100.",
         in: "query",
         name: "page_limit",
         required: false,
@@ -4803,7 +4974,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
       $ref: "#/components/schemas/managed_tenantGetManagedTenantListResp",
     },
     requiredParams: [],
-    operationId: "ves.io.schema.tenant_management.managed_tenant.CustomAPI.GetManagedTenantListByUser",
+    operationId:
+      "ves.io.schema.tenant_management.managed_tenant.CustomAPI.GetManagedTenantListByUser",
     tags: ["Other"],
     sourceFile: "domains/tenant_and_identity.json",
     displayName: null,
@@ -4832,7 +5004,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     pathParameters: [],
     queryParameters: [
       {
-        description: "PageLimit will hold the limit of items required per query.\nDefault value is set as 100.",
+        description:
+          "PageLimit will hold the limit of items required per query.\nDefault value is set as 100.",
         in: "query",
         name: "page_limit",
         required: false,
@@ -4906,7 +5079,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
         "x-displayname": "OIDC provider name.",
       },
       {
-        description: "Namespace\nNamespace contains namespace of OIDC provider. Namespace should be system.",
+        description:
+          "Namespace\nNamespace contains namespace of OIDC provider. Namespace should be system.",
         in: "path",
         name: "namespace",
         required: true,
@@ -4959,7 +5133,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
         "x-displayname": "OIDC provider name.",
       },
       {
-        description: "Namespace\nNamespace contains namespace of OIDC provider. Namespace should be system.",
+        description:
+          "Namespace\nNamespace contains namespace of OIDC provider. Namespace should be system.",
         in: "path",
         name: "namespace",
         required: true,
@@ -5020,7 +5195,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
       $ref: "#/components/schemas/child_tenant_managerMigrateCTMChildTenantsResp",
     },
     requiredParams: ["body", "name"],
-    operationId: "ves.io.schema.tenant_management.child_tenant_manager.CustomAPI.MigrateCTMChildTenants",
+    operationId:
+      "ves.io.schema.tenant_management.child_tenant_manager.CustomAPI.MigrateCTMChildTenants",
     tags: ["Other"],
     sourceFile: "domains/tenant_and_identity.json",
     displayName: null,
@@ -5185,7 +5361,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     pathParameters: [],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5348,7 +5525,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -5413,7 +5591,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "namespace",
     summary: "Replace Namespace.",
-    description: "Replaces attributes of a namespace including its metadata like labels, description etc.",
+    description:
+      "Replaces attributes of a namespace including its metadata like labels, description etc.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -5894,7 +6073,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "rbac-policy",
     summary: "GET RBAC Policy.",
-    description: "GET rbac_policy reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET rbac_policy reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -5982,7 +6162,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -6133,7 +6314,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "request-delete",
     summary: "DELETE Tenant.",
-    description: "Request to mark Tenant for deletion queue, after approve it will completely removed from the system.",
+    description:
+      "Request to mark Tenant for deletion queue, after approve it will completely removed from the system.",
     pathParameters: [],
     queryParameters: [],
     requestBodySchema: {
@@ -7100,7 +7282,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "state",
     summary: "List states.",
-    description: "Returns a list of known states of a country. List will be empty if country has no states.",
+    description:
+      "Returns a list of known states of a country. List will be empty if country has no states.",
     pathParameters: [
       {
         description:
@@ -7114,7 +7297,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
         "x-displayname": "Country code.",
       },
       {
-        description: "Prefix\nfirst two or more characters of the state you look for (can be upper or lower case)",
+        description:
+          "Prefix\nfirst two or more characters of the state you look for (can be upper or lower case)",
         in: "path",
         name: "prefix",
         required: true,
@@ -7190,7 +7374,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "suggest-value",
     summary: "Suggest Values.",
-    description: "Returns suggested values for the specified field in the given Create/Replace/Custom request.",
+    description:
+      "Returns suggested values for the specified field in the given Create/Replace/Custom request.",
     pathParameters: [],
     queryParameters: [],
     requestBodySchema: null,
@@ -7297,7 +7482,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "sync",
     summary: "Sync user",
-    description: "In case when user created initially from identity provider we need to sync the user data.",
+    description:
+      "In case when user created initially from identity provider we need to sync the user data.",
     pathParameters: [],
     queryParameters: [],
     requestBodySchema: null,
@@ -7541,7 +7727,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -7850,7 +8037,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "tenant-profile",
     summary: "GET Tenant Profile.",
-    description: "GET tenant_profile reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET tenant_profile reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -7939,7 +8127,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -8640,7 +8829,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "user-identification",
     summary: "Create User Identification.",
-    description: "Create user_identification creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create user_identification creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -8791,7 +8981,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "user-identification",
     summary: "GET User Identification.",
-    description: "GET user_identification reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET user_identification reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -8881,7 +9072,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -9175,7 +9367,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     description: "Create creates a user and namespace roles binding for this user.",
     pathParameters: [
       {
-        description: "Namespace\nAll users of a tenant must be created in tenant's system namespace.",
+        description:
+          "Namespace\nAll users of a tenant must be created in tenant's system namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -9261,7 +9454,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     description: "Replace updates user and namespace roles for this user.",
     pathParameters: [
       {
-        description: "Namespace\nAll users of a tenant must be created in tenant's system namespace.",
+        description:
+          "Namespace\nAll users of a tenant must be created in tenant's system namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -9479,7 +9673,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
     domain: "tenant_and_identity",
     resource: "validate-rule",
     summary: "Validate Rules.",
-    description: "ValidateRules returns whether the value is valid or not for the specified validator rules.",
+    description:
+      "ValidateRules returns whether the value is valid or not for the specified validator rules.",
     pathParameters: [],
     queryParameters: [],
     requestBodySchema: {
@@ -9583,7 +9778,8 @@ export const tenant_and_identityTools: ParsedOperation[] = [
       "GET fetches user information based on the username header from the request context\nthis API is also called as WhoAmI.",
     pathParameters: [
       {
-        description: "Namespace\nNamespace of the user object (namespace where the user object is stored).",
+        description:
+          "Namespace\nNamespace of the user object (namespace where the user object is stored).",
         in: "path",
         name: "namespace",
         required: true,
