@@ -17,7 +17,8 @@ export const container_servicesTools: ParsedOperation[] = [
     description: "GET the workload usage.",
     pathParameters: [
       {
-        description: "Namespace\nnamespace is used to scope the workload usage to a given namespace.",
+        description:
+          "Namespace\nnamespace is used to scope the workload usage to a given namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -74,7 +75,8 @@ export const container_servicesTools: ParsedOperation[] = [
     domain: "container_services",
     resource: "virtual-k8s",
     summary: "Create Virtual Kubernetes.",
-    description: "Create virtual_k8s will create the object in the storage backend for namespace metadata.namespace.",
+    description:
+      "Create virtual_k8s will create the object in the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -223,7 +225,8 @@ export const container_servicesTools: ParsedOperation[] = [
     domain: "container_services",
     resource: "virtual-k8s",
     summary: "GET Virtual Kubernetes.",
-    description: "GET virtual_k8s will GET the object from the storage backend for namesapce metadata.namespace.",
+    description:
+      "GET virtual_k8s will GET the object from the storage backend for namesapce metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -320,7 +323,8 @@ export const container_servicesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -550,7 +554,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.job.configuration.parameters[].choice",
-        options: ["spec.job.configuration.parameters[].env_var", "spec.job.configuration.parameters[].file"],
+        options: [
+          "spec.job.configuration.parameters[].env_var",
+          "spec.job.configuration.parameters[].file",
+        ],
       },
       {
         choiceField: "flavor_choice",
@@ -564,7 +571,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "registry_choice",
         fieldPath: "spec.job.containers[].image.registry_choice",
-        options: ["spec.job.containers[].image.container_registry", "spec.job.containers[].image.public"],
+        options: [
+          "spec.job.containers[].image.container_registry",
+          "spec.job.containers[].image.public",
+        ],
       },
       {
         choiceField: "health_check_choice",
@@ -671,7 +681,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.advertise_where[].vk8s_service.choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.advertise_where[].vk8s_service.choice",
         options: [
           "spec.service.advertise_options.advertise_custom.advertise_where[].vk8s_service.site",
           "spec.service.advertise_options.advertise_custom.advertise_where[].vk8s_service.virtual_site",
@@ -687,7 +698,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "loadbalancer_type",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.loadbalancer_type",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.loadbalancer_type",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https",
@@ -696,7 +708,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "route_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.route_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.route_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.default_route",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.specific_routes",
@@ -714,7 +727,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http.port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http.port_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http.port",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http.port_ranges",
@@ -722,7 +736,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "default_lb_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.default_lb_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.default_lb_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.default_loadbalancer",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.non_default_loadbalancer",
@@ -739,7 +754,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.port_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.port",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.port_ranges",
@@ -1135,7 +1151,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].port.info.target_port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].port.info.target_port_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].port.info.same_as_port",
           "spec.service.advertise_options.advertise_custom.ports[].port.info.target_port",
@@ -1151,7 +1168,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_in_cluster.multi_ports.ports[].info.target_port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_in_cluster.multi_ports.ports[].info.target_port_choice",
         options: [
           "spec.service.advertise_options.advertise_in_cluster.multi_ports.ports[].info.same_as_port",
           "spec.service.advertise_options.advertise_in_cluster.multi_ports.ports[].info.target_port",
@@ -1159,7 +1177,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_in_cluster.port.info.target_port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_in_cluster.port.info.target_port_choice",
         options: [
           "spec.service.advertise_options.advertise_in_cluster.port.info.same_as_port",
           "spec.service.advertise_options.advertise_in_cluster.port.info.target_port",
@@ -1175,7 +1194,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "advertise_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.multi_ports.ports[].advertise_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.multi_ports.ports[].advertise_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.multi_ports.ports[].http_loadbalancer",
           "spec.service.advertise_options.advertise_on_public.multi_ports.ports[].tcp_loadbalancer",
@@ -1653,7 +1673,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "loadbalancer_type",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.loadbalancer_type",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.loadbalancer_type",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https",
@@ -1662,7 +1683,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "route_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.route_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.route_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.default_route",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes",
@@ -1680,7 +1702,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http.port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http.port_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http.port",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http.port_ranges",
@@ -1688,7 +1711,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "default_lb_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.default_lb_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.default_lb_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.default_loadbalancer",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.non_default_loadbalancer",
@@ -1705,7 +1729,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.port_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.port",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.port_ranges",
@@ -2101,7 +2126,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.port.info.target_port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.port.info.target_port_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.port.info.same_as_port",
           "spec.service.advertise_options.advertise_on_public.port.port.info.target_port",
@@ -2110,7 +2136,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.service.configuration.parameters[].choice",
-        options: ["spec.service.configuration.parameters[].env_var", "spec.service.configuration.parameters[].file"],
+        options: [
+          "spec.service.configuration.parameters[].env_var",
+          "spec.service.configuration.parameters[].file",
+        ],
       },
       {
         choiceField: "flavor_choice",
@@ -2124,7 +2153,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "registry_choice",
         fieldPath: "spec.service.containers[].image.registry_choice",
-        options: ["spec.service.containers[].image.container_registry", "spec.service.containers[].image.public"],
+        options: [
+          "spec.service.containers[].image.container_registry",
+          "spec.service.containers[].image.public",
+        ],
       },
       {
         choiceField: "health_check_choice",
@@ -2251,7 +2283,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.simple_service.container.liveness_check.http_health_check.port.port_choice",
+        fieldPath:
+          "spec.simple_service.container.liveness_check.http_health_check.port.port_choice",
         options: [
           "spec.simple_service.container.liveness_check.http_health_check.port.name",
           "spec.simple_service.container.liveness_check.http_health_check.port.num",
@@ -2276,7 +2309,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.simple_service.container.readiness_check.http_health_check.port.port_choice",
+        fieldPath:
+          "spec.simple_service.container.readiness_check.http_health_check.port.port_choice",
         options: [
           "spec.simple_service.container.readiness_check.http_health_check.port.name",
           "spec.simple_service.container.readiness_check.http_health_check.port.num",
@@ -2284,7 +2318,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.simple_service.container.readiness_check.tcp_health_check.port.port_choice",
+        fieldPath:
+          "spec.simple_service.container.readiness_check.tcp_health_check.port.port_choice",
         options: [
           "spec.simple_service.container.readiness_check.tcp_health_check.port.name",
           "spec.simple_service.container.readiness_check.tcp_health_check.port.num",
@@ -2315,7 +2350,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].site",
           "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].virtual_site",
@@ -2324,7 +2360,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].vk8s_service.choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].vk8s_service.choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].vk8s_service.site",
           "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].vk8s_service.virtual_site",
@@ -2332,7 +2369,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "advertise_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.ports[].advertise_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.ports[].advertise_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer",
           "spec.stateful_service.advertise_options.advertise_custom.ports[].tcp_loadbalancer",
@@ -2350,7 +2388,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "route_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer.route_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer.route_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer.default_route",
           "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer.specific_routes",
@@ -2792,7 +2831,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.ports[].port.info.target_port_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.ports[].port.info.target_port_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.ports[].port.info.same_as_port",
           "spec.stateful_service.advertise_options.advertise_custom.ports[].port.info.target_port",
@@ -2817,7 +2857,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_in_cluster.port.info.target_port_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_in_cluster.port.info.target_port_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_in_cluster.port.info.same_as_port",
           "spec.stateful_service.advertise_options.advertise_in_cluster.port.info.target_port",
@@ -2833,7 +2874,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "advertise_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_on_public.multi_ports.ports[].advertise_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_on_public.multi_ports.ports[].advertise_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_on_public.multi_ports.ports[].http_loadbalancer",
           "spec.stateful_service.advertise_options.advertise_on_public.multi_ports.ports[].tcp_loadbalancer",
@@ -3303,7 +3345,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "advertise_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_on_public.port.advertise_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_on_public.port.advertise_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer",
           "spec.stateful_service.advertise_options.advertise_on_public.port.tcp_loadbalancer",
@@ -3321,7 +3364,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "route_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.route_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.route_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.default_route",
           "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes",
@@ -3763,7 +3807,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_on_public.port.port.info.target_port_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_on_public.port.port.info.target_port_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_on_public.port.port.info.same_as_port",
           "spec.stateful_service.advertise_options.advertise_on_public.port.port.info.target_port",
@@ -3805,7 +3850,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.stateful_service.containers[].liveness_check.http_health_check.port.port_choice",
+        fieldPath:
+          "spec.stateful_service.containers[].liveness_check.http_health_check.port.port_choice",
         options: [
           "spec.stateful_service.containers[].liveness_check.http_health_check.port.name",
           "spec.stateful_service.containers[].liveness_check.http_health_check.port.num",
@@ -3813,7 +3859,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.stateful_service.containers[].liveness_check.tcp_health_check.port.port_choice",
+        fieldPath:
+          "spec.stateful_service.containers[].liveness_check.tcp_health_check.port.port_choice",
         options: [
           "spec.stateful_service.containers[].liveness_check.tcp_health_check.port.name",
           "spec.stateful_service.containers[].liveness_check.tcp_health_check.port.num",
@@ -3830,7 +3877,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.stateful_service.containers[].readiness_check.http_health_check.port.port_choice",
+        fieldPath:
+          "spec.stateful_service.containers[].readiness_check.http_health_check.port.port_choice",
         options: [
           "spec.stateful_service.containers[].readiness_check.http_health_check.port.name",
           "spec.stateful_service.containers[].readiness_check.http_health_check.port.num",
@@ -3838,7 +3886,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.stateful_service.containers[].readiness_check.tcp_health_check.port.port_choice",
+        fieldPath:
+          "spec.stateful_service.containers[].readiness_check.tcp_health_check.port.port_choice",
         options: [
           "spec.stateful_service.containers[].readiness_check.tcp_health_check.port.name",
           "spec.stateful_service.containers[].readiness_check.tcp_health_check.port.num",
@@ -3858,7 +3907,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "class_name_choice",
-        fieldPath: "spec.stateful_service.persistent_volumes[].persistent_volume.storage.class_name_choice",
+        fieldPath:
+          "spec.stateful_service.persistent_volumes[].persistent_volume.storage.class_name_choice",
         options: [
           "spec.stateful_service.persistent_volumes[].persistent_volume.storage.class_name",
           "spec.stateful_service.persistent_volumes[].persistent_volume.storage.default",
@@ -3867,7 +3917,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "volume_choice",
         fieldPath: "spec.stateful_service.volumes[].volume_choice",
-        options: ["spec.stateful_service.volumes[].empty_dir", "spec.stateful_service.volumes[].host_path"],
+        options: [
+          "spec.stateful_service.volumes[].empty_dir",
+          "spec.stateful_service.volumes[].host_path",
+        ],
       },
     ],
     subscriptionRequirements: [
@@ -4195,7 +4248,8 @@ export const container_servicesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4449,7 +4503,8 @@ export const container_servicesTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -4597,7 +4652,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.job.configuration.parameters[].choice",
-        options: ["spec.job.configuration.parameters[].env_var", "spec.job.configuration.parameters[].file"],
+        options: [
+          "spec.job.configuration.parameters[].env_var",
+          "spec.job.configuration.parameters[].file",
+        ],
       },
       {
         choiceField: "flavor_choice",
@@ -4611,7 +4669,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "registry_choice",
         fieldPath: "spec.job.containers[].image.registry_choice",
-        options: ["spec.job.containers[].image.container_registry", "spec.job.containers[].image.public"],
+        options: [
+          "spec.job.containers[].image.container_registry",
+          "spec.job.containers[].image.public",
+        ],
       },
       {
         choiceField: "health_check_choice",
@@ -4718,7 +4779,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.advertise_where[].vk8s_service.choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.advertise_where[].vk8s_service.choice",
         options: [
           "spec.service.advertise_options.advertise_custom.advertise_where[].vk8s_service.site",
           "spec.service.advertise_options.advertise_custom.advertise_where[].vk8s_service.virtual_site",
@@ -4734,7 +4796,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "loadbalancer_type",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.loadbalancer_type",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.loadbalancer_type",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https",
@@ -4743,7 +4806,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "route_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.route_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.route_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.default_route",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.specific_routes",
@@ -4761,7 +4825,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http.port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http.port_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http.port",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.http.port_ranges",
@@ -4769,7 +4834,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "default_lb_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.default_lb_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.default_lb_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.default_loadbalancer",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.non_default_loadbalancer",
@@ -4786,7 +4852,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.port_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.port",
           "spec.service.advertise_options.advertise_custom.ports[].http_loadbalancer.https.port_ranges",
@@ -5182,7 +5249,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_custom.ports[].port.info.target_port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_custom.ports[].port.info.target_port_choice",
         options: [
           "spec.service.advertise_options.advertise_custom.ports[].port.info.same_as_port",
           "spec.service.advertise_options.advertise_custom.ports[].port.info.target_port",
@@ -5198,7 +5266,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_in_cluster.multi_ports.ports[].info.target_port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_in_cluster.multi_ports.ports[].info.target_port_choice",
         options: [
           "spec.service.advertise_options.advertise_in_cluster.multi_ports.ports[].info.same_as_port",
           "spec.service.advertise_options.advertise_in_cluster.multi_ports.ports[].info.target_port",
@@ -5206,7 +5275,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_in_cluster.port.info.target_port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_in_cluster.port.info.target_port_choice",
         options: [
           "spec.service.advertise_options.advertise_in_cluster.port.info.same_as_port",
           "spec.service.advertise_options.advertise_in_cluster.port.info.target_port",
@@ -5222,7 +5292,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "advertise_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.multi_ports.ports[].advertise_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.multi_ports.ports[].advertise_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.multi_ports.ports[].http_loadbalancer",
           "spec.service.advertise_options.advertise_on_public.multi_ports.ports[].tcp_loadbalancer",
@@ -5700,7 +5771,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "loadbalancer_type",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.loadbalancer_type",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.loadbalancer_type",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https",
@@ -5709,7 +5781,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "route_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.route_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.route_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.default_route",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes",
@@ -5727,7 +5800,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http.port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http.port_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http.port",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.http.port_ranges",
@@ -5735,7 +5809,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "default_lb_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.default_lb_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.default_lb_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.default_loadbalancer",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.non_default_loadbalancer",
@@ -5752,7 +5827,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.port_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.port",
           "spec.service.advertise_options.advertise_on_public.port.http_loadbalancer.https.port_ranges",
@@ -6148,7 +6224,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.service.advertise_options.advertise_on_public.port.port.info.target_port_choice",
+        fieldPath:
+          "spec.service.advertise_options.advertise_on_public.port.port.info.target_port_choice",
         options: [
           "spec.service.advertise_options.advertise_on_public.port.port.info.same_as_port",
           "spec.service.advertise_options.advertise_on_public.port.port.info.target_port",
@@ -6157,7 +6234,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "choice",
         fieldPath: "spec.service.configuration.parameters[].choice",
-        options: ["spec.service.configuration.parameters[].env_var", "spec.service.configuration.parameters[].file"],
+        options: [
+          "spec.service.configuration.parameters[].env_var",
+          "spec.service.configuration.parameters[].file",
+        ],
       },
       {
         choiceField: "flavor_choice",
@@ -6171,7 +6251,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "registry_choice",
         fieldPath: "spec.service.containers[].image.registry_choice",
-        options: ["spec.service.containers[].image.container_registry", "spec.service.containers[].image.public"],
+        options: [
+          "spec.service.containers[].image.container_registry",
+          "spec.service.containers[].image.public",
+        ],
       },
       {
         choiceField: "health_check_choice",
@@ -6298,7 +6381,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.simple_service.container.liveness_check.http_health_check.port.port_choice",
+        fieldPath:
+          "spec.simple_service.container.liveness_check.http_health_check.port.port_choice",
         options: [
           "spec.simple_service.container.liveness_check.http_health_check.port.name",
           "spec.simple_service.container.liveness_check.http_health_check.port.num",
@@ -6323,7 +6407,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.simple_service.container.readiness_check.http_health_check.port.port_choice",
+        fieldPath:
+          "spec.simple_service.container.readiness_check.http_health_check.port.port_choice",
         options: [
           "spec.simple_service.container.readiness_check.http_health_check.port.name",
           "spec.simple_service.container.readiness_check.http_health_check.port.num",
@@ -6331,7 +6416,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.simple_service.container.readiness_check.tcp_health_check.port.port_choice",
+        fieldPath:
+          "spec.simple_service.container.readiness_check.tcp_health_check.port.port_choice",
         options: [
           "spec.simple_service.container.readiness_check.tcp_health_check.port.name",
           "spec.simple_service.container.readiness_check.tcp_health_check.port.num",
@@ -6362,7 +6448,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].site",
           "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].virtual_site",
@@ -6371,7 +6458,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].vk8s_service.choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].vk8s_service.choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].vk8s_service.site",
           "spec.stateful_service.advertise_options.advertise_custom.advertise_where[].vk8s_service.virtual_site",
@@ -6379,7 +6467,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "advertise_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.ports[].advertise_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.ports[].advertise_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer",
           "spec.stateful_service.advertise_options.advertise_custom.ports[].tcp_loadbalancer",
@@ -6397,7 +6486,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "route_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer.route_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer.route_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer.default_route",
           "spec.stateful_service.advertise_options.advertise_custom.ports[].http_loadbalancer.specific_routes",
@@ -6839,7 +6929,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_custom.ports[].port.info.target_port_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_custom.ports[].port.info.target_port_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_custom.ports[].port.info.same_as_port",
           "spec.stateful_service.advertise_options.advertise_custom.ports[].port.info.target_port",
@@ -6864,7 +6955,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_in_cluster.port.info.target_port_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_in_cluster.port.info.target_port_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_in_cluster.port.info.same_as_port",
           "spec.stateful_service.advertise_options.advertise_in_cluster.port.info.target_port",
@@ -6880,7 +6972,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "advertise_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_on_public.multi_ports.ports[].advertise_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_on_public.multi_ports.ports[].advertise_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_on_public.multi_ports.ports[].http_loadbalancer",
           "spec.stateful_service.advertise_options.advertise_on_public.multi_ports.ports[].tcp_loadbalancer",
@@ -7350,7 +7443,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "advertise_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_on_public.port.advertise_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_on_public.port.advertise_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer",
           "spec.stateful_service.advertise_options.advertise_on_public.port.tcp_loadbalancer",
@@ -7368,7 +7462,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "route_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.route_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.route_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.default_route",
           "spec.stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes",
@@ -7810,7 +7905,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "target_port_choice",
-        fieldPath: "spec.stateful_service.advertise_options.advertise_on_public.port.port.info.target_port_choice",
+        fieldPath:
+          "spec.stateful_service.advertise_options.advertise_on_public.port.port.info.target_port_choice",
         options: [
           "spec.stateful_service.advertise_options.advertise_on_public.port.port.info.same_as_port",
           "spec.stateful_service.advertise_options.advertise_on_public.port.port.info.target_port",
@@ -7852,7 +7948,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.stateful_service.containers[].liveness_check.http_health_check.port.port_choice",
+        fieldPath:
+          "spec.stateful_service.containers[].liveness_check.http_health_check.port.port_choice",
         options: [
           "spec.stateful_service.containers[].liveness_check.http_health_check.port.name",
           "spec.stateful_service.containers[].liveness_check.http_health_check.port.num",
@@ -7860,7 +7957,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.stateful_service.containers[].liveness_check.tcp_health_check.port.port_choice",
+        fieldPath:
+          "spec.stateful_service.containers[].liveness_check.tcp_health_check.port.port_choice",
         options: [
           "spec.stateful_service.containers[].liveness_check.tcp_health_check.port.name",
           "spec.stateful_service.containers[].liveness_check.tcp_health_check.port.num",
@@ -7877,7 +7975,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.stateful_service.containers[].readiness_check.http_health_check.port.port_choice",
+        fieldPath:
+          "spec.stateful_service.containers[].readiness_check.http_health_check.port.port_choice",
         options: [
           "spec.stateful_service.containers[].readiness_check.http_health_check.port.name",
           "spec.stateful_service.containers[].readiness_check.http_health_check.port.num",
@@ -7885,7 +7984,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "port_choice",
-        fieldPath: "spec.stateful_service.containers[].readiness_check.tcp_health_check.port.port_choice",
+        fieldPath:
+          "spec.stateful_service.containers[].readiness_check.tcp_health_check.port.port_choice",
         options: [
           "spec.stateful_service.containers[].readiness_check.tcp_health_check.port.name",
           "spec.stateful_service.containers[].readiness_check.tcp_health_check.port.num",
@@ -7905,7 +8005,8 @@ export const container_servicesTools: ParsedOperation[] = [
       },
       {
         choiceField: "class_name_choice",
-        fieldPath: "spec.stateful_service.persistent_volumes[].persistent_volume.storage.class_name_choice",
+        fieldPath:
+          "spec.stateful_service.persistent_volumes[].persistent_volume.storage.class_name_choice",
         options: [
           "spec.stateful_service.persistent_volumes[].persistent_volume.storage.class_name",
           "spec.stateful_service.persistent_volumes[].persistent_volume.storage.default",
@@ -7914,7 +8015,10 @@ export const container_servicesTools: ParsedOperation[] = [
       {
         choiceField: "volume_choice",
         fieldPath: "spec.stateful_service.volumes[].volume_choice",
-        options: ["spec.stateful_service.volumes[].empty_dir", "spec.stateful_service.volumes[].host_path"],
+        options: [
+          "spec.stateful_service.volumes[].empty_dir",
+          "spec.stateful_service.volumes[].host_path",
+        ],
       },
     ],
     subscriptionRequirements: [
