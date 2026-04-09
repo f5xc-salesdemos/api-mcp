@@ -43,7 +43,8 @@ export const virtualTools: ParsedOperation[] = [
       $ref: "#/components/schemas/waf_signatures_changelogReleasedSignaturesRsp",
     },
     requiredParams: ["namespace", "vh_name"],
-    operationId: "ves.io.schema.waf_signatures_changelog.WafSignatureChangelogCustomApi.GetActiveStagedSignatures",
+    operationId:
+      "ves.io.schema.waf_signatures_changelog.WafSignatureChangelogCustomApi.GetActiveStagedSignatures",
     tags: ["Other"],
     sourceFile: "domains/virtual.json",
     displayName: null,
@@ -76,7 +77,8 @@ export const virtualTools: ParsedOperation[] = [
       $ref: "#/components/schemas/app_securitySecurityEventsAggregationResponse",
     },
     requiredParams: [],
-    operationId: "ves.io.schema.app_security.AppSecurityMonitoringAPI.SecurityEventsAggregationQueryAllNamespaces",
+    operationId:
+      "ves.io.schema.app_security.AppSecurityMonitoringAPI.SecurityEventsAggregationQueryAllNamespaces",
     tags: ["Other"],
     sourceFile: "domains/virtual.json",
     displayName: null,
@@ -109,7 +111,8 @@ export const virtualTools: ParsedOperation[] = [
       $ref: "#/components/schemas/app_securitySecurityEventsResponse",
     },
     requiredParams: [],
-    operationId: "ves.io.schema.app_security.AppSecurityMonitoringAPI.SecurityEventsQueryAllNamespaces",
+    operationId:
+      "ves.io.schema.app_security.AppSecurityMonitoringAPI.SecurityEventsQueryAllNamespaces",
     tags: ["Other"],
     sourceFile: "domains/virtual.json",
     displayName: null,
@@ -415,7 +418,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "anonymization_setting",
         fieldPath: "spec.anonymization_setting",
-        options: ["spec.custom_anonymization", "spec.default_anonymization", "spec.disable_anonymization"],
+        options: [
+          "spec.custom_anonymization",
+          "spec.default_anonymization",
+          "spec.disable_anonymization",
+        ],
         recommendedOption: "spec.default_anonymization",
       },
       {
@@ -433,7 +440,7 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "detection_setting_choice",
         fieldPath: "spec.detection_setting_choice",
-        options: ["spec.ai_risk_based_blocking", "spec.default_detection_settings", "spec.detection_settings"],
+        options: ["spec.default_detection_settings", "spec.detection_settings"],
         recommendedOption: "spec.default_detection_settings",
       },
       {
@@ -441,6 +448,12 @@ export const virtualTools: ParsedOperation[] = [
         fieldPath: "spec.enforcement_mode_choice",
         options: ["spec.blocking", "spec.monitoring"],
         recommendedOption: "spec.monitoring",
+      },
+      {
+        choiceField: "enhance_with_ai_choice",
+        fieldPath: "spec.enhance_with_ai_choice",
+        options: ["spec.disable_ai_enhancements", "spec.enable_ai_enhancements"],
+        recommendedOption: "spec.disable_ai_enhancements",
       },
       {
         choiceField: "anonymization_choice",
@@ -454,12 +467,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "bot_protection_choice",
         fieldPath: "spec.detection_settings.bot_protection_choice",
-        options: ["spec.detection_settings.bot_protection_setting", "spec.detection_settings.default_bot_setting"],
+        options: [
+          "spec.detection_settings.bot_protection_setting",
+          "spec.detection_settings.default_bot_setting",
+        ],
       },
       {
         choiceField: "false_positive_suppression",
         fieldPath: "spec.detection_settings.false_positive_suppression",
-        options: ["spec.detection_settings.disable_suppression", "spec.detection_settings.enable_suppression"],
+        options: [
+          "spec.detection_settings.disable_suppression",
+          "spec.detection_settings.enable_suppression",
+        ],
       },
       {
         choiceField: "signatures_staging_settings",
@@ -481,7 +500,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "violation_detection_setting",
         fieldPath: "spec.detection_settings.violation_detection_setting",
-        options: ["spec.detection_settings.default_violation_settings", "spec.detection_settings.violation_settings"],
+        options: [
+          "spec.detection_settings.default_violation_settings",
+          "spec.detection_settings.violation_settings",
+        ],
       },
       {
         choiceField: "attack_type_setting",
@@ -493,11 +515,20 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "signature_selection_by_accuracy",
-        fieldPath: "spec.detection_settings.signature_selection_setting.signature_selection_by_accuracy",
+        fieldPath:
+          "spec.detection_settings.signature_selection_setting.signature_selection_by_accuracy",
         options: [
           "spec.detection_settings.signature_selection_setting.high_medium_accuracy_signatures",
           "spec.detection_settings.signature_selection_setting.high_medium_low_accuracy_signatures",
           "spec.detection_settings.signature_selection_setting.only_high_accuracy_signatures",
+        ],
+      },
+      {
+        choiceField: "risk_score_action_choice",
+        fieldPath: "spec.enable_ai_enhancements.risk_score_action_choice",
+        options: [
+          "spec.enable_ai_enhancements.mitigate_high_medium_risk_action",
+          "spec.enable_ai_enhancements.mitigate_high_risk_action",
         ],
       },
     ],
@@ -701,7 +732,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -856,7 +888,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "anonymization_setting",
         fieldPath: "spec.anonymization_setting",
-        options: ["spec.custom_anonymization", "spec.default_anonymization", "spec.disable_anonymization"],
+        options: [
+          "spec.custom_anonymization",
+          "spec.default_anonymization",
+          "spec.disable_anonymization",
+        ],
         recommendedOption: "spec.default_anonymization",
       },
       {
@@ -874,7 +910,7 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "detection_setting_choice",
         fieldPath: "spec.detection_setting_choice",
-        options: ["spec.ai_risk_based_blocking", "spec.default_detection_settings", "spec.detection_settings"],
+        options: ["spec.default_detection_settings", "spec.detection_settings"],
         recommendedOption: "spec.default_detection_settings",
       },
       {
@@ -882,6 +918,12 @@ export const virtualTools: ParsedOperation[] = [
         fieldPath: "spec.enforcement_mode_choice",
         options: ["spec.blocking", "spec.monitoring"],
         recommendedOption: "spec.monitoring",
+      },
+      {
+        choiceField: "enhance_with_ai_choice",
+        fieldPath: "spec.enhance_with_ai_choice",
+        options: ["spec.disable_ai_enhancements", "spec.enable_ai_enhancements"],
+        recommendedOption: "spec.disable_ai_enhancements",
       },
       {
         choiceField: "anonymization_choice",
@@ -895,12 +937,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "bot_protection_choice",
         fieldPath: "spec.detection_settings.bot_protection_choice",
-        options: ["spec.detection_settings.bot_protection_setting", "spec.detection_settings.default_bot_setting"],
+        options: [
+          "spec.detection_settings.bot_protection_setting",
+          "spec.detection_settings.default_bot_setting",
+        ],
       },
       {
         choiceField: "false_positive_suppression",
         fieldPath: "spec.detection_settings.false_positive_suppression",
-        options: ["spec.detection_settings.disable_suppression", "spec.detection_settings.enable_suppression"],
+        options: [
+          "spec.detection_settings.disable_suppression",
+          "spec.detection_settings.enable_suppression",
+        ],
       },
       {
         choiceField: "signatures_staging_settings",
@@ -922,7 +970,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "violation_detection_setting",
         fieldPath: "spec.detection_settings.violation_detection_setting",
-        options: ["spec.detection_settings.default_violation_settings", "spec.detection_settings.violation_settings"],
+        options: [
+          "spec.detection_settings.default_violation_settings",
+          "spec.detection_settings.violation_settings",
+        ],
       },
       {
         choiceField: "attack_type_setting",
@@ -934,11 +985,20 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "signature_selection_by_accuracy",
-        fieldPath: "spec.detection_settings.signature_selection_setting.signature_selection_by_accuracy",
+        fieldPath:
+          "spec.detection_settings.signature_selection_setting.signature_selection_by_accuracy",
         options: [
           "spec.detection_settings.signature_selection_setting.high_medium_accuracy_signatures",
           "spec.detection_settings.signature_selection_setting.high_medium_low_accuracy_signatures",
           "spec.detection_settings.signature_selection_setting.only_high_accuracy_signatures",
+        ],
+      },
+      {
+        choiceField: "risk_score_action_choice",
+        fieldPath: "spec.enable_ai_enhancements.risk_score_action_choice",
+        options: [
+          "spec.enable_ai_enhancements.mitigate_high_medium_risk_action",
+          "spec.enable_ai_enhancements.mitigate_high_risk_action",
         ],
       },
     ],
@@ -1191,7 +1251,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "cluster",
     summary: "Create Cluster.",
-    description: "Create cluster will create the object in the storage backend for namespace metadata.namespace.",
+    description:
+      "Create cluster will create the object in the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -1262,7 +1323,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "proxy_protocol_type",
         fieldPath: "spec.proxy_protocol_type",
-        options: ["spec.disable_proxy_protocol", "spec.proxy_protocol_v1", "spec.proxy_protocol_v2"],
+        options: [
+          "spec.disable_proxy_protocol",
+          "spec.proxy_protocol_v1",
+          "spec.proxy_protocol_v2",
+        ],
       },
       {
         choiceField: "header_transformation_choice",
@@ -1316,7 +1381,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.tls_parameters.common_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.tls_parameters.common_params.tls_certificates[].private_key.clear_secret_info",
@@ -1410,7 +1476,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "cluster",
     summary: "GET Cluster.",
-    description: "GET cluster will GET the object from the storage backend for namespace metadata.namespace.",
+    description:
+      "GET cluster will GET the object from the storage backend for namespace metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -1500,7 +1567,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1647,7 +1715,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "proxy_protocol_type",
         fieldPath: "spec.proxy_protocol_type",
-        options: ["spec.disable_proxy_protocol", "spec.proxy_protocol_v1", "spec.proxy_protocol_v2"],
+        options: [
+          "spec.disable_proxy_protocol",
+          "spec.proxy_protocol_v1",
+          "spec.proxy_protocol_v2",
+        ],
       },
       {
         choiceField: "header_transformation_choice",
@@ -1701,7 +1773,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.tls_parameters.common_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.tls_parameters.common_params.tls_certificates[].private_key.clear_secret_info",
@@ -1789,7 +1862,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "dos-automitigation-rule",
     summary: "DELETE DoS Auto-Mitigation Rule for HTTP Load Balancer.",
-    description: "DELETE the corresponding DoS Auto-Mitigation Rule for the given HTTP load balancer.",
+    description:
+      "DELETE the corresponding DoS Auto-Mitigation Rule for the given HTTP load balancer.",
     pathParameters: [
       {
         description: "DoS Mitigation Rule Name\nName of the DoS Mitigation Rule.",
@@ -1852,7 +1926,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "dos-automitigation-rule",
     summary: "GET DoS Auto-Mitigation Rules for HTTP Load Balancer.",
-    description: "GET the corresponding DoS Auto-Mitigation Rules for the given HTTP load balancer.",
+    description:
+      "GET the corresponding DoS Auto-Mitigation Rules for the given HTTP load balancer.",
     pathParameters: [
       {
         description: "Name\nName of the Load Balancer.",
@@ -2186,7 +2261,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2660,7 +2736,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2894,7 +2971,8 @@ export const virtualTools: ParsedOperation[] = [
       $ref: "#/components/schemas/http_loadbalancerGetAPIEndpointsSchemaUpdatesResp",
     },
     requiredParams: ["body", "name", "namespace"],
-    operationId: "ves.io.schema.views.http_loadbalancer.ApiepLBCustomAPI.GetAPIEndpointsSchemaUpdates",
+    operationId:
+      "ves.io.schema.views.http_loadbalancer.ApiepLBCustomAPI.GetAPIEndpointsSchemaUpdates",
     tags: ["Other"],
     sourceFile: "domains/virtual.json",
     displayName: null,
@@ -3044,7 +3122,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "host_header_choice",
         fieldPath: "spec.http_health_check.host_header_choice",
-        options: ["spec.http_health_check.host_header", "spec.http_health_check.use_origin_server_name"],
+        options: [
+          "spec.http_health_check.host_header",
+          "spec.http_health_check.use_origin_server_name",
+        ],
         recommendedOption: "spec.http_health_check.use_origin_server_name",
       },
     ],
@@ -3210,7 +3291,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -3352,7 +3434,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "host_header_choice",
         fieldPath: "spec.http_health_check.host_header_choice",
-        options: ["spec.http_health_check.host_header", "spec.http_health_check.use_origin_server_name"],
+        options: [
+          "spec.http_health_check.host_header",
+          "spec.http_health_check.use_origin_server_name",
+        ],
         recommendedOption: "spec.http_health_check.use_origin_server_name",
       },
     ],
@@ -3369,7 +3454,8 @@ export const virtualTools: ParsedOperation[] = [
     description: "GET the counter for Enhanced Firewall Policy hits for a given namespace.",
     pathParameters: [
       {
-        description: "Namespace\nNamespace is used to scope Enhanced Firewall Policy hits for the given namespace.",
+        description:
+          "Namespace\nNamespace is used to scope Enhanced Firewall Policy hits for the given namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -3540,7 +3626,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "l7_ddos_auto_mitigation_action",
         fieldPath: "spec.l7_ddos_auto_mitigation_action",
-        options: ["spec.l7_ddos_action_block", "spec.l7_ddos_action_default", "spec.l7_ddos_action_js_challenge"],
+        options: [
+          "spec.l7_ddos_action_block",
+          "spec.l7_ddos_action_default",
+          "spec.l7_ddos_action_js_challenge",
+        ],
       },
       {
         choiceField: "loadbalancer_type",
@@ -3580,7 +3670,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "service_policy_choice",
         fieldPath: "spec.service_policy_choice",
-        options: ["spec.active_service_policies", "spec.no_service_policies", "spec.service_policies_from_namespace"],
+        options: [
+          "spec.active_service_policies",
+          "spec.no_service_policies",
+          "spec.service_policies_from_namespace",
+        ],
       },
       {
         choiceField: "slow_ddos_mitigation_choice",
@@ -3694,7 +3788,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
         options: [
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.cookie_matchers[].check_not_present",
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.cookie_matchers[].check_present",
@@ -3712,7 +3807,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_endpoint_rules[].request_matcher.jwt_claims[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_endpoint_rules[].request_matcher.jwt_claims[].match",
         options: [
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.jwt_claims[].check_not_present",
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.jwt_claims[].check_present",
@@ -3721,7 +3817,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_endpoint_rules[].request_matcher.query_params[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_endpoint_rules[].request_matcher.query_params[].match",
         options: [
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.query_params[].check_not_present",
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.query_params[].check_present",
@@ -3766,7 +3863,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_groups_rules[].request_matcher.cookie_matchers[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_groups_rules[].request_matcher.cookie_matchers[].match",
         options: [
           "spec.api_protection_rules.api_groups_rules[].request_matcher.cookie_matchers[].check_not_present",
           "spec.api_protection_rules.api_groups_rules[].request_matcher.cookie_matchers[].check_present",
@@ -3784,7 +3882,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_groups_rules[].request_matcher.jwt_claims[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_groups_rules[].request_matcher.jwt_claims[].match",
         options: [
           "spec.api_protection_rules.api_groups_rules[].request_matcher.jwt_claims[].check_not_present",
           "spec.api_protection_rules.api_groups_rules[].request_matcher.jwt_claims[].check_present",
@@ -3793,7 +3892,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_groups_rules[].request_matcher.query_params[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_groups_rules[].request_matcher.query_params[].match",
         options: [
           "spec.api_protection_rules.api_groups_rules[].request_matcher.query_params[].check_not_present",
           "spec.api_protection_rules.api_groups_rules[].request_matcher.query_params[].check_present",
@@ -3856,7 +3956,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
+        fieldPath:
+          "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
         options: [
           "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].check_not_present",
           "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].check_present",
@@ -3892,7 +3993,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "destination_type",
-        fieldPath: "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].destination_type",
+        fieldPath:
+          "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].destination_type",
         options: [
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].any_url",
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].api_endpoint",
@@ -3902,7 +4004,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].domain_choice",
+        fieldPath:
+          "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].domain_choice",
         options: [
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].any_domain",
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].specific_domain",
@@ -4066,7 +4169,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom",
@@ -4094,12 +4198,14 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "fail_configuration",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
         options: [],
       },
       {
         choiceField: "oversized_body_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_fail_validation",
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_skip_validation",
@@ -4107,7 +4213,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom",
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_default",
@@ -4133,7 +4240,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "validation_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.skip_validation",
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_active",
@@ -4164,7 +4272,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom",
@@ -4192,7 +4301,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "condition_type_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_endpoint",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_group",
@@ -4201,7 +4311,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].any_domain",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].specific_domain",
@@ -4258,7 +4369,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_custom",
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_default",
@@ -4276,7 +4388,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "frequency_choice",
         fieldPath: "spec.api_testing.frequency_choice",
-        options: ["spec.api_testing.every_day", "spec.api_testing.every_month", "spec.api_testing.every_week"],
+        options: [
+          "spec.api_testing.every_day",
+          "spec.api_testing.every_month",
+          "spec.api_testing.every_week",
+        ],
       },
       {
         choiceField: "credentials_choice",
@@ -4322,7 +4438,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.api_testing.domains[].credentials[].login_endpoint.json_payload.secret_info_oneof",
+        fieldPath:
+          "spec.api_testing.domains[].credentials[].login_endpoint.json_payload.secret_info_oneof",
         options: [
           "spec.api_testing.domains[].credentials[].login_endpoint.json_payload.blindfold_secret_info",
           "spec.api_testing.domains[].credentials[].login_endpoint.json_payload.clear_secret_info",
@@ -4375,11 +4492,15 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "mobile_sdk_choice",
         fieldPath: "spec.bot_defense.policy.mobile_sdk_choice",
-        options: ["spec.bot_defense.policy.disable_mobile_sdk", "spec.bot_defense.policy.mobile_sdk_config"],
+        options: [
+          "spec.bot_defense.policy.disable_mobile_sdk",
+          "spec.bot_defense.policy.mobile_sdk_config",
+        ],
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain",
@@ -4387,7 +4508,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -4396,7 +4518,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -4405,7 +4528,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense.policy.js_insertion_rules.exclude_list[].any_domain",
           "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain",
@@ -4521,7 +4645,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.create",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.password_reset",
@@ -4529,7 +4654,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.login",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.login_mfa",
@@ -4549,7 +4675,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.apply",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.money_transfer",
@@ -4557,12 +4684,14 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.label_choice",
         options: ["spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.checkin"],
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.create",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.update",
@@ -4571,7 +4700,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.flight_search",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.product_search",
@@ -4581,7 +4711,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.gift_card_make_purchase_with_gift_card",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.gift_card_validation",
@@ -4617,7 +4748,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "send_headers_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.send_headers_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.send_headers_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.append_headers",
           "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.no_headers",
@@ -4654,11 +4786,15 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "mobile_sdk_choice",
         fieldPath: "spec.bot_defense_advanced.mobile_sdk_choice",
-        options: ["spec.bot_defense_advanced.disable_mobile_sdk", "spec.bot_defense_advanced.mobile_sdk_config"],
+        options: [
+          "spec.bot_defense_advanced.disable_mobile_sdk",
+          "spec.bot_defense_advanced.mobile_sdk_config",
+        ],
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain",
@@ -4666,7 +4802,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -4675,7 +4812,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -4684,7 +4822,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].any_domain",
           "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain",
@@ -4692,7 +4831,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain.domain_choice",
         options: [
           "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain.exact_value",
           "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain.regex_value",
@@ -4764,7 +4904,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain",
@@ -4772,7 +4913,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -4781,7 +4923,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -4790,7 +4933,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].any_domain",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain",
@@ -4798,7 +4942,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.exact_value",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.regex_value",
@@ -4807,7 +4952,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path_match",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.prefix",
@@ -4816,7 +4962,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.rules[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.rules[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.rules[].any_domain",
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain",
@@ -4824,7 +4971,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.exact_value",
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.regex_value",
@@ -4872,7 +5020,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "action_choice",
         fieldPath: "spec.data_guard_rules[].action_choice",
-        options: ["spec.data_guard_rules[].apply_data_guard", "spec.data_guard_rules[].skip_data_guard"],
+        options: [
+          "spec.data_guard_rules[].apply_data_guard",
+          "spec.data_guard_rules[].skip_data_guard",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -4900,7 +5051,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "mitigation_choice",
         fieldPath: "spec.ddos_mitigation_rules[].mitigation_choice",
-        options: ["spec.ddos_mitigation_rules[].ddos_client_source", "spec.ddos_mitigation_rules[].ip_prefix_list"],
+        options: [
+          "spec.ddos_mitigation_rules[].ddos_client_source",
+          "spec.ddos_mitigation_rules[].ip_prefix_list",
+        ],
       },
       {
         choiceField: "health_check_port_choice",
@@ -4911,7 +5065,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "port_choice",
         fieldPath: "spec.default_pool.port_choice",
-        options: ["spec.default_pool.automatic_port", "spec.default_pool.lb_port", "spec.default_pool.port"],
+        options: [
+          "spec.default_pool.automatic_port",
+          "spec.default_pool.lb_port",
+          "spec.default_pool.port",
+        ],
       },
       {
         choiceField: "tls_choice",
@@ -4996,7 +5154,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "header_transformation_choice",
-        fieldPath: "spec.default_pool.advanced_options.http1_config.header_transformation.header_transformation_choice",
+        fieldPath:
+          "spec.default_pool.advanced_options.http1_config.header_transformation.header_transformation_choice",
         options: [
           "spec.default_pool.advanced_options.http1_config.header_transformation.default_header_transformation",
           "spec.default_pool.advanced_options.http1_config.header_transformation.legacy_header_transformation",
@@ -5141,7 +5300,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "map_downstream_to_upstream_conn_pool_type",
-        fieldPath: "spec.default_pool.upstream_conn_pool_reuse_type.map_downstream_to_upstream_conn_pool_type",
+        fieldPath:
+          "spec.default_pool.upstream_conn_pool_reuse_type.map_downstream_to_upstream_conn_pool_type",
         options: [
           "spec.default_pool.upstream_conn_pool_reuse_type.disable_conn_pool_reuse",
           "spec.default_pool.upstream_conn_pool_reuse_type.enable_conn_pool_reuse",
@@ -5204,7 +5364,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.default_pool.use_tls.use_mtls.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.default_pool.use_tls.use_mtls.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.default_pool.use_tls.use_mtls.tls_certificates[].private_key.blindfold_secret_info",
           "spec.default_pool.use_tls.use_mtls.tls_certificates[].private_key.clear_secret_info",
@@ -5263,7 +5424,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "api_repos_choice",
-        fieldPath: "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
+        fieldPath:
+          "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
         options: [
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].all_repos",
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].selected_repos",
@@ -5396,7 +5558,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "crl_choice",
         fieldPath: "spec.https.tls_cert_params.use_mtls.crl_choice",
-        options: ["spec.https.tls_cert_params.use_mtls.crl", "spec.https.tls_cert_params.use_mtls.no_crl"],
+        options: [
+          "spec.https.tls_cert_params.use_mtls.crl",
+          "spec.https.tls_cert_params.use_mtls.no_crl",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -5449,12 +5614,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "crl_choice",
         fieldPath: "spec.https.tls_parameters.use_mtls.crl_choice",
-        options: ["spec.https.tls_parameters.use_mtls.crl", "spec.https.tls_parameters.use_mtls.no_crl"],
+        options: [
+          "spec.https.tls_parameters.use_mtls.crl",
+          "spec.https.tls_parameters.use_mtls.no_crl",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
         fieldPath: "spec.https.tls_parameters.use_mtls.trusted_ca_choice",
-        options: ["spec.https.tls_parameters.use_mtls.trusted_ca", "spec.https.tls_parameters.use_mtls.trusted_ca_url"],
+        options: [
+          "spec.https.tls_parameters.use_mtls.trusted_ca",
+          "spec.https.tls_parameters.use_mtls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "xfcc_header",
@@ -5467,7 +5638,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "default_lb_choice",
         fieldPath: "spec.https_auto_cert.default_lb_choice",
-        options: ["spec.https_auto_cert.default_loadbalancer", "spec.https_auto_cert.non_default_loadbalancer"],
+        options: [
+          "spec.https_auto_cert.default_loadbalancer",
+          "spec.https_auto_cert.non_default_loadbalancer",
+        ],
       },
       {
         choiceField: "mtls_choice",
@@ -5477,7 +5651,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "path_normalize_choice",
         fieldPath: "spec.https_auto_cert.path_normalize_choice",
-        options: ["spec.https_auto_cert.disable_path_normalize", "spec.https_auto_cert.enable_path_normalize"],
+        options: [
+          "spec.https_auto_cert.disable_path_normalize",
+          "spec.https_auto_cert.enable_path_normalize",
+        ],
       },
       {
         choiceField: "port_choice",
@@ -5540,12 +5717,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "trusted_ca_choice",
         fieldPath: "spec.https_auto_cert.use_mtls.trusted_ca_choice",
-        options: ["spec.https_auto_cert.use_mtls.trusted_ca", "spec.https_auto_cert.use_mtls.trusted_ca_url"],
+        options: [
+          "spec.https_auto_cert.use_mtls.trusted_ca",
+          "spec.https_auto_cert.use_mtls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "xfcc_header",
         fieldPath: "spec.https_auto_cert.use_mtls.xfcc_header",
-        options: ["spec.https_auto_cert.use_mtls.xfcc_disabled", "spec.https_auto_cert.use_mtls.xfcc_options"],
+        options: [
+          "spec.https_auto_cert.use_mtls.xfcc_disabled",
+          "spec.https_auto_cert.use_mtls.xfcc_options",
+        ],
       },
       {
         choiceField: "jwks_configuration",
@@ -5568,7 +5751,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "issuer_validation",
         fieldPath: "spec.jwt_validation.reserved_claims.issuer_validation",
-        options: ["spec.jwt_validation.reserved_claims.issuer", "spec.jwt_validation.reserved_claims.issuer_disable"],
+        options: [
+          "spec.jwt_validation.reserved_claims.issuer",
+          "spec.jwt_validation.reserved_claims.issuer_disable",
+        ],
       },
       {
         choiceField: "validate_period",
@@ -5604,7 +5790,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "ddos_policy_choice",
         fieldPath: "spec.l7_ddos_protection.ddos_policy_choice",
-        options: ["spec.l7_ddos_protection.ddos_policy_custom", "spec.l7_ddos_protection.ddos_policy_none"],
+        options: [
+          "spec.l7_ddos_protection.ddos_policy_custom",
+          "spec.l7_ddos_protection.ddos_policy_none",
+        ],
       },
       {
         choiceField: "mitigation_action_choice",
@@ -5618,11 +5807,15 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "rps_threshold_choice",
         fieldPath: "spec.l7_ddos_protection.rps_threshold_choice",
-        options: ["spec.l7_ddos_protection.default_rps_threshold", "spec.l7_ddos_protection.rps_threshold"],
+        options: [
+          "spec.l7_ddos_protection.default_rps_threshold",
+          "spec.l7_ddos_protection.rps_threshold",
+        ],
       },
       {
         choiceField: "action_choice",
-        fieldPath: "spec.malware_protection_settings.malware_protection_rules[].action.action_choice",
+        fieldPath:
+          "spec.malware_protection_settings.malware_protection_rules[].action.action_choice",
         options: [
           "spec.malware_protection_settings.malware_protection_rules[].action.block",
           "spec.malware_protection_settings.malware_protection_rules[].action.report",
@@ -5630,7 +5823,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher",
-        fieldPath: "spec.malware_protection_settings.malware_protection_rules[].domain.domain_matcher",
+        fieldPath:
+          "spec.malware_protection_settings.malware_protection_rules[].domain.domain_matcher",
         options: [
           "spec.malware_protection_settings.malware_protection_rules[].domain.any_domain",
           "spec.malware_protection_settings.malware_protection_rules[].domain.domain",
@@ -5638,7 +5832,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.malware_protection_settings.malware_protection_rules[].domain.domain.domain_choice",
+        fieldPath:
+          "spec.malware_protection_settings.malware_protection_rules[].domain.domain.domain_choice",
         options: [
           "spec.malware_protection_settings.malware_protection_rules[].domain.domain.exact_value",
           "spec.malware_protection_settings.malware_protection_rules[].domain.domain.regex_value",
@@ -5657,7 +5852,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "path_normalize_choice",
         fieldPath: "spec.more_option.path_normalize_choice",
-        options: ["spec.more_option.disable_path_normalize", "spec.more_option.enable_path_normalize"],
+        options: [
+          "spec.more_option.disable_path_normalize",
+          "spec.more_option.enable_path_normalize",
+        ],
       },
       {
         choiceField: "strict_sni_host_header_check_choice",
@@ -5815,7 +6013,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "selector_choice",
-        fieldPath: "spec.origin_server_subset_rule_list.origin_server_subset_rules[].selector_choice",
+        fieldPath:
+          "spec.origin_server_subset_rule_list.origin_server_subset_rules[].selector_choice",
         options: [
           "spec.origin_server_subset_rule_list.origin_server_subset_rules[].client_selector",
           "spec.origin_server_subset_rule_list.origin_server_subset_rules[].none",
@@ -5949,12 +6148,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "httponly",
         fieldPath: "spec.protected_cookies[].httponly",
-        options: ["spec.protected_cookies[].add_httponly", "spec.protected_cookies[].ignore_httponly"],
+        options: [
+          "spec.protected_cookies[].add_httponly",
+          "spec.protected_cookies[].ignore_httponly",
+        ],
       },
       {
         choiceField: "max_age",
         fieldPath: "spec.protected_cookies[].max_age",
-        options: ["spec.protected_cookies[].ignore_max_age", "spec.protected_cookies[].max_age_value"],
+        options: [
+          "spec.protected_cookies[].ignore_max_age",
+          "spec.protected_cookies[].max_age_value",
+        ],
       },
       {
         choiceField: "samesite",
@@ -5988,12 +6193,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "action_choice",
         fieldPath: "spec.rate_limit.rate_limiter.action_choice",
-        options: ["spec.rate_limit.rate_limiter.action_block", "spec.rate_limit.rate_limiter.disabled"],
+        options: [
+          "spec.rate_limit.rate_limiter.action_block",
+          "spec.rate_limit.rate_limiter.disabled",
+        ],
       },
       {
         choiceField: "algorithm",
         fieldPath: "spec.rate_limit.rate_limiter.algorithm",
-        options: ["spec.rate_limit.rate_limiter.leaky_bucket", "spec.rate_limit.rate_limiter.token_bucket"],
+        options: [
+          "spec.rate_limit.rate_limiter.leaky_bucket",
+          "spec.rate_limit.rate_limiter.token_bucket",
+        ],
       },
       {
         choiceField: "block_duration_choice",
@@ -6131,7 +6342,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "bot_defense_javascript_injection_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.bot_defense_javascript_injection_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.bot_defense_javascript_injection_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.bot_defense_javascript_injection",
           "spec.routes[].simple_route.advanced_options.inherited_bot_defense_javascript_injection",
@@ -6231,7 +6443,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.request_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.request_cookies_to_add[].value_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.request_cookies_to_add[].secret_value",
           "spec.routes[].simple_route.advanced_options.request_cookies_to_add[].value",
@@ -6248,7 +6461,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.request_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.request_headers_to_add[].value_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.request_headers_to_add[].secret_value",
           "spec.routes[].simple_route.advanced_options.request_headers_to_add[].value",
@@ -6265,7 +6479,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].domain_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].domain_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_domain",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_domain",
@@ -6273,7 +6488,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "expiry_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].expiry_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].expiry_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_expiry",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_expiry",
@@ -6281,7 +6497,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "httponly_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].httponly_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].httponly_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_httponly",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_httponly",
@@ -6289,7 +6506,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_age_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].max_age_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].max_age_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_max_age",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].max_age_value",
@@ -6297,7 +6515,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "partitioned_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].partitioned_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].partitioned_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_partitioned",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_partitioned",
@@ -6305,7 +6524,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].path_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].path_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_path",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_path",
@@ -6313,7 +6533,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "samesite_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].samesite_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].samesite_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_samesite",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].samesite_lax",
@@ -6323,7 +6544,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secure_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].secure_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].secure_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_secure",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_secure",
@@ -6331,7 +6553,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].value_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_value",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].secret_value",
@@ -6349,7 +6572,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_headers_to_add[].value_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_headers_to_add[].secret_value",
           "spec.routes[].simple_route.advanced_options.response_headers_to_add[].value",
@@ -6366,7 +6590,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "policy_specifier",
-        fieldPath: "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].policy_specifier",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].policy_specifier",
         options: [
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie",
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].header_name",
@@ -6375,7 +6600,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "httponly",
-        fieldPath: "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.httponly",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.httponly",
         options: [
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.add_httponly",
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.ignore_httponly",
@@ -6383,7 +6609,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "samesite",
-        fieldPath: "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.samesite",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.samesite",
         options: [
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.ignore_samesite",
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.samesite_lax",
@@ -6393,7 +6620,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secure",
-        fieldPath: "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.secure",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.secure",
         options: [
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.add_secure",
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.ignore_secure",
@@ -6445,7 +6673,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "masking_mode_choice",
-        fieldPath: "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].masking_mode_choice",
+        fieldPath:
+          "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].masking_mode_choice",
         options: [
           "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].mask",
           "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].report",
@@ -6453,8 +6682,11 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "type_condition_type_choice",
-        fieldPath: "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].type_condition_type_choice",
-        options: ["spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].api_endpoint"],
+        fieldPath:
+          "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].type_condition_type_choice",
+        options: [
+          "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].api_endpoint",
+        ],
       },
       {
         choiceField: "api_discovery_choice",
@@ -6514,7 +6746,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "request_timeout_choice",
         fieldPath: "spec.slow_ddos_mitigation.request_timeout_choice",
-        options: ["spec.slow_ddos_mitigation.disable_request_timeout", "spec.slow_ddos_mitigation.request_timeout"],
+        options: [
+          "spec.slow_ddos_mitigation.disable_request_timeout",
+          "spec.slow_ddos_mitigation.request_timeout",
+        ],
       },
       {
         choiceField: "action_choice",
@@ -6548,7 +6783,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "waf_exclusion_choice",
         fieldPath: "spec.waf_exclusion.waf_exclusion_choice",
-        options: ["spec.waf_exclusion.waf_exclusion_inline_rules", "spec.waf_exclusion.waf_exclusion_policy"],
+        options: [
+          "spec.waf_exclusion.waf_exclusion_inline_rules",
+          "spec.waf_exclusion.waf_exclusion_policy",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -6570,7 +6808,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "waf_advanced_configuration",
-        fieldPath: "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_advanced_configuration",
+        fieldPath:
+          "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_advanced_configuration",
         options: [
           "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].app_firewall_detection_control",
           "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_skip_processing",
@@ -6738,7 +6977,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -6942,7 +7182,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "l7_ddos_auto_mitigation_action",
         fieldPath: "spec.l7_ddos_auto_mitigation_action",
-        options: ["spec.l7_ddos_action_block", "spec.l7_ddos_action_default", "spec.l7_ddos_action_js_challenge"],
+        options: [
+          "spec.l7_ddos_action_block",
+          "spec.l7_ddos_action_default",
+          "spec.l7_ddos_action_js_challenge",
+        ],
       },
       {
         choiceField: "loadbalancer_type",
@@ -6982,7 +7226,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "service_policy_choice",
         fieldPath: "spec.service_policy_choice",
-        options: ["spec.active_service_policies", "spec.no_service_policies", "spec.service_policies_from_namespace"],
+        options: [
+          "spec.active_service_policies",
+          "spec.no_service_policies",
+          "spec.service_policies_from_namespace",
+        ],
       },
       {
         choiceField: "slow_ddos_mitigation_choice",
@@ -7096,7 +7344,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
         options: [
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.cookie_matchers[].check_not_present",
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.cookie_matchers[].check_present",
@@ -7114,7 +7363,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_endpoint_rules[].request_matcher.jwt_claims[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_endpoint_rules[].request_matcher.jwt_claims[].match",
         options: [
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.jwt_claims[].check_not_present",
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.jwt_claims[].check_present",
@@ -7123,7 +7373,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_endpoint_rules[].request_matcher.query_params[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_endpoint_rules[].request_matcher.query_params[].match",
         options: [
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.query_params[].check_not_present",
           "spec.api_protection_rules.api_endpoint_rules[].request_matcher.query_params[].check_present",
@@ -7168,7 +7419,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_groups_rules[].request_matcher.cookie_matchers[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_groups_rules[].request_matcher.cookie_matchers[].match",
         options: [
           "spec.api_protection_rules.api_groups_rules[].request_matcher.cookie_matchers[].check_not_present",
           "spec.api_protection_rules.api_groups_rules[].request_matcher.cookie_matchers[].check_present",
@@ -7186,7 +7438,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_groups_rules[].request_matcher.jwt_claims[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_groups_rules[].request_matcher.jwt_claims[].match",
         options: [
           "spec.api_protection_rules.api_groups_rules[].request_matcher.jwt_claims[].check_not_present",
           "spec.api_protection_rules.api_groups_rules[].request_matcher.jwt_claims[].check_present",
@@ -7195,7 +7448,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_protection_rules.api_groups_rules[].request_matcher.query_params[].match",
+        fieldPath:
+          "spec.api_protection_rules.api_groups_rules[].request_matcher.query_params[].match",
         options: [
           "spec.api_protection_rules.api_groups_rules[].request_matcher.query_params[].check_not_present",
           "spec.api_protection_rules.api_groups_rules[].request_matcher.query_params[].check_present",
@@ -7258,7 +7512,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "match",
-        fieldPath: "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
+        fieldPath:
+          "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].match",
         options: [
           "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].check_not_present",
           "spec.api_rate_limit.api_endpoint_rules[].request_matcher.cookie_matchers[].check_present",
@@ -7294,7 +7549,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "destination_type",
-        fieldPath: "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].destination_type",
+        fieldPath:
+          "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].destination_type",
         options: [
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].any_url",
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].api_endpoint",
@@ -7304,7 +7560,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].domain_choice",
+        fieldPath:
+          "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].domain_choice",
         options: [
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].any_domain",
           "spec.api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules[].specific_domain",
@@ -7468,7 +7725,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom",
@@ -7496,12 +7754,14 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "fail_configuration",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.fail_configuration",
         options: [],
       },
       {
         choiceField: "oversized_body_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_fail_validation",
           "spec.api_specification.validation_all_spec_endpoints.settings.oversized_body_skip_validation",
@@ -7509,7 +7769,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom",
           "spec.api_specification.validation_all_spec_endpoints.settings.property_validation_settings_default",
@@ -7535,7 +7796,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "validation_mode_choice",
-        fieldPath: "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_choice",
         options: [
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.skip_validation",
           "spec.api_specification.validation_all_spec_endpoints.validation_mode.validation_mode_active",
@@ -7566,7 +7828,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "fall_through_mode_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_choice",
         options: [
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_allow",
           "spec.api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom",
@@ -7594,7 +7857,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "condition_type_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].condition_type_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_endpoint",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].api_group",
@@ -7603,7 +7867,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.open_api_validation_rules[].domain_choice",
         options: [
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].any_domain",
           "spec.api_specification.validation_custom_list.open_api_validation_rules[].specific_domain",
@@ -7660,7 +7925,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "property_validation_settings_choice",
-        fieldPath: "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
+        fieldPath:
+          "spec.api_specification.validation_custom_list.settings.property_validation_settings_choice",
         options: [
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_custom",
           "spec.api_specification.validation_custom_list.settings.property_validation_settings_default",
@@ -7678,7 +7944,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "frequency_choice",
         fieldPath: "spec.api_testing.frequency_choice",
-        options: ["spec.api_testing.every_day", "spec.api_testing.every_month", "spec.api_testing.every_week"],
+        options: [
+          "spec.api_testing.every_day",
+          "spec.api_testing.every_month",
+          "spec.api_testing.every_week",
+        ],
       },
       {
         choiceField: "credentials_choice",
@@ -7724,7 +7994,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.api_testing.domains[].credentials[].login_endpoint.json_payload.secret_info_oneof",
+        fieldPath:
+          "spec.api_testing.domains[].credentials[].login_endpoint.json_payload.secret_info_oneof",
         options: [
           "spec.api_testing.domains[].credentials[].login_endpoint.json_payload.blindfold_secret_info",
           "spec.api_testing.domains[].credentials[].login_endpoint.json_payload.clear_secret_info",
@@ -7777,11 +8048,15 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "mobile_sdk_choice",
         fieldPath: "spec.bot_defense.policy.mobile_sdk_choice",
-        options: ["spec.bot_defense.policy.disable_mobile_sdk", "spec.bot_defense.policy.mobile_sdk_config"],
+        options: [
+          "spec.bot_defense.policy.disable_mobile_sdk",
+          "spec.bot_defense.policy.mobile_sdk_config",
+        ],
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain",
@@ -7789,7 +8064,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -7798,7 +8074,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.bot_defense.policy.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -7807,7 +8084,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense.policy.js_insertion_rules.exclude_list[].any_domain",
           "spec.bot_defense.policy.js_insertion_rules.exclude_list[].domain",
@@ -7923,7 +8201,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.create",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.account_management.password_reset",
@@ -7931,7 +8210,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.login",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.authentication.login_mfa",
@@ -7951,7 +8231,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.apply",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.financial_services.money_transfer",
@@ -7959,12 +8240,14 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.label_choice",
         options: ["spec.bot_defense.policy.protected_app_endpoints[].flow_label.flight.checkin"],
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.create",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.profile_management.update",
@@ -7973,7 +8256,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.flight_search",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.search.product_search",
@@ -7983,7 +8267,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "label_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.label_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.label_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.gift_card_make_purchase_with_gift_card",
           "spec.bot_defense.policy.protected_app_endpoints[].flow_label.shopping_gift_cards.gift_card_validation",
@@ -8019,7 +8304,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "send_headers_choice",
-        fieldPath: "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.send_headers_choice",
+        fieldPath:
+          "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.send_headers_choice",
         options: [
           "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.append_headers",
           "spec.bot_defense.policy.protected_app_endpoints[].mitigation.flag.no_headers",
@@ -8056,11 +8342,15 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "mobile_sdk_choice",
         fieldPath: "spec.bot_defense_advanced.mobile_sdk_choice",
-        options: ["spec.bot_defense_advanced.disable_mobile_sdk", "spec.bot_defense_advanced.mobile_sdk_config"],
+        options: [
+          "spec.bot_defense_advanced.disable_mobile_sdk",
+          "spec.bot_defense_advanced.mobile_sdk_config",
+        ],
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain",
@@ -8068,7 +8358,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -8077,7 +8368,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.bot_defense_advanced.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -8086,7 +8378,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].any_domain",
           "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain",
@@ -8094,7 +8387,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain.domain_choice",
         options: [
           "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain.exact_value",
           "spec.bot_defense_advanced.js_insertion_rules.exclude_list[].domain.regex_value",
@@ -8166,7 +8460,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].any_domain",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain",
@@ -8174,7 +8469,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.exact_value",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].domain.regex_value",
@@ -8183,7 +8479,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path_match",
         options: [
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.path",
           "spec.client_side_defense.policy.js_insert_all_pages_except.exclude_list[].path.prefix",
@@ -8192,7 +8489,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].any_domain",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain",
@@ -8200,7 +8498,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.exact_value",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].domain.regex_value",
@@ -8209,7 +8508,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_match",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path_match",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path_match",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.path",
           "spec.client_side_defense.policy.js_insertion_rules.exclude_list[].path.prefix",
@@ -8218,7 +8518,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.rules[].domain_matcher_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.rules[].domain_matcher_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.rules[].any_domain",
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain",
@@ -8226,7 +8527,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.domain_choice",
+        fieldPath:
+          "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.domain_choice",
         options: [
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.exact_value",
           "spec.client_side_defense.policy.js_insertion_rules.rules[].domain.regex_value",
@@ -8274,7 +8576,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "action_choice",
         fieldPath: "spec.data_guard_rules[].action_choice",
-        options: ["spec.data_guard_rules[].apply_data_guard", "spec.data_guard_rules[].skip_data_guard"],
+        options: [
+          "spec.data_guard_rules[].apply_data_guard",
+          "spec.data_guard_rules[].skip_data_guard",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -8302,7 +8607,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "mitigation_choice",
         fieldPath: "spec.ddos_mitigation_rules[].mitigation_choice",
-        options: ["spec.ddos_mitigation_rules[].ddos_client_source", "spec.ddos_mitigation_rules[].ip_prefix_list"],
+        options: [
+          "spec.ddos_mitigation_rules[].ddos_client_source",
+          "spec.ddos_mitigation_rules[].ip_prefix_list",
+        ],
       },
       {
         choiceField: "health_check_port_choice",
@@ -8313,7 +8621,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "port_choice",
         fieldPath: "spec.default_pool.port_choice",
-        options: ["spec.default_pool.automatic_port", "spec.default_pool.lb_port", "spec.default_pool.port"],
+        options: [
+          "spec.default_pool.automatic_port",
+          "spec.default_pool.lb_port",
+          "spec.default_pool.port",
+        ],
       },
       {
         choiceField: "tls_choice",
@@ -8398,7 +8710,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "header_transformation_choice",
-        fieldPath: "spec.default_pool.advanced_options.http1_config.header_transformation.header_transformation_choice",
+        fieldPath:
+          "spec.default_pool.advanced_options.http1_config.header_transformation.header_transformation_choice",
         options: [
           "spec.default_pool.advanced_options.http1_config.header_transformation.default_header_transformation",
           "spec.default_pool.advanced_options.http1_config.header_transformation.legacy_header_transformation",
@@ -8543,7 +8856,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "map_downstream_to_upstream_conn_pool_type",
-        fieldPath: "spec.default_pool.upstream_conn_pool_reuse_type.map_downstream_to_upstream_conn_pool_type",
+        fieldPath:
+          "spec.default_pool.upstream_conn_pool_reuse_type.map_downstream_to_upstream_conn_pool_type",
         options: [
           "spec.default_pool.upstream_conn_pool_reuse_type.disable_conn_pool_reuse",
           "spec.default_pool.upstream_conn_pool_reuse_type.enable_conn_pool_reuse",
@@ -8606,7 +8920,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.default_pool.use_tls.use_mtls.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.default_pool.use_tls.use_mtls.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.default_pool.use_tls.use_mtls.tls_certificates[].private_key.blindfold_secret_info",
           "spec.default_pool.use_tls.use_mtls.tls_certificates[].private_key.clear_secret_info",
@@ -8665,7 +8980,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "api_repos_choice",
-        fieldPath: "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
+        fieldPath:
+          "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].api_repos_choice",
         options: [
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].all_repos",
           "spec.enable_api_discovery.api_discovery_from_code_scan.code_base_integrations[].selected_repos",
@@ -8798,7 +9114,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "crl_choice",
         fieldPath: "spec.https.tls_cert_params.use_mtls.crl_choice",
-        options: ["spec.https.tls_cert_params.use_mtls.crl", "spec.https.tls_cert_params.use_mtls.no_crl"],
+        options: [
+          "spec.https.tls_cert_params.use_mtls.crl",
+          "spec.https.tls_cert_params.use_mtls.no_crl",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -8851,12 +9170,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "crl_choice",
         fieldPath: "spec.https.tls_parameters.use_mtls.crl_choice",
-        options: ["spec.https.tls_parameters.use_mtls.crl", "spec.https.tls_parameters.use_mtls.no_crl"],
+        options: [
+          "spec.https.tls_parameters.use_mtls.crl",
+          "spec.https.tls_parameters.use_mtls.no_crl",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
         fieldPath: "spec.https.tls_parameters.use_mtls.trusted_ca_choice",
-        options: ["spec.https.tls_parameters.use_mtls.trusted_ca", "spec.https.tls_parameters.use_mtls.trusted_ca_url"],
+        options: [
+          "spec.https.tls_parameters.use_mtls.trusted_ca",
+          "spec.https.tls_parameters.use_mtls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "xfcc_header",
@@ -8869,7 +9194,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "default_lb_choice",
         fieldPath: "spec.https_auto_cert.default_lb_choice",
-        options: ["spec.https_auto_cert.default_loadbalancer", "spec.https_auto_cert.non_default_loadbalancer"],
+        options: [
+          "spec.https_auto_cert.default_loadbalancer",
+          "spec.https_auto_cert.non_default_loadbalancer",
+        ],
       },
       {
         choiceField: "mtls_choice",
@@ -8879,7 +9207,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "path_normalize_choice",
         fieldPath: "spec.https_auto_cert.path_normalize_choice",
-        options: ["spec.https_auto_cert.disable_path_normalize", "spec.https_auto_cert.enable_path_normalize"],
+        options: [
+          "spec.https_auto_cert.disable_path_normalize",
+          "spec.https_auto_cert.enable_path_normalize",
+        ],
       },
       {
         choiceField: "port_choice",
@@ -8942,12 +9273,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "trusted_ca_choice",
         fieldPath: "spec.https_auto_cert.use_mtls.trusted_ca_choice",
-        options: ["spec.https_auto_cert.use_mtls.trusted_ca", "spec.https_auto_cert.use_mtls.trusted_ca_url"],
+        options: [
+          "spec.https_auto_cert.use_mtls.trusted_ca",
+          "spec.https_auto_cert.use_mtls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "xfcc_header",
         fieldPath: "spec.https_auto_cert.use_mtls.xfcc_header",
-        options: ["spec.https_auto_cert.use_mtls.xfcc_disabled", "spec.https_auto_cert.use_mtls.xfcc_options"],
+        options: [
+          "spec.https_auto_cert.use_mtls.xfcc_disabled",
+          "spec.https_auto_cert.use_mtls.xfcc_options",
+        ],
       },
       {
         choiceField: "jwks_configuration",
@@ -8970,7 +9307,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "issuer_validation",
         fieldPath: "spec.jwt_validation.reserved_claims.issuer_validation",
-        options: ["spec.jwt_validation.reserved_claims.issuer", "spec.jwt_validation.reserved_claims.issuer_disable"],
+        options: [
+          "spec.jwt_validation.reserved_claims.issuer",
+          "spec.jwt_validation.reserved_claims.issuer_disable",
+        ],
       },
       {
         choiceField: "validate_period",
@@ -9006,7 +9346,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "ddos_policy_choice",
         fieldPath: "spec.l7_ddos_protection.ddos_policy_choice",
-        options: ["spec.l7_ddos_protection.ddos_policy_custom", "spec.l7_ddos_protection.ddos_policy_none"],
+        options: [
+          "spec.l7_ddos_protection.ddos_policy_custom",
+          "spec.l7_ddos_protection.ddos_policy_none",
+        ],
       },
       {
         choiceField: "mitigation_action_choice",
@@ -9020,11 +9363,15 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "rps_threshold_choice",
         fieldPath: "spec.l7_ddos_protection.rps_threshold_choice",
-        options: ["spec.l7_ddos_protection.default_rps_threshold", "spec.l7_ddos_protection.rps_threshold"],
+        options: [
+          "spec.l7_ddos_protection.default_rps_threshold",
+          "spec.l7_ddos_protection.rps_threshold",
+        ],
       },
       {
         choiceField: "action_choice",
-        fieldPath: "spec.malware_protection_settings.malware_protection_rules[].action.action_choice",
+        fieldPath:
+          "spec.malware_protection_settings.malware_protection_rules[].action.action_choice",
         options: [
           "spec.malware_protection_settings.malware_protection_rules[].action.block",
           "spec.malware_protection_settings.malware_protection_rules[].action.report",
@@ -9032,7 +9379,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_matcher",
-        fieldPath: "spec.malware_protection_settings.malware_protection_rules[].domain.domain_matcher",
+        fieldPath:
+          "spec.malware_protection_settings.malware_protection_rules[].domain.domain_matcher",
         options: [
           "spec.malware_protection_settings.malware_protection_rules[].domain.any_domain",
           "spec.malware_protection_settings.malware_protection_rules[].domain.domain",
@@ -9040,7 +9388,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.malware_protection_settings.malware_protection_rules[].domain.domain.domain_choice",
+        fieldPath:
+          "spec.malware_protection_settings.malware_protection_rules[].domain.domain.domain_choice",
         options: [
           "spec.malware_protection_settings.malware_protection_rules[].domain.domain.exact_value",
           "spec.malware_protection_settings.malware_protection_rules[].domain.domain.regex_value",
@@ -9059,7 +9408,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "path_normalize_choice",
         fieldPath: "spec.more_option.path_normalize_choice",
-        options: ["spec.more_option.disable_path_normalize", "spec.more_option.enable_path_normalize"],
+        options: [
+          "spec.more_option.disable_path_normalize",
+          "spec.more_option.enable_path_normalize",
+        ],
       },
       {
         choiceField: "strict_sni_host_header_check_choice",
@@ -9217,7 +9569,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "selector_choice",
-        fieldPath: "spec.origin_server_subset_rule_list.origin_server_subset_rules[].selector_choice",
+        fieldPath:
+          "spec.origin_server_subset_rule_list.origin_server_subset_rules[].selector_choice",
         options: [
           "spec.origin_server_subset_rule_list.origin_server_subset_rules[].client_selector",
           "spec.origin_server_subset_rule_list.origin_server_subset_rules[].none",
@@ -9351,12 +9704,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "httponly",
         fieldPath: "spec.protected_cookies[].httponly",
-        options: ["spec.protected_cookies[].add_httponly", "spec.protected_cookies[].ignore_httponly"],
+        options: [
+          "spec.protected_cookies[].add_httponly",
+          "spec.protected_cookies[].ignore_httponly",
+        ],
       },
       {
         choiceField: "max_age",
         fieldPath: "spec.protected_cookies[].max_age",
-        options: ["spec.protected_cookies[].ignore_max_age", "spec.protected_cookies[].max_age_value"],
+        options: [
+          "spec.protected_cookies[].ignore_max_age",
+          "spec.protected_cookies[].max_age_value",
+        ],
       },
       {
         choiceField: "samesite",
@@ -9390,12 +9749,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "action_choice",
         fieldPath: "spec.rate_limit.rate_limiter.action_choice",
-        options: ["spec.rate_limit.rate_limiter.action_block", "spec.rate_limit.rate_limiter.disabled"],
+        options: [
+          "spec.rate_limit.rate_limiter.action_block",
+          "spec.rate_limit.rate_limiter.disabled",
+        ],
       },
       {
         choiceField: "algorithm",
         fieldPath: "spec.rate_limit.rate_limiter.algorithm",
-        options: ["spec.rate_limit.rate_limiter.leaky_bucket", "spec.rate_limit.rate_limiter.token_bucket"],
+        options: [
+          "spec.rate_limit.rate_limiter.leaky_bucket",
+          "spec.rate_limit.rate_limiter.token_bucket",
+        ],
       },
       {
         choiceField: "block_duration_choice",
@@ -9533,7 +9898,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "bot_defense_javascript_injection_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.bot_defense_javascript_injection_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.bot_defense_javascript_injection_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.bot_defense_javascript_injection",
           "spec.routes[].simple_route.advanced_options.inherited_bot_defense_javascript_injection",
@@ -9633,7 +9999,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.request_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.request_cookies_to_add[].value_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.request_cookies_to_add[].secret_value",
           "spec.routes[].simple_route.advanced_options.request_cookies_to_add[].value",
@@ -9650,7 +10017,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.request_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.request_headers_to_add[].value_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.request_headers_to_add[].secret_value",
           "spec.routes[].simple_route.advanced_options.request_headers_to_add[].value",
@@ -9667,7 +10035,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].domain_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].domain_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_domain",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_domain",
@@ -9675,7 +10044,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "expiry_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].expiry_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].expiry_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_expiry",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_expiry",
@@ -9683,7 +10053,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "httponly_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].httponly_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].httponly_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_httponly",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_httponly",
@@ -9691,7 +10062,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_age_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].max_age_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].max_age_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_max_age",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].max_age_value",
@@ -9699,7 +10071,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "partitioned_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].partitioned_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].partitioned_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_partitioned",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_partitioned",
@@ -9707,7 +10080,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].path_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].path_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_path",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_path",
@@ -9715,7 +10089,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "samesite_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].samesite_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].samesite_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_samesite",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].samesite_lax",
@@ -9725,7 +10100,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secure_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].secure_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].secure_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].add_secure",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_secure",
@@ -9733,7 +10109,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].value_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].ignore_value",
           "spec.routes[].simple_route.advanced_options.response_cookies_to_add[].secret_value",
@@ -9751,7 +10128,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.routes[].simple_route.advanced_options.response_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.response_headers_to_add[].value_choice",
         options: [
           "spec.routes[].simple_route.advanced_options.response_headers_to_add[].secret_value",
           "spec.routes[].simple_route.advanced_options.response_headers_to_add[].value",
@@ -9768,7 +10146,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "policy_specifier",
-        fieldPath: "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].policy_specifier",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].policy_specifier",
         options: [
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie",
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].header_name",
@@ -9777,7 +10156,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "httponly",
-        fieldPath: "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.httponly",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.httponly",
         options: [
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.add_httponly",
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.ignore_httponly",
@@ -9785,7 +10165,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "samesite",
-        fieldPath: "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.samesite",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.samesite",
         options: [
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.ignore_samesite",
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.samesite_lax",
@@ -9795,7 +10176,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secure",
-        fieldPath: "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.secure",
+        fieldPath:
+          "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.secure",
         options: [
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.add_secure",
           "spec.routes[].simple_route.advanced_options.specific_hash_policy.hash_policy[].cookie.ignore_secure",
@@ -9847,7 +10229,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "masking_mode_choice",
-        fieldPath: "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].masking_mode_choice",
+        fieldPath:
+          "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].masking_mode_choice",
         options: [
           "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].mask",
           "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].report",
@@ -9855,8 +10238,11 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "type_condition_type_choice",
-        fieldPath: "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].type_condition_type_choice",
-        options: ["spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].api_endpoint"],
+        fieldPath:
+          "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].type_condition_type_choice",
+        options: [
+          "spec.sensitive_data_disclosure_rules.sensitive_data_types_in_response[].api_endpoint",
+        ],
       },
       {
         choiceField: "api_discovery_choice",
@@ -9916,7 +10302,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "request_timeout_choice",
         fieldPath: "spec.slow_ddos_mitigation.request_timeout_choice",
-        options: ["spec.slow_ddos_mitigation.disable_request_timeout", "spec.slow_ddos_mitigation.request_timeout"],
+        options: [
+          "spec.slow_ddos_mitigation.disable_request_timeout",
+          "spec.slow_ddos_mitigation.request_timeout",
+        ],
       },
       {
         choiceField: "action_choice",
@@ -9950,7 +10339,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "waf_exclusion_choice",
         fieldPath: "spec.waf_exclusion.waf_exclusion_choice",
-        options: ["spec.waf_exclusion.waf_exclusion_inline_rules", "spec.waf_exclusion.waf_exclusion_policy"],
+        options: [
+          "spec.waf_exclusion.waf_exclusion_inline_rules",
+          "spec.waf_exclusion.waf_exclusion_policy",
+        ],
       },
       {
         choiceField: "domain_choice",
@@ -9972,7 +10364,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "waf_advanced_configuration",
-        fieldPath: "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_advanced_configuration",
+        fieldPath:
+          "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_advanced_configuration",
         options: [
           "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].app_firewall_detection_control",
           "spec.waf_exclusion.waf_exclusion_inline_rules.rules[].waf_skip_processing",
@@ -10090,7 +10483,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "learnt-schema",
     summary: "GET GET Learnt Schema per API endpoint.",
-    description: "GET Learnt Schema per API endpoint for a given auto discovered API endpoint for Virtual Host.",
+    description:
+      "GET Learnt Schema per API endpoint for a given auto discovered API endpoint for Virtual Host.",
     pathParameters: [
       {
         description: "Virtual Host\nVirtual Host Name for current request.",
@@ -10201,7 +10595,8 @@ export const virtualTools: ParsedOperation[] = [
       $ref: "#/components/schemas/app_securitySearchLoadBalancersResponse",
     },
     requiredParams: [],
-    operationId: "ves.io.schema.app_security.AppSecurityMonitoringAPI.SearchLoadBalancersAllNamespaces",
+    operationId:
+      "ves.io.schema.app_security.AppSecurityMonitoringAPI.SearchLoadBalancersAllNamespaces",
     tags: ["Other"],
     sourceFile: "domains/virtual.json",
     displayName: null,
@@ -10375,13 +10770,19 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "outlier_detection_choice",
         fieldPath: "spec.advanced_options.outlier_detection_choice",
-        options: ["spec.advanced_options.disable_outlier_detection", "spec.advanced_options.outlier_detection"],
+        options: [
+          "spec.advanced_options.disable_outlier_detection",
+          "spec.advanced_options.outlier_detection",
+        ],
         recommendedOption: "spec.advanced_options.disable_outlier_detection",
       },
       {
         choiceField: "panic_threshold_type",
         fieldPath: "spec.advanced_options.panic_threshold_type",
-        options: ["spec.advanced_options.no_panic_threshold", "spec.advanced_options.panic_threshold"],
+        options: [
+          "spec.advanced_options.no_panic_threshold",
+          "spec.advanced_options.panic_threshold",
+        ],
         recommendedOption: "spec.advanced_options.no_panic_threshold",
       },
       {
@@ -10411,7 +10812,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "header_transformation_choice",
-        fieldPath: "spec.advanced_options.http1_config.header_transformation.header_transformation_choice",
+        fieldPath:
+          "spec.advanced_options.http1_config.header_transformation.header_transformation_choice",
         options: [
           "spec.advanced_options.http1_config.header_transformation.default_header_transformation",
           "spec.advanced_options.http1_config.header_transformation.legacy_header_transformation",
@@ -10588,7 +10990,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "sni_choice",
         fieldPath: "spec.use_tls.sni_choice",
-        options: ["spec.use_tls.disable_sni", "spec.use_tls.sni", "spec.use_tls.use_host_header_as_sni"],
+        options: [
+          "spec.use_tls.disable_sni",
+          "spec.use_tls.sni",
+          "spec.use_tls.use_host_header_as_sni",
+        ],
       },
       {
         choiceField: "choice",
@@ -10786,7 +11192,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -10968,13 +11375,19 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "outlier_detection_choice",
         fieldPath: "spec.advanced_options.outlier_detection_choice",
-        options: ["spec.advanced_options.disable_outlier_detection", "spec.advanced_options.outlier_detection"],
+        options: [
+          "spec.advanced_options.disable_outlier_detection",
+          "spec.advanced_options.outlier_detection",
+        ],
         recommendedOption: "spec.advanced_options.disable_outlier_detection",
       },
       {
         choiceField: "panic_threshold_type",
         fieldPath: "spec.advanced_options.panic_threshold_type",
-        options: ["spec.advanced_options.no_panic_threshold", "spec.advanced_options.panic_threshold"],
+        options: [
+          "spec.advanced_options.no_panic_threshold",
+          "spec.advanced_options.panic_threshold",
+        ],
         recommendedOption: "spec.advanced_options.no_panic_threshold",
       },
       {
@@ -11004,7 +11417,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "header_transformation_choice",
-        fieldPath: "spec.advanced_options.http1_config.header_transformation.header_transformation_choice",
+        fieldPath:
+          "spec.advanced_options.http1_config.header_transformation.header_transformation_choice",
         options: [
           "spec.advanced_options.http1_config.header_transformation.default_header_transformation",
           "spec.advanced_options.http1_config.header_transformation.legacy_header_transformation",
@@ -11181,7 +11595,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "sni_choice",
         fieldPath: "spec.use_tls.sni_choice",
-        options: ["spec.use_tls.disable_sni", "spec.use_tls.sni", "spec.use_tls.use_host_header_as_sni"],
+        options: [
+          "spec.use_tls.disable_sni",
+          "spec.use_tls.sni",
+          "spec.use_tls.use_host_header_as_sni",
+        ],
       },
       {
         choiceField: "choice",
@@ -11229,7 +11647,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "pdf",
     summary: "GET API Endpoint PDF.",
-    description: "GET PDF of all metrics for a given auto discovered API endpoint for Virtual Host.",
+    description:
+      "GET PDF of all metrics for a given auto discovered API endpoint for Virtual Host.",
     pathParameters: [
       {
         description: "Virtual Host\nVirtual Host Name for current request.",
@@ -11540,7 +11959,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -11786,12 +12206,19 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "dns_choice",
         fieldPath: "spec.dynamic_proxy.dns_choice",
-        options: ["spec.dynamic_proxy.disable_dns_masquerade", "spec.dynamic_proxy.enable_dns_masquerade"],
+        options: [
+          "spec.dynamic_proxy.disable_dns_masquerade",
+          "spec.dynamic_proxy.enable_dns_masquerade",
+        ],
       },
       {
         choiceField: "proxy_choice",
         fieldPath: "spec.dynamic_proxy.proxy_choice",
-        options: ["spec.dynamic_proxy.http_proxy", "spec.dynamic_proxy.https_proxy", "spec.dynamic_proxy.sni_proxy"],
+        options: [
+          "spec.dynamic_proxy.http_proxy",
+          "spec.dynamic_proxy.https_proxy",
+          "spec.dynamic_proxy.sni_proxy",
+        ],
       },
       {
         choiceField: "path_normalize_choice",
@@ -11808,7 +12235,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value",
           "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].value",
@@ -11816,7 +12244,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value.clear_secret_info",
@@ -11824,7 +12253,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value",
           "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].value",
@@ -11832,7 +12262,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value.clear_secret_info",
@@ -11840,7 +12271,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].domain_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].domain_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_domain",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_domain",
@@ -11848,7 +12280,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "expiry_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].expiry_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].expiry_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_expiry",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_expiry",
@@ -11856,7 +12289,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "httponly_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].httponly_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].httponly_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_httponly",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_httponly",
@@ -11864,7 +12298,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_age_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].max_age_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].max_age_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_max_age",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].max_age_value",
@@ -11872,7 +12307,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "partitioned_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].partitioned_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].partitioned_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_partitioned",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_partitioned",
@@ -11880,7 +12316,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].path_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].path_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_path",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_path",
@@ -11888,7 +12325,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "samesite_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].samesite_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].samesite_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_samesite",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].samesite_lax",
@@ -11898,7 +12336,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secure_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secure_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secure_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_secure",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_secure",
@@ -11906,7 +12345,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_value",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value",
@@ -11915,7 +12355,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value.clear_secret_info",
@@ -11923,7 +12364,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value",
           "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].value",
@@ -11931,7 +12373,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value.clear_secret_info",
@@ -11952,7 +12395,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value",
           "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].value",
@@ -11960,7 +12404,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value.clear_secret_info",
@@ -11968,7 +12413,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value",
           "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].value",
@@ -11976,7 +12422,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value.clear_secret_info",
@@ -11984,7 +12431,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].domain_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].domain_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_domain",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_domain",
@@ -11992,7 +12440,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "expiry_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].expiry_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].expiry_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_expiry",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_expiry",
@@ -12000,7 +12449,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "httponly_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].httponly_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].httponly_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_httponly",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_httponly",
@@ -12008,7 +12458,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_age_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].max_age_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].max_age_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_max_age",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].max_age_value",
@@ -12016,7 +12467,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "partitioned_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].partitioned_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].partitioned_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_partitioned",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_partitioned",
@@ -12024,7 +12476,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].path_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].path_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_path",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_path",
@@ -12032,7 +12485,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "samesite_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].samesite_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].samesite_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_samesite",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].samesite_lax",
@@ -12042,7 +12496,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secure_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].secure_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].secure_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_secure",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_secure",
@@ -12050,7 +12505,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_value",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].secret_value",
@@ -12068,7 +12524,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_headers_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_headers_to_add[].secret_value",
           "spec.dynamic_proxy.https_proxy.more_option.response_headers_to_add[].value",
@@ -12093,7 +12550,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].custom_hash_algorithms",
           "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].disable_ocsp_stapling",
@@ -12102,7 +12560,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].private_key.clear_secret_info",
@@ -12170,7 +12629,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.http_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.http_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.http_proxy.more_option.request_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.http_proxy.more_option.request_cookies_to_add[].secret_value.clear_secret_info",
@@ -12186,7 +12646,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.http_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.http_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.http_proxy.more_option.request_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.http_proxy.more_option.request_headers_to_add[].secret_value.clear_secret_info",
@@ -12269,7 +12730,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.http_proxy.more_option.response_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.http_proxy.more_option.response_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.http_proxy.more_option.response_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.http_proxy.more_option.response_cookies_to_add[].secret_value.clear_secret_info",
@@ -12285,7 +12747,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.http_proxy.more_option.response_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.http_proxy.more_option.response_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.http_proxy.more_option.response_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.http_proxy.more_option.response_headers_to_add[].secret_value.clear_secret_info",
@@ -12315,7 +12778,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "signing_cert_choice",
         fieldPath: "spec.tls_intercept.signing_cert_choice",
-        options: ["spec.tls_intercept.custom_certificate", "spec.tls_intercept.volterra_certificate"],
+        options: [
+          "spec.tls_intercept.custom_certificate",
+          "spec.tls_intercept.volterra_certificate",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -12518,7 +12984,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -12679,12 +13146,19 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "dns_choice",
         fieldPath: "spec.dynamic_proxy.dns_choice",
-        options: ["spec.dynamic_proxy.disable_dns_masquerade", "spec.dynamic_proxy.enable_dns_masquerade"],
+        options: [
+          "spec.dynamic_proxy.disable_dns_masquerade",
+          "spec.dynamic_proxy.enable_dns_masquerade",
+        ],
       },
       {
         choiceField: "proxy_choice",
         fieldPath: "spec.dynamic_proxy.proxy_choice",
-        options: ["spec.dynamic_proxy.http_proxy", "spec.dynamic_proxy.https_proxy", "spec.dynamic_proxy.sni_proxy"],
+        options: [
+          "spec.dynamic_proxy.http_proxy",
+          "spec.dynamic_proxy.https_proxy",
+          "spec.dynamic_proxy.sni_proxy",
+        ],
       },
       {
         choiceField: "path_normalize_choice",
@@ -12701,7 +13175,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value",
           "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].value",
@@ -12709,7 +13184,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.http_proxy.more_option.request_cookies_to_add[].secret_value.clear_secret_info",
@@ -12717,7 +13193,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value",
           "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].value",
@@ -12725,7 +13202,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.http_proxy.more_option.request_headers_to_add[].secret_value.clear_secret_info",
@@ -12733,7 +13211,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].domain_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].domain_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_domain",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_domain",
@@ -12741,7 +13220,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "expiry_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].expiry_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].expiry_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_expiry",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_expiry",
@@ -12749,7 +13229,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "httponly_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].httponly_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].httponly_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_httponly",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_httponly",
@@ -12757,7 +13238,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_age_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].max_age_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].max_age_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_max_age",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].max_age_value",
@@ -12765,7 +13247,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "partitioned_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].partitioned_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].partitioned_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_partitioned",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_partitioned",
@@ -12773,7 +13256,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].path_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].path_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_path",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_path",
@@ -12781,7 +13265,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "samesite_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].samesite_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].samesite_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_samesite",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].samesite_lax",
@@ -12791,7 +13276,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secure_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secure_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secure_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].add_secure",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_secure",
@@ -12799,7 +13285,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].ignore_value",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value",
@@ -12808,7 +13295,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.http_proxy.more_option.response_cookies_to_add[].secret_value.clear_secret_info",
@@ -12816,7 +13304,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value",
           "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].value",
@@ -12824,7 +13313,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.http_proxy.more_option.response_headers_to_add[].secret_value.clear_secret_info",
@@ -12845,7 +13335,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value",
           "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].value",
@@ -12853,7 +13344,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.https_proxy.more_option.request_cookies_to_add[].secret_value.clear_secret_info",
@@ -12861,7 +13353,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value",
           "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].value",
@@ -12869,7 +13362,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.dynamic_proxy.https_proxy.more_option.request_headers_to_add[].secret_value.clear_secret_info",
@@ -12877,7 +13371,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "domain_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].domain_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].domain_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_domain",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_domain",
@@ -12885,7 +13380,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "expiry_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].expiry_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].expiry_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_expiry",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_expiry",
@@ -12893,7 +13389,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "httponly_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].httponly_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].httponly_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_httponly",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_httponly",
@@ -12901,7 +13398,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_age_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].max_age_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].max_age_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_max_age",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].max_age_value",
@@ -12909,7 +13407,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "partitioned_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].partitioned_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].partitioned_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_partitioned",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_partitioned",
@@ -12917,7 +13416,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "path_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].path_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].path_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_path",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_path",
@@ -12925,7 +13425,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "samesite_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].samesite_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].samesite_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_samesite",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].samesite_lax",
@@ -12935,7 +13436,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secure_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].secure_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].secure_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].add_secure",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_secure",
@@ -12943,7 +13445,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].ignore_value",
           "spec.dynamic_proxy.https_proxy.more_option.response_cookies_to_add[].secret_value",
@@ -12961,7 +13464,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "value_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.more_option.response_headers_to_add[].value_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.more_option.response_headers_to_add[].value_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.more_option.response_headers_to_add[].secret_value",
           "spec.dynamic_proxy.https_proxy.more_option.response_headers_to_add[].value",
@@ -12986,7 +13490,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "ocsp_stapling_choice",
-        fieldPath: "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].ocsp_stapling_choice",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].ocsp_stapling_choice",
         options: [
           "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].custom_hash_algorithms",
           "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].disable_ocsp_stapling",
@@ -12995,7 +13500,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.dynamic_proxy.https_proxy.tls_params.tls_certificates[].private_key.clear_secret_info",
@@ -13063,7 +13569,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.http_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.http_proxy.more_option.request_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.http_proxy.more_option.request_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.http_proxy.more_option.request_cookies_to_add[].secret_value.clear_secret_info",
@@ -13079,7 +13586,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.http_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.http_proxy.more_option.request_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.http_proxy.more_option.request_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.http_proxy.more_option.request_headers_to_add[].secret_value.clear_secret_info",
@@ -13162,7 +13670,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.http_proxy.more_option.response_cookies_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.http_proxy.more_option.response_cookies_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.http_proxy.more_option.response_cookies_to_add[].secret_value.blindfold_secret_info",
           "spec.http_proxy.more_option.response_cookies_to_add[].secret_value.clear_secret_info",
@@ -13178,7 +13687,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.http_proxy.more_option.response_headers_to_add[].secret_value.secret_info_oneof",
+        fieldPath:
+          "spec.http_proxy.more_option.response_headers_to_add[].secret_value.secret_info_oneof",
         options: [
           "spec.http_proxy.more_option.response_headers_to_add[].secret_value.blindfold_secret_info",
           "spec.http_proxy.more_option.response_headers_to_add[].secret_value.clear_secret_info",
@@ -13208,7 +13718,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "signing_cert_choice",
         fieldPath: "spec.tls_intercept.signing_cert_choice",
-        options: ["spec.tls_intercept.custom_certificate", "spec.tls_intercept.volterra_certificate"],
+        options: [
+          "spec.tls_intercept.custom_certificate",
+          "spec.tls_intercept.volterra_certificate",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -13321,7 +13834,12 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "server_choice",
         fieldPath: "spec.server_choice",
-        options: ["spec.any_server", "spec.server_name", "spec.server_name_matcher", "spec.server_selector"],
+        options: [
+          "spec.any_server",
+          "spec.server_name",
+          "spec.server_name_matcher",
+          "spec.server_selector",
+        ],
       },
       {
         choiceField: "action_choice",
@@ -13335,7 +13853,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "asn_choice",
         fieldPath: "spec.rules[].spec.asn_choice",
-        options: ["spec.rules[].spec.any_asn", "spec.rules[].spec.asn_list", "spec.rules[].spec.asn_matcher"],
+        options: [
+          "spec.rules[].spec.any_asn",
+          "spec.rules[].spec.asn_list",
+          "spec.rules[].spec.asn_matcher",
+        ],
       },
       {
         choiceField: "country_choice",
@@ -13345,7 +13867,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "ip_choice",
         fieldPath: "spec.rules[].spec.ip_choice",
-        options: ["spec.rules[].spec.any_ip", "spec.rules[].spec.ip_matcher", "spec.rules[].spec.ip_prefix_list"],
+        options: [
+          "spec.rules[].spec.any_ip",
+          "spec.rules[].spec.ip_matcher",
+          "spec.rules[].spec.ip_prefix_list",
+        ],
       },
       {
         choiceField: "match",
@@ -13557,7 +14083,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -13706,7 +14233,12 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "server_choice",
         fieldPath: "spec.server_choice",
-        options: ["spec.any_server", "spec.server_name", "spec.server_name_matcher", "spec.server_selector"],
+        options: [
+          "spec.any_server",
+          "spec.server_name",
+          "spec.server_name_matcher",
+          "spec.server_selector",
+        ],
       },
       {
         choiceField: "action_choice",
@@ -13720,7 +14252,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "asn_choice",
         fieldPath: "spec.rules[].spec.asn_choice",
-        options: ["spec.rules[].spec.any_asn", "spec.rules[].spec.asn_list", "spec.rules[].spec.asn_matcher"],
+        options: [
+          "spec.rules[].spec.any_asn",
+          "spec.rules[].spec.asn_list",
+          "spec.rules[].spec.asn_matcher",
+        ],
       },
       {
         choiceField: "country_choice",
@@ -13730,7 +14266,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "ip_choice",
         fieldPath: "spec.rules[].spec.ip_choice",
-        options: ["spec.rules[].spec.any_ip", "spec.rules[].spec.ip_matcher", "spec.rules[].spec.ip_prefix_list"],
+        options: [
+          "spec.rules[].spec.any_ip",
+          "spec.rules[].spec.ip_matcher",
+          "spec.rules[].spec.ip_prefix_list",
+        ],
       },
       {
         choiceField: "match",
@@ -13794,7 +14334,8 @@ export const virtualTools: ParsedOperation[] = [
       $ref: "#/components/schemas/waf_signatures_changelogReleasedSignaturesRsp",
     },
     requiredParams: ["namespace", "vh_name"],
-    operationId: "ves.io.schema.waf_signatures_changelog.WafSignatureChangelogCustomApi.GetReleasedSignatures",
+    operationId:
+      "ves.io.schema.waf_signatures_changelog.WafSignatureChangelogCustomApi.GetReleasedSignatures",
     tags: ["Other"],
     sourceFile: "domains/virtual.json",
     displayName: null,
@@ -13822,7 +14363,8 @@ export const virtualTools: ParsedOperation[] = [
       "GET number of rule hits per client for a given namespace.\nThe rule hits counter can be aggregated based on one or more labels listed here.\nNAMESPACE, APP_TYPE, VIRTUAL_HOST, SITE, SERVICE, INSTANCE, WAF_INSTANCE_ID, RULE_ID, RULE_SEVERITY, RULE_TAG.",
     pathParameters: [
       {
-        description: "Namespace\n\nnamespace is used to scope the WAF rule hits for the given namespace.",
+        description:
+          "Namespace\n\nnamespace is used to scope the WAF rule hits for the given namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -13925,7 +14467,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "Long Base-64 encoded string which can be used to retrieve next batch of security events.",
+        description:
+          "Long Base-64 encoded string which can be used to retrieve next batch of security events.",
         in: "query",
         name: "scroll_id",
         required: false,
@@ -13968,7 +14511,8 @@ export const virtualTools: ParsedOperation[] = [
       "GET number of security events per client for a given namespace.\nThe security events counter can be aggregated based on one or more labels listed here.\nNAMESPACE, APP_TYPE, VIRTUAL_HOST, SITE, SERVICE, INSTANCE, WAF_INSTANCE_ID, WAF_MODE.",
     pathParameters: [
       {
-        description: "Namespace\nnamespace is used to scope the WAF security events for the given namespace.",
+        description:
+          "Namespace\nnamespace is used to scope the WAF security events for the given namespace.",
         in: "path",
         name: "namespace",
         required: true,
@@ -14008,7 +14552,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "service-policy",
     summary: "Create Service Policy.",
-    description: "Create service_policy creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create service_policy creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -14080,7 +14625,12 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "server_choice",
         fieldPath: "spec.server_choice",
-        options: ["spec.any_server", "spec.server_name", "spec.server_name_matcher", "spec.server_selector"],
+        options: [
+          "spec.any_server",
+          "spec.server_name",
+          "spec.server_name_matcher",
+          "spec.server_selector",
+        ],
       },
       {
         choiceField: "default_action_choice",
@@ -14274,7 +14824,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_parameter_value_size_choice",
-        fieldPath: "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_choice",
+        fieldPath:
+          "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_choice",
         options: [
           "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_exceeds",
           "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_none",
@@ -14419,7 +14970,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "service-policy",
     summary: "GET Service Policy.",
-    description: "GET service_policy reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET service_policy reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -14522,7 +15074,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -14600,7 +15153,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "service-policy-rule",
     summary: "Create Service Policy Rule.",
-    description: "Create service_policy_rule creates a new object in the storage backend for metadata.namespace.",
+    description:
+      "Create service_policy_rule creates a new object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description:
@@ -14720,12 +15274,20 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "match",
         fieldPath: "spec.headers[].match",
-        options: ["spec.headers[].check_not_present", "spec.headers[].check_present", "spec.headers[].item"],
+        options: [
+          "spec.headers[].check_not_present",
+          "spec.headers[].check_present",
+          "spec.headers[].item",
+        ],
       },
       {
         choiceField: "match",
         fieldPath: "spec.jwt_claims[].match",
-        options: ["spec.jwt_claims[].check_not_present", "spec.jwt_claims[].check_present", "spec.jwt_claims[].item"],
+        options: [
+          "spec.jwt_claims[].check_not_present",
+          "spec.jwt_claims[].check_present",
+          "spec.jwt_claims[].item",
+        ],
       },
       {
         choiceField: "action_type",
@@ -14816,7 +15378,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "max_query_size_choice",
         fieldPath: "spec.request_constraints.max_query_size_choice",
-        options: ["spec.request_constraints.max_query_size_exceeds", "spec.request_constraints.max_query_size_none"],
+        options: [
+          "spec.request_constraints.max_query_size_exceeds",
+          "spec.request_constraints.max_query_size_none",
+        ],
       },
       {
         choiceField: "max_request_line_size_choice",
@@ -14837,7 +15402,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "max_url_size_choice",
         fieldPath: "spec.request_constraints.max_url_size_choice",
-        options: ["spec.request_constraints.max_url_size_exceeds", "spec.request_constraints.max_url_size_none"],
+        options: [
+          "spec.request_constraints.max_url_size_exceeds",
+          "spec.request_constraints.max_url_size_none",
+        ],
       },
       {
         choiceField: "action_type",
@@ -14946,7 +15514,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "service-policy-rule",
     summary: "GET Service Policy Rule.",
-    description: "GET service_policy_rule reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET service_policy_rule reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -15049,7 +15618,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -15258,12 +15828,20 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "match",
         fieldPath: "spec.headers[].match",
-        options: ["spec.headers[].check_not_present", "spec.headers[].check_present", "spec.headers[].item"],
+        options: [
+          "spec.headers[].check_not_present",
+          "spec.headers[].check_present",
+          "spec.headers[].item",
+        ],
       },
       {
         choiceField: "match",
         fieldPath: "spec.jwt_claims[].match",
-        options: ["spec.jwt_claims[].check_not_present", "spec.jwt_claims[].check_present", "spec.jwt_claims[].item"],
+        options: [
+          "spec.jwt_claims[].check_not_present",
+          "spec.jwt_claims[].check_present",
+          "spec.jwt_claims[].item",
+        ],
       },
       {
         choiceField: "action_type",
@@ -15354,7 +15932,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "max_query_size_choice",
         fieldPath: "spec.request_constraints.max_query_size_choice",
-        options: ["spec.request_constraints.max_query_size_exceeds", "spec.request_constraints.max_query_size_none"],
+        options: [
+          "spec.request_constraints.max_query_size_exceeds",
+          "spec.request_constraints.max_query_size_none",
+        ],
       },
       {
         choiceField: "max_request_line_size_choice",
@@ -15375,7 +15956,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "max_url_size_choice",
         fieldPath: "spec.request_constraints.max_url_size_choice",
-        options: ["spec.request_constraints.max_url_size_exceeds", "spec.request_constraints.max_url_size_none"],
+        options: [
+          "spec.request_constraints.max_url_size_exceeds",
+          "spec.request_constraints.max_url_size_none",
+        ],
       },
       {
         choiceField: "action_type",
@@ -15410,7 +15994,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "service-policy-set",
     summary: "GET Service Policy Set.",
-    description: "GET service_policy_set reads a given object from storage backend for metadata.namespace.",
+    description:
+      "GET service_policy_set reads a given object from storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe name of the configuration object to be fetched.",
@@ -15511,7 +16096,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -15589,7 +16175,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "service-policy",
     summary: "Replace Service Policy.",
-    description: "Replace service_policy replaces an existing object in the storage backend for metadata.namespace.",
+    description:
+      "Replace service_policy replaces an existing object in the storage backend for metadata.namespace.",
     pathParameters: [
       {
         description: "Name\nThe configuration object to be replaced will be looked up by name.",
@@ -15672,7 +16259,12 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "server_choice",
         fieldPath: "spec.server_choice",
-        options: ["spec.any_server", "spec.server_name", "spec.server_name_matcher", "spec.server_selector"],
+        options: [
+          "spec.any_server",
+          "spec.server_name",
+          "spec.server_name_matcher",
+          "spec.server_selector",
+        ],
       },
       {
         choiceField: "default_action_choice",
@@ -15866,7 +16458,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "max_parameter_value_size_choice",
-        fieldPath: "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_choice",
+        fieldPath:
+          "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_choice",
         options: [
           "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_exceeds",
           "spec.rule_list.rules[].spec.request_constraints.max_parameter_value_size_none",
@@ -16162,7 +16755,8 @@ export const virtualTools: ParsedOperation[] = [
       "Suggest API endpoint protection rule for a given path\nDEPRECATED. Use api_sec.rule_suggestion.rulesuggestionapi.getsuggestedapiendpointprotectionrule.",
     pathParameters: [
       {
-        description: "Name\nHTTP load balancer for which this API endpoint protection rule applied.",
+        description:
+          "Name\nHTTP load balancer for which this API endpoint protection rule applied.",
         in: "path",
         name: "name",
         required: true,
@@ -16410,7 +17004,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "service_policy_choice",
         fieldPath: "spec.service_policy_choice",
-        options: ["spec.active_service_policies", "spec.no_service_policies", "spec.service_policies_from_namespace"],
+        options: [
+          "spec.active_service_policies",
+          "spec.no_service_policies",
+          "spec.service_policies_from_namespace",
+        ],
       },
       {
         choiceField: "sni_default_lb_choice",
@@ -16494,7 +17092,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "crl_choice",
         fieldPath: "spec.tls_tcp.tls_cert_params.use_mtls.crl_choice",
-        options: ["spec.tls_tcp.tls_cert_params.use_mtls.crl", "spec.tls_tcp.tls_cert_params.use_mtls.no_crl"],
+        options: [
+          "spec.tls_tcp.tls_cert_params.use_mtls.crl",
+          "spec.tls_tcp.tls_cert_params.use_mtls.no_crl",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -16547,7 +17148,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "crl_choice",
         fieldPath: "spec.tls_tcp.tls_parameters.use_mtls.crl_choice",
-        options: ["spec.tls_tcp.tls_parameters.use_mtls.crl", "spec.tls_tcp.tls_parameters.use_mtls.no_crl"],
+        options: [
+          "spec.tls_tcp.tls_parameters.use_mtls.crl",
+          "spec.tls_tcp.tls_parameters.use_mtls.no_crl",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -16588,12 +17192,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "trusted_ca_choice",
         fieldPath: "spec.tls_tcp_auto_cert.use_mtls.trusted_ca_choice",
-        options: ["spec.tls_tcp_auto_cert.use_mtls.trusted_ca", "spec.tls_tcp_auto_cert.use_mtls.trusted_ca_url"],
+        options: [
+          "spec.tls_tcp_auto_cert.use_mtls.trusted_ca",
+          "spec.tls_tcp_auto_cert.use_mtls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "xfcc_header",
         fieldPath: "spec.tls_tcp_auto_cert.use_mtls.xfcc_header",
-        options: ["spec.tls_tcp_auto_cert.use_mtls.xfcc_disabled", "spec.tls_tcp_auto_cert.use_mtls.xfcc_options"],
+        options: [
+          "spec.tls_tcp_auto_cert.use_mtls.xfcc_disabled",
+          "spec.tls_tcp_auto_cert.use_mtls.xfcc_options",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -16757,7 +17367,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -16928,7 +17539,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "service_policy_choice",
         fieldPath: "spec.service_policy_choice",
-        options: ["spec.active_service_policies", "spec.no_service_policies", "spec.service_policies_from_namespace"],
+        options: [
+          "spec.active_service_policies",
+          "spec.no_service_policies",
+          "spec.service_policies_from_namespace",
+        ],
       },
       {
         choiceField: "sni_default_lb_choice",
@@ -17012,7 +17627,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "crl_choice",
         fieldPath: "spec.tls_tcp.tls_cert_params.use_mtls.crl_choice",
-        options: ["spec.tls_tcp.tls_cert_params.use_mtls.crl", "spec.tls_tcp.tls_cert_params.use_mtls.no_crl"],
+        options: [
+          "spec.tls_tcp.tls_cert_params.use_mtls.crl",
+          "spec.tls_tcp.tls_cert_params.use_mtls.no_crl",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -17065,7 +17683,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "crl_choice",
         fieldPath: "spec.tls_tcp.tls_parameters.use_mtls.crl_choice",
-        options: ["spec.tls_tcp.tls_parameters.use_mtls.crl", "spec.tls_tcp.tls_parameters.use_mtls.no_crl"],
+        options: [
+          "spec.tls_tcp.tls_parameters.use_mtls.crl",
+          "spec.tls_tcp.tls_parameters.use_mtls.no_crl",
+        ],
       },
       {
         choiceField: "trusted_ca_choice",
@@ -17106,12 +17727,18 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "trusted_ca_choice",
         fieldPath: "spec.tls_tcp_auto_cert.use_mtls.trusted_ca_choice",
-        options: ["spec.tls_tcp_auto_cert.use_mtls.trusted_ca", "spec.tls_tcp_auto_cert.use_mtls.trusted_ca_url"],
+        options: [
+          "spec.tls_tcp_auto_cert.use_mtls.trusted_ca",
+          "spec.tls_tcp_auto_cert.use_mtls.trusted_ca_url",
+        ],
       },
       {
         choiceField: "xfcc_header",
         fieldPath: "spec.tls_tcp_auto_cert.use_mtls.xfcc_header",
-        options: ["spec.tls_tcp_auto_cert.use_mtls.xfcc_disabled", "spec.tls_tcp_auto_cert.use_mtls.xfcc_options"],
+        options: [
+          "spec.tls_tcp_auto_cert.use_mtls.xfcc_disabled",
+          "spec.tls_tcp_auto_cert.use_mtls.xfcc_options",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -17124,7 +17751,8 @@ export const virtualTools: ParsedOperation[] = [
     domain: "virtual",
     resource: "top-active",
     summary: "GET Top APIs Endpoints for Virtual Host.",
-    description: "Top APIs by requested activity metric. For example most-active APIs or most-attacked APIs.",
+    description:
+      "Top APIs by requested activity metric. For example most-active APIs or most-attacked APIs.",
     pathParameters: [
       {
         description: "Virtual Host Name\nVirtual Host name for current request.",
@@ -17551,7 +18179,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -18130,7 +18759,12 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "server_header_choice",
         fieldPath: "spec.server_header_choice",
-        options: ["spec.append_server_name", "spec.default_header", "spec.pass_through", "spec.server_name"],
+        options: [
+          "spec.append_server_name",
+          "spec.default_header",
+          "spec.pass_through",
+          "spec.server_name",
+        ],
       },
       {
         choiceField: "strict_sni_host_header_check_choice",
@@ -18145,7 +18779,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "cookie_params_choice",
         fieldPath: "spec.authentication.cookie_params_choice",
-        options: ["spec.authentication.cookie_params", "spec.authentication.use_auth_object_config"],
+        options: [
+          "spec.authentication.cookie_params",
+          "spec.authentication.use_auth_object_config",
+        ],
       },
       {
         choiceField: "redirect_url_choice",
@@ -18155,7 +18792,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "secret_choice",
         fieldPath: "spec.authentication.cookie_params.secret_choice",
-        options: ["spec.authentication.cookie_params.auth_hmac", "spec.authentication.cookie_params.kms_key_hmac"],
+        options: [
+          "spec.authentication.cookie_params.auth_hmac",
+          "spec.authentication.cookie_params.kms_key_hmac",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -18176,7 +18816,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "coalescing_choice",
         fieldPath: "spec.coalescing_options.coalescing_choice",
-        options: ["spec.coalescing_options.default_coalescing", "spec.coalescing_options.strict_coalescing"],
+        options: [
+          "spec.coalescing_options.default_coalescing",
+          "spec.coalescing_options.strict_coalescing",
+        ],
       },
       {
         choiceField: "allowed_domains",
@@ -18210,7 +18853,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "value_choice",
         fieldPath: "spec.request_cookies_to_add[].value_choice",
-        options: ["spec.request_cookies_to_add[].secret_value", "spec.request_cookies_to_add[].value"],
+        options: [
+          "spec.request_cookies_to_add[].secret_value",
+          "spec.request_cookies_to_add[].value",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -18223,7 +18869,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "value_choice",
         fieldPath: "spec.request_headers_to_add[].value_choice",
-        options: ["spec.request_headers_to_add[].secret_value", "spec.request_headers_to_add[].value"],
+        options: [
+          "spec.request_headers_to_add[].secret_value",
+          "spec.request_headers_to_add[].value",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -18236,22 +18885,34 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "domain_choice",
         fieldPath: "spec.response_cookies_to_add[].domain_choice",
-        options: ["spec.response_cookies_to_add[].add_domain", "spec.response_cookies_to_add[].ignore_domain"],
+        options: [
+          "spec.response_cookies_to_add[].add_domain",
+          "spec.response_cookies_to_add[].ignore_domain",
+        ],
       },
       {
         choiceField: "expiry_choice",
         fieldPath: "spec.response_cookies_to_add[].expiry_choice",
-        options: ["spec.response_cookies_to_add[].add_expiry", "spec.response_cookies_to_add[].ignore_expiry"],
+        options: [
+          "spec.response_cookies_to_add[].add_expiry",
+          "spec.response_cookies_to_add[].ignore_expiry",
+        ],
       },
       {
         choiceField: "httponly_choice",
         fieldPath: "spec.response_cookies_to_add[].httponly_choice",
-        options: ["spec.response_cookies_to_add[].add_httponly", "spec.response_cookies_to_add[].ignore_httponly"],
+        options: [
+          "spec.response_cookies_to_add[].add_httponly",
+          "spec.response_cookies_to_add[].ignore_httponly",
+        ],
       },
       {
         choiceField: "max_age_choice",
         fieldPath: "spec.response_cookies_to_add[].max_age_choice",
-        options: ["spec.response_cookies_to_add[].ignore_max_age", "spec.response_cookies_to_add[].max_age_value"],
+        options: [
+          "spec.response_cookies_to_add[].ignore_max_age",
+          "spec.response_cookies_to_add[].max_age_value",
+        ],
       },
       {
         choiceField: "partitioned_choice",
@@ -18264,7 +18925,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "path_choice",
         fieldPath: "spec.response_cookies_to_add[].path_choice",
-        options: ["spec.response_cookies_to_add[].add_path", "spec.response_cookies_to_add[].ignore_path"],
+        options: [
+          "spec.response_cookies_to_add[].add_path",
+          "spec.response_cookies_to_add[].ignore_path",
+        ],
       },
       {
         choiceField: "samesite_choice",
@@ -18279,7 +18943,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "secure_choice",
         fieldPath: "spec.response_cookies_to_add[].secure_choice",
-        options: ["spec.response_cookies_to_add[].add_secure", "spec.response_cookies_to_add[].ignore_secure"],
+        options: [
+          "spec.response_cookies_to_add[].add_secure",
+          "spec.response_cookies_to_add[].ignore_secure",
+        ],
       },
       {
         choiceField: "value_choice",
@@ -18301,7 +18968,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "value_choice",
         fieldPath: "spec.response_headers_to_add[].value_choice",
-        options: ["spec.response_headers_to_add[].secret_value", "spec.response_headers_to_add[].value"],
+        options: [
+          "spec.response_headers_to_add[].secret_value",
+          "spec.response_headers_to_add[].value",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -18314,7 +18984,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "request_timeout_choice",
         fieldPath: "spec.slow_ddos_mitigation.request_timeout_choice",
-        options: ["spec.slow_ddos_mitigation.disable_request_timeout", "spec.slow_ddos_mitigation.request_timeout"],
+        options: [
+          "spec.slow_ddos_mitigation.disable_request_timeout",
+          "spec.slow_ddos_mitigation.request_timeout",
+        ],
       },
       {
         choiceField: "client_certificate_verify_choice",
@@ -18353,7 +19026,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.tls_parameters.common_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.tls_parameters.common_params.tls_certificates[].private_key.clear_secret_info",
@@ -18370,7 +19044,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "ref_type",
         fieldPath: "spec.waf_type.ref_type",
-        options: ["spec.waf_type.app_firewall", "spec.waf_type.disable_waf", "spec.waf_type.inherit_waf"],
+        options: [
+          "spec.waf_type.app_firewall",
+          "spec.waf_type.disable_waf",
+          "spec.waf_type.inherit_waf",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -18534,7 +19212,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -18690,7 +19369,12 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "server_header_choice",
         fieldPath: "spec.server_header_choice",
-        options: ["spec.append_server_name", "spec.default_header", "spec.pass_through", "spec.server_name"],
+        options: [
+          "spec.append_server_name",
+          "spec.default_header",
+          "spec.pass_through",
+          "spec.server_name",
+        ],
       },
       {
         choiceField: "strict_sni_host_header_check_choice",
@@ -18705,7 +19389,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "cookie_params_choice",
         fieldPath: "spec.authentication.cookie_params_choice",
-        options: ["spec.authentication.cookie_params", "spec.authentication.use_auth_object_config"],
+        options: [
+          "spec.authentication.cookie_params",
+          "spec.authentication.use_auth_object_config",
+        ],
       },
       {
         choiceField: "redirect_url_choice",
@@ -18715,7 +19402,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "secret_choice",
         fieldPath: "spec.authentication.cookie_params.secret_choice",
-        options: ["spec.authentication.cookie_params.auth_hmac", "spec.authentication.cookie_params.kms_key_hmac"],
+        options: [
+          "spec.authentication.cookie_params.auth_hmac",
+          "spec.authentication.cookie_params.kms_key_hmac",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -18736,7 +19426,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "coalescing_choice",
         fieldPath: "spec.coalescing_options.coalescing_choice",
-        options: ["spec.coalescing_options.default_coalescing", "spec.coalescing_options.strict_coalescing"],
+        options: [
+          "spec.coalescing_options.default_coalescing",
+          "spec.coalescing_options.strict_coalescing",
+        ],
       },
       {
         choiceField: "allowed_domains",
@@ -18770,7 +19463,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "value_choice",
         fieldPath: "spec.request_cookies_to_add[].value_choice",
-        options: ["spec.request_cookies_to_add[].secret_value", "spec.request_cookies_to_add[].value"],
+        options: [
+          "spec.request_cookies_to_add[].secret_value",
+          "spec.request_cookies_to_add[].value",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -18783,7 +19479,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "value_choice",
         fieldPath: "spec.request_headers_to_add[].value_choice",
-        options: ["spec.request_headers_to_add[].secret_value", "spec.request_headers_to_add[].value"],
+        options: [
+          "spec.request_headers_to_add[].secret_value",
+          "spec.request_headers_to_add[].value",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -18796,22 +19495,34 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "domain_choice",
         fieldPath: "spec.response_cookies_to_add[].domain_choice",
-        options: ["spec.response_cookies_to_add[].add_domain", "spec.response_cookies_to_add[].ignore_domain"],
+        options: [
+          "spec.response_cookies_to_add[].add_domain",
+          "spec.response_cookies_to_add[].ignore_domain",
+        ],
       },
       {
         choiceField: "expiry_choice",
         fieldPath: "spec.response_cookies_to_add[].expiry_choice",
-        options: ["spec.response_cookies_to_add[].add_expiry", "spec.response_cookies_to_add[].ignore_expiry"],
+        options: [
+          "spec.response_cookies_to_add[].add_expiry",
+          "spec.response_cookies_to_add[].ignore_expiry",
+        ],
       },
       {
         choiceField: "httponly_choice",
         fieldPath: "spec.response_cookies_to_add[].httponly_choice",
-        options: ["spec.response_cookies_to_add[].add_httponly", "spec.response_cookies_to_add[].ignore_httponly"],
+        options: [
+          "spec.response_cookies_to_add[].add_httponly",
+          "spec.response_cookies_to_add[].ignore_httponly",
+        ],
       },
       {
         choiceField: "max_age_choice",
         fieldPath: "spec.response_cookies_to_add[].max_age_choice",
-        options: ["spec.response_cookies_to_add[].ignore_max_age", "spec.response_cookies_to_add[].max_age_value"],
+        options: [
+          "spec.response_cookies_to_add[].ignore_max_age",
+          "spec.response_cookies_to_add[].max_age_value",
+        ],
       },
       {
         choiceField: "partitioned_choice",
@@ -18824,7 +19535,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "path_choice",
         fieldPath: "spec.response_cookies_to_add[].path_choice",
-        options: ["spec.response_cookies_to_add[].add_path", "spec.response_cookies_to_add[].ignore_path"],
+        options: [
+          "spec.response_cookies_to_add[].add_path",
+          "spec.response_cookies_to_add[].ignore_path",
+        ],
       },
       {
         choiceField: "samesite_choice",
@@ -18839,7 +19553,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "secure_choice",
         fieldPath: "spec.response_cookies_to_add[].secure_choice",
-        options: ["spec.response_cookies_to_add[].add_secure", "spec.response_cookies_to_add[].ignore_secure"],
+        options: [
+          "spec.response_cookies_to_add[].add_secure",
+          "spec.response_cookies_to_add[].ignore_secure",
+        ],
       },
       {
         choiceField: "value_choice",
@@ -18861,7 +19578,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "value_choice",
         fieldPath: "spec.response_headers_to_add[].value_choice",
-        options: ["spec.response_headers_to_add[].secret_value", "spec.response_headers_to_add[].value"],
+        options: [
+          "spec.response_headers_to_add[].secret_value",
+          "spec.response_headers_to_add[].value",
+        ],
       },
       {
         choiceField: "secret_info_oneof",
@@ -18874,7 +19594,10 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "request_timeout_choice",
         fieldPath: "spec.slow_ddos_mitigation.request_timeout_choice",
-        options: ["spec.slow_ddos_mitigation.disable_request_timeout", "spec.slow_ddos_mitigation.request_timeout"],
+        options: [
+          "spec.slow_ddos_mitigation.disable_request_timeout",
+          "spec.slow_ddos_mitigation.request_timeout",
+        ],
       },
       {
         choiceField: "client_certificate_verify_choice",
@@ -18913,7 +19636,8 @@ export const virtualTools: ParsedOperation[] = [
       },
       {
         choiceField: "secret_info_oneof",
-        fieldPath: "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
+        fieldPath:
+          "spec.tls_parameters.common_params.tls_certificates[].private_key.secret_info_oneof",
         options: [
           "spec.tls_parameters.common_params.tls_certificates[].private_key.blindfold_secret_info",
           "spec.tls_parameters.common_params.tls_certificates[].private_key.clear_secret_info",
@@ -18930,7 +19654,11 @@ export const virtualTools: ParsedOperation[] = [
       {
         choiceField: "ref_type",
         fieldPath: "spec.waf_type.ref_type",
-        options: ["spec.waf_type.app_firewall", "spec.waf_type.disable_waf", "spec.waf_type.inherit_waf"],
+        options: [
+          "spec.waf_type.app_firewall",
+          "spec.waf_type.disable_waf",
+          "spec.waf_type.inherit_waf",
+        ],
       },
     ],
     subscriptionRequirements: [],
@@ -19289,7 +20017,8 @@ export const virtualTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
