@@ -1,29 +1,15 @@
-# Trivy Vulnerability Ignore File
-# Temporary exclusions for vulnerabilities in npm bundled dependencies
+# Governance-managed Trivy ignore list
+# Review quarterly — remove entries when upstream fixes are released
 #
-# These vulnerabilities are in packages bundled with npm (node:24-alpine base image),
-# not in our application dependencies. Package.json overrides do not affect npm's
-# bundled dependencies.
-#
-# Remediation Strategy:
-# - Monitor node:24-alpine releases for npm updates with fixed versions
-# - Remove these ignores once upstream provides fixed npm version
-# - Review monthly until resolved
-#
-# Next Review: 2026-02-19 (30 days from creation)
+# Format: one CVE/ID per line
+# Lines starting with # are comments
 
-# CVE-2025-64756: Command Injection in glob via malicious filenames
-# Affected: glob 10.4.5, 11.0.3 (bundled with npm)
-# Fixed in: glob 10.5.0, 11.1.0
-# Location: /usr/local/lib/node_modules/npm/node_modules/glob/
-# Severity: HIGH
-# Justification: Bundled with npm, waiting for node:24-alpine update
-CVE-2025-64756
-
-# CVE-2026-23745: Security issue in node-tar library
-# Affected: tar 7.5.1 (bundled with npm)
-# Fixed in: tar 7.5.3
-# Location: /usr/local/lib/node_modules/npm/node_modules/tar/
-# Severity: HIGH
-# Justification: Bundled with npm, waiting for node:24-alpine update
-CVE-2026-23745
+# CVE-2026-4539 — Low severity (CVSS 3.3) ReDoS in pygments AdlLexer
+# Transitive dependency: rich -> pygments
+# Affected: pygments <= 2.19.2 — no fix released to PyPI
+# Fix merged upstream: pygments/pygments#3064 (2026-03-25)
+# Pygments maintainers dispute this as a security issue per their security policy
+# Impact: Zero — AdlLexer handles openEHR archetype definitions, unused in this context
+# Expiry: 2026-05-31 — re-evaluate after pygments releases fix
+# Ref: https://nvd.nist.gov/vuln/detail/CVE-2026-4539
+CVE-2026-4539
