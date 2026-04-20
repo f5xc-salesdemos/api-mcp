@@ -68,7 +68,7 @@ jobs:
 
       - name: Cache OpenAPI specs
         id: cache-specs
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: specs/
           key: specs-${{ needs.check-upstream.outputs.version }}
