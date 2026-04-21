@@ -72,6 +72,116 @@ export const supportTools: ParsedOperation[] = [
     subscriptionRequirements: [],
   },
   {
+    toolName: "f5xc-api-support-allow-f5-ssh-create",
+    method: "POST",
+    path: "/api/operate/namespaces/system/sites/{site}/vpm/debug/global/allow-f5-ssh",
+    operation: "create",
+    domain: "support",
+    resource: "allow-f5-ssh",
+    summary: "Allow F5 SSH.",
+    description: "Allow F5 SSH on host.",
+    pathParameters: [
+      {
+        description: "Site Name\nName of the site where F5 SSH access will be controlled.",
+        in: "path",
+        name: "site",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Site Name",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: {
+      $ref: "#/components/schemas/debugAllowF5SSHRequest",
+    },
+    responseSchema: {
+      $ref: "#/components/schemas/debugAllowF5SSHResponse",
+    },
+    requiredParams: ["body", "site"],
+    operationId: "ves.io.schema.operate.debug.CustomPublicAPI.AllowF5SSH",
+    tags: ["Other"],
+    sourceFile: "domains/support.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
+    toolName: "f5xc-api-support-attachment-get",
+    method: "GET",
+    path: "/api/web/namespaces/system/customer_support/{name}/comment/{comment_id}/attachment/{attachment_id}",
+    operation: "get",
+    domain: "support",
+    resource: "attachment",
+    summary: "GET attachment.",
+    description:
+      "GET a specific attachment included in the comment from a customer support ticket.",
+    pathParameters: [
+      {
+        description:
+          "Attachment_id\nThe ID of the attachment included in the comment from a customer support ticket.",
+        in: "path",
+        name: "attachment_id",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Attachment ID.",
+      },
+      {
+        description: "Comment_id\nThe ID of the comment containing the attachment.",
+        in: "path",
+        name: "comment_id",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Comment ID.",
+      },
+      {
+        description: "Name\nThe name of the customer support ticket object.",
+        in: "path",
+        name: "name",
+        required: true,
+        schema: {
+          type: "string",
+        },
+        "x-displayname": "Name",
+      },
+    ],
+    queryParameters: [],
+    requestBodySchema: null,
+    responseSchema: {
+      $ref: "#/components/schemas/apiHttpBody",
+    },
+    requiredParams: ["attachment_id", "comment_id", "name"],
+    operationId: "ves.io.schema.customer_support.CustomAPI.GetAttachment",
+    tags: ["Other"],
+    sourceFile: "domains/support.json",
+    displayName: null,
+    dangerLevel: null,
+    sideEffects: null,
+    requiredFields: [],
+    confirmationRequired: false,
+    parameterExamples: {},
+    validationRules: {},
+    operationMetadata: null,
+    curlExample: null,
+    dependencies: [],
+    oneOfGroups: [],
+    subscriptionRequirements: [],
+  },
+  {
     toolName: "f5xc-api-support-change-password-create",
     method: "POST",
     path: "/api/operate/namespaces/system/sites/{site}/vpm/debug/{node}/change-password",
@@ -592,7 +702,8 @@ export const supportTools: ParsedOperation[] = [
     domain: "support",
     resource: "customer-support",
     summary: "List all tenant tickets.",
-    description: "Similar to the List rpc but returns all tenant tickets regardless of their author.",
+    description:
+      "Similar to the List rpc but returns all tenant tickets regardless of their author.",
     pathParameters: [
       {
         description: "Namespace\nNamespace to scope the listing of customer_support.",
@@ -607,7 +718,8 @@ export const supportTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -1455,7 +1567,8 @@ export const supportTools: ParsedOperation[] = [
       $ref: "#/components/schemas/ticket_tracking_systemJiraProjectsIssueTypesResponse",
     },
     requiredParams: ["body"],
-    operationId: "ves.io.schema.ticket_management.ticket_tracking_system.CustomAPI.JiraProjectsIssueTypes",
+    operationId:
+      "ves.io.schema.ticket_management.ticket_tracking_system.CustomAPI.JiraProjectsIssueTypes",
     tags: ["Other"],
     sourceFile: "domains/support.json",
     displayName: null,
@@ -1812,7 +1925,8 @@ export const supportTools: ParsedOperation[] = [
     description: "Changes priority of a selected ticket. Not possible if ticket's already closed.",
     pathParameters: [
       {
-        description: "Name\nThe name of the customer support ticket object to have its priority changed.",
+        description:
+          "Name\nThe name of the customer support ticket object to have its priority changed.",
         in: "path",
         name: "name",
         required: true,
@@ -2186,7 +2300,8 @@ export const supportTools: ParsedOperation[] = [
     description: "Start collecting a zip file of debug info from node.",
     pathParameters: [
       {
-        description: "Node Name\nName of the node\nIf using global, debug info will be collected for all nodes.",
+        description:
+          "Node Name\nName of the node\nIf using global, debug info will be collected for all nodes.",
         in: "path",
         name: "node",
         required: true,
@@ -2730,7 +2845,8 @@ export const supportTools: ParsedOperation[] = [
     ],
     queryParameters: [
       {
-        description: "A LabelSelectorType expression that every item in list response will satisfy.",
+        description:
+          "A LabelSelectorType expression that every item in list response will satisfy.",
         in: "query",
         name: "label_filter",
         required: false,
@@ -2884,7 +3000,8 @@ export const supportTools: ParsedOperation[] = [
     domain: "support",
     resource: "validate-ticket-tracking-system",
     summary: "Validate Ticket Tracking System.",
-    description: "Validate input for the ticket tracking system like the credentials + organization.",
+    description:
+      "Validate input for the ticket tracking system like the credentials + organization.",
     pathParameters: [],
     queryParameters: [],
     requestBodySchema: {
@@ -2894,7 +3011,8 @@ export const supportTools: ParsedOperation[] = [
       $ref: "#/components/schemas/ticket_tracking_systemValidateTicketTrackingSystemResponse",
     },
     requiredParams: ["body"],
-    operationId: "ves.io.schema.ticket_management.ticket_tracking_system.CustomAPI.ValidateTicketTrackingSystem",
+    operationId:
+      "ves.io.schema.ticket_management.ticket_tracking_system.CustomAPI.ValidateTicketTrackingSystem",
     tags: ["Other"],
     sourceFile: "domains/support.json",
     displayName: null,
