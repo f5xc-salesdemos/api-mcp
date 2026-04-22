@@ -7,17 +7,17 @@
  * These tools provide server metadata and authentication management.
  */
 
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { AuthMode, type CredentialManager } from "@robinmordasiewicz/f5xc-auth";
-import { VERSION } from "../../../index.js";
-import { CONFIGURE_AUTH_TOOL, configureAuthSchema, handleConfigureAuth } from "../../../tools/configure-auth.js";
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { AuthMode, type CredentialManager } from '@robinmordasiewicz/f5xc-auth';
+import { VERSION } from '../../../index.js';
+import { CONFIGURE_AUTH_TOOL, configureAuthSchema, handleConfigureAuth } from '../../../tools/configure-auth.js';
 import {
   DISCOVERY_TOOLS,
   getAvailableDomains,
   getConsolidationStats,
   getIndexMetadata,
-} from "../../../tools/discovery/index.js";
-import { createTextResponse } from "../../response-utils.js";
+} from '../../../tools/discovery/index.js';
+import { createTextResponse } from '../../response-utils.js';
 
 /**
  * Registers the server-info tool that provides server metadata and tool statistics.
@@ -32,9 +32,9 @@ export function registerServerInfoTool(server: McpServer, credentialManager: Cre
     const domains = getAvailableDomains();
 
     return createTextResponse({
-      server: "f5xc-api-mcp",
+      server: 'f5xc-api-mcp',
       version: VERSION,
-      mode: isAuthenticated ? "execution" : "documentation",
+      mode: isAuthenticated ? 'execution' : 'documentation',
       authenticated: isAuthenticated,
       authMethod: authMode,
       tenantUrl: isAuthenticated ? tenantUrl : null,
@@ -50,24 +50,24 @@ export function registerServerInfoTool(server: McpServer, credentialManager: Cre
       },
       consolidation: getConsolidationStats(),
       discoveryTools: [
-        "f5xc-api-configure-auth",
-        "f5xc-api-search-tools",
-        "f5xc-api-describe-tool",
-        "f5xc-api-get-schema",
-        "f5xc-api-suggest-parameters",
-        "f5xc-api-execute-tool",
-        "f5xc-api-search-resources",
-        "f5xc-api-execute-resource",
-        "f5xc-api-dependencies",
-        "f5xc-api-dependency-stats",
-        "f5xc-api-validate-params",
-        "f5xc-api-resolve-dependencies",
-        "f5xc-api-estimate-cost",
-        "f5xc-api-best-practices",
+        'f5xc-api-configure-auth',
+        'f5xc-api-search-tools',
+        'f5xc-api-describe-tool',
+        'f5xc-api-get-schema',
+        'f5xc-api-suggest-parameters',
+        'f5xc-api-execute-tool',
+        'f5xc-api-search-resources',
+        'f5xc-api-execute-resource',
+        'f5xc-api-dependencies',
+        'f5xc-api-dependency-stats',
+        'f5xc-api-validate-params',
+        'f5xc-api-resolve-dependencies',
+        'f5xc-api-estimate-cost',
+        'f5xc-api-best-practices',
       ],
       message: isAuthenticated
-        ? "Authenticated - API execution enabled. Use f5xc-api-search-tools to find available API tools."
-        : "Documentation mode. Set F5XC_API_URL and F5XC_API_TOKEN to enable API execution.",
+        ? 'Authenticated - API execution enabled. Use f5xc-api-search-tools to find available API tools.'
+        : 'Documentation mode. Set F5XC_API_URL and F5XC_API_TOKEN to enable API execution.',
     });
   });
 }
@@ -88,7 +88,7 @@ export function registerConfigureAuthTool(server: McpServer, credentialManager: 
     async (args) => {
       const result = await handleConfigureAuth(
         args as {
-          action?: "status" | "configure" | "list-profiles" | "set-active";
+          action?: 'status' | 'configure' | 'list-profiles' | 'set-active';
           tenantUrl?: string;
           apiToken?: string;
           profileName?: string;

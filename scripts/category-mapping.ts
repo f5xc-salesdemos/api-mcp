@@ -7,9 +7,9 @@
  * for organized API reference documentation.
  */
 
-import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,28 +18,28 @@ const __dirname = dirname(__filename);
  * Subcategory definitions matching sister projects
  */
 export const SUBCATEGORIES = {
-  AI_ML: "AI/ML",
-  API_SECURITY: "API Security",
-  APPLICATIONS: "Applications",
-  AUTHENTICATION: "Authentication",
-  BIGIP_INTEGRATION: "BIG-IP Integration",
-  BOT_DEFENSE: "Bot Defense",
-  CERTIFICATES: "Certificates",
-  CLOUD_RESOURCES: "Cloud Resources",
-  DNS: "DNS",
-  INFRASTRUCTURE_PROTECTION: "Infrastructure Protection",
-  INTEGRATIONS: "Integrations",
-  KUBERNETES: "Kubernetes",
-  LOAD_BALANCING: "Load Balancing",
-  MONITORING: "Monitoring",
-  NETWORKING: "Networking",
-  ORGANIZATION: "Organization",
-  SECURITY: "Security",
-  SERVICE_MESH: "Service Mesh",
-  SITES: "Sites",
-  SUBSCRIPTIONS: "Subscriptions",
-  VPN: "VPN",
-  GENERAL: "General",
+  AI_ML: 'AI/ML',
+  API_SECURITY: 'API Security',
+  APPLICATIONS: 'Applications',
+  AUTHENTICATION: 'Authentication',
+  BIGIP_INTEGRATION: 'BIG-IP Integration',
+  BOT_DEFENSE: 'Bot Defense',
+  CERTIFICATES: 'Certificates',
+  CLOUD_RESOURCES: 'Cloud Resources',
+  DNS: 'DNS',
+  INFRASTRUCTURE_PROTECTION: 'Infrastructure Protection',
+  INTEGRATIONS: 'Integrations',
+  KUBERNETES: 'Kubernetes',
+  LOAD_BALANCING: 'Load Balancing',
+  MONITORING: 'Monitoring',
+  NETWORKING: 'Networking',
+  ORGANIZATION: 'Organization',
+  SECURITY: 'Security',
+  SERVICE_MESH: 'Service Mesh',
+  SITES: 'Sites',
+  SUBSCRIPTIONS: 'Subscriptions',
+  VPN: 'VPN',
+  GENERAL: 'General',
 } as const;
 
 export type Subcategory = (typeof SUBCATEGORIES)[keyof typeof SUBCATEGORIES];
@@ -534,20 +534,20 @@ const RESOURCE_PATTERNS: Array<{ pattern: RegExp; subcategory: Subcategory }> = 
  */
 const EXACT_RESOURCE_MAP: Record<string, Subcategory> = {
   // Load Balancing
-  "http-loadbalancer": SUBCATEGORIES.LOAD_BALANCING,
-  "tcp-loadbalancer": SUBCATEGORIES.LOAD_BALANCING,
-  "udp-loadbalancer": SUBCATEGORIES.LOAD_BALANCING,
-  "origin-pool": SUBCATEGORIES.LOAD_BALANCING,
+  'http-loadbalancer': SUBCATEGORIES.LOAD_BALANCING,
+  'tcp-loadbalancer': SUBCATEGORIES.LOAD_BALANCING,
+  'udp-loadbalancer': SUBCATEGORIES.LOAD_BALANCING,
+  'origin-pool': SUBCATEGORIES.LOAD_BALANCING,
   healthcheck: SUBCATEGORIES.LOAD_BALANCING,
 
   // DNS
-  "dns-zone": SUBCATEGORIES.DNS,
-  "dns-loadbalancer": SUBCATEGORIES.DNS,
+  'dns-zone': SUBCATEGORIES.DNS,
+  'dns-loadbalancer': SUBCATEGORIES.DNS,
 
   // Security
-  "app-firewall": SUBCATEGORIES.SECURITY,
-  "service-policy": SUBCATEGORIES.SECURITY,
-  "rate-limiter": SUBCATEGORIES.SECURITY,
+  'app-firewall': SUBCATEGORIES.SECURITY,
+  'service-policy': SUBCATEGORIES.SECURITY,
+  'rate-limiter': SUBCATEGORIES.SECURITY,
 
   // Organization
   namespace: SUBCATEGORIES.ORGANIZATION,
@@ -558,13 +558,13 @@ const EXACT_RESOURCE_MAP: Record<string, Subcategory> = {
   secret: SUBCATEGORIES.CERTIFICATES,
 
   // Sites
-  "aws-vpc-site": SUBCATEGORIES.SITES,
-  "azure-vnet-site": SUBCATEGORIES.SITES,
-  "gcp-vpc-site": SUBCATEGORIES.SITES,
+  'aws-vpc-site': SUBCATEGORIES.SITES,
+  'azure-vnet-site': SUBCATEGORIES.SITES,
+  'gcp-vpc-site': SUBCATEGORIES.SITES,
 
   // Kubernetes
-  "k8s-cluster": SUBCATEGORIES.KUBERNETES,
-  "virtual-k8s": SUBCATEGORIES.KUBERNETES,
+  'k8s-cluster': SUBCATEGORIES.KUBERNETES,
+  'virtual-k8s': SUBCATEGORIES.KUBERNETES,
 };
 
 /**
@@ -606,55 +606,55 @@ export function getSubcategory(domain: string, resource: string): Subcategory {
 export function subcategoryToDirectory(subcategory: Subcategory): string {
   return subcategory
     .toLowerCase()
-    .replace(/\//g, "-")
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "");
+    .replace(/\//g, '-')
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
 }
 
 /** Compound words that should be split into separate title words */
 const COMPOUND_WORDS: Record<string, string> = {
-  loadbalancer: "Load Balancer",
-  healthcheck: "Health Check",
-  allowlist: "Allow List",
-  blocklist: "Block List",
-  ruleset: "Rule Set",
-  logfilter: "Log Filter",
-  ratelimiter: "Rate Limiter",
-  servicepolicy: "Service Policy",
-  nameserver: "Name Server",
-  failover: "Failover",
+  loadbalancer: 'Load Balancer',
+  healthcheck: 'Health Check',
+  allowlist: 'Allow List',
+  blocklist: 'Block List',
+  ruleset: 'Rule Set',
+  logfilter: 'Log Filter',
+  ratelimiter: 'Rate Limiter',
+  servicepolicy: 'Service Policy',
+  nameserver: 'Name Server',
+  failover: 'Failover',
 };
 
 /** Acronyms that should be fully uppercased */
 const TITLE_ACRONYMS = [
-  "http",
-  "https",
-  "tcp",
-  "udp",
-  "dns",
-  "api",
-  "ip",
-  "waf",
-  "tls",
-  "ssl",
-  "k8s",
-  "vpc",
-  "vnet",
-  "gcp",
-  "aws",
-  "azure",
-  "cdn",
-  "ddos",
-  "sdn",
-  "oidc",
-  "saml",
-  "bgp",
-  "nfv",
-  "nat",
-  "vip",
-  "ssh",
-  "jwt",
-  "ldap",
+  'http',
+  'https',
+  'tcp',
+  'udp',
+  'dns',
+  'api',
+  'ip',
+  'waf',
+  'tls',
+  'ssl',
+  'k8s',
+  'vpc',
+  'vnet',
+  'gcp',
+  'aws',
+  'azure',
+  'cdn',
+  'ddos',
+  'sdn',
+  'oidc',
+  'saml',
+  'bgp',
+  'nfv',
+  'nat',
+  'vip',
+  'ssh',
+  'jwt',
+  'ldap',
 ];
 
 /**
@@ -662,12 +662,12 @@ const TITLE_ACRONYMS = [
  */
 export function resourceToTitle(resource: string): string {
   return resource
-    .split("-")
+    .split('-')
     .flatMap((word) => {
       const lower = word.toLowerCase();
       // Check compound words first
       if (COMPOUND_WORDS[lower]) {
-        return COMPOUND_WORDS[lower].split(" ");
+        return COMPOUND_WORDS[lower].split(' ');
       }
       // Handle acronyms
       if (TITLE_ACRONYMS.includes(lower)) {
@@ -676,7 +676,7 @@ export function resourceToTitle(resource: string): string {
       // Capitalize first letter
       return [word.charAt(0).toUpperCase() + word.slice(1)];
     })
-    .join(" ");
+    .join(' ');
 }
 
 /**
@@ -698,30 +698,30 @@ export function getAllUsedSubcategories(tools: Array<{ domain: string; resource:
  * Acronym handling for domain titles
  */
 const DOMAIN_ACRONYMS = {
-  ai: "AI",
-  api: "API",
-  bigip: "BIG-IP",
-  cdn: "CDN",
-  dns: "DNS",
-  http: "HTTP",
-  ip: "IP",
-  k8s: "Kubernetes",
-  vpn: "VPN",
-  waf: "WAF",
+  ai: 'AI',
+  api: 'API',
+  bigip: 'BIG-IP',
+  cdn: 'CDN',
+  dns: 'DNS',
+  http: 'HTTP',
+  ip: 'IP',
+  k8s: 'Kubernetes',
+  vpn: 'VPN',
+  waf: 'WAF',
 } as const;
 
 /**
  * Special title overrides for domains
  */
 const DOMAIN_TITLE_OVERRIDES: Record<string, string> = {
-  ai_intelligence: "AI Intelligence",
-  api_security: "API Security",
-  bigip: "BIG-IP Integration",
-  infrastructure_protection: "Infrastructure Protection",
-  load_balancer: "Load Balancing",
-  service_mesh: "Service Mesh",
-  shape_security: "Shape Security (Bot Defense)",
-  tenant_management: "Tenant & Organization Management",
+  ai_intelligence: 'AI Intelligence',
+  api_security: 'API Security',
+  bigip: 'BIG-IP Integration',
+  infrastructure_protection: 'Infrastructure Protection',
+  load_balancer: 'Load Balancing',
+  service_mesh: 'Service Mesh',
+  shape_security: 'Shape Security (Bot Defense)',
+  tenant_management: 'Tenant & Organization Management',
 };
 
 /**
@@ -763,8 +763,8 @@ const LARGE_DOMAIN_THRESHOLD = 50;
  * // }
  */
 function loadDomainSpecs(): DomainSpec[] {
-  const indexPath = join(__dirname, "..", "specs", "index.json");
-  const content = readFileSync(indexPath, "utf-8");
+  const indexPath = join(__dirname, '..', 'specs', 'index.json');
+  const content = readFileSync(indexPath, 'utf-8');
   const index = JSON.parse(content);
   return index.specifications;
 }
@@ -857,7 +857,7 @@ export function domainToTitle(domain: string): string {
 
   // Split snake_case and convert to Title Case
   return domain
-    .split("_")
+    .split('_')
     .map((word) => {
       // Check if word is an acronym
       if (word.toLowerCase() in DOMAIN_ACRONYMS) {
@@ -866,7 +866,7 @@ export function domainToTitle(domain: string): string {
       // Title case for normal words
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     })
-    .join(" ");
+    .join(' ');
 }
 
 /**
@@ -897,8 +897,8 @@ export interface CategoryPath {
  */
 function kebabCase(str: string): string {
   return str
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .replace(/[\s_]+/g, "-")
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[\s_]+/g, '-')
     .toLowerCase();
 }
 
@@ -929,7 +929,7 @@ export function getSubdivision(domain: string, resource: string, tags: string[] 
   }
 
   // Use first tag if available and not "Other"
-  if (tags.length > 0 && tags[0] !== "Other") {
+  if (tags.length > 0 && tags[0] !== 'Other') {
     return tags[0];
   }
 
@@ -957,34 +957,34 @@ export function getSubdivision(domain: string, resource: string, tags: string[] 
 function getDomainSubdivision(domain: string, resource: string): string {
   const patterns: Record<string, Array<{ pattern: RegExp; category: string }>> = {
     observability: [
-      { pattern: /alert|event/i, category: "Alerts & Events" },
-      { pattern: /log|audit/i, category: "Logging" },
-      { pattern: /metric|stat/i, category: "Metrics & Statistics" },
-      { pattern: /monitor|health/i, category: "Monitoring" },
+      { pattern: /alert|event/i, category: 'Alerts & Events' },
+      { pattern: /log|audit/i, category: 'Logging' },
+      { pattern: /metric|stat/i, category: 'Metrics & Statistics' },
+      { pattern: /monitor|health/i, category: 'Monitoring' },
     ],
     networking: [
-      { pattern: /route|routing/i, category: "Routing" },
-      { pattern: /firewall|security-group/i, category: "Security" },
-      { pattern: /interface|network-interface/i, category: "Interfaces" },
+      { pattern: /route|routing/i, category: 'Routing' },
+      { pattern: /firewall|security-group/i, category: 'Security' },
+      { pattern: /interface|network-interface/i, category: 'Interfaces' },
     ],
     security: [
-      { pattern: /policy|rule/i, category: "Policies & Rules" },
-      { pattern: /waf|app-firewall/i, category: "WAF" },
-      { pattern: /certificate|cert|tls|ssl/i, category: "Certificates" },
+      { pattern: /policy|rule/i, category: 'Policies & Rules' },
+      { pattern: /waf|app-firewall/i, category: 'WAF' },
+      { pattern: /certificate|cert|tls|ssl/i, category: 'Certificates' },
     ],
     identity: [
-      { pattern: /user|account/i, category: "Users" },
-      { pattern: /role|permission|rbac/i, category: "Access Control" },
-      { pattern: /group|team/i, category: "Groups" },
+      { pattern: /user|account/i, category: 'Users' },
+      { pattern: /role|permission|rbac/i, category: 'Access Control' },
+      { pattern: /group|team/i, category: 'Groups' },
     ],
     infrastructure: [
-      { pattern: /cluster|node/i, category: "Clusters & Nodes" },
-      { pattern: /site|location/i, category: "Sites" },
-      { pattern: /vk8s|k8s|kubernetes/i, category: "Kubernetes" },
+      { pattern: /cluster|node/i, category: 'Clusters & Nodes' },
+      { pattern: /site|location/i, category: 'Sites' },
+      { pattern: /vk8s|k8s|kubernetes/i, category: 'Kubernetes' },
     ],
     shape_security: [
-      { pattern: /bot|mitigation/i, category: "Bot Defense" },
-      { pattern: /mobile/i, category: "Mobile Security" },
+      { pattern: /bot|mitigation/i, category: 'Bot Defense' },
+      { pattern: /mobile/i, category: 'Mobile Security' },
     ],
   };
 
@@ -996,7 +996,7 @@ function getDomainSubdivision(domain: string, resource: string): string {
     }
   }
 
-  return "Other";
+  return 'Other';
 }
 
 /**

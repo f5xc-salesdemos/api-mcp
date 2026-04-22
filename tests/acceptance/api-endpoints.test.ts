@@ -8,15 +8,15 @@
  * - Authenticated: Both documentation and API execution work
  */
 
-import { AuthMode, CredentialManager } from "@robinmordasiewicz/f5xc-auth";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createServer, F5XCApiServer } from "../../src/server.js";
+import { AuthMode, CredentialManager } from '@robinmordasiewicz/f5xc-auth';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { createServer, F5XCApiServer } from '../../src/server.js';
 import {
   clearF5XCEnvVars,
   isCI,
   setupAuthenticatedModeEnv,
   setupDocumentationModeEnv,
-} from "../utils/ci-environment.js";
+} from '../utils/ci-environment.js';
 
 // Mock MCP SDK for unit testing
 const mockConnect = vi.fn().mockResolvedValue(undefined);
@@ -25,7 +25,7 @@ const mockTool = vi.fn();
 const mockResource = vi.fn();
 const mockPrompt = vi.fn();
 
-vi.mock("@modelcontextprotocol/sdk/server/mcp.js", () => {
+vi.mock('@modelcontextprotocol/sdk/server/mcp.js', () => {
   const MockMcpServer = function (this: Record<string, unknown>) {
     this.connect = mockConnect;
     this.close = mockClose;
@@ -46,7 +46,7 @@ vi.mock("@modelcontextprotocol/sdk/server/mcp.js", () => {
   return { McpServer: MockMcpServer };
 });
 
-vi.mock("@modelcontextprotocol/sdk/server/stdio.js", () => {
+vi.mock('@modelcontextprotocol/sdk/server/stdio.js', () => {
   // Use a function expression (not arrow function) to allow 'new' operator
   const MockStdioServerTransport = function () {
     // Empty transport mock
@@ -56,7 +56,7 @@ vi.mock("@modelcontextprotocol/sdk/server/stdio.js", () => {
 });
 
 // Mock http-client
-vi.mock("../../src/auth/http-client.js", () => ({
+vi.mock('../../src/auth/http-client.js', () => ({
   createHttpClient: vi.fn().mockReturnValue({
     get: vi.fn(),
     post: vi.fn(),
@@ -67,16 +67,16 @@ vi.mock("../../src/auth/http-client.js", () => ({
 }));
 
 // Mock resources
-vi.mock("../../src/resources/index.js", () => ({
+vi.mock('../../src/resources/index.js', () => ({
   RESOURCE_TYPES: {
     http_loadbalancer: {
-      type: "http_loadbalancer",
-      description: "HTTP Load Balancer",
+      type: 'http_loadbalancer',
+      description: 'HTTP Load Balancer',
       namespaceScoped: true,
     },
     namespace: {
-      type: "namespace",
-      description: "Namespace",
+      type: 'namespace',
+      description: 'Namespace',
       namespaceScoped: false,
     },
   },
@@ -89,7 +89,7 @@ vi.mock("../../src/resources/index.js", () => ({
 }));
 
 // Mock logger
-vi.mock("../../src/utils/logging.js", () => ({
+vi.mock('../../src/utils/logging.js', () => ({
   logger: {
     info: vi.fn(),
     error: vi.fn(),
@@ -98,7 +98,7 @@ vi.mock("../../src/utils/logging.js", () => ({
   },
 }));
 
-describe("API Endpoint Acceptance Tests", () => {
+describe('API Endpoint Acceptance Tests', () => {
   const originalEnv = process.env;
 
   beforeEach(() => {
@@ -113,33 +113,33 @@ describe("API Endpoint Acceptance Tests", () => {
   // ===========================================================================
   // UNAUTHENTICATED ENDPOINT TESTS
   // ===========================================================================
-  describe("Unauthenticated API Endpoints", () => {
+  describe('Unauthenticated API Endpoints', () => {
     beforeEach(() => {
       setupDocumentationModeEnv();
     });
 
-    describe("Server Info Tool", () => {
-      it("should return documentation mode in server info", async () => {
+    describe('Server Info Tool', () => {
+      it('should return documentation mode in server info', async () => {
         const server = await createServer();
 
         // Find the server-info tool handler
-        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
         expect(serverInfoCall).toBeDefined();
 
         const handler = serverInfoCall[3];
         const result = await handler();
 
         const data = JSON.parse(result.content[0].text);
-        expect(data.mode).toBe("documentation");
+        expect(data.mode).toBe('documentation');
         expect(data.authenticated).toBe(false);
         expect(data.capabilities.documentation).toBe(true);
         expect(data.capabilities.api_execution).toBe(false);
       });
 
-      it("should indicate no tenant URL when unauthenticated", async () => {
+      it('should indicate no tenant URL when unauthenticated', async () => {
         const server = await createServer();
 
-        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
         const handler = serverInfoCall[3];
         const result = await handler();
 
@@ -148,26 +148,26 @@ describe("API Endpoint Acceptance Tests", () => {
       });
     });
 
-    describe("Tool Registration", () => {
-      it("should register all tools in documentation mode", async () => {
+    describe('Tool Registration', () => {
+      it('should register all tools in documentation mode', async () => {
         await createServer();
 
         // Should have registered tools
         expect(mockTool.mock.calls.length).toBeGreaterThan(0);
 
         // server-info should always be registered
-        const hasServerInfo = mockTool.mock.calls.some((call) => call[0] === "f5xc-api-server-info");
+        const hasServerInfo = mockTool.mock.calls.some((call) => call[0] === 'f5xc-api-server-info');
         expect(hasServerInfo).toBe(true);
       });
 
-      it("should register resources in documentation mode", async () => {
+      it('should register resources in documentation mode', async () => {
         await createServer();
 
         // Should have registered resources
         expect(mockResource.mock.calls.length).toBeGreaterThan(0);
       });
 
-      it("should register prompts in documentation mode", async () => {
+      it('should register prompts in documentation mode', async () => {
         await createServer();
 
         // Should have registered prompts
@@ -175,8 +175,8 @@ describe("API Endpoint Acceptance Tests", () => {
       });
     });
 
-    describe("Credential Manager Access", () => {
-      it("should expose unauthenticated credential manager", async () => {
+    describe('Credential Manager Access', () => {
+      it('should expose unauthenticated credential manager', async () => {
         const server = await createServer();
         const credManager = server.getCredentialManager();
 
@@ -190,43 +190,43 @@ describe("API Endpoint Acceptance Tests", () => {
   // ===========================================================================
   // AUTHENTICATED ENDPOINT TESTS
   // ===========================================================================
-  describe("Authenticated API Endpoints", () => {
+  describe('Authenticated API Endpoints', () => {
     beforeEach(() => {
       setupAuthenticatedModeEnv();
     });
 
-    describe("Server Info Tool", () => {
-      it("should return execution mode in server info", async () => {
+    describe('Server Info Tool', () => {
+      it('should return execution mode in server info', async () => {
         const server = await createServer();
 
-        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
         expect(serverInfoCall).toBeDefined();
 
         const handler = serverInfoCall[3];
         const result = await handler();
 
         const data = JSON.parse(result.content[0].text);
-        expect(data.mode).toBe("execution");
+        expect(data.mode).toBe('execution');
         expect(data.authenticated).toBe(true);
         expect(data.capabilities.documentation).toBe(true);
         expect(data.capabilities.api_execution).toBe(true);
       });
 
-      it("should include tenant URL when authenticated", async () => {
+      it('should include tenant URL when authenticated', async () => {
         const server = await createServer();
 
-        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
         const handler = serverInfoCall[3];
         const result = await handler();
 
         const data = JSON.parse(result.content[0].text);
         expect(data.tenantUrl).not.toBeNull();
-        expect(data.tenantUrl).toContain("console.ves.volterra.io");
+        expect(data.tenantUrl).toContain('console.ves.volterra.io');
       });
     });
 
-    describe("Credential Manager Access", () => {
-      it("should expose authenticated credential manager", async () => {
+    describe('Credential Manager Access', () => {
+      it('should expose authenticated credential manager', async () => {
         const server = await createServer();
         const credManager = server.getCredentialManager();
 
@@ -235,19 +235,19 @@ describe("API Endpoint Acceptance Tests", () => {
         expect(credManager.isAuthenticated()).toBe(true);
       });
 
-      it("should have valid tenant", async () => {
+      it('should have valid tenant', async () => {
         const server = await createServer();
         const credManager = server.getCredentialManager();
 
-        expect(credManager.getTenant()).toBe("test");
+        expect(credManager.getTenant()).toBe('test');
       });
 
-      it("should have valid API URL", async () => {
+      it('should have valid API URL', async () => {
         const server = await createServer();
         const credManager = server.getCredentialManager();
 
         // Note: f5xc-auth normalizes API URLs to include /api path
-        expect(credManager.getApiUrl()).toBe("https://test.console.ves.volterra.io/api");
+        expect(credManager.getApiUrl()).toBe('https://test.console.ves.volterra.io/api');
       });
     });
   });
@@ -255,8 +255,8 @@ describe("API Endpoint Acceptance Tests", () => {
   // ===========================================================================
   // STATE TRANSITION TESTS
   // ===========================================================================
-  describe("Authentication State Transitions", () => {
-    it("should create server correctly when transitioning from unauth to auth", async () => {
+  describe('Authentication State Transitions', () => {
+    it('should create server correctly when transitioning from unauth to auth', async () => {
       // First, create server in documentation mode
       setupDocumentationModeEnv();
       const server1 = await createServer();
@@ -269,72 +269,72 @@ describe("API Endpoint Acceptance Tests", () => {
       expect(server2.getCredentialManager().getAuthMode()).toBe(AuthMode.TOKEN);
     });
 
-    it("should maintain independent server instances", async () => {
+    it('should maintain independent server instances', async () => {
       setupAuthenticatedModeEnv({
-        apiUrl: "https://tenant-a.console.ves.volterra.io",
-        apiToken: "token-a",
+        apiUrl: 'https://tenant-a.console.ves.volterra.io',
+        apiToken: 'token-a',
       });
       const server1 = await createServer();
 
       setupAuthenticatedModeEnv({
-        apiUrl: "https://tenant-b.console.ves.volterra.io",
-        apiToken: "token-b",
+        apiUrl: 'https://tenant-b.console.ves.volterra.io',
+        apiToken: 'token-b',
       });
       vi.clearAllMocks();
       const server2 = await createServer();
 
       // Servers should have different credentials
-      expect(server1.getCredentialManager().getTenant()).toBe("tenant-a");
-      expect(server2.getCredentialManager().getTenant()).toBe("tenant-b");
+      expect(server1.getCredentialManager().getTenant()).toBe('tenant-a');
+      expect(server2.getCredentialManager().getTenant()).toBe('tenant-b');
     });
   });
 
   // ===========================================================================
   // PROMPT REGISTRATION TESTS
   // ===========================================================================
-  describe("Prompt Registration", () => {
-    it("should register workflow prompts in documentation mode", async () => {
+  describe('Prompt Registration', () => {
+    it('should register workflow prompts in documentation mode', async () => {
       setupDocumentationModeEnv();
       await createServer();
 
       // Check for key prompts
-      const hasDeployLb = mockPrompt.mock.calls.some((call) => call[0] === "deploy_http_loadbalancer");
+      const hasDeployLb = mockPrompt.mock.calls.some((call) => call[0] === 'deploy_http_loadbalancer');
       expect(hasDeployLb).toBe(true);
     });
 
-    it("should register workflow prompts in authenticated mode", async () => {
+    it('should register workflow prompts in authenticated mode', async () => {
       setupAuthenticatedModeEnv();
       await createServer();
 
       // Check for key prompts
-      const hasDeployLb = mockPrompt.mock.calls.some((call) => call[0] === "deploy_http_loadbalancer");
+      const hasDeployLb = mockPrompt.mock.calls.some((call) => call[0] === 'deploy_http_loadbalancer');
       expect(hasDeployLb).toBe(true);
     });
 
-    it("should execute prompt handler with arguments", async () => {
+    it('should execute prompt handler with arguments', async () => {
       setupDocumentationModeEnv();
       await createServer();
 
-      const deployLbPrompt = mockPrompt.mock.calls.find((call) => call[0] === "deploy_http_loadbalancer");
+      const deployLbPrompt = mockPrompt.mock.calls.find((call) => call[0] === 'deploy_http_loadbalancer');
       expect(deployLbPrompt).toBeDefined();
 
       const handler = deployLbPrompt[3];
       const result = await handler({
-        name: "test-lb",
-        namespace: "test-ns",
+        name: 'test-lb',
+        namespace: 'test-ns',
       });
 
       expect(result).toBeDefined();
       expect(result.messages).toHaveLength(1);
-      expect(result.messages[0].role).toBe("user");
+      expect(result.messages[0].role).toBe('user');
     });
   });
 
   // ===========================================================================
   // SERVER LIFECYCLE TESTS
   // ===========================================================================
-  describe("Server Lifecycle", () => {
-    it("should start and stop cleanly in documentation mode", async () => {
+  describe('Server Lifecycle', () => {
+    it('should start and stop cleanly in documentation mode', async () => {
       setupDocumentationModeEnv();
       const server = await createServer();
 
@@ -345,7 +345,7 @@ describe("API Endpoint Acceptance Tests", () => {
       expect(mockClose).toHaveBeenCalled();
     });
 
-    it("should start and stop cleanly in authenticated mode", async () => {
+    it('should start and stop cleanly in authenticated mode', async () => {
       setupAuthenticatedModeEnv();
       const server = await createServer();
 
@@ -356,7 +356,7 @@ describe("API Endpoint Acceptance Tests", () => {
       expect(mockClose).toHaveBeenCalled();
     });
 
-    it("should handle multiple start/stop cycles", async () => {
+    it('should handle multiple start/stop cycles', async () => {
       setupDocumentationModeEnv();
       const server = await createServer();
 
@@ -377,7 +377,7 @@ describe("API Endpoint Acceptance Tests", () => {
 // ===========================================================================
 // API CAPABILITY MATRIX
 // ===========================================================================
-describe("API Capability Matrix", () => {
+describe('API Capability Matrix', () => {
   const originalEnv = process.env;
 
   beforeEach(() => {
@@ -398,7 +398,7 @@ describe("API Capability Matrix", () => {
     };
   }> = [
     {
-      name: "Unauthenticated → Documentation only",
+      name: 'Unauthenticated → Documentation only',
       setup: () => setupDocumentationModeEnv(),
       expectedCapabilities: {
         documentation: true,
@@ -406,7 +406,7 @@ describe("API Capability Matrix", () => {
       },
     },
     {
-      name: "Token authenticated → Full capabilities",
+      name: 'Token authenticated → Full capabilities',
       setup: () => setupAuthenticatedModeEnv(),
       expectedCapabilities: {
         documentation: true,
@@ -414,11 +414,11 @@ describe("API Capability Matrix", () => {
       },
     },
     {
-      name: "Custom tenant → Full capabilities",
+      name: 'Custom tenant → Full capabilities',
       setup: () =>
         setupAuthenticatedModeEnv({
-          apiUrl: "https://production.console.ves.volterra.io",
-          apiToken: "prod-token",
+          apiUrl: 'https://production.console.ves.volterra.io',
+          apiToken: 'prod-token',
         }),
       expectedCapabilities: {
         documentation: true,
@@ -432,7 +432,7 @@ describe("API Capability Matrix", () => {
       setup();
       const server = await createServer();
 
-      const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+      const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
       const handler = serverInfoCall[3];
       const result = await handler();
 

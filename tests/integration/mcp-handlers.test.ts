@@ -9,9 +9,9 @@
  * These tests are idempotent and can be run repeatedly without side effects.
  */
 
-import { AuthMode, CredentialManager } from "@robinmordasiewicz/f5xc-auth";
-import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { clearF5XCEnvVars, setupAuthenticatedModeEnv, setupDocumentationModeEnv } from "../utils/ci-environment.js";
+import { AuthMode, CredentialManager } from '@robinmordasiewicz/f5xc-auth';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { clearF5XCEnvVars, setupAuthenticatedModeEnv, setupDocumentationModeEnv } from '../utils/ci-environment.js';
 
 // Mock MCP SDK to capture tool registrations
 const toolHandlers: Map<string, Function> = new Map();
@@ -21,7 +21,7 @@ const mockTool = vi.fn().mockImplementation((name, _desc, _schema, handler) => {
 const mockResource = vi.fn();
 const mockPrompt = vi.fn();
 
-vi.mock("@modelcontextprotocol/sdk/server/mcp.js", () => {
+vi.mock('@modelcontextprotocol/sdk/server/mcp.js', () => {
   const MockMcpServer = function (this: Record<string, unknown>) {
     this.tool = mockTool;
     this.resource = mockResource;
@@ -35,7 +35,7 @@ vi.mock("@modelcontextprotocol/sdk/server/mcp.js", () => {
 });
 
 // Mock logging
-vi.mock("../../src/utils/logging.js", () => ({
+vi.mock('../../src/utils/logging.js', () => ({
   logger: {
     info: vi.fn(),
     error: vi.fn(),
@@ -44,7 +44,7 @@ vi.mock("../../src/utils/logging.js", () => ({
   },
 }));
 
-describe("MCP Handler Integration Tests", () => {
+describe('MCP Handler Integration Tests', () => {
   const originalEnv = process.env;
 
   beforeEach(() => {
@@ -57,15 +57,15 @@ describe("MCP Handler Integration Tests", () => {
     process.env = originalEnv;
   });
 
-  describe("Documentation Mode (Unauthenticated)", () => {
+  describe('Documentation Mode (Unauthenticated)', () => {
     beforeEach(() => {
       setupDocumentationModeEnv();
     });
 
-    describe("server-info tool", () => {
-      it("should return documentation mode status", async () => {
-        const { registerTools } = await import("../../src/server/handlers/tool-handlers/index.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('server-info tool', () => {
+      it('should return documentation mode status', async () => {
+        const { registerTools } = await import('../../src/server/handlers/tool-handlers/index.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -73,24 +73,24 @@ describe("MCP Handler Integration Tests", () => {
         const server = new McpServer();
         registerTools(server, { credentialManager });
 
-        const handler = toolHandlers.get("f5xc-api-server-info");
+        const handler = toolHandlers.get('f5xc-api-server-info');
         expect(handler).toBeDefined();
 
         const result = await handler!();
         const data = JSON.parse(result.content[0].text);
 
-        expect(data.mode).toBe("documentation");
+        expect(data.mode).toBe('documentation');
         expect(data.authenticated).toBe(false);
         expect(data.authMethod).toBe(AuthMode.NONE);
         expect(data.tenantUrl).toBeNull();
         expect(data.capabilities.documentation).toBe(true);
         expect(data.capabilities.api_execution).toBe(false);
-        expect(data.server).toBe("f5xc-api-mcp");
+        expect(data.server).toBe('f5xc-api-mcp');
       });
 
-      it("should include tool index metadata", async () => {
-        const { registerTools } = await import("../../src/server/handlers/tool-handlers/index.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      it('should include tool index metadata', async () => {
+        const { registerTools } = await import('../../src/server/handlers/tool-handlers/index.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -98,67 +98,67 @@ describe("MCP Handler Integration Tests", () => {
         const server = new McpServer();
         registerTools(server, { credentialManager });
 
-        const handler = toolHandlers.get("f5xc-api-server-info");
+        const handler = toolHandlers.get('f5xc-api-server-info');
         const result = await handler!();
         const data = JSON.parse(result.content[0].text);
 
         expect(data.toolIndex).toBeDefined();
         expect(data.toolIndex.totalTools).toBeGreaterThan(1000);
-        expect(data.toolIndex.availableDomains).toContain("virtual");
-        expect(data.toolIndex.availableDomains).toContain("dns");
+        expect(data.toolIndex.availableDomains).toContain('virtual');
+        expect(data.toolIndex.availableDomains).toContain('dns');
       });
     });
 
-    describe("search-tools tool", () => {
-      it("should search for HTTP load balancer tools", async () => {
-        const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('search-tools tool', () => {
+      it('should search for HTTP load balancer tools', async () => {
+        const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerDiscoveryTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-search-tools");
+        const handler = toolHandlers.get('f5xc-api-search-tools');
         expect(handler).toBeDefined();
 
-        const result = await handler!({ query: "http load balancer" });
+        const result = await handler!({ query: 'http load balancer' });
         const data = JSON.parse(result.content[0].text);
 
         expect(data.results).toBeDefined();
         expect(data.results.length).toBeGreaterThan(0);
-        expect(data.results[0]).toHaveProperty("name");
-        expect(data.results[0]).toHaveProperty("score");
+        expect(data.results[0]).toHaveProperty('name');
+        expect(data.results[0]).toHaveProperty('score');
       });
 
-      it("should filter by domain", async () => {
-        const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      it('should filter by domain', async () => {
+        const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerDiscoveryTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-search-tools");
+        const handler = toolHandlers.get('f5xc-api-search-tools');
         const result = await handler!({
-          query: "create",
-          domains: ["dns"],
+          query: 'create',
+          domains: ['dns'],
         });
         const data = JSON.parse(result.content[0].text);
 
         expect(data.results).toBeDefined();
         for (const tool of data.results) {
-          expect(tool.domain).toBe("dns");
+          expect(tool.domain).toBe('dns');
         }
       });
 
-      it("should limit results", async () => {
-        const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      it('should limit results', async () => {
+        const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerDiscoveryTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-search-tools");
+        const handler = toolHandlers.get('f5xc-api-search-tools');
         const result = await handler!({
-          query: "list",
+          query: 'list',
           limit: 5,
         });
         const data = JSON.parse(result.content[0].text);
@@ -167,18 +167,18 @@ describe("MCP Handler Integration Tests", () => {
       });
     });
 
-    describe("describe-tool tool", () => {
-      it("should describe a known tool", async () => {
-        const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('describe-tool tool', () => {
+      it('should describe a known tool', async () => {
+        const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerDiscoveryTools(server);
 
         // First search to get a valid tool name
-        const searchHandler = toolHandlers.get("f5xc-api-search-tools");
+        const searchHandler = toolHandlers.get('f5xc-api-search-tools');
         const searchResult = await searchHandler!({
-          query: "http load balancer",
+          query: 'http load balancer',
           limit: 1,
         });
         const searchData = JSON.parse(searchResult.content[0].text);
@@ -186,7 +186,7 @@ describe("MCP Handler Integration Tests", () => {
         if (searchData.results.length > 0) {
           const toolName = searchData.results[0].name;
 
-          const describeHandler = toolHandlers.get("f5xc-api-describe-tool");
+          const describeHandler = toolHandlers.get('f5xc-api-describe-tool');
           const describeResult = await describeHandler!({ toolName });
           const describeData = JSON.parse(describeResult.content[0].text);
 
@@ -196,32 +196,32 @@ describe("MCP Handler Integration Tests", () => {
         }
       });
 
-      it("should return error for unknown tool", async () => {
-        const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      it('should return error for unknown tool', async () => {
+        const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerDiscoveryTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-describe-tool");
-        const result = await handler!({ toolName: "nonexistent-tool-xyz" });
+        const handler = toolHandlers.get('f5xc-api-describe-tool');
+        const result = await handler!({ toolName: 'nonexistent-tool-xyz' });
 
         expect(result.isError).toBe(true);
       });
     });
 
-    describe("search-resources tool", () => {
-      it("should search for resources", async () => {
-        const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('search-resources tool', () => {
+      it('should search for resources', async () => {
+        const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerDiscoveryTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-search-resources");
+        const handler = toolHandlers.get('f5xc-api-search-resources');
         expect(handler).toBeDefined();
 
-        const result = await handler!({ query: "load balancer" });
+        const result = await handler!({ query: 'load balancer' });
         const data = JSON.parse(result.content[0].text);
 
         expect(data.results).toBeDefined();
@@ -229,20 +229,20 @@ describe("MCP Handler Integration Tests", () => {
       });
     });
 
-    describe("dependencies tool", () => {
-      it("should return dependency information", async () => {
-        const { registerAnalysisTools } = await import("../../src/server/handlers/tool-handlers/analysis.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('dependencies tool', () => {
+      it('should return dependency information', async () => {
+        const { registerAnalysisTools } = await import('../../src/server/handlers/tool-handlers/analysis.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerAnalysisTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-dependencies");
+        const handler = toolHandlers.get('f5xc-api-dependencies');
         expect(handler).toBeDefined();
 
         const result = await handler!({
-          resource: "http-loadbalancer",
-          domain: "virtual",
+          resource: 'http-loadbalancer',
+          domain: 'virtual',
         });
         const data = JSON.parse(result.content[0].text);
 
@@ -251,15 +251,15 @@ describe("MCP Handler Integration Tests", () => {
       });
     });
 
-    describe("dependency-stats tool", () => {
-      it("should return graph statistics", async () => {
-        const { registerAnalysisTools } = await import("../../src/server/handlers/tool-handlers/analysis.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('dependency-stats tool', () => {
+      it('should return graph statistics', async () => {
+        const { registerAnalysisTools } = await import('../../src/server/handlers/tool-handlers/analysis.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerAnalysisTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-dependency-stats");
+        const handler = toolHandlers.get('f5xc-api-dependency-stats');
         expect(handler).toBeDefined();
 
         const result = await handler!({});
@@ -267,52 +267,52 @@ describe("MCP Handler Integration Tests", () => {
       });
     });
 
-    describe("best-practices tool", () => {
-      it("should return best practices for a domain", async () => {
-        const { registerGuidanceTools } = await import("../../src/server/handlers/tool-handlers/guidance.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('best-practices tool', () => {
+      it('should return best practices for a domain', async () => {
+        const { registerGuidanceTools } = await import('../../src/server/handlers/tool-handlers/guidance.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerGuidanceTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-best-practices");
+        const handler = toolHandlers.get('f5xc-api-best-practices');
         expect(handler).toBeDefined();
 
-        const result = await handler!({ domain: "virtual" });
+        const result = await handler!({ domain: 'virtual' });
         expect(result.isError).toBeUndefined();
       });
 
-      it("should return general best practices without domain", async () => {
-        const { registerGuidanceTools } = await import("../../src/server/handlers/tool-handlers/guidance.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      it('should return general best practices without domain', async () => {
+        const { registerGuidanceTools } = await import('../../src/server/handlers/tool-handlers/guidance.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerGuidanceTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-best-practices");
+        const handler = toolHandlers.get('f5xc-api-best-practices');
         const result = await handler!({});
         expect(result.isError).toBeUndefined();
       });
     });
 
-    describe("validate-params tool", () => {
-      it("should validate parameters for a tool", async () => {
-        const { registerAnalysisTools } = await import("../../src/server/handlers/tool-handlers/analysis.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('validate-params tool', () => {
+      it('should validate parameters for a tool', async () => {
+        const { registerAnalysisTools } = await import('../../src/server/handlers/tool-handlers/analysis.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const server = new McpServer();
         registerAnalysisTools(server);
 
-        const handler = toolHandlers.get("f5xc-api-validate-params");
+        const handler = toolHandlers.get('f5xc-api-validate-params');
         expect(handler).toBeDefined();
 
         // Search for a tool first
-        const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
+        const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
         registerDiscoveryTools(server);
 
-        const searchHandler = toolHandlers.get("f5xc-api-search-tools");
+        const searchHandler = toolHandlers.get('f5xc-api-search-tools');
         const searchResult = await searchHandler!({
-          query: "create http",
+          query: 'create http',
           limit: 1,
         });
         const searchData = JSON.parse(searchResult.content[0].text);
@@ -321,20 +321,20 @@ describe("MCP Handler Integration Tests", () => {
           const toolName = searchData.results[0].toolName;
           const result = await handler!({
             toolName,
-            body: { metadata: { name: "test" } },
+            body: { metadata: { name: 'test' } },
           });
           expect(result.isError).toBeUndefined();
         }
       });
     });
 
-    describe("execute-tool in documentation mode", () => {
-      it("should return documentation without executing", async () => {
+    describe('execute-tool in documentation mode', () => {
+      it('should return documentation without executing', async () => {
         setupDocumentationModeEnv();
         vi.resetModules();
 
-        const { registerExecutionTools } = await import("../../src/server/handlers/tool-handlers/execution.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+        const { registerExecutionTools } = await import('../../src/server/handlers/tool-handlers/execution.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -342,13 +342,13 @@ describe("MCP Handler Integration Tests", () => {
         const server = new McpServer();
         registerExecutionTools(server, credentialManager);
 
-        const handler = toolHandlers.get("f5xc-api-execute-tool");
+        const handler = toolHandlers.get('f5xc-api-execute-tool');
         expect(handler).toBeDefined();
 
         // Should work in documentation mode - returns docs/examples not actual API calls
         const result = await handler!({
-          toolName: "virtual_list-http-loadbalancers",
-          pathParams: { namespace: "default" },
+          toolName: 'virtual_list-http-loadbalancers',
+          pathParams: { namespace: 'default' },
         });
 
         // In documentation mode, should not error and should return some content
@@ -361,17 +361,17 @@ describe("MCP Handler Integration Tests", () => {
     });
   });
 
-  describe("Authenticated Mode", () => {
+  describe('Authenticated Mode', () => {
     beforeEach(async () => {
       setupAuthenticatedModeEnv();
       vi.resetModules();
       toolHandlers.clear();
     });
 
-    describe("server-info tool", () => {
-      it("should return execution mode status", async () => {
-        const { registerTools } = await import("../../src/server/handlers/tool-handlers/index.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('server-info tool', () => {
+      it('should return execution mode status', async () => {
+        const { registerTools } = await import('../../src/server/handlers/tool-handlers/index.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -379,11 +379,11 @@ describe("MCP Handler Integration Tests", () => {
         const server = new McpServer();
         registerTools(server, { credentialManager });
 
-        const handler = toolHandlers.get("f5xc-api-server-info");
+        const handler = toolHandlers.get('f5xc-api-server-info');
         const result = await handler!();
         const data = JSON.parse(result.content[0].text);
 
-        expect(data.mode).toBe("execution");
+        expect(data.mode).toBe('execution');
         expect(data.authenticated).toBe(true);
         expect(data.authMethod).toBe(AuthMode.TOKEN);
         expect(data.tenantUrl).not.toBeNull();
@@ -391,10 +391,10 @@ describe("MCP Handler Integration Tests", () => {
       });
     });
 
-    describe("configure-auth tool", () => {
-      it("should return auth status", async () => {
-        const { registerMetadataTools } = await import("../../src/server/handlers/tool-handlers/metadata.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('configure-auth tool', () => {
+      it('should return auth status', async () => {
+        const { registerMetadataTools } = await import('../../src/server/handlers/tool-handlers/metadata.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -402,10 +402,10 @@ describe("MCP Handler Integration Tests", () => {
         const server = new McpServer();
         registerMetadataTools(server, credentialManager);
 
-        const handler = toolHandlers.get("f5xc-api-configure-auth");
+        const handler = toolHandlers.get('f5xc-api-configure-auth');
         expect(handler).toBeDefined();
 
-        const result = await handler!({ action: "status" });
+        const result = await handler!({ action: 'status' });
         expect(result.isError).toBeUndefined();
         const data = JSON.parse(result.content[0].text);
         // Response uses 'authMethod' not 'authMode'
@@ -413,9 +413,9 @@ describe("MCP Handler Integration Tests", () => {
         expect(data.authenticated).toBe(true);
       });
 
-      it("should list profiles", async () => {
-        const { registerMetadataTools } = await import("../../src/server/handlers/tool-handlers/metadata.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      it('should list profiles', async () => {
+        const { registerMetadataTools } = await import('../../src/server/handlers/tool-handlers/metadata.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -423,8 +423,8 @@ describe("MCP Handler Integration Tests", () => {
         const server = new McpServer();
         registerMetadataTools(server, credentialManager);
 
-        const handler = toolHandlers.get("f5xc-api-configure-auth");
-        const result = await handler!({ action: "list-profiles" });
+        const handler = toolHandlers.get('f5xc-api-configure-auth');
+        const result = await handler!({ action: 'list-profiles' });
         expect(result.isError).toBeUndefined();
         const data = JSON.parse(result.content[0].text);
         expect(data.profiles).toBeInstanceOf(Array);
@@ -432,13 +432,13 @@ describe("MCP Handler Integration Tests", () => {
     });
   });
 
-  describe("Idempotency Verification", () => {
-    it("should produce same results when called multiple times", async () => {
+  describe('Idempotency Verification', () => {
+    it('should produce same results when called multiple times', async () => {
       setupDocumentationModeEnv();
       vi.resetModules();
 
-      const { registerTools } = await import("../../src/server/handlers/tool-handlers/index.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      const { registerTools } = await import('../../src/server/handlers/tool-handlers/index.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
@@ -446,7 +446,7 @@ describe("MCP Handler Integration Tests", () => {
       const server = new McpServer();
       registerTools(server, { credentialManager });
 
-      const handler = toolHandlers.get("f5xc-api-server-info");
+      const handler = toolHandlers.get('f5xc-api-server-info');
 
       // Call multiple times
       const results = await Promise.all([handler!(), handler!(), handler!()]);
@@ -458,21 +458,21 @@ describe("MCP Handler Integration Tests", () => {
       }
     });
 
-    it("should produce consistent search results", async () => {
+    it('should produce consistent search results', async () => {
       setupDocumentationModeEnv();
       vi.resetModules();
 
-      const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerDiscoveryTools(server);
 
-      const handler = toolHandlers.get("f5xc-api-search-tools");
+      const handler = toolHandlers.get('f5xc-api-search-tools');
 
       // Call with same parameters
-      const result1 = await handler!({ query: "http load balancer", limit: 5 });
-      const result2 = await handler!({ query: "http load balancer", limit: 5 });
+      const result1 = await handler!({ query: 'http load balancer', limit: 5 });
+      const result2 = await handler!({ query: 'http load balancer', limit: 5 });
 
       const data1 = JSON.parse(result1.content[0].text);
       const data2 = JSON.parse(result2.content[0].text);
@@ -485,18 +485,18 @@ describe("MCP Handler Integration Tests", () => {
     });
   });
 
-  describe("Handler Error Handling", () => {
-    it("should handle missing required parameters gracefully", async () => {
+  describe('Handler Error Handling', () => {
+    it('should handle missing required parameters gracefully', async () => {
       setupDocumentationModeEnv();
       vi.resetModules();
 
-      const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerDiscoveryTools(server);
 
-      const handler = toolHandlers.get("f5xc-api-describe-tool");
+      const handler = toolHandlers.get('f5xc-api-describe-tool');
 
       // Call without required toolName
       const result = await handler!({});
@@ -505,33 +505,33 @@ describe("MCP Handler Integration Tests", () => {
       expect(result.isError).toBe(true);
     });
 
-    it("should handle invalid parameter types gracefully", async () => {
+    it('should handle invalid parameter types gracefully', async () => {
       setupDocumentationModeEnv();
       vi.resetModules();
 
-      const { registerDiscoveryTools } = await import("../../src/server/handlers/tool-handlers/discovery.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      const { registerDiscoveryTools } = await import('../../src/server/handlers/tool-handlers/discovery.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerDiscoveryTools(server);
 
-      const handler = toolHandlers.get("f5xc-api-search-tools");
+      const handler = toolHandlers.get('f5xc-api-search-tools');
 
       // Call with invalid limit type - should still work or error gracefully
-      const result = await handler!({ query: "test", limit: "invalid" });
+      const result = await handler!({ query: 'test', limit: 'invalid' });
 
       // Should either work (coercing to valid) or return clean error
       expect(result.content).toBeDefined();
     });
   });
 
-  describe("All Registered Handlers Are Functional", () => {
-    it("should have functional handlers for all 14+ registered tools", async () => {
+  describe('All Registered Handlers Are Functional', () => {
+    it('should have functional handlers for all 14+ registered tools', async () => {
       setupDocumentationModeEnv();
       vi.resetModules();
 
-      const { registerTools } = await import("../../src/server/handlers/tool-handlers/index.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      const { registerTools } = await import('../../src/server/handlers/tool-handlers/index.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
@@ -544,7 +544,7 @@ describe("MCP Handler Integration Tests", () => {
 
       // Test that each handler is callable
       for (const [name, handler] of toolHandlers.entries()) {
-        expect(typeof handler).toBe("function");
+        expect(typeof handler).toBe('function');
 
         // Try calling with empty args (some may error, but shouldn't throw)
         try {

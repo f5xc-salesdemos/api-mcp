@@ -10,7 +10,7 @@
  * and smart example generation.
  */
 
-import { getToolByName } from "../registry.js";
+import { getToolByName } from '../registry.js';
 import {
   extractMutuallyExclusiveGroups,
   extractRequiredFields,
@@ -19,7 +19,7 @@ import {
   type MutuallyExclusiveGroup,
   type ResolvedSchema,
   getResolvedRequestBodySchema as resolveSchema,
-} from "./schema-loader.js";
+} from './schema-loader.js';
 
 // Re-export types for convenience
 export type { ResolvedSchema, MinimumConfiguration, MutuallyExclusiveGroup };
@@ -175,7 +175,7 @@ export function getMutuallyExclusiveFields(toolName: string): MutuallyExclusiveG
   if (minConfig?.mutually_exclusive_groups) {
     for (const group of minConfig.mutually_exclusive_groups) {
       groups.push({
-        fieldPath: group.fields.join(" | "),
+        fieldPath: group.fields.join(' | '),
         options: group.fields.map((f) => ({ fieldName: f })),
         reason: group.reason,
       });
@@ -190,23 +190,23 @@ export function getMutuallyExclusiveFields(toolName: string): MutuallyExclusiveG
  */
 const SMART_DEFAULTS: Record<string, (toolName: string, schema?: ResolvedSchema) => unknown> = {
   name: (toolName) => `example-${extractResourceFromTool(toolName)}`,
-  "metadata.name": (toolName) => `example-${extractResourceFromTool(toolName)}`,
-  namespace: () => "default",
-  "metadata.namespace": () => "default",
+  'metadata.name': (toolName) => `example-${extractResourceFromTool(toolName)}`,
+  namespace: () => 'default',
+  'metadata.namespace': () => 'default',
   port: () => 80,
   listen_port: () => 80,
-  domains: () => ["example.com"],
-  hostnames: () => ["example.com"],
+  domains: () => ['example.com'],
+  hostnames: () => ['example.com'],
   timeout: () => 30,
   connect_timeout: () => 30,
   idle_timeout: () => 60,
   retries: () => 3,
   enabled: () => true,
   active: () => true,
-  path: () => "/",
-  url_path: () => "/",
-  method: () => "GET",
-  protocol: () => "HTTP",
+  path: () => '/',
+  url_path: () => '/',
+  method: () => 'GET',
+  protocol: () => 'HTTP',
 };
 
 /**
@@ -214,16 +214,16 @@ const SMART_DEFAULTS: Record<string, (toolName: string, schema?: ResolvedSchema)
  */
 function extractResourceFromTool(toolName: string): string {
   // f5xc-api-virtual-http-loadbalancer-create -> http-loadbalancer
-  const parts = toolName.replace("f5xc-api-", "").split("-");
+  const parts = toolName.replace('f5xc-api-', '').split('-');
 
   // Remove domain (first part) and operation (last part)
   if (parts.length > 2) {
     parts.shift(); // Remove domain
     parts.pop(); // Remove operation
-    return parts.join("-");
+    return parts.join('-');
   }
 
-  return parts.join("-");
+  return parts.join('-');
 }
 
 /**
@@ -235,12 +235,12 @@ function getSmartDefault(fieldPath: string, schema: ResolvedSchema, toolName: st
     return schema.example;
   }
 
-  if (schema["x-ves-example"] !== undefined) {
-    return schema["x-ves-example"];
+  if (schema['x-ves-example'] !== undefined) {
+    return schema['x-ves-example'];
   }
 
   // Check smart defaults by field name
-  const fieldName = fieldPath.split(".").pop() || fieldPath;
+  const fieldName = fieldPath.split('.').pop() || fieldPath;
   if (SMART_DEFAULTS[fieldPath]) {
     return SMART_DEFAULTS[fieldPath](toolName, schema);
   }
@@ -260,16 +260,16 @@ function getSmartDefault(fieldPath: string, schema: ResolvedSchema, toolName: st
 
   // Type-based defaults
   switch (schema.type) {
-    case "string":
-      return "example-value";
-    case "integer":
-    case "number":
+    case 'string':
+      return 'example-value';
+    case 'integer':
+    case 'number':
       return 1;
-    case "boolean":
+    case 'boolean':
       return false;
-    case "array":
+    case 'array':
       return [];
-    case "object":
+    case 'object':
       return {};
     default:
       return null;
@@ -279,9 +279,9 @@ function getSmartDefault(fieldPath: string, schema: ResolvedSchema, toolName: st
 /**
  * Generate example payload from resolved schema with smart defaults
  */
-function generateFromResolvedSchema(schema: ResolvedSchema, toolName: string, path: string = ""): unknown {
+function generateFromResolvedSchema(schema: ResolvedSchema, toolName: string, path: string = ''): unknown {
   // For objects, build example from properties
-  if (schema.type === "object" && schema.properties) {
+  if (schema.type === 'object' && schema.properties) {
     const example: Record<string, unknown> = {};
 
     for (const [key, propSchema] of Object.entries(schema.properties)) {
@@ -296,7 +296,7 @@ function generateFromResolvedSchema(schema: ResolvedSchema, toolName: string, pa
   }
 
   // For arrays, generate one item example
-  if (schema.type === "array" && schema.items) {
+  if (schema.type === 'array' && schema.items) {
     const itemExample = generateFromResolvedSchema(schema.items, toolName, `${path}[]`);
     return itemExample !== null ? [itemExample] : [];
   }

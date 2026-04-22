@@ -12,9 +12,9 @@
  * - Tool discovery performance: < 100ms
  */
 
-import { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
-import axios, { type AxiosInstance } from "axios";
-import { beforeAll, describe, expect, it } from "vitest";
+import { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
+import axios, { type AxiosInstance } from 'axios';
+import { beforeAll, describe, expect, it } from 'vitest';
 import {
   calculateMemoryGrowth,
   calculateStats,
@@ -24,7 +24,7 @@ import {
   runConcurrent,
   runSequential,
   triggerGC,
-} from "../utils/performance-helpers";
+} from '../utils/performance-helpers';
 
 // Performance thresholds
 const THRESHOLDS = {
@@ -38,20 +38,20 @@ const THRESHOLDS = {
 let httpClient: AxiosInstance;
 
 beforeAll(async () => {
-  console.log("\n⚡ Setting up performance baseline tests...\n");
+  console.log('\n⚡ Setting up performance baseline tests...\n');
 
   const credentialManager = new CredentialManager();
   await credentialManager.initialize();
 
   if (!credentialManager.isAuthenticated()) {
-    throw new Error("Cannot run performance tests without valid credentials");
+    throw new Error('Cannot run performance tests without valid credentials');
   }
 
   httpClient = axios.create({
     baseURL: credentialManager.getApiUrl(),
     headers: {
       Authorization: `APIToken ${credentialManager.getToken()}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     timeout: 30000,
   });
@@ -59,20 +59,20 @@ beforeAll(async () => {
   console.log(`✅ Authenticated and ready for performance tests\n`);
 });
 
-describe("Performance Baseline Tests", () => {
-  describe("Response Time Benchmarks", () => {
-    it("should complete simple GET request within 2 seconds", async () => {
+describe('Performance Baseline Tests', () => {
+  describe('Response Time Benchmarks', () => {
+    it('should complete simple GET request within 2 seconds', async () => {
       const { duration } = await measurePerformance(async () => {
-        return await httpClient.get("/api/web/namespaces");
+        return await httpClient.get('/api/web/namespaces');
       });
 
       console.log(`  ⏱️  Simple GET: ${duration}ms`);
       expect(duration).toBeLessThan(THRESHOLDS.simpleGet);
     });
 
-    it("should complete 10 sequential requests within 20 seconds", async () => {
+    it('should complete 10 sequential requests within 20 seconds', async () => {
       const { duration } = await measurePerformance(async () => {
-        return await runSequential(async () => httpClient.get("/api/web/namespaces"), 10);
+        return await runSequential(async () => httpClient.get('/api/web/namespaces'), 10);
       });
 
       const avgDuration = duration / 10;
@@ -80,21 +80,21 @@ describe("Performance Baseline Tests", () => {
       expect(duration).toBeLessThan(THRESHOLDS.sequentialBatch);
     });
 
-    it("should complete 10 concurrent requests within 5 seconds", async () => {
+    it('should complete 10 concurrent requests within 5 seconds', async () => {
       const { duration } = await measurePerformance(async () => {
-        return await runConcurrent(async () => httpClient.get("/api/web/namespaces"), 10);
+        return await runConcurrent(async () => httpClient.get('/api/web/namespaces'), 10);
       });
 
       console.log(`  ⏱️  Concurrent 10x: ${duration}ms`);
       expect(duration).toBeLessThan(THRESHOLDS.concurrentBatch);
     });
 
-    it("should measure response time statistics over multiple requests", async () => {
+    it('should measure response time statistics over multiple requests', async () => {
       const durations: number[] = [];
 
       for (let i = 0; i < 20; i++) {
         const { duration } = await measurePerformance(async () => {
-          return await httpClient.get("/api/web/namespaces");
+          return await httpClient.get('/api/web/namespaces');
         });
         durations.push(duration);
       }
@@ -116,8 +116,8 @@ describe("Performance Baseline Tests", () => {
     });
   });
 
-  describe("Memory Usage Benchmarks", () => {
-    it("should not leak memory over 100 requests (< 10MB growth)", async () => {
+  describe('Memory Usage Benchmarks', () => {
+    it('should not leak memory over 100 requests (< 10MB growth)', async () => {
       // Trigger GC before starting
       triggerGC();
       await new Promise((resolve) => setTimeout(resolve, 100));
@@ -127,7 +127,7 @@ describe("Performance Baseline Tests", () => {
 
       // Make 100 requests
       for (let i = 0; i < 100; i++) {
-        await httpClient.get("/api/web/namespaces");
+        await httpClient.get('/api/web/namespaces');
 
         // Brief pause every 10 requests
         if (i % 10 === 0) {
@@ -149,7 +149,7 @@ describe("Performance Baseline Tests", () => {
       expect(Math.abs(growth.heapUsedGrowthMB)).toBeLessThan(THRESHOLDS.memoryGrowth);
     });
 
-    it("should maintain stable memory with concurrent requests", async () => {
+    it('should maintain stable memory with concurrent requests', async () => {
       triggerGC();
       await new Promise((resolve) => setTimeout(resolve, 100));
 
@@ -157,7 +157,7 @@ describe("Performance Baseline Tests", () => {
 
       // Run 5 batches of 10 concurrent requests
       for (let batch = 0; batch < 5; batch++) {
-        await runConcurrent(async () => httpClient.get("/api/web/namespaces"), 10);
+        await runConcurrent(async () => httpClient.get('/api/web/namespaces'), 10);
 
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
@@ -174,10 +174,10 @@ describe("Performance Baseline Tests", () => {
     });
   });
 
-  describe("Concurrency Benchmarks", () => {
-    it("should handle 5 concurrent requests efficiently", async () => {
+  describe('Concurrency Benchmarks', () => {
+    it('should handle 5 concurrent requests efficiently', async () => {
       const { duration } = await measurePerformance(async () => {
-        return await runConcurrent(async () => httpClient.get("/api/web/namespaces"), 5);
+        return await runConcurrent(async () => httpClient.get('/api/web/namespaces'), 5);
       });
 
       console.log(`  ⚡ 5 concurrent: ${duration}ms`);
@@ -186,9 +186,9 @@ describe("Performance Baseline Tests", () => {
       expect(duration).toBeLessThan(THRESHOLDS.simpleGet * 3);
     });
 
-    it("should handle 20 concurrent requests", async () => {
+    it('should handle 20 concurrent requests', async () => {
       const { duration } = await measurePerformance(async () => {
-        return await runConcurrent(async () => httpClient.get("/api/web/namespaces"), 20);
+        return await runConcurrent(async () => httpClient.get('/api/web/namespaces'), 20);
       });
 
       console.log(`  ⚡ 20 concurrent: ${duration}ms`);
@@ -197,13 +197,13 @@ describe("Performance Baseline Tests", () => {
       expect(duration).toBeLessThan(THRESHOLDS.concurrentBatch * 2);
     });
 
-    it("should scale linearly with moderate concurrency", async () => {
+    it('should scale linearly with moderate concurrency', async () => {
       const durations: number[] = [];
       const concurrencyLevels = [1, 2, 5, 10];
 
       for (const level of concurrencyLevels) {
         const { duration } = await measurePerformance(async () => {
-          return await runConcurrent(async () => httpClient.get("/api/web/namespaces"), level);
+          return await runConcurrent(async () => httpClient.get('/api/web/namespaces'), level);
         });
         durations.push(duration);
 
@@ -222,19 +222,19 @@ describe("Performance Baseline Tests", () => {
     });
   });
 
-  describe("Tool Discovery Performance", () => {
-    it("should load tool registry quickly (< 100ms)", async () => {
+  describe('Tool Discovery Performance', () => {
+    it('should load tool registry quickly (< 100ms)', async () => {
       const { duration } = await measurePerformance(async () => {
-        const fs = await import("fs");
-        const path = await import("path");
+        const fs = await import('fs');
+        const path = await import('path');
 
-        const generatedDir = path.join(process.cwd(), "src", "tools", "generated");
-        const files = fs.readdirSync(generatedDir).filter((f: string) => f.endsWith(".json"));
+        const generatedDir = path.join(process.cwd(), 'src', 'tools', 'generated');
+        const files = fs.readdirSync(generatedDir).filter((f: string) => f.endsWith('.json'));
 
         const tools = [];
         for (const file of files) {
           const filePath = path.join(generatedDir, file);
-          const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+          const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
           if (data.tools) {
             tools.push(...data.tools);
           }
@@ -247,18 +247,18 @@ describe("Performance Baseline Tests", () => {
       expect(duration).toBeLessThan(THRESHOLDS.toolDiscovery);
     });
 
-    it("should search tools efficiently", async () => {
-      const fs = await import("fs");
-      const path = await import("path");
+    it('should search tools efficiently', async () => {
+      const fs = await import('fs');
+      const path = await import('path');
 
       // Load tools once
-      const generatedDir = path.join(process.cwd(), "src", "tools", "generated");
-      const files = fs.readdirSync(generatedDir).filter((f: string) => f.endsWith(".json"));
+      const generatedDir = path.join(process.cwd(), 'src', 'tools', 'generated');
+      const files = fs.readdirSync(generatedDir).filter((f: string) => f.endsWith('.json'));
 
       const tools = [];
       for (const file of files) {
         const filePath = path.join(generatedDir, file);
-        const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
         if (data.tools) {
           tools.push(...data.tools);
         }
@@ -266,7 +266,7 @@ describe("Performance Baseline Tests", () => {
 
       // Measure search performance
       const { duration } = await measurePerformance(async () => {
-        const searchTerm = "loadbalancer";
+        const searchTerm = 'loadbalancer';
         return tools.filter(
           (tool: { name: string; description: string }) =>
             tool.name.toLowerCase().includes(searchTerm) || tool.description.toLowerCase().includes(searchTerm),
@@ -278,10 +278,10 @@ describe("Performance Baseline Tests", () => {
     });
   });
 
-  describe("Large Payload Performance", () => {
-    it("should handle large list responses efficiently", async () => {
+  describe('Large Payload Performance', () => {
+    it('should handle large list responses efficiently', async () => {
       const { duration } = await measurePerformance(async () => {
-        return await httpClient.get("/api/web/namespaces");
+        return await httpClient.get('/api/web/namespaces');
       });
 
       console.log(`  📦 Large list response: ${duration}ms`);
@@ -290,9 +290,9 @@ describe("Performance Baseline Tests", () => {
       expect(duration).toBeLessThan(THRESHOLDS.simpleGet);
     });
 
-    it("should handle multiple large responses concurrently", async () => {
+    it('should handle multiple large responses concurrently', async () => {
       const { duration } = await measurePerformance(async () => {
-        return await runConcurrent(async () => httpClient.get("/api/web/namespaces"), 5);
+        return await runConcurrent(async () => httpClient.get('/api/web/namespaces'), 5);
       });
 
       console.log(`  📦 5 concurrent large responses: ${duration}ms`);
@@ -300,11 +300,11 @@ describe("Performance Baseline Tests", () => {
     });
   });
 
-  describe("Error Path Performance", () => {
-    it("should fail fast on 404 errors", async () => {
+  describe('Error Path Performance', () => {
+    it('should fail fast on 404 errors', async () => {
       const { duration } = await measurePerformance(async () => {
         try {
-          await httpClient.get("/api/config/namespaces/system/http_loadbalancers/nonexistent-12345");
+          await httpClient.get('/api/config/namespaces/system/http_loadbalancers/nonexistent-12345');
         } catch (error) {
           // Expected 404
         }
@@ -316,18 +316,18 @@ describe("Performance Baseline Tests", () => {
       expect(duration).toBeLessThan(THRESHOLDS.simpleGet);
     });
 
-    it("should handle authentication errors quickly", async () => {
+    it('should handle authentication errors quickly', async () => {
       const invalidClient = axios.create({
         baseURL: httpClient.defaults.baseURL as string,
         headers: {
-          Authorization: "APIToken invalid-token",
+          Authorization: 'APIToken invalid-token',
         },
         timeout: 5000,
       });
 
       const { duration } = await measurePerformance(async () => {
         try {
-          await invalidClient.get("/api/web/namespaces");
+          await invalidClient.get('/api/web/namespaces');
         } catch (error) {
           // Expected 401
         }

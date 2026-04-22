@@ -8,9 +8,9 @@
  * both authenticated and unauthenticated modes.
  */
 
-import { AuthMode, CredentialManager } from "@robinmordasiewicz/f5xc-auth";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { setupAuthenticatedModeEnv, setupDocumentationModeEnv } from "../../utils/ci-environment.js";
+import { AuthMode, CredentialManager } from '@robinmordasiewicz/f5xc-auth';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { setupAuthenticatedModeEnv, setupDocumentationModeEnv } from '../../utils/ci-environment.js';
 
 // Mock MCP SDK
 const { mockTool, mockResource, mockPrompt } = vi.hoisted(() => ({
@@ -19,7 +19,7 @@ const { mockTool, mockResource, mockPrompt } = vi.hoisted(() => ({
   mockPrompt: vi.fn(),
 }));
 
-vi.mock("@modelcontextprotocol/sdk/server/mcp.js", () => {
+vi.mock('@modelcontextprotocol/sdk/server/mcp.js', () => {
   const MockMcpServer = function (this: Record<string, unknown>) {
     this.tool = mockTool;
     this.resource = mockResource;
@@ -33,7 +33,7 @@ vi.mock("@modelcontextprotocol/sdk/server/mcp.js", () => {
 });
 
 // Mock logging
-vi.mock("../../../src/utils/logging.js", () => ({
+vi.mock('../../../src/utils/logging.js', () => ({
   logger: {
     info: vi.fn(),
     error: vi.fn(),
@@ -42,7 +42,7 @@ vi.mock("../../../src/utils/logging.js", () => ({
   },
 }));
 
-describe("tool-handlers", () => {
+describe('tool-handlers', () => {
   const originalEnv = process.env;
 
   beforeEach(() => {
@@ -55,10 +55,10 @@ describe("tool-handlers", () => {
     process.env = originalEnv;
   });
 
-  describe("registerTools orchestrator", () => {
-    it("should register all tool categories", async () => {
-      const { registerTools } = await import("../../../src/server/handlers/tool-handlers/index.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+  describe('registerTools orchestrator', () => {
+    it('should register all tool categories', async () => {
+      const { registerTools } = await import('../../../src/server/handlers/tool-handlers/index.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
@@ -73,35 +73,35 @@ describe("tool-handlers", () => {
       const toolNames = mockTool.mock.calls.map((call) => call[0]);
 
       // Metadata tools
-      expect(toolNames).toContain("f5xc-api-server-info");
-      expect(toolNames).toContain("f5xc-api-configure-auth");
+      expect(toolNames).toContain('f5xc-api-server-info');
+      expect(toolNames).toContain('f5xc-api-configure-auth');
 
       // Discovery tools
-      expect(toolNames).toContain("f5xc-api-search-tools");
-      expect(toolNames).toContain("f5xc-api-describe-tool");
-      expect(toolNames).toContain("f5xc-api-get-schema");
-      expect(toolNames).toContain("f5xc-api-suggest-parameters");
+      expect(toolNames).toContain('f5xc-api-search-tools');
+      expect(toolNames).toContain('f5xc-api-describe-tool');
+      expect(toolNames).toContain('f5xc-api-get-schema');
+      expect(toolNames).toContain('f5xc-api-suggest-parameters');
 
       // Execution tools
-      expect(toolNames).toContain("f5xc-api-execute-tool");
-      expect(toolNames).toContain("f5xc-api-execute-resource");
+      expect(toolNames).toContain('f5xc-api-execute-tool');
+      expect(toolNames).toContain('f5xc-api-execute-resource');
 
       // Analysis tools
-      expect(toolNames).toContain("f5xc-api-dependencies");
-      expect(toolNames).toContain("f5xc-api-dependency-stats");
-      expect(toolNames).toContain("f5xc-api-validate-params");
+      expect(toolNames).toContain('f5xc-api-dependencies');
+      expect(toolNames).toContain('f5xc-api-dependency-stats');
+      expect(toolNames).toContain('f5xc-api-validate-params');
 
       // Planning tools
-      expect(toolNames).toContain("f5xc-api-resolve-dependencies");
-      expect(toolNames).toContain("f5xc-api-estimate-cost");
+      expect(toolNames).toContain('f5xc-api-resolve-dependencies');
+      expect(toolNames).toContain('f5xc-api-estimate-cost');
 
       // Guidance tools
-      expect(toolNames).toContain("f5xc-api-best-practices");
+      expect(toolNames).toContain('f5xc-api-best-practices');
     });
 
-    it("should register at least 14 tools", async () => {
-      const { registerTools } = await import("../../../src/server/handlers/tool-handlers/index.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    it('should register at least 14 tools', async () => {
+      const { registerTools } = await import('../../../src/server/handlers/tool-handlers/index.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
@@ -114,11 +114,11 @@ describe("tool-handlers", () => {
     });
   });
 
-  describe("metadata tools", () => {
-    describe("server-info tool", () => {
-      it("should return documentation mode when unauthenticated", async () => {
-        const { registerMetadataTools } = await import("../../../src/server/handlers/tool-handlers/metadata.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+  describe('metadata tools', () => {
+    describe('server-info tool', () => {
+      it('should return documentation mode when unauthenticated', async () => {
+        const { registerMetadataTools } = await import('../../../src/server/handlers/tool-handlers/metadata.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -127,7 +127,7 @@ describe("tool-handlers", () => {
         registerMetadataTools(server, credentialManager);
 
         // Find server-info handler
-        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
         expect(serverInfoCall).toBeDefined();
 
         const handler = serverInfoCall[3];
@@ -135,19 +135,19 @@ describe("tool-handlers", () => {
 
         expect(result.content).toHaveLength(1);
         const data = JSON.parse(result.content[0].text);
-        expect(data.mode).toBe("documentation");
+        expect(data.mode).toBe('documentation');
         expect(data.authenticated).toBe(false);
         expect(data.capabilities.api_execution).toBe(false);
       });
 
-      it("should return execution mode when authenticated", async () => {
+      it('should return execution mode when authenticated', async () => {
         setupAuthenticatedModeEnv();
 
         // Clear module cache to pick up new env vars
         vi.resetModules();
 
-        const { registerMetadataTools } = await import("../../../src/server/handlers/tool-handlers/metadata.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+        const { registerMetadataTools } = await import('../../../src/server/handlers/tool-handlers/metadata.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -155,19 +155,19 @@ describe("tool-handlers", () => {
         const server = new McpServer();
         registerMetadataTools(server, credentialManager);
 
-        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
         const handler = serverInfoCall[3];
         const result = await handler();
 
         const data = JSON.parse(result.content[0].text);
-        expect(data.mode).toBe("execution");
+        expect(data.mode).toBe('execution');
         expect(data.authenticated).toBe(true);
         expect(data.capabilities.api_execution).toBe(true);
       });
 
-      it("should include tool index information", async () => {
-        const { registerMetadataTools } = await import("../../../src/server/handlers/tool-handlers/metadata.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      it('should include tool index information', async () => {
+        const { registerMetadataTools } = await import('../../../src/server/handlers/tool-handlers/metadata.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -175,7 +175,7 @@ describe("tool-handlers", () => {
         const server = new McpServer();
         registerMetadataTools(server, credentialManager);
 
-        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
         const handler = serverInfoCall[3];
         const result = await handler();
 
@@ -187,9 +187,9 @@ describe("tool-handlers", () => {
         expect(data.toolIndex.availableDomains.length).toBeGreaterThan(0);
       });
 
-      it("should include consolidation stats", async () => {
-        const { registerMetadataTools } = await import("../../../src/server/handlers/tool-handlers/metadata.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      it('should include consolidation stats', async () => {
+        const { registerMetadataTools } = await import('../../../src/server/handlers/tool-handlers/metadata.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -197,7 +197,7 @@ describe("tool-handlers", () => {
         const server = new McpServer();
         registerMetadataTools(server, credentialManager);
 
-        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
         const handler = serverInfoCall[3];
         const result = await handler();
 
@@ -205,9 +205,9 @@ describe("tool-handlers", () => {
         expect(data.consolidation).toBeDefined();
       });
 
-      it("should list all discovery tools", async () => {
-        const { registerMetadataTools } = await import("../../../src/server/handlers/tool-handlers/metadata.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      it('should list all discovery tools', async () => {
+        const { registerMetadataTools } = await import('../../../src/server/handlers/tool-handlers/metadata.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -215,21 +215,21 @@ describe("tool-handlers", () => {
         const server = new McpServer();
         registerMetadataTools(server, credentialManager);
 
-        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-server-info");
+        const serverInfoCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-server-info');
         const handler = serverInfoCall[3];
         const result = await handler();
 
         const data = JSON.parse(result.content[0].text);
-        expect(data.discoveryTools).toContain("f5xc-api-search-tools");
-        expect(data.discoveryTools).toContain("f5xc-api-execute-tool");
-        expect(data.discoveryTools).toContain("f5xc-api-best-practices");
+        expect(data.discoveryTools).toContain('f5xc-api-search-tools');
+        expect(data.discoveryTools).toContain('f5xc-api-execute-tool');
+        expect(data.discoveryTools).toContain('f5xc-api-best-practices');
       });
     });
 
-    describe("configure-auth tool", () => {
-      it("should register configure-auth tool with correct schema", async () => {
-        const { registerMetadataTools } = await import("../../../src/server/handlers/tool-handlers/metadata.js");
-        const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    describe('configure-auth tool', () => {
+      it('should register configure-auth tool with correct schema', async () => {
+        const { registerMetadataTools } = await import('../../../src/server/handlers/tool-handlers/metadata.js');
+        const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
         const credentialManager = new CredentialManager();
         await credentialManager.initialize();
@@ -237,61 +237,61 @@ describe("tool-handlers", () => {
         const server = new McpServer();
         registerMetadataTools(server, credentialManager);
 
-        const configureAuthCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-configure-auth");
+        const configureAuthCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-configure-auth');
         expect(configureAuthCall).toBeDefined();
 
         // Verify schema has expected parameters
         const schema = configureAuthCall[2];
-        expect(schema).toHaveProperty("action");
-        expect(schema).toHaveProperty("tenantUrl");
-        expect(schema).toHaveProperty("apiToken");
-        expect(schema).toHaveProperty("profileName");
+        expect(schema).toHaveProperty('action');
+        expect(schema).toHaveProperty('tenantUrl');
+        expect(schema).toHaveProperty('apiToken');
+        expect(schema).toHaveProperty('profileName');
       });
     });
   });
 
-  describe("discovery tools", () => {
-    it("should register search-tools with correct schema", async () => {
-      const { registerDiscoveryTools } = await import("../../../src/server/handlers/tool-handlers/discovery.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+  describe('discovery tools', () => {
+    it('should register search-tools with correct schema', async () => {
+      const { registerDiscoveryTools } = await import('../../../src/server/handlers/tool-handlers/discovery.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerDiscoveryTools(server);
 
-      const searchToolsCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-search-tools");
+      const searchToolsCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-search-tools');
       expect(searchToolsCall).toBeDefined();
 
       const schema = searchToolsCall[2];
-      expect(schema).toHaveProperty("query");
+      expect(schema).toHaveProperty('query');
     });
 
-    it("should register describe-tool with toolName parameter", async () => {
-      const { registerDiscoveryTools } = await import("../../../src/server/handlers/tool-handlers/discovery.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    it('should register describe-tool with toolName parameter', async () => {
+      const { registerDiscoveryTools } = await import('../../../src/server/handlers/tool-handlers/discovery.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerDiscoveryTools(server);
 
-      const describeToolCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-describe-tool");
+      const describeToolCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-describe-tool');
       expect(describeToolCall).toBeDefined();
 
       const schema = describeToolCall[2];
-      expect(schema).toHaveProperty("toolName");
+      expect(schema).toHaveProperty('toolName');
     });
 
-    it("should register all 5 discovery tools", async () => {
-      const { registerDiscoveryTools } = await import("../../../src/server/handlers/tool-handlers/discovery.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    it('should register all 5 discovery tools', async () => {
+      const { registerDiscoveryTools } = await import('../../../src/server/handlers/tool-handlers/discovery.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerDiscoveryTools(server);
 
       const expectedTools = [
-        "f5xc-api-search-tools",
-        "f5xc-api-describe-tool",
-        "f5xc-api-get-schema",
-        "f5xc-api-suggest-parameters",
-        "f5xc-api-search-resources",
+        'f5xc-api-search-tools',
+        'f5xc-api-describe-tool',
+        'f5xc-api-get-schema',
+        'f5xc-api-suggest-parameters',
+        'f5xc-api-search-resources',
       ];
 
       const registeredTools = mockTool.mock.calls.map((call) => call[0]);
@@ -301,13 +301,13 @@ describe("tool-handlers", () => {
     });
   });
 
-  describe("execution tools", () => {
-    it("should register execute-tool", async () => {
+  describe('execution tools', () => {
+    it('should register execute-tool', async () => {
       setupAuthenticatedModeEnv();
       vi.resetModules();
 
-      const { registerExecutionTools } = await import("../../../src/server/handlers/tool-handlers/execution.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      const { registerExecutionTools } = await import('../../../src/server/handlers/tool-handlers/execution.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
@@ -315,16 +315,16 @@ describe("tool-handlers", () => {
       const server = new McpServer();
       registerExecutionTools(server, credentialManager);
 
-      const executeToolCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-execute-tool");
+      const executeToolCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-execute-tool');
       expect(executeToolCall).toBeDefined();
     });
 
-    it("should register execute-resource", async () => {
+    it('should register execute-resource', async () => {
       setupAuthenticatedModeEnv();
       vi.resetModules();
 
-      const { registerExecutionTools } = await import("../../../src/server/handlers/tool-handlers/execution.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+      const { registerExecutionTools } = await import('../../../src/server/handlers/tool-handlers/execution.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
@@ -332,76 +332,76 @@ describe("tool-handlers", () => {
       const server = new McpServer();
       registerExecutionTools(server, credentialManager);
 
-      const executeResourceCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-execute-resource");
+      const executeResourceCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-execute-resource');
       expect(executeResourceCall).toBeDefined();
     });
   });
 
-  describe("analysis tools", () => {
-    it("should register dependencies tool", async () => {
-      const { registerAnalysisTools } = await import("../../../src/server/handlers/tool-handlers/analysis.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+  describe('analysis tools', () => {
+    it('should register dependencies tool', async () => {
+      const { registerAnalysisTools } = await import('../../../src/server/handlers/tool-handlers/analysis.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerAnalysisTools(server);
 
-      const depsCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-dependencies");
+      const depsCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-dependencies');
       expect(depsCall).toBeDefined();
 
       const schema = depsCall[2];
-      expect(schema).toHaveProperty("resource");
-      expect(schema).toHaveProperty("domain");
+      expect(schema).toHaveProperty('resource');
+      expect(schema).toHaveProperty('domain');
     });
 
-    it("should register validate-params tool", async () => {
-      const { registerAnalysisTools } = await import("../../../src/server/handlers/tool-handlers/analysis.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    it('should register validate-params tool', async () => {
+      const { registerAnalysisTools } = await import('../../../src/server/handlers/tool-handlers/analysis.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerAnalysisTools(server);
 
-      const validateCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-validate-params");
+      const validateCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-validate-params');
       expect(validateCall).toBeDefined();
     });
   });
 
-  describe("planning tools", () => {
-    it("should register resolve-dependencies tool", async () => {
-      const { registerPlanningTools } = await import("../../../src/server/handlers/tool-handlers/planning.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+  describe('planning tools', () => {
+    it('should register resolve-dependencies tool', async () => {
+      const { registerPlanningTools } = await import('../../../src/server/handlers/tool-handlers/planning.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerPlanningTools(server);
 
-      const resolveCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-resolve-dependencies");
+      const resolveCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-resolve-dependencies');
       expect(resolveCall).toBeDefined();
     });
 
-    it("should register estimate-cost tool", async () => {
-      const { registerPlanningTools } = await import("../../../src/server/handlers/tool-handlers/planning.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    it('should register estimate-cost tool', async () => {
+      const { registerPlanningTools } = await import('../../../src/server/handlers/tool-handlers/planning.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerPlanningTools(server);
 
-      const estimateCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-estimate-cost");
+      const estimateCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-estimate-cost');
       expect(estimateCall).toBeDefined();
     });
   });
 
-  describe("guidance tools", () => {
-    it("should register best-practices tool", async () => {
-      const { registerGuidanceTools } = await import("../../../src/server/handlers/tool-handlers/guidance.js");
-      const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+  describe('guidance tools', () => {
+    it('should register best-practices tool', async () => {
+      const { registerGuidanceTools } = await import('../../../src/server/handlers/tool-handlers/guidance.js');
+      const { McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js');
 
       const server = new McpServer();
       registerGuidanceTools(server);
 
-      const bpCall = mockTool.mock.calls.find((call) => call[0] === "f5xc-api-best-practices");
+      const bpCall = mockTool.mock.calls.find((call) => call[0] === 'f5xc-api-best-practices');
       expect(bpCall).toBeDefined();
 
       const schema = bpCall[2];
-      expect(schema).toHaveProperty("domain");
+      expect(schema).toHaveProperty('domain');
     });
   });
 });

@@ -12,12 +12,12 @@
  *   tsx scripts/generate-docs.ts
  */
 
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-import YAML from "yaml";
-import type { OneOfGroup } from "../src/generator/dependency-types.js";
-import type { ParsedOperation } from "../src/generator/openapi-parser.js";
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import YAML from 'yaml';
+import type { OneOfGroup } from '../src/generator/dependency-types.js';
+import type { ParsedOperation } from '../src/generator/openapi-parser.js';
 import {
   type CategoryPath,
   domainToTitle,
@@ -25,7 +25,7 @@ import {
   getCategoryPath,
   requiresSubdivision,
   resourceToTitle,
-} from "./category-mapping.js";
+} from './category-mapping.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,10 +35,10 @@ const __dirname = dirname(__filename);
  */
 const CONFIG = {
   /** Directory for generated documentation */
-  DOCS_DIR: join(__dirname, "..", "docs", "tools"),
+  DOCS_DIR: join(__dirname, '..', 'docs', 'tools'),
 
   /** Preserve these manual doc files from deletion */
-  PRESERVE_FILES: ["index.mdx"],
+  PRESERVE_FILES: ['index.mdx'],
 
   /** Large domain threshold for subdivision */
   LARGE_DOMAIN_THRESHOLD: 50,
@@ -59,7 +59,7 @@ const log = {
  */
 interface AggregatedMetadata {
   /** Highest danger level across all tools */
-  maxDangerLevel: "low" | "medium" | "high" | null;
+  maxDangerLevel: 'low' | 'medium' | 'high' | null;
   /** Whether any tool requires confirmation */
   requiresConfirmation: boolean;
   /** Aggregated side effects */
@@ -94,31 +94,31 @@ interface ResourceDoc {
  * MDX interprets bare { } as JSX expressions and < as JSX tags.
  */
 function escapeJsx(text: string): string {
-  return text.replace(/\{/g, "\\{").replace(/\}/g, "\\}").replace(/</g, "&lt;");
+  return text.replace(/\{/g, '\\{').replace(/\}/g, '\\}').replace(/</g, '&lt;');
 }
 
 /**
  * Generate CURL examples section using real API paths from parsed operations
  */
 function generateCurlExamples(resource: string, tools: ParsedOperation[]): string {
-  const normalizedResource = resource.replace(/-/g, "_");
+  const normalizedResource = resource.replace(/-/g, '_');
   const base = `https://\${TENANT}.console.ves.volterra.io`;
 
-  const listOp = tools.find((t) => t.operation === "list");
-  const getOp = tools.find((t) => t.operation === "get");
-  const createOp = tools.find((t) => t.operation === "create");
-  const deleteOp = tools.find((t) => t.operation === "delete");
+  const listOp = tools.find((t) => t.operation === 'list');
+  const getOp = tools.find((t) => t.operation === 'get');
+  const createOp = tools.find((t) => t.operation === 'create');
+  const deleteOp = tools.find((t) => t.operation === 'delete');
 
   // Convert OpenAPI path params to shell variable style
   const shellPath = (path: string): string =>
     path
-      .replace(/\{metadata\.namespace\}/g, "${NAMESPACE}")
-      .replace(/\{namespace\}/g, "${NAMESPACE}")
-      .replace(/\{metadata\.name\}/g, "${NAME}")
-      .replace(/\{name\}/g, "${NAME}")
-      .replace(/\{[^}]+\}/g, "${PARAM}");
+      .replace(/\{metadata\.namespace\}/g, '${NAMESPACE}')
+      .replace(/\{namespace\}/g, '${NAMESPACE}')
+      .replace(/\{metadata\.name\}/g, '${NAME}')
+      .replace(/\{name\}/g, '${NAME}')
+      .replace(/\{[^}]+\}/g, '${PARAM}');
 
-  let content = "\n## CURL Examples\n\n```bash\n";
+  let content = '\n## CURL Examples\n\n```bash\n';
 
   if (listOp) {
     const path = shellPath(listOp.path);
@@ -140,62 +140,62 @@ function generateCurlExamples(resource: string, tools: ParsedOperation[]): strin
     content += `# Delete resource\ncurl -X DELETE "${base}${path}" \\\n  -H "Authorization: APIToken \${F5XC_API_TOKEN}"\n`;
   }
 
-  content += "```\n";
+  content += '```\n';
   return content;
 }
 
 /**
  * Get danger level badge for markdown
  */
-function getDangerBadge(level: "low" | "medium" | "high" | null): string {
+function getDangerBadge(level: 'low' | 'medium' | 'high' | null): string {
   switch (level) {
-    case "high":
-      return ":::danger[High Risk Operation]\nThis resource includes operations that may cause significant changes. Review carefully before executing.\n:::\n\n";
-    case "medium":
-      return ":::caution[Medium Risk]\nSome operations on this resource may modify or delete data.\n:::\n\n";
-    case "low":
-      return ":::note[Low Risk]\nOperations on this resource are generally safe.\n:::\n\n";
+    case 'high':
+      return ':::danger[High Risk Operation]\nThis resource includes operations that may cause significant changes. Review carefully before executing.\n:::\n\n';
+    case 'medium':
+      return ':::caution[Medium Risk]\nSome operations on this resource may modify or delete data.\n:::\n\n';
+    case 'low':
+      return ':::note[Low Risk]\nOperations on this resource are generally safe.\n:::\n\n';
     default:
-      return "";
+      return '';
   }
 }
 
 /**
  * Format side effects for markdown display
  */
-function formatSideEffects(sideEffects: AggregatedMetadata["sideEffects"]): string {
+function formatSideEffects(sideEffects: AggregatedMetadata['sideEffects']): string {
   const hasEffects =
     sideEffects.creates.length > 0 || sideEffects.modifies.length > 0 || sideEffects.deletes.length > 0;
 
   if (!hasEffects) {
-    return "";
+    return '';
   }
 
-  let content = "\n## Side Effects\n\n";
-  content += "Operations on this resource may have the following effects:\n\n";
+  let content = '\n## Side Effects\n\n';
+  content += 'Operations on this resource may have the following effects:\n\n';
 
   if (sideEffects.creates.length > 0) {
-    content += "**Creates:**\n\n";
+    content += '**Creates:**\n\n';
     for (const item of sideEffects.creates) {
       content += `- ${escapeJsx(item)}\n`;
     }
-    content += "\n";
+    content += '\n';
   }
 
   if (sideEffects.modifies.length > 0) {
-    content += "**Modifies:**\n\n";
+    content += '**Modifies:**\n\n';
     for (const item of sideEffects.modifies) {
       content += `- ${escapeJsx(item)}\n`;
     }
-    content += "\n";
+    content += '\n';
   }
 
   if (sideEffects.deletes.length > 0) {
-    content += "**Deletes:**\n\n";
+    content += '**Deletes:**\n\n';
     for (const item of sideEffects.deletes) {
       content += `- ${escapeJsx(item)}\n`;
     }
-    content += "\n";
+    content += '\n';
   }
 
   return content;
@@ -207,7 +207,7 @@ function formatSideEffects(sideEffects: AggregatedMetadata["sideEffects"]): stri
 function isTopLevelChoice(group: OneOfGroup): boolean {
   if (group.options.length === 0) return false;
   // Count dots in first option to determine depth — only spec.X (2 segments) is top-level
-  const depth = group.options[0].split(".").length;
+  const depth = group.options[0].split('.').length;
   return depth <= 2;
 }
 
@@ -215,8 +215,8 @@ function isTopLevelChoice(group: OneOfGroup): boolean {
  * Generate a readable description from an option path
  */
 function optionDescription(option: string): string {
-  const lastSegment = option.split(".").pop() || option;
-  return lastSegment.replace(/[_-]/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+  const lastSegment = option.split('.').pop() || option;
+  return lastSegment.replace(/[_-]/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
 }
 
 /**
@@ -226,11 +226,11 @@ function optionDescription(option: string): string {
 function formatConfigurationChoices(oneOfGroups: OneOfGroup[]): string {
   const topLevelGroups = oneOfGroups.filter(isTopLevelChoice);
   if (topLevelGroups.length === 0) {
-    return "";
+    return '';
   }
 
-  let content = "\n## Configuration Choices\n\n";
-  content += "This resource includes mutually exclusive configuration options:\n\n";
+  let content = '\n## Configuration Choices\n\n';
+  content += 'This resource includes mutually exclusive configuration options:\n\n';
 
   for (const group of topLevelGroups) {
     content += `### ${group.choiceField}\n\n`;
@@ -239,10 +239,10 @@ function formatConfigurationChoices(oneOfGroups: OneOfGroup[]): string {
       content += `${group.description}\n\n`;
     }
 
-    content += "| Option | Description | Recommended |\n|--------|-------------|-------------|\n";
+    content += '| Option | Description | Recommended |\n|--------|-------------|-------------|\n';
 
     for (const option of group.options) {
-      const isRecommended = group.recommendedOption === option ? "✅ Yes" : "";
+      const isRecommended = group.recommendedOption === option ? '✅ Yes' : '';
       const description = optionDescription(option);
       content += `| \`${option}\` | ${description} | ${isRecommended} |\n`;
     }
@@ -251,7 +251,7 @@ function formatConfigurationChoices(oneOfGroups: OneOfGroup[]): string {
       content += `\n:::tip[Recommended Option]\nUse \`${group.recommendedOption}\` for most use cases.\n:::\n\n`;
     }
 
-    content += "\n";
+    content += '\n';
   }
 
   return content;
@@ -263,12 +263,12 @@ function formatConfigurationChoices(oneOfGroups: OneOfGroup[]): string {
 function generateIntroText(title: string, tools: ParsedOperation[]): string {
   const ops = tools.map((t) => t.operation);
   const capabilities: string[] = [];
-  if (ops.includes("create")) capabilities.push("creating");
-  if (ops.includes("list")) capabilities.push("listing");
-  if (ops.includes("get")) capabilities.push("retrieving");
-  if (ops.includes("update")) capabilities.push("updating");
-  if (ops.includes("delete")) capabilities.push("deleting");
-  const capsText = capabilities.length > 0 ? capabilities.join(", ").replace(/, ([^,]*)$/, ", and $1") : "managing";
+  if (ops.includes('create')) capabilities.push('creating');
+  if (ops.includes('list')) capabilities.push('listing');
+  if (ops.includes('get')) capabilities.push('retrieving');
+  if (ops.includes('update')) capabilities.push('updating');
+  if (ops.includes('delete')) capabilities.push('deleting');
+  const capsText = capabilities.length > 0 ? capabilities.join(', ').replace(/, ([^,]*)$/, ', and $1') : 'managing';
   return `${title} provides tools for ${capsText} resources in F5 Distributed Cloud.`;
 }
 
@@ -278,11 +278,11 @@ function generateIntroText(title: string, tools: ParsedOperation[]): string {
 function normalizeToolSummary(summary: string): string {
   let s = summary;
   // Fix raw HTTP verbs used as operation descriptions
-  s = s.replace(/^GET\s+/i, "Get ");
-  s = s.replace(/^DELETE\s+/i, "Delete ");
-  s = s.replace(/^Replace\s+/i, "Update ");
+  s = s.replace(/^GET\s+/i, 'Get ');
+  s = s.replace(/^DELETE\s+/i, 'Delete ');
+  s = s.replace(/^Replace\s+/i, 'Update ');
   // Ensure ends with period
-  if (s && !s.endsWith(".")) s += ".";
+  if (s && !s.endsWith('.')) s += '.';
   return s;
 }
 
@@ -293,32 +293,32 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
   const { resource: rawResource, title: rawTitle, tools, metadata } = resourceDoc;
 
   // Sanitize resource and title: strip curly braces that MDX interprets as JSX expressions
-  const resource = rawResource.replace(/[{}]/g, "");
-  const title = rawTitle.replace(/[{}]/g, "");
+  const resource = rawResource.replace(/[{}]/g, '');
+  const title = rawTitle.replace(/[{}]/g, '');
 
   // Generate front matter - always use a consistent resource-level description
   const rawDescription = `Manage ${title} resources in F5 Distributed Cloud.`;
 
   // Wrap text at specified length, with optional indent for continuation lines
-  const wrapText = (text: string, maxLen: number, indent = ""): string => {
+  const wrapText = (text: string, maxLen: number, indent = ''): string => {
     if (text.length <= maxLen) return text;
-    const words = text.split(" ");
+    const words = text.split(' ');
     const lines: string[] = [];
-    let currentLine = "";
+    let currentLine = '';
     for (const word of words) {
-      if ((currentLine + " " + word).trim().length <= maxLen) {
-        currentLine = (currentLine + " " + word).trim();
+      if ((currentLine + ' ' + word).trim().length <= maxLen) {
+        currentLine = (currentLine + ' ' + word).trim();
       } else {
         if (currentLine) lines.push(currentLine);
         currentLine = word;
       }
     }
     if (currentLine) lines.push(currentLine);
-    return lines.join("\n" + indent);
+    return lines.join('\n' + indent);
   };
 
   // Use indent for YAML front matter continuation
-  const wrappedDescription = wrapText(rawDescription, 80, "  ");
+  const wrappedDescription = wrapText(rawDescription, 80, '  ');
 
   const frontMatter = {
     title,
@@ -328,8 +328,8 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
   // Generate danger badge and confirmation warning
   const dangerBadge = getDangerBadge(metadata.maxDangerLevel);
   const confirmationWarning = metadata.requiresConfirmation
-    ? ":::note[Confirmation Required]\nSome operations on this resource require explicit confirmation before execution.\n:::\n\n"
-    : "";
+    ? ':::note[Confirmation Required]\nSome operations on this resource require explicit confirmation before execution.\n:::\n\n'
+    : '';
 
   // Tools table
   const toolRows = tools
@@ -341,13 +341,13 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
       return aOrder - bOrder;
     })
     .map((tool) => `| \`${tool.toolName}\` | ${escapeJsx(normalizeToolSummary(tool.summary))} |`)
-    .join("\n");
+    .join('\n');
 
   // Default examples for common parameters
   const DEFAULT_EXAMPLES: Record<string, string> = {
-    namespace: "system",
-    name: "example-resource",
-    response_format: "GET_RSP_FORMAT_DEFAULT",
+    namespace: 'system',
+    name: 'example-resource',
+    response_format: 'GET_RSP_FORMAT_DEFAULT',
   };
 
   // Collect unique parameters from all tools, deduplicating metadata.X → X
@@ -356,64 +356,64 @@ function generateMarkdown(resourceDoc: ResourceDoc): string {
   for (const tool of tools) {
     for (const param of tool.pathParameters) {
       // Normalize: metadata.namespace → namespace, metadata.name → name
-      const canonicalName = param.name.replace(/^metadata\./, "");
+      const canonicalName = param.name.replace(/^metadata\./, '');
       if (!pathParams.has(canonicalName)) {
-        pathParams.set(canonicalName, param.description ?? "");
+        pathParams.set(canonicalName, param.description ?? '');
       }
     }
     for (const param of tool.queryParameters) {
       if (!queryParams.has(param.name)) {
-        queryParams.set(param.name, param.description ?? "");
+        queryParams.set(param.name, param.description ?? '');
       }
     }
   }
 
   // Parameters section with examples from enriched specs
-  let parametersSection = "";
+  let parametersSection = '';
   if (pathParams.size > 0 || queryParams.size > 0) {
-    parametersSection = "\n## Parameters\n\n";
+    parametersSection = '\n## Parameters\n\n';
 
     // Helper to escape pipe characters in table cells
-    const escapeTableCell = (text: string): string => text.replace(/\|/g, "\\|");
+    const escapeTableCell = (text: string): string => text.replace(/\|/g, '\\|');
 
     if (pathParams.size > 0) {
-      parametersSection += "### Path Parameters\n\n";
-      parametersSection += "| Parameter | Description | Example |\n|-----------|-------------|--------|\n";
+      parametersSection += '### Path Parameters\n\n';
+      parametersSection += '| Parameter | Description | Example |\n|-----------|-------------|--------|\n';
       for (const [name, desc] of pathParams) {
         // Clean up description — join first 2 lines, detect truncation
-        const fullDesc = desc.split("\n").slice(0, 2).join(" ").trim();
+        const fullDesc = desc.split('\n').slice(0, 2).join(' ').trim();
         const baseDesc = escapeJsx(
-          escapeTableCell(fullDesc.replace(/x-example:.*$/i, "").trim() || `The ${name} identifier`),
+          escapeTableCell(fullDesc.replace(/x-example:.*$/i, '').trim() || `The ${name} identifier`),
         );
         // Add ellipsis if description appears truncated (no ending punctuation)
-        const cleanDesc = baseDesc && !/[.!?)]$/.test(baseDesc) ? baseDesc + "..." : baseDesc;
+        const cleanDesc = baseDesc && !/[.!?)]$/.test(baseDesc) ? baseDesc + '...' : baseDesc;
         // Get example from aggregated metadata, falling back to defaults
-        const example = escapeTableCell(metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || "-");
+        const example = escapeTableCell(metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || '-');
         parametersSection += `| \`${name}\` | ${cleanDesc} | \`${example}\` |\n`;
       }
-      parametersSection += "\n";
+      parametersSection += '\n';
     }
 
     if (queryParams.size > 0) {
-      parametersSection += "### Query Parameters\n\n";
-      parametersSection += "| Parameter | Description | Example |\n|-----------|-------------|--------|\n";
+      parametersSection += '### Query Parameters\n\n';
+      parametersSection += '| Parameter | Description | Example |\n|-----------|-------------|--------|\n';
       for (const [name, desc] of queryParams) {
-        const fullDesc = desc.split("\n").slice(0, 2).join(" ").trim();
+        const fullDesc = desc.split('\n').slice(0, 2).join(' ').trim();
         const baseDesc = escapeJsx(
-          escapeTableCell(fullDesc.replace(/x-example:.*$/i, "").trim() || `The ${name} parameter`),
+          escapeTableCell(fullDesc.replace(/x-example:.*$/i, '').trim() || `The ${name} parameter`),
         );
-        const cleanDesc = baseDesc && !/[.!?)]$/.test(baseDesc) ? baseDesc + "..." : baseDesc;
-        const example = escapeTableCell(metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || "-");
+        const cleanDesc = baseDesc && !/[.!?)]$/.test(baseDesc) ? baseDesc + '...' : baseDesc;
+        const example = escapeTableCell(metadata.parameterExamples[name] || DEFAULT_EXAMPLES[name] || '-');
         parametersSection += `| \`${name}\` | ${cleanDesc} | \`${example}\` |\n`;
       }
-      parametersSection += "\n";
+      parametersSection += '\n';
     }
   }
 
   // Get example operations
-  const createOp = tools.find((t) => t.operation === "create");
-  const getOp = tools.find((t) => t.operation === "get");
-  const listOp = tools.find((t) => t.operation === "list");
+  const createOp = tools.find((t) => t.operation === 'create');
+  const getOp = tools.find((t) => t.operation === 'get');
+  const listOp = tools.find((t) => t.operation === 'list');
 
   // Example usage section
   let exampleSection = `
@@ -493,7 +493,7 @@ function cleanGeneratedDocs(): void {
     if (entry.isDirectory()) {
       // Remove entire subdirectory
       rmSync(fullPath, { recursive: true, force: true });
-    } else if (entry.name.endsWith(".mdx")) {
+    } else if (entry.name.endsWith('.mdx')) {
       // Check if it's a top-level generated file (we'll keep manually created ones at root)
       // For now, preserve all root-level .mdx files except those in subdirectories
       // The new structure puts all generated files in subcategory subdirectories
@@ -508,7 +508,7 @@ function subdivideByTags(domain: string, docs: ResourceDoc[]): Map<string, Resou
   const groups = new Map<string, ResourceDoc[]>();
 
   for (const doc of docs) {
-    const subdivision = doc.categoryPath.subdivision || "Other";
+    const subdivision = doc.categoryPath.subdivision || 'Other';
 
     if (!groups.has(subdivision)) {
       groups.set(subdivision, []);
@@ -523,7 +523,7 @@ function subdivideByTags(domain: string, docs: ResourceDoc[]): Map<string, Resou
  * Aggregate rich metadata from multiple tools
  */
 function aggregateMetadata(tools: ParsedOperation[]): AggregatedMetadata {
-  const dangerLevels: Array<"low" | "medium" | "high"> = [];
+  const dangerLevels: Array<'low' | 'medium' | 'high'> = [];
   let requiresConfirmation = false;
   const creates = new Set<string>();
   const modifies = new Set<string>();
@@ -582,13 +582,13 @@ function aggregateMetadata(tools: ParsedOperation[]): AggregatedMetadata {
   }
 
   // Determine max danger level
-  let maxDangerLevel: "low" | "medium" | "high" | null = null;
-  if (dangerLevels.includes("high")) {
-    maxDangerLevel = "high";
-  } else if (dangerLevels.includes("medium")) {
-    maxDangerLevel = "medium";
-  } else if (dangerLevels.includes("low")) {
-    maxDangerLevel = "low";
+  let maxDangerLevel: 'low' | 'medium' | 'high' | null = null;
+  if (dangerLevels.includes('high')) {
+    maxDangerLevel = 'high';
+  } else if (dangerLevels.includes('medium')) {
+    maxDangerLevel = 'medium';
+  } else if (dangerLevels.includes('low')) {
+    maxDangerLevel = 'low';
   }
 
   return {
@@ -695,7 +695,7 @@ function generateEnhancedNavigation(resourceDocs: ResourceDoc[]): Array<Record<s
         const resources = tagDocs
           .sort((a, b) => a.title.localeCompare(b.title))
           .map((doc) => ({
-            [doc.title]: `tools/${doc.categoryPath.directoryPath}/${doc.resource.replace(/[{}]/g, "")}.mdx`,
+            [doc.title]: `tools/${doc.categoryPath.directoryPath}/${doc.resource.replace(/[{}]/g, '')}.mdx`,
           }));
 
         tagEntries.push({ [tag]: resources });
@@ -707,7 +707,7 @@ function generateEnhancedNavigation(resourceDocs: ResourceDoc[]): Array<Record<s
       const resources = docs
         .sort((a, b) => a.title.localeCompare(b.title))
         .map((doc) => ({
-          [doc.title]: `tools/${doc.categoryPath.directoryPath}/${doc.resource.replace(/[{}]/g, "")}.mdx`,
+          [doc.title]: `tools/${doc.categoryPath.directoryPath}/${doc.resource.replace(/[{}]/g, '')}.mdx`,
         }));
 
       navigation.push({ [domainTitle]: resources });
@@ -721,12 +721,12 @@ function generateEnhancedNavigation(resourceDocs: ResourceDoc[]): Array<Record<s
  * Main generation function
  */
 async function generateDocs(): Promise<void> {
-  console.log("=".repeat(60));
-  console.log("F5XC API MCP Documentation Generator");
-  console.log("=".repeat(60));
+  console.log('='.repeat(60));
+  console.log('F5XC API MCP Documentation Generator');
+  console.log('='.repeat(60));
 
   // Dynamic import to avoid circular dependencies
-  const { allTools } = await import("../src/tools/registry.js");
+  const { allTools } = await import('../src/tools/registry.js');
 
   if (!allTools || allTools.length === 0) {
     log.warn("No tools found in registry. Run 'npm run generate' first.");
@@ -741,10 +741,10 @@ async function generateDocs(): Promise<void> {
 
   // Get all used subcategories
   const subcategories = getAllUsedSubcategories(allTools);
-  log.info(`Categories: ${subcategories.join(", ")}`);
+  log.info(`Categories: ${subcategories.join(', ')}`);
 
   // Clean existing generated docs
-  log.info("Cleaning existing generated docs...");
+  log.info('Cleaning existing generated docs...');
   cleanGeneratedDocs();
 
   // Create directory structure and generate markdown with new domain-based paths
@@ -755,7 +755,7 @@ async function generateDocs(): Promise<void> {
     // Use new categoryPath for directory structure
     const outputDir = join(CONFIG.DOCS_DIR, resourceDoc.categoryPath.directoryPath);
     // Sanitize filename: strip curly braces that break MDX/Astro builds
-    const safeResource = resourceDoc.resource.replace(/[{}]/g, "");
+    const safeResource = resourceDoc.resource.replace(/[{}]/g, '');
     const outputFile = join(outputDir, `${safeResource}.mdx`);
 
     // Create directory
@@ -776,17 +776,17 @@ async function generateDocs(): Promise<void> {
   log.info(`Generated navigation with ${navigation.length} domain entries`);
 
   // Summary
-  console.log("=".repeat(60));
-  console.log("Generation Summary:");
+  console.log('='.repeat(60));
+  console.log('Generation Summary:');
   console.log(`  Total tools: ${allTools.length}`);
   console.log(`  Unique resources: ${resourceDocs.size}`);
   console.log(`  Categories: ${subcategories.length}`);
   console.log(`  Files generated: ${fileCount}`);
   console.log(`  Output directory: ${CONFIG.DOCS_DIR}`);
-  console.log("=".repeat(60));
+  console.log('='.repeat(60));
 
   // Category breakdown by domain
-  console.log("\nDomain Breakdown:");
+  console.log('\nDomain Breakdown:');
   const domainCount = new Map<string, number>();
   for (const doc of generatedDocs) {
     const domain = doc.categoryPath.domain;
@@ -797,7 +797,7 @@ async function generateDocs(): Promise<void> {
     console.log(`  ${title}: ${count} resources`);
   }
 
-  log.success("Documentation generation complete!");
+  log.success('Documentation generation complete!');
 }
 
 /**

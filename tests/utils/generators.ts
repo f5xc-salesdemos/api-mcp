@@ -7,67 +7,67 @@
  * and F5XC API structures used in property-based tests.
  */
 
-import * as fc from "fast-check";
-import type { OpenApiParameter, ParsedOperation } from "../../src/generator/openapi-parser.js";
+import * as fc from 'fast-check';
+import type { OpenApiParameter, ParsedOperation } from '../../src/generator/openapi-parser.js';
 
 /**
  * Generate a valid OpenAPI parameter name (lowercase letters and underscores)
  */
 export const arbParameterName = fc
-  .array(fc.constantFrom(..."abcdefghijklmnopqrstuvwxyz_"), {
+  .array(fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz_'), {
     minLength: 1,
     maxLength: 20,
   })
-  .map((chars) => chars.join(""));
+  .map((chars) => chars.join(''));
 
 /**
  * Generate a valid domain name
  */
 export const arbDomainName = fc.constantFrom(
-  "waap",
-  "dns",
-  "network",
-  "core",
-  "cloud_connect",
-  "discovery",
-  "secrets",
-  "sites",
-  "app_firewall",
-  "origin_pool",
+  'waap',
+  'dns',
+  'network',
+  'core',
+  'cloud_connect',
+  'discovery',
+  'secrets',
+  'sites',
+  'app_firewall',
+  'origin_pool',
 );
 
 /**
  * Generate a valid resource name (kebab-case)
  */
 export const arbResourceName = fc
-  .array(fc.constantFrom(..."abcdefghijklmnopqrstuvwxyz-"), {
+  .array(fc.constantFrom(...'abcdefghijklmnopqrstuvwxyz-'), {
     minLength: 3,
     maxLength: 30,
   })
-  .map((chars) => chars.join(""))
-  .filter((s) => !s.startsWith("-") && !s.endsWith("-") && !s.includes("--"));
+  .map((chars) => chars.join(''))
+  .filter((s) => !s.startsWith('-') && !s.endsWith('-') && !s.includes('--'));
 
 /**
  * Generate a valid HTTP method
  */
-export const arbHttpMethod = fc.constantFrom("GET", "POST", "PUT", "DELETE", "PATCH");
+export const arbHttpMethod = fc.constantFrom('GET', 'POST', 'PUT', 'DELETE', 'PATCH');
 
 /**
  * Generate a valid operation type
  */
-export const arbOperationType = fc.constantFrom("create", "list", "get", "update", "delete");
+export const arbOperationType = fc.constantFrom('create', 'list', 'get', 'update', 'delete');
 
 /**
  * Generate an OpenAPI parameter type
  */
-export const arbParameterType = fc.constantFrom("string", "integer", "number", "boolean", "array", "object");
+export const arbParameterType = fc.constantFrom('string', 'integer', 'number', 'boolean', 'array', 'object');
 
 /**
  * Generate a valid API path
  */
 export const arbApiPath = fc
   .tuple(
-    fc.constantFrom("/api/config", "/api/data", "/api/introspection"),
+    fc.constantFrom('/api/config', '/api/data', '/api/introspection'),
     fc.boolean(), // has namespace
     arbResourceName,
     fc.boolean(), // has name parameter
@@ -75,11 +75,11 @@ export const arbApiPath = fc
   .map(([base, hasNamespace, resource, hasName]) => {
     let path = base;
     if (hasNamespace) {
-      path += "/namespaces/{namespace}";
+      path += '/namespaces/{namespace}';
     }
-    path += `/${resource.replace(/-/g, "_")}s`;
+    path += `/${resource.replace(/-/g, '_')}s`;
     if (hasName) {
-      path += "/{name}";
+      path += '/{name}';
     }
     return path;
   });
@@ -100,21 +100,21 @@ export const arbParameterSchema = fc.record({
  */
 export const arbOpenApiParameter: fc.Arbitrary<OpenApiParameter> = fc.record({
   name: arbParameterName,
-  in: fc.constantFrom("path", "query") as fc.Arbitrary<"path" | "query" | "header" | "cookie">,
+  in: fc.constantFrom('path', 'query') as fc.Arbitrary<'path' | 'query' | 'header' | 'cookie'>,
   required: fc.boolean(),
   description: fc.option(fc.lorem({ maxCount: 5 }), { nil: undefined }),
   schema: fc.option(arbParameterSchema, { nil: undefined }),
-  "x-displayname": fc.option(fc.lorem({ maxCount: 3 }), { nil: undefined }),
-  "x-ves-example": fc.option(fc.string({ minLength: 1, maxLength: 50 }), {
+  'x-displayname': fc.option(fc.lorem({ maxCount: 3 }), { nil: undefined }),
+  'x-ves-example': fc.option(fc.string({ minLength: 1, maxLength: 50 }), {
     nil: undefined,
   }),
-  "x-ves-validation-rules": fc.option(
+  'x-ves-validation-rules': fc.option(
     fc.record({
-      "ves.io.schema.rules.string.max_len": fc.constantFrom("64", "128", "256"),
+      'ves.io.schema.rules.string.max_len': fc.constantFrom('64', '128', '256'),
     }),
     { nil: undefined },
   ),
-  "x-ves-required": fc.option(fc.boolean(), { nil: undefined }),
+  'x-ves-required': fc.option(fc.boolean(), { nil: undefined }),
 });
 
 /**
@@ -122,12 +122,12 @@ export const arbOpenApiParameter: fc.Arbitrary<OpenApiParameter> = fc.record({
  */
 export const arbRequestBodySchema = fc.option(
   fc.record({
-    type: fc.constant("object"),
+    type: fc.constant('object'),
     properties: fc.record({
-      metadata: fc.constant({ type: "object" }),
-      spec: fc.constant({ type: "object" }),
+      metadata: fc.constant({ type: 'object' }),
+      spec: fc.constant({ type: 'object' }),
     }),
-    required: fc.option(fc.constantFrom(["metadata"], ["metadata", "spec"]), {
+    required: fc.option(fc.constantFrom(['metadata'], ['metadata', 'spec']), {
       nil: undefined,
     }),
   }),
@@ -138,7 +138,7 @@ export const arbRequestBodySchema = fc.option(
  * Generate a danger level
  */
 export const arbDangerLevel = fc.option(
-  fc.constantFrom("low", "medium", "high") as fc.Arbitrary<"low" | "medium" | "high">,
+  fc.constantFrom('low', 'medium', 'high') as fc.Arbitrary<'low' | 'medium' | 'high'>,
   { nil: null },
 );
 
@@ -195,11 +195,11 @@ export const arbParsedOperation: fc.Arbitrary<ParsedOperation> = fc
       description: `${operation} ${resource} in ${domain}`,
       pathParameters: pathParameters.map((p) => ({
         ...p,
-        in: "path" as const,
+        in: 'path' as const,
       })),
       queryParameters: queryParameters.map((p) => ({
         ...p,
-        in: "query" as const,
+        in: 'query' as const,
       })),
       requestBodySchema,
       responseSchema: null,
@@ -233,10 +233,10 @@ export const arbToolName = fc
  * Generate a valid OpenAPI spec structure
  */
 export const arbOpenApiSpec = fc.record({
-  openapi: fc.constant("3.0.0"),
+  openapi: fc.constant('3.0.0'),
   info: fc.record({
     title: fc.lorem({ maxCount: 5 }),
-    version: fc.constantFrom("1.0.0", "2.0.0", "3.0.0"),
+    version: fc.constantFrom('1.0.0', '2.0.0', '3.0.0'),
     description: fc.option(fc.lorem({ maxCount: 10 }), { nil: undefined }),
   }),
   paths: fc.dictionary(
@@ -252,7 +252,7 @@ export const arbOpenApiSpec = fc.record({
             nil: undefined,
           }),
           parameters: fc.option(fc.array(arbOpenApiParameter, { maxLength: 3 }), { nil: undefined }),
-          responses: fc.constant({ "200": { description: "OK" } }),
+          responses: fc.constant({ '200': { description: 'OK' } }),
         }),
         { nil: undefined },
       ),
@@ -270,14 +270,14 @@ export const arbOpenApiSpec = fc.record({
             fc.record({
               required: fc.boolean(),
               content: fc.constant({
-                "application/json": {
-                  schema: { type: "object" },
+                'application/json': {
+                  schema: { type: 'object' },
                 },
               }),
             }),
             { nil: undefined },
           ),
-          responses: fc.constant({ "201": { description: "Created" } }),
+          responses: fc.constant({ '201': { description: 'Created' } }),
         }),
         { nil: undefined },
       ),
@@ -290,9 +290,9 @@ export const arbOpenApiSpec = fc.record({
  * Generate validation rules for testing
  */
 export const arbValidationRules = fc.record({
-  "ves.io.schema.rules.string.max_len": fc.constantFrom("64", "128", "256", "512"),
-  "ves.io.schema.rules.string.min_len": fc.constantFrom("1", "2", "3"),
-  "ves.io.schema.rules.message.required": fc.constantFrom("true", "false"),
+  'ves.io.schema.rules.string.max_len': fc.constantFrom('64', '128', '256', '512'),
+  'ves.io.schema.rules.string.min_len': fc.constantFrom('1', '2', '3'),
+  'ves.io.schema.rules.message.required': fc.constantFrom('true', 'false'),
 });
 
 /**
@@ -300,17 +300,17 @@ export const arbValidationRules = fc.record({
  */
 export function arbValidParameterValue(type: string): fc.Arbitrary<unknown> {
   switch (type) {
-    case "string":
+    case 'string':
       return fc.string({ minLength: 1, maxLength: 100 });
-    case "integer":
+    case 'integer':
       return fc.integer({ min: 0, max: 1000 });
-    case "number":
+    case 'number':
       return fc.float({ min: 0, max: 1000, noNaN: true });
-    case "boolean":
+    case 'boolean':
       return fc.boolean();
-    case "array":
+    case 'array':
       return fc.array(fc.string(), { maxLength: 5 });
-    case "object":
+    case 'object':
       return fc.dictionary(fc.string(), fc.string(), { maxKeys: 5 });
     default:
       return fc.string();

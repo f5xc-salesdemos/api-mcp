@@ -13,35 +13,35 @@
 /**
  * Authentication state for the operation
  */
-export type AuthState = "authenticated" | "documentation" | "unauthenticated";
+export type AuthState = 'authenticated' | 'documentation' | 'unauthenticated';
 
 /**
  * CRUD operation types
  */
-export type CrudOperation = "create" | "get" | "list" | "update" | "delete" | "validate" | "search" | "describe";
+export type CrudOperation = 'create' | 'get' | 'list' | 'update' | 'delete' | 'validate' | 'search' | 'describe';
 
 /**
  * Input validation state
  */
 export type InputState =
-  | "valid"
-  | "missing_required"
-  | "invalid_type"
-  | "oneOf_conflict"
-  | "unknown_field"
-  | "empty"
-  | "malformed";
+  | 'valid'
+  | 'missing_required'
+  | 'invalid_type'
+  | 'oneOf_conflict'
+  | 'unknown_field'
+  | 'empty'
+  | 'malformed';
 
 /**
  * Expected outcome type
  */
 export type OutcomeType =
-  | "api_response"
-  | "validation_result"
-  | "documentation"
-  | "error"
-  | "warning"
-  | "search_results";
+  | 'api_response'
+  | 'validation_result'
+  | 'documentation'
+  | 'error'
+  | 'warning'
+  | 'search_results';
 
 /**
  * A condition matrix entry defining expected behavior
@@ -103,56 +103,56 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
   // CREATE Operations - Authenticated
   // -------------------------------------------------------------------------
   {
-    scenarioId: "create_valid_authenticated",
-    description: "Create resource with valid configuration when authenticated",
-    authState: "authenticated",
-    operation: "create",
-    inputState: "valid",
+    scenarioId: 'create_valid_authenticated',
+    description: 'Create resource with valid configuration when authenticated',
+    authState: 'authenticated',
+    operation: 'create',
+    inputState: 'valid',
     expectedStatus: 200,
-    outcomeType: "api_response",
+    outcomeType: 'api_response',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
     },
   },
   {
-    scenarioId: "create_missing_required_authenticated",
-    description: "Create resource missing required fields when authenticated",
-    authState: "authenticated",
-    operation: "create",
-    inputState: "missing_required",
+    scenarioId: 'create_missing_required_authenticated',
+    description: 'Create resource missing required fields when authenticated',
+    authState: 'authenticated',
+    operation: 'create',
+    inputState: 'missing_required',
     expectedStatus: 400,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorCodePattern: "INVALID_ARGUMENT|VALIDATION_ERROR",
-      errorMessagePattern: "required|missing",
+      errorCodePattern: 'INVALID_ARGUMENT|VALIDATION_ERROR',
+      errorMessagePattern: 'required|missing',
     },
   },
   {
-    scenarioId: "create_oneOf_conflict_authenticated",
-    description: "Create resource with conflicting oneOf choices when authenticated",
-    authState: "authenticated",
-    operation: "create",
-    inputState: "oneOf_conflict",
+    scenarioId: 'create_oneOf_conflict_authenticated',
+    description: 'Create resource with conflicting oneOf choices when authenticated',
+    authState: 'authenticated',
+    operation: 'create',
+    inputState: 'oneOf_conflict',
     expectedStatus: 400,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorMessagePattern: "mutually exclusive|oneOf|only one",
+      errorMessagePattern: 'mutually exclusive|oneOf|only one',
     },
   },
   {
-    scenarioId: "create_invalid_type_authenticated",
-    description: "Create resource with invalid field types when authenticated",
-    authState: "authenticated",
-    operation: "create",
-    inputState: "invalid_type",
+    scenarioId: 'create_invalid_type_authenticated',
+    description: 'Create resource with invalid field types when authenticated',
+    authState: 'authenticated',
+    operation: 'create',
+    inputState: 'invalid_type',
     expectedStatus: 400,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorMessagePattern: "type|invalid|expected",
+      errorMessagePattern: 'type|invalid|expected',
     },
   },
 
@@ -160,30 +160,30 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
   // GET Operations - Authenticated
   // -------------------------------------------------------------------------
   {
-    scenarioId: "get_existing_authenticated",
-    description: "Get existing resource when authenticated",
-    authState: "authenticated",
-    operation: "get",
-    inputState: "valid",
+    scenarioId: 'get_existing_authenticated',
+    description: 'Get existing resource when authenticated',
+    authState: 'authenticated',
+    operation: 'get',
+    inputState: 'valid',
     expectedStatus: 200,
-    outcomeType: "api_response",
+    outcomeType: 'api_response',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
     },
   },
   {
-    scenarioId: "get_nonexistent_authenticated",
-    description: "Get non-existent resource when authenticated",
-    authState: "authenticated",
-    operation: "get",
-    inputState: "valid",
+    scenarioId: 'get_nonexistent_authenticated',
+    description: 'Get non-existent resource when authenticated',
+    authState: 'authenticated',
+    operation: 'get',
+    inputState: 'valid',
     expectedStatus: 404,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorCodePattern: "NOT_FOUND",
-      errorMessagePattern: "not found|does not exist",
+      errorCodePattern: 'NOT_FOUND',
+      errorMessagePattern: 'not found|does not exist',
     },
   },
 
@@ -191,13 +191,13 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
   // LIST Operations - Authenticated
   // -------------------------------------------------------------------------
   {
-    scenarioId: "list_resources_authenticated",
-    description: "List resources when authenticated",
-    authState: "authenticated",
-    operation: "list",
-    inputState: "valid",
+    scenarioId: 'list_resources_authenticated',
+    description: 'List resources when authenticated',
+    authState: 'authenticated',
+    operation: 'list',
+    inputState: 'valid',
     expectedStatus: 200,
-    outcomeType: "api_response",
+    outcomeType: 'api_response',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
@@ -205,13 +205,13 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
     },
   },
   {
-    scenarioId: "list_empty_namespace_authenticated",
-    description: "List resources in empty namespace when authenticated",
-    authState: "authenticated",
-    operation: "list",
-    inputState: "valid",
+    scenarioId: 'list_empty_namespace_authenticated',
+    description: 'List resources in empty namespace when authenticated',
+    authState: 'authenticated',
+    operation: 'list',
+    inputState: 'valid',
     expectedStatus: 200,
-    outcomeType: "api_response",
+    outcomeType: 'api_response',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
@@ -223,42 +223,42 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
   // UPDATE Operations - Authenticated
   // -------------------------------------------------------------------------
   {
-    scenarioId: "update_existing_authenticated",
-    description: "Update existing resource with valid data when authenticated",
-    authState: "authenticated",
-    operation: "update",
-    inputState: "valid",
+    scenarioId: 'update_existing_authenticated',
+    description: 'Update existing resource with valid data when authenticated',
+    authState: 'authenticated',
+    operation: 'update',
+    inputState: 'valid',
     expectedStatus: 200,
-    outcomeType: "api_response",
+    outcomeType: 'api_response',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
     },
   },
   {
-    scenarioId: "update_nonexistent_authenticated",
-    description: "Update non-existent resource when authenticated",
-    authState: "authenticated",
-    operation: "update",
-    inputState: "valid",
+    scenarioId: 'update_nonexistent_authenticated',
+    description: 'Update non-existent resource when authenticated',
+    authState: 'authenticated',
+    operation: 'update',
+    inputState: 'valid',
     expectedStatus: 404,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorCodePattern: "NOT_FOUND",
+      errorCodePattern: 'NOT_FOUND',
     },
   },
   {
-    scenarioId: "update_oneOf_conflict_authenticated",
-    description: "Update resource with conflicting oneOf choices",
-    authState: "authenticated",
-    operation: "update",
-    inputState: "oneOf_conflict",
+    scenarioId: 'update_oneOf_conflict_authenticated',
+    description: 'Update resource with conflicting oneOf choices',
+    authState: 'authenticated',
+    operation: 'update',
+    inputState: 'oneOf_conflict',
     expectedStatus: 400,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorMessagePattern: "mutually exclusive|oneOf|only one",
+      errorMessagePattern: 'mutually exclusive|oneOf|only one',
     },
   },
 
@@ -266,29 +266,29 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
   // DELETE Operations - Authenticated
   // -------------------------------------------------------------------------
   {
-    scenarioId: "delete_existing_authenticated",
-    description: "Delete existing resource when authenticated",
-    authState: "authenticated",
-    operation: "delete",
-    inputState: "valid",
+    scenarioId: 'delete_existing_authenticated',
+    description: 'Delete existing resource when authenticated',
+    authState: 'authenticated',
+    operation: 'delete',
+    inputState: 'valid',
     expectedStatus: 200,
-    outcomeType: "api_response",
+    outcomeType: 'api_response',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
     },
   },
   {
-    scenarioId: "delete_nonexistent_authenticated",
-    description: "Delete non-existent resource when authenticated",
-    authState: "authenticated",
-    operation: "delete",
-    inputState: "valid",
+    scenarioId: 'delete_nonexistent_authenticated',
+    description: 'Delete non-existent resource when authenticated',
+    authState: 'authenticated',
+    operation: 'delete',
+    inputState: 'valid',
     expectedStatus: 404,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorCodePattern: "NOT_FOUND",
+      errorCodePattern: 'NOT_FOUND',
     },
   },
 
@@ -296,31 +296,31 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
   // Authentication Errors
   // -------------------------------------------------------------------------
   {
-    scenarioId: "any_operation_invalid_auth",
-    description: "Any operation with invalid authentication",
-    authState: "authenticated",
-    operation: "create",
-    inputState: "valid",
+    scenarioId: 'any_operation_invalid_auth',
+    description: 'Any operation with invalid authentication',
+    authState: 'authenticated',
+    operation: 'create',
+    inputState: 'valid',
     expectedStatus: 401,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorCodePattern: "UNAUTHENTICATED|UNAUTHORIZED",
-      errorMessagePattern: "authentication|unauthorized|invalid token",
+      errorCodePattern: 'UNAUTHENTICATED|UNAUTHORIZED',
+      errorMessagePattern: 'authentication|unauthorized|invalid token',
     },
   },
   {
-    scenarioId: "any_operation_forbidden",
-    description: "Any operation with insufficient permissions",
-    authState: "authenticated",
-    operation: "create",
-    inputState: "valid",
+    scenarioId: 'any_operation_forbidden',
+    description: 'Any operation with insufficient permissions',
+    authState: 'authenticated',
+    operation: 'create',
+    inputState: 'valid',
     expectedStatus: 403,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorCodePattern: "PERMISSION_DENIED|FORBIDDEN",
-      errorMessagePattern: "permission|forbidden|access denied",
+      errorCodePattern: 'PERMISSION_DENIED|FORBIDDEN',
+      errorMessagePattern: 'permission|forbidden|access denied',
     },
   },
 
@@ -328,13 +328,13 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
   // Documentation Mode Operations
   // -------------------------------------------------------------------------
   {
-    scenarioId: "create_documentation_mode",
-    description: "Create operation in documentation mode",
-    authState: "documentation",
-    operation: "create",
-    inputState: "valid",
+    scenarioId: 'create_documentation_mode',
+    description: 'Create operation in documentation mode',
+    authState: 'documentation',
+    operation: 'create',
+    inputState: 'valid',
     expectedStatus: null,
-    outcomeType: "documentation",
+    outcomeType: 'documentation',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
@@ -343,13 +343,13 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
     },
   },
   {
-    scenarioId: "get_documentation_mode",
-    description: "Get operation in documentation mode",
-    authState: "documentation",
-    operation: "get",
-    inputState: "valid",
+    scenarioId: 'get_documentation_mode',
+    description: 'Get operation in documentation mode',
+    authState: 'documentation',
+    operation: 'get',
+    inputState: 'valid',
     expectedStatus: null,
-    outcomeType: "documentation",
+    outcomeType: 'documentation',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
@@ -357,13 +357,13 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
     },
   },
   {
-    scenarioId: "list_documentation_mode",
-    description: "List operation in documentation mode",
-    authState: "documentation",
-    operation: "list",
-    inputState: "valid",
+    scenarioId: 'list_documentation_mode',
+    description: 'List operation in documentation mode',
+    authState: 'documentation',
+    operation: 'list',
+    inputState: 'valid',
     expectedStatus: null,
-    outcomeType: "documentation",
+    outcomeType: 'documentation',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
@@ -371,13 +371,13 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
     },
   },
   {
-    scenarioId: "delete_documentation_mode",
-    description: "Delete operation in documentation mode",
-    authState: "documentation",
-    operation: "delete",
-    inputState: "valid",
+    scenarioId: 'delete_documentation_mode',
+    description: 'Delete operation in documentation mode',
+    authState: 'documentation',
+    operation: 'delete',
+    inputState: 'valid',
     expectedStatus: null,
-    outcomeType: "documentation",
+    outcomeType: 'documentation',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
@@ -389,13 +389,13 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
   // Validation Operations
   // -------------------------------------------------------------------------
   {
-    scenarioId: "validate_valid_config",
-    description: "Validate valid configuration",
-    authState: "documentation",
-    operation: "validate",
-    inputState: "valid",
+    scenarioId: 'validate_valid_config',
+    description: 'Validate valid configuration',
+    authState: 'documentation',
+    operation: 'validate',
+    inputState: 'valid',
     expectedStatus: null,
-    outcomeType: "validation_result",
+    outcomeType: 'validation_result',
     expectedCharacteristics: {
       hasError: false,
       hasWarnings: false,
@@ -403,46 +403,46 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
     },
   },
   {
-    scenarioId: "validate_missing_required",
-    description: "Validate configuration missing required fields",
-    authState: "documentation",
-    operation: "validate",
-    inputState: "missing_required",
+    scenarioId: 'validate_missing_required',
+    description: 'Validate configuration missing required fields',
+    authState: 'documentation',
+    operation: 'validate',
+    inputState: 'missing_required',
     expectedStatus: null,
-    outcomeType: "validation_result",
+    outcomeType: 'validation_result',
     expectedCharacteristics: {
       hasError: true,
       validationPassed: false,
-      errorMessagePattern: "required|missing",
+      errorMessagePattern: 'required|missing',
     },
   },
   {
-    scenarioId: "validate_oneOf_conflict",
-    description: "Validate configuration with oneOf conflict",
-    authState: "documentation",
-    operation: "validate",
-    inputState: "oneOf_conflict",
+    scenarioId: 'validate_oneOf_conflict',
+    description: 'Validate configuration with oneOf conflict',
+    authState: 'documentation',
+    operation: 'validate',
+    inputState: 'oneOf_conflict',
     expectedStatus: null,
-    outcomeType: "validation_result",
+    outcomeType: 'validation_result',
     expectedCharacteristics: {
       hasError: false,
       hasWarnings: true,
       validationPassed: false,
-      warningMessagePattern: "mutually exclusive|oneOf|only one",
+      warningMessagePattern: 'mutually exclusive|oneOf|only one',
     },
   },
   {
-    scenarioId: "validate_invalid_type",
-    description: "Validate configuration with invalid field types",
-    authState: "documentation",
-    operation: "validate",
-    inputState: "invalid_type",
+    scenarioId: 'validate_invalid_type',
+    description: 'Validate configuration with invalid field types',
+    authState: 'documentation',
+    operation: 'validate',
+    inputState: 'invalid_type',
     expectedStatus: null,
-    outcomeType: "validation_result",
+    outcomeType: 'validation_result',
     expectedCharacteristics: {
       hasError: true,
       validationPassed: false,
-      errorMessagePattern: "type|invalid|expected",
+      errorMessagePattern: 'type|invalid|expected',
     },
   },
 
@@ -450,13 +450,13 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
   // Search/Discovery Operations
   // -------------------------------------------------------------------------
   {
-    scenarioId: "search_tools_valid",
-    description: "Search for tools with valid query",
-    authState: "documentation",
-    operation: "search",
-    inputState: "valid",
+    scenarioId: 'search_tools_valid',
+    description: 'Search for tools with valid query',
+    authState: 'documentation',
+    operation: 'search',
+    inputState: 'valid',
     expectedStatus: null,
-    outcomeType: "search_results",
+    outcomeType: 'search_results',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
@@ -464,13 +464,13 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
     },
   },
   {
-    scenarioId: "search_tools_no_match",
-    description: "Search for tools with no matching results",
-    authState: "documentation",
-    operation: "search",
-    inputState: "valid",
+    scenarioId: 'search_tools_no_match',
+    description: 'Search for tools with no matching results',
+    authState: 'documentation',
+    operation: 'search',
+    inputState: 'valid',
     expectedStatus: null,
-    outcomeType: "search_results",
+    outcomeType: 'search_results',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
@@ -478,29 +478,29 @@ export const CRUD_CONDITION_MATRIX: ConditionEntry[] = [
     },
   },
   {
-    scenarioId: "describe_tool_valid",
-    description: "Describe existing tool",
-    authState: "documentation",
-    operation: "describe",
-    inputState: "valid",
+    scenarioId: 'describe_tool_valid',
+    description: 'Describe existing tool',
+    authState: 'documentation',
+    operation: 'describe',
+    inputState: 'valid',
     expectedStatus: null,
-    outcomeType: "api_response",
+    outcomeType: 'api_response',
     expectedCharacteristics: {
       hasData: true,
       hasError: false,
     },
   },
   {
-    scenarioId: "describe_tool_nonexistent",
-    description: "Describe non-existent tool",
-    authState: "documentation",
-    operation: "describe",
-    inputState: "valid",
+    scenarioId: 'describe_tool_nonexistent',
+    description: 'Describe non-existent tool',
+    authState: 'documentation',
+    operation: 'describe',
+    inputState: 'valid',
     expectedStatus: null,
-    outcomeType: "error",
+    outcomeType: 'error',
     expectedCharacteristics: {
       hasError: true,
-      errorMessagePattern: "not found|unknown tool",
+      errorMessagePattern: 'not found|unknown tool',
     },
   },
 ];
@@ -556,18 +556,18 @@ export function getExpectedOutcome(
  */
 export const HEALTHCHECK_ONEOF_GROUPS = {
   /** Host header choice - only one allowed */
-  hostHeaderChoice: ["host_header", "use_origin_server_name"],
+  hostHeaderChoice: ['host_header', 'use_origin_server_name'],
   /** Health check type choice */
-  healthCheckType: ["http_health_check", "tcp_health_check"],
+  healthCheckType: ['http_health_check', 'tcp_health_check'],
   /** TLS configuration choice */
-  tlsChoice: ["use_tls", "no_tls"],
+  tlsChoice: ['use_tls', 'no_tls'],
 } as const;
 
 /**
  * Required fields for healthcheck creation
  */
 export const HEALTHCHECK_REQUIRED_FIELDS = {
-  pathParams: ["namespace", "name"],
+  pathParams: ['namespace', 'name'],
   body: [], // Most body fields have defaults
 } as const;
 

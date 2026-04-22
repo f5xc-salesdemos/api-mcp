@@ -16,13 +16,13 @@
  *   1 - Validation failed
  */
 
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 // Import from the built output to validate the compiled code
-const SPECS_DIR = join(process.cwd(), "specs", "domains");
-const REGISTRY_FILE = join(process.cwd(), "src", "tools", "registry.ts");
-const FIXTURES_FILE = join(process.cwd(), "tests", "fixtures", "generated.ts");
+const SPECS_DIR = join(process.cwd(), 'specs', 'domains');
+const REGISTRY_FILE = join(process.cwd(), 'src', 'tools', 'registry.ts');
+const FIXTURES_FILE = join(process.cwd(), 'tests', 'fixtures', 'generated.ts');
 
 interface ValidationResult {
   passed: boolean;
@@ -37,20 +37,20 @@ function addResult(name: string, result: ValidationResult): void {
 }
 
 async function main(): Promise<void> {
-  console.log("🔍 Validating tool generation...\n");
+  console.log('🔍 Validating tool generation...\n');
 
   // 1. Check specs directory exists
   try {
     if (!existsSync(SPECS_DIR)) {
-      addResult("Specs Directory", {
+      addResult('Specs Directory', {
         passed: false,
-        message: "specs/domains directory not found",
+        message: 'specs/domains directory not found',
       });
     } else {
-      addResult("Specs Directory", { passed: true, message: "exists" });
+      addResult('Specs Directory', { passed: true, message: 'exists' });
     }
   } catch (error) {
-    addResult("Specs Directory", {
+    addResult('Specs Directory', {
       passed: false,
       message: (error as Error).message,
     });
@@ -59,15 +59,15 @@ async function main(): Promise<void> {
   // 2. Check registry file exists
   try {
     if (!existsSync(REGISTRY_FILE)) {
-      addResult("Registry File", {
+      addResult('Registry File', {
         passed: false,
-        message: "src/tools/registry.ts not found - run npm run generate",
+        message: 'src/tools/registry.ts not found - run npm run generate',
       });
     } else {
-      addResult("Registry File", { passed: true, message: "exists" });
+      addResult('Registry File', { passed: true, message: 'exists' });
     }
   } catch (error) {
-    addResult("Registry File", {
+    addResult('Registry File', {
       passed: false,
       message: (error as Error).message,
     });
@@ -76,15 +76,15 @@ async function main(): Promise<void> {
   // 3. Check fixtures file exists
   try {
     if (!existsSync(FIXTURES_FILE)) {
-      addResult("Test Fixtures", {
+      addResult('Test Fixtures', {
         passed: false,
-        message: "tests/fixtures/generated.ts not found - run npm run generate:fixtures",
+        message: 'tests/fixtures/generated.ts not found - run npm run generate:fixtures',
       });
     } else {
-      addResult("Test Fixtures", { passed: true, message: "exists" });
+      addResult('Test Fixtures', { passed: true, message: 'exists' });
     }
   } catch (error) {
-    addResult("Test Fixtures", {
+    addResult('Test Fixtures', {
       passed: false,
       message: (error as Error).message,
     });
@@ -92,31 +92,31 @@ async function main(): Promise<void> {
 
   // 4. Validate registry content
   try {
-    const content = readFileSync(REGISTRY_FILE, "utf-8");
+    const content = readFileSync(REGISTRY_FILE, 'utf-8');
 
-    if (!content.includes("export const allTools")) {
-      addResult("Registry Content", {
+    if (!content.includes('export const allTools')) {
+      addResult('Registry Content', {
         passed: false,
-        message: "missing allTools export",
+        message: 'missing allTools export',
       });
-    } else if (!content.includes("export function getToolByName")) {
-      addResult("Registry Content", {
+    } else if (!content.includes('export function getToolByName')) {
+      addResult('Registry Content', {
         passed: false,
-        message: "missing getToolByName export",
+        message: 'missing getToolByName export',
       });
-    } else if (!content.includes("export function getAllDomains")) {
-      addResult("Registry Content", {
+    } else if (!content.includes('export function getAllDomains')) {
+      addResult('Registry Content', {
         passed: false,
-        message: "missing getAllDomains export",
+        message: 'missing getAllDomains export',
       });
     } else {
-      addResult("Registry Content", {
+      addResult('Registry Content', {
         passed: true,
-        message: "has required exports",
+        message: 'has required exports',
       });
     }
   } catch (error) {
-    addResult("Registry Content", {
+    addResult('Registry Content', {
       passed: false,
       message: (error as Error).message,
     });
@@ -124,31 +124,31 @@ async function main(): Promise<void> {
 
   // 5. Validate fixtures content
   try {
-    const content = readFileSync(FIXTURES_FILE, "utf-8");
+    const content = readFileSync(FIXTURES_FILE, 'utf-8');
 
-    if (!content.includes("export const REGISTRY_STATS")) {
-      addResult("Fixtures Content", {
+    if (!content.includes('export const REGISTRY_STATS')) {
+      addResult('Fixtures Content', {
         passed: false,
-        message: "missing REGISTRY_STATS export",
+        message: 'missing REGISTRY_STATS export',
       });
-    } else if (!content.includes("export const FIRST_TOOL")) {
-      addResult("Fixtures Content", {
+    } else if (!content.includes('export const FIRST_TOOL')) {
+      addResult('Fixtures Content', {
         passed: false,
-        message: "missing FIRST_TOOL export",
+        message: 'missing FIRST_TOOL export',
       });
-    } else if (!content.includes("export const AVAILABLE_DOMAINS")) {
-      addResult("Fixtures Content", {
+    } else if (!content.includes('export const AVAILABLE_DOMAINS')) {
+      addResult('Fixtures Content', {
         passed: false,
-        message: "missing AVAILABLE_DOMAINS export",
+        message: 'missing AVAILABLE_DOMAINS export',
       });
     } else {
-      addResult("Fixtures Content", {
+      addResult('Fixtures Content', {
         passed: true,
-        message: "has required exports",
+        message: 'has required exports',
       });
     }
   } catch (error) {
-    addResult("Fixtures Content", {
+    addResult('Fixtures Content', {
       passed: false,
       message: (error as Error).message,
     });
@@ -156,39 +156,39 @@ async function main(): Promise<void> {
 
   // 6. Extract and validate stats from fixtures
   try {
-    const content = readFileSync(FIXTURES_FILE, "utf-8");
+    const content = readFileSync(FIXTURES_FILE, 'utf-8');
 
     const toolsMatch = content.match(/totalTools:\s*(\d+)/);
     const domainsMatch = content.match(/totalDomains:\s*(\d+)/);
 
     if (!toolsMatch || !domainsMatch) {
-      addResult("Generation Statistics", {
+      addResult('Generation Statistics', {
         passed: false,
-        message: "cannot parse statistics",
+        message: 'cannot parse statistics',
       });
     } else {
       const totalTools = parseInt(toolsMatch[1], 10);
       const totalDomains = parseInt(domainsMatch[1], 10);
 
       if (totalTools < 100) {
-        addResult("Generation Statistics", {
+        addResult('Generation Statistics', {
           passed: false,
           message: `only ${totalTools} tools generated - expected 100+`,
         });
       } else if (totalDomains < 10) {
-        addResult("Generation Statistics", {
+        addResult('Generation Statistics', {
           passed: false,
           message: `only ${totalDomains} domains found - expected 10+`,
         });
       } else {
-        addResult("Generation Statistics", {
+        addResult('Generation Statistics', {
           passed: true,
           message: `${totalTools} tools across ${totalDomains} domains`,
         });
       }
     }
   } catch (error) {
-    addResult("Generation Statistics", {
+    addResult('Generation Statistics', {
       passed: false,
       message: (error as Error).message,
     });
@@ -197,12 +197,12 @@ async function main(): Promise<void> {
   // 7. Validate rich metadata coverage by importing at runtime
   try {
     // Dynamic import the registry
-    const { allTools } = await import("../src/tools/registry.js");
+    const { allTools } = await import('../src/tools/registry.js');
 
     if (!allTools || !Array.isArray(allTools)) {
-      addResult("Rich Metadata Coverage", {
+      addResult('Rich Metadata Coverage', {
         passed: false,
-        message: "allTools is not an array",
+        message: 'allTools is not an array',
       });
     } else {
       const total = allTools.length;
@@ -229,25 +229,25 @@ async function main(): Promise<void> {
       // At least dangerLevel or operationMetadata should have good coverage (50%+)
       const hasGoodCoverage = coverage.dangerLevel > total * 0.5 || coverage.operationMetadata > total * 0.5;
 
-      addResult("Rich Metadata Coverage", {
+      addResult('Rich Metadata Coverage', {
         passed: hasGoodCoverage,
-        message: hasGoodCoverage ? "good coverage" : "insufficient metadata coverage",
+        message: hasGoodCoverage ? 'good coverage' : 'insufficient metadata coverage',
         details,
       });
     }
   } catch (error) {
-    addResult("Rich Metadata Coverage", {
+    addResult('Rich Metadata Coverage', {
       passed: false,
       message: `import failed: ${(error as Error).message}`,
     });
   }
 
   // Print results
-  console.log("📊 Validation Results:\n");
+  console.log('📊 Validation Results:\n');
 
   let allPassed = true;
   for (const result of results) {
-    const icon = result.passed ? "✅" : "❌";
+    const icon = result.passed ? '✅' : '❌';
     console.log(`${icon} ${result.message}`);
     if (result.details) {
       for (const detail of result.details) {
@@ -257,18 +257,18 @@ async function main(): Promise<void> {
     if (!result.passed) allPassed = false;
   }
 
-  console.log("");
+  console.log('');
 
   if (allPassed) {
-    console.log("✅ All validations passed!\n");
+    console.log('✅ All validations passed!\n');
     process.exit(0);
   } else {
-    console.log("❌ Some validations failed!\n");
+    console.log('❌ Some validations failed!\n');
     process.exit(1);
   }
 }
 
 main().catch((error) => {
-  console.error("Fatal error:", error);
+  console.error('Fatal error:', error);
   process.exit(1);
 });

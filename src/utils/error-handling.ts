@@ -19,7 +19,7 @@ export class F5XCError extends Error {
 
   constructor(message: string, code: string, context?: Record<string, unknown>) {
     super(message);
-    this.name = "F5XCError";
+    this.name = 'F5XCError';
     this.code = code;
     this.context = context;
 
@@ -47,8 +47,8 @@ export class F5XCError extends Error {
  */
 export class AuthenticationError extends F5XCError {
   constructor(message: string, context?: Record<string, unknown>) {
-    super(message, "AUTH_ERROR", context);
-    this.name = "AuthenticationError";
+    super(message, 'AUTH_ERROR', context);
+    this.name = 'AuthenticationError';
   }
 }
 
@@ -62,8 +62,8 @@ export class F5XCApiError extends F5XCError {
   readonly response?: unknown;
 
   constructor(message: string, status?: number, response?: unknown, context?: Record<string, unknown>) {
-    super(message, "API_ERROR", context);
-    this.name = "F5XCApiError";
+    super(message, 'API_ERROR', context);
+    this.name = 'F5XCApiError';
     this.status = status;
     this.response = response;
   }
@@ -82,8 +82,8 @@ export class F5XCApiError extends F5XCError {
  */
 export class ConfigurationError extends F5XCError {
   constructor(message: string, context?: Record<string, unknown>) {
-    super(message, "CONFIG_ERROR", context);
-    this.name = "ConfigurationError";
+    super(message, 'CONFIG_ERROR', context);
+    this.name = 'ConfigurationError';
   }
 }
 
@@ -103,11 +103,11 @@ export class SSLCertificateError extends F5XCError {
   constructor(
     message: string,
     hostname?: string,
-    certInfo?: SSLCertificateError["certInfo"],
+    certInfo?: SSLCertificateError['certInfo'],
     context?: Record<string, unknown>,
   ) {
-    super(message, "SSL_CERT_ERROR", context);
-    this.name = "SSLCertificateError";
+    super(message, 'SSL_CERT_ERROR', context);
+    this.name = 'SSLCertificateError';
     this.hostname = hostname;
     this.certInfo = certInfo;
   }
@@ -132,8 +132,8 @@ export class ValidationError extends F5XCError {
   }>;
 
   constructor(message: string, errors: Array<{ field: string; message: string }>, context?: Record<string, unknown>) {
-    super(message, "VALIDATION_ERROR", context);
-    this.name = "ValidationError";
+    super(message, 'VALIDATION_ERROR', context);
+    this.name = 'ValidationError';
     this.errors = errors;
   }
 
@@ -153,8 +153,8 @@ export class ToolExecutionError extends F5XCError {
   readonly toolName: string;
 
   constructor(toolName: string, message: string, context?: Record<string, unknown>) {
-    super(message, "TOOL_ERROR", context);
-    this.name = "ToolExecutionError";
+    super(message, 'TOOL_ERROR', context);
+    this.name = 'ToolExecutionError';
     this.toolName = toolName;
   }
 
@@ -171,8 +171,8 @@ export class ToolExecutionError extends F5XCError {
  */
 export class SpecificationError extends F5XCError {
   constructor(message: string, context?: Record<string, unknown>) {
-    super(message, "SPEC_ERROR", context);
-    this.name = "SpecificationError";
+    super(message, 'SPEC_ERROR', context);
+    this.name = 'SpecificationError';
   }
 }
 
@@ -181,19 +181,19 @@ export class SpecificationError extends F5XCError {
  */
 export enum ErrorCategory {
   /** User input validation errors */
-  VALIDATION = "validation",
+  VALIDATION = 'validation',
   /** Authentication/authorization errors */
-  AUTHENTICATION = "authentication",
+  AUTHENTICATION = 'authentication',
   /** Server-side errors */
-  SERVER = "server",
+  SERVER = 'server',
   /** Network/connectivity errors */
-  NETWORK = "network",
+  NETWORK = 'network',
   /** Configuration errors */
-  CONFIGURATION = "configuration",
+  CONFIGURATION = 'configuration',
   /** SSL/TLS certificate errors */
-  SSL_CERTIFICATE = "ssl_certificate",
+  SSL_CERTIFICATE = 'ssl_certificate',
   /** Unknown errors */
-  UNKNOWN = "unknown",
+  UNKNOWN = 'unknown',
 }
 
 /**
@@ -228,34 +228,34 @@ export function categorizeError(error: unknown): ErrorCategory {
   }
   if (error instanceof Error) {
     const message = error.message.toLowerCase();
-    const code = (error as NodeJS.ErrnoException).code?.toLowerCase() ?? "";
+    const code = (error as NodeJS.ErrnoException).code?.toLowerCase() ?? '';
 
     // SSL/TLS certificate errors
     if (
-      message.includes("certificate") ||
-      message.includes("ssl") ||
-      message.includes("tls") ||
-      message.includes("altnames") ||
-      (message.includes("hostname") && message.includes("match")) ||
-      message.includes("self signed") ||
-      message.includes("self-signed") ||
-      message.includes("unable to verify") ||
-      code === "cert_has_expired" ||
-      code === "depth_zero_self_signed_cert" ||
-      code === "unable_to_get_issuer_cert" ||
-      code === "unable_to_verify_leaf_signature" ||
-      code === "hostname_mismatch" ||
-      code === "err_tls_cert_altname_invalid"
+      message.includes('certificate') ||
+      message.includes('ssl') ||
+      message.includes('tls') ||
+      message.includes('altnames') ||
+      (message.includes('hostname') && message.includes('match')) ||
+      message.includes('self signed') ||
+      message.includes('self-signed') ||
+      message.includes('unable to verify') ||
+      code === 'cert_has_expired' ||
+      code === 'depth_zero_self_signed_cert' ||
+      code === 'unable_to_get_issuer_cert' ||
+      code === 'unable_to_verify_leaf_signature' ||
+      code === 'hostname_mismatch' ||
+      code === 'err_tls_cert_altname_invalid'
     ) {
       return ErrorCategory.SSL_CERTIFICATE;
     }
 
     // Network/connectivity errors
     if (
-      message.includes("network") ||
-      message.includes("timeout") ||
-      message.includes("econnrefused") ||
-      message.includes("enotfound")
+      message.includes('network') ||
+      message.includes('timeout') ||
+      message.includes('econnrefused') ||
+      message.includes('enotfound')
     ) {
       return ErrorCategory.NETWORK;
     }
@@ -268,7 +268,7 @@ export function categorizeError(error: unknown): ErrorCategory {
  */
 export function formatErrorForMcp(error: unknown): {
   isError: true;
-  content: Array<{ type: "text"; text: string }>;
+  content: Array<{ type: 'text'; text: string }>;
 } {
   const category = categorizeError(error);
 
@@ -282,10 +282,10 @@ export function formatErrorForMcp(error: unknown): {
     details = error.context;
   } else if (error instanceof Error) {
     errorMessage = error.message;
-    errorCode = "UNKNOWN_ERROR";
+    errorCode = 'UNKNOWN_ERROR';
   } else {
     errorMessage = String(error);
-    errorCode = "UNKNOWN_ERROR";
+    errorCode = 'UNKNOWN_ERROR';
   }
 
   const errorResponse = {
@@ -301,7 +301,7 @@ export function formatErrorForMcp(error: unknown): {
     isError: true,
     content: [
       {
-        type: "text",
+        type: 'text',
         text: JSON.stringify(errorResponse, null, 2),
       },
     ],
@@ -320,11 +320,11 @@ export function withErrorHandling<T extends unknown[], R>(fn: (...args: T) => Pr
         throw error;
       }
       if (error instanceof Error) {
-        throw new F5XCError(error.message, "UNKNOWN_ERROR", {
+        throw new F5XCError(error.message, 'UNKNOWN_ERROR', {
           originalError: error.name,
         });
       }
-      throw new F5XCError(String(error), "UNKNOWN_ERROR");
+      throw new F5XCError(String(error), 'UNKNOWN_ERROR');
     }
   };
 }
@@ -353,10 +353,10 @@ export function wrapSSLError(error: unknown, apiUrl?: string): Error {
   }
 
   // Check for hostname/altname mismatch (the staging certificate issue)
-  if (message.includes("altnames") || (message.includes("hostname") && message.includes("match"))) {
-    const isStaging = hostname?.includes(".staging.");
+  if (message.includes('altnames') || (message.includes('hostname') && message.includes('match'))) {
+    const isStaging = hostname?.includes('.staging.');
 
-    let guidance = `SSL Certificate Error: The server certificate does not cover hostname "${hostname ?? "unknown"}".`;
+    let guidance = `SSL Certificate Error: The server certificate does not cover hostname "${hostname ?? 'unknown'}".`;
 
     if (isStaging) {
       guidance += `
@@ -376,7 +376,7 @@ Example:
       guidance += `
 
 SOLUTIONS:
-1. Verify the API URL is correct: ${apiUrl ?? "not set"}
+1. Verify the API URL is correct: ${apiUrl ?? 'not set'}
 2. If using a custom CA, set F5XC_CA_BUNDLE=/path/to/ca-bundle.crt
 3. Check if the certificate has expired or is self-signed`;
     }
@@ -388,7 +388,7 @@ SOLUTIONS:
   }
 
   // Check for self-signed certificates
-  if (message.includes("self signed") || message.includes("self-signed")) {
+  if (message.includes('self signed') || message.includes('self-signed')) {
     return new SSLCertificateError(
       `SSL Certificate Error: Self-signed certificate detected.
 
@@ -402,7 +402,7 @@ SOLUTIONS:
   }
 
   // Check for expired certificates
-  if (message.includes("expired") || message.includes("not yet valid")) {
+  if (message.includes('expired') || message.includes('not yet valid')) {
     return new SSLCertificateError(
       `SSL Certificate Error: Certificate has expired or is not yet valid.
 
@@ -415,10 +415,10 @@ Contact your F5 XC administrator to renew the certificate.`,
 
   // Generic SSL error
   if (
-    message.includes("certificate") ||
-    message.includes("ssl") ||
-    message.includes("tls") ||
-    message.includes("unable to verify")
+    message.includes('certificate') ||
+    message.includes('ssl') ||
+    message.includes('tls') ||
+    message.includes('unable to verify')
   ) {
     return new SSLCertificateError(
       `SSL/TLS Error: ${error.message}
