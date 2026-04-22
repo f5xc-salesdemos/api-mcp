@@ -1,0 +1,16 @@
+{
+  "customSets": [
+    {
+      "label": "Guides",
+      "description": "Setup and usage guides for the MCP server",
+      "paths": ["guides/**"]
+    },
+    {
+      "label": "API Reference",
+      "description": "Tool definitions and reference documentation",
+      "paths": ["reference/**", "tools/**"]
+    }
+  ],
+  "promote": ["index*", "installation*", "authentication*"],
+  "demote": ["troubleshooting*"]
+}
