@@ -12,5 +12,5 @@
     }
   ],
   "promote": ["index*", "installation*", "authentication*"],
-  "demote": ["troubleshooting*"]
+  "demote": ["troubleshooting*", "tools/**"]
 }
