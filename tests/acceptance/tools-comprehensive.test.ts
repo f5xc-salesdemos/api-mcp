@@ -18,10 +18,10 @@
  *   npm run test:discover:sample       # Sample (virtual domain only, ~10 min)
  */
 
-import { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
-import axios, { type AxiosInstance } from 'axios';
 import fs from 'node:fs';
 import path from 'node:path';
+import { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
+import axios, { type AxiosInstance } from 'axios';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { ResourceTracker } from '../e2e/helpers/resource-tracker';
 import { generateTestResourceName } from '../e2e/helpers/test-data-generator';

@@ -22,7 +22,7 @@ import {
 } from './schema-loader.js';
 
 // Re-export types for convenience
-export type { ResolvedSchema, MinimumConfiguration, MutuallyExclusiveGroup };
+export type { MinimumConfiguration, MutuallyExclusiveGroup, ResolvedSchema };
 
 /**
  * Get the raw JSON schema for a tool's request body (may contain $refs)
