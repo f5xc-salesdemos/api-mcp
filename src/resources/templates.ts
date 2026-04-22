@@ -9,20 +9,20 @@
  * Resource descriptions are enhanced with domain context from upstream specs.
  */
 
-import { getResourceDomain, getResourceMetadata } from '../generator/domain-metadata.js';
+import { getResourceDomain, getResourceMetadata } from "../generator/domain-metadata.js";
 
 /**
  * Resource URI schemes
  */
 export const RESOURCE_SCHEMES = {
   /** Base scheme for all F5XC resources */
-  BASE: 'f5xc://',
+  BASE: "f5xc://",
 
   /** System namespace for global resources */
-  SYSTEM: 'system',
+  SYSTEM: "system",
 
   /** Shared namespace for cross-tenant resources */
-  SHARED: 'shared',
+  SHARED: "shared",
 } as const;
 
 /**
@@ -40,7 +40,7 @@ export interface ResourceType {
   /** Whether resource is namespace-scoped */
   namespaceScoped: boolean;
   /** Subscription tier required */
-  tier: 'NO_TIER' | 'STANDARD' | 'ADVANCED';
+  tier: "NO_TIER" | "STANDARD" | "ADVANCED";
   /** Related resources */
   relatedResources?: string[];
 }
@@ -51,161 +51,161 @@ export interface ResourceType {
 export const RESOURCE_TYPES: Record<string, ResourceType> = {
   // Core Resources (NO_TIER)
   namespace: {
-    type: 'namespace',
-    name: 'Namespace',
-    description: 'Logical grouping of resources',
-    apiPath: '/api/web/namespaces',
+    type: "namespace",
+    name: "Namespace",
+    description: "Logical grouping of resources",
+    apiPath: "/api/web/namespaces",
     namespaceScoped: false,
-    tier: 'NO_TIER',
+    tier: "NO_TIER",
   },
   certificate: {
-    type: 'certificate',
-    name: 'Certificate',
-    description: 'TLS/SSL certificate',
-    apiPath: '/api/config/namespaces/{namespace}/certificates',
+    type: "certificate",
+    name: "Certificate",
+    description: "TLS/SSL certificate",
+    apiPath: "/api/config/namespaces/{namespace}/certificates",
     namespaceScoped: true,
-    tier: 'NO_TIER',
+    tier: "NO_TIER",
   },
   secret: {
-    type: 'secret',
-    name: 'Secret',
-    description: 'Sensitive data storage',
-    apiPath: '/api/config/namespaces/{namespace}/secrets',
+    type: "secret",
+    name: "Secret",
+    description: "Sensitive data storage",
+    apiPath: "/api/config/namespaces/{namespace}/secrets",
     namespaceScoped: true,
-    tier: 'NO_TIER',
+    tier: "NO_TIER",
   },
   cloud_credentials: {
-    type: 'cloud_credentials',
-    name: 'Cloud Credentials',
-    description: 'Cloud provider authentication',
-    apiPath: '/api/config/namespaces/{namespace}/cloud_credentials',
+    type: "cloud_credentials",
+    name: "Cloud Credentials",
+    description: "Cloud provider authentication",
+    apiPath: "/api/config/namespaces/{namespace}/cloud_credentials",
     namespaceScoped: true,
-    tier: 'NO_TIER',
+    tier: "NO_TIER",
   },
 
   // Standard Resources
   http_loadbalancer: {
-    type: 'http_loadbalancer',
-    name: 'HTTP Load Balancer',
-    description: 'Layer 7 HTTP/HTTPS load balancer',
-    apiPath: '/api/config/namespaces/{namespace}/http_loadbalancers',
+    type: "http_loadbalancer",
+    name: "HTTP Load Balancer",
+    description: "Layer 7 HTTP/HTTPS load balancer",
+    apiPath: "/api/config/namespaces/{namespace}/http_loadbalancers",
     namespaceScoped: true,
-    tier: 'STANDARD',
-    relatedResources: ['origin_pool', 'healthcheck', 'app_firewall'],
+    tier: "STANDARD",
+    relatedResources: ["origin_pool", "healthcheck", "app_firewall"],
   },
   tcp_loadbalancer: {
-    type: 'tcp_loadbalancer',
-    name: 'TCP Load Balancer',
-    description: 'Layer 4 TCP load balancer',
-    apiPath: '/api/config/namespaces/{namespace}/tcp_loadbalancers',
+    type: "tcp_loadbalancer",
+    name: "TCP Load Balancer",
+    description: "Layer 4 TCP load balancer",
+    apiPath: "/api/config/namespaces/{namespace}/tcp_loadbalancers",
     namespaceScoped: true,
-    tier: 'STANDARD',
-    relatedResources: ['origin_pool', 'healthcheck'],
+    tier: "STANDARD",
+    relatedResources: ["origin_pool", "healthcheck"],
   },
   origin_pool: {
-    type: 'origin_pool',
-    name: 'Origin Pool',
-    description: 'Backend server pool for load balancing',
-    apiPath: '/api/config/namespaces/{namespace}/origin_pools',
+    type: "origin_pool",
+    name: "Origin Pool",
+    description: "Backend server pool for load balancing",
+    apiPath: "/api/config/namespaces/{namespace}/origin_pools",
     namespaceScoped: true,
-    tier: 'STANDARD',
-    relatedResources: ['healthcheck'],
+    tier: "STANDARD",
+    relatedResources: ["healthcheck"],
   },
   healthcheck: {
-    type: 'healthcheck',
-    name: 'Health Check',
-    description: 'Health monitoring for origin servers',
-    apiPath: '/api/config/namespaces/{namespace}/healthchecks',
+    type: "healthcheck",
+    name: "Health Check",
+    description: "Health monitoring for origin servers",
+    apiPath: "/api/config/namespaces/{namespace}/healthchecks",
     namespaceScoped: true,
-    tier: 'STANDARD',
+    tier: "STANDARD",
   },
   dns_zone: {
-    type: 'dns_zone',
-    name: 'DNS Zone',
-    description: 'DNS zone management',
-    apiPath: '/api/config/namespaces/{namespace}/dns_zones',
+    type: "dns_zone",
+    name: "DNS Zone",
+    description: "DNS zone management",
+    apiPath: "/api/config/namespaces/{namespace}/dns_zones",
     namespaceScoped: true,
-    tier: 'STANDARD',
+    tier: "STANDARD",
   },
   dns_load_balancer: {
-    type: 'dns_load_balancer',
-    name: 'DNS Load Balancer',
-    description: 'Global DNS-based load balancing',
-    apiPath: '/api/config/namespaces/{namespace}/dns_load_balancers',
+    type: "dns_load_balancer",
+    name: "DNS Load Balancer",
+    description: "Global DNS-based load balancing",
+    apiPath: "/api/config/namespaces/{namespace}/dns_load_balancers",
     namespaceScoped: true,
-    tier: 'STANDARD',
-    relatedResources: ['dns_zone'],
+    tier: "STANDARD",
+    relatedResources: ["dns_zone"],
   },
 
   // Site Resources
   aws_vpc_site: {
-    type: 'aws_vpc_site',
-    name: 'AWS VPC Site',
-    description: 'F5XC site deployed in AWS VPC',
-    apiPath: '/api/config/namespaces/{namespace}/aws_vpc_sites',
+    type: "aws_vpc_site",
+    name: "AWS VPC Site",
+    description: "F5XC site deployed in AWS VPC",
+    apiPath: "/api/config/namespaces/{namespace}/aws_vpc_sites",
     namespaceScoped: true,
-    tier: 'STANDARD',
-    relatedResources: ['cloud_credentials'],
+    tier: "STANDARD",
+    relatedResources: ["cloud_credentials"],
   },
   azure_vnet_site: {
-    type: 'azure_vnet_site',
-    name: 'Azure VNet Site',
-    description: 'F5XC site deployed in Azure VNet',
-    apiPath: '/api/config/namespaces/{namespace}/azure_vnet_sites',
+    type: "azure_vnet_site",
+    name: "Azure VNet Site",
+    description: "F5XC site deployed in Azure VNet",
+    apiPath: "/api/config/namespaces/{namespace}/azure_vnet_sites",
     namespaceScoped: true,
-    tier: 'STANDARD',
-    relatedResources: ['cloud_credentials'],
+    tier: "STANDARD",
+    relatedResources: ["cloud_credentials"],
   },
   gcp_vpc_site: {
-    type: 'gcp_vpc_site',
-    name: 'GCP VPC Site',
-    description: 'F5XC site deployed in GCP VPC',
-    apiPath: '/api/config/namespaces/{namespace}/gcp_vpc_sites',
+    type: "gcp_vpc_site",
+    name: "GCP VPC Site",
+    description: "F5XC site deployed in GCP VPC",
+    apiPath: "/api/config/namespaces/{namespace}/gcp_vpc_sites",
     namespaceScoped: true,
-    tier: 'STANDARD',
-    relatedResources: ['cloud_credentials'],
+    tier: "STANDARD",
+    relatedResources: ["cloud_credentials"],
   },
 
   // Advanced Resources (WAAP)
   app_firewall: {
-    type: 'app_firewall',
-    name: 'Application Firewall',
-    description: 'Web Application Firewall (WAF) policy',
-    apiPath: '/api/config/namespaces/{namespace}/app_firewalls',
+    type: "app_firewall",
+    name: "Application Firewall",
+    description: "Web Application Firewall (WAF) policy",
+    apiPath: "/api/config/namespaces/{namespace}/app_firewalls",
     namespaceScoped: true,
-    tier: 'ADVANCED',
+    tier: "ADVANCED",
   },
   service_policy: {
-    type: 'service_policy',
-    name: 'Service Policy',
-    description: 'Service-level security policy',
-    apiPath: '/api/config/namespaces/{namespace}/service_policys',
+    type: "service_policy",
+    name: "Service Policy",
+    description: "Service-level security policy",
+    apiPath: "/api/config/namespaces/{namespace}/service_policys",
     namespaceScoped: true,
-    tier: 'ADVANCED',
+    tier: "ADVANCED",
   },
   rate_limiter: {
-    type: 'rate_limiter',
-    name: 'Rate Limiter',
-    description: 'Request rate limiting policy',
-    apiPath: '/api/config/namespaces/{namespace}/rate_limiters',
+    type: "rate_limiter",
+    name: "Rate Limiter",
+    description: "Request rate limiting policy",
+    apiPath: "/api/config/namespaces/{namespace}/rate_limiters",
     namespaceScoped: true,
-    tier: 'ADVANCED',
+    tier: "ADVANCED",
   },
   bot_defense: {
-    type: 'bot_defense',
-    name: 'Bot Defense',
-    description: 'Bot detection and mitigation',
-    apiPath: '/api/config/namespaces/{namespace}/bot_defenses',
+    type: "bot_defense",
+    name: "Bot Defense",
+    description: "Bot detection and mitigation",
+    apiPath: "/api/config/namespaces/{namespace}/bot_defenses",
     namespaceScoped: true,
-    tier: 'ADVANCED',
+    tier: "ADVANCED",
   },
   api_definition: {
-    type: 'api_definition',
-    name: 'API Definition',
-    description: 'OpenAPI specification for API protection',
-    apiPath: '/api/config/namespaces/{namespace}/api_definitions',
+    type: "api_definition",
+    name: "API Definition",
+    description: "OpenAPI specification for API protection",
+    apiPath: "/api/config/namespaces/{namespace}/api_definitions",
     namespaceScoped: true,
-    tier: 'ADVANCED',
+    tier: "ADVANCED",
   },
 };
 
@@ -239,7 +239,7 @@ export function parseResourceUri(uri: string): {
   }
 
   const path = uri.slice(RESOURCE_SCHEMES.BASE.length);
-  const parts = path.split('/');
+  const parts = path.split("/");
 
   if (parts.length !== 4) {
     return null;
@@ -270,7 +270,7 @@ export function getResourceType(type: string): ResourceType | undefined {
  * @param tier - Subscription tier
  * @returns Array of resource types
  */
-export function getResourceTypesByTier(tier: 'NO_TIER' | 'STANDARD' | 'ADVANCED'): ResourceType[] {
+export function getResourceTypesByTier(tier: "NO_TIER" | "STANDARD" | "ADVANCED"): ResourceType[] {
   return Object.values(RESOURCE_TYPES).filter((rt) => rt.tier === tier);
 }
 
@@ -288,7 +288,7 @@ export function buildApiPath(resourceType: string, namespace: string, name?: str
     return null;
   }
 
-  let path = rt.apiPath.replace('{namespace}', encodeURIComponent(namespace));
+  let path = rt.apiPath.replace("{namespace}", encodeURIComponent(namespace));
 
   if (name) {
     path += `/${encodeURIComponent(name)}`;
@@ -300,15 +300,15 @@ export function buildApiPath(resourceType: string, namespace: string, name?: str
 /**
  * Map upstream tier string to ResourceType tier enum
  */
-function mapUpstreamTier(upstreamTier: string): 'NO_TIER' | 'STANDARD' | 'ADVANCED' {
+function mapUpstreamTier(upstreamTier: string): "NO_TIER" | "STANDARD" | "ADVANCED" {
   const normalized = upstreamTier.toLowerCase();
-  if (normalized === 'advanced') {
-    return 'ADVANCED';
+  if (normalized === "advanced") {
+    return "ADVANCED";
   }
-  if (normalized === 'standard') {
-    return 'STANDARD';
+  if (normalized === "standard") {
+    return "STANDARD";
   }
-  return 'NO_TIER';
+  return "NO_TIER";
 }
 
 /**
@@ -325,7 +325,7 @@ function mapUpstreamTier(upstreamTier: string): 'NO_TIER' | 'STANDARD' | 'ADVANC
  */
 export function enhanceWithDomainContext(rt: ResourceType): ResourceType {
   // Normalize resource type for lookup (handle both snake_case and kebab-case)
-  const normalizedType = rt.type.replace(/-/g, '_');
+  const normalizedType = rt.type.replace(/-/g, "_");
 
   // First try resource-level metadata (v1.0.84+)
   const resourceMeta = getResourceMetadata(normalizedType);

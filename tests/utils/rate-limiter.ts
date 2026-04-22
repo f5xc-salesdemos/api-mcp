@@ -80,7 +80,7 @@ export class RateLimiter {
         if (attempt < this.config.maxRetries) {
           const backoffTime = this.config.retryDelay * 2 ** (attempt - 1);
           console.log(
-            `🔄 Retry ${attempt}/${this.config.maxRetries} after ${backoffTime}ms (error: ${statusCode || 'unknown'})`,
+            `🔄 Retry ${attempt}/${this.config.maxRetries} after ${backoffTime}ms (error: ${statusCode || "unknown"})`,
           );
           await this.sleep(backoffTime);
         }

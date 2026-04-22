@@ -16,10 +16,10 @@ export {
   toKebabCase,
   toPascalCase,
   toSnakeCase,
-} from './acronyms.js';
+} from "./acronyms.js";
 
 export {
   extractResourceFromPath,
   generateToolName,
   methodToOperation,
-} from './volterra-mapping.js';
+} from "./volterra-mapping.js";

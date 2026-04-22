@@ -14,14 +14,14 @@
  * - Error messages reference specific fields
  */
 
-import { describe, expect, it } from 'vitest';
-import { describeTool } from '../../../../src/tools/discovery/describe.js';
-import { validateToolParams } from '../../../../src/tools/discovery/validate.js';
-import { getToolByName } from '../../../../src/tools/registry.js';
+import { describe, expect, it } from "vitest";
+import { describeTool } from "../../../../src/tools/discovery/describe.js";
+import { validateToolParams } from "../../../../src/tools/discovery/validate.js";
+import { getToolByName } from "../../../../src/tools/registry.js";
 
-describe('UAT: x-f5xc-conflicts-with Extension', () => {
-  describe('Extension Presence in Specs', () => {
-    it('should have parser support for conflicts-with extension', () => {
+describe("UAT: x-f5xc-conflicts-with Extension", () => {
+  describe("Extension Presence in Specs", () => {
+    it("should have parser support for conflicts-with extension", () => {
       // The parser was updated to support x-f5xc-conflicts-with
       // See: src/generator/openapi-parser.ts line 52
       // Schema: "x-f5xc-conflicts-with": z.array(z.string()).optional()
@@ -31,30 +31,30 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       expect(true).toBe(true); // Parser update confirmed in code review
     });
 
-    it('should have healthcheck tool registered', async () => {
-      const tool = getToolByName('f5xc-api-virtual-healthcheck-create');
+    it("should have healthcheck tool registered", async () => {
+      const tool = getToolByName("f5xc-api-virtual-healthcheck-create");
 
       // Tool should be registered
       expect(tool).toBeDefined();
 
       // Tool description should be available
-      const description = await describeTool('f5xc-api-virtual-healthcheck-create');
+      const description = await describeTool("f5xc-api-virtual-healthcheck-create");
       expect(description).toBeDefined();
-      expect(description.name).toBe('f5xc-api-virtual-healthcheck-create');
+      expect(description.name).toBe("f5xc-api-virtual-healthcheck-create");
     });
   });
 
-  describe('Conflict Detection in Validation', () => {
-    it('should detect host_header + use_origin_server_name conflict', () => {
+  describe("Conflict Detection in Validation", () => {
+    it("should detect host_header + use_origin_server_name conflict", () => {
       const conflictingConfig = {
         metadata: {
-          name: 'test-healthcheck',
-          namespace: 'default',
+          name: "test-healthcheck",
+          namespace: "default",
         },
         spec: {
           http_health_check: {
-            path: '/health',
-            host_header: 'custom.example.com', // Option 1
+            path: "/health",
+            host_header: "custom.example.com", // Option 1
             use_origin_server_name: {}, // Option 2 - CONFLICT!
           },
           interval: 15,
@@ -63,8 +63,8 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       };
 
       const result = validateToolParams({
-        toolName: 'f5xc-api-virtual-healthcheck-create',
-        pathParams: { 'metadata.namespace': 'default' },
+        toolName: "f5xc-api-virtual-healthcheck-create",
+        pathParams: { "metadata.namespace": "default" },
         body: conflictingConfig,
       });
 
@@ -74,32 +74,32 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       // Should mention mutual exclusivity or conflict
       const hasConflictWarning = result.warnings.some(
         (w) =>
-          w.toLowerCase().includes('mutually exclusive') ||
-          w.toLowerCase().includes('conflict') ||
-          w.toLowerCase().includes('choose only one') ||
-          w.toLowerCase().includes('multiple'),
+          w.toLowerCase().includes("mutually exclusive") ||
+          w.toLowerCase().includes("conflict") ||
+          w.toLowerCase().includes("choose only one") ||
+          w.toLowerCase().includes("multiple"),
       );
 
       expect(hasConflictWarning).toBe(true);
 
       // Should mention the specific field names
       const mentionsFields = result.warnings.some(
-        (w) => (w.includes('host_header') && w.includes('use_origin_server_name')) || w.includes('host_header_choice'),
+        (w) => (w.includes("host_header") && w.includes("use_origin_server_name")) || w.includes("host_header_choice"),
       );
 
       expect(mentionsFields).toBe(true);
     });
 
-    it('should allow host_header alone (no conflict)', () => {
+    it("should allow host_header alone (no conflict)", () => {
       const validConfig = {
         metadata: {
-          name: 'test-healthcheck-host',
-          namespace: 'default',
+          name: "test-healthcheck-host",
+          namespace: "default",
         },
         spec: {
           http_health_check: {
-            path: '/health',
-            host_header: 'custom.example.com', // Only this option
+            path: "/health",
+            host_header: "custom.example.com", // Only this option
           },
           interval: 15,
           timeout: 3,
@@ -107,28 +107,28 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       };
 
       const result = validateToolParams({
-        toolName: 'f5xc-api-virtual-healthcheck-create',
-        pathParams: { 'metadata.namespace': 'default' },
+        toolName: "f5xc-api-virtual-healthcheck-create",
+        pathParams: { "metadata.namespace": "default" },
         body: validConfig,
       });
 
       // Should not have conflict warnings
       const hasConflictWarning = result.warnings.some(
-        (w) => w.toLowerCase().includes('mutually exclusive') || w.toLowerCase().includes('conflict'),
+        (w) => w.toLowerCase().includes("mutually exclusive") || w.toLowerCase().includes("conflict"),
       );
 
       expect(hasConflictWarning).toBe(false);
     });
 
-    it('should allow use_origin_server_name alone (no conflict)', () => {
+    it("should allow use_origin_server_name alone (no conflict)", () => {
       const validConfig = {
         metadata: {
-          name: 'test-healthcheck-origin',
-          namespace: 'default',
+          name: "test-healthcheck-origin",
+          namespace: "default",
         },
         spec: {
           http_health_check: {
-            path: '/health',
+            path: "/health",
             use_origin_server_name: {}, // Only this option (recommended)
           },
           interval: 15,
@@ -137,30 +137,30 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       };
 
       const result = validateToolParams({
-        toolName: 'f5xc-api-virtual-healthcheck-create',
-        pathParams: { 'metadata.namespace': 'default' },
+        toolName: "f5xc-api-virtual-healthcheck-create",
+        pathParams: { "metadata.namespace": "default" },
         body: validConfig,
       });
 
       // Should not have conflict warnings
       const hasConflictWarning = result.warnings.some(
-        (w) => w.toLowerCase().includes('mutually exclusive') || w.toLowerCase().includes('conflict'),
+        (w) => w.toLowerCase().includes("mutually exclusive") || w.toLowerCase().includes("conflict"),
       );
 
       expect(hasConflictWarning).toBe(false);
     });
   });
 
-  describe('Extension Statistics', () => {
-    it('should have conflicts-with extension widely distributed', () => {
+  describe("Extension Statistics", () => {
+    it("should have conflicts-with extension widely distributed", () => {
       // Based on spec analysis: 6,375 occurrences across 39 domains
       // Virtual: 1,161 | Sites: 1,095 | CDN: 859 | Shape: 407 | Network: 333
 
       // This test verifies tools are properly registered
       const virtualTools = [
-        'f5xc-api-virtual-healthcheck-create',
-        'f5xc-api-virtual-origin-pool-create',
-        'f5xc-api-virtual-http-loadbalancer-create',
+        "f5xc-api-virtual-healthcheck-create",
+        "f5xc-api-virtual-origin-pool-create",
+        "f5xc-api-virtual-http-loadbalancer-create",
       ];
 
       for (const toolName of virtualTools) {
@@ -170,10 +170,10 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       }
     });
 
-    it('should have conflicts across multiple domains', () => {
+    it("should have conflicts across multiple domains", () => {
       // Test that tools from virtual domain are registered
       // (Other domains follow the same pattern)
-      const sampleTools = ['f5xc-api-virtual-healthcheck-create', 'f5xc-api-virtual-origin-pool-create'];
+      const sampleTools = ["f5xc-api-virtual-healthcheck-create", "f5xc-api-virtual-origin-pool-create"];
 
       for (const toolName of sampleTools) {
         const tool = getToolByName(toolName);
@@ -187,14 +187,14 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
     });
   });
 
-  describe('Validation Message Quality', () => {
-    it('should provide clear conflict error messages', () => {
+  describe("Validation Message Quality", () => {
+    it("should provide clear conflict error messages", () => {
       const conflictingConfig = {
-        metadata: { name: 'test', namespace: 'default' },
+        metadata: { name: "test", namespace: "default" },
         spec: {
           http_health_check: {
-            path: '/health',
-            host_header: 'test.com',
+            path: "/health",
+            host_header: "test.com",
             use_origin_server_name: {},
           },
           interval: 15,
@@ -203,8 +203,8 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       };
 
       const result = validateToolParams({
-        toolName: 'f5xc-api-virtual-healthcheck-create',
-        pathParams: { 'metadata.namespace': 'default' },
+        toolName: "f5xc-api-virtual-healthcheck-create",
+        pathParams: { "metadata.namespace": "default" },
         body: conflictingConfig,
       });
 
@@ -214,18 +214,18 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
         expect(warning.length).toBeGreaterThan(0);
 
         // Should be informative (not just "error" or "invalid")
-        expect(warning.toLowerCase()).not.toBe('error');
-        expect(warning.toLowerCase()).not.toBe('invalid');
+        expect(warning.toLowerCase()).not.toBe("error");
+        expect(warning.toLowerCase()).not.toBe("invalid");
       }
     });
 
-    it('should suggest correct usage for conflicts', () => {
+    it("should suggest correct usage for conflicts", () => {
       const conflictingConfig = {
-        metadata: { name: 'test', namespace: 'default' },
+        metadata: { name: "test", namespace: "default" },
         spec: {
           http_health_check: {
-            path: '/health',
-            host_header: 'test.com',
+            path: "/health",
+            host_header: "test.com",
             use_origin_server_name: {},
           },
           interval: 15,
@@ -234,8 +234,8 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       };
 
       const result = validateToolParams({
-        toolName: 'f5xc-api-virtual-healthcheck-create',
-        pathParams: { 'metadata.namespace': 'default' },
+        toolName: "f5xc-api-virtual-healthcheck-create",
+        pathParams: { "metadata.namespace": "default" },
         body: conflictingConfig,
       });
 
@@ -245,24 +245,24 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       // Warnings should mention what to do (choose one, select, etc.)
       const hasGuidance = result.warnings.some(
         (w) =>
-          w.toLowerCase().includes('choose') ||
-          w.toLowerCase().includes('select') ||
-          w.toLowerCase().includes('only one') ||
-          w.toLowerCase().includes('mutually'),
+          w.toLowerCase().includes("choose") ||
+          w.toLowerCase().includes("select") ||
+          w.toLowerCase().includes("only one") ||
+          w.toLowerCase().includes("mutually"),
       );
 
       expect(hasGuidance).toBe(true);
     });
   });
 
-  describe('Backwards Compatibility', () => {
-    it('should not break existing valid configurations', () => {
+  describe("Backwards Compatibility", () => {
+    it("should not break existing valid configurations", () => {
       // Configuration that was valid before should still be valid
       const validConfig = {
-        metadata: { name: 'existing-hc', namespace: 'default' },
+        metadata: { name: "existing-hc", namespace: "default" },
         spec: {
           http_health_check: {
-            path: '/health',
+            path: "/health",
             use_origin_server_name: {},
           },
           interval: 15,
@@ -273,8 +273,8 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       };
 
       const result = validateToolParams({
-        toolName: 'f5xc-api-virtual-healthcheck-create',
-        pathParams: { 'metadata.namespace': 'default' },
+        toolName: "f5xc-api-virtual-healthcheck-create",
+        pathParams: { "metadata.namespace": "default" },
         body: validConfig,
       });
 
@@ -282,18 +282,18 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       expect(result.valid).toBe(true);
 
       // Should not have conflict warnings
-      const hasConflictWarning = result.warnings.some((w) => w.toLowerCase().includes('conflict'));
+      const hasConflictWarning = result.warnings.some((w) => w.toLowerCase().includes("conflict"));
 
       expect(hasConflictWarning).toBe(false);
     });
 
-    it('should handle minimal configuration correctly', () => {
+    it("should handle minimal configuration correctly", () => {
       // Minimal valid config should work
       const minimalConfig = {
-        metadata: { name: 'minimal-hc', namespace: 'default' },
+        metadata: { name: "minimal-hc", namespace: "default" },
         spec: {
           http_health_check: {
-            path: '/',
+            path: "/",
           },
           interval: 15,
           timeout: 3,
@@ -301,14 +301,14 @@ describe('UAT: x-f5xc-conflicts-with Extension', () => {
       };
 
       const result = validateToolParams({
-        toolName: 'f5xc-api-virtual-healthcheck-create',
-        pathParams: { 'metadata.namespace': 'default' },
+        toolName: "f5xc-api-virtual-healthcheck-create",
+        pathParams: { "metadata.namespace": "default" },
         body: minimalConfig,
       });
 
       // Should be valid (no conflicts because neither option is specified)
       // Validation might have other warnings/errors, but not conflicts
-      const hasConflictWarning = result.warnings.some((w) => w.toLowerCase().includes('conflict'));
+      const hasConflictWarning = result.warnings.some((w) => w.toLowerCase().includes("conflict"));
 
       expect(hasConflictWarning).toBe(false);
     });

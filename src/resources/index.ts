@@ -4,9 +4,9 @@
  * Resources Module - Export all resource utilities
  */
 
-export type { ResourceDocumentation, ResourceReadResult } from './handlers.js';
-export { createResourceHandler, ResourceHandler } from './handlers.js';
-export type { ResourceType } from './templates.js';
+export type { ResourceDocumentation, ResourceReadResult } from "./handlers.js";
+export { createResourceHandler, ResourceHandler } from "./handlers.js";
+export type { ResourceType } from "./templates.js";
 export {
   buildApiPath,
   buildResourceUri,
@@ -18,4 +18,4 @@ export {
   parseResourceUri,
   RESOURCE_SCHEMES,
   RESOURCE_TYPES,
-} from './templates.js';
+} from "./templates.js";

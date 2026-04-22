@@ -36,7 +36,7 @@ export class ResourceTracker {
   /**
    * Track a created resource for later cleanup
    */
-  track(resource: Omit<TrackedResource, 'createdAt'>): void {
+  track(resource: Omit<TrackedResource, "createdAt">): void {
     const tracked: TrackedResource = {
       ...resource,
       createdAt: new Date(),
@@ -116,9 +116,7 @@ export class ResourceTracker {
 
     if (result.failed.length > 0) {
       console.log(`\n⚠️  Failed deletions:`);
-      result.failed.forEach((f) => {
-        console.log(`  - ${f.resource}: ${f.error}`);
-      });
+      result.failed.forEach((f) => console.log(`  - ${f.resource}: ${f.error}`));
     }
 
     return result;
@@ -166,20 +164,20 @@ export class ResourceTracker {
    */
   private getDeleteUrl(resource: TrackedResource): string {
     // Special handling for namespaces (not namespaced themselves)
-    if (resource.type === 'namespace') {
+    if (resource.type === "namespace") {
       return `/api/web/namespaces/${resource.name}`;
     }
 
     // Map resource types to API endpoints
     const typeToEndpoint: Record<string, string> = {
-      http_loadbalancer: 'http_loadbalancers',
-      tcp_loadbalancer: 'tcp_loadbalancers',
-      origin_pool: 'origin_pools',
-      app_firewall: 'app_firewalls',
-      service_policy: 'service_policys',
-      dns_zone: 'dns_zones',
-      certificate: 'certificates',
-      virtual_network: 'virtual_networks',
+      http_loadbalancer: "http_loadbalancers",
+      tcp_loadbalancer: "tcp_loadbalancers",
+      origin_pool: "origin_pools",
+      app_firewall: "app_firewalls",
+      service_policy: "service_policys",
+      dns_zone: "dns_zones",
+      certificate: "certificates",
+      virtual_network: "virtual_networks",
       // Add more as needed
     };
 

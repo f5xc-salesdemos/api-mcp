@@ -13,10 +13,10 @@
  *   tsx scripts/generate-test-fixtures.ts
  */
 
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import * as prettier from 'prettier';
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import * as prettier from "prettier";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,19 +25,19 @@ const __dirname = dirname(__filename);
  * Configuration
  */
 const CONFIG = {
-  REGISTRY_PATH: join(__dirname, '..', 'src', 'tools', 'registry.ts'),
-  FIXTURES_DIR: join(__dirname, '..', 'tests', 'fixtures'),
-  FIXTURES_FILE: join(__dirname, '..', 'tests', 'fixtures', 'generated.ts'),
+  REGISTRY_PATH: join(__dirname, "..", "src", "tools", "registry.ts"),
+  FIXTURES_DIR: join(__dirname, "..", "tests", "fixtures"),
+  FIXTURES_FILE: join(__dirname, "..", "tests", "fixtures", "generated.ts"),
 };
 
 /**
  * Prettier configuration
  */
 const PRETTIER_CONFIG: prettier.Options = {
-  parser: 'typescript',
+  parser: "typescript",
   semi: true,
   singleQuote: false,
-  trailingComma: 'es5',
+  trailingComma: "es5",
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,
@@ -58,7 +58,7 @@ async function formatCode(code: string): Promise<string> {
  * Generate test fixtures from registry
  */
 async function generateFixtures(): Promise<void> {
-  console.log('Generating dynamic test fixtures...\n');
+  console.log("Generating dynamic test fixtures...\n");
 
   // Check if registry exists
   if (!existsSync(CONFIG.REGISTRY_PATH)) {
@@ -67,7 +67,7 @@ async function generateFixtures(): Promise<void> {
   }
 
   // Import registry dynamically
-  const { allTools, getAllDomains, getToolsByDomain, getToolCountByDomain } = await import('../src/tools/registry.js');
+  const { allTools, getAllDomains, getToolsByDomain, getToolCountByDomain } = await import("../src/tools/registry.js");
 
   if (allTools.length === 0) {
     console.error("No tools found in registry. Run 'npm run generate' first.");
@@ -104,7 +104,7 @@ async function generateFixtures(): Promise<void> {
 
   // Find tools with different operations
   const toolsByOperation: Record<string, unknown> = {};
-  for (const op of ['create', 'get', 'list', 'delete', 'update']) {
+  for (const op of ["create", "get", "list", "delete", "update"]) {
     const tool = allTools.find((t: { operation: string }) => t.operation === op);
     if (tool) {
       toolsByOperation[op] = {
@@ -158,7 +158,7 @@ export const AVAILABLE_DOMAINS = ${JSON.stringify(domains)} as const;
 /**
  * Sample domain for testing (first available domain)
  */
-export const SAMPLE_DOMAIN = "${sampleDomains[0] || 'unknown'}";
+export const SAMPLE_DOMAIN = "${sampleDomains[0] || "unknown"}";
 
 /**
  * Sample tools by domain
@@ -195,11 +195,11 @@ export const FIRST_TOOL = ${JSON.stringify(
  * Tools with rich metadata (for metadata-specific tests)
  */
 export const RICH_METADATA_SAMPLES = {
-  withDangerLevel: ${toolWithDangerLevel ? JSON.stringify({ toolName: toolWithDangerLevel.toolName, dangerLevel: toolWithDangerLevel.dangerLevel }) : 'null'},
-  withOperationMetadata: ${toolWithMetadata ? JSON.stringify({ toolName: toolWithMetadata.toolName }) : 'null'},
-  withValidationRules: ${toolWithValidation ? JSON.stringify({ toolName: toolWithValidation.toolName }) : 'null'},
-  withParameters: ${toolWithParams ? JSON.stringify({ toolName: toolWithParams.toolName, pathParamCount: toolWithParams.pathParameters.length, queryParamCount: toolWithParams.queryParameters.length }) : 'null'},
-  withCurlExample: ${toolWithCurlExample ? JSON.stringify({ toolName: toolWithCurlExample.toolName }) : 'null'},
+  withDangerLevel: ${toolWithDangerLevel ? JSON.stringify({ toolName: toolWithDangerLevel.toolName, dangerLevel: toolWithDangerLevel.dangerLevel }) : "null"},
+  withOperationMetadata: ${toolWithMetadata ? JSON.stringify({ toolName: toolWithMetadata.toolName }) : "null"},
+  withValidationRules: ${toolWithValidation ? JSON.stringify({ toolName: toolWithValidation.toolName }) : "null"},
+  withParameters: ${toolWithParams ? JSON.stringify({ toolName: toolWithParams.toolName, pathParamCount: toolWithParams.pathParameters.length, queryParamCount: toolWithParams.queryParameters.length }) : "null"},
+  withCurlExample: ${toolWithCurlExample ? JSON.stringify({ toolName: toolWithCurlExample.toolName }) : "null"},
 } as const;
 
 /**
@@ -238,12 +238,12 @@ export function getSampleToolByOperation(operation: "create" | "get" | "list" | 
   const formattedContent = await formatCode(fixtureContent);
   writeFileSync(CONFIG.FIXTURES_FILE, formattedContent);
 
-  console.log('Generated test fixtures:');
+  console.log("Generated test fixtures:");
   console.log(`  Total tools: ${allTools.length}`);
   console.log(`  Total domains: ${domains.length}`);
-  console.log(`  Sample domains: ${sampleDomains.join(', ')}`);
+  console.log(`  Sample domains: ${sampleDomains.join(", ")}`);
   console.log(`  Output: ${CONFIG.FIXTURES_FILE}`);
-  console.log('\n✅ Fixtures generated successfully!');
+  console.log("\n✅ Fixtures generated successfully!");
 }
 
 /**
@@ -252,6 +252,6 @@ export function getSampleToolByOperation(operation: "create" | "get" | "list" | 
 generateFixtures()
   .then(() => process.exit(0))
   .catch((error: unknown) => {
-    console.error('Failed to generate fixtures:', error instanceof Error ? error.message : error);
+    console.error("Failed to generate fixtures:", error instanceof Error ? error.message : error);
     process.exit(1);
   });

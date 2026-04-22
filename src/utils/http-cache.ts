@@ -115,7 +115,7 @@ export class HttpCache {
   /**
    * Generate cache key from URL and method
    */
-  private getCacheKey(url: string, method: string = 'GET'): string {
+  private getCacheKey(url: string, method: string = "GET"): string {
     return `${method.toUpperCase()}:${url}`;
   }
 
@@ -168,7 +168,7 @@ export class HttpCache {
     }
 
     // Check for no-cache or no-store directives
-    if (cacheControl.includes('no-cache') || cacheControl.includes('no-store')) {
+    if (cacheControl.includes("no-cache") || cacheControl.includes("no-store")) {
       return 0; // Don't cache
     }
 
@@ -182,7 +182,7 @@ export class HttpCache {
    * @param method - HTTP method (default: GET)
    * @returns Cached response or null if not found or expired
    */
-  get<T = unknown>(url: string, method: string = 'GET'): CacheEntry<T> | null {
+  get<T = unknown>(url: string, method: string = "GET"): CacheEntry<T> | null {
     const key = this.getCacheKey(url, method);
     const entry = this.cache.get(key) as CacheEntry<T> | undefined;
 
@@ -216,16 +216,16 @@ export class HttpCache {
   set<T = unknown>(
     url: string,
     response: { data: T; status: number },
-    method: string = 'GET',
+    method: string = "GET",
     headers?: Record<string, string>,
   ): void {
     // Don't cache non-GET requests by default (unless explicitly configured)
-    if (method.toUpperCase() !== 'GET' && !headers?.['cache-control']) {
+    if (method.toUpperCase() !== "GET" && !headers?.["cache-control"]) {
       return;
     }
 
     // Respect Cache-Control header
-    const cacheControl = headers?.['cache-control'];
+    const cacheControl = headers?.["cache-control"];
     const ttlFromHeader = this.parseCacheControl(cacheControl);
 
     // Don't cache if Cache-Control says so
@@ -246,7 +246,7 @@ export class HttpCache {
       status: response.status,
       timestamp: Date.now(),
       ttl,
-      etag: headers?.['etag'],
+      etag: headers?.["etag"],
       lastAccess: Date.now(),
     };
 
@@ -260,7 +260,7 @@ export class HttpCache {
    * @param method - HTTP method (default: GET)
    * @returns True if cached and not expired
    */
-  has(url: string, method: string = 'GET'): boolean {
+  has(url: string, method: string = "GET"): boolean {
     const entry = this.get(url, method);
     return entry !== null;
   }
@@ -271,7 +271,7 @@ export class HttpCache {
    * @param url - Request URL
    * @param method - HTTP method (default: GET)
    */
-  invalidate(url: string, method: string = 'GET'): void {
+  invalidate(url: string, method: string = "GET"): void {
     const key = this.getCacheKey(url, method);
     this.cache.delete(key);
   }
@@ -316,7 +316,7 @@ export class HttpCache {
    * @param method - HTTP method (default: GET)
    * @returns ETag value if available
    */
-  getETag(url: string, method: string = 'GET'): string | null {
+  getETag(url: string, method: string = "GET"): string | null {
     const entry = this.get(url, method);
     return entry?.etag ?? null;
   }

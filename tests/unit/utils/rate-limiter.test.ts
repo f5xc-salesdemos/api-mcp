@@ -1,11 +1,11 @@
 // Copyright (c) 2026 Robin Mordasiewicz. MIT License.
 
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { createRateLimiterFromEnv, RateLimiter } from '../../../src/utils/rate-limiter.js';
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { createRateLimiterFromEnv, RateLimiter } from "../../../src/utils/rate-limiter.js";
 
-describe('RateLimiter', () => {
-  describe('Token Bucket Algorithm', () => {
-    it('should allow burst requests up to burstSize', async () => {
+describe("RateLimiter", () => {
+  describe("Token Bucket Algorithm", () => {
+    it("should allow burst requests up to burstSize", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 60,
         burstSize: 5,
@@ -23,7 +23,7 @@ describe('RateLimiter', () => {
       expect(results).toHaveLength(5);
     });
 
-    it('should refill tokens over time', async () => {
+    it("should refill tokens over time", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 60, // 1 token per second
         burstSize: 2,
@@ -40,7 +40,7 @@ describe('RateLimiter', () => {
       expect(state.tokens).toBeGreaterThanOrEqual(0.9); // Allow for timing variance
     });
 
-    it('should not exceed burstSize when refilling', async () => {
+    it("should not exceed burstSize when refilling", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 60,
         burstSize: 3,
@@ -53,7 +53,7 @@ describe('RateLimiter', () => {
       expect(state.tokens).toBeLessThanOrEqual(3);
     });
 
-    it('should track queued requests', async () => {
+    it("should track queued requests", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 60,
         burstSize: 1,
@@ -63,7 +63,7 @@ describe('RateLimiter', () => {
       const requests = Array.from({ length: 3 }, () =>
         limiter.execute(async () => {
           await new Promise((resolve) => setTimeout(resolve, 100));
-          return 'done';
+          return "done";
         }),
       );
 
@@ -80,8 +80,8 @@ describe('RateLimiter', () => {
     });
   });
 
-  describe('Retry Strategies', () => {
-    it('should use exponential backoff by default', async () => {
+  describe("Retry Strategies", () => {
+    it("should use exponential backoff by default", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 120, // 2 per second, reasonable rate
         burstSize: 2,
@@ -92,22 +92,22 @@ describe('RateLimiter', () => {
       const startTime = Date.now();
 
       // Exhaust tokens
-      await limiter.execute(async () => 'first');
-      await limiter.execute(async () => 'second');
+      await limiter.execute(async () => "first");
+      await limiter.execute(async () => "second");
 
       // This will wait for token refill (500ms for 1 token at 120rpm)
-      await limiter.execute(async () => 'third');
+      await limiter.execute(async () => "third");
 
       const elapsed = Date.now() - startTime;
       // Should take at least 100ms (first retry)
       expect(elapsed).toBeGreaterThan(90);
     });
 
-    it('should use linear backoff when configured', async () => {
+    it("should use linear backoff when configured", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 120,
         burstSize: 2,
-        retryStrategy: 'linear',
+        retryStrategy: "linear",
         maxRetries: 3,
         initialRetryDelay: 100,
       });
@@ -115,16 +115,16 @@ describe('RateLimiter', () => {
       const startTime = Date.now();
 
       // Exhaust tokens
-      await limiter.execute(async () => 'first');
-      await limiter.execute(async () => 'second');
-      await limiter.execute(async () => 'third');
+      await limiter.execute(async () => "first");
+      await limiter.execute(async () => "second");
+      await limiter.execute(async () => "third");
 
       const elapsed = Date.now() - startTime;
       // Linear: 100ms (first retry)
       expect(elapsed).toBeGreaterThan(90);
     });
 
-    it('should throw error when max retries exceeded', async () => {
+    it("should throw error when max retries exceeded", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 1, // Extremely low
         burstSize: 1,
@@ -133,30 +133,30 @@ describe('RateLimiter', () => {
       });
 
       // Exhaust token
-      await limiter.execute(async () => 'first');
+      await limiter.execute(async () => "first");
 
       // Should fail after 2 retries
-      await expect(limiter.execute(async () => 'second')).rejects.toThrow(/Rate limit exceeded.*max retries/);
+      await expect(limiter.execute(async () => "second")).rejects.toThrow(/Rate limit exceeded.*max retries/);
     });
   });
 
-  describe('Configuration', () => {
-    it('should use default configuration', () => {
+  describe("Configuration", () => {
+    it("should use default configuration", () => {
       const limiter = new RateLimiter();
       const config = limiter.getConfig();
 
       expect(config.requestsPerMinute).toBe(60);
       expect(config.burstSize).toBe(10);
-      expect(config.retryStrategy).toBe('exponential');
+      expect(config.retryStrategy).toBe("exponential");
       expect(config.maxRetries).toBe(3);
       expect(config.initialRetryDelay).toBe(1000);
     });
 
-    it('should accept custom configuration', () => {
+    it("should accept custom configuration", () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 120,
         burstSize: 20,
-        retryStrategy: 'linear',
+        retryStrategy: "linear",
         maxRetries: 5,
         initialRetryDelay: 500,
       });
@@ -164,12 +164,12 @@ describe('RateLimiter', () => {
       const config = limiter.getConfig();
       expect(config.requestsPerMinute).toBe(120);
       expect(config.burstSize).toBe(20);
-      expect(config.retryStrategy).toBe('linear');
+      expect(config.retryStrategy).toBe("linear");
       expect(config.maxRetries).toBe(5);
       expect(config.initialRetryDelay).toBe(500);
     });
 
-    it('should allow partial configuration', () => {
+    it("should allow partial configuration", () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 30,
       });
@@ -177,12 +177,12 @@ describe('RateLimiter', () => {
       const config = limiter.getConfig();
       expect(config.requestsPerMinute).toBe(30);
       expect(config.burstSize).toBe(10); // default
-      expect(config.retryStrategy).toBe('exponential'); // default
+      expect(config.retryStrategy).toBe("exponential"); // default
     });
   });
 
-  describe('State Management', () => {
-    it('should provide current state', () => {
+  describe("State Management", () => {
+    it("should provide current state", () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 60,
         burstSize: 5,
@@ -194,7 +194,7 @@ describe('RateLimiter', () => {
       expect(state.lastRefillTime).toBeGreaterThan(0);
     });
 
-    it('should reset state correctly', async () => {
+    it("should reset state correctly", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 60,
         burstSize: 3,
@@ -214,7 +214,7 @@ describe('RateLimiter', () => {
       expect(stateAfter.queuedRequests).toBe(0);
     });
 
-    it('should check if can accept request', () => {
+    it("should check if can accept request", () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 60,
         burstSize: 2,
@@ -228,23 +228,23 @@ describe('RateLimiter', () => {
     });
   });
 
-  describe('Error Handling', () => {
-    it('should propagate errors from executed function', async () => {
+  describe("Error Handling", () => {
+    it("should propagate errors from executed function", async () => {
       const limiter = new RateLimiter();
 
       await expect(
         limiter.execute(async () => {
-          throw new Error('Test error');
+          throw new Error("Test error");
         }),
-      ).rejects.toThrow('Test error');
+      ).rejects.toThrow("Test error");
     });
 
-    it('should decrement queue count even on error', async () => {
+    it("should decrement queue count even on error", async () => {
       const limiter = new RateLimiter();
 
       try {
         await limiter.execute(async () => {
-          throw new Error('Test error');
+          throw new Error("Test error");
         });
       } catch {
         // Ignore error
@@ -255,8 +255,8 @@ describe('RateLimiter', () => {
     });
   });
 
-  describe('Concurrent Requests', () => {
-    it('should handle concurrent requests correctly', async () => {
+  describe("Concurrent Requests", () => {
+    it("should handle concurrent requests correctly", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 120, // 2 per second
         burstSize: 10,
@@ -274,7 +274,7 @@ describe('RateLimiter', () => {
       expect(results).toHaveLength(20);
     });
 
-    it('should maintain rate limit under concurrent load', async () => {
+    it("should maintain rate limit under concurrent load", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 600, // 10 per second - high enough to avoid excessive retries
         burstSize: 10,
@@ -303,7 +303,7 @@ describe('RateLimiter', () => {
     });
   });
 
-  describe('Environment Variable Configuration', () => {
+  describe("Environment Variable Configuration", () => {
     beforeEach(() => {
       // Clear environment variables
       delete process.env.F5XC_RATE_LIMIT_RPM;
@@ -312,35 +312,35 @@ describe('RateLimiter', () => {
       delete process.env.F5XC_RATE_LIMIT_MAX_RETRIES;
     });
 
-    it('should create rate limiter with default config when no env vars', () => {
+    it("should create rate limiter with default config when no env vars", () => {
       const limiter = createRateLimiterFromEnv();
       const config = limiter.getConfig();
 
       expect(config.requestsPerMinute).toBe(60);
       expect(config.burstSize).toBe(10);
-      expect(config.retryStrategy).toBe('exponential');
+      expect(config.retryStrategy).toBe("exponential");
       expect(config.maxRetries).toBe(3);
     });
 
-    it('should read configuration from environment variables', () => {
-      process.env.F5XC_RATE_LIMIT_RPM = '120';
-      process.env.F5XC_RATE_LIMIT_BURST = '20';
-      process.env.F5XC_RATE_LIMIT_STRATEGY = 'linear';
-      process.env.F5XC_RATE_LIMIT_MAX_RETRIES = '5';
+    it("should read configuration from environment variables", () => {
+      process.env.F5XC_RATE_LIMIT_RPM = "120";
+      process.env.F5XC_RATE_LIMIT_BURST = "20";
+      process.env.F5XC_RATE_LIMIT_STRATEGY = "linear";
+      process.env.F5XC_RATE_LIMIT_MAX_RETRIES = "5";
 
       const limiter = createRateLimiterFromEnv();
       const config = limiter.getConfig();
 
       expect(config.requestsPerMinute).toBe(120);
       expect(config.burstSize).toBe(20);
-      expect(config.retryStrategy).toBe('linear');
+      expect(config.retryStrategy).toBe("linear");
       expect(config.maxRetries).toBe(5);
     });
 
-    it('should ignore invalid environment variable values', () => {
-      process.env.F5XC_RATE_LIMIT_RPM = 'invalid';
-      process.env.F5XC_RATE_LIMIT_BURST = '-10';
-      process.env.F5XC_RATE_LIMIT_STRATEGY = 'invalid';
+    it("should ignore invalid environment variable values", () => {
+      process.env.F5XC_RATE_LIMIT_RPM = "invalid";
+      process.env.F5XC_RATE_LIMIT_BURST = "-10";
+      process.env.F5XC_RATE_LIMIT_STRATEGY = "invalid";
 
       const limiter = createRateLimiterFromEnv();
       const config = limiter.getConfig();
@@ -348,23 +348,23 @@ describe('RateLimiter', () => {
       // Should use defaults for invalid values
       expect(config.requestsPerMinute).toBe(60);
       expect(config.burstSize).toBe(10);
-      expect(config.retryStrategy).toBe('exponential');
+      expect(config.retryStrategy).toBe("exponential");
     });
 
-    it('should handle partial environment configuration', () => {
-      process.env.F5XC_RATE_LIMIT_RPM = '90';
+    it("should handle partial environment configuration", () => {
+      process.env.F5XC_RATE_LIMIT_RPM = "90";
 
       const limiter = createRateLimiterFromEnv();
       const config = limiter.getConfig();
 
       expect(config.requestsPerMinute).toBe(90);
       expect(config.burstSize).toBe(10); // default
-      expect(config.retryStrategy).toBe('exponential'); // default
+      expect(config.retryStrategy).toBe("exponential"); // default
     });
   });
 
-  describe('Performance', () => {
-    it('should handle high throughput efficiently', async () => {
+  describe("Performance", () => {
+    it("should handle high throughput efficiently", async () => {
       const limiter = new RateLimiter({
         requestsPerMinute: 6000, // 100 per second
         burstSize: 100,
@@ -380,7 +380,7 @@ describe('RateLimiter', () => {
       expect(elapsed).toBeLessThan(500);
     });
 
-    it('should minimize overhead for token refill calculation', () => {
+    it("should minimize overhead for token refill calculation", () => {
       const limiter = new RateLimiter();
 
       const startTime = Date.now();

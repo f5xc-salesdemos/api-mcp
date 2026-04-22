@@ -15,48 +15,48 @@ import type {
   OneOfGroup,
   ParsedRef,
   ResourceReference,
-} from './dependency-types.js';
-import { getDomainMetadata, getResourceDomain, getResourceMetadata } from './domain-metadata.js';
+} from "./dependency-types.js";
+import { getDomainMetadata, getResourceDomain, getResourceMetadata } from "./domain-metadata.js";
 
 /**
  * Known resource type suffixes to strip from schema names
  * Order matters - more specific suffixes first
  */
 const RESOURCE_SUFFIXES = [
-  'CreateRequest',
-  'CreateResponse',
-  'ReplaceRequest',
-  'ReplaceResponse',
-  'GetRequest',
-  'GetResponse',
-  'ListRequest',
-  'ListResponse',
-  'DeleteRequest',
-  'DeleteResponse',
-  'UpdateRequest',
-  'UpdateResponse',
-  'Spec',
-  'SpecType',
-  'Object',
-  'Type',
+  "CreateRequest",
+  "CreateResponse",
+  "ReplaceRequest",
+  "ReplaceResponse",
+  "GetRequest",
+  "GetResponse",
+  "ListRequest",
+  "ListResponse",
+  "DeleteRequest",
+  "DeleteResponse",
+  "UpdateRequest",
+  "UpdateResponse",
+  "Spec",
+  "SpecType",
+  "Object",
+  "Type",
 ];
 
 /**
  * Known operation types inferred from schema names
  */
 const OPERATION_PATTERNS: Record<string, string> = {
-  CreateRequest: 'create',
-  CreateResponse: 'create',
-  ReplaceRequest: 'replace',
-  ReplaceResponse: 'replace',
-  GetRequest: 'get',
-  GetResponse: 'get',
-  ListRequest: 'list',
-  ListResponse: 'list',
-  DeleteRequest: 'delete',
-  DeleteResponse: 'delete',
-  UpdateRequest: 'update',
-  UpdateResponse: 'update',
+  CreateRequest: "create",
+  CreateResponse: "create",
+  ReplaceRequest: "replace",
+  ReplaceResponse: "replace",
+  GetRequest: "get",
+  GetResponse: "get",
+  ListRequest: "list",
+  ListResponse: "list",
+  DeleteRequest: "delete",
+  DeleteResponse: "delete",
+  UpdateRequest: "update",
+  UpdateResponse: "update",
 };
 
 /**
@@ -68,7 +68,7 @@ const OPERATION_PATTERNS: Record<string, string> = {
  * //      resourceType: "origin_pool", operationType: "create" }
  */
 export function parseRef(refString: string): ParsedRef | null {
-  if (!refString || typeof refString !== 'string') {
+  if (!refString || typeof refString !== "string") {
     return null;
   }
 
@@ -118,8 +118,8 @@ export function parseRef(refString: string): ParsedRef | null {
  */
 export function normalizeResourceType(resourceType: string): string {
   return resourceType
-    .replace(/_/g, '-')
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/_/g, "-")
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
     .toLowerCase();
 }
 
@@ -135,28 +135,28 @@ export function normalizeResourceType(resourceType: string): string {
  */
 export function extractRefPatterns(
   schema: Record<string, unknown>,
-  currentPath = '',
+  currentPath = "",
   depth = 0,
   maxDepth = 20,
 ): ResourceReference[] {
   // Depth protection
   if (depth > maxDepth) {
-    throw new Error(`Schema nesting exceeds maximum depth of ${maxDepth} at path: ${currentPath || 'root'}`);
+    throw new Error(`Schema nesting exceeds maximum depth of ${maxDepth} at path: ${currentPath || "root"}`);
   }
 
   const references: ResourceReference[] = [];
 
-  if (!schema || typeof schema !== 'object') {
+  if (!schema || typeof schema !== "object") {
     return references;
   }
 
   // Handle direct $ref
-  if ('$ref' in schema && typeof schema.$ref === 'string') {
+  if ("$ref" in schema && typeof schema.$ref === "string") {
     const parsed = parseRef(schema.$ref);
     if (parsed?.resourceType) {
       references.push({
         resourceType: normalizeResourceType(parsed.resourceType),
-        domain: '', // Will be resolved later from the full spec context
+        domain: "", // Will be resolved later from the full spec context
         fieldPath: currentPath,
         required: false, // Will be updated based on parent "required" array
         inline: false, // Simple refs are not inline
@@ -165,15 +165,15 @@ export function extractRefPatterns(
   }
 
   // Handle properties object
-  if ('properties' in schema && typeof schema.properties === 'object' && schema.properties) {
+  if ("properties" in schema && typeof schema.properties === "object" && schema.properties) {
     const properties = schema.properties as Record<string, unknown>;
     const requiredFields =
-      Array.isArray(schema.required) && schema.required.every((r) => typeof r === 'string')
+      Array.isArray(schema.required) && schema.required.every((r) => typeof r === "string")
         ? (schema.required as string[])
         : [];
 
     for (const [propName, propSchema] of Object.entries(properties)) {
-      if (typeof propSchema === 'object' && propSchema !== null) {
+      if (typeof propSchema === "object" && propSchema !== null) {
         const propPath = currentPath ? `${currentPath}.${propName}` : propName;
         const propRefs = extractRefPatterns(propSchema as Record<string, unknown>, propPath, depth + 1, maxDepth);
 
@@ -190,9 +190,9 @@ export function extractRefPatterns(
   }
 
   // Handle allOf
-  if ('allOf' in schema && Array.isArray(schema.allOf)) {
+  if ("allOf" in schema && Array.isArray(schema.allOf)) {
     for (const [index, item] of schema.allOf.entries()) {
-      if (typeof item === 'object' && item !== null) {
+      if (typeof item === "object" && item !== null) {
         const allOfPath = currentPath ? `${currentPath}.allOf[${index}]` : `allOf[${index}]`;
         references.push(...extractRefPatterns(item as Record<string, unknown>, allOfPath, depth + 1, maxDepth));
       }
@@ -200,9 +200,9 @@ export function extractRefPatterns(
   }
 
   // Handle oneOf (inline capability)
-  if ('oneOf' in schema && Array.isArray(schema.oneOf)) {
+  if ("oneOf" in schema && Array.isArray(schema.oneOf)) {
     for (const [index, item] of schema.oneOf.entries()) {
-      if (typeof item === 'object' && item !== null) {
+      if (typeof item === "object" && item !== null) {
         const oneOfPath = currentPath ? `${currentPath}.oneOf[${index}]` : `oneOf[${index}]`;
         const oneOfRefs = extractRefPatterns(item as Record<string, unknown>, oneOfPath, depth + 1, maxDepth);
         // Mark oneOf refs as supporting inline definitions
@@ -215,9 +215,9 @@ export function extractRefPatterns(
   }
 
   // Handle anyOf (inline capability)
-  if ('anyOf' in schema && Array.isArray(schema.anyOf)) {
+  if ("anyOf" in schema && Array.isArray(schema.anyOf)) {
     for (const [index, item] of schema.anyOf.entries()) {
-      if (typeof item === 'object' && item !== null) {
+      if (typeof item === "object" && item !== null) {
         const anyOfPath = currentPath ? `${currentPath}.anyOf[${index}]` : `anyOf[${index}]`;
         const anyOfRefs = extractRefPatterns(item as Record<string, unknown>, anyOfPath, depth + 1, maxDepth);
         for (const ref of anyOfRefs) {
@@ -229,18 +229,18 @@ export function extractRefPatterns(
   }
 
   // Handle items (arrays)
-  if ('items' in schema && typeof schema.items === 'object' && schema.items !== null) {
-    const itemsPath = currentPath ? `${currentPath}[]` : '[]';
+  if ("items" in schema && typeof schema.items === "object" && schema.items !== null) {
+    const itemsPath = currentPath ? `${currentPath}[]` : "[]";
     references.push(...extractRefPatterns(schema.items as Record<string, unknown>, itemsPath, depth + 1, maxDepth));
   }
 
   // Handle additionalProperties
   if (
-    'additionalProperties' in schema &&
-    typeof schema.additionalProperties === 'object' &&
+    "additionalProperties" in schema &&
+    typeof schema.additionalProperties === "object" &&
     schema.additionalProperties !== null
   ) {
-    const addPropsPath = currentPath ? `${currentPath}[*]` : '[*]';
+    const addPropsPath = currentPath ? `${currentPath}[*]` : "[*]";
     references.push(
       ...extractRefPatterns(schema.additionalProperties as Record<string, unknown>, addPropsPath, depth + 1, maxDepth),
     );
@@ -264,7 +264,7 @@ export function extractRefPatterns(
  */
 export function extractOneOfPatterns(
   schema: Record<string, unknown>,
-  currentPath = '',
+  currentPath = "",
   depth = 0,
   maxDepth = 20,
   componentSchemas: Record<string, unknown> = {},
@@ -276,20 +276,20 @@ export function extractOneOfPatterns(
     return groups;
   }
 
-  if (!schema || typeof schema !== 'object') {
+  if (!schema || typeof schema !== "object") {
     return groups;
   }
 
   // Look for x-ves-oneof-field-* keys at current level
   for (const [key, value] of Object.entries(schema)) {
-    if (key.startsWith('x-ves-oneof-field-') && typeof value === 'string') {
-      const choiceField = key.replace('x-ves-oneof-field-', '');
+    if (key.startsWith("x-ves-oneof-field-") && typeof value === "string") {
+      const choiceField = key.replace("x-ves-oneof-field-", "");
       const fieldPath = currentPath ? `${currentPath}.${choiceField}` : choiceField;
 
       try {
         // Value is a JSON array string like "[\"option1\",\"option2\"]"
         const parsedOptions = JSON.parse(value) as unknown;
-        if (Array.isArray(parsedOptions) && parsedOptions.every((o) => typeof o === 'string')) {
+        if (Array.isArray(parsedOptions) && parsedOptions.every((o) => typeof o === "string")) {
           // Build full paths for options
           const optionsWithPaths = (parsedOptions as string[]).map((opt) =>
             currentPath ? `${currentPath}.${opt}` : opt,
@@ -304,18 +304,18 @@ export function extractOneOfPatterns(
           };
 
           // Look for description and recommended option
-          if ('properties' in schema && typeof schema.properties === 'object' && schema.properties) {
+          if ("properties" in schema && typeof schema.properties === "object" && schema.properties) {
             const properties = schema.properties as Record<string, unknown>;
 
             // Check for description on the choice field
             const prop = properties[choiceField];
-            if (prop && typeof prop === 'object' && 'description' in prop) {
+            if (prop && typeof prop === "object" && "description" in prop) {
               group.description = String((prop as Record<string, unknown>).description);
             }
 
             // Method 1: Look for x-f5xc-recommended-oneof-variant-{choiceField} annotation
             const recommendedKey = `x-f5xc-recommended-oneof-variant-${choiceField}`;
-            if (recommendedKey in schema && typeof schema[recommendedKey] === 'string') {
+            if (recommendedKey in schema && typeof schema[recommendedKey] === "string") {
               // Build full path for recommended option
               const recommendedOpt = schema[recommendedKey] as string;
               group.recommendedOption = currentPath ? `${currentPath}.${recommendedOpt}` : recommendedOpt;
@@ -325,9 +325,9 @@ export function extractOneOfPatterns(
             if (!group.recommendedOption) {
               for (const option of parsedOptions as string[]) {
                 const optionProp = properties[option];
-                if (optionProp && typeof optionProp === 'object') {
+                if (optionProp && typeof optionProp === "object") {
                   const optionObj = optionProp as Record<string, unknown>;
-                  if (optionObj['x-f5xc-server-default'] === true) {
+                  if (optionObj["x-f5xc-server-default"] === true) {
                     group.recommendedOption = currentPath ? `${currentPath}.${option}` : option;
                     break;
                   }
@@ -345,16 +345,16 @@ export function extractOneOfPatterns(
   }
 
   // Recursively traverse properties
-  if ('properties' in schema && typeof schema.properties === 'object' && schema.properties) {
+  if ("properties" in schema && typeof schema.properties === "object" && schema.properties) {
     const properties = schema.properties as Record<string, unknown>;
     for (const [propName, propSchema] of Object.entries(properties)) {
-      if (typeof propSchema === 'object' && propSchema !== null) {
+      if (typeof propSchema === "object" && propSchema !== null) {
         const propPath = currentPath ? `${currentPath}.${propName}` : propName;
         const propObj = propSchema as Record<string, unknown>;
 
         // Resolve $ref if present
         let resolvedSchema = propObj;
-        if ('$ref' in propObj && typeof propObj.$ref === 'string') {
+        if ("$ref" in propObj && typeof propObj.$ref === "string") {
           const parsed = parseRef(propObj.$ref);
           if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
             resolvedSchema = componentSchemas[parsed.schemaName] as Record<string, unknown>;
@@ -367,12 +367,12 @@ export function extractOneOfPatterns(
   }
 
   // Recursively traverse allOf
-  if ('allOf' in schema && Array.isArray(schema.allOf)) {
+  if ("allOf" in schema && Array.isArray(schema.allOf)) {
     for (const item of schema.allOf) {
-      if (typeof item === 'object' && item !== null) {
+      if (typeof item === "object" && item !== null) {
         // allOf schemas share the same path context
         let resolvedItem = item as Record<string, unknown>;
-        if ('$ref' in resolvedItem && typeof resolvedItem.$ref === 'string') {
+        if ("$ref" in resolvedItem && typeof resolvedItem.$ref === "string") {
           const parsed = parseRef(resolvedItem.$ref);
           if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
             resolvedItem = componentSchemas[parsed.schemaName] as Record<string, unknown>;
@@ -384,11 +384,11 @@ export function extractOneOfPatterns(
   }
 
   // Recursively traverse oneOf
-  if ('oneOf' in schema && Array.isArray(schema.oneOf)) {
+  if ("oneOf" in schema && Array.isArray(schema.oneOf)) {
     for (const item of schema.oneOf) {
-      if (typeof item === 'object' && item !== null) {
+      if (typeof item === "object" && item !== null) {
         let resolvedItem = item as Record<string, unknown>;
-        if ('$ref' in resolvedItem && typeof resolvedItem.$ref === 'string') {
+        if ("$ref" in resolvedItem && typeof resolvedItem.$ref === "string") {
           const parsed = parseRef(resolvedItem.$ref);
           if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
             resolvedItem = componentSchemas[parsed.schemaName] as Record<string, unknown>;
@@ -400,11 +400,11 @@ export function extractOneOfPatterns(
   }
 
   // Recursively traverse anyOf
-  if ('anyOf' in schema && Array.isArray(schema.anyOf)) {
+  if ("anyOf" in schema && Array.isArray(schema.anyOf)) {
     for (const item of schema.anyOf) {
-      if (typeof item === 'object' && item !== null) {
+      if (typeof item === "object" && item !== null) {
         let resolvedItem = item as Record<string, unknown>;
-        if ('$ref' in resolvedItem && typeof resolvedItem.$ref === 'string') {
+        if ("$ref" in resolvedItem && typeof resolvedItem.$ref === "string") {
           const parsed = parseRef(resolvedItem.$ref);
           if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
             resolvedItem = componentSchemas[parsed.schemaName] as Record<string, unknown>;
@@ -416,10 +416,10 @@ export function extractOneOfPatterns(
   }
 
   // Recursively traverse array items
-  if ('items' in schema && typeof schema.items === 'object' && schema.items !== null) {
-    const itemsPath = currentPath ? `${currentPath}[]` : '[]';
+  if ("items" in schema && typeof schema.items === "object" && schema.items !== null) {
+    const itemsPath = currentPath ? `${currentPath}[]` : "[]";
     let resolvedItems = schema.items as Record<string, unknown>;
-    if ('$ref' in resolvedItems && typeof resolvedItems.$ref === 'string') {
+    if ("$ref" in resolvedItems && typeof resolvedItems.$ref === "string") {
       const parsed = parseRef(resolvedItems.$ref);
       if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
         resolvedItems = componentSchemas[parsed.schemaName] as Record<string, unknown>;
@@ -430,13 +430,13 @@ export function extractOneOfPatterns(
 
   // Recursively traverse additionalProperties
   if (
-    'additionalProperties' in schema &&
-    typeof schema.additionalProperties === 'object' &&
+    "additionalProperties" in schema &&
+    typeof schema.additionalProperties === "object" &&
     schema.additionalProperties !== null
   ) {
-    const addPropsPath = currentPath ? `${currentPath}[*]` : '[*]';
+    const addPropsPath = currentPath ? `${currentPath}[*]` : "[*]";
     let resolvedAddProps = schema.additionalProperties as Record<string, unknown>;
-    if ('$ref' in resolvedAddProps && typeof resolvedAddProps.$ref === 'string') {
+    if ("$ref" in resolvedAddProps && typeof resolvedAddProps.$ref === "string") {
       const parsed = parseRef(resolvedAddProps.$ref);
       if (parsed?.schemaName && componentSchemas[parsed.schemaName]) {
         resolvedAddProps = componentSchemas[parsed.schemaName] as Record<string, unknown>;
@@ -458,13 +458,13 @@ export function extractAddonServicesFromSchema(subscriptionSchema: Record<string
   const services: AddonServiceDefinition[] = [];
 
   // Look for x-ves-oneof-field-addon_choice
-  const addonChoiceKey = 'x-ves-oneof-field-addon_choice';
+  const addonChoiceKey = "x-ves-oneof-field-addon_choice";
   const addonChoiceValue = subscriptionSchema[addonChoiceKey];
 
-  if (typeof addonChoiceValue === 'string') {
+  if (typeof addonChoiceValue === "string") {
     try {
       const addons = JSON.parse(addonChoiceValue) as unknown;
-      if (Array.isArray(addons) && addons.every((a) => typeof a === 'string')) {
+      if (Array.isArray(addons) && addons.every((a) => typeof a === "string")) {
         for (const addon of addons as string[]) {
           services.push({
             serviceId: addon,
@@ -491,17 +491,17 @@ export function extractAddonServicesFromSchema(subscriptionSchema: Record<string
  */
 export function formatAddonDisplayName(serviceId: string): string {
   return serviceId
-    .replace(/^f5xc_/, 'F5XC ')
-    .replace(/_/g, ' ')
-    .split(' ')
+    .replace(/^f5xc_/, "F5XC ")
+    .replace(/_/g, " ")
+    .split(" ")
     .map((word) => {
       // Keep common acronyms uppercase
-      if (['F5XC', 'WAAP', 'CDN', 'API', 'WAF', 'DNS'].includes(word.toUpperCase())) {
+      if (["F5XC", "WAAP", "CDN", "API", "WAF", "DNS"].includes(word.toUpperCase())) {
         return word.toUpperCase();
       }
       return word.charAt(0).toUpperCase() + word.slice(1);
     })
-    .join(' ');
+    .join(" ");
 }
 
 /**
@@ -512,7 +512,7 @@ export function formatAddonDisplayName(serviceId: string): string {
  * extractTierFromAddon("f5xc_waap_standard") // => "standard"
  */
 export function extractTierFromAddon(serviceId: string): string {
-  const tiers = ['advanced', 'standard', 'premium', 'basic', 'enterprise'];
+  const tiers = ["advanced", "standard", "premium", "basic", "enterprise"];
   const lowerServiceId = serviceId.toLowerCase();
 
   for (const tier of tiers) {
@@ -521,7 +521,7 @@ export function extractTierFromAddon(serviceId: string): string {
     }
   }
 
-  return 'standard'; // Default tier
+  return "standard"; // Default tier
 }
 
 /**
@@ -537,16 +537,16 @@ export function extractSubscriptionServices(billingSpec: {
 
   // Look for subscriptionSubscribeRequest schema
   const subscribeSchema = schemas.subscriptionSubscribeRequest;
-  if (subscribeSchema && typeof subscribeSchema === 'object') {
+  if (subscribeSchema && typeof subscribeSchema === "object") {
     return extractAddonServicesFromSchema(subscribeSchema as Record<string, unknown>);
   }
 
   // Fallback: look for any schema with x-ves-oneof-field-addon_choice
   for (const schemaName of Object.keys(schemas)) {
     const schema = schemas[schemaName];
-    if (schema && typeof schema === 'object') {
+    if (schema && typeof schema === "object") {
       const schemaObj = schema as Record<string, unknown>;
-      if ('x-ves-oneof-field-addon_choice' in schemaObj) {
+      if ("x-ves-oneof-field-addon_choice" in schemaObj) {
         return extractAddonServicesFromSchema(schemaObj);
       }
     }
@@ -579,15 +579,15 @@ export function extractOperationDependencies(
   result.references = extractRefPatterns(requestBodySchema);
 
   // If the request body has a $ref, also look in that component schema
-  if ('$ref' in requestBodySchema && typeof requestBodySchema.$ref === 'string') {
+  if ("$ref" in requestBodySchema && typeof requestBodySchema.$ref === "string") {
     const parsed = parseRef(requestBodySchema.$ref);
     if (parsed?.schemaName) {
       const componentSchema = componentSchemas[parsed.schemaName];
-      if (componentSchema && typeof componentSchema === 'object') {
+      if (componentSchema && typeof componentSchema === "object") {
         // Extract oneOf patterns from the component schema, passing componentSchemas for $ref resolution
         result.oneOfGroups = extractOneOfPatterns(
           componentSchema as Record<string, unknown>,
-          '',
+          "",
           0,
           20,
           componentSchemas,
@@ -618,15 +618,15 @@ export function extractOperationDependencies(
  * Map category to subscription IDs (v1.0.84+)
  */
 const CATEGORY_SUBSCRIPTION_MAP: Record<string, string[]> = {
-  security: ['f5xc_waap_standard', 'f5xc_waap_advanced'],
-  'api security': ['f5xc_waap_standard', 'f5xc_waap_advanced'],
-  'bot defense': ['f5xc_waap_standard', 'f5xc_waap_advanced'],
-  cdn: ['f5xc_content_delivery_network_standard'],
-  'content delivery': ['f5xc_content_delivery_network_standard'],
-  mesh: ['f5xc_securemesh_standard', 'f5xc_securemesh_advanced'],
-  'service mesh': ['f5xc_securemesh_standard', 'f5xc_securemesh_advanced'],
-  kubernetes: ['f5xc_appstack_standard'],
-  infrastructure: ['f5xc_site_management_standard'],
+  security: ["f5xc_waap_standard", "f5xc_waap_advanced"],
+  "api security": ["f5xc_waap_standard", "f5xc_waap_advanced"],
+  "bot defense": ["f5xc_waap_standard", "f5xc_waap_advanced"],
+  cdn: ["f5xc_content_delivery_network_standard"],
+  "content delivery": ["f5xc_content_delivery_network_standard"],
+  mesh: ["f5xc_securemesh_standard", "f5xc_securemesh_advanced"],
+  "service mesh": ["f5xc_securemesh_standard", "f5xc_securemesh_advanced"],
+  kubernetes: ["f5xc_appstack_standard"],
+  infrastructure: ["f5xc_site_management_standard"],
 };
 
 /**
@@ -645,12 +645,12 @@ export function mapResourceToSubscriptions(resource: string, domain: string): st
   const subscriptions: string[] = [];
 
   // Normalize resource name
-  const normalizedResource = resource.toLowerCase().replace(/-/g, '_');
+  const normalizedResource = resource.toLowerCase().replace(/-/g, "_");
 
   // Try upstream resource metadata first (v1.0.84+)
   const resourceMeta = getResourceMetadata(normalizedResource);
 
-  if (resourceMeta && resourceMeta.tier === 'Advanced') {
+  if (resourceMeta && resourceMeta.tier === "Advanced") {
     const category = resourceMeta.category.toLowerCase();
     const categorySubscriptions = CATEGORY_SUBSCRIPTION_MAP[category];
     if (categorySubscriptions) {
@@ -660,7 +660,7 @@ export function mapResourceToSubscriptions(resource: string, domain: string): st
 
   // Also check domain metadata for domain-level subscriptions
   const domainMeta = getDomainMetadata(domain);
-  if (domainMeta && domainMeta.requiresTier === 'Advanced') {
+  if (domainMeta && domainMeta.requiresTier === "Advanced") {
     const uiCategory = domainMeta.uiCategory.toLowerCase();
     const domainSubscriptions = CATEGORY_SUBSCRIPTION_MAP[uiCategory];
     if (domainSubscriptions) {
@@ -672,45 +672,45 @@ export function mapResourceToSubscriptions(resource: string, domain: string): st
   if (subscriptions.length === 0) {
     // WAAP-related resources
     const waapResources = [
-      'app-firewall',
-      'waf',
-      'service-policy',
-      'rate-limiter',
-      'api-definition',
-      'api-security',
-      'data-guard',
-      'trusted-client',
-      'malicious-user',
-      'client-side-defense',
-      'service-policy-set',
+      "app-firewall",
+      "waf",
+      "service-policy",
+      "rate-limiter",
+      "api-definition",
+      "api-security",
+      "data-guard",
+      "trusted-client",
+      "malicious-user",
+      "client-side-defense",
+      "service-policy-set",
     ];
-    const waapDomains = ['waf', 'api', 'rate_limiting', 'bot_and_threat_defense'];
+    const waapDomains = ["waf", "api", "rate_limiting", "bot_and_threat_defense"];
 
     if (waapResources.some((r) => resource.includes(r)) || waapDomains.includes(domain)) {
-      subscriptions.push('f5xc_waap_standard', 'f5xc_waap_advanced');
+      subscriptions.push("f5xc_waap_standard", "f5xc_waap_advanced");
     }
 
     // CDN-related resources
-    const cdnResources = ['cdn-loadbalancer', 'cdn-origin', 'cdn-origin-pool'];
-    if (cdnResources.some((r) => resource.includes(r)) || domain === 'cdn') {
-      subscriptions.push('f5xc_content_delivery_network_standard');
+    const cdnResources = ["cdn-loadbalancer", "cdn-origin", "cdn-origin-pool"];
+    if (cdnResources.some((r) => resource.includes(r)) || domain === "cdn") {
+      subscriptions.push("f5xc_content_delivery_network_standard");
     }
 
     // SecureMesh-related resources
-    const meshResources = ['site-mesh-group', 'mesh-policy', 'global-network'];
-    if (meshResources.some((r) => resource.includes(r)) || domain === 'service_mesh' || domain === 'network_security') {
-      subscriptions.push('f5xc_securemesh_standard', 'f5xc_securemesh_advanced');
+    const meshResources = ["site-mesh-group", "mesh-policy", "global-network"];
+    if (meshResources.some((r) => resource.includes(r)) || domain === "service_mesh" || domain === "network_security") {
+      subscriptions.push("f5xc_securemesh_standard", "f5xc_securemesh_advanced");
     }
 
     // AppStack-related resources
-    if (domain === 'managed_kubernetes' || resource.includes('vk8s')) {
-      subscriptions.push('f5xc_appstack_standard');
+    if (domain === "managed_kubernetes" || resource.includes("vk8s")) {
+      subscriptions.push("f5xc_appstack_standard");
     }
 
     // Site management resources
-    const siteResources = ['site', 'fleet', 'token', 'tunnel'];
-    if (siteResources.some((r) => resource.includes(r)) || domain === 'sites') {
-      subscriptions.push('f5xc_site_management_standard');
+    const siteResources = ["site", "fleet", "token", "tunnel"];
+    if (siteResources.some((r) => resource.includes(r)) || domain === "sites") {
+      subscriptions.push("f5xc_site_management_standard");
     }
   }
 
@@ -723,32 +723,32 @@ export function mapResourceToSubscriptions(resource: string, domain: string): st
  * @deprecated Prefer adding resources to upstream specs instead of extending this map
  */
 export const FALLBACK_RESOURCE_DOMAIN_MAP: Record<string, string> = {
-  'origin-pool': 'network',
-  origin_pool: 'network',
-  'http-loadbalancer': 'virtual',
-  http_loadbalancer: 'virtual',
-  'tcp-loadbalancer': 'virtual',
-  tcp_loadbalancer: 'virtual',
-  'dns-lb-pool': 'dns',
-  dns_lb_pool: 'dns',
-  'dns-zone': 'dns',
-  dns_zone: 'dns',
-  'app-firewall': 'waf',
-  app_firewall: 'waf',
-  'service-policy': 'network_security',
-  service_policy: 'network_security',
-  certificate: 'certificates',
-  'api-definition': 'api',
-  api_definition: 'api',
-  site: 'sites',
-  'aws-vpc-site': 'sites',
-  'azure-vnet-site': 'sites',
-  'gcp-vpc-site': 'sites',
-  healthcheck: 'network',
-  'virtual-host': 'virtual',
-  namespace: 'tenant_and_identity',
-  secret: 'blindfold',
-  token: 'authentication',
+  "origin-pool": "network",
+  origin_pool: "network",
+  "http-loadbalancer": "virtual",
+  http_loadbalancer: "virtual",
+  "tcp-loadbalancer": "virtual",
+  tcp_loadbalancer: "virtual",
+  "dns-lb-pool": "dns",
+  dns_lb_pool: "dns",
+  "dns-zone": "dns",
+  dns_zone: "dns",
+  "app-firewall": "waf",
+  app_firewall: "waf",
+  "service-policy": "network_security",
+  service_policy: "network_security",
+  certificate: "certificates",
+  "api-definition": "api",
+  api_definition: "api",
+  site: "sites",
+  "aws-vpc-site": "sites",
+  "azure-vnet-site": "sites",
+  "gcp-vpc-site": "sites",
+  healthcheck: "network",
+  "virtual-host": "virtual",
+  namespace: "tenant_and_identity",
+  secret: "blindfold",
+  token: "authentication",
 };
 
 /**
@@ -768,12 +768,12 @@ export function resolveResourceDomain(resourceType: string): string {
   }
 
   // Also try with underscore variant
-  const underscoreVariant = resourceType.replace(/-/g, '_');
+  const underscoreVariant = resourceType.replace(/-/g, "_");
   const domainMetaUnderscore = getResourceDomain(underscoreVariant);
   if (domainMetaUnderscore) {
     return domainMetaUnderscore.domain;
   }
 
   // Fall back to hardcoded mappings for resources not in specs
-  return FALLBACK_RESOURCE_DOMAIN_MAP[resourceType] || FALLBACK_RESOURCE_DOMAIN_MAP[underscoreVariant] || '';
+  return FALLBACK_RESOURCE_DOMAIN_MAP[resourceType] || FALLBACK_RESOURCE_DOMAIN_MAP[underscoreVariant] || "";
 }

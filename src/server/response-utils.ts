@@ -7,7 +7,7 @@
  * Extracted from server.ts to reduce duplication and improve maintainability.
  */
 
-import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 /**
  * Creates a standardized text response for MCP tools.
@@ -20,7 +20,7 @@ export function createTextResponse(data: unknown): CallToolResult {
   return {
     content: [
       {
-        type: 'text',
+        type: "text",
         text: JSON.stringify(data, null, 2),
       },
     ],
@@ -49,7 +49,7 @@ export function createErrorResponse(error: string | Error, hint?: string): CallT
   return {
     content: [
       {
-        type: 'text',
+        type: "text",
         text: JSON.stringify(errorPayload, null, 2),
       },
     ],

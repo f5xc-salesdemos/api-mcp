@@ -12,7 +12,7 @@
  * Issue #208: Add Integration Tests for Complete Tool Discovery Flow
  */
 
-import { afterAll, describe, expect, it } from 'vitest';
+import { afterAll, describe, expect, it } from "vitest";
 import {
   clearDependencyCache,
   generateDependencyReport,
@@ -23,34 +23,34 @@ import {
   getPrerequisiteResources,
   getResourceDependencies,
   getSubscriptionRequirements,
-} from '../../src/tools/discovery/dependencies.js';
+} from "../../src/tools/discovery/dependencies.js";
 import {
   describeTool,
   describeToolCompact,
   describeToolSafe,
   describeTools,
   getFullToolSchema,
-} from '../../src/tools/discovery/describe.js';
-import type { SearchOptions } from '../../src/tools/discovery/search.js';
+} from "../../src/tools/discovery/describe.js";
+import type { SearchOptions } from "../../src/tools/discovery/search.js";
 import {
   getAvailableDomains,
   getToolCountByDomain,
   getToolsByDomain,
   getToolsByResource,
   searchTools,
-} from '../../src/tools/discovery/search.js';
-import type { SearchResult } from '../../src/tools/discovery/search-index.js';
+} from "../../src/tools/discovery/search.js";
+import type { SearchResult } from "../../src/tools/discovery/search-index.js";
 
-describe('Tool Discovery Flow Integration Tests', () => {
+describe("Tool Discovery Flow Integration Tests", () => {
   afterAll(() => {
     // Clean up dependency cache
     clearDependencyCache();
   });
 
-  describe('Search Operations', () => {
-    describe('basic search functionality', () => {
-      it('should find tools matching a simple query', () => {
-        const results = searchTools('load balancer');
+  describe("Search Operations", () => {
+    describe("basic search functionality", () => {
+      it("should find tools matching a simple query", () => {
+        const results = searchTools("load balancer");
 
         expect(results.length).toBeGreaterThan(0);
         results.forEach((result) => {
@@ -61,99 +61,99 @@ describe('Tool Discovery Flow Integration Tests', () => {
         });
       });
 
-      it('should limit results based on limit option', () => {
-        const results = searchTools('origin', { limit: 5 });
+      it("should limit results based on limit option", () => {
+        const results = searchTools("origin", { limit: 5 });
 
         expect(results.length).toBeLessThanOrEqual(5);
       });
 
-      it('should filter by minimum score', () => {
-        const results = searchTools('http', { minScore: 0.5 });
+      it("should filter by minimum score", () => {
+        const results = searchTools("http", { minScore: 0.5 });
 
         results.forEach((result) => {
           expect(result.score).toBeGreaterThanOrEqual(0.5);
         });
       });
 
-      it('should return results sorted by score descending', () => {
-        const results = searchTools('pool');
+      it("should return results sorted by score descending", () => {
+        const results = searchTools("pool");
 
         for (let i = 1; i < results.length; i++) {
           expect(results[i - 1].score).toBeGreaterThanOrEqual(results[i].score);
         }
       });
 
-      it('should handle empty queries gracefully', () => {
-        const results = searchTools('');
+      it("should handle empty queries gracefully", () => {
+        const results = searchTools("");
 
         expect(Array.isArray(results)).toBe(true);
       });
 
-      it('should handle queries with no matches', () => {
-        const results = searchTools('xyznonexistentqueryxyz');
+      it("should handle queries with no matches", () => {
+        const results = searchTools("xyznonexistentqueryxyz");
 
         expect(results.length).toBe(0);
       });
     });
 
-    describe('filtered search', () => {
-      it('should filter by domain', () => {
-        const results = searchTools('create', { domains: ['virtual'] });
+    describe("filtered search", () => {
+      it("should filter by domain", () => {
+        const results = searchTools("create", { domains: ["virtual"] });
 
         results.forEach((result) => {
-          expect(result.tool.domain).toBe('virtual');
+          expect(result.tool.domain).toBe("virtual");
         });
       });
 
-      it('should filter by multiple domains', () => {
-        const results = searchTools('list', { domains: ['virtual', 'dns'] });
+      it("should filter by multiple domains", () => {
+        const results = searchTools("list", { domains: ["virtual", "dns"] });
 
         results.forEach((result) => {
-          expect(['virtual', 'dns']).toContain(result.tool.domain);
+          expect(["virtual", "dns"]).toContain(result.tool.domain);
         });
       });
 
-      it('should filter by operation type', () => {
-        const results = searchTools('pool', { operations: ['create'] });
+      it("should filter by operation type", () => {
+        const results = searchTools("pool", { operations: ["create"] });
 
         results.forEach((result) => {
-          expect(result.tool.operation).toBe('create');
+          expect(result.tool.operation).toBe("create");
         });
       });
 
-      it('should filter by multiple operations', () => {
-        const results = searchTools('balancer', {
-          operations: ['create', 'list'],
+      it("should filter by multiple operations", () => {
+        const results = searchTools("balancer", {
+          operations: ["create", "list"],
         });
 
         results.forEach((result) => {
-          expect(['create', 'list']).toContain(result.tool.operation);
+          expect(["create", "list"]).toContain(result.tool.operation);
         });
       });
 
-      it('should combine domain and operation filters', () => {
-        const results = searchTools('http', {
-          domains: ['virtual'],
-          operations: ['get'],
+      it("should combine domain and operation filters", () => {
+        const results = searchTools("http", {
+          domains: ["virtual"],
+          operations: ["get"],
         });
 
         results.forEach((result) => {
-          expect(result.tool.domain).toBe('virtual');
-          expect(result.tool.operation).toBe('get');
+          expect(result.tool.domain).toBe("virtual");
+          expect(result.tool.operation).toBe("get");
         });
       });
 
-      it('should exclude dangerous operations when requested', () => {
-        const results = searchTools('delete', { excludeDangerous: true });
+      it("should exclude dangerous operations when requested", () => {
+        const results = searchTools("delete", { excludeDangerous: true });
 
         results.forEach((result) => {
-          expect(result.tool.dangerLevel).not.toBe('high');
+          expect(result.tool.dangerLevel).not.toBe("high");
         });
       });
 
-      it('should include prerequisite information when requested', () => {
-        const results = searchTools('http loadbalancer create', {
-          operations: ['create'],
+      it("should include prerequisite information when requested", () => {
+        const results = searchTools("http loadbalancer create", {
+          operations: ["create"],
           includeDependencies: true,
         });
 
@@ -164,51 +164,51 @@ describe('Tool Discovery Flow Integration Tests', () => {
       });
     });
 
-    describe('search index operations', () => {
-      it('should return available domains', () => {
+    describe("search index operations", () => {
+      it("should return available domains", () => {
         const domains = getAvailableDomains();
 
         expect(Array.isArray(domains)).toBe(true);
         expect(domains.length).toBeGreaterThan(0);
         // Common F5XC domains
-        expect(domains.some((d) => ['virtual', 'dns', 'origin_pool'].includes(d))).toBe(true);
+        expect(domains.some((d) => ["virtual", "dns", "origin_pool"].includes(d))).toBe(true);
       });
 
-      it('should get tools by domain', () => {
-        const tools = getToolsByDomain('virtual');
+      it("should get tools by domain", () => {
+        const tools = getToolsByDomain("virtual");
 
         expect(Array.isArray(tools)).toBe(true);
         tools.forEach((tool) => {
-          expect(tool.domain).toBe('virtual');
+          expect(tool.domain).toBe("virtual");
         });
       });
 
-      it('should get tools by resource', () => {
-        const tools = getToolsByResource('http-loadbalancer');
+      it("should get tools by resource", () => {
+        const tools = getToolsByResource("http-loadbalancer");
 
         expect(Array.isArray(tools)).toBe(true);
         if (tools.length > 0) {
-          expect(tools[0].resource).toBe('http-loadbalancer');
+          expect(tools[0].resource).toBe("http-loadbalancer");
         }
       });
 
-      it('should get tool count by domain', () => {
+      it("should get tool count by domain", () => {
         const counts = getToolCountByDomain();
 
-        expect(typeof counts).toBe('object');
+        expect(typeof counts).toBe("object");
         Object.values(counts).forEach((count) => {
-          expect(typeof count).toBe('number');
+          expect(typeof count).toBe("number");
           expect(count).toBeGreaterThanOrEqual(0);
         });
       });
     });
   });
 
-  describe('Tool Description Flow', () => {
-    describe('basic description', () => {
-      it('should describe a tool by name', () => {
+  describe("Tool Description Flow", () => {
+    describe("basic description", () => {
+      it("should describe a tool by name", () => {
         // Get a real tool name from search
-        const searchResults = searchTools('http loadbalancer', { limit: 1 });
+        const searchResults = searchTools("http loadbalancer", { limit: 1 });
         if (searchResults.length === 0) {
           // Skip if no tools found
           return;
@@ -230,8 +230,8 @@ describe('Tool Discovery Flow Integration Tests', () => {
         }
       });
 
-      it('should return compact description format', () => {
-        const searchResults = searchTools('origin pool', { limit: 1 });
+      it("should return compact description format", () => {
+        const searchResults = searchTools("origin pool", { limit: 1 });
         if (searchResults.length === 0) {
           return;
         }
@@ -251,15 +251,15 @@ describe('Tool Discovery Flow Integration Tests', () => {
         }
       });
 
-      it('should describe tool safely with error handling', () => {
-        const result = describeToolSafe('nonexistent-tool-name');
+      it("should describe tool safely with error handling", () => {
+        const result = describeToolSafe("nonexistent-tool-name");
 
         expect(result.success).toBe(false);
         expect(result.error).toBeDefined();
       });
 
-      it('should describe multiple tools at once', () => {
-        const searchResults = searchTools('origin', { limit: 3 });
+      it("should describe multiple tools at once", () => {
+        const searchResults = searchTools("origin", { limit: 3 });
         const toolNames = searchResults.map((r) => r.tool.toolName);
 
         if (toolNames.length === 0) {
@@ -275,9 +275,9 @@ describe('Tool Discovery Flow Integration Tests', () => {
       });
     });
 
-    describe('schema retrieval', () => {
-      it('should get full tool schema', () => {
-        const searchResults = searchTools('http loadbalancer create', {
+    describe("schema retrieval", () => {
+      it("should get full tool schema", () => {
+        const searchResults = searchTools("http loadbalancer create", {
           limit: 1,
         });
         if (searchResults.length === 0) {
@@ -289,16 +289,16 @@ describe('Tool Discovery Flow Integration Tests', () => {
 
         // Schema may be null for some tools
         if (schema) {
-          expect(typeof schema).toBe('object');
+          expect(typeof schema).toBe("object");
         }
       });
     });
   });
 
-  describe('Dependency Resolution Flow', () => {
-    describe('prerequisite discovery', () => {
-      it('should get prerequisite resources for a domain/resource', () => {
-        const prereqs = getPrerequisiteResources('virtual', 'http-loadbalancer');
+  describe("Dependency Resolution Flow", () => {
+    describe("prerequisite discovery", () => {
+      it("should get prerequisite resources for a domain/resource", () => {
+        const prereqs = getPrerequisiteResources("virtual", "http-loadbalancer");
 
         expect(Array.isArray(prereqs)).toBe(true);
         prereqs.forEach((prereq) => {
@@ -307,54 +307,54 @@ describe('Tool Discovery Flow Integration Tests', () => {
         });
       });
 
-      it('should get dependent resources', () => {
-        const dependents = getDependentResources('origin_pool', 'origin-pool');
+      it("should get dependent resources", () => {
+        const dependents = getDependentResources("origin_pool", "origin-pool");
 
         expect(Array.isArray(dependents)).toBe(true);
       });
 
-      it('should handle non-existent resources gracefully', () => {
-        const prereqs = getPrerequisiteResources('nonexistent', 'fake-resource');
+      it("should handle non-existent resources gracefully", () => {
+        const prereqs = getPrerequisiteResources("nonexistent", "fake-resource");
 
         expect(Array.isArray(prereqs)).toBe(true);
         expect(prereqs.length).toBe(0);
       });
     });
 
-    describe('creation order', () => {
-      it('should determine creation order for resources', () => {
-        const order = getCreationOrder('virtual', 'http-loadbalancer');
+    describe("creation order", () => {
+      it("should determine creation order for resources", () => {
+        const order = getCreationOrder("virtual", "http-loadbalancer");
 
         expect(Array.isArray(order)).toBe(true);
         // getCreationOrder returns string[] - list of resource names in order
         order.forEach((resourceName) => {
-          expect(typeof resourceName).toBe('string');
+          expect(typeof resourceName).toBe("string");
         });
       });
 
-      it('should handle resources with no dependencies', () => {
+      it("should handle resources with no dependencies", () => {
         // Try a resource that likely has no deps
-        const order = getCreationOrder('namespace', 'namespace');
+        const order = getCreationOrder("namespace", "namespace");
 
         expect(Array.isArray(order)).toBe(true);
       });
     });
 
-    describe('dependency statistics', () => {
-      it('should return dependency graph statistics', () => {
+    describe("dependency statistics", () => {
+      it("should return dependency graph statistics", () => {
         const stats = getDependencyStats();
 
         expect(stats).toBeDefined();
-        expect(typeof stats.totalResources).toBe('number');
-        expect(typeof stats.totalDependencies).toBe('number');
-        expect(typeof stats.totalOneOfGroups).toBe('number');
-        expect(typeof stats.totalSubscriptions).toBe('number');
+        expect(typeof stats.totalResources).toBe("number");
+        expect(typeof stats.totalDependencies).toBe("number");
+        expect(typeof stats.totalOneOfGroups).toBe("number");
+        expect(typeof stats.totalSubscriptions).toBe("number");
       });
     });
 
-    describe('resource dependencies', () => {
-      it('should get full resource dependencies', () => {
-        const deps = getResourceDependencies('virtual', 'http-loadbalancer');
+    describe("resource dependencies", () => {
+      it("should get full resource dependencies", () => {
+        const deps = getResourceDependencies("virtual", "http-loadbalancer");
 
         // deps may be null if resource not in dependency graph
         if (deps) {
@@ -367,26 +367,26 @@ describe('Tool Discovery Flow Integration Tests', () => {
         }
       });
 
-      it('should get subscription requirements', () => {
-        const subs = getSubscriptionRequirements('virtual', 'http-loadbalancer');
+      it("should get subscription requirements", () => {
+        const subs = getSubscriptionRequirements("virtual", "http-loadbalancer");
 
         expect(Array.isArray(subs)).toBe(true);
       });
 
-      it('should get oneOf groups', () => {
-        const oneOfs = getOneOfGroups('virtual', 'http-loadbalancer');
+      it("should get oneOf groups", () => {
+        const oneOfs = getOneOfGroups("virtual", "http-loadbalancer");
 
         expect(Array.isArray(oneOfs)).toBe(true);
       });
     });
 
-    describe('dependency report generation', () => {
-      it('should generate comprehensive dependency report', () => {
-        const report = generateDependencyReport('virtual', 'http-loadbalancer');
+    describe("dependency report generation", () => {
+      it("should generate comprehensive dependency report", () => {
+        const report = generateDependencyReport("virtual", "http-loadbalancer");
 
         expect(report).toBeDefined();
-        expect(report.domain).toBe('virtual');
-        expect(report.resource).toBe('http-loadbalancer');
+        expect(report.domain).toBe("virtual");
+        expect(report.resource).toBe("http-loadbalancer");
         expect(report.prerequisites).toBeDefined();
         expect(report.dependents).toBeDefined();
         expect(report.creationSequence).toBeDefined();
@@ -394,23 +394,23 @@ describe('Tool Discovery Flow Integration Tests', () => {
         expect(report.subscriptionRequirements).toBeDefined();
       });
 
-      it('should handle non-existent resources in report generation', () => {
-        const report = generateDependencyReport('fake-domain', 'fake-resource');
+      it("should handle non-existent resources in report generation", () => {
+        const report = generateDependencyReport("fake-domain", "fake-resource");
 
         expect(report).toBeDefined();
-        expect(report.domain).toBe('fake-domain');
-        expect(report.resource).toBe('fake-resource');
+        expect(report.domain).toBe("fake-domain");
+        expect(report.resource).toBe("fake-resource");
         // Should still return valid structure with empty arrays
         expect(Array.isArray(report.prerequisites)).toBe(true);
       });
     });
   });
 
-  describe('Complete Discovery Flow', () => {
-    it('should complete search → describe → schema flow', () => {
+  describe("Complete Discovery Flow", () => {
+    it("should complete search → describe → schema flow", () => {
       // Step 1: Search for tools
-      const searchResults = searchTools('http loadbalancer', {
-        operations: ['create'],
+      const searchResults = searchTools("http loadbalancer", {
+        operations: ["create"],
         limit: 1,
       });
 
@@ -431,13 +431,13 @@ describe('Tool Discovery Flow Integration Tests', () => {
       // Step 3: Get schema
       const schema = getFullToolSchema(tool.toolName);
       // Schema is optional, may be null
-      expect(schema === null || typeof schema === 'object').toBe(true);
+      expect(schema === null || typeof schema === "object").toBe(true);
     });
 
-    it('should complete search → deps → creation order flow', () => {
+    it("should complete search → deps → creation order flow", () => {
       // Step 1: Search for a create operation
-      const searchResults = searchTools('http loadbalancer create', {
-        operations: ['create'],
+      const searchResults = searchTools("http loadbalancer create", {
+        operations: ["create"],
         includeDependencies: true,
         limit: 1,
       });
@@ -460,9 +460,9 @@ describe('Tool Discovery Flow Integration Tests', () => {
       expect(report.domain).toBe(tool.domain);
     });
 
-    it('should complete resource discovery flow with CRUD operations', () => {
-      const resource = 'origin-pool';
-      const domain = 'origin_pool';
+    it("should complete resource discovery flow with CRUD operations", () => {
+      const resource = "origin-pool";
+      const domain = "origin_pool";
 
       // Get all CRUD operations for a resource
       const tools = getToolsByResource(resource);
@@ -484,7 +484,7 @@ describe('Tool Discovery Flow Integration Tests', () => {
       });
     });
 
-    it('should handle full flow with domain filtering', () => {
+    it("should handle full flow with domain filtering", () => {
       const domains = getAvailableDomains();
       if (domains.length === 0) {
         return;
@@ -493,7 +493,7 @@ describe('Tool Discovery Flow Integration Tests', () => {
       const targetDomain = domains[0];
 
       // Search within domain
-      const results = searchTools('list', {
+      const results = searchTools("list", {
         domains: [targetDomain],
         limit: 5,
       });
@@ -510,68 +510,68 @@ describe('Tool Discovery Flow Integration Tests', () => {
     });
   });
 
-  describe('Error Handling', () => {
-    describe('invalid inputs', () => {
-      it('should handle invalid domain in search filter', () => {
-        const results = searchTools('create', {
-          domains: ['nonexistent-domain-xyz'],
+  describe("Error Handling", () => {
+    describe("invalid inputs", () => {
+      it("should handle invalid domain in search filter", () => {
+        const results = searchTools("create", {
+          domains: ["nonexistent-domain-xyz"],
         });
 
         // Should return empty or filtered results
         expect(Array.isArray(results)).toBe(true);
       });
 
-      it('should handle invalid operation type in filter', () => {
-        const results = searchTools('pool', {
-          operations: ['nonexistent-op' as 'create'],
+      it("should handle invalid operation type in filter", () => {
+        const results = searchTools("pool", {
+          operations: ["nonexistent-op" as "create"],
         });
 
         expect(Array.isArray(results)).toBe(true);
       });
 
-      it('should handle null/undefined in describeTool gracefully', () => {
+      it("should handle null/undefined in describeTool gracefully", () => {
         // describeTool returns null for invalid inputs rather than throwing
         const result = describeTool(null as unknown as string);
         expect(result).toBeNull();
       });
 
-      it('should return error in describeToolSafe for invalid tool', () => {
-        const result = describeToolSafe('');
+      it("should return error in describeToolSafe for invalid tool", () => {
+        const result = describeToolSafe("");
 
         expect(result.success).toBe(false);
         expect(result.error).toBeDefined();
       });
     });
 
-    describe('edge cases', () => {
-      it('should handle special characters in search query', () => {
-        const results = searchTools('http-load_balancer.v1');
+    describe("edge cases", () => {
+      it("should handle special characters in search query", () => {
+        const results = searchTools("http-load_balancer.v1");
 
         expect(Array.isArray(results)).toBe(true);
       });
 
-      it('should handle very long search queries', () => {
-        const longQuery = 'http loadbalancer origin pool dns zone '.repeat(10);
+      it("should handle very long search queries", () => {
+        const longQuery = "http loadbalancer origin pool dns zone ".repeat(10);
         const results = searchTools(longQuery);
 
         expect(Array.isArray(results)).toBe(true);
       });
 
-      it('should handle unicode characters in search', () => {
-        const results = searchTools('\u00e9\u00e8\u00ea'); // accented chars
+      it("should handle unicode characters in search", () => {
+        const results = searchTools("\u00e9\u00e8\u00ea"); // accented chars
 
         expect(Array.isArray(results)).toBe(true);
       });
 
-      it('should handle numeric values in search', () => {
-        const results = searchTools('443 8080 https');
+      it("should handle numeric values in search", () => {
+        const results = searchTools("443 8080 https");
 
         expect(Array.isArray(results)).toBe(true);
       });
     });
 
-    describe('concurrent access', () => {
-      it('should handle concurrent search operations', async () => {
+    describe("concurrent access", () => {
+      it("should handle concurrent search operations", async () => {
         const searches = Array.from({ length: 10 }, (_, i) => Promise.resolve(searchTools(`query${i}`, { limit: 5 })));
 
         const results = await Promise.all(searches);
@@ -581,8 +581,8 @@ describe('Tool Discovery Flow Integration Tests', () => {
         });
       });
 
-      it('should handle concurrent describe operations', async () => {
-        const searchResults = searchTools('pool', { limit: 5 });
+      it("should handle concurrent describe operations", async () => {
+        const searchResults = searchTools("pool", { limit: 5 });
         const toolNames = searchResults.map((r) => r.tool.toolName);
 
         if (toolNames.length === 0) {
@@ -596,24 +596,24 @@ describe('Tool Discovery Flow Integration Tests', () => {
         results.forEach((result) => {
           expect(result).toBeDefined();
           // Each should be either success or failure, but not crash
-          expect(typeof result.success).toBe('boolean');
+          expect(typeof result.success).toBe("boolean");
         });
       });
     });
   });
 
-  describe('Performance Characteristics', () => {
-    it('should search within reasonable time for common queries', () => {
+  describe("Performance Characteristics", () => {
+    it("should search within reasonable time for common queries", () => {
       const start = performance.now();
-      searchTools('http loadbalancer', { limit: 100 });
+      searchTools("http loadbalancer", { limit: 100 });
       const duration = performance.now() - start;
 
       // Should complete within 100ms for indexed search
       expect(duration).toBeLessThan(100);
     });
 
-    it('should describe tools quickly', () => {
-      const searchResults = searchTools('origin', { limit: 1 });
+    it("should describe tools quickly", () => {
+      const searchResults = searchTools("origin", { limit: 1 });
       if (searchResults.length === 0) {
         return;
       }
@@ -626,7 +626,7 @@ describe('Tool Discovery Flow Integration Tests', () => {
       expect(duration).toBeLessThan(50);
     });
 
-    it('should load dependency graph efficiently', () => {
+    it("should load dependency graph efficiently", () => {
       clearDependencyCache();
 
       const start = performance.now();

@@ -11,11 +11,11 @@
  * See tests/fixtures/generated.ts for fixture generation.
  */
 
-import { beforeEach, describe, expect, it } from 'vitest';
-import type { ParsedOperation } from '../../src/generator/openapi-parser.js';
-import { clearIndexCache, getToolIndex } from '../../src/tools/discovery/index-loader.js';
-import { allTools, getToolByName } from '../../src/tools/registry.js';
-import { FIRST_TOOL, getValidToolName, RICH_METADATA_SAMPLES } from '../fixtures/generated.js';
+import { beforeEach, describe, expect, it } from "vitest";
+import type { ParsedOperation } from "../../src/generator/openapi-parser.js";
+import { clearIndexCache, getToolIndex } from "../../src/tools/discovery/index-loader.js";
+import { allTools, getToolByName } from "../../src/tools/registry.js";
+import { FIRST_TOOL, getValidToolName, RICH_METADATA_SAMPLES } from "../fixtures/generated.js";
 
 /**
  * Helper to find tools with specific rich metadata properties
@@ -38,61 +38,61 @@ function findToolsWithProperty<T extends keyof ParsedOperation>(
   return matching;
 }
 
-describe('Rich Metadata Extraction', () => {
+describe("Rich Metadata Extraction", () => {
   beforeEach(() => {
     clearIndexCache();
   });
 
-  describe('ParsedOperation Interface', () => {
-    it('should have all rich metadata properties defined', () => {
+  describe("ParsedOperation Interface", () => {
+    it("should have all rich metadata properties defined", () => {
       const tool = getToolByName(getValidToolName());
       expect(tool).toBeDefined();
 
       // Verify all rich metadata properties exist (even if null/empty)
-      expect(tool).toHaveProperty('displayName');
-      expect(tool).toHaveProperty('dangerLevel');
-      expect(tool).toHaveProperty('sideEffects');
-      expect(tool).toHaveProperty('requiredFields');
-      expect(tool).toHaveProperty('confirmationRequired');
-      expect(tool).toHaveProperty('parameterExamples');
-      expect(tool).toHaveProperty('validationRules');
-      expect(tool).toHaveProperty('operationMetadata');
+      expect(tool).toHaveProperty("displayName");
+      expect(tool).toHaveProperty("dangerLevel");
+      expect(tool).toHaveProperty("sideEffects");
+      expect(tool).toHaveProperty("requiredFields");
+      expect(tool).toHaveProperty("confirmationRequired");
+      expect(tool).toHaveProperty("parameterExamples");
+      expect(tool).toHaveProperty("validationRules");
+      expect(tool).toHaveProperty("operationMetadata");
     });
 
-    it('should have correct types for rich metadata properties', () => {
+    it("should have correct types for rich metadata properties", () => {
       const tool = getToolByName(getValidToolName());
       expect(tool).toBeDefined();
 
       // Type checks - properties should be their expected types or null
       if (tool!.displayName !== null) {
-        expect(typeof tool!.displayName).toBe('string');
+        expect(typeof tool!.displayName).toBe("string");
       }
 
       if (tool!.dangerLevel !== null) {
-        expect(['low', 'medium', 'high']).toContain(tool!.dangerLevel);
+        expect(["low", "medium", "high"]).toContain(tool!.dangerLevel);
       }
 
       if (tool!.sideEffects !== null) {
-        expect(typeof tool!.sideEffects).toBe('object');
+        expect(typeof tool!.sideEffects).toBe("object");
       }
 
       expect(Array.isArray(tool!.requiredFields)).toBe(true);
-      expect(typeof tool!.confirmationRequired).toBe('boolean');
-      expect(typeof tool!.parameterExamples).toBe('object');
-      expect(typeof tool!.validationRules).toBe('object');
+      expect(typeof tool!.confirmationRequired).toBe("boolean");
+      expect(typeof tool!.parameterExamples).toBe("object");
+      expect(typeof tool!.validationRules).toBe("object");
     });
   });
 
-  describe('x-ves-danger-level', () => {
-    it('should only contain valid danger level values', () => {
-      const validLevels = ['low', 'medium', 'high', null];
+  describe("x-ves-danger-level", () => {
+    it("should only contain valid danger level values", () => {
+      const validLevels = ["low", "medium", "high", null];
 
       for (const tool of allTools) {
         expect(validLevels).toContain(tool.dangerLevel);
       }
     });
 
-    it('should have tools with danger level from fixtures if available', () => {
+    it("should have tools with danger level from fixtures if available", () => {
       if (RICH_METADATA_SAMPLES.withDangerLevel) {
         const tool = getToolByName(RICH_METADATA_SAMPLES.withDangerLevel.toolName);
         expect(tool).toBeDefined();
@@ -100,20 +100,20 @@ describe('Rich Metadata Extraction', () => {
       }
     });
 
-    it('should find some tools with danger level if specs contain them', () => {
-      const toolsWithDanger = findToolsWithProperty('dangerLevel', (level) => level !== null);
+    it("should find some tools with danger level if specs contain them", () => {
+      const toolsWithDanger = findToolsWithProperty("dangerLevel", (level) => level !== null);
 
       // This is a structural test - we're not asserting specific count
       // Just validating that IF they exist, they have valid values
       for (const tool of toolsWithDanger) {
-        expect(['low', 'medium', 'high']).toContain(tool.dangerLevel);
+        expect(["low", "medium", "high"]).toContain(tool.dangerLevel);
       }
     });
   });
 
-  describe('x-ves-side-effects', () => {
-    it('should have valid side effects structure when present', () => {
-      const toolsWithSideEffects = findToolsWithProperty('sideEffects', (effects) => effects !== null);
+  describe("x-ves-side-effects", () => {
+    it("should have valid side effects structure when present", () => {
+      const toolsWithSideEffects = findToolsWithProperty("sideEffects", (effects) => effects !== null);
 
       for (const tool of toolsWithSideEffects) {
         const effects = tool.sideEffects!;
@@ -131,15 +131,15 @@ describe('Rich Metadata Extraction', () => {
       }
     });
 
-    it('should correlate side effects with operation type', () => {
+    it("should correlate side effects with operation type", () => {
       for (const tool of allTools) {
         if (tool.sideEffects) {
           // Create operations should have 'creates' effect
-          if (tool.operation === 'create' && tool.sideEffects.creates) {
+          if (tool.operation === "create" && tool.sideEffects.creates) {
             expect(tool.sideEffects.creates.length).toBeGreaterThanOrEqual(0);
           }
           // Delete operations should have 'deletes' effect
-          if (tool.operation === 'delete' && tool.sideEffects.deletes) {
+          if (tool.operation === "delete" && tool.sideEffects.deletes) {
             expect(tool.sideEffects.deletes.length).toBeGreaterThanOrEqual(0);
           }
         }
@@ -147,15 +147,15 @@ describe('Rich Metadata Extraction', () => {
     });
   });
 
-  describe('x-ves-confirmation-required', () => {
-    it('should be boolean for all tools', () => {
+  describe("x-ves-confirmation-required", () => {
+    it("should be boolean for all tools", () => {
       for (const tool of allTools) {
-        expect(typeof tool.confirmationRequired).toBe('boolean');
+        expect(typeof tool.confirmationRequired).toBe("boolean");
       }
     });
 
-    it('should be more likely true for high-danger operations', () => {
-      const highDangerTools = findToolsWithProperty('dangerLevel', (level) => level === 'high');
+    it("should be more likely true for high-danger operations", () => {
+      const highDangerTools = findToolsWithProperty("dangerLevel", (level) => level === "high");
 
       const confirmationRequired = highDangerTools.filter((t) => t.confirmationRequired);
 
@@ -168,37 +168,37 @@ describe('Rich Metadata Extraction', () => {
     });
   });
 
-  describe('x-ves-required-fields', () => {
-    it('should be an array for all tools', () => {
+  describe("x-ves-required-fields", () => {
+    it("should be an array for all tools", () => {
       for (const tool of allTools) {
         expect(Array.isArray(tool.requiredFields)).toBe(true);
       }
     });
 
-    it('should contain string values when populated', () => {
-      const toolsWithRequiredFields = findToolsWithProperty('requiredFields', (fields) => fields.length > 0);
+    it("should contain string values when populated", () => {
+      const toolsWithRequiredFields = findToolsWithProperty("requiredFields", (fields) => fields.length > 0);
 
       for (const tool of toolsWithRequiredFields) {
         for (const field of tool.requiredFields) {
-          expect(typeof field).toBe('string');
+          expect(typeof field).toBe("string");
         }
       }
     });
   });
 
-  describe('x-ves-example (Parameter Examples)', () => {
-    it('should have valid parameter examples structure', () => {
+  describe("x-ves-example (Parameter Examples)", () => {
+    it("should have valid parameter examples structure", () => {
       for (const tool of allTools) {
-        expect(typeof tool.parameterExamples).toBe('object');
+        expect(typeof tool.parameterExamples).toBe("object");
 
         for (const [param, example] of Object.entries(tool.parameterExamples)) {
-          expect(typeof param).toBe('string');
-          expect(typeof example).toBe('string');
+          expect(typeof param).toBe("string");
+          expect(typeof example).toBe("string");
         }
       }
     });
 
-    it('should have tools with parameter examples from fixtures if available', () => {
+    it("should have tools with parameter examples from fixtures if available", () => {
       if (RICH_METADATA_SAMPLES.withParameters) {
         const tool = getToolByName(RICH_METADATA_SAMPLES.withParameters.toolName);
         expect(tool).toBeDefined();
@@ -208,33 +208,33 @@ describe('Rich Metadata Extraction', () => {
     });
   });
 
-  describe('x-ves-validation-rules', () => {
-    it('should have valid validation rules structure', () => {
+  describe("x-ves-validation-rules", () => {
+    it("should have valid validation rules structure", () => {
       for (const tool of allTools) {
-        expect(typeof tool.validationRules).toBe('object');
+        expect(typeof tool.validationRules).toBe("object");
 
         for (const [param, rules] of Object.entries(tool.validationRules)) {
-          expect(typeof param).toBe('string');
-          expect(typeof rules).toBe('object');
+          expect(typeof param).toBe("string");
+          expect(typeof rules).toBe("object");
 
           for (const [ruleName, ruleValue] of Object.entries(rules)) {
-            expect(typeof ruleName).toBe('string');
-            expect(typeof ruleValue).toBe('string');
+            expect(typeof ruleName).toBe("string");
+            expect(typeof ruleValue).toBe("string");
           }
         }
       }
     });
 
-    it('should contain known validation rule patterns when present', () => {
+    it("should contain known validation rule patterns when present", () => {
       const knownRulePatterns = [
-        'ves.io.schema.rules.string.max_len',
-        'ves.io.schema.rules.message.required',
-        'ves.io.schema.rules.repeated.max_items',
-        'ves.io.schema.rules.string.min_len',
-        'ves.io.schema.rules.string.pattern',
+        "ves.io.schema.rules.string.max_len",
+        "ves.io.schema.rules.message.required",
+        "ves.io.schema.rules.repeated.max_items",
+        "ves.io.schema.rules.string.min_len",
+        "ves.io.schema.rules.string.pattern",
       ];
 
-      const toolsWithRules = findToolsWithProperty('validationRules', (rules) => Object.keys(rules).length > 0);
+      const toolsWithRules = findToolsWithProperty("validationRules", (rules) => Object.keys(rules).length > 0);
 
       // If there are validation rules, they should follow known patterns
       for (const tool of toolsWithRules) {
@@ -248,17 +248,17 @@ describe('Rich Metadata Extraction', () => {
     });
   });
 
-  describe('x-ves-operation-metadata', () => {
-    it('should have valid operation metadata structure when present', () => {
-      const toolsWithMetadata = findToolsWithProperty('operationMetadata', (metadata) => metadata !== null);
+  describe("x-ves-operation-metadata", () => {
+    it("should have valid operation metadata structure when present", () => {
+      const toolsWithMetadata = findToolsWithProperty("operationMetadata", (metadata) => metadata !== null);
 
       for (const tool of toolsWithMetadata) {
         const metadata = tool.operationMetadata!;
-        expect(typeof metadata).toBe('object');
+        expect(typeof metadata).toBe("object");
 
         // Check optional properties have correct types when present
         if (metadata.purpose) {
-          expect(typeof metadata.purpose).toBe('string');
+          expect(typeof metadata.purpose).toBe("string");
         }
         if (metadata.required_fields) {
           expect(Array.isArray(metadata.required_fields)).toBe(true);
@@ -267,37 +267,37 @@ describe('Rich Metadata Extraction', () => {
           expect(Array.isArray(metadata.optional_fields)).toBe(true);
         }
         if (metadata.danger_level) {
-          expect(['low', 'medium', 'high']).toContain(metadata.danger_level);
+          expect(["low", "medium", "high"]).toContain(metadata.danger_level);
         }
         if (metadata.confirmation_required !== undefined) {
-          expect(typeof metadata.confirmation_required).toBe('boolean');
+          expect(typeof metadata.confirmation_required).toBe("boolean");
         }
       }
     });
 
-    it('should have tools with operation metadata from fixtures if available', () => {
+    it("should have tools with operation metadata from fixtures if available", () => {
       if (RICH_METADATA_SAMPLES.withOperationMetadata) {
         const tool = getToolByName(RICH_METADATA_SAMPLES.withOperationMetadata.toolName);
         expect(tool).toBeDefined();
         // operationMetadata may or may not be present depending on specs
         // Just verify the property exists
-        expect(tool).toHaveProperty('operationMetadata');
+        expect(tool).toHaveProperty("operationMetadata");
       }
     });
   });
 
-  describe('x-displayname', () => {
-    it('should have valid display name when present', () => {
-      const toolsWithDisplayName = findToolsWithProperty('displayName', (name) => name !== null);
+  describe("x-displayname", () => {
+    it("should have valid display name when present", () => {
+      const toolsWithDisplayName = findToolsWithProperty("displayName", (name) => name !== null);
 
       for (const tool of toolsWithDisplayName) {
-        expect(typeof tool.displayName).toBe('string');
+        expect(typeof tool.displayName).toBe("string");
         expect(tool.displayName!.length).toBeGreaterThan(0);
       }
     });
 
-    it('should provide human-readable alternative to tool name', () => {
-      const toolsWithDisplayName = findToolsWithProperty('displayName', (name) => name !== null);
+    it("should provide human-readable alternative to tool name", () => {
+      const toolsWithDisplayName = findToolsWithProperty("displayName", (name) => name !== null);
 
       // Display names should be more readable than machine tool names
       for (const tool of toolsWithDisplayName) {
@@ -307,30 +307,30 @@ describe('Rich Metadata Extraction', () => {
     });
   });
 
-  describe('curlExample (from x-ves-minimum-configuration)', () => {
-    it('should have valid curl example string when present', () => {
-      const toolsWithCurlExample = findToolsWithProperty('curlExample', (example) => example !== null);
+  describe("curlExample (from x-ves-minimum-configuration)", () => {
+    it("should have valid curl example string when present", () => {
+      const toolsWithCurlExample = findToolsWithProperty("curlExample", (example) => example !== null);
 
       for (const tool of toolsWithCurlExample) {
-        expect(typeof tool.curlExample).toBe('string');
+        expect(typeof tool.curlExample).toBe("string");
         expect(tool.curlExample!.length).toBeGreaterThan(0);
       }
     });
 
-    it('should contain proper curl command structure', () => {
-      const toolsWithCurlExample = findToolsWithProperty('curlExample', (example) => example !== null);
+    it("should contain proper curl command structure", () => {
+      const toolsWithCurlExample = findToolsWithProperty("curlExample", (example) => example !== null);
 
       for (const tool of toolsWithCurlExample) {
         // Curl examples should start with 'curl'
         expect(tool.curlExample).toMatch(/^curl\s/);
         // Should contain API URL placeholder
-        expect(tool.curlExample).toContain('$F5XC_API_URL');
+        expect(tool.curlExample).toContain("$F5XC_API_URL");
         // Should contain authorization header
-        expect(tool.curlExample).toContain('Authorization');
+        expect(tool.curlExample).toContain("Authorization");
       }
     });
 
-    it('should have tools with curl example from fixtures if available', () => {
+    it("should have tools with curl example from fixtures if available", () => {
       if (RICH_METADATA_SAMPLES.withCurlExample) {
         const tool = getToolByName(RICH_METADATA_SAMPLES.withCurlExample.toolName);
         expect(tool).toBeDefined();
@@ -340,8 +340,8 @@ describe('Rich Metadata Extraction', () => {
   });
 });
 
-describe('Rich Metadata Coverage Statistics', () => {
-  it('should report metadata coverage across all tools', () => {
+describe("Rich Metadata Coverage Statistics", () => {
+  it("should report metadata coverage across all tools", () => {
     const totalTools = allTools.length;
 
     // Calculate coverage for each metadata field
@@ -369,21 +369,21 @@ describe('Rich Metadata Coverage Statistics', () => {
   });
 });
 
-describe('Metadata Index Integration', () => {
-  it('should include rich metadata in tool index', () => {
+describe("Metadata Index Integration", () => {
+  it("should include rich metadata in tool index", () => {
     const index = getToolIndex();
 
     expect(index.tools.length).toBeGreaterThan(0);
 
     // Index entries should have name, domain, resource, operation
     const firstTool = index.tools[0];
-    expect(firstTool).toHaveProperty('name');
-    expect(firstTool).toHaveProperty('domain');
-    expect(firstTool).toHaveProperty('resource');
-    expect(firstTool).toHaveProperty('operation');
+    expect(firstTool).toHaveProperty("name");
+    expect(firstTool).toHaveProperty("domain");
+    expect(firstTool).toHaveProperty("resource");
+    expect(firstTool).toHaveProperty("operation");
   });
 
-  it('should provide consistent metadata between index and full tool', () => {
+  it("should provide consistent metadata between index and full tool", () => {
     const index = getToolIndex();
     const indexEntry = index.tools[0];
     const fullTool = getToolByName(indexEntry.name);

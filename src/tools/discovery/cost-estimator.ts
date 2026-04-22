@@ -7,14 +7,14 @@
  * workflow cost aggregation for F5XC API operations.
  */
 
-import { getToolByName } from '../registry.js';
-import { getToolEntry, toolExists } from './index-loader.js';
-import type { CreationPlan, WorkflowStep } from './resolver.js';
+import { getToolByName } from "../registry.js";
+import { getToolEntry, toolExists } from "./index-loader.js";
+import type { CreationPlan, WorkflowStep } from "./resolver.js";
 
 /**
  * Latency classification from performance_impact
  */
-export type LatencyLevel = 'low' | 'moderate' | 'high' | 'unknown';
+export type LatencyLevel = "low" | "moderate" | "high" | "unknown";
 
 /**
  * Token cost estimate for a single tool
@@ -53,7 +53,7 @@ export interface ToolCostEstimate {
   /** Latency estimate */
   latency: LatencyEstimate;
   /** Danger level */
-  dangerLevel: 'low' | 'medium' | 'high' | 'critical';
+  dangerLevel: "low" | "medium" | "high" | "critical";
   /** Whether tool exists */
   exists: boolean;
 }
@@ -109,10 +109,10 @@ const DEFAULT_LATENCY_MS: Record<LatencyLevel, number> = {
  * Latency level descriptions
  */
 const LATENCY_DESCRIPTIONS: Record<LatencyLevel, string> = {
-  low: 'Fast operation, typically completes in under 1 second',
-  moderate: 'Standard operation, may take 1-3 seconds',
-  high: 'Complex operation, may take 3-10 seconds or involve async processing',
-  unknown: 'Latency not specified, estimate based on operation type',
+  low: "Fast operation, typically completes in under 1 second",
+  moderate: "Standard operation, may take 1-3 seconds",
+  high: "Complex operation, may take 3-10 seconds or involve async processing",
+  unknown: "Latency not specified, estimate based on operation type",
 };
 
 /**
@@ -143,32 +143,32 @@ function estimateTokens(text: string): number {
 function getLatencyLevel(toolName: string): LatencyLevel {
   const tool = getToolByName(toolName);
   if (!tool) {
-    return 'unknown';
+    return "unknown";
   }
 
   // Check operation metadata for performance impact
   const metadata = tool.operationMetadata;
   if (metadata?.performance_impact?.latency) {
     const latency = metadata.performance_impact.latency;
-    if (latency === 'low' || latency === 'moderate' || latency === 'high') {
+    if (latency === "low" || latency === "moderate" || latency === "high") {
       return latency;
     }
   }
 
   // Fallback: estimate based on operation type
   switch (tool.operation) {
-    case 'list':
-      return 'low';
-    case 'get':
-      return 'low';
-    case 'create':
-      return 'moderate';
-    case 'update':
-      return 'moderate';
-    case 'delete':
-      return 'moderate';
+    case "list":
+      return "low";
+    case "get":
+      return "low";
+    case "create":
+      return "moderate";
+    case "update":
+      return "moderate";
+    case "delete":
+      return "moderate";
     default:
-      return 'unknown';
+      return "unknown";
   }
 }
 
@@ -197,19 +197,19 @@ export function estimateToolTokens(toolName: string): TokenEstimate {
   // Request tokens: based on operation type
   let requestTokens: number;
   switch (tool.operation) {
-    case 'create':
+    case "create":
       requestTokens = 500; // Create operations typically have larger request bodies
       break;
-    case 'update':
+    case "update":
       requestTokens = 400;
       break;
-    case 'list':
+    case "list":
       requestTokens = 50; // List operations have minimal request
       break;
-    case 'get':
+    case "get":
       requestTokens = 30;
       break;
-    case 'delete':
+    case "delete":
       requestTokens = 30;
       break;
     default:
@@ -219,19 +219,19 @@ export function estimateToolTokens(toolName: string): TokenEstimate {
   // Response tokens: based on operation type
   let responseTokens: number;
   switch (tool.operation) {
-    case 'list':
+    case "list":
       responseTokens = 1000; // List operations can return many items
       break;
-    case 'get':
+    case "get":
       responseTokens = 500;
       break;
-    case 'create':
+    case "create":
       responseTokens = 400;
       break;
-    case 'update':
+    case "update":
       responseTokens = 400;
       break;
-    case 'delete':
+    case "delete":
       responseTokens = 100;
       break;
     default:
@@ -269,7 +269,7 @@ export function estimateToolCost(toolName: string): ToolCostEstimate {
     toolName,
     tokens: estimateToolTokens(toolName),
     latency: estimateToolLatency(toolName),
-    dangerLevel: tool?.dangerLevel ?? 'low',
+    dangerLevel: tool?.dangerLevel ?? "low",
     exists,
   };
 }
@@ -286,7 +286,7 @@ export function estimateMultipleToolsCost(toolNames: string[]): ToolCostEstimate
  */
 function aggregateLatency(levels: LatencyLevel[]): LatencyLevel {
   if (levels.length === 0) {
-    return 'unknown';
+    return "unknown";
   }
 
   const levelValues: Record<LatencyLevel, number> = {
@@ -299,9 +299,9 @@ function aggregateLatency(levels: LatencyLevel[]): LatencyLevel {
   const total = levels.reduce((sum, level) => sum + levelValues[level], 0);
   const avg = total / levels.length;
 
-  if (avg < 1.5) return 'low';
-  if (avg < 2.5) return 'moderate';
-  return 'high';
+  if (avg < 1.5) return "low";
+  if (avg < 2.5) return "moderate";
+  return "high";
 }
 
 /**
@@ -349,30 +349,30 @@ export function formatCostEstimate(estimate: ToolCostEstimate): string {
   const lines: string[] = [];
 
   lines.push(`# Cost Estimate: ${estimate.toolName}`);
-  lines.push('');
+  lines.push("");
 
   if (!estimate.exists) {
-    lines.push('**Warning**: Tool not found - estimates are approximate');
-    lines.push('');
+    lines.push("**Warning**: Tool not found - estimates are approximate");
+    lines.push("");
   }
 
-  lines.push('## Token Usage');
+  lines.push("## Token Usage");
   lines.push(`- Schema/Description: ~${estimate.tokens.schemaTokens} tokens`);
   lines.push(`- Request Body: ~${estimate.tokens.requestTokens} tokens`);
   lines.push(`- Response: ~${estimate.tokens.responseTokens} tokens`);
   lines.push(`- **Total per call**: ~${estimate.tokens.totalTokens} tokens`);
-  lines.push('');
+  lines.push("");
 
-  lines.push('## Latency');
+  lines.push("## Latency");
   lines.push(`- Level: ${estimate.latency.level}`);
   lines.push(`- Estimated: ~${estimate.latency.estimatedMs}ms`);
   lines.push(`- ${estimate.latency.description}`);
-  lines.push('');
+  lines.push("");
 
-  lines.push('## Risk');
+  lines.push("## Risk");
   lines.push(`- Danger Level: ${estimate.dangerLevel}`);
 
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 /**
@@ -381,30 +381,30 @@ export function formatCostEstimate(estimate: ToolCostEstimate): string {
 export function formatWorkflowCostEstimate(estimate: WorkflowCostEstimate): string {
   const lines: string[] = [];
 
-  lines.push('# Workflow Cost Estimate');
-  lines.push('');
-  lines.push('## Summary');
+  lines.push("# Workflow Cost Estimate");
+  lines.push("");
+  lines.push("## Summary");
   lines.push(`- **Total Steps**: ${estimate.stepCount}`);
   lines.push(`- **Total Tokens**: ~${estimate.totalTokens}`);
   lines.push(`- **Average Latency**: ${estimate.averageLatency}`);
   lines.push(`- **Estimated Total Time**: ~${(estimate.estimatedTotalMs / 1000).toFixed(1)}s`);
-  lines.push('');
+  lines.push("");
 
   if (estimate.warnings.length > 0) {
-    lines.push('## Warnings');
+    lines.push("## Warnings");
     for (const warning of estimate.warnings) {
       lines.push(`- ${warning}`);
     }
-    lines.push('');
+    lines.push("");
   }
 
-  lines.push('## Step Breakdown');
-  lines.push('');
-  lines.push('| Step | Tool | Tokens | Latency |');
-  lines.push('|------|------|--------|---------|');
+  lines.push("## Step Breakdown");
+  lines.push("");
+  lines.push("| Step | Tool | Tokens | Latency |");
+  lines.push("|------|------|--------|---------|");
   for (const step of estimate.steps) {
     lines.push(`| ${step.stepNumber} | ${step.toolName} | ~${step.tokens} | ~${step.latencyMs}ms |`);
   }
 
-  return lines.join('\n');
+  return lines.join("\n");
 }

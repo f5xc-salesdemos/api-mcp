@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Robin Mordasiewicz. MIT License.
 
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from "vitest/config";
 
 /**
  * Vitest configuration for E2E authenticated tests
@@ -11,23 +11,23 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     // E2E test file patterns
-    include: ['tests/e2e/**/*.test.ts'],
-    exclude: ['node_modules', 'dist'],
+    include: ["tests/e2e/**/*.test.ts"],
+    exclude: ["node_modules", "dist"],
 
     // Environment
-    environment: 'node',
+    environment: "node",
 
     // Longer timeout for API calls
     testTimeout: 60000,
 
     // Verbose reporter for visibility
-    reporters: ['verbose'],
+    reporters: ["verbose"],
 
     // Sequential execution for CRUD operations
     fileParallelism: false,
 
     // Setup files
-    setupFiles: ['tests/setup.ts'],
+    setupFiles: ["tests/setup.ts"],
 
     // Type checking disabled for faster execution
     typecheck: {

@@ -26,7 +26,7 @@ export interface ToolIndexEntry {
   /** Brief summary for search matching */
   summary: string;
   /** Danger level (Phase A): low, medium, high */
-  dangerLevel: 'low' | 'medium' | 'high';
+  dangerLevel: "low" | "medium" | "high";
   /** Domain category from upstream specs (e.g., "Security", "Platform") */
   domainCategory: string | null;
   /** UI category from upstream specs (e.g., "API Protection", "Sites") */

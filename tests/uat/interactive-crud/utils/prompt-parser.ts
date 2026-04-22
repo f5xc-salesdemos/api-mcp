@@ -11,7 +11,7 @@ import {
   type OperationType,
   RESOURCE_KEYWORDS,
   VALUE_PATTERNS,
-} from '../prompts/common-prompt-patterns.js';
+} from "../prompts/common-prompt-patterns.js";
 
 // ============================================================================
 // Types
@@ -101,7 +101,7 @@ export function detectOperation(prompt: string): {
   keywords: string[];
 } {
   const normalizedPrompt = prompt.toLowerCase();
-  let bestMatch: OperationType = 'help';
+  let bestMatch: OperationType = "help";
   let bestScore = 0;
   const matchedKeywords: string[] = [];
 
@@ -162,31 +162,31 @@ export function generateSearchQuery(operation: OperationType, resourceType: stri
 
   // Add operation-specific terms
   switch (operation) {
-    case 'create':
-      parts.push('create');
+    case "create":
+      parts.push("create");
       break;
-    case 'get':
-      parts.push('get');
+    case "get":
+      parts.push("get");
       break;
-    case 'list':
-      parts.push('list');
+    case "list":
+      parts.push("list");
       break;
-    case 'update':
-      parts.push('replace', 'update');
+    case "update":
+      parts.push("replace", "update");
       break;
-    case 'delete':
-      parts.push('delete');
+    case "delete":
+      parts.push("delete");
       break;
-    case 'validate':
-      parts.push('validate', 'schema');
+    case "validate":
+      parts.push("validate", "schema");
       break;
-    case 'search':
+    case "search":
       // For search, use the resource type only
       break;
-    case 'describe':
-      parts.push('describe', 'schema');
+    case "describe":
+      parts.push("describe", "schema");
       break;
-    case 'help':
+    case "help":
       // Keep generic
       break;
   }
@@ -195,23 +195,23 @@ export function generateSearchQuery(operation: OperationType, resourceType: stri
   if (parts.length === 0) {
     const words = prompt.toLowerCase().split(/\s+/);
     const stopWords = new Set([
-      'a',
-      'an',
-      'the',
-      'what',
-      'how',
-      'can',
-      'do',
-      'i',
-      'with',
-      'for',
-      'is',
-      'are',
-      'to',
-      'from',
-      'in',
-      'on',
-      'at',
+      "a",
+      "an",
+      "the",
+      "what",
+      "how",
+      "can",
+      "do",
+      "i",
+      "with",
+      "for",
+      "is",
+      "are",
+      "to",
+      "from",
+      "in",
+      "on",
+      "at",
     ]);
     for (const word of words) {
       if (!stopWords.has(word) && word.length > 2) {
@@ -221,7 +221,7 @@ export function generateSearchQuery(operation: OperationType, resourceType: stri
     }
   }
 
-  return parts.join(' ');
+  return parts.join(" ");
 }
 
 /**
@@ -288,7 +288,7 @@ export function extractValues(prompt: string, operation: OperationType): Extract
   }
 
   // Check for "use origin server name"
-  if (prompt.includes('use origin server') || prompt.includes('origin server name')) {
+  if (prompt.includes("use origin server") || prompt.includes("origin server name")) {
     values.useOriginServerName = true;
   }
 
@@ -318,25 +318,25 @@ export function extractValues(prompt: string, operation: OperationType): Extract
  */
 function isOperationKeyword(word: string): boolean {
   const operationWords = new Set([
-    'create',
-    'get',
-    'list',
-    'update',
-    'delete',
-    'remove',
-    'show',
-    'display',
-    'validate',
-    'search',
-    'find',
-    'help',
-    'named',
-    'called',
-    'with',
-    'using',
-    'from',
-    'the',
-    'all',
+    "create",
+    "get",
+    "list",
+    "update",
+    "delete",
+    "remove",
+    "show",
+    "display",
+    "validate",
+    "search",
+    "find",
+    "help",
+    "named",
+    "called",
+    "with",
+    "using",
+    "from",
+    "the",
+    "all",
   ]);
   return operationWords.has(word.toLowerCase());
 }
@@ -357,23 +357,23 @@ export function generateToolSearchQueries(parsed: ParsedPrompt): string[] {
   // If we have a resource type, add CRUD-specific queries
   if (parsed.resourceType) {
     switch (parsed.operation) {
-      case 'create':
+      case "create":
         queries.push(`create ${parsed.resourceType}`);
         queries.push(`${parsed.resourceType} create`);
         break;
-      case 'get':
+      case "get":
         queries.push(`get ${parsed.resourceType}`);
         queries.push(`${parsed.resourceType} get`);
         break;
-      case 'list':
+      case "list":
         queries.push(`list ${parsed.resourceType}`);
         queries.push(`${parsed.resourceType} list`);
         break;
-      case 'update':
+      case "update":
         queries.push(`replace ${parsed.resourceType}`);
         queries.push(`update ${parsed.resourceType}`);
         break;
-      case 'delete':
+      case "delete":
         queries.push(`delete ${parsed.resourceType}`);
         queries.push(`${parsed.resourceType} delete`);
         break;
@@ -390,17 +390,17 @@ export function generateToolSearchQueries(parsed: ParsedPrompt): string[] {
 export function buildExpectedToolPattern(parsed: ParsedPrompt): string | null {
   if (!parsed.resourceType) return null;
 
-  const resourcePart = parsed.resourceType.replace(/-/g, '.');
+  const resourcePart = parsed.resourceType.replace(/-/g, ".");
   const operationMap: Record<OperationType, string> = {
-    create: 'create',
-    get: 'get',
-    list: 'list',
-    update: 'replace',
-    delete: 'delete',
-    validate: '',
-    search: '',
-    describe: '',
-    help: '',
+    create: "create",
+    get: "get",
+    list: "list",
+    update: "replace",
+    delete: "delete",
+    validate: "",
+    search: "",
+    describe: "",
+    help: "",
   };
 
   const op = operationMap[parsed.operation];
@@ -462,8 +462,8 @@ function toCamelCase(str: string): string {
 export function buildHealthcheckBody(values: ExtractedValues): Record<string, unknown> {
   const body: Record<string, unknown> = {
     metadata: {
-      name: values.name || 'test-healthcheck',
-      namespace: values.namespace || 'default',
+      name: values.name || "test-healthcheck",
+      namespace: values.namespace || "default",
     },
     spec: {},
   };
@@ -505,7 +505,7 @@ export function buildPathParams(
   defaults: { namespace?: string; name?: string } = {},
 ): Record<string, string> {
   return {
-    namespace: values.namespace || defaults.namespace || 'default',
-    name: values.name || defaults.name || 'test-resource',
+    namespace: values.namespace || defaults.namespace || "default",
+    name: values.name || defaults.name || "test-resource",
   };
 }

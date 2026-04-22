@@ -12,7 +12,7 @@ import {
   getAllHttpErrorCodes,
   getHttpErrorResolution,
   type HttpErrorResolution,
-} from '../generator/domain-metadata.js';
+} from "../generator/domain-metadata.js";
 
 /**
  * Error resolution prompt definition
@@ -47,7 +47,7 @@ export interface ErrorPromptArgument {
  */
 function convertToErrorPrompt(error: HttpErrorResolution): ErrorPrompt {
   // Build template from upstream data
-  const causesList = error.commonCauses.map((cause, i) => `${i + 1}. ${cause}`).join('\n');
+  const causesList = error.commonCauses.map((cause, i) => `${i + 1}. ${cause}`).join("\n");
 
   const stepsList = error.diagnosticSteps
     .map((step: ErrorDiagnosticStep) => {
@@ -58,12 +58,12 @@ function convertToErrorPrompt(error: HttpErrorResolution): ErrorPrompt {
       }
       return content;
     })
-    .join('\n');
+    .join("\n");
 
-  const preventionList = error.prevention.map((p) => `- ${p}`).join('\n');
+  const preventionList = error.prevention.map((p) => `- ${p}`).join("\n");
 
   const relatedList =
-    error.relatedErrors.length > 0 ? `\n## Related Errors\n${error.relatedErrors.map((e) => `- ${e}`).join('\n')}` : '';
+    error.relatedErrors.length > 0 ? `\n## Related Errors\n${error.relatedErrors.map((e) => `- ${e}`).join("\n")}` : "";
 
   const template = `# ${error.code} ${error.name} - Resolution Guide
 
@@ -88,13 +88,13 @@ ${relatedList}
   // Standard arguments for error prompts
   const args: ErrorPromptArgument[] = [
     {
-      name: 'operation',
-      description: 'The API operation that failed',
+      name: "operation",
+      description: "The API operation that failed",
       required: false,
     },
     {
-      name: 'error_message',
-      description: 'The specific error message received',
+      name: "error_message",
+      description: "The specific error message received",
       required: false,
     },
   ];
@@ -102,28 +102,28 @@ ${relatedList}
   // Add context-specific arguments based on error type
   if (error.code === 403 || error.code === 404) {
     args.push({
-      name: 'namespace',
-      description: 'The namespace being accessed',
+      name: "namespace",
+      description: "The namespace being accessed",
       required: false,
     });
     args.push({
-      name: 'resource_type',
-      description: 'The type of resource being accessed',
+      name: "resource_type",
+      description: "The type of resource being accessed",
       required: false,
     });
   }
 
   if (error.code === 409) {
     args.push({
-      name: 'resource_name',
-      description: 'The name of the conflicting resource',
+      name: "resource_name",
+      description: "The name of the conflicting resource",
       required: false,
     });
   }
 
   return {
     code: error.code,
-    name: `resolve-${error.code}-${error.name.toLowerCase().replace(/\s+/g, '-')}`,
+    name: `resolve-${error.code}-${error.name.toLowerCase().replace(/\s+/g, "-")}`,
     description: `Diagnose and resolve ${error.name} errors (${error.code})`,
     arguments: args,
     template,
@@ -188,7 +188,7 @@ export function processErrorTemplate(prompt: ErrorPrompt, args: Record<string, s
   let processed = prompt.template;
 
   for (const [key, value] of Object.entries(args)) {
-    const placeholder = new RegExp(`\\{\\{${key}\\}\\}`, 'g');
+    const placeholder = new RegExp(`\\{\\{${key}\\}\\}`, "g");
     processed = processed.replace(placeholder, value || `[${key}]`);
   }
 

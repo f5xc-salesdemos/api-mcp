@@ -11,10 +11,10 @@
  * Log levels
  */
 export enum LogLevel {
-  DEBUG = 'debug',
-  INFO = 'info',
-  WARN = 'warn',
-  ERROR = 'error',
+  DEBUG = "debug",
+  INFO = "info",
+  WARN = "warn",
+  ERROR = "error",
 }
 
 /**
@@ -68,12 +68,12 @@ class Logger {
     this.config = { ...DEFAULT_CONFIG, ...config };
 
     // Check for environment variable overrides
-    const envLevel = process.env['LOG_LEVEL']?.toLowerCase();
+    const envLevel = process.env["LOG_LEVEL"]?.toLowerCase();
     if (envLevel && Object.values(LogLevel).includes(envLevel as LogLevel)) {
       this.config.level = envLevel as LogLevel;
     }
 
-    if (process.env['LOG_JSON'] === 'true') {
+    if (process.env["LOG_JSON"] === "true") {
       this.config.json = true;
     }
   }
@@ -99,7 +99,7 @@ class Logger {
 
     if (this.config.json) {
       // Structured JSON output
-      process.stderr.write(JSON.stringify(entry) + '\n');
+      process.stderr.write(JSON.stringify(entry) + "\n");
     } else {
       // Human-readable output
       const parts: string[] = [];
@@ -115,7 +115,7 @@ class Logger {
         parts.push(JSON.stringify(entry.context));
       }
 
-      process.stderr.write(parts.join(' ') + '\n');
+      process.stderr.write(parts.join(" ") + "\n");
     }
   }
 

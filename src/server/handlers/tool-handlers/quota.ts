@@ -7,13 +7,13 @@
  * Provides visibility into resource quota consumption and limits.
  */
 
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import type { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
-import { createHttpClient } from '@robinmordasiewicz/f5xc-auth';
-import { z } from 'zod';
-import { formatQuotaStatus, formatQuotaTable } from '../../../services/quota-formatter.js';
-import { quotaService } from '../../../services/quota-service.js';
-import { logger } from '../../../utils/logging.js';
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
+import { createHttpClient } from "@robinmordasiewicz/f5xc-auth";
+import { z } from "zod";
+import { formatQuotaStatus, formatQuotaTable } from "../../../services/quota-formatter.js";
+import { quotaService } from "../../../services/quota-service.js";
+import { logger } from "../../../utils/logging.js";
 
 /**
  * Register quota management tools with the MCP server
@@ -26,8 +26,8 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
    * Tool 1: Get Quota Status
    */
   server.tool(
-    'f5xc-api-get-quota-status',
-    'Get current quota usage and limits for a namespace and resource type',
+    "f5xc-api-get-quota-status",
+    "Get current quota usage and limits for a namespace and resource type",
     {
       namespace: z.string().describe("Namespace to check quota for (e.g., 'default', 'production')"),
       resourceType: z.string().optional().describe("Resource type to check (e.g., 'healthcheck', 'http-loadbalancer')"),
@@ -38,8 +38,8 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
         return {
           content: [
             {
-              type: 'text',
-              text: 'Quota checking requires authentication. Please configure F5XC credentials using f5xc-api-configure-auth.',
+              type: "text",
+              text: "Quota checking requires authentication. Please configure F5XC credentials using f5xc-api-configure-auth.",
             },
           ],
         };
@@ -55,7 +55,7 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
           return {
             content: [
               {
-                type: 'text',
+                type: "text",
                 text: formatQuotaStatus(status),
               },
             ],
@@ -67,14 +67,14 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
           return {
             content: [
               {
-                type: 'text',
+                type: "text",
                 text: formatQuotaTable(allQuotas),
               },
             ],
           };
         }
       } catch (error) {
-        logger.error('Failed to get quota status', {
+        logger.error("Failed to get quota status", {
           namespace,
           resourceType,
           error: error instanceof Error ? error.message : String(error),
@@ -83,7 +83,7 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
         return {
           content: [
             {
-              type: 'text',
+              type: "text",
               text: `Error fetching quota status: ${error instanceof Error ? error.message : String(error)}`,
             },
           ],
@@ -96,15 +96,15 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
    * Tool 2: List All Namespace Quotas
    */
   server.tool(
-    'f5xc-api-list-namespace-quotas',
-    'List all resource quotas for a namespace with current usage',
+    "f5xc-api-list-namespace-quotas",
+    "List all resource quotas for a namespace with current usage",
     {
-      namespace: z.string().describe('Namespace to list quotas for'),
+      namespace: z.string().describe("Namespace to list quotas for"),
       showOnlyLimited: z
         .boolean()
         .optional()
         .default(false)
-        .describe('Only show resources with quota limits (filter out unlimited)'),
+        .describe("Only show resources with quota limits (filter out unlimited)"),
     },
     async (args) => {
       const { namespace, showOnlyLimited = false } = args;
@@ -112,8 +112,8 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
         return {
           content: [
             {
-              type: 'text',
-              text: 'Quota checking requires authentication. Please configure F5XC credentials using f5xc-api-configure-auth.',
+              type: "text",
+              text: "Quota checking requires authentication. Please configure F5XC credentials using f5xc-api-configure-auth.",
             },
           ],
         };
@@ -132,7 +132,7 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
           return {
             content: [
               {
-                type: 'text',
+                type: "text",
                 text: showOnlyLimited
                   ? `No limited quota resources found in namespace '${namespace}'.`
                   : `No quota information available for namespace '${namespace}'.`,
@@ -144,13 +144,13 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
         return {
           content: [
             {
-              type: 'text',
+              type: "text",
               text: `Quota Status for Namespace: ${namespace}\n\n${formatQuotaTable(filtered)}`,
             },
           ],
         };
       } catch (error) {
-        logger.error('Failed to list namespace quotas', {
+        logger.error("Failed to list namespace quotas", {
           namespace,
           error: error instanceof Error ? error.message : String(error),
         });
@@ -158,7 +158,7 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
         return {
           content: [
             {
-              type: 'text',
+              type: "text",
               text: `Error listing namespace quotas: ${error instanceof Error ? error.message : String(error)}`,
             },
           ],
@@ -171,10 +171,10 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
    * Tool 3: Clear Quota Cache
    */
   server.tool(
-    'f5xc-api-clear-quota-cache',
-    'Clear the quota information cache to force fresh queries from the F5XC API',
+    "f5xc-api-clear-quota-cache",
+    "Clear the quota information cache to force fresh queries from the F5XC API",
     {
-      namespace: z.string().optional().describe('Specific namespace to clear (optional - clears all if omitted)'),
+      namespace: z.string().optional().describe("Specific namespace to clear (optional - clears all if omitted)"),
     },
     async (args) => {
       const { namespace } = args;
@@ -184,7 +184,7 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
           return {
             content: [
               {
-                type: 'text',
+                type: "text",
                 text: `✅ Cleared quota cache for namespace: ${namespace}`,
               },
             ],
@@ -194,14 +194,14 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
           return {
             content: [
               {
-                type: 'text',
-                text: '✅ Cleared all quota cache entries',
+                type: "text",
+                text: "✅ Cleared all quota cache entries",
               },
             ],
           };
         }
       } catch (error) {
-        logger.error('Failed to clear quota cache', {
+        logger.error("Failed to clear quota cache", {
           namespace,
           error: error instanceof Error ? error.message : String(error),
         });
@@ -209,7 +209,7 @@ export function registerQuotaTools(server: McpServer, credentialManager?: Creden
         return {
           content: [
             {
-              type: 'text',
+              type: "text",
               text: `Error clearing quota cache: ${error instanceof Error ? error.message : String(error)}`,
             },
           ],

@@ -8,17 +8,17 @@
  * - execute-resource: Execute a CRUD operation on a consolidated resource
  */
 
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import type { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
-import { z } from 'zod';
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
+import { z } from "zod";
 import {
   type CrudOperation,
   DISCOVERY_TOOLS,
   executeTool,
   getConsolidatedResource,
   resolveConsolidatedTool,
-} from '../../../tools/discovery/index.js';
-import { createErrorResponse, createTextResponse } from '../../response-utils.js';
+} from "../../../tools/discovery/index.js";
+import { createErrorResponse, createTextResponse } from "../../response-utils.js";
 
 /**
  * Registers the execute-tool tool for executing a specific tool with parameters.
@@ -28,10 +28,10 @@ export function registerExecuteToolTool(server: McpServer, credentialManager: Cr
     DISCOVERY_TOOLS.execute.name,
     DISCOVERY_TOOLS.execute.description,
     {
-      toolName: z.string().describe('Tool name to execute'),
-      pathParams: z.record(z.string(), z.string()).optional().describe('Path parameters'),
-      queryParams: z.record(z.string(), z.string()).optional().describe('Query parameters'),
-      body: z.record(z.string(), z.unknown()).optional().describe('Request body'),
+      toolName: z.string().describe("Tool name to execute"),
+      pathParams: z.record(z.string(), z.string()).optional().describe("Path parameters"),
+      queryParams: z.record(z.string(), z.string()).optional().describe("Query parameters"),
+      body: z.record(z.string(), z.unknown()).optional().describe("Request body"),
     },
     async (args) => {
       const result = await executeTool(
@@ -57,11 +57,11 @@ export function registerExecuteResourceTool(server: McpServer, credentialManager
     DISCOVERY_TOOLS.executeResource.name,
     DISCOVERY_TOOLS.executeResource.description,
     {
-      resourceName: z.string().describe('Consolidated resource name'),
-      operation: z.enum(['create', 'get', 'list', 'update', 'delete']).describe('CRUD operation'),
-      pathParams: z.record(z.string(), z.string()).optional().describe('Path parameters'),
-      queryParams: z.record(z.string(), z.string()).optional().describe('Query parameters'),
-      body: z.record(z.string(), z.unknown()).optional().describe('Request body'),
+      resourceName: z.string().describe("Consolidated resource name"),
+      operation: z.enum(["create", "get", "list", "update", "delete"]).describe("CRUD operation"),
+      pathParams: z.record(z.string(), z.string()).optional().describe("Path parameters"),
+      queryParams: z.record(z.string(), z.string()).optional().describe("Query parameters"),
+      body: z.record(z.string(), z.unknown()).optional().describe("Request body"),
     },
     async (args) => {
       // Resolve to underlying tool
@@ -72,7 +72,7 @@ export function registerExecuteResourceTool(server: McpServer, credentialManager
         if (!resource) {
           return createErrorResponse(
             `Resource "${args.resourceName}" not found`,
-            'Use f5xc-api-search-resources to find available resources.',
+            "Use f5xc-api-search-resources to find available resources.",
           );
         }
         return createTextResponse({

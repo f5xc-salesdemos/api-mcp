@@ -14,16 +14,16 @@
  * - Environment variable priority cascade
  */
 
-import { AuthMode, CredentialManager, getProfileManager, type Profile } from '@robinmordasiewicz/f5xc-auth';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { AuthMode, CredentialManager, getProfileManager, type Profile } from "@robinmordasiewicz/f5xc-auth";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   clearF5XCEnvVars,
   isCI,
   setupAuthenticatedModeEnv,
   setupDocumentationModeEnv,
-} from '../utils/ci-environment.js';
+} from "../utils/ci-environment.js";
 
-describe('Auth Integration Tests', () => {
+describe("Auth Integration Tests", () => {
   const originalEnv = process.env;
 
   beforeEach(() => {
@@ -38,12 +38,12 @@ describe('Auth Integration Tests', () => {
   // ===========================================================================
   // SCENARIO 1: Documentation Mode (No Credentials)
   // ===========================================================================
-  describe('Scenario: Documentation Mode (Unauthenticated)', () => {
+  describe("Scenario: Documentation Mode (Unauthenticated)", () => {
     beforeEach(() => {
       setupDocumentationModeEnv();
     });
 
-    it('should initialize CredentialManager in NONE mode', async () => {
+    it("should initialize CredentialManager in NONE mode", async () => {
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
@@ -51,28 +51,28 @@ describe('Auth Integration Tests', () => {
       expect(credentialManager.isAuthenticated()).toBe(false);
     });
 
-    it('should return null for API URL when not authenticated', async () => {
+    it("should return null for API URL when not authenticated", async () => {
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
       expect(credentialManager.getApiUrl()).toBeNull();
     });
 
-    it('should return null for tenant when not authenticated', async () => {
+    it("should return null for tenant when not authenticated", async () => {
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
       expect(credentialManager.getTenant()).toBeNull();
     });
 
-    it('should return null for token when not authenticated', async () => {
+    it("should return null for token when not authenticated", async () => {
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
       expect(credentialManager.getToken()).toBeNull();
     });
 
-    it('should return null for namespace when not configured', async () => {
+    it("should return null for namespace when not configured", async () => {
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
@@ -83,12 +83,12 @@ describe('Auth Integration Tests', () => {
   // ===========================================================================
   // SCENARIO 2: Token Authentication
   // ===========================================================================
-  describe('Scenario: Token Authentication', () => {
+  describe("Scenario: Token Authentication", () => {
     beforeEach(() => {
       setupAuthenticatedModeEnv();
     });
 
-    it('should initialize CredentialManager in TOKEN mode', async () => {
+    it("should initialize CredentialManager in TOKEN mode", async () => {
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
@@ -96,59 +96,59 @@ describe('Auth Integration Tests', () => {
       expect(credentialManager.isAuthenticated()).toBe(true);
     });
 
-    it('should return configured API URL', async () => {
+    it("should return configured API URL", async () => {
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
       // Note: f5xc-auth normalizes API URLs to include /api path
-      expect(credentialManager.getApiUrl()).toBe('https://test.console.ves.volterra.io/api');
+      expect(credentialManager.getApiUrl()).toBe("https://test.console.ves.volterra.io/api");
     });
 
-    it('should extract tenant from API URL', async () => {
+    it("should extract tenant from API URL", async () => {
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
-      expect(credentialManager.getTenant()).toBe('test');
+      expect(credentialManager.getTenant()).toBe("test");
     });
 
-    it('should return configured token', async () => {
+    it("should return configured token", async () => {
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
-      expect(credentialManager.getToken()).toBe('test-token');
+      expect(credentialManager.getToken()).toBe("test-token");
     });
 
-    it('should handle custom namespace', async () => {
-      process.env.F5XC_NAMESPACE = 'custom-namespace';
+    it("should handle custom namespace", async () => {
+      process.env.F5XC_NAMESPACE = "custom-namespace";
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
-      expect(credentialManager.getNamespace()).toBe('custom-namespace');
+      expect(credentialManager.getNamespace()).toBe("custom-namespace");
     });
   });
 
   // ===========================================================================
   // SCENARIO 3: Environment Variable Priority
   // ===========================================================================
-  describe('Scenario: Environment Variable Priority Cascade', () => {
-    it('should prioritize env vars over profile settings', async () => {
+  describe("Scenario: Environment Variable Priority Cascade", () => {
+    it("should prioritize env vars over profile settings", async () => {
       // Set up env vars with specific values
       setupAuthenticatedModeEnv({
-        apiUrl: 'https://env-tenant.console.ves.volterra.io',
-        apiToken: 'env-token',
+        apiUrl: "https://env-tenant.console.ves.volterra.io",
+        apiToken: "env-token",
       });
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
 
       // Env vars should take priority (note: f5xc-auth normalizes with /api)
-      expect(credentialManager.getApiUrl()).toBe('https://env-tenant.console.ves.volterra.io/api');
-      expect(credentialManager.getToken()).toBe('env-token');
-      expect(credentialManager.getTenant()).toBe('env-tenant');
+      expect(credentialManager.getApiUrl()).toBe("https://env-tenant.console.ves.volterra.io/api");
+      expect(credentialManager.getToken()).toBe("env-token");
+      expect(credentialManager.getTenant()).toBe("env-tenant");
     });
 
-    it('should fall back to documentation mode when no credentials', async () => {
+    it("should fall back to documentation mode when no credentials", async () => {
       clearF5XCEnvVars();
       setupDocumentationModeEnv();
 
@@ -162,8 +162,8 @@ describe('Auth Integration Tests', () => {
   // ===========================================================================
   // SCENARIO 4: Credential Manager Reload
   // ===========================================================================
-  describe('Scenario: Credential Manager Reload', () => {
-    it('should reload credentials when environment changes', async () => {
+  describe("Scenario: Credential Manager Reload", () => {
+    it("should reload credentials when environment changes", async () => {
       // Start in documentation mode
       setupDocumentationModeEnv();
 
@@ -180,7 +180,7 @@ describe('Auth Integration Tests', () => {
       expect(credentialManager.isAuthenticated()).toBe(true);
     });
 
-    it('should transition from authenticated to documentation mode', async () => {
+    it("should transition from authenticated to documentation mode", async () => {
       // Start in authenticated mode
       setupAuthenticatedModeEnv();
 
@@ -201,11 +201,11 @@ describe('Auth Integration Tests', () => {
   // ===========================================================================
   // SCENARIO 5: Multiple Credential Manager Instances
   // ===========================================================================
-  describe('Scenario: Multiple Credential Manager Instances', () => {
-    it('should allow multiple independent instances', async () => {
+  describe("Scenario: Multiple Credential Manager Instances", () => {
+    it("should allow multiple independent instances", async () => {
       setupAuthenticatedModeEnv({
-        apiUrl: 'https://tenant-a.console.ves.volterra.io',
-        apiToken: 'token-a',
+        apiUrl: "https://tenant-a.console.ves.volterra.io",
+        apiToken: "token-a",
       });
 
       const manager1 = new CredentialManager();
@@ -213,36 +213,36 @@ describe('Auth Integration Tests', () => {
 
       // Change environment
       setupAuthenticatedModeEnv({
-        apiUrl: 'https://tenant-b.console.ves.volterra.io',
-        apiToken: 'token-b',
+        apiUrl: "https://tenant-b.console.ves.volterra.io",
+        apiToken: "token-b",
       });
 
       const manager2 = new CredentialManager();
       await manager2.initialize();
 
       // First instance should retain original values
-      expect(manager1.getTenant()).toBe('tenant-a');
+      expect(manager1.getTenant()).toBe("tenant-a");
 
       // Second instance should have new values
-      expect(manager2.getTenant()).toBe('tenant-b');
+      expect(manager2.getTenant()).toBe("tenant-b");
     });
   });
 
   // ===========================================================================
   // SCENARIO 6: Profile Manager Integration
   // ===========================================================================
-  describe('Scenario: Profile Manager Integration', () => {
-    it('should access ProfileManager from shared package', () => {
+  describe("Scenario: Profile Manager Integration", () => {
+    it("should access ProfileManager from shared package", () => {
       const profileManager = getProfileManager();
 
       expect(profileManager).toBeDefined();
-      expect(typeof profileManager.list).toBe('function');
-      expect(typeof profileManager.get).toBe('function');
-      expect(typeof profileManager.getActive).toBe('function');
-      expect(typeof profileManager.setActive).toBe('function');
+      expect(typeof profileManager.list).toBe("function");
+      expect(typeof profileManager.get).toBe("function");
+      expect(typeof profileManager.getActive).toBe("function");
+      expect(typeof profileManager.setActive).toBe("function");
     });
 
-    it('should list profiles (may be empty)', async () => {
+    it("should list profiles (may be empty)", async () => {
       setupDocumentationModeEnv();
 
       const profileManager = getProfileManager();
@@ -251,24 +251,24 @@ describe('Auth Integration Tests', () => {
       expect(Array.isArray(profiles)).toBe(true);
     });
 
-    it('should get active profile (may be null)', async () => {
+    it("should get active profile (may be null)", async () => {
       setupDocumentationModeEnv();
 
       const profileManager = getProfileManager();
       const active = await profileManager.getActive();
 
       // In test environment, no active profile expected
-      expect(active === null || typeof active === 'string').toBe(true);
+      expect(active === null || typeof active === "string").toBe(true);
     });
   });
 
   // ===========================================================================
   // SCENARIO 7: Error Handling
   // ===========================================================================
-  describe('Scenario: Error Handling', () => {
-    it('should handle invalid API URL gracefully', async () => {
-      process.env.F5XC_API_URL = 'not-a-valid-url';
-      process.env.F5XC_API_TOKEN = 'test-token';
+  describe("Scenario: Error Handling", () => {
+    it("should handle invalid API URL gracefully", async () => {
+      process.env.F5XC_API_URL = "not-a-valid-url";
+      process.env.F5XC_API_TOKEN = "test-token";
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
@@ -278,9 +278,9 @@ describe('Auth Integration Tests', () => {
       expect(credentialManager).toBeDefined();
     });
 
-    it('should handle empty token gracefully', async () => {
-      process.env.F5XC_API_URL = 'https://test.console.ves.volterra.io';
-      process.env.F5XC_API_TOKEN = '';
+    it("should handle empty token gracefully", async () => {
+      process.env.F5XC_API_URL = "https://test.console.ves.volterra.io";
+      process.env.F5XC_API_TOKEN = "";
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
@@ -289,9 +289,9 @@ describe('Auth Integration Tests', () => {
       expect(credentialManager.getAuthMode()).toBe(AuthMode.NONE);
     });
 
-    it('should handle missing API URL with token', async () => {
+    it("should handle missing API URL with token", async () => {
       delete process.env.F5XC_API_URL;
-      process.env.F5XC_API_TOKEN = 'test-token';
+      process.env.F5XC_API_TOKEN = "test-token";
 
       const credentialManager = new CredentialManager();
       await credentialManager.initialize();
@@ -304,14 +304,14 @@ describe('Auth Integration Tests', () => {
   // ===========================================================================
   // SCENARIO 8: AuthMode Enum Values
   // ===========================================================================
-  describe('Scenario: AuthMode Enum Validation', () => {
-    it('should have correct string values for AuthMode', () => {
-      expect(AuthMode.NONE).toBe('none');
-      expect(AuthMode.TOKEN).toBe('token');
-      expect(AuthMode.CERTIFICATE).toBe('certificate');
+  describe("Scenario: AuthMode Enum Validation", () => {
+    it("should have correct string values for AuthMode", () => {
+      expect(AuthMode.NONE).toBe("none");
+      expect(AuthMode.TOKEN).toBe("token");
+      expect(AuthMode.CERTIFICATE).toBe("certificate");
     });
 
-    it('should return string mode values (not numeric)', async () => {
+    it("should return string mode values (not numeric)", async () => {
       setupAuthenticatedModeEnv();
 
       const credentialManager = new CredentialManager();
@@ -320,8 +320,8 @@ describe('Auth Integration Tests', () => {
       const mode = credentialManager.getAuthMode();
 
       // Mode should be a string, not a number
-      expect(typeof mode).toBe('string');
-      expect(['none', 'token', 'certificate']).toContain(mode);
+      expect(typeof mode).toBe("string");
+      expect(["none", "token", "certificate"]).toContain(mode);
     });
   });
 });
@@ -329,7 +329,7 @@ describe('Auth Integration Tests', () => {
 // ===========================================================================
 // ACCEPTANCE TEST MATRIX
 // ===========================================================================
-describe('Auth Integration Test Matrix', () => {
+describe("Auth Integration Test Matrix", () => {
   const originalEnv = process.env;
 
   beforeEach(() => {
@@ -348,49 +348,49 @@ describe('Auth Integration Test Matrix', () => {
     expectedTenant: string | null;
   }> = [
     {
-      name: 'No credentials → Documentation mode',
+      name: "No credentials → Documentation mode",
       setup: () => setupDocumentationModeEnv(),
       expectedMode: AuthMode.NONE,
       expectedAuthenticated: false,
       expectedTenant: null,
     },
     {
-      name: 'Token only → Execution mode',
+      name: "Token only → Execution mode",
       setup: () => setupAuthenticatedModeEnv(),
       expectedMode: AuthMode.TOKEN,
       expectedAuthenticated: true,
-      expectedTenant: 'test',
+      expectedTenant: "test",
     },
     {
-      name: 'Custom tenant URL → Extract tenant',
+      name: "Custom tenant URL → Extract tenant",
       setup: () =>
         setupAuthenticatedModeEnv({
-          apiUrl: 'https://custom-tenant.console.ves.volterra.io',
-          apiToken: 'custom-token',
+          apiUrl: "https://custom-tenant.console.ves.volterra.io",
+          apiToken: "custom-token",
         }),
       expectedMode: AuthMode.TOKEN,
       expectedAuthenticated: true,
-      expectedTenant: 'custom-tenant',
+      expectedTenant: "custom-tenant",
     },
     {
-      name: 'Missing token → Documentation mode',
+      name: "Missing token → Documentation mode",
       setup: () => {
         clearF5XCEnvVars();
-        process.env.F5XC_API_URL = 'https://test.console.ves.volterra.io';
+        process.env.F5XC_API_URL = "https://test.console.ves.volterra.io";
         // No token set
-        process.env.XDG_CONFIG_HOME = '/tmp/__nonexistent_test_config__';
+        process.env.XDG_CONFIG_HOME = "/tmp/__nonexistent_test_config__";
       },
       expectedMode: AuthMode.NONE,
       expectedAuthenticated: false,
       expectedTenant: null,
     },
     {
-      name: 'Empty token → Documentation mode',
+      name: "Empty token → Documentation mode",
       setup: () => {
         clearF5XCEnvVars();
-        process.env.F5XC_API_URL = 'https://test.console.ves.volterra.io';
-        process.env.F5XC_API_TOKEN = '';
-        process.env.XDG_CONFIG_HOME = '/tmp/__nonexistent_test_config__';
+        process.env.F5XC_API_URL = "https://test.console.ves.volterra.io";
+        process.env.F5XC_API_TOKEN = "";
+        process.env.XDG_CONFIG_HOME = "/tmp/__nonexistent_test_config__";
       },
       expectedMode: AuthMode.NONE,
       expectedAuthenticated: false,

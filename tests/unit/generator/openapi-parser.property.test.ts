@@ -7,32 +7,32 @@
  * that should hold across all possible valid inputs.
  */
 
-import * as fc from 'fast-check';
-import { describe, expect, it } from 'vitest';
+import * as fc from "fast-check";
+import { describe, expect, it } from "vitest";
 import {
   getAllOperations,
   groupOperationsByDomain,
   type ParsedOperation,
   type ParsedSpec,
-} from '../../../src/generator/openapi-parser.js';
+} from "../../../src/generator/openapi-parser.js";
 import {
   arbDomainName,
   arbHttpMethod,
   arbOperationType,
   arbParsedOperation,
   arbResourceName,
-} from '../../utils/generators.js';
+} from "../../utils/generators.js";
 
-describe('openapi-parser property-based tests', () => {
-  describe('getAllOperations invariants', () => {
-    it('should always return sorted operations by toolName', () => {
+describe("openapi-parser property-based tests", () => {
+  describe("getAllOperations invariants", () => {
+    it("should always return sorted operations by toolName", () => {
       fc.assert(
         fc.property(fc.array(arbParsedOperation, { maxLength: 20 }), (operations) => {
           const specs: ParsedSpec[] = [
             {
-              filePath: '/test.json',
-              title: 'Test',
-              version: '1.0.0',
+              filePath: "/test.json",
+              title: "Test",
+              version: "1.0.0",
               operations,
               schemas: {},
             },
@@ -49,14 +49,14 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should deduplicate operations with same toolName', () => {
+    it("should deduplicate operations with same toolName", () => {
       fc.assert(
         fc.property(fc.array(arbParsedOperation, { maxLength: 20 }), (operations) => {
           const specs: ParsedSpec[] = [
             {
-              filePath: '/test.json',
-              title: 'Test',
-              version: '1.0.0',
+              filePath: "/test.json",
+              title: "Test",
+              version: "1.0.0",
               operations,
               schemas: {},
             },
@@ -72,7 +72,7 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should preserve all unique operations from input', () => {
+    it("should preserve all unique operations from input", () => {
       fc.assert(
         fc.property(fc.array(arbParsedOperation, { maxLength: 20 }), (operations) => {
           // Make operations unique by toolName
@@ -85,9 +85,9 @@ describe('openapi-parser property-based tests', () => {
 
           const specs: ParsedSpec[] = [
             {
-              filePath: '/test.json',
-              title: 'Test',
-              version: '1.0.0',
+              filePath: "/test.json",
+              title: "Test",
+              version: "1.0.0",
               operations: uniqueOps,
               schemas: {},
             },
@@ -101,7 +101,7 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should combine operations from multiple specs', () => {
+    it("should combine operations from multiple specs", () => {
       fc.assert(
         fc.property(
           fc.array(arbParsedOperation, { minLength: 1, maxLength: 10 }),
@@ -109,16 +109,16 @@ describe('openapi-parser property-based tests', () => {
           (ops1, ops2) => {
             const specs: ParsedSpec[] = [
               {
-                filePath: '/spec1.json',
-                title: 'Spec 1',
-                version: '1.0.0',
+                filePath: "/spec1.json",
+                title: "Spec 1",
+                version: "1.0.0",
                 operations: ops1,
                 schemas: {},
               },
               {
-                filePath: '/spec2.json',
-                title: 'Spec 2',
-                version: '1.0.0',
+                filePath: "/spec2.json",
+                title: "Spec 2",
+                version: "1.0.0",
                 operations: ops2,
                 schemas: {},
               },
@@ -136,18 +136,18 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should return empty array for empty specs list', () => {
+    it("should return empty array for empty specs list", () => {
       const result = getAllOperations([]);
       expect(result).toHaveLength(0);
     });
 
-    it('should handle specs with empty operations', () => {
+    it("should handle specs with empty operations", () => {
       fc.assert(
         fc.property(fc.integer({ min: 1, max: 5 }), (numSpecs) => {
           const specs: ParsedSpec[] = Array.from({ length: numSpecs }, (_, i) => ({
             filePath: `/spec${i}.json`,
             title: `Spec ${i}`,
-            version: '1.0.0',
+            version: "1.0.0",
             operations: [],
             schemas: {},
           }));
@@ -161,8 +161,8 @@ describe('openapi-parser property-based tests', () => {
     });
   });
 
-  describe('groupOperationsByDomain invariants', () => {
-    it('should preserve all operations across groups', () => {
+  describe("groupOperationsByDomain invariants", () => {
+    it("should preserve all operations across groups", () => {
       fc.assert(
         fc.property(fc.array(arbParsedOperation, { maxLength: 30 }), (operations) => {
           const grouped = groupOperationsByDomain(operations);
@@ -179,7 +179,7 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should group operations by their domain field', () => {
+    it("should group operations by their domain field", () => {
       fc.assert(
         fc.property(fc.array(arbParsedOperation, { maxLength: 20 }), (operations) => {
           const grouped = groupOperationsByDomain(operations);
@@ -195,7 +195,7 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should sort operations within each group by toolName', () => {
+    it("should sort operations within each group by toolName", () => {
       fc.assert(
         fc.property(fc.array(arbParsedOperation, { maxLength: 20 }), (operations) => {
           const grouped = groupOperationsByDomain(operations);
@@ -210,7 +210,7 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should return domain keys in sorted order', () => {
+    it("should return domain keys in sorted order", () => {
       fc.assert(
         fc.property(fc.array(arbParsedOperation, { maxLength: 20 }), (operations) => {
           const grouped = groupOperationsByDomain(operations);
@@ -224,7 +224,7 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should handle single-domain operations', () => {
+    it("should handle single-domain operations", () => {
       fc.assert(
         fc.property(
           arbDomainName,
@@ -248,21 +248,21 @@ describe('openapi-parser property-based tests', () => {
     });
   });
 
-  describe('toolName format invariants', () => {
-    it('should generate toolNames with consistent format', () => {
+  describe("toolName format invariants", () => {
+    it("should generate toolNames with consistent format", () => {
       fc.assert(
         fc.property(arbParsedOperation, (operation) => {
           // toolName format: f5xc-api-{domain}-{resource}-{operation}
           const toolName = operation.toolName;
 
-          expect(toolName.startsWith('f5xc-api-')).toBe(true);
-          expect(toolName.split('-').length).toBeGreaterThanOrEqual(4);
+          expect(toolName.startsWith("f5xc-api-")).toBe(true);
+          expect(toolName.split("-").length).toBeGreaterThanOrEqual(4);
         }),
         { numRuns: 100 },
       );
     });
 
-    it('should have toolName containing domain and operation', () => {
+    it("should have toolName containing domain and operation", () => {
       fc.assert(
         fc.property(arbParsedOperation, (operation) => {
           const toolName = operation.toolName;
@@ -279,8 +279,8 @@ describe('openapi-parser property-based tests', () => {
     });
   });
 
-  describe('operation structure invariants', () => {
-    it('should always have required fields', () => {
+  describe("operation structure invariants", () => {
+    it("should always have required fields", () => {
       fc.assert(
         fc.property(arbParsedOperation, (operation) => {
           // Required fields
@@ -295,27 +295,27 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should have valid HTTP method', () => {
+    it("should have valid HTTP method", () => {
       fc.assert(
         fc.property(arbParsedOperation, (operation) => {
-          const validMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+          const validMethods = ["GET", "POST", "PUT", "DELETE", "PATCH"];
           expect(validMethods).toContain(operation.method);
         }),
         { numRuns: 100 },
       );
     });
 
-    it('should have valid operation type', () => {
+    it("should have valid operation type", () => {
       fc.assert(
         fc.property(arbParsedOperation, (operation) => {
-          const validOperations = ['create', 'list', 'get', 'update', 'delete'];
+          const validOperations = ["create", "list", "get", "update", "delete"];
           expect(validOperations).toContain(operation.operation);
         }),
         { numRuns: 100 },
       );
     });
 
-    it('should have array types for list fields', () => {
+    it("should have array types for list fields", () => {
       fc.assert(
         fc.property(arbParsedOperation, (operation) => {
           expect(Array.isArray(operation.pathParameters)).toBe(true);
@@ -331,11 +331,11 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('should have valid danger level when present', () => {
+    it("should have valid danger level when present", () => {
       fc.assert(
         fc.property(arbParsedOperation, (operation) => {
           if (operation.dangerLevel !== null) {
-            const validLevels = ['low', 'medium', 'high'];
+            const validLevels = ["low", "medium", "high"];
             expect(validLevels).toContain(operation.dangerLevel);
           }
         }),
@@ -344,15 +344,15 @@ describe('openapi-parser property-based tests', () => {
     });
   });
 
-  describe('idempotency invariants', () => {
-    it('getAllOperations should be idempotent', () => {
+  describe("idempotency invariants", () => {
+    it("getAllOperations should be idempotent", () => {
       fc.assert(
         fc.property(fc.array(arbParsedOperation, { maxLength: 15 }), (operations) => {
           const specs: ParsedSpec[] = [
             {
-              filePath: '/test.json',
-              title: 'Test',
-              version: '1.0.0',
+              filePath: "/test.json",
+              title: "Test",
+              version: "1.0.0",
               operations,
               schemas: {},
             },
@@ -367,7 +367,7 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('groupOperationsByDomain should be idempotent', () => {
+    it("groupOperationsByDomain should be idempotent", () => {
       fc.assert(
         fc.property(fc.array(arbParsedOperation, { maxLength: 15 }), (operations) => {
           const result1 = groupOperationsByDomain(operations);
@@ -384,8 +384,8 @@ describe('openapi-parser property-based tests', () => {
     });
   });
 
-  describe('determinism invariants', () => {
-    it('should produce deterministic results for same input', () => {
+  describe("determinism invariants", () => {
+    it("should produce deterministic results for same input", () => {
       fc.assert(
         fc.property(
           fc.array(arbParsedOperation, { maxLength: 10 }),
@@ -393,9 +393,9 @@ describe('openapi-parser property-based tests', () => {
           (operations, iterations) => {
             const specs: ParsedSpec[] = [
               {
-                filePath: '/test.json',
-                title: 'Test',
-                version: '1.0.0',
+                filePath: "/test.json",
+                title: "Test",
+                version: "1.0.0",
                 operations,
                 schemas: {},
               },
@@ -417,15 +417,15 @@ describe('openapi-parser property-based tests', () => {
     });
   });
 
-  describe('parameter validation invariants', () => {
-    it('path parameters should always be required', () => {
+  describe("parameter validation invariants", () => {
+    it("path parameters should always be required", () => {
       fc.assert(
         fc.property(arbParsedOperation, (operation) => {
           operation.pathParameters.forEach((param) => {
             // Path parameters are typically required in OpenAPI
-            if (param.in === 'path') {
+            if (param.in === "path") {
               // Note: Our generator always sets required based on input
-              expect(param.in).toBe('path');
+              expect(param.in).toBe("path");
             }
           });
         }),
@@ -433,11 +433,11 @@ describe('openapi-parser property-based tests', () => {
       );
     });
 
-    it('parameter names should be non-empty strings', () => {
+    it("parameter names should be non-empty strings", () => {
       fc.assert(
         fc.property(arbParsedOperation, (operation) => {
           [...operation.pathParameters, ...operation.queryParameters].forEach((param) => {
-            expect(typeof param.name).toBe('string');
+            expect(typeof param.name).toBe("string");
             expect(param.name.length).toBeGreaterThan(0);
           });
         }),

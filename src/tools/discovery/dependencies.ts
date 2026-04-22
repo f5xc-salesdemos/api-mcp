@@ -10,10 +10,10 @@
  * operations in the correct order without hallucinating dependencies.
  */
 
-import { existsSync, readFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { deserializeDependencyGraph, getResourcesBySubscription } from '../../generator/dependency-graph.js';
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { deserializeDependencyGraph, getResourcesBySubscription } from "../../generator/dependency-graph.js";
 import type {
   DependencyDiscoveryAction,
   DependencyDiscoveryResponse,
@@ -22,8 +22,8 @@ import type {
   ResourceDependencies,
   ResourceReference,
   SubscriptionRequirement,
-} from '../../generator/dependency-types.js';
-import { createResourceKey } from '../../generator/dependency-types.js';
+} from "../../generator/dependency-types.js";
+import { createResourceKey } from "../../generator/dependency-types.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -36,7 +36,7 @@ let cachedGraph: DependencyGraph | null = null;
 /**
  * Path to the generated dependency graph JSON
  */
-const DEPENDENCY_GRAPH_PATH = join(__dirname, '..', 'generated', 'dependency-graph.json');
+const DEPENDENCY_GRAPH_PATH = join(__dirname, "..", "generated", "dependency-graph.json");
 
 /**
  * Load the dependency graph from the generated JSON file
@@ -53,7 +53,7 @@ export function loadDependencyGraph(): DependencyGraph {
     );
   }
 
-  const json = readFileSync(DEPENDENCY_GRAPH_PATH, 'utf-8');
+  const json = readFileSync(DEPENDENCY_GRAPH_PATH, "utf-8");
   cachedGraph = deserializeDependencyGraph(json);
   return cachedGraph;
 }
@@ -178,9 +178,9 @@ export function getAvailableAddonServices(): string[] {
  * Format a resource reference for human-readable output
  */
 function formatResourceRef(ref: ResourceReference): string {
-  const domain = ref.domain || 'unknown';
-  const required = ref.required ? ' (required)' : ' (optional)';
-  const inline = ref.inline ? ' [inline allowed]' : '';
+  const domain = ref.domain || "unknown";
+  const required = ref.required ? " (required)" : " (optional)";
+  const inline = ref.inline ? " [inline allowed]" : "";
   return `${domain}/${ref.resourceType}${required}${inline}`;
 }
 
@@ -195,7 +195,7 @@ function formatResourceRef(ref: ResourceReference): string {
 export function generateDependencyReport(
   domain: string,
   resource: string,
-  action: DependencyDiscoveryAction = 'full',
+  action: DependencyDiscoveryAction = "full",
 ): DependencyDiscoveryResponse {
   const deps = getResourceDependencies(domain, resource);
 
@@ -222,28 +222,28 @@ export function generateDependencyReport(
   };
 
   // Build response based on action
-  if (action === 'full' || action === 'prerequisites') {
+  if (action === "full" || action === "prerequisites") {
     response.prerequisites = deps.requires.map(formatResourceRef);
   }
 
-  if (action === 'full' || action === 'dependents') {
+  if (action === "full" || action === "dependents") {
     response.dependents = deps.requiredBy.map(formatResourceRef);
   }
 
-  if (action === 'full' || action === 'oneOf') {
+  if (action === "full" || action === "oneOf") {
     response.mutuallyExclusiveFields = deps.oneOfGroups.map((group) => ({
       field: group.choiceField,
       options: group.options,
     }));
   }
 
-  if (action === 'full' || action === 'subscriptions') {
+  if (action === "full" || action === "subscriptions") {
     response.subscriptionRequirements = deps.subscriptions.map(
-      (sub) => `${sub.displayName} (${sub.tier})${sub.required ? ' - required' : ''}`,
+      (sub) => `${sub.displayName} (${sub.tier})${sub.required ? " - required" : ""}`,
     );
   }
 
-  if (action === 'full' || action === 'creationOrder') {
+  if (action === "full" || action === "creationOrder") {
     response.creationSequence = deps.creationOrder;
   }
 

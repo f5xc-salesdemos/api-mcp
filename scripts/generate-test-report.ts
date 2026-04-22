@@ -10,12 +10,12 @@
  *   tsx scripts/generate-test-report.ts [--input path/to/results.json]
  */
 
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 interface TestResult {
   name: string;
-  state: 'passed' | 'failed' | 'skipped';
+  state: "passed" | "failed" | "skipped";
   duration?: number;
   error?: {
     message: string;
@@ -40,7 +40,7 @@ interface VitestResults {
 }
 
 interface CategorizedIssue {
-  severity: 'critical' | 'high' | 'medium' | 'low';
+  severity: "critical" | "high" | "medium" | "low";
   testName: string;
   error: string;
   stack?: string;
@@ -52,27 +52,27 @@ interface IssuePattern {
   errorPattern: string;
   occurrences: number;
   affectedTests: string[];
-  severity: 'critical' | 'high' | 'medium' | 'low';
+  severity: "critical" | "high" | "medium" | "low";
 }
 
 /**
  * Main report generation function
  */
 async function generateReport(): Promise<void> {
-  console.log('📊 Generating Test Report...\n');
+  console.log("📊 Generating Test Report...\n");
 
   // Find most recent test results
-  const resultsDir = path.join(process.cwd(), 'test-reports');
+  const resultsDir = path.join(process.cwd(), "test-reports");
 
   if (!fs.existsSync(resultsDir)) {
-    console.error('❌ No test-reports directory found. Run tests first.');
+    console.error("❌ No test-reports directory found. Run tests first.");
     process.exit(1);
   }
 
   // Get all JSON result files
   const resultFiles = fs
     .readdirSync(resultsDir)
-    .filter((f) => f.endsWith('.json'))
+    .filter((f) => f.endsWith(".json"))
     .map((f) => ({
       name: f,
       path: path.join(resultsDir, f),
@@ -81,7 +81,7 @@ async function generateReport(): Promise<void> {
     .sort((a, b) => b.mtime.getTime() - a.mtime.getTime());
 
   if (resultFiles.length === 0) {
-    console.error('❌ No test result JSON files found in test-reports/');
+    console.error("❌ No test result JSON files found in test-reports/");
     process.exit(1);
   }
 
@@ -89,24 +89,24 @@ async function generateReport(): Promise<void> {
   console.log(`📄 Processing most recent: ${resultFiles[0].name}\n`);
 
   // Parse results
-  const results: VitestResults = JSON.parse(fs.readFileSync(resultFiles[0].path, 'utf-8'));
+  const results: VitestResults = JSON.parse(fs.readFileSync(resultFiles[0].path, "utf-8"));
 
   // Categorize issues
   const issues = categorizeIssues(results);
   const patterns = identifyPatterns(issues);
 
   // Generate reports
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
 
   generateBugsMarkdown(issues, patterns, timestamp);
   generateEnhancementsMarkdown(issues, timestamp);
   generateSummaryMarkdown(results, issues, patterns, timestamp);
   generateGitHubIssues(
-    issues.filter((i) => i.severity === 'critical'),
+    issues.filter((i) => i.severity === "critical"),
     timestamp,
   );
 
-  console.log('\n✅ Report generation complete!');
+  console.log("\n✅ Report generation complete!");
   console.log(`\n📂 Generated files in project root:`);
   console.log(`   - BUGS.md`);
   console.log(`   - ENHANCEMENTS.md`);
@@ -122,7 +122,7 @@ function categorizeIssues(results: VitestResults): CategorizedIssue[] {
 
   for (const suite of results.testResults) {
     for (const test of suite.tests) {
-      if (test.state === 'failed' && test.error) {
+      if (test.state === "failed" && test.error) {
         const issue = categorizeFailure(test.name, test.error);
         issues.push(issue);
       }
@@ -137,55 +137,55 @@ function categorizeIssues(results: VitestResults): CategorizedIssue[] {
  */
 function categorizeFailure(testName: string, error: { message: string; stack?: string }): CategorizedIssue {
   const errorMsg = error.message.toLowerCase();
-  const stack = error.stack || '';
+  const stack = error.stack || "";
 
   // Extract HTTP status code if present
   const statusMatch = errorMsg.match(/status:?\s*(\d{3})/i) || stack.match(/status:?\s*(\d{3})/i);
   const httpStatus = statusMatch ? parseInt(statusMatch[1], 10) : undefined;
 
   // Determine severity
-  let severity: 'critical' | 'high' | 'medium' | 'low' = 'medium';
-  let category = 'Unknown';
+  let severity: "critical" | "high" | "medium" | "low" = "medium";
+  let category = "Unknown";
 
   // Critical: 500 errors, null pointer, system crashes
   if (
     (httpStatus && httpStatus >= 500) ||
-    errorMsg.includes('null pointer') ||
-    errorMsg.includes('cannot read property') ||
-    errorMsg.includes('internal server error') ||
-    errorMsg.includes('segmentation fault') ||
-    errorMsg.includes('fatal error')
+    errorMsg.includes("null pointer") ||
+    errorMsg.includes("cannot read property") ||
+    errorMsg.includes("internal server error") ||
+    errorMsg.includes("segmentation fault") ||
+    errorMsg.includes("fatal error")
   ) {
-    severity = 'critical';
-    category = 'System Failure';
+    severity = "critical";
+    category = "System Failure";
   }
   // High: Incorrect behavior, authentication issues, data corruption
   else if (
-    (errorMsg.includes('expected') && errorMsg.includes('received')) ||
+    (errorMsg.includes("expected") && errorMsg.includes("received")) ||
     httpStatus === 401 ||
     httpStatus === 403 ||
-    errorMsg.includes('schema mismatch') ||
-    errorMsg.includes('data type error') ||
-    errorMsg.includes('validation failed')
+    errorMsg.includes("schema mismatch") ||
+    errorMsg.includes("data type error") ||
+    errorMsg.includes("validation failed")
   ) {
-    severity = 'high';
-    category = httpStatus === 401 || httpStatus === 403 ? 'Authentication/Authorization' : 'Incorrect Behavior';
+    severity = "high";
+    category = httpStatus === 401 || httpStatus === 403 ? "Authentication/Authorization" : "Incorrect Behavior";
   }
   // Medium: API inconsistencies, undocumented behavior
   else if (
     httpStatus === 404 ||
-    errorMsg.includes('undocumented') ||
-    errorMsg.includes('inconsistent') ||
-    errorMsg.includes('deprecated') ||
-    errorMsg.includes('timeout')
+    errorMsg.includes("undocumented") ||
+    errorMsg.includes("inconsistent") ||
+    errorMsg.includes("deprecated") ||
+    errorMsg.includes("timeout")
   ) {
-    severity = 'medium';
-    category = 'API Inconsistency';
+    severity = "medium";
+    category = "API Inconsistency";
   }
   // Low: Performance issues, minor bugs
-  else if (errorMsg.includes('slow') || errorMsg.includes('performance') || errorMsg.includes('memory leak')) {
-    severity = 'low';
-    category = 'Performance';
+  else if (errorMsg.includes("slow") || errorMsg.includes("performance") || errorMsg.includes("memory leak")) {
+    severity = "low";
+    category = "Performance";
   }
 
   return {
@@ -206,7 +206,7 @@ function identifyPatterns(issues: CategorizedIssue[]): IssuePattern[] {
 
   for (const issue of issues) {
     // Extract error pattern (first line of error message)
-    const errorPattern = issue.error.split('\n')[0];
+    const errorPattern = issue.error.split("\n")[0];
 
     if (patternMap.has(errorPattern)) {
       const pattern = patternMap.get(errorPattern)!;
@@ -230,10 +230,10 @@ function identifyPatterns(issues: CategorizedIssue[]): IssuePattern[] {
  * Generate BUGS.md file
  */
 function generateBugsMarkdown(issues: CategorizedIssue[], patterns: IssuePattern[], timestamp: string): void {
-  const critical = issues.filter((i) => i.severity === 'critical');
-  const high = issues.filter((i) => i.severity === 'high');
-  const medium = issues.filter((i) => i.severity === 'medium');
-  const low = issues.filter((i) => i.severity === 'low');
+  const critical = issues.filter((i) => i.severity === "critical");
+  const high = issues.filter((i) => i.severity === "high");
+  const medium = issues.filter((i) => i.severity === "medium");
+  const low = issues.filter((i) => i.severity === "low");
 
   let markdown = `# Discovered Bugs - F5XC API MCP Server\n\n`;
   markdown += `**Report Generated**: ${new Date(timestamp).toLocaleString()}\n\n`;
@@ -250,7 +250,7 @@ function generateBugsMarkdown(issues: CategorizedIssue[], patterns: IssuePattern
       markdown += `### ${pattern.errorPattern}\n\n`;
       markdown += `- **Occurrences**: ${pattern.occurrences}\n`;
       markdown += `- **Severity**: ${pattern.severity}\n`;
-      markdown += `- **Affected Tests**: ${pattern.affectedTests.slice(0, 5).join(', ')}${pattern.affectedTests.length > 5 ? `, and ${pattern.affectedTests.length - 5} more` : ''}\n\n`;
+      markdown += `- **Affected Tests**: ${pattern.affectedTests.slice(0, 5).join(", ")}${pattern.affectedTests.length > 5 ? `, and ${pattern.affectedTests.length - 5} more` : ""}\n\n`;
     }
   }
 
@@ -299,8 +299,8 @@ function generateBugsMarkdown(issues: CategorizedIssue[], patterns: IssuePattern
     markdown += `\n`;
   }
 
-  fs.writeFileSync('BUGS.md', markdown);
-  console.log('✅ Generated BUGS.md');
+  fs.writeFileSync("BUGS.md", markdown);
+  console.log("✅ Generated BUGS.md");
 }
 
 /**
@@ -323,7 +323,7 @@ function generateEnhancementsMarkdown(issues: CategorizedIssue[], timestamp: str
     categoryMap.get(category)!.push(issue);
   }
 
-  if (categoryMap.has('API Inconsistency')) {
+  if (categoryMap.has("API Inconsistency")) {
     markdown += `### API Standardization\n\n`;
     markdown += `- Add consistent error response format across all tools\n`;
     markdown += `- Standardize status field locations in API responses\n`;
@@ -331,7 +331,7 @@ function generateEnhancementsMarkdown(issues: CategorizedIssue[], timestamp: str
     markdown += `- Add request/response validation with clear error messages\n\n`;
   }
 
-  if (categoryMap.has('Authentication/Authorization')) {
+  if (categoryMap.has("Authentication/Authorization")) {
     markdown += `### Authentication Improvements\n\n`;
     markdown += `- Add more descriptive authentication error messages\n`;
     markdown += `- Implement automatic token refresh mechanism\n`;
@@ -339,7 +339,7 @@ function generateEnhancementsMarkdown(issues: CategorizedIssue[], timestamp: str
     markdown += `- Provide better guidance for permission errors\n\n`;
   }
 
-  if (categoryMap.has('Performance')) {
+  if (categoryMap.has("Performance")) {
     markdown += `### Performance Enhancements\n\n`;
     markdown += `- Add caching for frequently accessed tools\n`;
     markdown += `- Implement request batching where possible\n`;
@@ -367,8 +367,8 @@ function generateEnhancementsMarkdown(issues: CategorizedIssue[], timestamp: str
   markdown += `- Document rate limiting and best practices\n`;
   markdown += `- Add migration guides for breaking changes\n\n`;
 
-  fs.writeFileSync('ENHANCEMENTS.md', markdown);
-  console.log('✅ Generated ENHANCEMENTS.md');
+  fs.writeFileSync("ENHANCEMENTS.md", markdown);
+  console.log("✅ Generated ENHANCEMENTS.md");
 }
 
 /**
@@ -391,14 +391,14 @@ function generateSummaryMarkdown(
   markdown += `- **Skipped**: ${results.numPendingTests}\n`;
   markdown += `- **Duration**: ${Math.round((Date.now() - results.startTime) / 1000)}s\n\n`;
 
-  const critical = issues.filter((i) => i.severity === 'critical');
-  const high = issues.filter((i) => i.severity === 'high');
+  const critical = issues.filter((i) => i.severity === "critical");
+  const high = issues.filter((i) => i.severity === "high");
 
   markdown += `## Issue Summary\n\n`;
   markdown += `- 🔴 **Critical Bugs**: ${critical.length} (require immediate attention)\n`;
   markdown += `- 🟠 **High Priority**: ${high.length} (fix soon)\n`;
-  markdown += `- 🟡 **Medium Priority**: ${issues.filter((i) => i.severity === 'medium').length}\n`;
-  markdown += `- 🟢 **Low Priority**: ${issues.filter((i) => i.severity === 'low').length}\n\n`;
+  markdown += `- 🟡 **Medium Priority**: ${issues.filter((i) => i.severity === "medium").length}\n`;
+  markdown += `- 🟢 **Low Priority**: ${issues.filter((i) => i.severity === "low").length}\n\n`;
 
   if (patterns.length > 0) {
     markdown += `## Top Error Patterns\n\n`;
@@ -419,7 +419,7 @@ function generateSummaryMarkdown(
   markdown += `- **Enhancements**: See ENHANCEMENTS.md for improvement opportunities\n`;
   markdown += `- **GitHub Issues**: See test-reports/github-issues/ for critical bug templates\n\n`;
 
-  const summaryPath = path.join(process.cwd(), 'test-reports', `summary-${timestamp}.md`);
+  const summaryPath = path.join(process.cwd(), "test-reports", `summary-${timestamp}.md`);
   fs.writeFileSync(summaryPath, markdown);
   console.log(`✅ Generated test-reports/summary-${timestamp}.md`);
 }
@@ -428,7 +428,7 @@ function generateSummaryMarkdown(
  * Generate GitHub issue templates for critical bugs
  */
 function generateGitHubIssues(criticalIssues: CategorizedIssue[], timestamp: string): void {
-  const issuesDir = path.join(process.cwd(), 'test-reports', 'github-issues');
+  const issuesDir = path.join(process.cwd(), "test-reports", "github-issues");
 
   if (!fs.existsSync(issuesDir)) {
     fs.mkdirSync(issuesDir, { recursive: true });
@@ -476,7 +476,7 @@ function generateGitHubIssues(criticalIssues: CategorizedIssue[], timestamp: str
     markdown += `This is a CRITICAL bug that blocks functionality and requires immediate attention.\n\n`;
 
     markdown += `## Environment\n\n`;
-    markdown += `- F5XC Tenant: ${process.env.TEST_TENANT_NAME ?? 'staging-test'}.staging.volterra.us\n`;
+    markdown += `- F5XC Tenant: ${process.env.TEST_TENANT_NAME ?? "staging-test"}.staging.volterra.us\n`;
     markdown += `- Test Framework: Vitest\n`;
     markdown += `- Discovered: ${new Date(timestamp).toLocaleString()}\n`;
 
@@ -490,6 +490,6 @@ function generateGitHubIssues(criticalIssues: CategorizedIssue[], timestamp: str
 
 // Run report generation
 generateReport().catch((error) => {
-  console.error('❌ Report generation failed:', error);
+  console.error("❌ Report generation failed:", error);
   process.exit(1);
 });

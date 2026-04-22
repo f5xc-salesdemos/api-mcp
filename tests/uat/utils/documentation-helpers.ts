@@ -7,9 +7,9 @@
  * by executing CLI commands and parsing documentation files.
  */
 
-import { spawn } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { spawn } from "node:child_process";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
 /**
  * CLI command execution result
@@ -50,36 +50,36 @@ export async function runCliCommand(args: string[], options?: { timeout?: number
   const timeout = options?.timeout ?? 5000;
 
   return new Promise((resolve, reject) => {
-    const child = spawn('node', ['dist/index.js', ...args], {
+    const child = spawn("node", ["dist/index.js", ...args], {
       cwd: process.cwd(),
       env: {
         ...process.env,
         // Use non-existent config directory to avoid loading real profiles
-        XDG_CONFIG_HOME: '/tmp/__nonexistent_test_config__',
+        XDG_CONFIG_HOME: "/tmp/__nonexistent_test_config__",
         // Disable colors for cleaner output parsing
-        NO_COLOR: '1',
+        NO_COLOR: "1",
         // Suppress any debug logging
-        LOG_LEVEL: 'error',
+        LOG_LEVEL: "error",
       },
       timeout,
     });
 
-    let stdout = '';
-    let stderr = '';
+    let stdout = "";
+    let stderr = "";
 
-    child.stdout?.on('data', (data: Buffer) => {
+    child.stdout?.on("data", (data: Buffer) => {
       stdout += data.toString();
     });
 
-    child.stderr?.on('data', (data: Buffer) => {
+    child.stderr?.on("data", (data: Buffer) => {
       stderr += data.toString();
     });
 
-    child.on('close', (code) => {
+    child.on("close", (code) => {
       resolve({ stdout, stderr, exitCode: code ?? 0 });
     });
 
-    child.on('error', (error) => {
+    child.on("error", (error) => {
       reject(error);
     });
   });
@@ -107,10 +107,10 @@ export function validateCurlSyntax(curl: string): CurlValidationResult {
   const errors: string[] = [];
 
   // Check starts with curl
-  if (!curl.startsWith('curl ') && !curl.startsWith('curl\n') && !curl.startsWith('# ')) {
+  if (!curl.startsWith("curl ") && !curl.startsWith("curl\n") && !curl.startsWith("# ")) {
     // Allow comment-prefixed examples
-    const firstNonComment = curl.split('\n').find((line) => !line.startsWith('#') && line.trim() !== '');
-    if (firstNonComment && !firstNonComment.startsWith('curl')) {
+    const firstNonComment = curl.split("\n").find((line) => !line.startsWith("#") && line.trim() !== "");
+    if (firstNonComment && !firstNonComment.startsWith("curl")) {
       errors.push("Command must start with 'curl'");
     }
   }
@@ -120,20 +120,20 @@ export function validateCurlSyntax(curl: string): CurlValidationResult {
   const doubleQuotes = (curl.match(/"/g) || []).length;
 
   if (singleQuotes % 2 !== 0) {
-    errors.push('Unbalanced single quotes');
+    errors.push("Unbalanced single quotes");
   }
   if (doubleQuotes % 2 !== 0) {
-    errors.push('Unbalanced double quotes');
+    errors.push("Unbalanced double quotes");
   }
 
   // Check HTTP method (should have -X METHOD)
   if (!curl.match(/-X\s+(GET|POST|PUT|DELETE|PATCH)/i)) {
-    errors.push('Missing or invalid HTTP method (-X GET|POST|PUT|DELETE|PATCH)');
+    errors.push("Missing or invalid HTTP method (-X GET|POST|PUT|DELETE|PATCH)");
   }
 
   // Check URL present - allow template variables like ${TENANT} or {tenant}
   if (!curl.match(/"https?:\/\/[^"]+"|'https?:\/\/[^']+'/)) {
-    errors.push('Missing or invalid URL in quotes');
+    errors.push("Missing or invalid URL in quotes");
   }
 
   // Check for valid JSON in -d flag if present
@@ -143,8 +143,8 @@ export function validateCurlSyntax(curl: string): CurlValidationResult {
       JSON.parse(bodyMatch[1]);
     } catch {
       // Allow template placeholders like ${...}
-      if (!bodyMatch[1].includes('${')) {
-        errors.push('Invalid JSON in request body (-d flag)');
+      if (!bodyMatch[1].includes("${")) {
+        errors.push("Invalid JSON in request body (-d flag)");
       }
     }
   }
@@ -169,7 +169,7 @@ export function validateCurlSyntax(curl: string): CurlValidationResult {
  * ```
  */
 export function parseMarkdownTable(markdown: string): Array<Record<string, string>> {
-  const lines = markdown.split('\n');
+  const lines = markdown.split("\n");
   const results: Array<Record<string, string>> = [];
 
   let headers: string[] = [];
@@ -180,11 +180,11 @@ export function parseMarkdownTable(markdown: string): Array<Record<string, strin
     const trimmed = line.trim();
 
     // Check if this is a table row
-    if (trimmed.includes('|')) {
+    if (trimmed.includes("|")) {
       const cells = trimmed
-        .split('|')
+        .split("|")
         .map((c) => c.trim())
-        .filter((c) => c !== '');
+        .filter((c) => c !== "");
 
       if (!inTable) {
         // First row with | is the header
@@ -197,11 +197,11 @@ export function parseMarkdownTable(markdown: string): Array<Record<string, strin
         // Data row
         const row: Record<string, string> = {};
         headers.forEach((header, i) => {
-          row[header] = cells[i] ?? '';
+          row[header] = cells[i] ?? "";
         });
         results.push(row);
       }
-    } else if (inTable && trimmed === '') {
+    } else if (inTable && trimmed === "") {
       // Empty line ends the table
       break;
     }
@@ -236,7 +236,7 @@ export function readProjectFile(relativePath: string): string {
   if (!existsSync(fullPath)) {
     throw new Error(`File not found: ${fullPath}`);
   }
-  return readFileSync(fullPath, 'utf-8');
+  return readFileSync(fullPath, "utf-8");
 }
 
 /**
@@ -259,7 +259,7 @@ export function getPackageJson(): {
   scripts: Record<string, string>;
   [key: string]: unknown;
 } {
-  const content = readProjectFile('package.json');
+  const content = readProjectFile("package.json");
   return JSON.parse(content) as {
     name: string;
     version: string;
@@ -285,7 +285,7 @@ export function getManifestJson(): {
   }>;
   [key: string]: unknown;
 } {
-  const content = readProjectFile('manifest.json');
+  const content = readProjectFile("manifest.json");
   return JSON.parse(content) as {
     name: string;
     version: string;
@@ -332,5 +332,5 @@ export function validateTemplateVariables(text: string): string[] {
  */
 export function extractTemplateVariables(text: string): string[] {
   const matches = text.match(/\$\{arguments\.(\w+)\}/g) || [];
-  return matches.map((m) => m.replace(/\$\{arguments\.(\w+)\}/, '$1'));
+  return matches.map((m) => m.replace(/\$\{arguments\.(\w+)\}/, "$1"));
 }

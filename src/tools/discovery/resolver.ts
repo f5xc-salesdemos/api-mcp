@@ -8,16 +8,16 @@
  * and handles oneOf groups with alternative paths.
  */
 
-import type { ResourceReference } from '../../generator/dependency-types.js';
-import { createResourceKey } from '../../generator/dependency-types.js';
-import { getToolByName } from '../registry.js';
+import type { ResourceReference } from "../../generator/dependency-types.js";
+import { createResourceKey } from "../../generator/dependency-types.js";
+import { getToolByName } from "../registry.js";
 import {
   getOneOfGroups,
   getPrerequisiteResources,
   getResourceDependencies,
   getSubscriptionRequirements,
-} from './dependencies.js';
-import { searchTools } from './search.js';
+} from "./dependencies.js";
+import { searchTools } from "./search.js";
 
 /**
  * A single step in a creation workflow
@@ -26,7 +26,7 @@ export interface WorkflowStep {
   /** Step number in the sequence */
   stepNumber: number;
   /** Action description */
-  action: 'create' | 'configure' | 'verify';
+  action: "create" | "configure" | "verify";
   /** Resource domain */
   domain: string;
   /** Resource type */
@@ -84,7 +84,7 @@ export interface CreationPlan {
   /** Resources that already exist (skip these steps) */
   existingResources?: string[];
   /** Estimated complexity (low, medium, high) */
-  complexity: 'low' | 'medium' | 'high';
+  complexity: "low" | "medium" | "high";
 }
 
 /**
@@ -121,7 +121,7 @@ function findCreateTool(domain: string, resource: string): string | null {
   // Search for create tool matching this resource
   const results = searchTools(`${resource} create`, {
     domains: [domain],
-    operations: ['create'],
+    operations: ["create"],
     limit: 5,
   });
 
@@ -130,9 +130,9 @@ function findCreateTool(domain: string, resource: string): string | null {
   }
 
   // Try alternative naming patterns
-  const normalizedResource = resource.replace(/-/g, '_');
+  const normalizedResource = resource.replace(/-/g, "_");
   const altResults = searchTools(`${normalizedResource} create`, {
-    operations: ['create'],
+    operations: ["create"],
     limit: 5,
   });
 
@@ -149,7 +149,7 @@ function findCreateTool(domain: string, resource: string): string | null {
 function getRequiredInputs(toolName: string): string[] {
   const tool = getToolByName(toolName);
   if (!tool) {
-    return ['namespace', 'name'];
+    return ["namespace", "name"];
   }
 
   const required: string[] = [];
@@ -165,11 +165,11 @@ function getRequiredInputs(toolName: string): string[] {
   }
 
   // Always include common required fields
-  if (!required.includes('namespace')) {
-    required.push('namespace');
+  if (!required.includes("namespace")) {
+    required.push("namespace");
   }
-  if (!required.includes('name')) {
-    required.push('name');
+  if (!required.includes("name")) {
+    required.push("name");
   }
 
   return [...new Set(required)];
@@ -346,7 +346,7 @@ export function resolveDependencies(params: ResolveParams): ResolveResult {
 
     const step: WorkflowStep = {
       stepNumber,
-      action: 'create',
+      action: "create",
       domain: dep.domain,
       resource: dep.resourceType,
       toolName,
@@ -379,7 +379,7 @@ export function resolveDependencies(params: ResolveParams): ResolveResult {
 
     const targetStep: WorkflowStep = {
       stepNumber,
-      action: 'create',
+      action: "create",
       domain,
       resource,
       toolName: targetToolName,
@@ -405,7 +405,7 @@ export function resolveDependencies(params: ResolveParams): ResolveResult {
   const subscriptions: string[] = [];
   const subs = getSubscriptionRequirements(domain, resource);
   for (const sub of subs) {
-    subscriptions.push(`${sub.displayName} (${sub.tier})${sub.required ? ' - required' : ''}`);
+    subscriptions.push(`${sub.displayName} (${sub.tier})${sub.required ? " - required" : ""}`);
   }
 
   // Build alternatives for oneOf choices if requested
@@ -425,11 +425,11 @@ export function resolveDependencies(params: ResolveParams): ResolveResult {
   }
 
   // Determine complexity
-  let complexity: 'low' | 'medium' | 'high' = 'low';
+  let complexity: "low" | "medium" | "high" = "low";
   if (steps.length > 5) {
-    complexity = 'high';
+    complexity = "high";
   } else if (steps.length > 2) {
-    complexity = 'medium';
+    complexity = "medium";
   }
 
   const plan: CreationPlan = {
@@ -457,47 +457,47 @@ export function formatCreationPlan(plan: CreationPlan): string {
   const lines: string[] = [];
 
   lines.push(`# Creation Plan for ${plan.targetDomain}/${plan.targetResource}`);
-  lines.push('');
+  lines.push("");
   lines.push(`**Complexity**: ${plan.complexity}`);
   lines.push(`**Total Steps**: ${plan.totalSteps}`);
-  lines.push('');
+  lines.push("");
 
   if (plan.subscriptions.length > 0) {
-    lines.push('## Required Subscriptions');
+    lines.push("## Required Subscriptions");
     for (const sub of plan.subscriptions) {
       lines.push(`- ${sub}`);
     }
-    lines.push('');
+    lines.push("");
   }
 
   if (plan.existingResources && plan.existingResources.length > 0) {
-    lines.push('## Existing Resources (Skipped)');
+    lines.push("## Existing Resources (Skipped)");
     for (const res of plan.existingResources) {
       lines.push(`- ${res}`);
     }
-    lines.push('');
+    lines.push("");
   }
 
-  lines.push('## Workflow Steps');
-  lines.push('');
+  lines.push("## Workflow Steps");
+  lines.push("");
 
   for (const step of plan.steps) {
     lines.push(`### Step ${step.stepNumber}: ${step.action} ${step.domain}/${step.resource}`);
     lines.push(`**Tool**: \`${step.toolName}\``);
-    lines.push(`**Optional**: ${step.optional ? 'Yes' : 'No'}`);
+    lines.push(`**Optional**: ${step.optional ? "Yes" : "No"}`);
 
     if (step.dependsOn.length > 0) {
-      lines.push(`**Depends On**: ${step.dependsOn.join(', ')}`);
+      lines.push(`**Depends On**: ${step.dependsOn.join(", ")}`);
     }
 
     if (step.requiredInputs.length > 0) {
-      lines.push(`**Required Inputs**: ${step.requiredInputs.join(', ')}`);
+      lines.push(`**Required Inputs**: ${step.requiredInputs.join(", ")}`);
     }
 
     if (step.oneOfChoices && step.oneOfChoices.length > 0) {
-      lines.push('**Mutually Exclusive Choices**:');
+      lines.push("**Mutually Exclusive Choices**:");
       for (const choice of step.oneOfChoices) {
-        lines.push(`  - \`${choice.field}\`: Choose one of [${choice.options.join(', ')}]`);
+        lines.push(`  - \`${choice.field}\`: Choose one of [${choice.options.join(", ")}]`);
       }
     }
 
@@ -505,29 +505,29 @@ export function formatCreationPlan(plan: CreationPlan): string {
       lines.push(`**Notes**: ${step.notes}`);
     }
 
-    lines.push('');
+    lines.push("");
   }
 
   if (plan.warnings.length > 0) {
-    lines.push('## Warnings');
+    lines.push("## Warnings");
     for (const warning of plan.warnings) {
       lines.push(`- ⚠️ ${warning}`);
     }
-    lines.push('');
+    lines.push("");
   }
 
   if (plan.alternatives.length > 0) {
-    lines.push('## Alternative Paths');
+    lines.push("## Alternative Paths");
     for (const alt of plan.alternatives) {
       lines.push(`- **${alt.choiceField}**: ${alt.selectedOption}`);
       if (alt.description) {
         lines.push(`  ${alt.description}`);
       }
     }
-    lines.push('');
+    lines.push("");
   }
 
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 /**

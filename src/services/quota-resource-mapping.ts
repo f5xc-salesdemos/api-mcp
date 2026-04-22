@@ -13,28 +13,28 @@
  */
 export const QUOTA_RESOURCE_MAP: Record<string, string> = {
   // Load Balancing
-  'http-loadbalancer': 'http_loadbalancer',
-  'tcp-loadbalancer': 'tcp_loadbalancer',
-  'origin-pool': 'origin_pool',
-  healthcheck: 'healthcheck',
+  "http-loadbalancer": "http_loadbalancer",
+  "tcp-loadbalancer": "tcp_loadbalancer",
+  "origin-pool": "origin_pool",
+  healthcheck: "healthcheck",
 
   // DNS
-  'dns-zone': 'dns_zone',
-  'dns-lb-pool': 'dns_lb_pool',
+  "dns-zone": "dns_zone",
+  "dns-lb-pool": "dns_lb_pool",
 
   // Security
-  'waf-policy': 'app_firewall',
-  'service-policy': 'service_policy',
-  'app-firewall': 'app_firewall',
+  "waf-policy": "app_firewall",
+  "service-policy": "service_policy",
+  "app-firewall": "app_firewall",
 
   // Infrastructure
-  'aws-vpc-site': 'aws_vpc_site',
-  'azure-vnet-site': 'azure_vnet_site',
-  'gcp-vpc-site': 'gcp_vpc_site',
+  "aws-vpc-site": "aws_vpc_site",
+  "azure-vnet-site": "azure_vnet_site",
+  "gcp-vpc-site": "gcp_vpc_site",
 
   // System
-  namespace: 'namespace',
-  'api-credential': 'api_credential',
+  namespace: "namespace",
+  "api-credential": "api_credential",
 
   // Placeholder for additional mappings discovered from F5XC API responses
 };

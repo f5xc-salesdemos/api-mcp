@@ -8,12 +8,12 @@
  * with spec changes and recommended values.
  */
 
-import type { FieldDefaultMetadata } from '../../../src/generator/openapi-parser.js';
+import type { FieldDefaultMetadata } from "../../../src/generator/openapi-parser.js";
 import {
   extractFieldDefaults,
   getResolvedRequestBodySchema,
   type ResolvedSchema,
-} from '../../../src/tools/discovery/schema-loader.js';
+} from "../../../src/tools/discovery/schema-loader.js";
 
 /**
  * Generated test case for a tool
@@ -104,8 +104,8 @@ export function generateTestMatrix(config: TestMatrixConfig): GeneratedTestCase[
 
   // Test case 1: Minimal config (only required fields)
   testCases.push({
-    name: 'Minimal configuration (required fields only)',
-    description: 'Tests that server applies defaults for all omitted optional fields',
+    name: "Minimal configuration (required fields only)",
+    description: "Tests that server applies defaults for all omitted optional fields",
     config: JSON.parse(JSON.stringify(config.baseConfig)),
     expectedValid: true,
     serverAppliedDefaults: metadata.serverDefaults.map((d) => ({
@@ -121,8 +121,8 @@ export function generateTestMatrix(config: TestMatrixConfig): GeneratedTestCase[
   // Test case 2: All recommended values
   const recommendedConfig = generateRecommendedConfig(config.toolName, config.baseConfig);
   testCases.push({
-    name: 'All recommended values',
-    description: 'Tests configuration with all UI-recommended values explicitly set',
+    name: "All recommended values",
+    description: "Tests configuration with all UI-recommended values explicitly set",
     config: recommendedConfig,
     expectedValid: true,
     serverAppliedDefaults: [], // No defaults needed when values are explicit
@@ -232,7 +232,7 @@ export function generatePlainLanguageTests(
 /**
  * Dangerous property names that could lead to prototype pollution
  */
-const DANGEROUS_PROPERTIES = new Set(['__proto__', 'constructor', 'prototype']);
+const DANGEROUS_PROPERTIES = new Set(["__proto__", "constructor", "prototype"]);
 
 /**
  * Check if a property name is safe (not a prototype pollution vector)
@@ -254,7 +254,7 @@ function sanitizePropertyName(name: string): string {
  * Uses Object.defineProperty for safe assignment to prevent prototype pollution
  */
 function setNestedValue(obj: Record<string, unknown>, path: string, value: unknown): void {
-  const parts = path.split('.');
+  const parts = path.split(".");
 
   // Sanitize all parts first (throws on unsafe names)
   const sanitizedParts = parts.map(sanitizePropertyName);
@@ -263,7 +263,7 @@ function setNestedValue(obj: Record<string, unknown>, path: string, value: unkno
 
   for (let i = 0; i < sanitizedParts.length - 1; i++) {
     const part = sanitizedParts[i];
-    if (!Object.hasOwn(current, part) || typeof current[part] !== 'object') {
+    if (!Object.hasOwn(current, part) || typeof current[part] !== "object") {
       Object.defineProperty(current, part, {
         value: {},
         writable: true,
@@ -294,7 +294,7 @@ export function getServerDefaultsSummary(
   return metadata.serverDefaults.map((d) => ({
     field: d.fieldPath,
     serverDefault: d.defaultValue,
-    description: d.requiredForCreate ? 'User-required but has server default' : 'Server applies default if omitted',
+    description: d.requiredForCreate ? "User-required but has server default" : "Server applies default if omitted",
   }));
 }
 
@@ -367,8 +367,8 @@ export function analyzeConfigWithDefaults(
             recommended: def.recommendedValue,
           });
         } else if (
-          typeof providedValue === 'number' &&
-          typeof def.recommendedValue === 'number' &&
+          typeof providedValue === "number" &&
+          typeof def.recommendedValue === "number" &&
           providedValue < def.recommendedValue
         ) {
           belowRecommended.push({
@@ -399,14 +399,14 @@ export function analyzeConfigWithDefaults(
  * Get nested value from object using dot notation
  */
 function getNestedValue(obj: Record<string, unknown>, path: string): unknown {
-  const parts = path.split('.');
+  const parts = path.split(".");
   let current: unknown = obj;
 
   for (const part of parts) {
     if (current === null || current === undefined) {
       return undefined;
     }
-    if (typeof current !== 'object') {
+    if (typeof current !== "object") {
       return undefined;
     }
     current = (current as Record<string, unknown>)[part];

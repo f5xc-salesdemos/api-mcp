@@ -7,10 +7,10 @@
  * Extracted from server.ts.
  */
 
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import type { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
-import { RESOURCE_TYPES, type ResourceHandler } from '../../resources/index.js';
-import { logger } from '../../utils/logging.js';
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
+import { RESOURCE_TYPES, type ResourceHandler } from "../../resources/index.js";
+import { logger } from "../../utils/logging.js";
 
 /**
  * Context needed for resource registration.
@@ -30,7 +30,7 @@ export interface ResourceRegistrationContext {
  * @param context - Context containing credential manager and resource handler
  */
 export function registerResources(server: McpServer, context: ResourceRegistrationContext): void {
-  const tenant = context.credentialManager.getTenant() ?? '{tenant}';
+  const tenant = context.credentialManager.getTenant() ?? "{tenant}";
 
   // Register resource templates for each resource type
   for (const rt of Object.values(RESOURCE_TYPES)) {
@@ -59,7 +59,7 @@ export function registerResources(server: McpServer, context: ResourceRegistrati
     });
   }
 
-  logger.info('Resource registration completed', {
+  logger.info("Resource registration completed", {
     resourceTypes: Object.keys(RESOURCE_TYPES).length,
   });
 }

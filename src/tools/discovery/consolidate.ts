@@ -12,13 +12,13 @@
  *   After:  f5xc-api-waap-http-loadbalancer (with operation parameter)
  */
 
-import { getToolIndex } from './index-loader.js';
-import type { ToolIndexEntry } from './types.js';
+import { getToolIndex } from "./index-loader.js";
+import type { ToolIndexEntry } from "./types.js";
 
 /**
  * CRUD operation types supported by consolidated resources
  */
-export type CrudOperation = 'create' | 'get' | 'list' | 'update' | 'delete';
+export type CrudOperation = "create" | "get" | "list" | "update" | "delete";
 
 /**
  * Consolidated resource entry representing a group of CRUD tools
@@ -64,7 +64,7 @@ let consolidatedCache: ConsolidatedIndex | null = null;
 /**
  * Standard CRUD operations
  */
-const CRUD_OPERATIONS: CrudOperation[] = ['create', 'get', 'list', 'update', 'delete'];
+const CRUD_OPERATIONS: CrudOperation[] = ["create", "get", "list", "update", "delete"];
 
 /**
  * Generate consolidated resource name from tool name
@@ -125,7 +125,7 @@ export function getConsolidatedIndex(): ConsolidatedIndex {
     }
 
     // Generate combined summary from resource name
-    const summary = `Manage ${firstTool.resource} resources. Operations: ${operations.join(', ')}`;
+    const summary = `Manage ${firstTool.resource} resources. Operations: ${operations.join(", ")}`;
 
     resources.push({
       name: getConsolidatedName(firstTool.domain, firstTool.resource),
@@ -215,7 +215,7 @@ export function searchConsolidatedResources(
 
     // Score based on term matching
     const searchableText = [resource.name, resource.domain, resource.resource, resource.summary, ...resource.operations]
-      .join(' ')
+      .join(" ")
       .toLowerCase();
 
     const matchedTerms: string[] = [];

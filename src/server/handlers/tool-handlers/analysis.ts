@@ -9,17 +9,17 @@
  * - validate-params: Validate parameters before execution
  */
 
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { z } from 'zod';
-import type { DependencyDiscoveryAction } from '../../../generator/dependency-types.js';
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { z } from "zod";
+import type { DependencyDiscoveryAction } from "../../../generator/dependency-types.js";
 import {
   DISCOVERY_TOOLS,
   formatValidationResult,
   generateDependencyReport,
   getDependencyStats,
   validateToolParams,
-} from '../../../tools/discovery/index.js';
-import { createTextResponse } from '../../response-utils.js';
+} from "../../../tools/discovery/index.js";
+import { createTextResponse } from "../../response-utils.js";
 
 /**
  * Registers the dependencies tool for getting resource dependency information.
@@ -32,12 +32,12 @@ export function registerDependenciesTool(server: McpServer): void {
       resource: z.string().describe("Resource name (e.g., 'http-loadbalancer')"),
       domain: z.string().describe("Domain containing the resource (e.g., 'virtual')"),
       action: z
-        .enum(['prerequisites', 'dependents', 'oneOf', 'subscriptions', 'creationOrder', 'full'])
+        .enum(["prerequisites", "dependents", "oneOf", "subscriptions", "creationOrder", "full"])
         .optional()
         .describe("Type of dependency information to retrieve (default: 'full')"),
     },
     async (args) => {
-      const action = (args.action ?? 'full') as DependencyDiscoveryAction;
+      const action = (args.action ?? "full") as DependencyDiscoveryAction;
       const report = generateDependencyReport(args.domain, args.resource, action);
 
       return createTextResponse(report);
@@ -63,10 +63,10 @@ export function registerValidateParamsTool(server: McpServer): void {
     DISCOVERY_TOOLS.validateParams.name,
     DISCOVERY_TOOLS.validateParams.description,
     {
-      toolName: z.string().describe('Tool name to validate parameters for'),
-      pathParams: z.record(z.string(), z.string()).optional().describe('Path parameters to validate'),
-      queryParams: z.record(z.string(), z.string()).optional().describe('Query parameters to validate'),
-      body: z.record(z.string(), z.unknown()).optional().describe('Request body to validate'),
+      toolName: z.string().describe("Tool name to validate parameters for"),
+      pathParams: z.record(z.string(), z.string()).optional().describe("Path parameters to validate"),
+      queryParams: z.record(z.string(), z.string()).optional().describe("Query parameters to validate"),
+      body: z.record(z.string(), z.unknown()).optional().describe("Request body to validate"),
     },
     async (args) => {
       const result = validateToolParams({

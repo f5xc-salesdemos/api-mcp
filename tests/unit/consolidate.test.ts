@@ -14,7 +14,7 @@
  * See tests/fixtures/generated.ts for fixture generation.
  */
 
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from "vitest";
 import {
   clearConsolidatedCache,
   getConsolidatedByDomain,
@@ -23,18 +23,18 @@ import {
   getConsolidationStats,
   resolveConsolidatedTool,
   searchConsolidatedResources,
-} from '../../src/tools/discovery/consolidate.js';
-import { clearIndexCache } from '../../src/tools/discovery/index-loader.js';
-import { FIRST_TOOL, getValidDomain, SAMPLE_DOMAIN, SAMPLE_RESOURCES } from '../fixtures/generated.js';
+} from "../../src/tools/discovery/consolidate.js";
+import { clearIndexCache } from "../../src/tools/discovery/index-loader.js";
+import { FIRST_TOOL, getValidDomain, SAMPLE_DOMAIN, SAMPLE_RESOURCES } from "../fixtures/generated.js";
 
-describe('consolidate', () => {
+describe("consolidate", () => {
   beforeEach(() => {
     clearConsolidatedCache();
     clearIndexCache();
   });
 
-  describe('getConsolidatedIndex', () => {
-    it('should return a valid consolidated index', () => {
+  describe("getConsolidatedIndex", () => {
+    it("should return a valid consolidated index", () => {
       const index = getConsolidatedIndex();
 
       expect(index).toBeDefined();
@@ -43,14 +43,14 @@ describe('consolidate', () => {
       expect(Array.isArray(index.resources)).toBe(true);
     });
 
-    it('should cache the index on subsequent calls', () => {
+    it("should cache the index on subsequent calls", () => {
       const index1 = getConsolidatedIndex();
       const index2 = getConsolidatedIndex();
 
       expect(index1).toBe(index2); // Same reference
     });
 
-    it('should have resources with valid structure', () => {
+    it("should have resources with valid structure", () => {
       const index = getConsolidatedIndex();
       const resource = index.resources[0];
 
@@ -64,7 +64,7 @@ describe('consolidate', () => {
       expect(resource.toolMap).toBeDefined();
     });
 
-    it('should identify full CRUD resources', () => {
+    it("should identify full CRUD resources", () => {
       const index = getConsolidatedIndex();
 
       expect(index.fullCrudResources).toBeGreaterThan(0);
@@ -75,25 +75,25 @@ describe('consolidate', () => {
       expect(fullCrudResources.every((r) => r.operations.length >= 4)).toBe(true);
     });
 
-    it('should group CRUD operations correctly', () => {
+    it("should group CRUD operations correctly", () => {
       const index = getConsolidatedIndex();
 
       // Find any resource with create and list operations dynamically
       const resourceWithCrud = index.resources.find(
-        (r) => r.operations.includes('create') && r.operations.includes('list'),
+        (r) => r.operations.includes("create") && r.operations.includes("list"),
       );
 
       if (resourceWithCrud) {
-        expect(resourceWithCrud.operations).toContain('create');
-        expect(resourceWithCrud.operations).toContain('list');
+        expect(resourceWithCrud.operations).toContain("create");
+        expect(resourceWithCrud.operations).toContain("list");
         expect(resourceWithCrud.toolMap.create).toBeDefined();
         expect(resourceWithCrud.toolMap.list).toBeDefined();
       }
     });
   });
 
-  describe('clearConsolidatedCache', () => {
-    it('should clear the cached index', () => {
+  describe("clearConsolidatedCache", () => {
+    it("should clear the cached index", () => {
       const index1 = getConsolidatedIndex();
       clearConsolidatedCache();
       const index2 = getConsolidatedIndex();
@@ -105,8 +105,8 @@ describe('consolidate', () => {
     });
   });
 
-  describe('getConsolidatedResource', () => {
-    it('should return resource for existing name', () => {
+  describe("getConsolidatedResource", () => {
+    it("should return resource for existing name", () => {
       const index = getConsolidatedIndex();
       const firstResource = index.resources[0];
       const resource = getConsolidatedResource(firstResource.name);
@@ -115,15 +115,15 @@ describe('consolidate', () => {
       expect(resource?.name).toBe(firstResource.name);
     });
 
-    it('should return undefined for non-existent resource', () => {
-      const resource = getConsolidatedResource('non-existent-resource-xyz-12345');
+    it("should return undefined for non-existent resource", () => {
+      const resource = getConsolidatedResource("non-existent-resource-xyz-12345");
 
       expect(resource).toBeUndefined();
     });
   });
 
-  describe('getConsolidatedByDomain', () => {
-    it('should return resources for existing domain', () => {
+  describe("getConsolidatedByDomain", () => {
+    it("should return resources for existing domain", () => {
       const domain = getValidDomain();
       const resources = getConsolidatedByDomain(domain);
 
@@ -131,13 +131,13 @@ describe('consolidate', () => {
       expect(resources.every((r) => r.domain === domain)).toBe(true);
     });
 
-    it('should return empty array for non-existent domain', () => {
-      const resources = getConsolidatedByDomain('nonexistent-domain-xyz-12345');
+    it("should return empty array for non-existent domain", () => {
+      const resources = getConsolidatedByDomain("nonexistent-domain-xyz-12345");
 
       expect(resources.length).toBe(0);
     });
 
-    it('should be case-insensitive', () => {
+    it("should be case-insensitive", () => {
       const domain = getValidDomain();
       const resources1 = getConsolidatedByDomain(domain);
       const resources2 = getConsolidatedByDomain(domain.toUpperCase());
@@ -146,15 +146,15 @@ describe('consolidate', () => {
     });
   });
 
-  describe('searchConsolidatedResources', () => {
-    it('should find resources matching simple queries', () => {
+  describe("searchConsolidatedResources", () => {
+    it("should find resources matching simple queries", () => {
       // Use first resource from fixtures as search term
       const results = searchConsolidatedResources(FIRST_TOOL.resource);
 
       expect(results.length).toBeGreaterThan(0);
     });
 
-    it('should find resources by domain', () => {
+    it("should find resources by domain", () => {
       const domain = getValidDomain();
       const results = searchConsolidatedResources(domain);
 
@@ -162,7 +162,7 @@ describe('consolidate', () => {
       expect(results.some((r) => r.resource.domain === domain)).toBe(true);
     });
 
-    it('should respect limit option', () => {
+    it("should respect limit option", () => {
       const results = searchConsolidatedResources(FIRST_TOOL.resource, {
         limit: 5,
       });
@@ -170,7 +170,7 @@ describe('consolidate', () => {
       expect(results.length).toBeLessThanOrEqual(5);
     });
 
-    it('should filter by domains', () => {
+    it("should filter by domains", () => {
       const domain = getValidDomain();
       const results = searchConsolidatedResources(FIRST_TOOL.resource, {
         domains: [domain],
@@ -181,14 +181,14 @@ describe('consolidate', () => {
       }
     });
 
-    it('should return empty array for no matches', () => {
+    it("should return empty array for no matches", () => {
       // Use a completely random string with no dictionary words
-      const results = searchConsolidatedResources('qzxwjkvmnbfghpyr');
+      const results = searchConsolidatedResources("qzxwjkvmnbfghpyr");
 
       expect(results.length).toBe(0);
     });
 
-    it('should return scored results', () => {
+    it("should return scored results", () => {
       const results = searchConsolidatedResources(FIRST_TOOL.resource);
 
       expect(results.length).toBeGreaterThan(0);
@@ -196,7 +196,7 @@ describe('consolidate', () => {
       expect(results[0].score).toBeLessThanOrEqual(1);
     });
 
-    it('should include matched terms', () => {
+    it("should include matched terms", () => {
       const results = searchConsolidatedResources(FIRST_TOOL.resource);
 
       expect(results.length).toBeGreaterThan(0);
@@ -204,40 +204,40 @@ describe('consolidate', () => {
     });
   });
 
-  describe('resolveConsolidatedTool', () => {
-    it('should resolve to correct underlying tool', () => {
+  describe("resolveConsolidatedTool", () => {
+    it("should resolve to correct underlying tool", () => {
       const index = getConsolidatedIndex();
-      const resource = index.resources.find((r) => r.operations.includes('create'));
+      const resource = index.resources.find((r) => r.operations.includes("create"));
 
       if (resource) {
-        const toolName = resolveConsolidatedTool(resource.name, 'create');
+        const toolName = resolveConsolidatedTool(resource.name, "create");
 
         expect(toolName).toBeDefined();
         expect(toolName).toBe(resource.toolMap.create);
       }
     });
 
-    it('should return null for non-existent resource', () => {
-      const toolName = resolveConsolidatedTool('non-existent-resource-xyz-12345', 'create');
+    it("should return null for non-existent resource", () => {
+      const toolName = resolveConsolidatedTool("non-existent-resource-xyz-12345", "create");
 
       expect(toolName).toBeNull();
     });
 
-    it('should return null for unavailable operation', () => {
+    it("should return null for unavailable operation", () => {
       const index = getConsolidatedIndex();
       // Find a resource that doesn't have all operations
-      const partialResource = index.resources.find((r) => !r.operations.includes('update'));
+      const partialResource = index.resources.find((r) => !r.operations.includes("update"));
 
       if (partialResource) {
-        const toolName = resolveConsolidatedTool(partialResource.name, 'update');
+        const toolName = resolveConsolidatedTool(partialResource.name, "update");
 
         expect(toolName).toBeNull();
       }
     });
   });
 
-  describe('getConsolidationStats', () => {
-    it('should return valid statistics', () => {
+  describe("getConsolidationStats", () => {
+    it("should return valid statistics", () => {
       const stats = getConsolidationStats();
 
       expect(stats.originalToolCount).toBeGreaterThan(0);
@@ -246,7 +246,7 @@ describe('consolidate', () => {
       expect(stats.reductionPercent).toMatch(/^\d+\.\d+%$/);
     });
 
-    it('should show significant reduction', () => {
+    it("should show significant reduction", () => {
       const stats = getConsolidationStats();
 
       // Should reduce by at least 30%
@@ -254,7 +254,7 @@ describe('consolidate', () => {
       expect(reductionNum).toBeGreaterThan(30);
     });
 
-    it('should have consolidated count less than original', () => {
+    it("should have consolidated count less than original", () => {
       const stats = getConsolidationStats();
 
       expect(stats.consolidatedCount).toBeLessThan(stats.originalToolCount);
@@ -262,8 +262,8 @@ describe('consolidate', () => {
   });
 });
 
-describe('Consolidation Value', () => {
-  it('should provide meaningful reduction', () => {
+describe("Consolidation Value", () => {
+  it("should provide meaningful reduction", () => {
     const stats = getConsolidationStats();
 
     // Verify the consolidation provides real value
@@ -277,7 +277,7 @@ describe('Consolidation Value', () => {
     expect(reductionNum).toBeGreaterThanOrEqual(40);
   });
 
-  it('should preserve all operations in tool map', () => {
+  it("should preserve all operations in tool map", () => {
     const index = getConsolidatedIndex();
 
     for (const resource of index.resources) {

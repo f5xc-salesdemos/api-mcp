@@ -8,9 +8,9 @@
  * Enriches entries with domain metadata from upstream specs.
  */
 
-import { getDomainMetadata, getResourceMetadata } from '../../generator/domain-metadata.js';
-import { allTools } from '../registry.js';
-import type { ToolIndex, ToolIndexEntry, ToolIndexMetadata } from './types.js';
+import { getDomainMetadata, getResourceMetadata } from "../../generator/domain-metadata.js";
+import { allTools } from "../registry.js";
+import type { ToolIndex, ToolIndexEntry, ToolIndexMetadata } from "./types.js";
 
 // Cached index for performance
 let cachedIndex: ToolIndex | null = null;
@@ -24,7 +24,7 @@ function generateIndex(): ToolIndex {
     const domainMeta = getDomainMetadata(tool.domain);
 
     // Get resource-level metadata (v1.0.84+)
-    const normalizedResource = tool.resource.replace(/-/g, '_');
+    const normalizedResource = tool.resource.replace(/-/g, "_");
     const resourceMeta = getResourceMetadata(normalizedResource);
 
     return {
@@ -33,7 +33,7 @@ function generateIndex(): ToolIndex {
       resource: tool.resource,
       operation: tool.operation,
       summary: tool.summary,
-      dangerLevel: tool.dangerLevel ?? 'low',
+      dangerLevel: tool.dangerLevel ?? "low",
       // Domain metadata from upstream specs
       domainCategory: domainMeta?.domainCategory ?? null,
       uiCategory: domainMeta?.uiCategory ?? null,
@@ -58,7 +58,7 @@ function generateIndex(): ToolIndex {
     totalTools: tools.length,
     domains,
     generatedAt: new Date().toISOString(),
-    version: '1.0.0',
+    version: "1.0.0",
   };
 
   return { metadata, tools };

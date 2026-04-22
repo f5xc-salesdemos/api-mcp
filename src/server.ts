@@ -8,17 +8,17 @@
  * execution mode (authenticated with F5XC credentials).
  */
 
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { AuthMode, CredentialManager, createHttpClient, type HttpClient } from '@robinmordasiewicz/f5xc-auth';
-import { VERSION } from './index.js';
-import { createResourceHandler, type ResourceHandler } from './resources/index.js';
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { AuthMode, CredentialManager, createHttpClient, type HttpClient } from "@robinmordasiewicz/f5xc-auth";
+import { VERSION } from "./index.js";
+import { createResourceHandler, type ResourceHandler } from "./resources/index.js";
 // Import handlers from the new modular structure
-import { registerPrompts } from './server/handlers/prompt-handler.js';
-import { registerResources } from './server/handlers/resource-handler.js';
-import { registerTools } from './server/handlers/tool-handlers/index.js';
-import { logger } from './utils/logging.js';
-import { normalizeF5XCUrl } from './utils/url-utils.js';
+import { registerPrompts } from "./server/handlers/prompt-handler.js";
+import { registerResources } from "./server/handlers/resource-handler.js";
+import { registerTools } from "./server/handlers/tool-handlers/index.js";
+import { logger } from "./utils/logging.js";
+import { normalizeF5XCUrl } from "./utils/url-utils.js";
 
 /**
  * Server configuration options
@@ -90,14 +90,14 @@ export class F5XCApiServer {
   async start(): Promise<void> {
     this.transport = new StdioServerTransport();
 
-    logger.info('Starting F5XC API MCP Server', {
+    logger.info("Starting F5XC API MCP Server", {
       version: VERSION,
       authMode: this.credentialManager.getAuthMode(),
     });
 
     await this.server.connect(this.transport);
 
-    logger.info('F5XC API MCP Server started successfully');
+    logger.info("F5XC API MCP Server started successfully");
   }
 
   /**
@@ -107,7 +107,7 @@ export class F5XCApiServer {
     if (this.transport) {
       await this.server.close();
       this.transport = null;
-      logger.info('F5XC API MCP Server stopped');
+      logger.info("F5XC API MCP Server stopped");
     }
   }
 
@@ -150,13 +150,13 @@ export async function createServer(): Promise<F5XCApiServer> {
   }
 
   // Guard: reject F5XC_TLS_INSECURE for production domains
-  if (process.env.F5XC_TLS_INSECURE === 'true' && apiUrl) {
+  if (process.env.F5XC_TLS_INSECURE === "true" && apiUrl) {
     const normalizedForCheck = normalizeF5XCUrl(apiUrl);
     try {
       const hostname = new URL(normalizedForCheck).hostname.toLowerCase();
-      const isProduction = hostname.endsWith('.console.ves.volterra.io') && !hostname.includes('.staging.');
+      const isProduction = hostname.endsWith(".console.ves.volterra.io") && !hostname.includes(".staging.");
       if (isProduction) {
-        logger.warn('F5XC_TLS_INSECURE=true is not allowed for production domains. Clearing the flag.', { hostname });
+        logger.warn("F5XC_TLS_INSECURE=true is not allowed for production domains. Clearing the flag.", { hostname });
         delete process.env.F5XC_TLS_INSECURE;
       }
     } catch {
@@ -168,7 +168,7 @@ export async function createServer(): Promise<F5XCApiServer> {
   await credentialManager.initialize();
 
   return new F5XCApiServer({
-    name: 'f5xc-api-mcp',
+    name: "f5xc-api-mcp",
     version: VERSION,
     credentialManager,
   });

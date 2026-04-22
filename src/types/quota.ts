@@ -10,7 +10,7 @@
 /**
  * Quota threshold levels
  */
-export type QuotaThreshold = 'green' | 'yellow' | 'red';
+export type QuotaThreshold = "green" | "yellow" | "red";
 
 /**
  * Quota information for a resource type

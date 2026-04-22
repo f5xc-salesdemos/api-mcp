@@ -7,38 +7,38 @@
  * operation metadata for MCP tool generation.
  */
 
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { basename, extname, join, relative } from 'node:path';
-import { z } from 'zod';
-import { logger } from '../utils/logging.js';
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { basename, extname, join, relative } from "node:path";
+import { z } from "zod";
+import { logger } from "../utils/logging.js";
 import {
   extractOperationDependencies,
   extractTierFromAddon,
   formatAddonDisplayName,
   mapResourceToSubscriptions,
   resolveResourceDomain,
-} from './dependency-extractor.js';
-import type { OneOfGroup, ResourceReference, SubscriptionRequirement } from './dependency-types.js';
-import { extractResourceFromPath, generateToolName, methodToOperation } from './naming/index.js';
+} from "./dependency-extractor.js";
+import type { OneOfGroup, ResourceReference, SubscriptionRequirement } from "./dependency-types.js";
+import { extractResourceFromPath, generateToolName, methodToOperation } from "./naming/index.js";
 
 /**
  * OpenAPI Schema Types
  */
 const OpenApiParameterSchema = z.object({
   name: z.string(),
-  in: z.enum(['path', 'query', 'header', 'cookie']),
+  in: z.enum(["path", "query", "header", "cookie"]),
   required: z.boolean().optional(),
   description: z.string().optional(),
   schema: z.record(z.string(), z.unknown()).optional(),
   // Rich metadata fields from enriched specs
-  'x-displayname': z.string().optional(),
-  'x-ves-example': z.string().optional(),
-  'x-ves-validation-rules': z.record(z.string(), z.string()).optional(),
-  'x-ves-required': z.boolean().optional(),
+  "x-displayname": z.string().optional(),
+  "x-ves-example": z.string().optional(),
+  "x-ves-validation-rules": z.record(z.string(), z.string()).optional(),
+  "x-ves-required": z.boolean().optional(),
   // PR #449: Server-applied default values
   default: z.unknown().optional(),
-  'x-f5xc-server-default': z.boolean().optional(),
-  'x-f5xc-required-for': z
+  "x-f5xc-server-default": z.boolean().optional(),
+  "x-f5xc-required-for": z
     .object({
       minimum_config: z.boolean().optional(),
       create: z.boolean().optional(),
@@ -47,7 +47,7 @@ const OpenApiParameterSchema = z.object({
     })
     .optional(),
   // v2.0.32: Recommended values matching web UI defaults
-  'x-f5xc-recommended-value': z.unknown().optional(),
+  "x-f5xc-recommended-value": z.unknown().optional(),
 });
 
 const OpenApiRequestBodySchema = z.object({
@@ -99,7 +99,7 @@ const OperationMetadataSchema = z.object({
     })
     .optional(),
   side_effects: SideEffectsSchema.optional(),
-  danger_level: z.enum(['low', 'medium', 'high']).optional(),
+  danger_level: z.enum(["low", "medium", "high"]).optional(),
   confirmation_required: z.boolean().optional(),
   common_errors: z
     .array(
@@ -128,16 +128,16 @@ const OpenApiOperationSchema = z.object({
   responses: z.record(z.string(), OpenApiResponseSchema).optional(),
   security: z.array(z.record(z.string(), z.array(z.string()))).optional(),
   // Existing x-* field
-  'x-ves-proto-rpc': z.string().optional(),
+  "x-ves-proto-rpc": z.string().optional(),
   // Rich metadata fields from enriched specs v1.0.63
-  'x-ves-danger-level': z.enum(['low', 'medium', 'high']).optional(),
-  'x-ves-side-effects': SideEffectsSchema.optional(),
-  'x-ves-required-fields': z.array(z.string()).optional(),
-  'x-ves-confirmation-required': z.boolean().optional(),
-  'x-ves-operation-metadata': OperationMetadataSchema.optional(),
+  "x-ves-danger-level": z.enum(["low", "medium", "high"]).optional(),
+  "x-ves-side-effects": SideEffectsSchema.optional(),
+  "x-ves-required-fields": z.array(z.string()).optional(),
+  "x-ves-confirmation-required": z.boolean().optional(),
+  "x-ves-operation-metadata": OperationMetadataSchema.optional(),
   // Discovery metadata from live API exploration (v2.0.5+)
-  'x-discovered-response-time-ms': z.number().optional(),
-  'x-discovered-sample-size': z.number().optional(),
+  "x-discovered-response-time-ms": z.number().optional(),
+  "x-discovered-sample-size": z.number().optional(),
 });
 
 const OpenApiPathItemSchema = z.object({
@@ -219,7 +219,7 @@ export interface OperationMetadata {
     postconditions?: string[];
   };
   side_effects?: SideEffects;
-  danger_level?: 'low' | 'medium' | 'high';
+  danger_level?: "low" | "medium" | "high";
   confirmation_required?: boolean;
   common_errors?: CommonError[];
   performance_impact?: PerformanceImpact;
@@ -298,7 +298,7 @@ export interface ParsedOperation {
   /** Human-readable display name (x-displayname) */
   displayName: string | null;
   /** Risk level for the operation (x-ves-danger-level) */
-  dangerLevel: 'low' | 'medium' | 'high' | null;
+  dangerLevel: "low" | "medium" | "high" | null;
   /** Side effects of the operation (x-ves-side-effects) */
   sideEffects: SideEffects | null;
   /** Required fields for the operation (x-ves-required-fields) */
@@ -359,21 +359,21 @@ function extractCurlExamplesFromSchemas(schemas: Record<string, unknown> | undef
   }
 
   for (const schema of Object.values(schemas)) {
-    if (!schema || typeof schema !== 'object') {
+    if (!schema || typeof schema !== "object") {
       continue;
     }
 
     const schemaObj = schema as Record<string, unknown>;
-    const minConfig = schemaObj['x-ves-minimum-configuration'];
+    const minConfig = schemaObj["x-ves-minimum-configuration"];
 
-    if (!minConfig || typeof minConfig !== 'object') {
+    if (!minConfig || typeof minConfig !== "object") {
       continue;
     }
 
     const config = minConfig as Record<string, unknown>;
-    const exampleCurl = config['example_curl'];
+    const exampleCurl = config["example_curl"];
 
-    if (typeof exampleCurl !== 'string') {
+    if (typeof exampleCurl !== "string") {
       continue;
     }
 
@@ -389,8 +389,8 @@ function extractCurlExamplesFromSchemas(schemas: Record<string, unknown> | undef
     // Normalize the path by replacing concrete namespace/name values with placeholders
     // /api/config/namespaces/default/app_firewalls -> /api/config/namespaces/{namespace}/app_firewalls
     const normalizedPath = apiPath
-      .replace(/\/namespaces\/[^/]+\//, '/namespaces/{namespace}/')
-      .replace(/\/system\//, '/{system_namespace}/');
+      .replace(/\/namespaces\/[^/]+\//, "/namespaces/{namespace}/")
+      .replace(/\/system\//, "/{system_namespace}/");
 
     // Store if not already present (first match wins)
     if (!curlExamples.has(normalizedPath)) {
@@ -408,11 +408,11 @@ function extractCurlExamplesFromSchemas(schemas: Record<string, unknown> | undef
 function matchCurlExample(operationPath: string, curlExamples: Map<string, string>): string | null {
   // Normalize the operation path similarly
   const normalizedOpPath = operationPath
-    .replace(/\{metadata\.namespace\}/g, '{namespace}')
-    .replace(/\{metadata\.name\}/g, '{name}')
+    .replace(/\{metadata\.namespace\}/g, "{namespace}")
+    .replace(/\{metadata\.name\}/g, "{name}")
     .replace(/\{[^}]+\}/g, (match) => {
       // Keep just the last part of dotted names
-      const simplified = match.replace(/\{[^.]+\./g, '{');
+      const simplified = match.replace(/\{[^.]+\./g, "{");
       return simplified;
     });
 
@@ -503,14 +503,14 @@ function extractDomainOperations(
   // Extract curl examples from schemas if not provided
   const curlMap = curlExamples ?? extractCurlExamplesFromSchemas(spec.components?.schemas as Record<string, unknown>);
 
-  const httpMethods = ['get', 'post', 'put', 'delete', 'patch'] as const;
+  const httpMethods = ["get", "post", "put", "delete", "patch"] as const;
 
   // Sort paths alphabetically for deterministic output
   const sortedPaths = Object.entries(spec.paths).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
 
   for (const [path, pathItem] of sortedPaths) {
     // Check if path has a name parameter (indicates single resource operations)
-    const hasNameParam = path.includes('{name}') || path.includes('{id}');
+    const hasNameParam = path.includes("{name}") || path.includes("{id}");
 
     // Get path-level parameters
     const pathLevelParams = pathItem.parameters ?? [];
@@ -529,13 +529,13 @@ function extractDomainOperations(
       // Combine path and operation parameters
       const allParams = [...pathLevelParams, ...(operation.parameters ?? [])];
 
-      const pathParameters = allParams.filter((p) => p.in === 'path');
-      const queryParameters = allParams.filter((p) => p.in === 'query');
+      const pathParameters = allParams.filter((p) => p.in === "path");
+      const queryParameters = allParams.filter((p) => p.in === "query");
 
       // Extract request body schema
       let requestBodySchema: Record<string, unknown> | null = null;
       if (operation.requestBody?.content) {
-        const jsonContent = operation.requestBody.content['application/json'];
+        const jsonContent = operation.requestBody.content["application/json"];
         if (jsonContent?.schema) {
           requestBodySchema = jsonContent.schema as Record<string, unknown>;
         }
@@ -544,9 +544,9 @@ function extractDomainOperations(
       // Extract response schema (from 200 or first success response)
       let responseSchema: Record<string, unknown> | null = null;
       if (operation.responses) {
-        const successResponse = operation.responses['200'] ?? operation.responses['201'];
+        const successResponse = operation.responses["200"] ?? operation.responses["201"];
         if (successResponse?.content) {
-          const jsonContent = successResponse.content['application/json'];
+          const jsonContent = successResponse.content["application/json"];
           if (jsonContent?.schema) {
             responseSchema = jsonContent.schema as Record<string, unknown>;
           }
@@ -561,23 +561,23 @@ function extractDomainOperations(
         }
       }
       if (operation.requestBody?.required) {
-        requiredParams.push('body');
+        requiredParams.push("body");
       }
 
       // Use content as-is - enriched specs are already normalized
       const summary = operation.summary ?? `${operationType} ${resource}`;
-      const description = operation.description ?? '';
+      const description = operation.description ?? "";
 
       // Extract rich metadata from x-* fields (v1.0.63 enriched specs)
-      const dangerLevel = operation['x-ves-danger-level'] ?? null;
-      const sideEffects = operation['x-ves-side-effects'] ?? null;
-      const requiredFields = operation['x-ves-required-fields'] ?? [];
-      const confirmationRequired = operation['x-ves-confirmation-required'] ?? false;
-      const operationMetadata = operation['x-ves-operation-metadata'] ?? null;
+      const dangerLevel = operation["x-ves-danger-level"] ?? null;
+      const sideEffects = operation["x-ves-side-effects"] ?? null;
+      const requiredFields = operation["x-ves-required-fields"] ?? [];
+      const confirmationRequired = operation["x-ves-confirmation-required"] ?? false;
+      const operationMetadata = operation["x-ves-operation-metadata"] ?? null;
 
       // Extract discovery metadata from live API exploration (v2.0.5+)
-      const discoveredResponseTimeMs = operation['x-discovered-response-time-ms'];
-      const discoveredSampleSize = operation['x-discovered-sample-size'];
+      const discoveredResponseTimeMs = operation["x-discovered-response-time-ms"];
+      const discoveredSampleSize = operation["x-discovered-sample-size"];
       const discoveryMetadata: DiscoveryMetadata | undefined =
         discoveredResponseTimeMs !== undefined || discoveredSampleSize !== undefined
           ? {
@@ -593,19 +593,19 @@ function extractDomainOperations(
 
       for (const param of allParams) {
         // Extract parameter examples
-        if (param['x-ves-example']) {
-          parameterExamples[param.name] = param['x-ves-example'];
+        if (param["x-ves-example"]) {
+          parameterExamples[param.name] = param["x-ves-example"];
         }
         // Extract validation rules
-        if (param['x-ves-validation-rules']) {
-          validationRules[param.name] = param['x-ves-validation-rules'];
+        if (param["x-ves-validation-rules"]) {
+          validationRules[param.name] = param["x-ves-validation-rules"];
         }
       }
 
       // Get path-level displayname if available (from pathItem)
       const pathItemAny = pathItem as Record<string, unknown>;
-      if (pathItemAny['x-displayname'] && typeof pathItemAny['x-displayname'] === 'string') {
-        displayName = pathItemAny['x-displayname'];
+      if (pathItemAny["x-displayname"] && typeof pathItemAny["x-displayname"] === "string") {
+        displayName = pathItemAny["x-displayname"];
       }
 
       // Match curl example for this operation
@@ -679,10 +679,10 @@ function extractDomainOperations(
  */
 export function parseDomainSpecFile(filePath: string, basePath?: string): ParsedSpec | null {
   try {
-    const content = readFileSync(filePath, 'utf-8');
+    const content = readFileSync(filePath, "utf-8");
     const ext = extname(filePath).toLowerCase();
 
-    if (ext !== '.json') {
+    if (ext !== ".json") {
       logger.warn(`Domain specs must be JSON: ${ext}`, { file: filePath });
       return null;
     }
@@ -702,7 +702,7 @@ export function parseDomainSpecFile(filePath: string, basePath?: string): Parsed
 
     // Derive domain from filename (load_balancer.json → load_balancer)
     const filename = basename(filePath, ext);
-    const domain = filename.replace(/-/g, '_');
+    const domain = filename.replace(/-/g, "_");
 
     // Use relative path for sourceFile to ensure deterministic output
     const sourceFile = basePath ? relative(basePath, filePath) : filePath;
@@ -741,7 +741,7 @@ export function parseDomainsDirectory(dirPath: string): ParsedSpec[] {
   }
 
   // Use parent of dirPath as base for relative paths (makes paths like "domains/filename.json")
-  const basePath = join(dirPath, '..');
+  const basePath = join(dirPath, "..");
 
   const entries = readdirSync(dirPath, { withFileTypes: true });
 
@@ -753,7 +753,7 @@ export function parseDomainsDirectory(dirPath: string): ParsedSpec[] {
       continue;
     }
 
-    if (!entry.name.endsWith('.json')) {
+    if (!entry.name.endsWith(".json")) {
       continue;
     }
 
@@ -767,7 +767,7 @@ export function parseDomainsDirectory(dirPath: string): ParsedSpec[] {
 
   logger.info(`Parsed ${specs.length} domain spec files`, {
     totalOperations: specs.reduce((sum, s) => sum + s.operations.length, 0),
-    domains: specs.map((s) => basename(s.filePath, '.json')),
+    domains: specs.map((s) => basename(s.filePath, ".json")),
   });
 
   return specs;

@@ -14,10 +14,10 @@
  * - Configuration variants
  */
 
-import { describe, expect, it, vi } from 'vitest';
-import { describeTool } from '../../../src/tools/discovery/describe.js';
-import { searchTools } from '../../../src/tools/discovery/search.js';
-import { validateToolParams } from '../../../src/tools/discovery/validate.js';
+import { describe, expect, it, vi } from "vitest";
+import { describeTool } from "../../../src/tools/discovery/describe.js";
+import { searchTools } from "../../../src/tools/discovery/search.js";
+import { validateToolParams } from "../../../src/tools/discovery/validate.js";
 import {
   analyzeConfigWithDefaults,
   generateOneOfTests,
@@ -26,10 +26,10 @@ import {
   getRecommendedValuesSummary,
   getServerDefaultsSummary,
   getToolSchemaMetadata,
-} from '../utils/schema-driven-tests.js';
+} from "../utils/schema-driven-tests.js";
 
 // Mock logger
-vi.mock('../../../src/utils/logging.js', () => ({
+vi.mock("../../../src/utils/logging.js", () => ({
   logger: {
     error: vi.fn(),
     info: vi.fn(),
@@ -38,70 +38,70 @@ vi.mock('../../../src/utils/logging.js', () => ({
   },
 }));
 
-const HEALTHCHECK_TOOL = 'f5xc-api-virtual-healthcheck-create';
+const HEALTHCHECK_TOOL = "f5xc-api-virtual-healthcheck-create";
 
 // Plain language test mappings
 const PLAIN_LANGUAGE_QUERIES = [
   {
-    plainText: 'Create a health check for my web servers',
-    searchQuery: 'create health check',
+    plainText: "Create a health check for my web servers",
+    searchQuery: "create health check",
     minimalConfig: {
-      metadata: { name: 'web-hc', namespace: 'default' },
+      metadata: { name: "web-hc", namespace: "default" },
       spec: {
-        http_health_check: { path: '/health', use_origin_server_name: {} },
+        http_health_check: { path: "/health", use_origin_server_name: {} },
       },
     },
   },
   {
-    plainText: 'Set up HTTP health monitoring',
-    searchQuery: 'http health check create',
+    plainText: "Set up HTTP health monitoring",
+    searchQuery: "http health check create",
     minimalConfig: {
-      metadata: { name: 'http-hc', namespace: 'default' },
-      spec: { http_health_check: { path: '/', use_origin_server_name: {} } },
+      metadata: { name: "http-hc", namespace: "default" },
+      spec: { http_health_check: { path: "/", use_origin_server_name: {} } },
     },
   },
   {
-    plainText: 'Create TCP health check',
-    searchQuery: 'create healthcheck tcp',
+    plainText: "Create TCP health check",
+    searchQuery: "create healthcheck tcp",
     minimalConfig: {
-      metadata: { name: 'tcp-hc', namespace: 'default' },
+      metadata: { name: "tcp-hc", namespace: "default" },
       spec: { tcp_health_check: {} },
     },
   },
   {
-    plainText: 'Add health monitoring with 5 second timeout',
-    searchQuery: 'create health check timeout',
+    plainText: "Add health monitoring with 5 second timeout",
+    searchQuery: "create health check timeout",
     minimalConfig: {
-      metadata: { name: 'timeout-hc', namespace: 'default' },
+      metadata: { name: "timeout-hc", namespace: "default" },
       spec: {
         timeout: 5,
-        http_health_check: { path: '/health', use_origin_server_name: {} },
+        http_health_check: { path: "/health", use_origin_server_name: {} },
       },
     },
   },
   {
-    plainText: 'Create a minimal health check configuration',
-    searchQuery: 'create healthcheck minimal',
+    plainText: "Create a minimal health check configuration",
+    searchQuery: "create healthcheck minimal",
     minimalConfig: {
-      metadata: { name: 'minimal-hc', namespace: 'default' },
-      spec: { http_health_check: { path: '/', use_origin_server_name: {} } },
+      metadata: { name: "minimal-hc", namespace: "default" },
+      spec: { http_health_check: { path: "/", use_origin_server_name: {} } },
     },
   },
 ];
 
 // Base configuration for test matrix
 const BASE_HEALTHCHECK_CONFIG = {
-  metadata: { name: 'test-healthcheck', namespace: 'default' },
-  spec: { http_health_check: { path: '/health', use_origin_server_name: {} } },
+  metadata: { name: "test-healthcheck", namespace: "default" },
+  spec: { http_health_check: { path: "/health", use_origin_server_name: {} } },
 };
 
 // Optional field variants to test
 const HEALTHCHECK_VARIANTS = {
-  'spec.timeout': [1, 3, 5, 10, 30],
-  'spec.interval': [5, 15, 30, 60],
-  'spec.unhealthy_threshold': [1, 2, 3, 5],
-  'spec.healthy_threshold': [1, 2, 3, 5],
-  'spec.jitter_percent': [0, 10, 30, 50],
+  "spec.timeout": [1, 3, 5, 10, 30],
+  "spec.interval": [5, 15, 30, 60],
+  "spec.unhealthy_threshold": [1, 2, 3, 5],
+  "spec.healthy_threshold": [1, 2, 3, 5],
+  "spec.jitter_percent": [0, 10, 30, 50],
 };
 
 // Initialize schema metadata and test matrix synchronously at module load
@@ -111,38 +111,38 @@ const schemaMetadata = getToolSchemaMetadata(HEALTHCHECK_TOOL);
 const testMatrix = generateTestMatrix({
   toolName: HEALTHCHECK_TOOL,
   baseConfig: BASE_HEALTHCHECK_CONFIG,
-  requiredFields: ['metadata.name', 'metadata.namespace'],
+  requiredFields: ["metadata.name", "metadata.namespace"],
   optionalFieldVariants: HEALTHCHECK_VARIANTS,
 });
 
-describe('Healthcheck - Schema Metadata Extraction', () => {
-  it('should load healthcheck schema metadata', () => {
+describe("Healthcheck - Schema Metadata Extraction", () => {
+  it("should load healthcheck schema metadata", () => {
     expect(schemaMetadata).toBeDefined();
     expect(schemaMetadata.toolName).toBe(HEALTHCHECK_TOOL);
   });
 
-  it('should extract server defaults from schema', () => {
+  it("should extract server defaults from schema", () => {
     // Server defaults should be extracted from x-f5xc-server-default markers
     expect(Array.isArray(schemaMetadata.serverDefaults)).toBe(true);
 
     // Log discovered defaults for visibility
-    console.log('\n📋 Healthcheck Server Defaults:');
+    console.log("\n📋 Healthcheck Server Defaults:");
     for (const def of schemaMetadata.serverDefaults) {
       console.log(`   ${def.fieldPath} → ${JSON.stringify(def.defaultValue)}`);
     }
   });
 
-  it('should extract recommended values from schema', () => {
+  it("should extract recommended values from schema", () => {
     expect(Array.isArray(schemaMetadata.recommendedValues)).toBe(true);
 
     // Log discovered recommended values
-    console.log('\n📋 Healthcheck Recommended Values:');
+    console.log("\n📋 Healthcheck Recommended Values:");
     for (const rec of schemaMetadata.recommendedValues) {
       console.log(`   ${rec.fieldPath} → ${JSON.stringify(rec.recommendedValue)}`);
     }
   });
 
-  it('should provide summary for documentation', () => {
+  it("should provide summary for documentation", () => {
     const serverSummary = getServerDefaultsSummary(HEALTHCHECK_TOOL);
     const recommendedSummary = getRecommendedValuesSummary(HEALTHCHECK_TOOL);
 
@@ -151,12 +151,12 @@ describe('Healthcheck - Schema Metadata Extraction', () => {
   });
 });
 
-describe('Healthcheck - Plain Language Query Discovery', () => {
+describe("Healthcheck - Plain Language Query Discovery", () => {
   const plainLanguageTests = generatePlainLanguageTests(HEALTHCHECK_TOOL, PLAIN_LANGUAGE_QUERIES);
 
   for (const test of plainLanguageTests) {
     describe(`Query: "${test.query}"`, () => {
-      it('should find healthcheck tool via search', () => {
+      it("should find healthcheck tool via search", () => {
         const results = searchTools(test.searchQuery, { limit: 10 });
 
         expect(results.length).toBeGreaterThan(0);
@@ -164,24 +164,24 @@ describe('Healthcheck - Plain Language Query Discovery', () => {
         // Should find healthcheck-related tool
         const hasHealthcheck = results.some(
           (r) =>
-            r.tool.resource.includes('healthcheck') ||
-            r.tool.name.includes('healthcheck') ||
-            r.tool.resource.includes('health-check'),
+            r.tool.resource.includes("healthcheck") ||
+            r.tool.name.includes("healthcheck") ||
+            r.tool.resource.includes("health-check"),
         );
         expect(hasHealthcheck).toBe(true);
       });
 
-      it('should validate minimal configuration', () => {
+      it("should validate minimal configuration", () => {
         const result = validateToolParams({
           toolName: HEALTHCHECK_TOOL,
-          pathParams: { 'metadata.namespace': 'default' },
+          pathParams: { "metadata.namespace": "default" },
           body: test.config,
         });
 
         expect(result.valid).toBe(true);
       });
 
-      it('should analyze what server will apply', () => {
+      it("should analyze what server will apply", () => {
         const analysis = analyzeConfigWithDefaults(HEALTHCHECK_TOOL, test.config);
 
         // Server will apply defaults for omitted fields
@@ -199,14 +199,14 @@ describe('Healthcheck - Plain Language Query Discovery', () => {
   }
 });
 
-describe('Healthcheck - Programmatic Configuration Matrix', () => {
+describe("Healthcheck - Programmatic Configuration Matrix", () => {
   // This test suite is entirely generated from schema metadata
-  describe('Generated Test Cases', () => {
+  describe("Generated Test Cases", () => {
     for (const testCase of testMatrix) {
       it(`should validate: ${testCase.name}`, () => {
         const result = validateToolParams({
           toolName: HEALTHCHECK_TOOL,
-          pathParams: { 'metadata.namespace': 'default' },
+          pathParams: { "metadata.namespace": "default" },
           body: testCase.config,
         });
 
@@ -215,12 +215,12 @@ describe('Healthcheck - Programmatic Configuration Matrix', () => {
     }
   });
 
-  describe('Server Defaults Application', () => {
-    it('should track all server defaults that will be applied to minimal config', () => {
+  describe("Server Defaults Application", () => {
+    it("should track all server defaults that will be applied to minimal config", () => {
       const minimalConfig = BASE_HEALTHCHECK_CONFIG;
       const analysis = analyzeConfigWithDefaults(HEALTHCHECK_TOOL, minimalConfig);
 
-      console.log('\n📊 Server Defaults Analysis for Minimal Config:');
+      console.log("\n📊 Server Defaults Analysis for Minimal Config:");
       console.log(`   Provided fields: ${analysis.providedFields.length}`);
       console.log(`   Server will apply: ${analysis.serverWillApply.length} defaults`);
 
@@ -234,7 +234,7 @@ describe('Healthcheck - Programmatic Configuration Matrix', () => {
   });
 });
 
-describe('Healthcheck - Recommended Values Validation', () => {
+describe("Healthcheck - Recommended Values Validation", () => {
   /**
    * Expected recommended values from v2.0.32 spec:
    * - timeout: 3 seconds
@@ -245,19 +245,19 @@ describe('Healthcheck - Recommended Values Validation', () => {
    */
 
   const EXPECTED_RECOMMENDATIONS = {
-    'spec.timeout': 3,
-    'spec.interval': 15,
-    'spec.unhealthy_threshold': 1,
-    'spec.healthy_threshold': 3,
-    'spec.jitter_percent': 30,
+    "spec.timeout": 3,
+    "spec.interval": 15,
+    "spec.unhealthy_threshold": 1,
+    "spec.healthy_threshold": 3,
+    "spec.jitter_percent": 30,
   };
 
-  it('should match expected recommended values from spec', () => {
+  it("should match expected recommended values from spec", () => {
     const recommendations = schemaMetadata.recommendedValues;
 
     for (const [field, expectedValue] of Object.entries(EXPECTED_RECOMMENDATIONS)) {
       // Find matching recommendation (may have different path format)
-      const fieldName = field.split('.').pop();
+      const fieldName = field.split(".").pop();
       const rec = recommendations.find((r) => r.fieldPath.includes(fieldName!));
 
       if (rec) {
@@ -266,22 +266,22 @@ describe('Healthcheck - Recommended Values Validation', () => {
     }
   });
 
-  it('should identify when config uses recommended values', () => {
+  it("should identify when config uses recommended values", () => {
     const configWithRecommended = {
-      metadata: { name: 'recommended-hc', namespace: 'default' },
+      metadata: { name: "recommended-hc", namespace: "default" },
       spec: {
         timeout: 3,
         interval: 15,
         unhealthy_threshold: 1,
         healthy_threshold: 3,
         jitter_percent: 30,
-        http_health_check: { path: '/health', use_origin_server_name: {} },
+        http_health_check: { path: "/health", use_origin_server_name: {} },
       },
     };
 
     const analysis = analyzeConfigWithDefaults(HEALTHCHECK_TOOL, configWithRecommended);
 
-    console.log('\n✅ Fields matching recommended values:');
+    console.log("\n✅ Fields matching recommended values:");
     for (const match of analysis.matchesRecommended) {
       console.log(`   ${match.field}: ${match.provided} (recommended: ${match.recommended})`);
     }
@@ -290,21 +290,21 @@ describe('Healthcheck - Recommended Values Validation', () => {
     expect(analysis.matchesRecommended.length).toBeGreaterThanOrEqual(0);
   });
 
-  it('should identify when config uses values below recommended', () => {
+  it("should identify when config uses values below recommended", () => {
     const configBelowRecommended = {
-      metadata: { name: 'below-rec-hc', namespace: 'default' },
+      metadata: { name: "below-rec-hc", namespace: "default" },
       spec: {
         timeout: 1, // Below recommended 3
         interval: 5, // Below recommended 15
         unhealthy_threshold: 1,
         healthy_threshold: 1, // Below recommended 3
-        http_health_check: { path: '/health', use_origin_server_name: {} },
+        http_health_check: { path: "/health", use_origin_server_name: {} },
       },
     };
 
     const analysis = analyzeConfigWithDefaults(HEALTHCHECK_TOOL, configBelowRecommended);
 
-    console.log('\n⚠️ Fields below recommended values:');
+    console.log("\n⚠️ Fields below recommended values:");
     for (const below of analysis.belowRecommended) {
       console.log(`   ${below.field}: ${below.provided} < ${below.recommended} (recommended)`);
     }
@@ -314,60 +314,60 @@ describe('Healthcheck - Recommended Values Validation', () => {
   });
 });
 
-describe('Healthcheck - Search Tool Integration', () => {
-  it('should find create tool with POST method', async () => {
-    const results = searchTools('create healthcheck', {
-      operations: ['create'],
+describe("Healthcheck - Search Tool Integration", () => {
+  it("should find create tool with POST method", async () => {
+    const results = searchTools("create healthcheck", {
+      operations: ["create"],
       limit: 1,
     });
 
     expect(results.length).toBeGreaterThan(0);
 
     const description = await describeTool(results[0].tool.name);
-    expect(description.method).toBe('POST');
+    expect(description.method).toBe("POST");
   });
 
-  it('should filter to virtual domain', () => {
-    const results = searchTools('healthcheck', {
-      domains: ['virtual'],
+  it("should filter to virtual domain", () => {
+    const results = searchTools("healthcheck", {
+      domains: ["virtual"],
       limit: 5,
     });
 
-    expect(results.every((r) => r.tool.domain === 'virtual')).toBe(true);
+    expect(results.every((r) => r.tool.domain === "virtual")).toBe(true);
   });
 
-  it('should filter to create operations only', () => {
-    const results = searchTools('healthcheck', {
-      operations: ['create'],
+  it("should filter to create operations only", () => {
+    const results = searchTools("healthcheck", {
+      operations: ["create"],
       limit: 5,
     });
 
-    expect(results.every((r) => r.tool.operation === 'create')).toBe(true);
+    expect(results.every((r) => r.tool.operation === "create")).toBe(true);
   });
 });
 
-describe('Healthcheck - Error Handling', () => {
-  it('should warn when metadata.name is missing', () => {
+describe("Healthcheck - Error Handling", () => {
+  it("should warn when metadata.name is missing", () => {
     const invalidConfig = {
-      metadata: { namespace: 'default' },
+      metadata: { namespace: "default" },
       spec: {
-        http_health_check: { path: '/health', use_origin_server_name: {} },
+        http_health_check: { path: "/health", use_origin_server_name: {} },
       },
     };
 
     const result = validateToolParams({
       toolName: HEALTHCHECK_TOOL,
-      pathParams: { 'metadata.namespace': 'default' },
+      pathParams: { "metadata.namespace": "default" },
       body: invalidConfig,
     });
 
-    expect(result.warnings.some((w) => w.toLowerCase().includes('name'))).toBe(true);
+    expect(result.warnings.some((w) => w.toLowerCase().includes("name"))).toBe(true);
   });
 
-  it('should pass validation when body is missing for documentation mode', () => {
+  it("should pass validation when body is missing for documentation mode", () => {
     const result = validateToolParams({
       toolName: HEALTHCHECK_TOOL,
-      pathParams: { 'metadata.namespace': 'default' },
+      pathParams: { "metadata.namespace": "default" },
     });
 
     // Errors are expected for missing body in create operation
@@ -376,9 +376,9 @@ describe('Healthcheck - Error Handling', () => {
   });
 });
 
-describe('Healthcheck - Test Matrix Statistics', () => {
-  it('should report generated test statistics', () => {
-    console.log('\n📊 Healthcheck Test Matrix Statistics:');
+describe("Healthcheck - Test Matrix Statistics", () => {
+  it("should report generated test statistics", () => {
+    console.log("\n📊 Healthcheck Test Matrix Statistics:");
     console.log(`   Total generated test cases: ${testMatrix.length}`);
     console.log(`   Server defaults tracked: ${schemaMetadata.serverDefaults.length}`);
     console.log(`   Recommended values tracked: ${schemaMetadata.recommendedValues.length}`);
@@ -395,54 +395,54 @@ describe('Healthcheck - Test Matrix Statistics', () => {
  * - use_origin_server_name (default/recommended): Uses origin server name as Host header
  * - host_header (custom): Custom header value specification
  */
-describe('Healthcheck - host_header_choice OneOf Group', () => {
+describe("Healthcheck - host_header_choice OneOf Group", () => {
   // Define the host_header_choice OneOf group tests
   const hostHeaderChoiceTests = generateOneOfTests(HEALTHCHECK_TOOL, [
     {
-      name: 'host_header_choice',
-      options: ['use_origin_server_name', 'host_header'],
+      name: "host_header_choice",
+      options: ["use_origin_server_name", "host_header"],
       validConfigs: [
         // Valid: use_origin_server_name only (recommended)
         {
-          metadata: { name: 'hc-origin-name', namespace: 'default' },
+          metadata: { name: "hc-origin-name", namespace: "default" },
           spec: {
             http_health_check: {
-              path: '/health',
+              path: "/health",
               use_origin_server_name: {},
             },
           },
         },
         // Valid: host_header only (custom)
         {
-          metadata: { name: 'hc-custom-header', namespace: 'default' },
+          metadata: { name: "hc-custom-header", namespace: "default" },
           spec: {
             http_health_check: {
-              path: '/health',
-              host_header: 'custom-host.example.com',
+              path: "/health",
+              host_header: "custom-host.example.com",
             },
           },
         },
       ],
       // Invalid: both options specified
       invalidConfig: {
-        metadata: { name: 'hc-both', namespace: 'default' },
+        metadata: { name: "hc-both", namespace: "default" },
         spec: {
           http_health_check: {
-            path: '/health',
+            path: "/health",
             use_origin_server_name: {},
-            host_header: 'custom-host.example.com',
+            host_header: "custom-host.example.com",
           },
         },
       },
     },
   ]);
 
-  describe('Valid configurations (single option)', () => {
+  describe("Valid configurations (single option)", () => {
     for (const testCase of hostHeaderChoiceTests.filter((t) => t.expectedValid)) {
       it(`should validate: ${testCase.name}`, () => {
         const result = validateToolParams({
           toolName: HEALTHCHECK_TOOL,
-          pathParams: { 'metadata.namespace': 'default' },
+          pathParams: { "metadata.namespace": "default" },
           body: testCase.config,
         });
 
@@ -452,12 +452,12 @@ describe('Healthcheck - host_header_choice OneOf Group', () => {
     }
   });
 
-  describe('Invalid configurations (multiple options)', () => {
+  describe("Invalid configurations (multiple options)", () => {
     for (const testCase of hostHeaderChoiceTests.filter((t) => !t.expectedValid)) {
       it(`should detect: ${testCase.name}`, () => {
         const result = validateToolParams({
           toolName: HEALTHCHECK_TOOL,
-          pathParams: { 'metadata.namespace': 'default' },
+          pathParams: { "metadata.namespace": "default" },
           body: testCase.config,
         });
 
@@ -477,47 +477,47 @@ describe('Healthcheck - host_header_choice OneOf Group', () => {
         // Check if mutual exclusivity warning exists for nested oneOf at spec.http_health_check
         const hasMutualExclusivityWarning = result.warnings.some(
           (w) =>
-            w.toLowerCase().includes('mutually exclusive') ||
-            w.toLowerCase().includes('choose only one') ||
-            w.toLowerCase().includes('multiple'),
+            w.toLowerCase().includes("mutually exclusive") ||
+            w.toLowerCase().includes("choose only one") ||
+            w.toLowerCase().includes("multiple"),
         );
 
         // Log whether nested oneOf was detected
         if (hasMutualExclusivityWarning) {
-          console.log('      ✅ Nested oneOf conflict detected');
+          console.log("      ✅ Nested oneOf conflict detected");
           // Verify the warning includes the nested field paths
           const hasNestedPath = result.warnings.some(
-            (w) => w.includes('spec.http_health_check') || w.includes('host_header_choice'),
+            (w) => w.includes("spec.http_health_check") || w.includes("host_header_choice"),
           );
           if (hasNestedPath) {
-            console.log('      ✅ Warning includes nested path');
+            console.log("      ✅ Warning includes nested path");
           }
         } else {
           // If not detected, the schema may not have the x-ves-oneof-field annotation
-          console.log('      ℹ️ Nested oneOf not detected - schema may not have annotation');
+          console.log("      ℹ️ Nested oneOf not detected - schema may not have annotation");
         }
       });
     }
   });
 
-  describe('Recommended option tracking', () => {
-    it('should track use_origin_server_name as recommended option with full path', () => {
+  describe("Recommended option tracking", () => {
+    it("should track use_origin_server_name as recommended option with full path", () => {
       // Search for healthcheck tool and check oneOf groups
-      const results = searchTools('create healthcheck', { limit: 5 });
+      const results = searchTools("create healthcheck", { limit: 5 });
       const healthcheckTool = results.find(
-        (r) => r.tool.name === HEALTHCHECK_TOOL || r.tool.resource.includes('healthcheck'),
+        (r) => r.tool.name === HEALTHCHECK_TOOL || r.tool.resource.includes("healthcheck"),
       );
 
       expect(healthcheckTool).toBeDefined();
 
       // Log the oneOf groups for visibility
       if (healthcheckTool?.tool) {
-        console.log('\n📋 Healthcheck OneOf Groups:');
+        console.log("\n📋 Healthcheck OneOf Groups:");
         const oneOfGroups = healthcheckTool.tool.oneOfGroups || [];
         for (const group of oneOfGroups) {
           console.log(`   ${group.choiceField}:`);
           console.log(`     Field path: ${group.fieldPath}`);
-          console.log(`     Options: ${group.options.join(', ')}`);
+          console.log(`     Options: ${group.options.join(", ")}`);
           if (group.recommendedOption) {
             console.log(`     Recommended: ${group.recommendedOption}`);
           }
@@ -526,7 +526,7 @@ describe('Healthcheck - host_header_choice OneOf Group', () => {
         // Find host_header_choice group - should now have nested path
         const hostHeaderGroup = oneOfGroups.find(
           (g: { choiceField: string; fieldPath?: string }) =>
-            g.choiceField === 'host_header_choice' || g.fieldPath?.includes('host_header_choice'),
+            g.choiceField === "host_header_choice" || g.fieldPath?.includes("host_header_choice"),
         );
 
         if (hostHeaderGroup) {
@@ -534,8 +534,8 @@ describe('Healthcheck - host_header_choice OneOf Group', () => {
           console.log(`      Recommended: ${hostHeaderGroup.recommendedOption}`);
 
           // With nested detection, the fieldPath should include the full nested path
-          if (hostHeaderGroup.fieldPath?.includes('spec.')) {
-            console.log('      ✅ Field path includes nested location (spec.*)');
+          if (hostHeaderGroup.fieldPath?.includes("spec.")) {
+            console.log("      ✅ Field path includes nested location (spec.*)");
           }
 
           // Verify recommended option includes full path if nested
@@ -543,21 +543,21 @@ describe('Healthcheck - host_header_choice OneOf Group', () => {
             // Could be "use_origin_server_name" (top-level) or
             // "spec.http_health_check.use_origin_server_name" (nested)
             const isValidRecommended =
-              hostHeaderGroup.recommendedOption === 'use_origin_server_name' ||
-              hostHeaderGroup.recommendedOption.endsWith('use_origin_server_name');
+              hostHeaderGroup.recommendedOption === "use_origin_server_name" ||
+              hostHeaderGroup.recommendedOption.endsWith("use_origin_server_name");
             expect(isValidRecommended).toBe(true);
           }
         }
       }
     });
 
-    it('should include recommendation in validation warnings when applicable', () => {
+    it("should include recommendation in validation warnings when applicable", () => {
       // Test with no host_header_choice selected
       const configNoChoice = {
-        metadata: { name: 'hc-no-choice', namespace: 'default' },
+        metadata: { name: "hc-no-choice", namespace: "default" },
         spec: {
           http_health_check: {
-            path: '/health',
+            path: "/health",
             // Neither use_origin_server_name nor host_header specified
           },
         },
@@ -565,23 +565,23 @@ describe('Healthcheck - host_header_choice OneOf Group', () => {
 
       const result = validateToolParams({
         toolName: HEALTHCHECK_TOOL,
-        pathParams: { 'metadata.namespace': 'default' },
+        pathParams: { "metadata.namespace": "default" },
         body: configNoChoice,
       });
 
       // Log warnings for visibility
-      console.log('\n📋 Warnings for config without host_header_choice:');
+      console.log("\n📋 Warnings for config without host_header_choice:");
       for (const warning of result.warnings) {
         console.log(`   ⚠️ ${warning}`);
       }
 
       // Check if validation suggests the recommended option
       const suggestsRecommended = result.warnings.some(
-        (w) => w.includes('use_origin_server_name') || w.includes('recommended') || w.includes('Consider using'),
+        (w) => w.includes("use_origin_server_name") || w.includes("recommended") || w.includes("Consider using"),
       );
 
       if (suggestsRecommended) {
-        console.log('   ✅ Validation suggests recommended option');
+        console.log("   ✅ Validation suggests recommended option");
       }
 
       // The result should either be valid (server applies default) or have helpful warnings

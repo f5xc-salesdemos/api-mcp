@@ -7,7 +7,7 @@
  * Thresholds determine when to warn or block resource creation.
  */
 
-import type { QuotaThreshold } from '../types/quota.js';
+import type { QuotaThreshold } from "../types/quota.js";
 
 /**
  * Quota threshold configuration
@@ -38,9 +38,9 @@ export const DEFAULT_QUOTA_THRESHOLDS: QuotaThresholdConfig = {
  */
 export function getQuotaThresholds(): QuotaThresholdConfig {
   return {
-    greenThreshold: parseInt(process.env.F5XC_QUOTA_GREEN_THRESHOLD || '79', 10),
-    yellowThreshold: parseInt(process.env.F5XC_QUOTA_YELLOW_THRESHOLD || '99', 10),
-    redThreshold: parseInt(process.env.F5XC_QUOTA_RED_THRESHOLD || '100', 10),
+    greenThreshold: parseInt(process.env.F5XC_QUOTA_GREEN_THRESHOLD || "79", 10),
+    yellowThreshold: parseInt(process.env.F5XC_QUOTA_YELLOW_THRESHOLD || "99", 10),
+    redThreshold: parseInt(process.env.F5XC_QUOTA_RED_THRESHOLD || "100", 10),
   };
 }
 
@@ -56,10 +56,10 @@ export function getThresholdLevel(
   config: QuotaThresholdConfig = DEFAULT_QUOTA_THRESHOLDS,
 ): QuotaThreshold {
   if (percentage >= config.redThreshold) {
-    return 'red';
+    return "red";
   }
   if (percentage >= config.yellowThreshold) {
-    return 'yellow';
+    return "yellow";
   }
-  return 'green';
+  return "green";
 }

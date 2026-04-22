@@ -7,7 +7,7 @@
  * that the MCP server responds appropriately to natural language inputs.
  */
 
-import type { SearchResult } from '../../../../src/tools/discovery/types.js';
+import type { SearchResult } from "../../../../src/tools/discovery/types.js";
 
 /**
  * Represents a simulated user query with expected outcomes
@@ -57,11 +57,11 @@ export interface DocumentationResponse {
  */
 export function isDocumentationResponse(result: unknown): result is DocumentationResponse {
   return (
-    typeof result === 'object' &&
+    typeof result === "object" &&
     result !== null &&
-    'curlExample' in result &&
-    'authMessage' in result &&
-    'tool' in result
+    "curlExample" in result &&
+    "authMessage" in result &&
+    "tool" in result
   );
 }
 
@@ -77,7 +77,7 @@ export interface ErrorResponse {
  * Type guard to check if result is an error response
  */
 export function isErrorResponse(result: unknown): result is ErrorResponse {
-  return typeof result === 'object' && result !== null && 'error' in result;
+  return typeof result === "object" && result !== null && "error" in result;
 }
 
 /**
@@ -96,11 +96,11 @@ export interface DependencyReportResponse {
  */
 export function isDependencyReport(result: unknown): result is DependencyReportResponse {
   return (
-    typeof result === 'object' &&
+    typeof result === "object" &&
     result !== null &&
-    'resource' in result &&
-    'domain' in result &&
-    'prerequisites' in result
+    "resource" in result &&
+    "domain" in result &&
+    "prerequisites" in result
   );
 }
 
@@ -124,11 +124,11 @@ export interface BestPracticesResponse {
  */
 export function isBestPracticesResponse(result: unknown): result is BestPracticesResponse {
   return (
-    typeof result === 'object' &&
+    typeof result === "object" &&
     result !== null &&
-    'success' in result &&
-    (('practices' in result && result.practices !== undefined) ||
-      ('availableDomains' in result && result.availableDomains !== undefined))
+    "success" in result &&
+    (("practices" in result && result.practices !== undefined) ||
+      ("availableDomains" in result && result.availableDomains !== undefined))
   );
 }
 
@@ -167,35 +167,35 @@ export function validateSearchResults(query: ChatQuery, results: SearchResult[])
 export const COMMON_QUERIES = {
   // Discovery queries
   discovery: {
-    serverInfo: 'What can I do with F5 XC?',
-    listOperations: 'List all available operations',
-    loadBalancerOptions: 'Show me load balancer options',
-    dnsTools: 'What DNS tools are available?',
+    serverInfo: "What can I do with F5 XC?",
+    listOperations: "List all available operations",
+    loadBalancerOptions: "Show me load balancer options",
+    dnsTools: "What DNS tools are available?",
   },
   // Creation queries
   creation: {
-    createLb: 'Create an HTTP load balancer',
-    prerequisites: 'What do I need before creating a load balancer?',
-    deployWaf: 'Show me the steps to deploy a WAF',
-    setupOriginPool: 'How do I set up an origin pool?',
+    createLb: "Create an HTTP load balancer",
+    prerequisites: "What do I need before creating a load balancer?",
+    deployWaf: "Show me the steps to deploy a WAF",
+    setupOriginPool: "How do I set up an origin pool?",
   },
   // Inspection queries
   inspection: {
-    listLbs: 'List my load balancers',
-    getLbDetails: 'Get details of load balancer',
+    listLbs: "List my load balancers",
+    getLbDetails: "Get details of load balancer",
     originPoolStatus: "What's the status of my origin pools?",
   },
   // Modification queries
   modification: {
-    updateLb: 'Update my load balancer config',
-    deleteLb: 'Delete load balancer',
-    changeOriginPool: 'Delete origin pool',
+    updateLb: "Update my load balancer config",
+    deleteLb: "Delete load balancer",
+    changeOriginPool: "Delete origin pool",
   },
   // Best practices queries
   guidance: {
-    wafBestPractices: 'What are best practices for WAF?',
-    commonErrors: 'Common mistakes with load balancers?',
-    dnsStructure: 'How should I structure my DNS zones?',
+    wafBestPractices: "What are best practices for WAF?",
+    commonErrors: "Common mistakes with load balancers?",
+    dnsStructure: "How should I structure my DNS zones?",
   },
 } as const;
 
@@ -204,24 +204,24 @@ export const COMMON_QUERIES = {
  */
 export const QUERY_MAPPINGS: Record<string, string> = {
   // Discovery
-  'What can I do with F5 XC?': 'f5xc operations',
-  'List all available operations': 'list operations',
-  'Show me load balancer options': 'http load balancer',
-  'What DNS tools are available?': 'dns',
+  "What can I do with F5 XC?": "f5xc operations",
+  "List all available operations": "list operations",
+  "Show me load balancer options": "http load balancer",
+  "What DNS tools are available?": "dns",
 
   // Creation
-  'Create an HTTP load balancer': 'create http load balancer',
-  'What do I need before creating a load balancer?': 'http-loadbalancer',
-  'Show me the steps to deploy a WAF': 'waf app firewall',
-  'How do I set up an origin pool?': 'create origin pool',
+  "Create an HTTP load balancer": "create http load balancer",
+  "What do I need before creating a load balancer?": "http-loadbalancer",
+  "Show me the steps to deploy a WAF": "waf app firewall",
+  "How do I set up an origin pool?": "create origin pool",
 
   // Inspection
-  'List my load balancers': 'list http load balancer',
-  'Get details of load balancer': 'get http load balancer',
-  "What's the status of my origin pools?": 'list origin pool',
+  "List my load balancers": "list http load balancer",
+  "Get details of load balancer": "get http load balancer",
+  "What's the status of my origin pools?": "list origin pool",
 
   // Modification
-  'Update my load balancer config': 'update http load balancer',
-  'Delete load balancer': 'delete http load balancer',
-  'Delete origin pool': 'delete origin pool',
+  "Update my load balancer config": "update http load balancer",
+  "Delete load balancer": "delete http load balancer",
+  "Delete origin pool": "delete origin pool",
 };

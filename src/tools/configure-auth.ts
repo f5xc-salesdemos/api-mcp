@@ -10,18 +10,18 @@
  * - set-active: Switch active profile
  */
 
-import { type CredentialManager, getProfileManager, type Profile } from '@robinmordasiewicz/f5xc-auth';
-import { z } from 'zod';
-import { logger } from '../utils/logging.js';
-import { normalizeF5XCUrl, verifyF5XCEndpoint } from '../utils/url-utils.js';
+import { type CredentialManager, getProfileManager, type Profile } from "@robinmordasiewicz/f5xc-auth";
+import { z } from "zod";
+import { logger } from "../utils/logging.js";
+import { normalizeF5XCUrl, verifyF5XCEndpoint } from "../utils/url-utils.js";
 
 /**
  * Tool name constant
  */
 export const CONFIGURE_AUTH_TOOL = {
-  name: 'f5xc-api-configure-auth',
+  name: "f5xc-api-configure-auth",
   description:
-    'Configure F5XC API authentication. Check status, save credentials to profile, list profiles, or switch active profile.',
+    "Configure F5XC API authentication. Check status, save credentials to profile, list profiles, or switch active profile.",
 };
 
 /**
@@ -29,23 +29,23 @@ export const CONFIGURE_AUTH_TOOL = {
  */
 export const configureAuthSchema = {
   action: z
-    .enum(['status', 'configure', 'list-profiles', 'set-active'])
+    .enum(["status", "configure", "list-profiles", "set-active"])
     .optional()
-    .default('status')
-    .describe('Action to perform (default: status)'),
+    .default("status")
+    .describe("Action to perform (default: status)"),
   tenantUrl: z
     .string()
     .optional()
     .describe(
-      'F5XC tenant URL. Accepts various formats: https://tenant.console.ves.volterra.io, tenant.console.ves.volterra.io, tenant.staging.volterra.us, or even just the tenant name',
+      "F5XC tenant URL. Accepts various formats: https://tenant.console.ves.volterra.io, tenant.console.ves.volterra.io, tenant.staging.volterra.us, or even just the tenant name",
     ),
-  apiToken: z.string().optional().describe('API token for authentication'),
-  profileName: z.string().optional().default('default').describe("Profile name (default: 'default')"),
+  apiToken: z.string().optional().describe("API token for authentication"),
+  profileName: z.string().optional().default("default").describe("Profile name (default: 'default')"),
   skipVerification: z
     .boolean()
     .optional()
     .default(false)
-    .describe('Skip URL verification (useful for air-gapped environments)'),
+    .describe("Skip URL verification (useful for air-gapped environments)"),
 };
 
 /**
@@ -53,7 +53,7 @@ export const configureAuthSchema = {
  */
 interface StatusResponse {
   authenticated: boolean;
-  mode: 'documentation' | 'execution';
+  mode: "documentation" | "execution";
   authMethod: string;
   tenantUrl: string | null;
   activeProfile: string | null;
@@ -90,7 +90,7 @@ type ToolResponse = StatusResponse | ConfigureResponse | ListProfilesResponse | 
  */
 export async function handleConfigureAuth(
   args: {
-    action?: 'status' | 'configure' | 'list-profiles' | 'set-active';
+    action?: "status" | "configure" | "list-profiles" | "set-active";
     tenantUrl?: string;
     apiToken?: string;
     profileName?: string;
@@ -98,26 +98,26 @@ export async function handleConfigureAuth(
   },
   credentialManager: CredentialManager,
 ): Promise<ToolResponse> {
-  const action = args.action ?? 'status';
+  const action = args.action ?? "status";
   const profileManager = getProfileManager();
 
   switch (action) {
-    case 'status':
+    case "status":
       return handleStatus(credentialManager, profileManager);
 
-    case 'configure':
+    case "configure":
       return handleConfigure(args, credentialManager, profileManager);
 
-    case 'list-profiles':
+    case "list-profiles":
       return handleListProfiles(profileManager);
 
-    case 'set-active':
-      return handleSetActive(args.profileName ?? 'default', credentialManager, profileManager);
+    case "set-active":
+      return handleSetActive(args.profileName ?? "default", credentialManager, profileManager);
 
     default:
       return {
         success: false,
-        profileName: '',
+        profileName: "",
         message: `Unknown action: ${action}`,
       };
   }
@@ -142,27 +142,27 @@ async function handleStatus(
   if (isAuthenticated) {
     return {
       authenticated: true,
-      mode: 'execution',
+      mode: "execution",
       authMethod: authMode,
       tenantUrl,
       activeProfile,
       profiles: profileNames,
       message: activeProfile
         ? `Authenticated via profile '${activeProfile}'. API execution enabled.`
-        : 'Authenticated via environment variables. API execution enabled.',
+        : "Authenticated via environment variables. API execution enabled.",
     };
   }
 
   return {
     authenticated: false,
-    mode: 'documentation',
-    authMethod: 'none',
+    mode: "documentation",
+    authMethod: "none",
     tenantUrl: null,
     activeProfile: null,
     profiles: profileNames,
     message:
       profileNames.length > 0
-        ? `No active profile. Available profiles: ${profileNames.join(', ')}. Use action='set-active' to activate one, or action='configure' to create a new profile.`
+        ? `No active profile. Available profiles: ${profileNames.join(", ")}. Use action='set-active' to activate one, or action='configure' to create a new profile.`
         : "No credentials configured. Use action='configure' with tenantUrl and apiToken to authenticate.",
   };
 }
@@ -180,14 +180,14 @@ async function handleConfigure(
   credentialManager: CredentialManager,
   profileManager: ReturnType<typeof getProfileManager>,
 ): Promise<ConfigureResponse> {
-  const { tenantUrl, apiToken, profileName = 'default', skipVerification = false } = args;
+  const { tenantUrl, apiToken, profileName = "default", skipVerification = false } = args;
 
   // Validate required fields
   if (!tenantUrl) {
     return {
       success: false,
       profileName,
-      message: 'Missing required parameter: tenantUrl',
+      message: "Missing required parameter: tenantUrl",
     };
   }
 
@@ -195,7 +195,7 @@ async function handleConfigure(
     return {
       success: false,
       profileName,
-      message: 'Missing required parameter: apiToken',
+      message: "Missing required parameter: apiToken",
     };
   }
 
@@ -211,9 +211,9 @@ async function handleConfigure(
     if (!verification.valid) {
       let message = `URL verification failed for "${tenantUrl}": ${verification.error}`;
       if (verification.suggestions?.length) {
-        message += `\n\nSuggestions:\n${verification.suggestions.map((s) => `  - ${s}`).join('\n')}`;
+        message += `\n\nSuggestions:\n${verification.suggestions.map((s) => `  - ${s}`).join("\n")}`;
       }
-      message += '\n\nUse skipVerification=true to bypass this check.';
+      message += "\n\nUse skipVerification=true to bypass this check.";
       return {
         success: false,
         profileName,
@@ -272,10 +272,10 @@ async function handleListProfiles(profileManager: ReturnType<typeof getProfileMa
 
   const profileList = profiles.map((p) => {
     // Determine auth method
-    let authMethod = 'none';
-    if (p.apiToken) authMethod = 'token';
-    else if (p.p12Bundle) authMethod = 'p12';
-    else if (p.cert && p.key) authMethod = 'certificate';
+    let authMethod = "none";
+    if (p.apiToken) authMethod = "token";
+    else if (p.p12Bundle) authMethod = "p12";
+    else if (p.cert && p.key) authMethod = "certificate";
 
     return {
       name: p.name,

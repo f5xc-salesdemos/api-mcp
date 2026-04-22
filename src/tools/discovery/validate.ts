@@ -8,14 +8,14 @@
  * before making API calls.
  */
 
-import type { HttpClient } from '@robinmordasiewicz/f5xc-auth';
-import type { OneOfGroup } from '../../generator/dependency-types.js';
-import type { ParsedOperation } from '../../generator/openapi-parser.js';
-import { formatQuotaError, formatQuotaWarning } from '../../services/quota-formatter.js';
-import { quotaService } from '../../services/quota-service.js';
-import type { QuotaInfo } from '../../types/quota.js';
-import { logger } from '../../utils/logging.js';
-import { getToolByName } from '../registry.js';
+import type { HttpClient } from "@robinmordasiewicz/f5xc-auth";
+import type { OneOfGroup } from "../../generator/dependency-types.js";
+import type { ParsedOperation } from "../../generator/openapi-parser.js";
+import { formatQuotaError, formatQuotaWarning } from "../../services/quota-formatter.js";
+import { quotaService } from "../../services/quota-service.js";
+import type { QuotaInfo } from "../../types/quota.js";
+import { logger } from "../../utils/logging.js";
+import { getToolByName } from "../registry.js";
 
 /**
  * Validation error detail
@@ -105,9 +105,9 @@ export function validateToolParams(params: ValidateParams): ValidationResult {
       valid: false,
       errors: [
         {
-          path: 'toolName',
+          path: "toolName",
           message: `Tool "${toolName}" not found`,
-          expected: 'Valid tool name',
+          expected: "Valid tool name",
           actual: toolName,
         },
       ],
@@ -173,7 +173,7 @@ export async function validateQuotaAvailability(
       valid: false,
       errors: [
         {
-          path: 'toolName',
+          path: "toolName",
           message: `Tool "${params.toolName}" not found`,
         },
       ],
@@ -182,7 +182,7 @@ export async function validateQuotaAvailability(
   }
 
   // Only check quota for create operations
-  if (tool.operation !== 'create') {
+  if (tool.operation !== "create") {
     return {
       valid: true,
       errors: [],
@@ -197,7 +197,7 @@ export async function validateQuotaAvailability(
     return {
       valid: true,
       errors: [],
-      warnings: ['Namespace not provided - quota validation skipped'],
+      warnings: ["Namespace not provided - quota validation skipped"],
     };
   }
 
@@ -210,14 +210,14 @@ export async function validateQuotaAvailability(
     // Red zone: Block creation
     if (!quotaCheck.allowed) {
       errors.push({
-        path: 'quota',
+        path: "quota",
         message: formatQuotaError(quotaCheck),
         quotaInfo: quotaCheck.quotaInfo,
       });
     }
 
     // Yellow zone: Warn about approaching limit
-    if (quotaCheck.quotaInfo.threshold === 'yellow') {
+    if (quotaCheck.quotaInfo.threshold === "yellow") {
       warnings.push(formatQuotaWarning(quotaCheck.quotaInfo, tool.resource));
     }
 
@@ -229,12 +229,12 @@ export async function validateQuotaAvailability(
     };
   } catch (error) {
     // Quota check failed - log but don't block execution
-    logger.error('Quota validation failed', { error });
+    logger.error("Quota validation failed", { error });
 
     return {
       valid: true,
       errors: [],
-      warnings: ['Quota validation failed - proceeding without quota check'],
+      warnings: ["Quota validation failed - proceeding without quota check"],
     };
   }
 }
@@ -244,17 +244,17 @@ export async function validateQuotaAvailability(
  */
 function extractNamespace(pathParams: Record<string, string>, body?: Record<string, unknown>): string | null {
   // Extract namespace from path params (e.g., metadata.namespace)
-  if (pathParams['metadata.namespace']) {
-    return pathParams['metadata.namespace'];
+  if (pathParams["metadata.namespace"]) {
+    return pathParams["metadata.namespace"];
   }
   if (pathParams.namespace) {
     return pathParams.namespace;
   }
 
   // Extract from request body metadata
-  if (body?.metadata && typeof body.metadata === 'object') {
+  if (body?.metadata && typeof body.metadata === "object") {
     const metadata = body.metadata as Record<string, unknown>;
-    if (metadata.namespace && typeof metadata.namespace === 'string') {
+    if (metadata.namespace && typeof metadata.namespace === "string") {
       return metadata.namespace;
     }
   }
@@ -276,7 +276,7 @@ function validatePathParams(
       errors.push({
         path: `pathParams.${param.name}`,
         message: `Missing required path parameter: ${param.name}`,
-        expected: param.description || 'string value',
+        expected: param.description || "string value",
       });
     }
   }
@@ -288,7 +288,7 @@ function validatePathParams(
       errors.push({
         path: `pathParams.${key}`,
         message: `Unknown path parameter: ${key}`,
-        expected: `One of: ${[...knownParams].join(', ')}`,
+        expected: `One of: ${[...knownParams].join(", ")}`,
         actual: key,
       });
     }
@@ -310,7 +310,7 @@ function validateQueryParams(
       errors.push({
         path: `queryParams.${param.name}`,
         message: `Missing required query parameter: ${param.name}`,
-        expected: param.description || 'string value',
+        expected: param.description || "string value",
       });
     }
   }
@@ -334,28 +334,28 @@ function validateBody(
   warnings: string[],
 ): void {
   // Check if body is required but missing
-  if (tool.method === 'POST' || tool.method === 'PUT') {
+  if (tool.method === "POST" || tool.method === "PUT") {
     if (!body || Object.keys(body).length === 0) {
       // For create/update, body is usually required
-      if (tool.operation === 'create' || tool.operation === 'update') {
+      if (tool.operation === "create" || tool.operation === "update") {
         errors.push({
-          path: 'body',
-          message: 'Request body is required for this operation',
-          expected: 'Object with required fields',
+          path: "body",
+          message: "Request body is required for this operation",
+          expected: "Object with required fields",
         });
       }
     }
   }
 
   // Basic structure validation for F5XC resources
-  if (body && tool.operation === 'create') {
+  if (body && tool.operation === "create") {
     // Most F5XC resources require metadata.name and metadata.namespace
-    if (!body.metadata || typeof body.metadata !== 'object') {
+    if (!body.metadata || typeof body.metadata !== "object") {
       warnings.push("Body should include a 'metadata' object for F5XC resources");
     } else {
       const metadata = body.metadata as Record<string, unknown>;
       if (!metadata.name) {
-        warnings.push('metadata.name is typically required for F5XC resources');
+        warnings.push("metadata.name is typically required for F5XC resources");
       }
     }
   }
@@ -399,7 +399,7 @@ function validateRequiredFields(
       errors.push({
         path: `body.${field}`,
         message: `Missing required field: ${field}`,
-        expected: 'User must provide value',
+        expected: "User must provide value",
       });
     }
     return;
@@ -412,7 +412,7 @@ function validateRequiredFields(
         errors.push({
           path: `body.${field}`,
           message: `Missing required field: ${field}`,
-          expected: 'User must provide value',
+          expected: "User must provide value",
         });
       }
     }
@@ -466,7 +466,7 @@ function validateOneOfGroups(
 
     if (selectedOptions.length > 1) {
       // Multiple options selected - include recommended hint if available
-      let warningMsg = `Multiple mutually exclusive options selected for ${group.choiceField}: ${selectedOptions.join(', ')}. Choose only one.`;
+      let warningMsg = `Multiple mutually exclusive options selected for ${group.choiceField}: ${selectedOptions.join(", ")}. Choose only one.`;
       if (group.recommendedOption) {
         warningMsg += ` Recommended: ${group.recommendedOption}`;
       }
@@ -486,14 +486,14 @@ function validateOneOfGroups(
  * Get nested value from object using dot notation
  */
 function getNestedValue(obj: Record<string, unknown>, path: string): unknown {
-  const parts = path.split('.');
+  const parts = path.split(".");
   let current: unknown = obj;
 
   for (const part of parts) {
     if (current === null || current === undefined) {
       return undefined;
     }
-    if (typeof current !== 'object') {
+    if (typeof current !== "object") {
       return undefined;
     }
     current = (current as Record<string, unknown>)[part];
@@ -509,15 +509,15 @@ export function formatValidationResult(result: ValidationResult): string {
   const lines: string[] = [];
 
   if (result.valid) {
-    lines.push('✅ Validation passed');
+    lines.push("✅ Validation passed");
     if (result.tool) {
       lines.push(`   Tool: ${result.tool.name}`);
       lines.push(`   Operation: ${result.tool.method} ${result.tool.path}`);
     }
   } else {
-    lines.push('❌ Validation failed');
-    lines.push('');
-    lines.push('Errors:');
+    lines.push("❌ Validation failed");
+    lines.push("");
+    lines.push("Errors:");
     for (const error of result.errors) {
       lines.push(`  • ${error.path}: ${error.message}`);
       if (error.expected) {
@@ -530,12 +530,12 @@ export function formatValidationResult(result: ValidationResult): string {
   }
 
   if (result.warnings.length > 0) {
-    lines.push('');
-    lines.push('Warnings:');
+    lines.push("");
+    lines.push("Warnings:");
     for (const warning of result.warnings) {
       lines.push(`  ⚠️ ${warning}`);
     }
   }
 
-  return lines.join('\n');
+  return lines.join("\n");
 }

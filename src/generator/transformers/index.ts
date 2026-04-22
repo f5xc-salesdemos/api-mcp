@@ -10,4 +10,4 @@ export {
   hasMyPrefixExamples,
   normalizeExamples,
   normalizeParameterExamples,
-} from './normalize-examples.js';
+} from "./normalize-examples.js";

@@ -7,8 +7,8 @@
  * Extracted from server.ts to support modular handler architecture.
  */
 
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import type { CredentialManager, HttpClient } from '@robinmordasiewicz/f5xc-auth';
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { CredentialManager, HttpClient } from "@robinmordasiewicz/f5xc-auth";
 
 /**
  * Configuration options for the F5XC API MCP server.

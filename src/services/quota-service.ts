@@ -7,12 +7,12 @@
  * Provides caching, threshold calculation, and quota validation.
  */
 
-import type { HttpClient } from '@robinmordasiewicz/f5xc-auth';
-import type { CachedQuotaEntry, QuotaCheckResult, QuotaInfo, QuotaStatus } from '../types/quota.js';
-import { logger } from '../utils/logging.js';
-import { fetchQuotaUsage, parseQuotaUsage } from './quota-api-client.js';
-import { getQuotaResourceType } from './quota-resource-mapping.js';
-import { getQuotaThresholds, getThresholdLevel } from './quota-thresholds.js';
+import type { HttpClient } from "@robinmordasiewicz/f5xc-auth";
+import type { CachedQuotaEntry, QuotaCheckResult, QuotaInfo, QuotaStatus } from "../types/quota.js";
+import { logger } from "../utils/logging.js";
+import { fetchQuotaUsage, parseQuotaUsage } from "./quota-api-client.js";
+import { getQuotaResourceType } from "./quota-resource-mapping.js";
+import { getQuotaThresholds, getThresholdLevel } from "./quota-thresholds.js";
 
 /**
  * Default cache TTL (5 minutes)
@@ -49,7 +49,7 @@ export class QuotaService {
       const status = await this.getQuotaStatus(namespace, resourceType, httpClient);
 
       // Determine if creation is allowed based on threshold
-      const allowed = status.limits.threshold !== 'red';
+      const allowed = status.limits.threshold !== "red";
       const reason = allowed
         ? undefined
         : `Resource quota limit reached. Cannot create additional ${resourceType} resources.`;
@@ -68,13 +68,13 @@ export class QuotaService {
       // Return allowed=true to not block operations when quota API is unavailable
       return {
         allowed: true,
-        reason: 'Quota check failed - proceeding without quota validation',
+        reason: "Quota check failed - proceeding without quota validation",
         quotaInfo: {
           limit: Infinity,
           current: 0,
           remaining: Infinity,
           percentage: 0,
-          threshold: 'green',
+          threshold: "green",
         },
       };
     }
@@ -122,7 +122,7 @@ export class QuotaService {
           current: 0,
           remaining: Infinity,
           percentage: 0,
-          threshold: 'green',
+          threshold: "green",
         },
       };
 
@@ -241,7 +241,7 @@ export class QuotaService {
    */
   clearCache(): void {
     this.cache.clear();
-    logger.debug('Cleared all quota cache entries');
+    logger.debug("Cleared all quota cache entries");
   }
 }
 

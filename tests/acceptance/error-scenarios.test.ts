@@ -14,49 +14,49 @@
  * SAFETY: Uses invalid tokens only - never risks valid credentials
  */
 
-import { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
-import axios, { type AxiosError, type AxiosInstance } from 'axios';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
+import axios, { AxiosError, type AxiosInstance } from "axios";
+import { beforeAll, describe, expect, it } from "vitest";
 
 /** Staging tenant name — override with TEST_TENANT_NAME env var */
-const TEST_TENANT = process.env.TEST_TENANT_NAME ?? 'staging-test';
+const TEST_TENANT = process.env.TEST_TENANT_NAME ?? "staging-test";
 const STAGING_BASE_URL = `https://${TEST_TENANT}.staging.volterra.us`;
 
-describe('Error Scenario Tests', () => {
-  describe('Authentication Errors', () => {
-    it('should handle invalid API token (401 Unauthorized)', async () => {
+describe("Error Scenario Tests", () => {
+  describe("Authentication Errors", () => {
+    it("should handle invalid API token (401 Unauthorized)", async () => {
       const httpClient = axios.create({
         baseURL: STAGING_BASE_URL,
         headers: {
-          Authorization: 'APIToken invalid-token-12345',
-          'Content-Type': 'application/json',
+          Authorization: "APIToken invalid-token-12345",
+          "Content-Type": "application/json",
         },
         timeout: 10000,
       });
 
       try {
-        await httpClient.get('/api/web/namespaces');
-        expect.fail('Should have thrown 401 error');
+        await httpClient.get("/api/web/namespaces");
+        expect.fail("Should have thrown 401 error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.response?.status).toBe(401);
-        expect(err.response?.statusText).toContain('Unauthorized');
+        expect(err.response?.statusText).toContain("Unauthorized");
       }
     });
 
-    it('should handle malformed API token format', async () => {
+    it("should handle malformed API token format", async () => {
       const httpClient = axios.create({
         baseURL: STAGING_BASE_URL,
         headers: {
-          Authorization: 'Bearer malformed-not-apitoken',
-          'Content-Type': 'application/json',
+          Authorization: "Bearer malformed-not-apitoken",
+          "Content-Type": "application/json",
         },
         timeout: 10000,
       });
 
       try {
-        await httpClient.get('/api/web/namespaces');
-        expect.fail('Should have thrown authentication error');
+        await httpClient.get("/api/web/namespaces");
+        expect.fail("Should have thrown authentication error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.response?.status).toBeGreaterThanOrEqual(401);
@@ -64,38 +64,38 @@ describe('Error Scenario Tests', () => {
       }
     });
 
-    it('should handle missing authorization header', async () => {
+    it("should handle missing authorization header", async () => {
       const httpClient = axios.create({
         baseURL: STAGING_BASE_URL,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         timeout: 10000,
       });
 
       try {
-        await httpClient.get('/api/web/namespaces');
-        expect.fail('Should have thrown authentication error');
+        await httpClient.get("/api/web/namespaces");
+        expect.fail("Should have thrown authentication error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.response?.status).toBe(401);
       }
     });
 
-    it('should handle expired API token scenario', async () => {
+    it("should handle expired API token scenario", async () => {
       // Simulate expired token (will get 401)
       const httpClient = axios.create({
         baseURL: STAGING_BASE_URL,
         headers: {
-          Authorization: 'APIToken expired-token-00000000',
-          'Content-Type': 'application/json',
+          Authorization: "APIToken expired-token-00000000",
+          "Content-Type": "application/json",
         },
         timeout: 10000,
       });
 
       try {
-        await httpClient.get('/api/web/namespaces');
-        expect.fail('Should have thrown 401 error');
+        await httpClient.get("/api/web/namespaces");
+        expect.fail("Should have thrown 401 error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.response?.status).toBe(401);
@@ -103,7 +103,7 @@ describe('Error Scenario Tests', () => {
     });
   });
 
-  describe('HTTP Error Codes', () => {
+  describe("HTTP Error Codes", () => {
     let validHttpClient: AxiosInstance;
 
     beforeAll(async () => {
@@ -112,23 +112,23 @@ describe('Error Scenario Tests', () => {
       await credentialManager.initialize();
 
       if (!credentialManager.isAuthenticated()) {
-        throw new Error('Cannot test HTTP errors without valid credentials');
+        throw new Error("Cannot test HTTP errors without valid credentials");
       }
 
       validHttpClient = axios.create({
         baseURL: credentialManager.getApiUrl(),
         headers: {
           Authorization: `APIToken ${credentialManager.getToken()}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         timeout: 10000,
       });
     });
 
-    it('should handle 404 Not Found gracefully', async () => {
+    it("should handle 404 Not Found gracefully", async () => {
       try {
-        await validHttpClient.get('/api/config/namespaces/system/http_loadbalancers/nonexistent-resource-12345');
-        expect.fail('Should have thrown 404 error');
+        await validHttpClient.get("/api/config/namespaces/system/http_loadbalancers/nonexistent-resource-12345");
+        expect.fail("Should have thrown 404 error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.response?.status).toBe(404);
@@ -136,10 +136,10 @@ describe('Error Scenario Tests', () => {
       }
     });
 
-    it('should handle 403 Forbidden gracefully', async () => {
+    it("should handle 403 Forbidden gracefully", async () => {
       // Attempt to access a restricted namespace
       try {
-        await validHttpClient.get('/api/config/namespaces/restricted-namespace-test/http_loadbalancers');
+        await validHttpClient.get("/api/config/namespaces/restricted-namespace-test/http_loadbalancers");
 
         // If no error, that's fine (namespace might not exist or we have access)
         expect(true).toBe(true);
@@ -150,20 +150,20 @@ describe('Error Scenario Tests', () => {
       }
     });
 
-    it('should handle malformed API endpoint (404)', async () => {
+    it("should handle malformed API endpoint (404)", async () => {
       try {
-        await validHttpClient.get('/api/config/invalid-endpoint-path');
-        expect.fail('Should have thrown 404 error');
+        await validHttpClient.get("/api/config/invalid-endpoint-path");
+        expect.fail("Should have thrown 404 error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.response?.status).toBe(404);
       }
     });
 
-    it('should handle invalid method for endpoint (405)', async () => {
+    it("should handle invalid method for endpoint (405)", async () => {
       try {
         // Try PATCH on a non-patchable endpoint
-        await validHttpClient.patch('/api/web/namespaces', {});
+        await validHttpClient.patch("/api/web/namespaces", {});
 
         // If succeeds, that's acceptable (endpoint might support PATCH)
         expect(true).toBe(true);
@@ -174,10 +174,10 @@ describe('Error Scenario Tests', () => {
       }
     });
 
-    it('should include error details in response', async () => {
+    it("should include error details in response", async () => {
       try {
-        await validHttpClient.get('/api/config/namespaces/system/http_loadbalancers/nonexistent-12345');
-        expect.fail('Should have thrown 404 error');
+        await validHttpClient.get("/api/config/namespaces/system/http_loadbalancers/nonexistent-12345");
+        expect.fail("Should have thrown 404 error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.response?.status).toBe(404);
@@ -186,56 +186,56 @@ describe('Error Scenario Tests', () => {
         // Verify error response structure
         const message = error instanceof Error ? error.message : String(error);
         expect(message).toBeDefined();
-        expect(typeof message).toBe('string');
+        expect(typeof message).toBe("string");
       }
     });
   });
 
-  describe('Network and Timeout Errors', () => {
-    it('should handle connection timeout gracefully', async () => {
+  describe("Network and Timeout Errors", () => {
+    it("should handle connection timeout gracefully", async () => {
       const httpClient = axios.create({
         baseURL: STAGING_BASE_URL,
         headers: {
-          Authorization: 'APIToken test-token',
+          Authorization: "APIToken test-token",
         },
         timeout: 1, // 1ms timeout - will fail
       });
 
       try {
-        await httpClient.get('/api/web/namespaces');
-        expect.fail('Should have thrown timeout error');
+        await httpClient.get("/api/web/namespaces");
+        expect.fail("Should have thrown timeout error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.code).toBeDefined();
-        expect(['ECONNABORTED', 'ETIMEDOUT']).toContain(err.code);
+        expect(["ECONNABORTED", "ETIMEDOUT"]).toContain(err.code);
       }
     });
 
-    it('should handle invalid hostname (DNS failure)', async () => {
+    it("should handle invalid hostname (DNS failure)", async () => {
       const httpClient = axios.create({
-        baseURL: 'https://nonexistent-invalid-hostname-12345.volterra.us',
+        baseURL: "https://nonexistent-invalid-hostname-12345.volterra.us",
         timeout: 5000,
       });
 
       try {
-        await httpClient.get('/api/web/namespaces');
-        expect.fail('Should have thrown DNS error');
+        await httpClient.get("/api/web/namespaces");
+        expect.fail("Should have thrown DNS error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.code).toBeDefined();
-        expect(['ENOTFOUND', 'EAI_AGAIN']).toContain(err.code);
+        expect(["ENOTFOUND", "EAI_AGAIN"]).toContain(err.code);
       }
     });
 
-    it('should handle invalid port (connection refused)', async () => {
+    it("should handle invalid port (connection refused)", async () => {
       const httpClient = axios.create({
         baseURL: `${STAGING_BASE_URL}:9999`,
         timeout: 5000,
       });
 
       try {
-        await httpClient.get('/api/web/namespaces');
-        expect.fail('Should have thrown connection error');
+        await httpClient.get("/api/web/namespaces");
+        expect.fail("Should have thrown connection error");
       } catch (error: unknown) {
         const err = error as AxiosError;
         expect(err.code).toBeDefined();
@@ -245,7 +245,7 @@ describe('Error Scenario Tests', () => {
     });
   });
 
-  describe('Request Validation Errors', () => {
+  describe("Request Validation Errors", () => {
     let validHttpClient: AxiosInstance;
 
     beforeAll(async () => {
@@ -253,25 +253,25 @@ describe('Error Scenario Tests', () => {
       await credentialManager.initialize();
 
       if (!credentialManager.isAuthenticated()) {
-        throw new Error('Cannot test validation errors without valid credentials');
+        throw new Error("Cannot test validation errors without valid credentials");
       }
 
       validHttpClient = axios.create({
         baseURL: credentialManager.getApiUrl(),
         headers: {
           Authorization: `APIToken ${credentialManager.getToken()}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         timeout: 10000,
       });
     });
 
-    it('should handle missing required fields in POST', async () => {
+    it("should handle missing required fields in POST", async () => {
       try {
         // Create HTTP load balancer with incomplete payload
-        await validHttpClient.post('/api/config/namespaces/system/http_loadbalancers', {
+        await validHttpClient.post("/api/config/namespaces/system/http_loadbalancers", {
           metadata: {
-            name: 'incomplete-test',
+            name: "incomplete-test",
             // Missing namespace
           },
           // Missing spec
@@ -287,14 +287,14 @@ describe('Error Scenario Tests', () => {
       }
     });
 
-    it('should handle invalid JSON in request body', async () => {
+    it("should handle invalid JSON in request body", async () => {
       try {
         await validHttpClient.post(
-          '/api/config/namespaces/system/http_loadbalancers',
-          'invalid-json-string-not-object',
+          "/api/config/namespaces/system/http_loadbalancers",
+          "invalid-json-string-not-object",
         );
 
-        expect.fail('Should have thrown validation error');
+        expect.fail("Should have thrown validation error");
       } catch (error: unknown) {
         // Should get 400 Bad Request or parse error
         const err = error as AxiosError;
@@ -303,12 +303,12 @@ describe('Error Scenario Tests', () => {
       }
     });
 
-    it('should handle invalid data types in payload', async () => {
+    it("should handle invalid data types in payload", async () => {
       try {
-        await validHttpClient.post('/api/config/namespaces/system/http_loadbalancers', {
+        await validHttpClient.post("/api/config/namespaces/system/http_loadbalancers", {
           metadata: {
             name: 12345, // Should be string, not number
-            namespace: 'system',
+            namespace: "system",
           },
           spec: {},
         });
@@ -324,8 +324,8 @@ describe('Error Scenario Tests', () => {
     });
   });
 
-  describe('Rate Limiting Behavior', () => {
-    it('should handle rate limit responses gracefully', async () => {
+  describe("Rate Limiting Behavior", () => {
+    it("should handle rate limit responses gracefully", async () => {
       // Note: We can't reliably trigger 429 in tests without flooding the API
       // This test validates that we handle 429 correctly if it occurs
 
@@ -333,7 +333,7 @@ describe('Error Scenario Tests', () => {
       await credentialManager.initialize();
 
       if (!credentialManager.isAuthenticated()) {
-        console.log('⚠️  Skipping rate limit test - not authenticated');
+        console.log("⚠️  Skipping rate limit test - not authenticated");
         return;
       }
 
@@ -341,13 +341,13 @@ describe('Error Scenario Tests', () => {
         baseURL: credentialManager.getApiUrl(),
         headers: {
           Authorization: `APIToken ${credentialManager.getToken()}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         timeout: 10000,
       });
 
       // Make a single request - should succeed
-      const response = await httpClient.get('/api/web/namespaces');
+      const response = await httpClient.get("/api/web/namespaces");
       expect(response.status).toBe(200);
 
       // Verify we can handle 429 if it happens
@@ -355,42 +355,42 @@ describe('Error Scenario Tests', () => {
     });
   });
 
-  describe('Graceful Degradation', () => {
-    it('should provide meaningful error messages', async () => {
+  describe("Graceful Degradation", () => {
+    it("should provide meaningful error messages", async () => {
       const httpClient = axios.create({
         baseURL: STAGING_BASE_URL,
         headers: {
-          Authorization: 'APIToken invalid-token',
+          Authorization: "APIToken invalid-token",
         },
         timeout: 10000,
       });
 
       try {
-        await httpClient.get('/api/web/namespaces');
-        expect.fail('Should have thrown error');
+        await httpClient.get("/api/web/namespaces");
+        expect.fail("Should have thrown error");
       } catch (error: unknown) {
         // Verify error has useful information
         const err = error as AxiosError;
         const message = error instanceof Error ? error.message : String(error);
         expect(message).toBeDefined();
         expect(err.response?.status).toBeDefined();
-        expect(typeof message).toBe('string');
+        expect(typeof message).toBe("string");
         expect(message.length).toBeGreaterThan(0);
       }
     });
 
-    it('should preserve error context through axios', async () => {
+    it("should preserve error context through axios", async () => {
       const httpClient = axios.create({
         baseURL: STAGING_BASE_URL,
         headers: {
-          Authorization: 'APIToken invalid-token',
+          Authorization: "APIToken invalid-token",
         },
         timeout: 10000,
       });
 
       try {
-        await httpClient.get('/api/web/namespaces');
-        expect.fail('Should have thrown error');
+        await httpClient.get("/api/web/namespaces");
+        expect.fail("Should have thrown error");
       } catch (error: unknown) {
         // Verify we have full error context
         const err = error as AxiosError;

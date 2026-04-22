@@ -203,12 +203,12 @@ export interface DependencyDiscoveryResponse {
  * Actions available for the f5xc-api-dependencies discovery tool
  */
 export type DependencyDiscoveryAction =
-  | 'prerequisites'
-  | 'dependents'
-  | 'oneOf'
-  | 'subscriptions'
-  | 'creationOrder'
-  | 'full';
+  | "prerequisites"
+  | "dependents"
+  | "oneOf"
+  | "subscriptions"
+  | "creationOrder"
+  | "full";
 
 /**
  * Input schema for the f5xc-api-dependencies discovery tool
@@ -241,9 +241,9 @@ export function parseResourceKey(key: ResourceKey): {
   domain: string;
   resource: string;
 } {
-  const parts = key.split('/');
-  const domain = parts[0] ?? '';
-  const resource = parts.slice(1).join('/');
+  const parts = key.split("/");
+  const domain = parts[0] ?? "";
+  const resource = parts.slice(1).join("/");
   return {
     domain,
     resource,

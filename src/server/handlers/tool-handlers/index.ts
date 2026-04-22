@@ -7,17 +7,17 @@
  * Combines metadata, discovery, execution, analysis, planning, and guidance tools.
  */
 
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { AuthMode, type CredentialManager } from '@robinmordasiewicz/f5xc-auth';
-import { getConsolidationStats, getIndexMetadata } from '../../../tools/discovery/index.js';
-import { logger } from '../../../utils/logging.js';
-import { registerAnalysisTools } from './analysis.js';
-import { registerDiscoveryTools } from './discovery.js';
-import { registerExecutionTools } from './execution.js';
-import { registerGuidanceTools } from './guidance.js';
-import { registerMetadataTools } from './metadata.js';
-import { registerPlanningTools } from './planning.js';
-import { registerQuotaTools } from './quota.js';
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { AuthMode, type CredentialManager } from "@robinmordasiewicz/f5xc-auth";
+import { getConsolidationStats, getIndexMetadata } from "../../../tools/discovery/index.js";
+import { logger } from "../../../utils/logging.js";
+import { registerAnalysisTools } from "./analysis.js";
+import { registerDiscoveryTools } from "./discovery.js";
+import { registerExecutionTools } from "./execution.js";
+import { registerGuidanceTools } from "./guidance.js";
+import { registerMetadataTools } from "./metadata.js";
+import { registerPlanningTools } from "./planning.js";
+import { registerQuotaTools } from "./quota.js";
 
 /**
  * Context for tool registration containing necessary dependencies.
@@ -53,7 +53,7 @@ export function registerTools(server: McpServer, context: ToolRegistrationContex
   // Log registration completion
   const indexMetadata = getIndexMetadata();
   const consolidationStats = getConsolidationStats();
-  logger.info('Tool registration completed (dynamic discovery mode)', {
+  logger.info("Tool registration completed (dynamic discovery mode)", {
     authMode,
     authenticated: authMode !== AuthMode.NONE,
     registeredTools: 17, // Updated: 14 + 3 quota tools
@@ -61,15 +61,15 @@ export function registerTools(server: McpServer, context: ToolRegistrationContex
     consolidatedResources: consolidationStats.consolidatedCount,
     consolidationReduction: consolidationStats.reductionPercent,
     domains: Object.keys(indexMetadata.domains),
-    tokenSavings: '95%+ (535K → ~500 tokens upfront)',
+    tokenSavings: "95%+ (535K → ~500 tokens upfront)",
   });
 }
 
-export { registerAnalysisTools } from './analysis.js';
-export { registerDiscoveryTools } from './discovery.js';
-export { registerExecutionTools } from './execution.js';
-export { registerGuidanceTools } from './guidance.js';
+export { registerAnalysisTools } from "./analysis.js";
+export { registerDiscoveryTools } from "./discovery.js";
+export { registerExecutionTools } from "./execution.js";
+export { registerGuidanceTools } from "./guidance.js";
 // Re-export individual registration functions for testing and selective use
-export { registerMetadataTools } from './metadata.js';
-export { registerPlanningTools } from './planning.js';
-export { registerQuotaTools } from './quota.js';
+export { registerMetadataTools } from "./metadata.js";
+export { registerPlanningTools } from "./planning.js";
+export { registerQuotaTools } from "./quota.js";

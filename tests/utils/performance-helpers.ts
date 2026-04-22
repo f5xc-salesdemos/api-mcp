@@ -225,6 +225,6 @@ export function triggerGC(): void {
   if (global.gc) {
     global.gc();
   } else {
-    console.warn('⚠️  Garbage collection not exposed. Run with --expose-gc for accurate memory tests.');
+    console.warn("⚠️  Garbage collection not exposed. Run with --expose-gc for accurate memory tests.");
   }
 }

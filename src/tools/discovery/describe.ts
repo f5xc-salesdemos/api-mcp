@@ -7,10 +7,10 @@
  * This implements lazy loading to avoid upfront token consumption.
  */
 
-import type { ParsedOperation } from '../../generator/openapi-parser.js';
-import { getToolByName } from '../registry.js';
-import { getToolEntry, getToolIndex, toolExists } from './index-loader.js';
-import { generateSmartExamplePayload } from './schema.js';
+import type { ParsedOperation } from "../../generator/openapi-parser.js";
+import { getToolByName } from "../registry.js";
+import { getToolEntry, getToolIndex, toolExists } from "./index-loader.js";
+import { generateSmartExamplePayload } from "./schema.js";
 
 /**
  * Simplified tool description for MCP response
@@ -63,9 +63,9 @@ export interface ParameterDescription {
  */
 const COMMON_PARAM_DESCRIPTIONS: Record<string, string> = {
   namespace: "Target namespace (e.g., 'default')",
-  'metadata.namespace': 'Target namespace for the resource',
-  name: 'Resource name',
-  'metadata.name': 'Resource name identifier',
+  "metadata.namespace": "Target namespace for the resource",
+  name: "Resource name",
+  "metadata.name": "Resource name identifier",
 };
 
 /**
@@ -84,7 +84,7 @@ function optimizeDescription(name: string, description: string): string {
     if (firstSentence && firstSentence.length <= 100) {
       return firstSentence;
     }
-    return description.slice(0, 97) + '...';
+    return description.slice(0, 97) + "...";
   }
 
   return description;
@@ -101,9 +101,9 @@ function extractParameterDescription(param: {
 }): ParameterDescription {
   return {
     name: param.name,
-    description: optimizeDescription(param.name, param.description ?? ''),
+    description: optimizeDescription(param.name, param.description ?? ""),
     required: param.required ?? false,
-    type: (param.schema?.type as string) ?? 'string',
+    type: (param.schema?.type as string) ?? "string",
   };
 }
 
@@ -133,9 +133,9 @@ export function describeTool(toolName: string): ToolDescription | null {
   let requestBodyRef: string | null = null;
   if (tool.requestBodySchema) {
     const ref = tool.requestBodySchema.$ref;
-    if (typeof ref === 'string') {
+    if (typeof ref === "string") {
       // Extract just the schema name from the reference
-      requestBodyRef = ref.replace('#/components/schemas/', '');
+      requestBodyRef = ref.replace("#/components/schemas/", "");
     }
   }
 
@@ -286,7 +286,7 @@ export function getOptimizationStats(): {
 
   // Find tools that likely have path parameters (create and list operations)
   const sampleTools = allTools
-    .filter((t: { operation: string }) => t.operation === 'create' || t.operation === 'list')
+    .filter((t: { operation: string }) => t.operation === "create" || t.operation === "list")
     .slice(0, 5)
     .map((t: { name: string }) => t.name);
 
@@ -298,8 +298,8 @@ export function getOptimizationStats(): {
     const tool = getToolByName(name);
     if (tool && tool.pathParameters.length > 0) {
       for (const param of tool.pathParameters) {
-        originalTotal += (param.description ?? '').length;
-        optimizedTotal += optimizeDescription(param.name, param.description ?? '').length;
+        originalTotal += (param.description ?? "").length;
+        optimizedTotal += optimizeDescription(param.name, param.description ?? "").length;
         count++;
       }
     }

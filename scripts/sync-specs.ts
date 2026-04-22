@@ -14,12 +14,12 @@
  *   tsx scripts/sync-specs.ts
  */
 
-import { createWriteStream, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import https from 'node:https';
-import { basename, dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import JSZip from 'jszip';
-import { normalizeExamples } from '../src/generator/transformers/normalize-examples.js';
+import { createWriteStream, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import https from "node:https";
+import JSZip from "jszip";
+import { basename, dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { normalizeExamples } from "../src/generator/transformers/normalize-examples.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -29,28 +29,28 @@ const __dirname = dirname(__filename);
  */
 const CONFIG = {
   /** GitHub repository for enriched specs */
-  GITHUB_REPO: 'robinmordasiewicz/f5xc-api-enriched',
+  GITHUB_REPO: "robinmordasiewicz/f5xc-api-enriched",
 
   /** GitHub API endpoint for latest release */
-  GITHUB_API: 'https://api.github.com/repos/robinmordasiewicz/f5xc-api-enriched/releases/latest',
+  GITHUB_API: "https://api.github.com/repos/robinmordasiewicz/f5xc-api-enriched/releases/latest",
 
   /** Directory to store domain specs */
-  SPECS_DOMAINS_DIR: join(__dirname, '..', 'specs', 'domains'),
+  SPECS_DOMAINS_DIR: join(__dirname, "..", "specs", "domains"),
 
   /** Base specs directory */
-  SPECS_DIR: join(__dirname, '..', 'specs'),
+  SPECS_DIR: join(__dirname, "..", "specs"),
 
   /** Index file with version metadata */
-  SPECS_INDEX_FILE: join(__dirname, '..', 'specs', 'index.json'),
+  SPECS_INDEX_FILE: join(__dirname, "..", "specs", "index.json"),
 
   /** Temporary download file */
-  TEMP_ZIP: join(__dirname, '..', 'specs', 'temp-enriched.zip'),
+  TEMP_ZIP: join(__dirname, "..", "specs", "temp-enriched.zip"),
 
   /** Request timeout in milliseconds */
   TIMEOUT: 120000,
 
   /** User agent for GitHub API */
-  USER_AGENT: 'f5xc-api-mcp/sync-specs',
+  USER_AGENT: "f5xc-api-mcp/sync-specs",
 };
 
 /**
@@ -72,7 +72,7 @@ const log = {
  * @param obj - The object to normalize (typically a parsed JSON spec)
  */
 function normalizeSpecExamples(obj: unknown): void {
-  if (!obj || typeof obj !== 'object') return;
+  if (!obj || typeof obj !== "object") return;
 
   if (Array.isArray(obj)) {
     obj.forEach(normalizeSpecExamples);
@@ -80,9 +80,9 @@ function normalizeSpecExamples(obj: unknown): void {
   }
 
   for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
-    if (key === 'description' && typeof value === 'string') {
+    if (key === "description" && typeof value === "string") {
       (obj as Record<string, unknown>)[key] = normalizeExamples(value);
-    } else if (typeof value === 'object') {
+    } else if (typeof value === "object") {
       normalizeSpecExamples(value);
     }
   }
@@ -108,21 +108,21 @@ interface GitHubRelease {
 async function fetchJson<T>(url: string): Promise<T> {
   return new Promise((resolve, reject) => {
     const headers: Record<string, string> = {
-      'User-Agent': CONFIG.USER_AGENT,
-      Accept: 'application/vnd.github.v3+json',
+      "User-Agent": CONFIG.USER_AGENT,
+      Accept: "application/vnd.github.v3+json",
     };
 
     // Use GitHub token if available for higher rate limits
     const token = process.env.GITHUB_TOKEN;
     if (token) {
-      headers['Authorization'] = `token ${token}`;
+      headers["Authorization"] = `token ${token}`;
     }
 
     const urlObj = new URL(url);
     const options = {
       hostname: urlObj.hostname,
       path: urlObj.pathname + urlObj.search,
-      method: 'GET',
+      method: "GET",
       headers,
       timeout: CONFIG.TIMEOUT,
     };
@@ -141,11 +141,11 @@ async function fetchJson<T>(url: string): Promise<T> {
         return;
       }
 
-      let data = '';
-      response.on('data', (chunk) => {
+      let data = "";
+      response.on("data", (chunk) => {
         data += chunk;
       });
-      response.on('end', () => {
+      response.on("end", () => {
         try {
           resolve(JSON.parse(data) as T);
         } catch (error) {
@@ -154,10 +154,10 @@ async function fetchJson<T>(url: string): Promise<T> {
       });
     });
 
-    request.on('error', reject);
-    request.on('timeout', () => {
+    request.on("error", reject);
+    request.on("timeout", () => {
       request.destroy();
-      reject(new Error('Request timed out'));
+      reject(new Error("Request timed out"));
     });
 
     request.end();
@@ -184,20 +184,20 @@ async function downloadFile(url: string, destPath: string): Promise<void> {
     const file = createWriteStream(destPath);
 
     const headers: Record<string, string> = {
-      'User-Agent': CONFIG.USER_AGENT,
-      Accept: 'application/octet-stream',
+      "User-Agent": CONFIG.USER_AGENT,
+      Accept: "application/octet-stream",
     };
 
     const token = process.env.GITHUB_TOKEN;
     if (token) {
-      headers['Authorization'] = `token ${token}`;
+      headers["Authorization"] = `token ${token}`;
     }
 
     const urlObj = new URL(url);
     const options = {
       hostname: urlObj.hostname,
       path: urlObj.pathname + urlObj.search,
-      method: 'GET',
+      method: "GET",
       headers,
       timeout: CONFIG.TIMEOUT,
     };
@@ -219,31 +219,31 @@ async function downloadFile(url: string, destPath: string): Promise<void> {
         return;
       }
 
-      const contentLength = response.headers['content-length'];
+      const contentLength = response.headers["content-length"];
       if (contentLength) {
         log.info(`Download size: ${(parseInt(contentLength, 10) / 1024 / 1024).toFixed(2)} MB`);
       }
 
       response.pipe(file);
 
-      file.on('finish', () => {
+      file.on("finish", () => {
         file.close();
-        log.success('Download completed');
+        log.success("Download completed");
         resolve();
       });
     });
 
-    request.on('error', (error) => {
+    request.on("error", (error) => {
       file.close();
       rmSync(destPath, { force: true });
       reject(error);
     });
 
-    request.on('timeout', () => {
+    request.on("timeout", () => {
       request.destroy();
       file.close();
       rmSync(destPath, { force: true });
-      reject(new Error('Request timed out'));
+      reject(new Error("Request timed out"));
     });
 
     request.end();
@@ -271,22 +271,22 @@ async function extractDomainSpecs(zipPath: string, destDir: string): Promise<num
     }
 
     // Extract domain JSON files from domains/ directory
-    if (relativePath.startsWith('domains/') && relativePath.endsWith('.json')) {
+    if (relativePath.startsWith("domains/") && relativePath.endsWith(".json")) {
       const filename = basename(relativePath);
       const destPath = join(destDir, filename);
 
-      const content = await zipEntry.async('nodebuffer');
+      const content = await zipEntry.async("nodebuffer");
       // Parse JSON, normalize "my-" prefixes to "example-", and write back
-      const jsonContent = JSON.parse(content.toString('utf-8')) as unknown;
+      const jsonContent = JSON.parse(content.toString("utf-8")) as unknown;
       normalizeSpecExamples(jsonContent);
-      writeFileSync(destPath, JSON.stringify(jsonContent, null, 2) + '\n');
+      writeFileSync(destPath, JSON.stringify(jsonContent, null, 2) + "\n");
       extracted++;
       log.info(`  Extracted: ${filename}`);
     }
 
     // Extract index.json to specs directory
-    if (relativePath === 'index.json') {
-      const content = await zipEntry.async('nodebuffer');
+    if (relativePath === "index.json") {
+      const content = await zipEntry.async("nodebuffer");
       writeFileSync(CONFIG.SPECS_INDEX_FILE, content);
       log.info(`  Extracted: index.json`);
     }
@@ -303,7 +303,7 @@ function countSpecFiles(dir: string): number {
     return 0;
   }
 
-  return readdirSync(dir).filter((f) => f.endsWith('.json')).length;
+  return readdirSync(dir).filter((f) => f.endsWith(".json")).length;
 }
 
 /**
@@ -312,7 +312,7 @@ function countSpecFiles(dir: string): number {
 function cleanup(): void {
   if (existsSync(CONFIG.TEMP_ZIP)) {
     rmSync(CONFIG.TEMP_ZIP, { force: true });
-    log.info('Cleaned up temporary files');
+    log.info("Cleaned up temporary files");
   }
 }
 
@@ -325,7 +325,7 @@ function getCurrentVersion(): string | null {
   }
 
   try {
-    const index = JSON.parse(readFileSync(CONFIG.SPECS_INDEX_FILE, 'utf-8'));
+    const index = JSON.parse(readFileSync(CONFIG.SPECS_INDEX_FILE, "utf-8"));
     return index.version || null;
   } catch {
     return null;
@@ -336,10 +336,10 @@ function getCurrentVersion(): string | null {
  * Main sync function
  */
 async function syncSpecs(): Promise<void> {
-  console.log('='.repeat(60));
-  console.log('F5 Distributed Cloud Enriched OpenAPI Specification Sync');
+  console.log("=".repeat(60));
+  console.log("F5 Distributed Cloud Enriched OpenAPI Specification Sync");
   console.log(`Source: github.com/${CONFIG.GITHUB_REPO}`);
-  console.log('='.repeat(60));
+  console.log("=".repeat(60));
 
   try {
     // Create directories
@@ -362,9 +362,9 @@ async function syncSpecs(): Promise<void> {
     const release = await getLatestRelease();
 
     // Find the ZIP asset
-    const zipAsset = release.assets.find((a) => a.name.endsWith('.zip'));
+    const zipAsset = release.assets.find((a) => a.name.endsWith(".zip"));
     if (!zipAsset) {
-      throw new Error('No ZIP asset found in release');
+      throw new Error("No ZIP asset found in release");
     }
 
     log.info(`Asset: ${zipAsset.name} (${(zipAsset.size / 1024 / 1024).toFixed(2)} MB)`);
@@ -390,17 +390,17 @@ async function syncSpecs(): Promise<void> {
     const newVersion = getCurrentVersion();
 
     // Summary
-    console.log('='.repeat(60));
-    console.log('Sync Summary:');
+    console.log("=".repeat(60));
+    console.log("Sync Summary:");
     console.log(`  Source: github.com/${CONFIG.GITHUB_REPO}`);
     console.log(`  Release: ${release.tag_name}`);
-    console.log(`  Version: ${newVersion || 'unknown'}`);
+    console.log(`  Version: ${newVersion || "unknown"}`);
     console.log(`  Specs directory: ${CONFIG.SPECS_DOMAINS_DIR}`);
     console.log(`  Domain specs: ${extractedCount}`);
     if (currentVersion && newVersion && currentVersion !== newVersion) {
       console.log(`  Updated: ${currentVersion} → ${newVersion}`);
     }
-    console.log('='.repeat(60));
+    console.log("=".repeat(60));
   } catch (error) {
     cleanup();
     throw error;

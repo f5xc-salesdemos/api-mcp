@@ -20,12 +20,12 @@
  */
 export function generateToolName(domain: string, resource: string, operation: string): string {
   // Normalize inputs
-  const normalizedDomain = domain.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const normalizedDomain = domain.toLowerCase().replace(/[^a-z0-9]/g, "");
   const normalizedResource = resource
     .toLowerCase()
-    .replace(/_/g, '-')
-    .replace(/[^a-z0-9-]/g, '');
-  const normalizedOperation = operation.toLowerCase().replace(/[^a-z0-9]/g, '');
+    .replace(/_/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+  const normalizedOperation = operation.toLowerCase().replace(/[^a-z0-9]/g, "");
 
   return `f5xc-api-${normalizedDomain}-${normalizedResource}-${normalizedOperation}`;
 }
@@ -38,22 +38,22 @@ export function generateToolName(domain: string, resource: string, operation: st
  */
 export function extractResourceFromPath(path: string): string {
   // Extract the resource name from the path
-  const segments = path.split('/').filter(Boolean);
+  const segments = path.split("/").filter(Boolean);
   const lastSegment = segments[segments.length - 1];
 
   if (!lastSegment) {
-    return 'unknown';
+    return "unknown";
   }
 
   // Remove path parameters
-  if (lastSegment.startsWith('{')) {
+  if (lastSegment.startsWith("{")) {
     const secondLast = segments[segments.length - 2];
     return secondLast
-      ? secondLast.replace(/_/g, '-').replace(/s$/, '') // Remove trailing 's' for plural
-      : 'unknown';
+      ? secondLast.replace(/_/g, "-").replace(/s$/, "") // Remove trailing 's' for plural
+      : "unknown";
   }
 
-  return lastSegment.replace(/_/g, '-').replace(/s$/, '');
+  return lastSegment.replace(/_/g, "-").replace(/s$/, "");
 }
 
 /**
@@ -67,16 +67,16 @@ export function methodToOperation(method: string, hasPathParam: boolean): string
   const upperMethod = method.toUpperCase();
 
   switch (upperMethod) {
-    case 'GET':
-      return hasPathParam ? 'get' : 'list';
-    case 'POST':
-      return 'create';
-    case 'PUT':
-      return 'update';
-    case 'DELETE':
-      return 'delete';
-    case 'PATCH':
-      return 'patch';
+    case "GET":
+      return hasPathParam ? "get" : "list";
+    case "POST":
+      return "create";
+    case "PUT":
+      return "update";
+    case "DELETE":
+      return "delete";
+    case "PATCH":
+      return "patch";
     default:
       return upperMethod.toLowerCase();
   }

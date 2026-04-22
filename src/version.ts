@@ -9,10 +9,10 @@
  */
 
 /** Package version from package.json */
-export const VERSION = '2.0.21-2601122132';
+export const VERSION = "2.0.21-2601122132";
 
 /** Package name */
-export const PACKAGE_NAME = '@f5xc-salesdemos/api-mcp';
+export const PACKAGE_NAME = "@f5xc-salesdemos/api-mcp";
 
 /** Upstream F5 XC API version from specs */
-export const UPSTREAM_VERSION = 'unknown';
+export const UPSTREAM_VERSION = "unknown";

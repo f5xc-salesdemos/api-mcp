@@ -56,7 +56,7 @@ export async function pollResourceStatus(
   let lastError: string | undefined;
 
   const checkStatus =
-    typeof expectedStatus === 'function' ? expectedStatus : (status: string) => status === expectedStatus;
+    typeof expectedStatus === "function" ? expectedStatus : (status: string) => status === expectedStatus;
 
   while (attempts < maxAttempts) {
     // Check timeout if set
@@ -96,10 +96,10 @@ export async function pollResourceStatus(
       if (httpErr.response?.status === 404) {
         return {
           success: false,
-          status: 'NOT_FOUND',
+          status: "NOT_FOUND",
           attempts,
           duration: Date.now() - startTime,
-          error: 'Resource not found (404)',
+          error: "Resource not found (404)",
         };
       }
     }
@@ -200,7 +200,7 @@ export async function waitForResourceDeleted(
         console.log(`✅ Resource deleted after ${attempts} attempts (${Math.round((Date.now() - startTime) / 1000)}s)`);
         return {
           success: true,
-          status: 'DELETED',
+          status: "DELETED",
           attempts,
           duration: Date.now() - startTime,
         };
@@ -208,7 +208,7 @@ export async function waitForResourceDeleted(
 
       // Other error (not 404)
       console.log(
-        `  ⚠️  Attempt ${attempts}/${maxAttempts}: Unexpected error = ${httpErr.response?.status || 'unknown'}`,
+        `  ⚠️  Attempt ${attempts}/${maxAttempts}: Unexpected error = ${httpErr.response?.status || "unknown"}`,
       );
 
       if (attempts < maxAttempts) {
@@ -275,7 +275,7 @@ export async function verifyResource(
     }
 
     // Validation failed
-    const error = typeof validationResult === 'string' ? validationResult : 'Validation failed';
+    const error = typeof validationResult === "string" ? validationResult : "Validation failed";
 
     return {
       success: false,
@@ -304,7 +304,7 @@ export async function verifyResource(
 function getNestedValue(obj: unknown, ...keys: string[]): unknown {
   let current: unknown = obj;
   for (const key of keys) {
-    if (current == null || typeof current !== 'object') {
+    if (current == null || typeof current !== "object") {
       return undefined;
     }
     current = (current as Record<string, unknown>)[key];
@@ -320,27 +320,27 @@ function getNestedValue(obj: unknown, ...keys: string[]): unknown {
  */
 function extractStatus(data: unknown): string {
   // Try common status field locations
-  const systemStatus = getNestedValue(data, 'system_metadata', 'status', 'status');
-  if (typeof systemStatus === 'string') {
+  const systemStatus = getNestedValue(data, "system_metadata", "status", "status");
+  if (typeof systemStatus === "string") {
     return systemStatus;
   }
 
-  const statusStatus = getNestedValue(data, 'status', 'status');
-  if (typeof statusStatus === 'string') {
+  const statusStatus = getNestedValue(data, "status", "status");
+  if (typeof statusStatus === "string") {
     return statusStatus;
   }
 
-  const systemState = getNestedValue(data, 'system_metadata', 'state');
-  if (typeof systemState === 'string') {
+  const systemState = getNestedValue(data, "system_metadata", "state");
+  if (typeof systemState === "string") {
     return systemState;
   }
 
-  const state = getNestedValue(data, 'state');
-  if (typeof state === 'string') {
+  const state = getNestedValue(data, "state");
+  if (typeof state === "string") {
     return state;
   }
 
-  return 'UNKNOWN';
+  return "UNKNOWN";
 }
 
 /**
@@ -350,7 +350,7 @@ function extractStatus(data: unknown): string {
  * @returns True if operational
  */
 function isOperationalStatus(status: string): boolean {
-  const operationalStatuses = ['READY', 'ACTIVE', 'ONLINE', 'UP', 'AVAILABLE', 'RUNNING', 'PROVISIONED', 'APPLIED'];
+  const operationalStatuses = ["READY", "ACTIVE", "ONLINE", "UP", "AVAILABLE", "RUNNING", "PROVISIONED", "APPLIED"];
 
   return operationalStatuses.includes(status.toUpperCase());
 }

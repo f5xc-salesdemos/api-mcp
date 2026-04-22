@@ -7,7 +7,7 @@
  * Reduces search complexity from O(n) linear scan to O(log n) index lookups.
  */
 
-import type { ToolIndexEntry } from './types.js';
+import type { ToolIndexEntry } from "./types.js";
 
 /**
  * Inverted index structure mapping terms to tool IDs
@@ -49,8 +49,8 @@ const DEFAULT_CONFIG: IndexConfig = {
 function normalizeText(text: string): string {
   return text
     .toLowerCase()
-    .replace(/[-_]/g, ' ')
-    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/[-_]/g, " ")
+    .replace(/[^a-z0-9\s]/g, "")
     .trim();
 }
 
@@ -138,7 +138,7 @@ export function buildSearchIndex(tools: ToolIndexEntry[], config: Partial<IndexC
     index.operations.get(operation)!.add(toolId);
 
     // Index all searchable terms from tool
-    const searchableText = [tool.name, tool.domain, tool.resource, tool.operation, tool.summary].join(' ');
+    const searchableText = [tool.name, tool.domain, tool.resource, tool.operation, tool.summary].join(" ");
 
     const terms = tokenize(searchableText, fullConfig.minTermLength);
 
