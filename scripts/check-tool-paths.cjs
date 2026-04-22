@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-const path = require("node:path");
-const fs = require("node:fs");
+const path = require('node:path');
+const fs = require('node:fs');
 
-const distDir = path.join(process.cwd(), "dist", "tools", "generated");
+const distDir = path.join(process.cwd(), 'dist', 'tools', 'generated');
 const entries = fs.readdirSync(distDir, { withFileTypes: true });
 const domainDirs = entries.filter((e) => e.isDirectory()).map((e) => e.name);
 
@@ -11,12 +11,12 @@ let toolsWithoutPath = 0;
 const missingPathTools = [];
 
 for (const domain of domainDirs) {
-  const indexPath = path.join(distDir, domain, "index.js");
+  const indexPath = path.join(distDir, domain, 'index.js');
   if (fs.existsSync(indexPath)) {
     try {
       delete require.cache[require.resolve(indexPath)];
       const module = require(indexPath);
-      const toolsArrayName = Object.keys(module).find((key) => key.endsWith("Tools"));
+      const toolsArrayName = Object.keys(module).find((key) => key.endsWith('Tools'));
 
       if (toolsArrayName && Array.isArray(module[toolsArrayName])) {
         const tools = module[toolsArrayName];
@@ -28,7 +28,7 @@ for (const domain of domainDirs) {
             missingPathTools.push({
               domain,
               index: idx,
-              toolName: tool.toolName || "unnamed",
+              toolName: tool.toolName || 'unnamed',
               operation: tool.operation,
               method: tool.method,
             });

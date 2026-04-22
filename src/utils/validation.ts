@@ -15,7 +15,7 @@ export class ValidationError extends Error {
     public readonly maxDepth?: number,
   ) {
     super(message);
-    this.name = "ValidationError";
+    this.name = 'ValidationError';
     Object.setPrototypeOf(this, ValidationError.prototype);
   }
 }
@@ -52,13 +52,13 @@ export interface ValidationConfig {
  * validateObjectDepth(deepObject, 10); // throws ValidationError
  * ```
  */
-export function validateObjectDepth(obj: unknown, maxDepth = 10, currentPath = "root", currentDepth = 0): void {
+export function validateObjectDepth(obj: unknown, maxDepth = 10, currentPath = 'root', currentDepth = 0): void {
   // Base cases: primitives don't add depth
   if (obj === null || obj === undefined) {
     return;
   }
 
-  if (typeof obj !== "object") {
+  if (typeof obj !== 'object') {
     return;
   }
 
@@ -79,7 +79,7 @@ export function validateObjectDepth(obj: unknown, maxDepth = 10, currentPath = "
       const itemPath = `${currentPath}[${i}]`;
 
       // Recurse for objects/arrays in array
-      if (typeof item === "object" && item !== null) {
+      if (typeof item === 'object' && item !== null) {
         validateObjectDepth(item, maxDepth, itemPath, currentDepth + 1);
       }
     }
@@ -91,7 +91,7 @@ export function validateObjectDepth(obj: unknown, maxDepth = 10, currentPath = "
     const valuePath = `${currentPath}.${key}`;
 
     // Recurse for nested objects/arrays
-    if (typeof value === "object" && value !== null) {
+    if (typeof value === 'object' && value !== null) {
       validateObjectDepth(value, maxDepth, valuePath, currentDepth + 1);
     }
   }
@@ -120,7 +120,7 @@ export function validateRequestBody(body: unknown, config: Partial<ValidationCon
     validateObjectDepth(body, fullConfig.maxDepth);
   } else {
     // Skip path tracking for performance
-    validateObjectDepth(body, fullConfig.maxDepth, "", 0);
+    validateObjectDepth(body, fullConfig.maxDepth, '', 0);
   }
 
   // Additional validations if configured
@@ -133,13 +133,13 @@ export function validateRequestBody(body: unknown, config: Partial<ValidationCon
  * Validate array lengths and string lengths
  * @internal
  */
-function validateSizes(obj: unknown, config: ValidationConfig, currentPath = "root"): void {
+function validateSizes(obj: unknown, config: ValidationConfig, currentPath = 'root'): void {
   if (obj === null || obj === undefined) {
     return;
   }
 
   // Check string length
-  if (typeof obj === "string" && config.maxStringLength !== undefined) {
+  if (typeof obj === 'string' && config.maxStringLength !== undefined) {
     if (obj.length > config.maxStringLength) {
       throw new ValidationError(
         `String length (${obj.length}) exceeds maximum (${config.maxStringLength})`,
@@ -149,7 +149,7 @@ function validateSizes(obj: unknown, config: ValidationConfig, currentPath = "ro
     return;
   }
 
-  if (typeof obj !== "object") {
+  if (typeof obj !== 'object') {
     return;
   }
 
@@ -221,7 +221,7 @@ export function createValidationConfigFromEnv(): Partial<ValidationConfig> {
  * @returns Maximum depth of the object tree
  */
 export function getObjectDepth(obj: unknown, currentDepth = 0, visited: WeakSet<object> = new WeakSet()): number {
-  if (obj === null || obj === undefined || typeof obj !== "object") {
+  if (obj === null || obj === undefined || typeof obj !== 'object') {
     return currentDepth;
   }
 

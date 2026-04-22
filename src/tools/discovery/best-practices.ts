@@ -17,9 +17,9 @@ import {
   getHttpErrorResolution,
   getResourceErrorPatterns,
   type TroubleshootingGuide,
-} from "../../generator/domain-metadata.js";
-import { getAllDependencyDomains, getResourcesInDomain } from "./dependencies.js";
-import { getToolIndex } from "./index-loader.js";
+} from '../../generator/domain-metadata.js';
+import { getAllDependencyDomains, getResourcesInDomain } from './dependencies.js';
+import { getToolIndex } from './index-loader.js';
 
 /**
  * Common error pattern with resolution guidance
@@ -71,7 +71,7 @@ export interface RecommendedWorkflow {
   /** Prerequisites */
   prerequisites?: string[];
   /** Estimated complexity */
-  complexity: "low" | "medium" | "high";
+  complexity: 'low' | 'medium' | 'high';
 }
 
 /**
@@ -116,7 +116,7 @@ export interface BestPracticesQuery {
   /** Domain to query */
   domain?: string;
   /** Specific aspect to retrieve */
-  aspect?: "errors" | "workflows" | "danger" | "security" | "performance" | "all";
+  aspect?: 'errors' | 'workflows' | 'danger' | 'security' | 'performance' | 'all';
   /** Include detailed breakdowns */
   detailed?: boolean;
 }
@@ -152,7 +152,7 @@ function getDomainDisplayInfo(domain: string): {
   }
   // Fallback for unknown domains
   return {
-    displayName: domain.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+    displayName: domain.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()),
     description: `Operations for ${domain} resources`,
   };
 }
@@ -175,7 +175,7 @@ function getDomainCommonErrors(domain: string): CommonError[] {
 
       errors.push({
         statusCode: err.errorCode,
-        errorType: httpError?.name || "Error",
+        errorType: httpError?.name || 'Error',
         description: err.pattern,
         resolution: [err.resolution, ...(httpError?.prevention?.slice(0, 2) || [])],
       });
@@ -247,13 +247,13 @@ function analyzeDangerLevels(domain: string): DangerAnalysis {
 
   for (const tool of domainTools) {
     switch (tool.dangerLevel) {
-      case "low":
+      case 'low':
         analysis.low++;
         break;
-      case "medium":
+      case 'medium':
         analysis.medium++;
         break;
-      case "high":
+      case 'high':
         analysis.high++;
         analysis.highDangerTools.push(tool.name);
         break;
@@ -271,7 +271,7 @@ function analyzeDangerLevels(domain: string): DangerAnalysis {
 /**
  * Count operations by type for a domain
  */
-function countOperations(domain: string): DomainBestPractices["operations"] {
+function countOperations(domain: string): DomainBestPractices['operations'] {
   const index = getToolIndex();
   const domainTools = index.tools.filter((t) => t.domain === domain);
 
@@ -286,19 +286,19 @@ function countOperations(domain: string): DomainBestPractices["operations"] {
 
   for (const tool of domainTools) {
     switch (tool.operation) {
-      case "create":
+      case 'create':
         ops.create++;
         break;
-      case "get":
+      case 'get':
         ops.get++;
         break;
-      case "list":
+      case 'list':
         ops.list++;
         break;
-      case "update":
+      case 'update':
         ops.update++;
         break;
-      case "delete":
+      case 'delete':
         ops.delete++;
         break;
       default:
@@ -345,21 +345,21 @@ function generateWorkflows(domain: string): RecommendedWorkflow[] {
         steps: [
           {
             stepNumber: 1,
-            action: "Search for list operations",
+            action: 'Search for list operations',
             note: `Use f5xc-api-search-tools with query '${domain} list'`,
           },
           {
             stepNumber: 2,
-            action: "Execute list operation",
-            note: "Provide namespace parameter to scope results",
+            action: 'Execute list operation',
+            note: 'Provide namespace parameter to scope results',
           },
           {
             stepNumber: 3,
-            action: "Review results",
-            note: "Check resource metadata and dependencies",
+            action: 'Review results',
+            note: 'Check resource metadata and dependencies',
           },
         ],
-        complexity: "low",
+        complexity: 'low',
       });
     }
   }
@@ -425,32 +425,32 @@ export function queryBestPractices(query: BestPracticesQuery): BestPracticesResu
   }
 
   // Filter by aspect if specified
-  if (query.aspect && query.aspect !== "all") {
+  if (query.aspect && query.aspect !== 'all') {
     const filtered: DomainBestPractices = { ...practices };
 
     switch (query.aspect) {
-      case "errors":
+      case 'errors':
         filtered.workflows = [];
         filtered.securityNotes = [];
         filtered.performanceTips = [];
         break;
-      case "workflows":
+      case 'workflows':
         filtered.commonErrors = [];
         filtered.securityNotes = [];
         filtered.performanceTips = [];
         break;
-      case "danger":
+      case 'danger':
         filtered.commonErrors = [];
         filtered.workflows = [];
         filtered.securityNotes = [];
         filtered.performanceTips = [];
         break;
-      case "security":
+      case 'security':
         filtered.commonErrors = [];
         filtered.workflows = [];
         filtered.performanceTips = [];
         break;
-      case "performance":
+      case 'performance':
         filtered.commonErrors = [];
         filtered.workflows = [];
         filtered.securityNotes = [];
@@ -488,7 +488,7 @@ export function getAllDomainsSummary(): Array<{
       dangerous: 0,
     };
     existing.count++;
-    if (tool.dangerLevel === "low" || tool.dangerLevel === "medium") {
+    if (tool.dangerLevel === 'low' || tool.dangerLevel === 'medium') {
       existing.safe++;
     } else {
       existing.dangerous++;
@@ -516,97 +516,97 @@ export function formatBestPractices(practices: DomainBestPractices): string {
   const lines: string[] = [];
 
   lines.push(`# Best Practices: ${practices.displayName}`);
-  lines.push("");
+  lines.push('');
   lines.push(`**Description**: ${practices.description}`);
   lines.push(`**Total Tools**: ${practices.totalTools}`);
-  lines.push("");
+  lines.push('');
 
-  lines.push("## Operations");
+  lines.push('## Operations');
   lines.push(`- Create: ${practices.operations.create}`);
   lines.push(`- Get: ${practices.operations.get}`);
   lines.push(`- List: ${practices.operations.list}`);
   lines.push(`- Update: ${practices.operations.update}`);
   lines.push(`- Delete: ${practices.operations.delete}`);
-  lines.push("");
+  lines.push('');
 
-  lines.push("## Danger Analysis");
+  lines.push('## Danger Analysis');
   lines.push(`- Safe Operations: ${practices.dangerAnalysis.safePercentage}%`);
   lines.push(`- Low: ${practices.dangerAnalysis.low}`);
   lines.push(`- Medium: ${practices.dangerAnalysis.medium}`);
   lines.push(`- High: ${practices.dangerAnalysis.high}`);
   if (practices.dangerAnalysis.highDangerTools.length > 0) {
     lines.push(
-      `- High-risk tools: ${practices.dangerAnalysis.highDangerTools.slice(0, 5).join(", ")}${practices.dangerAnalysis.highDangerTools.length > 5 ? "..." : ""}`,
+      `- High-risk tools: ${practices.dangerAnalysis.highDangerTools.slice(0, 5).join(', ')}${practices.dangerAnalysis.highDangerTools.length > 5 ? '...' : ''}`,
     );
   }
-  lines.push("");
+  lines.push('');
 
   if (practices.commonErrors.length > 0) {
-    lines.push("## Common Errors");
+    lines.push('## Common Errors');
     for (const error of practices.commonErrors) {
       lines.push(`### ${error.statusCode} - ${error.errorType}`);
       lines.push(error.description);
-      lines.push("**Resolution**:");
+      lines.push('**Resolution**:');
       for (const step of error.resolution) {
         lines.push(`- ${step}`);
       }
-      lines.push("");
+      lines.push('');
     }
   }
 
   if (practices.workflows.length > 0) {
-    lines.push("## Recommended Workflows");
+    lines.push('## Recommended Workflows');
     for (const workflow of practices.workflows) {
       lines.push(`### ${workflow.name}`);
       lines.push(`*${workflow.description}* (Complexity: ${workflow.complexity})`);
       if (workflow.prerequisites && workflow.prerequisites.length > 0) {
-        lines.push(`**Prerequisites**: ${workflow.prerequisites.join(", ")}`);
+        lines.push(`**Prerequisites**: ${workflow.prerequisites.join(', ')}`);
       }
-      lines.push("**Steps**:");
+      lines.push('**Steps**:');
       for (const step of workflow.steps) {
-        const toolInfo = step.toolName ? ` (\`${step.toolName}\`)` : "";
-        const noteInfo = step.note ? ` - ${step.note}` : "";
+        const toolInfo = step.toolName ? ` (\`${step.toolName}\`)` : '';
+        const noteInfo = step.note ? ` - ${step.note}` : '';
         lines.push(`${step.stepNumber}. ${step.action}${toolInfo}${noteInfo}`);
       }
-      lines.push("");
+      lines.push('');
     }
   }
 
   if (practices.securityNotes.length > 0) {
-    lines.push("## Security Notes");
+    lines.push('## Security Notes');
     for (const note of practices.securityNotes) {
       lines.push(`- ${note}`);
     }
-    lines.push("");
+    lines.push('');
   }
 
   if (practices.performanceTips.length > 0) {
-    lines.push("## Performance Tips");
+    lines.push('## Performance Tips');
     for (const tip of practices.performanceTips) {
       lines.push(`- ${tip}`);
     }
-    lines.push("");
+    lines.push('');
   }
 
   if (practices.troubleshootingGuides && practices.troubleshootingGuides.length > 0) {
-    lines.push("## Troubleshooting Guides");
+    lines.push('## Troubleshooting Guides');
     for (const guide of practices.troubleshootingGuides) {
       lines.push(`### ${guide.problem}`);
-      lines.push("**Symptoms**:");
+      lines.push('**Symptoms**:');
       for (const symptom of guide.symptoms) {
         lines.push(`- ${symptom}`);
       }
-      lines.push("**Diagnosis**:");
+      lines.push('**Diagnosis**:');
       for (const cmd of guide.diagnosisCommands) {
         lines.push(`- ${cmd}`);
       }
-      lines.push("**Solutions**:");
+      lines.push('**Solutions**:');
       for (const solution of guide.solutions) {
         lines.push(`- ${solution}`);
       }
-      lines.push("");
+      lines.push('');
     }
   }
 
-  return lines.join("\n");
+  return lines.join('\n');
 }

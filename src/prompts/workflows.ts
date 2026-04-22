@@ -7,7 +7,7 @@
  * Workflows are now sourced from upstream x-f5xc-guided-workflows (v2.0.8+).
  */
 
-import { type GuidedWorkflow, getGuidedWorkflowById, getGuidedWorkflows } from "../generator/domain-metadata.js";
+import { type GuidedWorkflow, getGuidedWorkflowById, getGuidedWorkflows } from '../generator/domain-metadata.js';
 
 /**
  * Workflow prompt definition
@@ -65,12 +65,12 @@ function convertToWorkflowPrompt(workflow: GuidedWorkflow): WorkflowPrompt {
 
       return content;
     })
-    .join("\n");
+    .join('\n');
 
   // Build prerequisites section
-  let prereqs = "";
+  let prereqs = '';
   if (workflow.prerequisites && workflow.prerequisites.length > 0) {
-    prereqs = `## Prerequisites\n${workflow.prerequisites.map((p) => `- ${p}`).join("\n")}\n\n`;
+    prereqs = `## Prerequisites\n${workflow.prerequisites.map((p) => `- ${p}`).join('\n')}\n\n`;
   }
 
   // Build full template
@@ -89,14 +89,14 @@ Estimated steps: ${workflow.estimatedSteps}
 
   // Extract arguments from required fields in steps
   const argumentSet = new Map<string, WorkflowArgument>();
-  argumentSet.set("namespace", {
-    name: "namespace",
-    description: "Namespace for the resources",
+  argumentSet.set('namespace', {
+    name: 'namespace',
+    description: 'Namespace for the resources',
     required: true,
   });
-  argumentSet.set("name", {
-    name: "name",
-    description: "Name prefix for resources",
+  argumentSet.set('name', {
+    name: 'name',
+    description: 'Name prefix for resources',
     required: true,
   });
 
@@ -106,7 +106,7 @@ Estimated steps: ${workflow.estimatedSteps}
         if (!argumentSet.has(field)) {
           argumentSet.set(field, {
             name: field,
-            description: `${field.replace(/_/g, " ")} for the operation`,
+            description: `${field.replace(/_/g, ' ')} for the operation`,
             required: true,
           });
         }
@@ -168,21 +168,21 @@ export function processPromptTemplate(template: string, args: Record<string, str
 
   // Replace simple {{variable}} placeholders
   for (const [key, value] of Object.entries(args)) {
-    const pattern = new RegExp(`\\{\\{${key}\\}\\}`, "g");
-    result = result.replace(pattern, value ?? "");
+    const pattern = new RegExp(`\\{\\{${key}\\}\\}`, 'g');
+    result = result.replace(pattern, value ?? '');
   }
 
   // Handle {{#if variable}} ... {{/if}} blocks
   const ifPattern = /\{\{#if\s+(\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g;
   result = result.replace(ifPattern, (_, varName: string, content: string) => {
     const value = args[varName];
-    return value && value !== "false" ? content : "";
+    return value && value !== 'false' ? content : '';
   });
 
   // Handle {{#if (eq var "value")}} ... {{/if}} blocks
   const eqPattern = /\{\{#if\s+\(eq\s+(\w+)\s+"([^"]+)"\)\}\}([\s\S]*?)\{\{\/if\}\}/g;
   result = result.replace(eqPattern, (_, varName: string, expected: string, content: string) => {
-    return args[varName] === expected ? content : "";
+    return args[varName] === expected ? content : '';
   });
 
   return result;

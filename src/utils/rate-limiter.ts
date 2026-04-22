@@ -13,7 +13,7 @@ export interface RateLimitConfig {
   /** Maximum burst size (tokens available at once) */
   burstSize: number;
   /** Retry strategy for rate-limited requests */
-  retryStrategy: "exponential" | "linear";
+  retryStrategy: 'exponential' | 'linear';
   /** Maximum number of retry attempts */
   maxRetries: number;
   /** Initial retry delay in milliseconds */
@@ -47,7 +47,7 @@ export class RateLimiter {
     this.config = {
       requestsPerMinute: config.requestsPerMinute ?? 60,
       burstSize: config.burstSize ?? 10,
-      retryStrategy: config.retryStrategy ?? "exponential",
+      retryStrategy: config.retryStrategy ?? 'exponential',
       maxRetries: config.maxRetries ?? 3,
       initialRetryDelay: config.initialRetryDelay ?? 1000,
     };
@@ -93,7 +93,7 @@ export class RateLimiter {
    * @returns Delay in milliseconds
    */
   private calculateRetryDelay(attempt: number): number {
-    if (this.config.retryStrategy === "exponential") {
+    if (this.config.retryStrategy === 'exponential') {
       return this.config.initialRetryDelay * 2 ** attempt;
     } else {
       return this.config.initialRetryDelay * (attempt + 1);
@@ -219,7 +219,7 @@ export function createRateLimiterFromEnv(): RateLimiter {
 
   if (process.env.F5XC_RATE_LIMIT_STRATEGY) {
     const strategy = process.env.F5XC_RATE_LIMIT_STRATEGY.toLowerCase();
-    if (strategy === "exponential" || strategy === "linear") {
+    if (strategy === 'exponential' || strategy === 'linear') {
       config.retryStrategy = strategy;
     }
   }

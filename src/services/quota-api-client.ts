@@ -7,9 +7,9 @@
  * Provides methods to fetch quota usage and limits from the F5XC platform.
  */
 
-import type { HttpClient } from "@robinmordasiewicz/f5xc-auth";
-import type { F5XCQuotaLimitsResponse, F5XCQuotaUsageResponse, QuotaResourceUsage } from "../types/quota.js";
-import { logger } from "../utils/logging.js";
+import type { HttpClient } from '@robinmordasiewicz/f5xc-auth';
+import type { F5XCQuotaLimitsResponse, F5XCQuotaUsageResponse, QuotaResourceUsage } from '../types/quota.js';
+import { logger } from '../utils/logging.js';
 
 /**
  * Fetch quota usage from F5XC API

@@ -8,9 +8,9 @@
  * and resource mappings.
  */
 
-import { existsSync, readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -132,11 +132,11 @@ export interface DomainMetadata {
   /** Number of schemas */
   schemaCount: number;
   /** Complexity level */
-  complexity: "simple" | "moderate" | "advanced";
+  complexity: 'simple' | 'moderate' | 'advanced';
   /** Preview/beta status */
   isPreview: boolean;
   /** Required subscription tier */
-  requiresTier: "Standard" | "Advanced";
+  requiresTier: 'Standard' | 'Advanced';
   /** High-level category (Platform, Security, etc.) */
   domainCategory: string;
   /** UI grouping category */
@@ -195,20 +195,20 @@ interface RawSpecEntry {
   path_count: number;
   schema_count: number;
   // x-f5xc-* prefixed fields (v2.0.0+)
-  "x-f5xc-description-short": string;
-  "x-f5xc-description-medium": string;
-  "x-f5xc-complexity": string;
-  "x-f5xc-is-preview": boolean;
-  "x-f5xc-requires-tier": string;
-  "x-f5xc-category": string; // Replaces both domain_category and ui_category
-  "x-f5xc-use-cases": string[];
-  "x-f5xc-related-domains": string[];
-  "x-f5xc-icon": string;
-  "x-f5xc-logo-svg"?: string;
-  "x-f5xc-primary-resources": RawResourceEntry[];
-  "x-f5xc-primary-resources-simple": string[];
+  'x-f5xc-description-short': string;
+  'x-f5xc-description-medium': string;
+  'x-f5xc-complexity': string;
+  'x-f5xc-is-preview': boolean;
+  'x-f5xc-requires-tier': string;
+  'x-f5xc-category': string; // Replaces both domain_category and ui_category
+  'x-f5xc-use-cases': string[];
+  'x-f5xc-related-domains': string[];
+  'x-f5xc-icon': string;
+  'x-f5xc-logo-svg'?: string;
+  'x-f5xc-primary-resources': RawResourceEntry[];
+  'x-f5xc-primary-resources-simple': string[];
   // x-f5xc-cli-metadata (v2.0.5+) contains structured CLI guidance
-  "x-f5xc-cli-metadata"?: {
+  'x-f5xc-cli-metadata'?: {
     quick_start?: {
       command: string;
       description: string;
@@ -251,7 +251,7 @@ let resourceMetadataCache: Map<string, ResourceMetadata> | null = null;
  */
 function getSpecIndexPath(): string {
   // Navigate from src/generator to specs/index.json
-  return join(__dirname, "..", "..", "specs", "index.json");
+  return join(__dirname, '..', '..', 'specs', 'index.json');
 }
 
 /**
@@ -278,7 +278,7 @@ function transformResourceEntry(raw: RawResourceEntry): ResourceMetadata {
 /**
  * Transform raw CLI metadata to camelCase CliMetadata (v2.0.5+)
  */
-function transformCliMetadata(raw: RawSpecEntry["x-f5xc-cli-metadata"]): CliMetadata | undefined {
+function transformCliMetadata(raw: RawSpecEntry['x-f5xc-cli-metadata']): CliMetadata | undefined {
   if (!raw) return undefined;
 
   return {
@@ -311,28 +311,28 @@ function transformCliMetadata(raw: RawSpecEntry["x-f5xc-cli-metadata"]): CliMeta
  */
 function transformSpecEntry(raw: RawSpecEntry): DomainMetadata {
   // x-f5xc-category is a DRY consolidation of domain_category and ui_category
-  const category = raw["x-f5xc-category"];
+  const category = raw['x-f5xc-category'];
 
   return {
     domain: raw.domain,
     title: raw.title,
     description: raw.description,
-    descriptionShort: raw["x-f5xc-description-short"],
-    descriptionMedium: raw["x-f5xc-description-medium"],
+    descriptionShort: raw['x-f5xc-description-short'],
+    descriptionMedium: raw['x-f5xc-description-medium'],
     file: raw.file,
     pathCount: raw.path_count,
     schemaCount: raw.schema_count,
-    complexity: raw["x-f5xc-complexity"] as "simple" | "moderate" | "advanced",
-    isPreview: raw["x-f5xc-is-preview"],
-    requiresTier: raw["x-f5xc-requires-tier"] as "Standard" | "Advanced",
+    complexity: raw['x-f5xc-complexity'] as 'simple' | 'moderate' | 'advanced',
+    isPreview: raw['x-f5xc-is-preview'],
+    requiresTier: raw['x-f5xc-requires-tier'] as 'Standard' | 'Advanced',
     domainCategory: category, // From x-f5xc-category
     uiCategory: category, // From x-f5xc-category (same value, DRY consolidation)
-    useCases: raw["x-f5xc-use-cases"] || [],
-    relatedDomains: raw["x-f5xc-related-domains"] || [],
-    primaryResources: (raw["x-f5xc-primary-resources"] || []).map(transformResourceEntry),
-    icon: raw["x-f5xc-icon"],
-    logoSvg: raw["x-f5xc-logo-svg"],
-    cliMetadata: transformCliMetadata(raw["x-f5xc-cli-metadata"]),
+    useCases: raw['x-f5xc-use-cases'] || [],
+    relatedDomains: raw['x-f5xc-related-domains'] || [],
+    primaryResources: (raw['x-f5xc-primary-resources'] || []).map(transformResourceEntry),
+    icon: raw['x-f5xc-icon'],
+    logoSvg: raw['x-f5xc-logo-svg'],
+    cliMetadata: transformCliMetadata(raw['x-f5xc-cli-metadata']),
   };
 }
 
@@ -351,7 +351,7 @@ export function loadSpecIndex(): SpecIndex {
     throw new Error(`Spec index not found at ${indexPath}. Run 'npm run sync-specs' first.`);
   }
 
-  const content = readFileSync(indexPath, "utf-8");
+  const content = readFileSync(indexPath, 'utf-8');
   const raw: RawSpecIndex = JSON.parse(content);
 
   cachedSpecIndex = {
@@ -387,12 +387,12 @@ function buildResourceCaches(): void {
     // Use rich primaryResources for full metadata
     for (const resource of spec.primaryResources) {
       // Normalize resource name (handle both snake_case and kebab-case)
-      const normalized = resource.name.toLowerCase().replace(/-/g, "_");
+      const normalized = resource.name.toLowerCase().replace(/-/g, '_');
       resourceToDomainCache.set(normalized, spec);
       resourceMetadataCache.set(normalized, resource);
 
       // Also add kebab-case version
-      const kebab = resource.name.toLowerCase().replace(/_/g, "-");
+      const kebab = resource.name.toLowerCase().replace(/_/g, '-');
       resourceToDomainCache.set(kebab, spec);
       resourceMetadataCache.set(kebab, resource);
     }
@@ -406,9 +406,9 @@ function buildResourceCaches(): void {
 export function getResourceDomain(resourceType: string): DomainMetadata | undefined {
   buildResourceCaches();
 
-  const normalized = resourceType.toLowerCase().replace(/-/g, "_");
+  const normalized = resourceType.toLowerCase().replace(/-/g, '_');
   return (
-    resourceToDomainCache!.get(normalized) || resourceToDomainCache!.get(resourceType.toLowerCase().replace(/_/g, "-"))
+    resourceToDomainCache!.get(normalized) || resourceToDomainCache!.get(resourceType.toLowerCase().replace(/_/g, '-'))
   );
 }
 
@@ -419,9 +419,9 @@ export function getResourceDomain(resourceType: string): DomainMetadata | undefi
 export function getResourceMetadata(resourceType: string): ResourceMetadata | undefined {
   buildResourceCaches();
 
-  const normalized = resourceType.toLowerCase().replace(/-/g, "_");
+  const normalized = resourceType.toLowerCase().replace(/-/g, '_');
   return (
-    resourceMetadataCache!.get(normalized) || resourceMetadataCache!.get(resourceType.toLowerCase().replace(/_/g, "-"))
+    resourceMetadataCache!.get(normalized) || resourceMetadataCache!.get(resourceType.toLowerCase().replace(/_/g, '-'))
   );
 }
 
@@ -486,7 +486,7 @@ export function getResourceToDomainMap(): Record<string, string> {
   for (const spec of index.specifications) {
     for (const resource of spec.primaryResources) {
       // Use kebab-case as the key (consistent with tool naming)
-      const kebabCase = resource.name.toLowerCase().replace(/_/g, "-");
+      const kebabCase = resource.name.toLowerCase().replace(/_/g, '-');
       map[kebabCase] = spec.domain;
     }
   }
@@ -543,7 +543,7 @@ export interface GuidedWorkflow {
   id: string;
   name: string;
   description: string;
-  complexity: "low" | "medium" | "high";
+  complexity: 'low' | 'medium' | 'high';
   estimatedSteps: number;
   prerequisites: string[];
   steps: GuidedWorkflowStep[];
@@ -702,10 +702,10 @@ interface RawAcronymsExtension {
 }
 
 interface RawSpecIndexWithExtensions extends RawSpecIndex {
-  "x-f5xc-guided-workflows"?: RawGuidedWorkflowsExtension;
-  "x-f5xc-error-resolution"?: RawErrorResolutionExtension;
-  "x-f5xc-critical-resources"?: string[];
-  "x-f5xc-acronyms"?: RawAcronymsExtension;
+  'x-f5xc-guided-workflows'?: RawGuidedWorkflowsExtension;
+  'x-f5xc-error-resolution'?: RawErrorResolutionExtension;
+  'x-f5xc-critical-resources'?: string[];
+  'x-f5xc-acronyms'?: RawAcronymsExtension;
 }
 
 // Caches for new extensions
@@ -740,7 +740,7 @@ function transformGuidedWorkflow(raw: RawGuidedWorkflow): GuidedWorkflow {
     id: raw.id,
     name: raw.name,
     description: raw.description,
-    complexity: raw.complexity as "low" | "medium" | "high",
+    complexity: raw.complexity as 'low' | 'medium' | 'high',
     estimatedSteps: raw.estimated_steps,
     prerequisites: raw.prerequisites || [],
     steps: raw.steps.map(transformGuidedWorkflowStep),
@@ -758,7 +758,7 @@ function loadRawSpecIndexWithExtensions(): RawSpecIndexWithExtensions {
     throw new Error(`Spec index not found at ${indexPath}. Run 'npm run sync-specs' first.`);
   }
 
-  const content = readFileSync(indexPath, "utf-8");
+  const content = readFileSync(indexPath, 'utf-8');
   return JSON.parse(content) as RawSpecIndexWithExtensions;
 }
 
@@ -771,11 +771,11 @@ export function loadGuidedWorkflows(): GuidedWorkflowsIndex {
   }
 
   const raw = loadRawSpecIndexWithExtensions();
-  const ext = raw["x-f5xc-guided-workflows"];
+  const ext = raw['x-f5xc-guided-workflows'];
 
   if (!ext) {
     cachedGuidedWorkflows = {
-      version: "0.0.0",
+      version: '0.0.0',
       totalWorkflows: 0,
       domains: [],
       workflows: [],
@@ -831,11 +831,11 @@ export function loadErrorResolution(): ErrorResolutionIndex {
   }
 
   const raw = loadRawSpecIndexWithExtensions();
-  const ext = raw["x-f5xc-error-resolution"];
+  const ext = raw['x-f5xc-error-resolution'];
 
   if (!ext) {
     cachedErrorResolution = {
-      version: "0.0.0",
+      version: '0.0.0',
       httpErrors: new Map(),
       resourceErrors: new Map(),
     };
@@ -903,7 +903,7 @@ export function getAllHttpErrorCodes(): number[] {
  */
 export function getResourceErrorPatterns(resourceType: string): ResourceErrorPattern[] {
   const index = loadErrorResolution();
-  const normalized = resourceType.toLowerCase().replace(/-/g, "_");
+  const normalized = resourceType.toLowerCase().replace(/-/g, '_');
   return index.resourceErrors.get(normalized) || [];
 }
 
@@ -924,7 +924,7 @@ export function loadCriticalResources(): string[] {
   }
 
   const raw = loadRawSpecIndexWithExtensions();
-  cachedCriticalResources = raw["x-f5xc-critical-resources"] || [];
+  cachedCriticalResources = raw['x-f5xc-critical-resources'] || [];
   return cachedCriticalResources;
 }
 
@@ -933,8 +933,8 @@ export function loadCriticalResources(): string[] {
  */
 export function isCriticalResource(resourceType: string): boolean {
   const critical = loadCriticalResources();
-  const normalized = resourceType.toLowerCase().replace(/-/g, "_");
-  return critical.some((r) => r.toLowerCase().replace(/-/g, "_") === normalized);
+  const normalized = resourceType.toLowerCase().replace(/-/g, '_');
+  return critical.some((r) => r.toLowerCase().replace(/-/g, '_') === normalized);
 }
 
 // ============================================================================
@@ -951,11 +951,11 @@ export function loadAcronyms(): AcronymsIndex {
   }
 
   const raw = loadRawSpecIndexWithExtensions();
-  const ext = raw["x-f5xc-acronyms"];
+  const ext = raw['x-f5xc-acronyms'];
 
   if (!ext) {
     cachedAcronyms = {
-      version: "0.0.0",
+      version: '0.0.0',
       categories: [],
       acronyms: [],
     };

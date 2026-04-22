@@ -14,7 +14,7 @@
  * See tests/fixtures/generated.ts for fixture generation.
  */
 
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from 'vitest';
 import {
   describeTool,
   describeToolCompact,
@@ -22,23 +22,23 @@ import {
   describeTools,
   getFullToolSchema,
   getOptimizationStats,
-} from "../../src/tools/discovery/describe.js";
-import { validateExecuteParams } from "../../src/tools/discovery/execute.js";
-import { DISCOVERY_TOOLS } from "../../src/tools/discovery/index.js";
+} from '../../src/tools/discovery/describe.js';
+import { validateExecuteParams } from '../../src/tools/discovery/execute.js';
+import { DISCOVERY_TOOLS } from '../../src/tools/discovery/index.js';
 import {
   clearIndexCache,
   getIndexMetadata,
   getToolEntry,
   getToolIndex,
   toolExists,
-} from "../../src/tools/discovery/index-loader.js";
+} from '../../src/tools/discovery/index-loader.js';
 import {
   getAvailableDomains,
   getToolCountByDomain,
   getToolsByDomain,
   getToolsByResource,
   searchTools,
-} from "../../src/tools/discovery/search.js";
+} from '../../src/tools/discovery/search.js';
 import {
   AVAILABLE_DOMAINS,
   FIRST_TOOL,
@@ -48,15 +48,15 @@ import {
   REGISTRY_STATS,
   SAMPLE_DOMAIN,
   SAMPLE_TOOLS_BY_OPERATION,
-} from "../fixtures/generated.js";
+} from '../fixtures/generated.js';
 
-describe("discovery/index-loader", () => {
+describe('discovery/index-loader', () => {
   beforeEach(() => {
     clearIndexCache();
   });
 
-  describe("getToolIndex", () => {
-    it("should return a valid tool index", () => {
+  describe('getToolIndex', () => {
+    it('should return a valid tool index', () => {
       const index = getToolIndex();
 
       expect(index).toBeDefined();
@@ -66,23 +66,23 @@ describe("discovery/index-loader", () => {
       expect(index.tools.length).toBeGreaterThan(0);
     });
 
-    it("should cache the index on subsequent calls", () => {
+    it('should cache the index on subsequent calls', () => {
       const index1 = getToolIndex();
       const index2 = getToolIndex();
 
       expect(index1).toBe(index2); // Same reference
     });
 
-    it("should have valid metadata", () => {
+    it('should have valid metadata', () => {
       const index = getToolIndex();
 
       expect(index.metadata.totalTools).toBeGreaterThan(0);
-      expect(index.metadata.version).toBe("1.0.0");
+      expect(index.metadata.version).toBe('1.0.0');
       expect(index.metadata.generatedAt).toBeDefined();
       expect(Object.keys(index.metadata.domains).length).toBeGreaterThan(0);
     });
 
-    it("should match fixture stats", () => {
+    it('should match fixture stats', () => {
       const index = getToolIndex();
 
       // Verify index matches generated fixtures
@@ -91,8 +91,8 @@ describe("discovery/index-loader", () => {
     });
   });
 
-  describe("getIndexMetadata", () => {
-    it("should return metadata without full index", () => {
+  describe('getIndexMetadata', () => {
+    it('should return metadata without full index', () => {
       const metadata = getIndexMetadata();
 
       expect(metadata.totalTools).toBeGreaterThan(0);
@@ -100,20 +100,20 @@ describe("discovery/index-loader", () => {
     });
   });
 
-  describe("toolExists", () => {
-    it("should return true for existing tools", () => {
+  describe('toolExists', () => {
+    it('should return true for existing tools', () => {
       // Use dynamically generated tool name from fixtures
       expect(toolExists(FIRST_TOOL.toolName)).toBe(true);
     });
 
-    it("should return false for non-existent tools", () => {
-      expect(toolExists("non-existent-tool-xyz-12345")).toBe(false);
-      expect(toolExists("")).toBe(false);
+    it('should return false for non-existent tools', () => {
+      expect(toolExists('non-existent-tool-xyz-12345')).toBe(false);
+      expect(toolExists('')).toBe(false);
     });
   });
 
-  describe("getToolEntry", () => {
-    it("should return tool entry for existing tool", () => {
+  describe('getToolEntry', () => {
+    it('should return tool entry for existing tool', () => {
       const entry = getToolEntry(FIRST_TOOL.toolName);
 
       expect(entry).toBeDefined();
@@ -123,15 +123,15 @@ describe("discovery/index-loader", () => {
       expect(entry?.operation).toBe(FIRST_TOOL.operation);
     });
 
-    it("should return undefined for non-existent tool", () => {
-      const entry = getToolEntry("non-existent-tool-xyz-12345");
+    it('should return undefined for non-existent tool', () => {
+      const entry = getToolEntry('non-existent-tool-xyz-12345');
 
       expect(entry).toBeUndefined();
     });
   });
 
-  describe("clearIndexCache", () => {
-    it("should clear the cached index", () => {
+  describe('clearIndexCache', () => {
+    it('should clear the cached index', () => {
       const index1 = getToolIndex();
       clearIndexCache();
       const index2 = getToolIndex();
@@ -144,16 +144,16 @@ describe("discovery/index-loader", () => {
   });
 });
 
-describe("discovery/search", () => {
-  describe("searchTools", () => {
-    it("should find tools matching resource terms", () => {
+describe('discovery/search', () => {
+  describe('searchTools', () => {
+    it('should find tools matching resource terms', () => {
       // Use the first tool's resource as a search term
       const results = searchTools(FIRST_TOOL.resource);
 
       expect(results.length).toBeGreaterThan(0);
     });
 
-    it("should find tools by domain", () => {
+    it('should find tools by domain', () => {
       const domain = getValidDomain();
       const results = searchTools(domain);
 
@@ -161,23 +161,23 @@ describe("discovery/search", () => {
       expect(results.some((r) => r.tool.domain === domain)).toBe(true);
     });
 
-    it("should find tools by operation", () => {
-      const createTool = getSampleToolByOperation("create");
+    it('should find tools by operation', () => {
+      const createTool = getSampleToolByOperation('create');
       if (createTool) {
-        const results = searchTools("create");
+        const results = searchTools('create');
 
         expect(results.length).toBeGreaterThan(0);
-        expect(results.some((r) => r.tool.operation === "create")).toBe(true);
+        expect(results.some((r) => r.tool.operation === 'create')).toBe(true);
       }
     });
 
-    it("should respect limit option", () => {
+    it('should respect limit option', () => {
       const results = searchTools(FIRST_TOOL.resource, { limit: 5 });
 
       expect(results.length).toBeLessThanOrEqual(5);
     });
 
-    it("should filter by domains", () => {
+    it('should filter by domains', () => {
       const domain = getValidDomain();
       const results = searchTools(FIRST_TOOL.resource, { domains: [domain] });
 
@@ -186,24 +186,24 @@ describe("discovery/search", () => {
       }
     });
 
-    it("should filter by operations", () => {
+    it('should filter by operations', () => {
       const results = searchTools(FIRST_TOOL.resource, {
-        operations: ["create", "delete"],
+        operations: ['create', 'delete'],
       });
 
       if (results.length > 0) {
-        expect(results.every((r) => ["create", "delete"].includes(r.tool.operation))).toBe(true);
+        expect(results.every((r) => ['create', 'delete'].includes(r.tool.operation))).toBe(true);
       }
     });
 
-    it("should return empty array for no matches", () => {
+    it('should return empty array for no matches', () => {
       // Use a completely random string with no dictionary words
-      const results = searchTools("qzxwjkvmnbfghpyr");
+      const results = searchTools('qzxwjkvmnbfghpyr');
 
       expect(results.length).toBe(0);
     });
 
-    it("should return scored results", () => {
+    it('should return scored results', () => {
       const results = searchTools(FIRST_TOOL.resource);
 
       expect(results.length).toBeGreaterThan(0);
@@ -211,7 +211,7 @@ describe("discovery/search", () => {
       expect(results[0].score).toBeLessThanOrEqual(1);
     });
 
-    it("should include matched terms", () => {
+    it('should include matched terms', () => {
       const results = searchTools(FIRST_TOOL.resource);
 
       expect(results.length).toBeGreaterThan(0);
@@ -219,8 +219,8 @@ describe("discovery/search", () => {
     });
   });
 
-  describe("getToolsByDomain", () => {
-    it("should return all tools for a domain", () => {
+  describe('getToolsByDomain', () => {
+    it('should return all tools for a domain', () => {
       const domain = getValidDomain();
       const tools = getToolsByDomain(domain);
 
@@ -228,13 +228,13 @@ describe("discovery/search", () => {
       expect(tools.every((t) => t.domain === domain)).toBe(true);
     });
 
-    it("should return empty array for non-existent domain", () => {
-      const tools = getToolsByDomain("nonexistent-domain-xyz-12345");
+    it('should return empty array for non-existent domain', () => {
+      const tools = getToolsByDomain('nonexistent-domain-xyz-12345');
 
       expect(tools.length).toBe(0);
     });
 
-    it("should be case-insensitive", () => {
+    it('should be case-insensitive', () => {
       const domain = getValidDomain();
       const tools1 = getToolsByDomain(domain);
       const tools2 = getToolsByDomain(domain.toUpperCase());
@@ -243,8 +243,8 @@ describe("discovery/search", () => {
     });
   });
 
-  describe("getToolsByResource", () => {
-    it("should return tools matching resource name", () => {
+  describe('getToolsByResource', () => {
+    it('should return tools matching resource name', () => {
       const resource = FIRST_TOOL.resource;
       const tools = getToolsByResource(resource);
 
@@ -252,7 +252,7 @@ describe("discovery/search", () => {
       expect(tools.every((t) => t.resource.includes(resource))).toBe(true);
     });
 
-    it("should handle partial matches", () => {
+    it('should handle partial matches', () => {
       // Use first 3 characters of resource as partial match
       const partialResource = FIRST_TOOL.resource.substring(0, 3);
       const tools = getToolsByResource(partialResource);
@@ -261,8 +261,8 @@ describe("discovery/search", () => {
     });
   });
 
-  describe("getAvailableDomains", () => {
-    it("should return all available domains", () => {
+  describe('getAvailableDomains', () => {
+    it('should return all available domains', () => {
       const domains = getAvailableDomains();
 
       expect(domains.length).toBeGreaterThan(0);
@@ -272,8 +272,8 @@ describe("discovery/search", () => {
     });
   });
 
-  describe("getToolCountByDomain", () => {
-    it("should return tool counts per domain", () => {
+  describe('getToolCountByDomain', () => {
+    it('should return tool counts per domain', () => {
       const counts = getToolCountByDomain();
       const domain = getValidDomain();
 
@@ -281,7 +281,7 @@ describe("discovery/search", () => {
       expect(counts[domain]).toBeGreaterThan(0);
     });
 
-    it("should match fixture domain counts", () => {
+    it('should match fixture domain counts', () => {
       const counts = getToolCountByDomain();
 
       // Verify against fixtures
@@ -290,9 +290,9 @@ describe("discovery/search", () => {
   });
 });
 
-describe("discovery/describe", () => {
-  describe("describeTool", () => {
-    it("should return description for existing tool", () => {
+describe('discovery/describe', () => {
+  describe('describeTool', () => {
+    it('should return description for existing tool', () => {
       const desc = describeTool(FIRST_TOOL.toolName);
 
       expect(desc).toBeDefined();
@@ -303,22 +303,22 @@ describe("discovery/describe", () => {
       expect(desc?.operation).toBe(FIRST_TOOL.operation);
     });
 
-    it("should include path parameters", () => {
+    it('should include path parameters', () => {
       const desc = describeTool(FIRST_TOOL.toolName);
 
       expect(desc?.pathParameters).toBeDefined();
       expect(Array.isArray(desc?.pathParameters)).toBe(true);
     });
 
-    it("should return null for non-existent tool", () => {
-      const desc = describeTool("non-existent-tool-xyz-12345");
+    it('should return null for non-existent tool', () => {
+      const desc = describeTool('non-existent-tool-xyz-12345');
 
       expect(desc).toBeNull();
     });
 
-    it("should indicate if request body is required", () => {
-      const createTool = getSampleToolByOperation("create");
-      const listTool = getSampleToolByOperation("list");
+    it('should indicate if request body is required', () => {
+      const createTool = getSampleToolByOperation('create');
+      const listTool = getSampleToolByOperation('list');
 
       if (createTool) {
         const createDesc = describeTool(createTool.toolName);
@@ -332,10 +332,10 @@ describe("discovery/describe", () => {
     });
   });
 
-  describe("describeTools", () => {
-    it("should return descriptions for multiple tools", () => {
-      const createTool = getSampleToolByOperation("create");
-      const listTool = getSampleToolByOperation("list");
+  describe('describeTools', () => {
+    it('should return descriptions for multiple tools', () => {
+      const createTool = getSampleToolByOperation('create');
+      const listTool = getSampleToolByOperation('list');
 
       if (createTool && listTool) {
         const toolNames = [createTool.toolName, listTool.toolName];
@@ -347,16 +347,16 @@ describe("discovery/describe", () => {
       }
     });
 
-    it("should skip non-existent tools", () => {
-      const toolNames = [FIRST_TOOL.toolName, "non-existent-tool-xyz-12345"];
+    it('should skip non-existent tools', () => {
+      const toolNames = [FIRST_TOOL.toolName, 'non-existent-tool-xyz-12345'];
       const descriptions = describeTools(toolNames);
 
       expect(descriptions.size).toBe(1);
     });
   });
 
-  describe("describeToolSafe", () => {
-    it("should return success for existing tool", () => {
+  describe('describeToolSafe', () => {
+    it('should return success for existing tool', () => {
       const result = describeToolSafe(FIRST_TOOL.toolName);
 
       expect(result.success).toBe(true);
@@ -364,8 +364,8 @@ describe("discovery/describe", () => {
       expect(result.error).toBeUndefined();
     });
 
-    it("should return error for non-existent tool", () => {
-      const result = describeToolSafe("non-existent-tool-xyz-12345");
+    it('should return error for non-existent tool', () => {
+      const result = describeToolSafe('non-existent-tool-xyz-12345');
 
       expect(result.success).toBe(false);
       expect(result.error).toBeDefined();
@@ -373,43 +373,43 @@ describe("discovery/describe", () => {
     });
   });
 
-  describe("getFullToolSchema", () => {
-    it("should return full ParsedOperation", () => {
+  describe('getFullToolSchema', () => {
+    it('should return full ParsedOperation', () => {
       const schema = getFullToolSchema(FIRST_TOOL.toolName);
 
       expect(schema).toBeDefined();
       expect(schema?.toolName).toBe(FIRST_TOOL.toolName);
       // These may or may not be defined based on the tool
-      expect("requestBodySchema" in (schema ?? {})).toBe(true);
-      expect("responseSchema" in (schema ?? {})).toBe(true);
+      expect('requestBodySchema' in (schema ?? {})).toBe(true);
+      expect('responseSchema' in (schema ?? {})).toBe(true);
     });
 
-    it("should return null for non-existent tool", () => {
-      const schema = getFullToolSchema("non-existent-tool-xyz-12345");
+    it('should return null for non-existent tool', () => {
+      const schema = getFullToolSchema('non-existent-tool-xyz-12345');
 
       expect(schema).toBeNull();
     });
   });
 });
 
-describe("discovery/execute", () => {
-  describe("validateExecuteParams", () => {
-    it("should validate correct parameters", () => {
-      const listTool = getSampleToolByOperation("list");
+describe('discovery/execute', () => {
+  describe('validateExecuteParams', () => {
+    it('should validate correct parameters', () => {
+      const listTool = getSampleToolByOperation('list');
       if (listTool) {
         const result = validateExecuteParams(listTool.toolName, {
           toolName: listTool.toolName,
-          pathParams: { namespace: "default" },
+          pathParams: { namespace: 'default' },
         });
 
         // Validation may pass or fail based on required params - just verify structure
-        expect(typeof result.valid).toBe("boolean");
+        expect(typeof result.valid).toBe('boolean');
         expect(Array.isArray(result.errors)).toBe(true);
       }
     });
 
-    it("should detect missing required path parameters", () => {
-      const listTool = getSampleToolByOperation("list");
+    it('should detect missing required path parameters', () => {
+      const listTool = getSampleToolByOperation('list');
       if (listTool) {
         const result = validateExecuteParams(listTool.toolName, {
           toolName: listTool.toolName,
@@ -422,41 +422,41 @@ describe("discovery/execute", () => {
       }
     });
 
-    it("should detect non-existent tool", () => {
-      const result = validateExecuteParams("non-existent-tool-xyz-12345", {
-        toolName: "non-existent-tool-xyz-12345",
+    it('should detect non-existent tool', () => {
+      const result = validateExecuteParams('non-existent-tool-xyz-12345', {
+        toolName: 'non-existent-tool-xyz-12345',
       });
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some((e) => e.includes("not found"))).toBe(true);
+      expect(result.errors.some((e) => e.includes('not found'))).toBe(true);
     });
   });
 });
 
-describe("discovery/index (DISCOVERY_TOOLS)", () => {
-  describe("DISCOVERY_TOOLS", () => {
-    it("should export all discovery tool definitions", () => {
+describe('discovery/index (DISCOVERY_TOOLS)', () => {
+  describe('DISCOVERY_TOOLS', () => {
+    it('should export all discovery tool definitions', () => {
       expect(DISCOVERY_TOOLS.search).toBeDefined();
       expect(DISCOVERY_TOOLS.describe).toBeDefined();
       expect(DISCOVERY_TOOLS.execute).toBeDefined();
       expect(DISCOVERY_TOOLS.serverInfo).toBeDefined();
     });
 
-    it("should have correct tool names", () => {
-      expect(DISCOVERY_TOOLS.search.name).toBe("f5xc-api-search-tools");
-      expect(DISCOVERY_TOOLS.describe.name).toBe("f5xc-api-describe-tool");
-      expect(DISCOVERY_TOOLS.execute.name).toBe("f5xc-api-execute-tool");
-      expect(DISCOVERY_TOOLS.serverInfo.name).toBe("f5xc-api-server-info");
+    it('should have correct tool names', () => {
+      expect(DISCOVERY_TOOLS.search.name).toBe('f5xc-api-search-tools');
+      expect(DISCOVERY_TOOLS.describe.name).toBe('f5xc-api-describe-tool');
+      expect(DISCOVERY_TOOLS.execute.name).toBe('f5xc-api-execute-tool');
+      expect(DISCOVERY_TOOLS.serverInfo.name).toBe('f5xc-api-server-info');
     });
 
-    it("should have descriptions", () => {
+    it('should have descriptions', () => {
       expect(DISCOVERY_TOOLS.search.description).toBeTruthy();
       expect(DISCOVERY_TOOLS.describe.description).toBeTruthy();
       expect(DISCOVERY_TOOLS.execute.description).toBeTruthy();
       expect(DISCOVERY_TOOLS.serverInfo.description).toBeTruthy();
     });
 
-    it("should have input schemas", () => {
+    it('should have input schemas', () => {
       expect(DISCOVERY_TOOLS.search.inputSchema).toBeDefined();
       expect(DISCOVERY_TOOLS.search.inputSchema.properties.query).toBeDefined();
 
@@ -469,8 +469,8 @@ describe("discovery/index (DISCOVERY_TOOLS)", () => {
   });
 });
 
-describe("Token Efficiency Validation", () => {
-  it("should have lightweight index entries", () => {
+describe('Token Efficiency Validation', () => {
+  it('should have lightweight index entries', () => {
     const index = getToolIndex();
     const sampleEntry = index.tools[0];
 
@@ -478,26 +478,26 @@ describe("Token Efficiency Validation", () => {
     // 5 core + Phase A metadata + domain metadata + resource metadata (v1.0.84+) + discovery (v2.0.5+)
     const fields = Object.keys(sampleEntry);
     expect(fields).toEqual([
-      "name",
-      "domain",
-      "resource",
-      "operation",
-      "summary",
-      "dangerLevel",
-      "domainCategory",
-      "uiCategory",
+      'name',
+      'domain',
+      'resource',
+      'operation',
+      'summary',
+      'dangerLevel',
+      'domainCategory',
+      'uiCategory',
       // v1.0.84+ resource-level metadata fields
-      "resourceIcon",
-      "resourceCategory",
-      "supportsLogs",
-      "supportsMetrics",
-      "resourceTier",
+      'resourceIcon',
+      'resourceCategory',
+      'supportsLogs',
+      'supportsMetrics',
+      'resourceTier',
       // v2.0.5+ discovery metadata
-      "discoveryResponseTimeMs",
+      'discoveryResponseTimeMs',
     ]);
   });
 
-  it("should have significantly fewer tokens than full tools", () => {
+  it('should have significantly fewer tokens than full tools', () => {
     const index = getToolIndex();
 
     // Validate index is loaded but full schemas are not
@@ -507,9 +507,9 @@ describe("Token Efficiency Validation", () => {
   });
 });
 
-describe("Schema Optimization", () => {
-  describe("describeToolCompact", () => {
-    it("should return compact description for existing tool", () => {
+describe('Schema Optimization', () => {
+  describe('describeToolCompact', () => {
+    it('should return compact description for existing tool', () => {
       const compact = describeToolCompact(FIRST_TOOL.toolName);
 
       expect(compact).toBeDefined();
@@ -520,13 +520,13 @@ describe("Schema Optimization", () => {
       expect(compact?.o).toBe(FIRST_TOOL.operation);
     });
 
-    it("should return null for non-existent tool", () => {
-      const compact = describeToolCompact("non-existent-tool-xyz-12345");
+    it('should return null for non-existent tool', () => {
+      const compact = describeToolCompact('non-existent-tool-xyz-12345');
 
       expect(compact).toBeNull();
     });
 
-    it("should be significantly smaller than full description", () => {
+    it('should be significantly smaller than full description', () => {
       const full = describeTool(FIRST_TOOL.toolName);
       const compact = describeToolCompact(FIRST_TOOL.toolName);
 
@@ -537,18 +537,18 @@ describe("Schema Optimization", () => {
       expect(compactSize).toBeLessThan(fullSize * 0.7);
     });
 
-    it("should include essential information", () => {
+    it('should include essential information', () => {
       const compact = describeToolCompact(FIRST_TOOL.toolName);
 
       expect(compact?.s).toBeDefined(); // summary
       expect(compact?.rp).toBeDefined(); // requiredParams
       expect(compact?.pp).toBeDefined(); // pathParams
-      expect(typeof compact?.rb).toBe("boolean"); // hasRequestBody
+      expect(typeof compact?.rb).toBe('boolean'); // hasRequestBody
     });
   });
 
-  describe("getOptimizationStats", () => {
-    it("should return valid optimization statistics", () => {
+  describe('getOptimizationStats', () => {
+    it('should return valid optimization statistics', () => {
       const stats = getOptimizationStats();
 
       expect(stats.avgOriginalParamDescLen).toBeGreaterThan(0);
@@ -556,7 +556,7 @@ describe("Schema Optimization", () => {
       expect(stats.estimatedSavingsPercent).toMatch(/^\d+\.\d+%$/);
     });
 
-    it("should show meaningful savings", () => {
+    it('should show meaningful savings', () => {
       const stats = getOptimizationStats();
 
       // Optimized should be shorter than original
@@ -564,10 +564,10 @@ describe("Schema Optimization", () => {
     });
   });
 
-  describe("parameter description optimization", () => {
-    it("should use optimized descriptions for common params", () => {
+  describe('parameter description optimization', () => {
+    it('should use optimized descriptions for common params', () => {
       const desc = describeTool(FIRST_TOOL.toolName);
-      const namespaceParam = desc?.pathParameters.find((p) => p.name.includes("namespace"));
+      const namespaceParam = desc?.pathParameters.find((p) => p.name.includes('namespace'));
 
       // Should use optimized description, not verbose OpenAPI one
       if (namespaceParam) {
@@ -575,7 +575,7 @@ describe("Schema Optimization", () => {
       }
     });
 
-    it("should truncate verbose descriptions", () => {
+    it('should truncate verbose descriptions', () => {
       const desc = describeTool(FIRST_TOOL.toolName);
 
       // All parameter descriptions should be reasonably short

@@ -7,15 +7,15 @@
  * and error resolution prompts. Extracted from server.ts.
  */
 
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { z } from "zod";
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { z } from 'zod';
 import {
   getErrorPrompts,
   getWorkflowPrompts,
   processErrorTemplate,
   processPromptTemplate,
-} from "../../prompts/index.js";
-import { logger } from "../../utils/logging.js";
+} from '../../prompts/index.js';
+import { logger } from '../../utils/logging.js';
 
 /**
  * Builds a Zod schema from prompt argument definitions.
@@ -44,7 +44,7 @@ function buildArgumentSchema(
 function extractStringArgs(args: Record<string, unknown>): Record<string, string> {
   const processedArgs: Record<string, string> = {};
   for (const [key, value] of Object.entries(args)) {
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       processedArgs[key] = value;
     }
   }
@@ -64,9 +64,9 @@ function applyDefaultValues(
   for (const arg of workflowArgs) {
     if (!processedArgs[arg.name] && !arg.required) {
       // Set sensible defaults
-      if (arg.name === "backend_port") processedArgs[arg.name] = "80";
-      if (arg.name === "enable_waf") processedArgs[arg.name] = "false";
-      if (arg.name === "mode") processedArgs[arg.name] = "blocking";
+      if (arg.name === 'backend_port') processedArgs[arg.name] = '80';
+      if (arg.name === 'enable_waf') processedArgs[arg.name] = 'false';
+      if (arg.name === 'mode') processedArgs[arg.name] = 'blocking';
     }
   }
 }
@@ -91,9 +91,9 @@ function registerWorkflowPrompts(server: McpServer): number {
       return {
         messages: [
           {
-            role: "user" as const,
+            role: 'user' as const,
             content: {
-              type: "text" as const,
+              type: 'text' as const,
               text: processedTemplate,
             },
           },
@@ -123,9 +123,9 @@ function registerErrorPrompts(server: McpServer): number {
       return {
         messages: [
           {
-            role: "user" as const,
+            role: 'user' as const,
             content: {
-              type: "text" as const,
+              type: 'text' as const,
               text: processedTemplate,
             },
           },
@@ -147,7 +147,7 @@ export function registerPrompts(server: McpServer): void {
   const workflowCount = registerWorkflowPrompts(server);
   const errorCount = registerErrorPrompts(server);
 
-  logger.info("Prompt registration completed", {
+  logger.info('Prompt registration completed', {
     workflows: workflowCount,
     errorPrompts: errorCount,
   });

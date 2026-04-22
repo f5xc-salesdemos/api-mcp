@@ -10,9 +10,9 @@
  *   tsx tests/e2e/scripts/orphan-cleanup.ts [--age-hours 24] [--dry-run]
  */
 
-import { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
-import axios, { type AxiosInstance } from "axios";
-import { extractTimestamp, getResourceAge, isTestResource } from "../helpers/test-data-generator";
+import { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
+import axios, { type AxiosInstance } from 'axios';
+import { extractTimestamp, getResourceAge, isTestResource } from '../helpers/test-data-generator';
 
 interface OrphanResource {
   type: string;
@@ -34,14 +34,14 @@ interface CleanupReport {
 
 // Parse command line arguments
 const args = process.argv.slice(2);
-const ageHoursArg = args.find((arg) => arg.startsWith("--age-hours="));
-const MAX_AGE_HOURS = ageHoursArg ? parseInt(ageHoursArg.split("=")[1], 10) : 24;
-const DRY_RUN = args.includes("--dry-run");
+const ageHoursArg = args.find((arg) => arg.startsWith('--age-hours='));
+const MAX_AGE_HOURS = ageHoursArg ? parseInt(ageHoursArg.split('=')[1], 10) : 24;
+const DRY_RUN = args.includes('--dry-run');
 
 console.log(`\n🧹 F5XC Orphan Resource Cleanup\n`);
 console.log(`Configuration:`);
 console.log(`  - Max Age: ${MAX_AGE_HOURS} hours`);
-console.log(`  - Mode: ${DRY_RUN ? "DRY RUN (no deletions)" : "LIVE (will delete)"}\n`);
+console.log(`  - Mode: ${DRY_RUN ? 'DRY RUN (no deletions)' : 'LIVE (will delete)'}\n`);
 
 /**
  * Main cleanup function
@@ -52,7 +52,7 @@ async function cleanupOrphans(): Promise<void> {
   await credentialManager.initialize();
 
   if (!credentialManager.isAuthenticated()) {
-    console.error("❌ Not authenticated. Please configure F5XC credentials.");
+    console.error('❌ Not authenticated. Please configure F5XC credentials.');
     process.exit(1);
   }
 
@@ -63,7 +63,7 @@ async function cleanupOrphans(): Promise<void> {
   const httpClient = createHttpClient(credentialManager);
 
   // Scan for orphaned resources
-  console.log("🔍 Scanning for orphaned test resources...\n");
+  console.log('🔍 Scanning for orphaned test resources...\n');
   const report: CleanupReport = {
     scanned: 0,
     orphansFound: 0,
@@ -76,23 +76,23 @@ async function cleanupOrphans(): Promise<void> {
   // Resource types to scan
   const resourceTypes = [
     {
-      domain: "virtual",
-      type: "http_loadbalancer",
-      endpoint: "http_loadbalancers",
+      domain: 'virtual',
+      type: 'http_loadbalancer',
+      endpoint: 'http_loadbalancers',
     },
     {
-      domain: "virtual",
-      type: "tcp_loadbalancer",
-      endpoint: "tcp_loadbalancers",
+      domain: 'virtual',
+      type: 'tcp_loadbalancer',
+      endpoint: 'tcp_loadbalancers',
     },
-    { domain: "virtual", type: "origin_pool", endpoint: "origin_pools" },
-    { domain: "waf", type: "app_firewall", endpoint: "app_firewalls" },
-    { domain: "dns", type: "dns_zone", endpoint: "dns_zones" },
-    { domain: "certificate", type: "certificate", endpoint: "certificates" },
+    { domain: 'virtual', type: 'origin_pool', endpoint: 'origin_pools' },
+    { domain: 'waf', type: 'app_firewall', endpoint: 'app_firewalls' },
+    { domain: 'dns', type: 'dns_zone', endpoint: 'dns_zones' },
+    { domain: 'certificate', type: 'certificate', endpoint: 'certificates' },
     {
-      domain: "tenant_and_identity",
-      type: "namespace",
-      endpoint: "namespaces",
+      domain: 'tenant_and_identity',
+      type: 'namespace',
+      endpoint: 'namespaces',
     },
   ];
 
@@ -150,7 +150,7 @@ async function scanResourceType(
   try {
     // Get list of resources
     let url: string;
-    if (resourceType.type === "namespace") {
+    if (resourceType.type === 'namespace') {
       // Namespaces are not namespaced themselves
       url = `/api/web/namespaces`;
     } else {
@@ -164,7 +164,7 @@ async function scanResourceType(
       return;
     }
 
-    await scanEndpoint(httpClient, url, resourceType, "system", report);
+    await scanEndpoint(httpClient, url, resourceType, 'system', report);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
     console.log(`  ⚠️  Error scanning ${resourceType.domain}/${resourceType.type}: ${message}`);
@@ -231,12 +231,12 @@ async function scanEndpoint(
  */
 async function listNamespaces(httpClient: AxiosInstance): Promise<string[]> {
   try {
-    const response = await httpClient.get("/api/web/namespaces");
+    const response = await httpClient.get('/api/web/namespaces');
     const items = response.data?.items || [];
     return items.map((item: { name: string }) => item.name).filter(Boolean);
   } catch (error) {
-    console.log("  ⚠️  Error listing namespaces, using default namespaces");
-    return ["default", "system"];
+    console.log('  ⚠️  Error listing namespaces, using default namespaces');
+    return ['default', 'system'];
   }
 }
 
@@ -278,20 +278,20 @@ async function deleteOrphan(httpClient: AxiosInstance, orphan: OrphanResource, r
  */
 function getDeleteUrl(orphan: OrphanResource): string {
   // Special handling for namespaces (not namespaced themselves)
-  if (orphan.type === "namespace") {
+  if (orphan.type === 'namespace') {
     return `/api/web/namespaces/${orphan.name}`;
   }
 
   // Map resource types to API endpoints
   const typeToEndpoint: Record<string, string> = {
-    http_loadbalancer: "http_loadbalancers",
-    tcp_loadbalancer: "tcp_loadbalancers",
-    origin_pool: "origin_pools",
-    app_firewall: "app_firewalls",
-    service_policy: "service_policys",
-    dns_zone: "dns_zones",
-    certificate: "certificates",
-    virtual_network: "virtual_networks",
+    http_loadbalancer: 'http_loadbalancers',
+    tcp_loadbalancer: 'tcp_loadbalancers',
+    origin_pool: 'origin_pools',
+    app_firewall: 'app_firewalls',
+    service_policy: 'service_policys',
+    dns_zone: 'dns_zones',
+    certificate: 'certificates',
+    virtual_network: 'virtual_networks',
   };
 
   const endpoint = typeToEndpoint[orphan.type] || `${orphan.type}s`;
@@ -326,7 +326,7 @@ function printSummary(report: CleanupReport): void {
  * Generate cleanup report file
  */
 function generateCleanupReport(report: CleanupReport): void {
-  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
   const reportPath = `test-reports/cleanup-${timestamp}.json`;
 
   const reportData = {
@@ -343,10 +343,10 @@ function generateCleanupReport(report: CleanupReport): void {
     errors: report.errors,
   };
 
-  const fs = require("node:fs");
-  const path = require("node:path");
+  const fs = require('node:fs');
+  const path = require('node:path');
 
-  const reportsDir = path.join(process.cwd(), "test-reports");
+  const reportsDir = path.join(process.cwd(), 'test-reports');
   if (!fs.existsSync(reportsDir)) {
     fs.mkdirSync(reportsDir, { recursive: true });
   }
@@ -367,7 +367,7 @@ function createHttpClient(credentialManager: CredentialManager): AxiosInstance {
     baseURL,
     headers: {
       Authorization: `APIToken ${apiToken}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     timeout: 30000,
   });
@@ -382,6 +382,6 @@ function sleep(ms: number): Promise<void> {
 
 // Run cleanup
 cleanupOrphans().catch((error) => {
-  console.error("❌ Cleanup failed:", error);
+  console.error('❌ Cleanup failed:', error);
   process.exit(1);
 });

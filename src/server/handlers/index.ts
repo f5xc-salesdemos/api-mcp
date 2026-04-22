@@ -6,11 +6,11 @@
  * Central export point for all MCP handlers.
  */
 
-export { registerPrompts } from "./prompt-handler.js";
+export { registerPrompts } from './prompt-handler.js';
 export {
   type ResourceRegistrationContext,
   registerResources,
-} from "./resource-handler.js";
+} from './resource-handler.js';
 export {
   registerAnalysisTools,
   registerDiscoveryTools,
@@ -20,4 +20,4 @@ export {
   registerPlanningTools,
   registerTools,
   type ToolRegistrationContext,
-} from "./tool-handlers/index.js";
+} from './tool-handlers/index.js';

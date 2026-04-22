@@ -11,18 +11,18 @@
  * This validates the most common F5XC usage pattern.
  */
 
-import { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
-import axios, { type AxiosInstance } from "axios";
-import { afterEach, beforeAll, describe, expect, it } from "vitest";
-import { ResourceTracker } from "../helpers/resource-tracker";
+import { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
+import axios, { type AxiosInstance } from 'axios';
+import { afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { ResourceTracker } from '../helpers/resource-tracker';
 import {
   delay,
   generateHttpLoadBalancerConfig,
   generateNamespaceConfig,
   generateOriginPoolConfig,
   generateTestResourceName,
-} from "../helpers/test-data-generator";
-import { waitForResourceReady } from "../helpers/validation-helpers";
+} from '../helpers/test-data-generator';
+import { waitForResourceReady } from '../helpers/validation-helpers';
 
 let httpClient: AxiosInstance;
 let resourceTracker: ResourceTracker;
@@ -32,14 +32,14 @@ beforeAll(async () => {
   await credentialManager.initialize();
 
   if (!credentialManager.isAuthenticated()) {
-    throw new Error("Authentication required for E2E tests");
+    throw new Error('Authentication required for E2E tests');
   }
 
   httpClient = axios.create({
     baseURL: credentialManager.getApiUrl(),
     headers: {
       Authorization: `APIToken ${credentialManager.getToken()}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     timeout: 30000,
   });
@@ -51,29 +51,29 @@ afterEach(async () => {
   await resourceTracker.cleanupAll(httpClient);
 }, 120000);
 
-describe("HTTP Load Balancer E2E Workflow", () => {
+describe('HTTP Load Balancer E2E Workflow', () => {
   it(
-    "should complete full HTTP load balancer workflow",
+    'should complete full HTTP load balancer workflow',
     async () => {
       // Step 1: Create namespace
-      const namespaceName = generateTestResourceName("namespace");
+      const namespaceName = generateTestResourceName('namespace');
       const namespaceConfig = generateNamespaceConfig(namespaceName);
 
-      const nsResponse = await httpClient.post("/api/web/namespaces", namespaceConfig);
+      const nsResponse = await httpClient.post('/api/web/namespaces', namespaceConfig);
       expect(nsResponse.status).toBeGreaterThanOrEqual(200);
       expect(nsResponse.status).toBeLessThan(300);
 
       resourceTracker.track({
-        type: "namespace",
-        domain: "tenant_and_identity",
-        namespace: "system",
+        type: 'namespace',
+        domain: 'tenant_and_identity',
+        namespace: 'system',
         name: namespaceName,
       });
 
       await delay(2000);
 
       // Step 2: Create origin pool
-      const poolName = generateTestResourceName("pool");
+      const poolName = generateTestResourceName('pool');
       const poolConfig = generateOriginPoolConfig(poolName, namespaceName, {
         port: 80,
         backendCount: 2,
@@ -85,8 +85,8 @@ describe("HTTP Load Balancer E2E Workflow", () => {
       expect(poolResponse.status).toBeLessThan(300);
 
       resourceTracker.track({
-        type: "origin_pool",
-        domain: "virtual",
+        type: 'origin_pool',
+        domain: 'virtual',
         namespace: namespaceName,
         name: poolName,
       });
@@ -94,7 +94,7 @@ describe("HTTP Load Balancer E2E Workflow", () => {
       await delay(2000);
 
       // Step 3: Create HTTP load balancer
-      const lbName = generateTestResourceName("lb");
+      const lbName = generateTestResourceName('lb');
       const lbConfig = generateHttpLoadBalancerConfig(lbName, namespaceName, poolName, {
         domain: `${lbName}.example.com`,
         port: 80,
@@ -105,8 +105,8 @@ describe("HTTP Load Balancer E2E Workflow", () => {
       expect(lbResponse.status).toBeLessThan(300);
 
       resourceTracker.track({
-        type: "http_loadbalancer",
-        domain: "virtual",
+        type: 'http_loadbalancer',
+        domain: 'virtual',
         namespace: namespaceName,
         name: lbName,
       });
@@ -120,7 +120,7 @@ describe("HTTP Load Balancer E2E Workflow", () => {
 
       expect(readyResult.success).toBe(true);
 
-      console.log("\n✅ HTTP Load Balancer workflow complete!");
+      console.log('\n✅ HTTP Load Balancer workflow complete!');
       console.log(`  - Namespace: ${namespaceName}`);
       console.log(`  - Origin Pool: ${poolName}`);
       console.log(`  - Load Balancer: ${lbName}`);

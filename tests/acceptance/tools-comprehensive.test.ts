@@ -18,14 +18,14 @@
  *   npm run test:discover:sample       # Sample (virtual domain only, ~10 min)
  */
 
-import { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
-import axios, { type AxiosInstance } from "axios";
-import fs from "node:fs";
-import path from "node:path";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { ResourceTracker } from "../e2e/helpers/resource-tracker";
-import { generateTestResourceName } from "../e2e/helpers/test-data-generator";
-import { RateLimiter } from "../utils/rate-limiter";
+import fs from 'node:fs';
+import path from 'node:path';
+import { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
+import axios, { type AxiosInstance } from 'axios';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { ResourceTracker } from '../e2e/helpers/resource-tracker';
+import { generateTestResourceName } from '../e2e/helpers/test-data-generator';
+import { RateLimiter } from '../utils/rate-limiter';
 
 /** Shape of a tool definition from the generated tool registry */
 interface ToolDefinition {
@@ -49,7 +49,7 @@ interface ToolRegistry {
 
 /** Type guard to extract HTTP status from an axios error */
 function getErrorStatus(error: unknown): number | undefined {
-  if (error instanceof Error && "response" in error) {
+  if (error instanceof Error && 'response' in error) {
     const resp = (error as { response?: { status?: number } }).response;
     return resp?.status;
   }
@@ -92,7 +92,7 @@ const stats = {
  * Load tool registry from generated tool modules synchronously
  */
 function loadToolRegistrySync(): ToolRegistry {
-  const distDir = path.join(process.cwd(), "dist", "tools", "generated");
+  const distDir = path.join(process.cwd(), 'dist', 'tools', 'generated');
 
   // Load all domain directories
   const domains: string[] = [];
@@ -106,7 +106,7 @@ function loadToolRegistrySync(): ToolRegistry {
     const domainDirs = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name);
 
     for (const domainName of domainDirs) {
-      const indexPath = path.join(distDir, domainName, "index.js");
+      const indexPath = path.join(distDir, domainName, 'index.js');
 
       if (fs.existsSync(indexPath)) {
         try {
@@ -116,7 +116,7 @@ function loadToolRegistrySync(): ToolRegistry {
           const module = require(indexPath);
 
           // Find the tools array export (e.g., virtualTools, wafTools, etc.)
-          const toolsArrayName = Object.keys(module).find((key) => key.endsWith("Tools"));
+          const toolsArrayName = Object.keys(module).find((key) => key.endsWith('Tools'));
 
           if (toolsArrayName && Array.isArray(module[toolsArrayName])) {
             const tools = module[toolsArrayName];
@@ -145,11 +145,11 @@ function loadToolRegistrySync(): ToolRegistry {
  * Setup authentication and HTTP client
  */
 beforeAll(async () => {
-  console.log("\n🔧 Setting up comprehensive tool validation tests...\n");
+  console.log('\n🔧 Setting up comprehensive tool validation tests...\n');
 
   // Verify credentials
   if (!process.env.F5XC_API_URL || !process.env.F5XC_API_TOKEN) {
-    throw new Error("Missing F5XC credentials. Set F5XC_API_URL and F5XC_API_TOKEN environment variables.");
+    throw new Error('Missing F5XC credentials. Set F5XC_API_URL and F5XC_API_TOKEN environment variables.');
   }
 
   // Initialize credential manager
@@ -157,7 +157,7 @@ beforeAll(async () => {
   await credentialManager.initialize();
 
   if (!credentialManager.isAuthenticated()) {
-    throw new Error("Failed to authenticate with F5XC API");
+    throw new Error('Failed to authenticate with F5XC API');
   }
 
   const tenant = credentialManager.getTenant();
@@ -169,7 +169,7 @@ beforeAll(async () => {
     baseURL: credentialManager.getApiUrl(),
     headers: {
       Authorization: `APIToken ${credentialManager.getToken()}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     timeout: TEST_CONFIG.timeout,
   });
@@ -200,7 +200,7 @@ beforeAll(async () => {
  * Cleanup resources after all tests
  */
 afterAll(async () => {
-  console.log("\n🧹 Cleaning up test resources...");
+  console.log('\n🧹 Cleaning up test resources...');
   await resourceTracker.cleanupAll(httpClient);
 
   // Print final statistics
@@ -259,9 +259,9 @@ function logProgress(): void {
  * Print final statistics
  */
 function printFinalStatistics(): void {
-  console.log("\n" + "=".repeat(80));
-  console.log("📊 COMPREHENSIVE TEST SUITE - FINAL STATISTICS");
-  console.log("=".repeat(80) + "\n");
+  console.log('\n' + '='.repeat(80));
+  console.log('📊 COMPREHENSIVE TEST SUITE - FINAL STATISTICS');
+  console.log('='.repeat(80) + '\n');
 
   console.log(`Total Tests: ${stats.total}`);
   console.log(`✅ Passed: ${stats.passed} (${((stats.passed / stats.total) * 100).toFixed(1)}%)`);
@@ -292,7 +292,7 @@ function printFinalStatistics(): void {
     console.log();
   }
 
-  console.log("Domain Breakdown:\n");
+  console.log('Domain Breakdown:\n');
 
   // Sort domains by failure rate
   const sortedDomains = Array.from(stats.domainStats.entries()).sort((a, b) => {
@@ -305,13 +305,13 @@ function printFinalStatistics(): void {
     if (domainStat.total === 0) continue;
 
     const passRate = ((domainStat.passed / domainStat.total) * 100).toFixed(1);
-    const rbacInfo = domainStat.rbac > 0 ? ` (${domainStat.rbac} RBAC)` : "";
-    const icon = domainStat.failed === 0 ? "✅" : domainStat.failed > domainStat.passed ? "❌" : "⚠️";
+    const rbacInfo = domainStat.rbac > 0 ? ` (${domainStat.rbac} RBAC)` : '';
+    const icon = domainStat.failed === 0 ? '✅' : domainStat.failed > domainStat.passed ? '❌' : '⚠️';
 
     console.log(`  ${icon} ${domain.padEnd(30)} ${domainStat.passed}/${domainStat.total} (${passRate}%)${rbacInfo}`);
   }
 
-  console.log("\n" + "=".repeat(80) + "\n");
+  console.log('\n' + '='.repeat(80) + '\n');
 }
 
 /**
@@ -333,7 +333,7 @@ async function validateListOperation(tool: ToolDefinition, domain: string): Prom
   }
 
   // Replace path parameters with test values
-  const testUrl = tool.path.replace("{namespace}", "system").replace("{name}", "test-resource");
+  const testUrl = tool.path.replace('{namespace}', 'system').replace('{name}', 'test-resource');
 
   try {
     const response = await executeWithRateLimit(() => httpClient.get(testUrl));
@@ -380,10 +380,10 @@ async function validateGetOperation(tool: ToolDefinition, domain: string): Promi
   }
 
   // For GET operations, 404 and 403 are acceptable (resource may not exist or RBAC)
-  const testResourceName = generateTestResourceName("get-test");
+  const testResourceName = generateTestResourceName('get-test');
 
   // Replace path parameters
-  const testUrl = tool.path.replace("{namespace}", "system").replace("{name}", testResourceName);
+  const testUrl = tool.path.replace('{namespace}', 'system').replace('{name}', testResourceName);
 
   try {
     const response = await executeWithRateLimit(() => httpClient.get(testUrl));
@@ -431,19 +431,19 @@ async function validateCreateOperation(tool: ToolDefinition, domain: string): Pr
     return;
   }
 
-  const testName = generateTestResourceName("create-test");
+  const testName = generateTestResourceName('create-test');
 
   // Build minimal valid payload
   const payload = {
     metadata: {
       name: testName,
-      namespace: "system",
+      namespace: 'system',
     },
     spec: {}, // Minimal spec
   };
 
   // Replace path parameters
-  const testUrl = tool.path.replace("{namespace}", "system").replace("{name}", testName);
+  const testUrl = tool.path.replace('{namespace}', 'system').replace('{name}', testName);
 
   try {
     const response = await executeWithRateLimit(() => httpClient.post(testUrl, payload));
@@ -456,7 +456,7 @@ async function validateCreateOperation(tool: ToolDefinition, domain: string): Pr
     resourceTracker.track({
       type: tool.resourceType || tool.endpoint,
       domain,
-      namespace: "system",
+      namespace: 'system',
       name: testName,
     });
 
@@ -498,8 +498,8 @@ async function validateDocumentationMode(tool: ToolDefinition, domain: string): 
 
   expect(tool.toolName).toBeDefined();
   expect(tool.description).toBeDefined();
-  expect(typeof tool.toolName).toBe("string");
-  expect(typeof tool.description).toBe("string");
+  expect(typeof tool.toolName).toBe('string');
+  expect(typeof tool.description).toBe('string');
 
   // Verify tool has required metadata
   if (tool.parameters) {
@@ -514,7 +514,7 @@ async function validateDocumentationMode(tool: ToolDefinition, domain: string): 
 // TEST SUITES BY DOMAIN
 // ============================================================================
 
-describe("F5XC API Comprehensive Tool Validation", () => {
+describe('F5XC API Comprehensive Tool Validation', () => {
   // Generate test suites for each domain
   for (const domain of toolRegistry.domains) {
     describe(`domain: ${domain}`, () => {
@@ -533,15 +533,15 @@ describe("F5XC API Comprehensive Tool Validation", () => {
 
           try {
             // Determine operation type and validate accordingly
-            const operation = tool.operation?.toLowerCase() || "list";
+            const operation = tool.operation?.toLowerCase() || 'list';
 
-            if (operation === "list") {
+            if (operation === 'list') {
               await validateListOperation(tool, domain);
-            } else if (operation === "get") {
+            } else if (operation === 'get') {
               await validateGetOperation(tool, domain);
-            } else if (operation === "create") {
+            } else if (operation === 'create') {
               await validateCreateOperation(tool, domain);
-            } else if (operation === "update" || operation === "delete") {
+            } else if (operation === 'update' || operation === 'delete') {
               await validateDocumentationMode(tool, domain);
             } else {
               // Default to documentation mode for unknown operations

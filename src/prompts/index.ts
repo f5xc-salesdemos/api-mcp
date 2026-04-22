@@ -4,7 +4,7 @@
  * Prompts Module - Export all prompt utilities
  */
 
-export type { ErrorPrompt, ErrorPromptArgument } from "./error-resolution.js";
+export type { ErrorPrompt, ErrorPromptArgument } from './error-resolution.js';
 // Phase B: Error resolution prompts (now sourced from upstream)
 export {
   clearErrorCache,
@@ -12,11 +12,11 @@ export {
   getErrorPromptByName,
   getErrorPrompts,
   processErrorTemplate,
-} from "./error-resolution.js";
-export type { WorkflowArgument, WorkflowPrompt } from "./workflows.js";
+} from './error-resolution.js';
+export type { WorkflowArgument, WorkflowPrompt } from './workflows.js';
 export {
   clearWorkflowCache,
   getWorkflowPrompt,
   getWorkflowPrompts,
   processPromptTemplate,
-} from "./workflows.js";
+} from './workflows.js';

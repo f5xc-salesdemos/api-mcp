@@ -6,10 +6,10 @@
  * Tests the actual generateExampleResource function via ResourceHandler.
  */
 
-import { beforeAll, describe, expect, it, vi } from "vitest";
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 
 // Mock logger to prevent console output
-vi.mock("../../../src/utils/logging.js", () => ({
+vi.mock('../../../src/utils/logging.js', () => ({
   logger: {
     error: vi.fn(),
     info: vi.fn(),
@@ -18,9 +18,9 @@ vi.mock("../../../src/utils/logging.js", () => ({
   },
 }));
 
-import { CredentialManager } from "@robinmordasiewicz/f5xc-auth";
+import { CredentialManager } from '@robinmordasiewicz/f5xc-auth';
 // Import the actual ResourceHandler to test real code
-import { ResourceDocumentation, ResourceHandler } from "../../../src/resources/handlers.js";
+import { ResourceDocumentation, ResourceHandler } from '../../../src/resources/handlers.js';
 
 // Type for parsed resource content
 interface ExampleResourceContent {
@@ -50,7 +50,7 @@ interface DocumentationResponseContent {
   relatedResources: string[];
 }
 
-describe("Example Resource Validation", () => {
+describe('Example Resource Validation', () => {
   let handler: ResourceHandler;
 
   beforeAll(() => {
@@ -60,39 +60,39 @@ describe("Example Resource Validation", () => {
     handler = new ResourceHandler(credentialManager, null);
   });
 
-  describe("http_loadbalancer example from real handler", () => {
+  describe('http_loadbalancer example from real handler', () => {
     let docContent: DocumentationResponseContent;
 
     beforeAll(async () => {
-      const result = await handler.readResource("f5xc://test-tenant/test-ns/http_loadbalancer/example-lb");
-      expect(result.mode).toBe("documentation");
+      const result = await handler.readResource('f5xc://test-tenant/test-ns/http_loadbalancer/example-lb');
+      expect(result.mode).toBe('documentation');
       docContent = JSON.parse(result.content) as DocumentationResponseContent;
     });
 
-    it("should return documentation mode response", async () => {
-      expect(docContent.resourceType.type).toBe("http_loadbalancer");
+    it('should return documentation mode response', async () => {
+      expect(docContent.resourceType.type).toBe('http_loadbalancer');
     });
 
-    it("should have metadata with name and namespace", () => {
+    it('should have metadata with name and namespace', () => {
       const example = docContent.exampleResource;
-      expect(example.metadata.name).toBe("example-lb");
-      expect(example.metadata.namespace).toBe("test-ns");
+      expect(example.metadata.name).toBe('example-lb');
+      expect(example.metadata.namespace).toBe('test-ns');
     });
 
-    it("should have spec with domains array", () => {
+    it('should have spec with domains array', () => {
       const spec = docContent.exampleResource.spec as { domains?: string[] };
       expect(Array.isArray(spec.domains)).toBe(true);
       expect(spec.domains!.length).toBeGreaterThan(0);
     });
 
-    it("should have spec with default_route_pools", () => {
+    it('should have spec with default_route_pools', () => {
       const spec = docContent.exampleResource.spec as {
         default_route_pools?: unknown[];
       };
       expect(Array.isArray(spec.default_route_pools)).toBe(true);
     });
 
-    it("should have valid pool reference structure", () => {
+    it('should have valid pool reference structure', () => {
       const spec = docContent.exampleResource.spec as {
         default_route_pools: Array<{
           pool: { tenant: string; namespace: string; name: string };
@@ -104,12 +104,12 @@ describe("Example Resource Validation", () => {
       expect(pool.name).toBeDefined();
     });
 
-    it("should have system_metadata with timestamps", () => {
+    it('should have system_metadata with timestamps', () => {
       const example = docContent.exampleResource;
       expect(example.system_metadata?.creation_timestamp).toBeDefined();
     });
 
-    it("should have valid ISO timestamp format", () => {
+    it('should have valid ISO timestamp format', () => {
       const timestamp = docContent.exampleResource.system_metadata?.creation_timestamp as string;
       expect(() => new Date(timestamp)).not.toThrow();
       const date = new Date(timestamp);
@@ -117,27 +117,27 @@ describe("Example Resource Validation", () => {
       expect(timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(.\d{3})?Z$/);
     });
 
-    it("should have valid API path", () => {
-      expect(docContent.apiPath).toContain("test-ns");
-      expect(docContent.apiPath).toContain("http_loadbalancers");
+    it('should have valid API path', () => {
+      expect(docContent.apiPath).toContain('test-ns');
+      expect(docContent.apiPath).toContain('http_loadbalancers');
     });
 
-    it("should have curl example", () => {
-      expect(docContent.curlExample).toContain("curl");
-      expect(docContent.curlExample).toContain("GET");
+    it('should have curl example', () => {
+      expect(docContent.curlExample).toContain('curl');
+      expect(docContent.curlExample).toContain('GET');
     });
   });
 
-  describe("origin_pool example from real handler", () => {
+  describe('origin_pool example from real handler', () => {
     let docContent: DocumentationResponseContent;
 
     beforeAll(async () => {
-      const result = await handler.readResource("f5xc://test-tenant/test-ns/origin_pool/example-pool");
-      expect(result.mode).toBe("documentation");
+      const result = await handler.readResource('f5xc://test-tenant/test-ns/origin_pool/example-pool');
+      expect(result.mode).toBe('documentation');
       docContent = JSON.parse(result.content) as DocumentationResponseContent;
     });
 
-    it("should have origin_servers array", () => {
+    it('should have origin_servers array', () => {
       const spec = docContent.exampleResource.spec as {
         origin_servers?: unknown[];
       };
@@ -145,13 +145,13 @@ describe("Example Resource Validation", () => {
       expect(spec.origin_servers!.length).toBeGreaterThan(0);
     });
 
-    it("should have port as number", () => {
+    it('should have port as number', () => {
       const spec = docContent.exampleResource.spec as { port?: number };
-      expect(typeof spec.port).toBe("number");
+      expect(typeof spec.port).toBe('number');
       expect(spec.port!).toBeGreaterThan(0);
     });
 
-    it("should have valid IP address format in origin_servers", () => {
+    it('should have valid IP address format in origin_servers', () => {
       const spec = docContent.exampleResource.spec as {
         origin_servers: Array<{ public_ip: { ip: string } }>;
       };
@@ -159,7 +159,7 @@ describe("Example Resource Validation", () => {
       expect(ip).toMatch(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/);
     });
 
-    it("should have loadbalancer_algorithm defined", () => {
+    it('should have loadbalancer_algorithm defined', () => {
       const spec = docContent.exampleResource.spec as {
         loadbalancer_algorithm?: string;
       };
@@ -167,23 +167,23 @@ describe("Example Resource Validation", () => {
     });
   });
 
-  describe("dns_zone example from real handler", () => {
+  describe('dns_zone example from real handler', () => {
     let docContent: DocumentationResponseContent;
 
     beforeAll(async () => {
-      const result = await handler.readResource("f5xc://test-tenant/test-ns/dns_zone/example-zone");
-      expect(result.mode).toBe("documentation");
+      const result = await handler.readResource('f5xc://test-tenant/test-ns/dns_zone/example-zone');
+      expect(result.mode).toBe('documentation');
       docContent = JSON.parse(result.content) as DocumentationResponseContent;
     });
 
-    it("should have primary configuration", () => {
+    it('should have primary configuration', () => {
       const spec = docContent.exampleResource.spec as {
         primary?: Record<string, unknown>;
       };
       expect(spec.primary).toBeDefined();
     });
 
-    it("should have soa_parameters with required fields", () => {
+    it('should have soa_parameters with required fields', () => {
       const spec = docContent.exampleResource.spec as {
         primary: {
           soa_parameters: {
@@ -201,7 +201,7 @@ describe("Example Resource Validation", () => {
       expect(soa.negative_ttl).toBeDefined();
     });
 
-    it("should have numeric SOA values", () => {
+    it('should have numeric SOA values', () => {
       const spec = docContent.exampleResource.spec as {
         primary: {
           soa_parameters: {
@@ -213,37 +213,37 @@ describe("Example Resource Validation", () => {
         };
       };
       const soa = spec.primary.soa_parameters;
-      expect(typeof soa.refresh).toBe("number");
-      expect(typeof soa.retry).toBe("number");
-      expect(typeof soa.expire).toBe("number");
-      expect(typeof soa.negative_ttl).toBe("number");
+      expect(typeof soa.refresh).toBe('number');
+      expect(typeof soa.retry).toBe('number');
+      expect(typeof soa.expire).toBe('number');
+      expect(typeof soa.negative_ttl).toBe('number');
     });
   });
 
-  describe("app_firewall example from real handler", () => {
+  describe('app_firewall example from real handler', () => {
     let docContent: DocumentationResponseContent;
 
     beforeAll(async () => {
-      const result = await handler.readResource("f5xc://test-tenant/test-ns/app_firewall/example-waf");
-      expect(result.mode).toBe("documentation");
+      const result = await handler.readResource('f5xc://test-tenant/test-ns/app_firewall/example-waf');
+      expect(result.mode).toBe('documentation');
       docContent = JSON.parse(result.content) as DocumentationResponseContent;
     });
 
-    it("should have detection_settings", () => {
+    it('should have detection_settings', () => {
       const spec = docContent.exampleResource.spec as {
         detection_settings?: Record<string, unknown>;
       };
       expect(spec.detection_settings).toBeDefined();
     });
 
-    it("should have bot_protection_setting", () => {
+    it('should have bot_protection_setting', () => {
       const spec = docContent.exampleResource.spec as {
         bot_protection_setting?: Record<string, unknown>;
       };
       expect(spec.bot_protection_setting).toBeDefined();
     });
 
-    it("should have valid bot action values", () => {
+    it('should have valid bot action values', () => {
       const spec = docContent.exampleResource.spec as {
         bot_protection_setting: {
           malicious_bot_action: string;
@@ -252,60 +252,60 @@ describe("Example Resource Validation", () => {
         };
       };
       const bot = spec.bot_protection_setting;
-      const validActions = ["BLOCK", "REPORT", "ALLOW", "FLAG"];
+      const validActions = ['BLOCK', 'REPORT', 'ALLOW', 'FLAG'];
       expect(validActions).toContain(bot.malicious_bot_action);
       expect(validActions).toContain(bot.suspicious_bot_action);
       expect(validActions).toContain(bot.good_bot_action);
     });
   });
 
-  describe("error handling", () => {
-    it("should throw error for unknown resource types", async () => {
-      await expect(handler.readResource("f5xc://test-tenant/test-ns/unknown_type/test-resource")).rejects.toThrow(
-        "Unknown resource type: unknown_type",
+  describe('error handling', () => {
+    it('should throw error for unknown resource types', async () => {
+      await expect(handler.readResource('f5xc://test-tenant/test-ns/unknown_type/test-resource')).rejects.toThrow(
+        'Unknown resource type: unknown_type',
       );
     });
 
-    it("should throw error for invalid URI format", async () => {
-      await expect(handler.readResource("invalid-uri-format")).rejects.toThrow("Invalid resource URI");
+    it('should throw error for invalid URI format', async () => {
+      await expect(handler.readResource('invalid-uri-format')).rejects.toThrow('Invalid resource URI');
     });
   });
 
-  describe("JSON serialization", () => {
-    it("should produce valid JSON for http_loadbalancer", async () => {
-      const result = await handler.readResource("f5xc://test-tenant/test-ns/http_loadbalancer/test-lb");
+  describe('JSON serialization', () => {
+    it('should produce valid JSON for http_loadbalancer', async () => {
+      const result = await handler.readResource('f5xc://test-tenant/test-ns/http_loadbalancer/test-lb');
       expect(() => JSON.parse(result.content)).not.toThrow();
     });
 
-    it("should produce formatted JSON with indentation", async () => {
-      const result = await handler.readResource("f5xc://test-tenant/test-ns/origin_pool/test-pool");
-      expect(result.content).toContain("\n");
-      expect(result.content).toContain("  ");
+    it('should produce formatted JSON with indentation', async () => {
+      const result = await handler.readResource('f5xc://test-tenant/test-ns/origin_pool/test-pool');
+      expect(result.content).toContain('\n');
+      expect(result.content).toContain('  ');
     });
 
-    it("should include mimeType as application/json", async () => {
-      const result = await handler.readResource("f5xc://test-tenant/test-ns/http_loadbalancer/test-lb");
-      expect(result.mimeType).toBe("application/json");
+    it('should include mimeType as application/json', async () => {
+      const result = await handler.readResource('f5xc://test-tenant/test-ns/http_loadbalancer/test-lb');
+      expect(result.mimeType).toBe('application/json');
     });
   });
 
-  describe("resource metadata consistency", () => {
-    it("should use provided name in metadata", async () => {
-      const result = await handler.readResource("f5xc://test-tenant/my-namespace/http_loadbalancer/my-custom-name");
+  describe('resource metadata consistency', () => {
+    it('should use provided name in metadata', async () => {
+      const result = await handler.readResource('f5xc://test-tenant/my-namespace/http_loadbalancer/my-custom-name');
       const content = JSON.parse(result.content) as DocumentationResponseContent;
-      expect(content.exampleResource.metadata.name).toBe("my-custom-name");
+      expect(content.exampleResource.metadata.name).toBe('my-custom-name');
     });
 
-    it("should use provided namespace in metadata", async () => {
-      const result = await handler.readResource("f5xc://test-tenant/custom-ns/http_loadbalancer/test-lb");
+    it('should use provided namespace in metadata', async () => {
+      const result = await handler.readResource('f5xc://test-tenant/custom-ns/http_loadbalancer/test-lb');
       const content = JSON.parse(result.content) as DocumentationResponseContent;
-      expect(content.exampleResource.metadata.namespace).toBe("custom-ns");
+      expect(content.exampleResource.metadata.namespace).toBe('custom-ns');
     });
 
-    it("should include description with resource type", async () => {
-      const result = await handler.readResource("f5xc://test-tenant/test-ns/origin_pool/test-pool");
+    it('should include description with resource type', async () => {
+      const result = await handler.readResource('f5xc://test-tenant/test-ns/origin_pool/test-pool');
       const content = JSON.parse(result.content) as DocumentationResponseContent;
-      expect(content.exampleResource.metadata.description).toContain("origin_pool");
+      expect(content.exampleResource.metadata.description).toContain('origin_pool');
     });
   });
 });

@@ -9,7 +9,7 @@
  * Enhanced with schema-based generation and smart defaults fallback.
  */
 
-import { getToolByName } from "../registry.js";
+import { getToolByName } from '../registry.js';
 import {
   generateSmartExamplePayload,
   getMinimumConfiguration,
@@ -17,7 +17,7 @@ import {
   getRequiredFields,
   type MinimumConfiguration,
   type MutuallyExclusiveGroup,
-} from "./schema.js";
+} from './schema.js';
 
 /**
  * Extended suggestion result with rich metadata
@@ -28,7 +28,7 @@ export interface SuggestionResult {
   /** Human-readable description */
   description: string;
   /** Source of the example */
-  source: "curated" | "spec" | "generated";
+  source: 'curated' | 'spec' | 'generated';
   /** Required fields that must be provided */
   requiredFields?: string[];
   /** Mutually exclusive field groups */
@@ -47,28 +47,28 @@ export interface SuggestionResult {
  */
 const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   // HTTP Load Balancer examples
-  "f5xc-api-virtual-http-loadbalancer-create": {
+  'f5xc-api-virtual-http-loadbalancer-create': {
     metadata: {
-      name: "example-http-lb",
-      namespace: "default",
+      name: 'example-http-lb',
+      namespace: 'default',
       labels: {
-        "ves.io/site": "aws-us-west-2",
+        'ves.io/site': 'aws-us-west-2',
       },
     },
     spec: {
-      domains: ["example.com"],
+      domains: ['example.com'],
       http: {
         port: 80,
       },
       routes: [
         {
           match: {
-            http_method: "ANY",
+            http_method: 'ANY',
           },
           route: {
             destinations: [
               {
-                host: "backend.example.com",
+                host: 'backend.example.com',
                 port: 80,
               },
             ],
@@ -79,28 +79,28 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   },
 
   // Origin Pool examples
-  "f5xc-api-virtual-origin-pool-create": {
+  'f5xc-api-virtual-origin-pool-create': {
     metadata: {
-      name: "example-origin-pool",
-      namespace: "default",
+      name: 'example-origin-pool',
+      namespace: 'default',
     },
     spec: {
       origins: [
         {
           public_name: {
-            dns_name: "backend.example.com",
+            dns_name: 'backend.example.com',
           },
           port: 80,
-          method: "GET",
+          method: 'GET',
         },
       ],
       healthcheck: [
         {
-          name: "default-health-check",
+          name: 'default-health-check',
           http_health_check: {
-            use_http_path: "/health",
+            use_http_path: '/health',
             use_http_port: 80,
-            expected_status_codes: ["200"],
+            expected_status_codes: ['200'],
           },
         },
       ],
@@ -108,10 +108,10 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   },
 
   // TCP Load Balancer examples
-  "f5xc-api-virtual-tcp-loadbalancer-create": {
+  'f5xc-api-virtual-tcp-loadbalancer-create': {
     metadata: {
-      name: "example-tcp-lb",
-      namespace: "default",
+      name: 'example-tcp-lb',
+      namespace: 'default',
     },
     spec: {
       listen_port: 3306,
@@ -126,7 +126,7 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
           route: {
             destinations: [
               {
-                host: "mysql.example.com",
+                host: 'mysql.example.com',
                 port: 3306,
               },
             ],
@@ -137,10 +137,10 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   },
 
   // DNS Zone examples
-  "f5xc-api-dns-zone-create": {
+  'f5xc-api-dns-zone-create': {
     metadata: {
-      name: "example-com-zone",
-      namespace: "system",
+      name: 'example-com-zone',
+      namespace: 'system',
     },
     spec: {
       primary: {
@@ -154,27 +154,27 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
         },
         default_ttl: 3600,
       },
-      zone_name: "example.com",
+      zone_name: 'example.com',
     },
   },
 
   // DNS Load Balancer examples
-  "f5xc-api-dns-load-balancer-create": {
+  'f5xc-api-dns-load-balancer-create': {
     metadata: {
-      name: "example-dns-lb",
-      namespace: "system",
+      name: 'example-dns-lb',
+      namespace: 'system',
     },
     spec: {
-      dns_lb_type: "DNS_LB_TYPE_ROUND_ROBIN",
+      dns_lb_type: 'DNS_LB_TYPE_ROUND_ROBIN',
       dns_policy: {
         rules: [
           {
-            rule_name: "default-rule",
-            rule_type: "DNS_LB_RULE_TYPE_STATIC",
+            rule_name: 'default-rule',
+            rule_type: 'DNS_LB_RULE_TYPE_STATIC',
             static_route: {
               destinations: [
                 {
-                  ip: "192.168.1.100",
+                  ip: '192.168.1.100',
                   port: 80,
                 },
               ],
@@ -186,67 +186,67 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   },
 
   // Certificate examples
-  "f5xc-api-certificates-certificate-create": {
+  'f5xc-api-certificates-certificate-create': {
     metadata: {
-      name: "example-certificate",
-      namespace: "system",
+      name: 'example-certificate',
+      namespace: 'system',
     },
     spec: {
       certificate_url: {
-        url: "string:///<base64-encoded-certificate>",
+        url: 'string:///<base64-encoded-certificate>',
       },
       private_key: {
         blindfold_secret_info: {
-          location: "string:///<base64-encoded-private-key>",
+          location: 'string:///<base64-encoded-private-key>',
         },
       },
     },
   },
 
   // Namespace examples
-  "f5xc-api-system-namespace-create": {
+  'f5xc-api-system-namespace-create': {
     metadata: {
-      name: "example-namespace",
-      namespace: "system",
+      name: 'example-namespace',
+      namespace: 'system',
     },
     spec: {},
   },
 
   // WAF Policy examples
-  "f5xc-api-app-firewall-policy-create": {
+  'f5xc-api-app-firewall-policy-create': {
     metadata: {
-      name: "example-waf-policy",
-      namespace: "default",
+      name: 'example-waf-policy',
+      namespace: 'default',
     },
     spec: {
       blocking: true,
       default_action: {
         deny: {},
       },
-      enforcement_mode: "ENFORCEMENT_MODE_ACTIVE",
+      enforcement_mode: 'ENFORCEMENT_MODE_ACTIVE',
     },
   },
 
   // Service Policy examples
-  "f5xc-api-network-security-service-policy-create": {
+  'f5xc-api-network-security-service-policy-create': {
     metadata: {
-      name: "example-service-policy",
-      namespace: "default",
+      name: 'example-service-policy',
+      namespace: 'default',
     },
     spec: {
-      algo: "FIRST_MATCH",
+      algo: 'FIRST_MATCH',
       any_server: {},
       rule_list: {
         rules: [
           {
             metadata: {
-              name: "allow-internal",
+              name: 'allow-internal',
             },
             spec: {
-              action: "ALLOW",
+              action: 'ALLOW',
               any_client: {},
               label_matcher: {
-                keys: ["app"],
+                keys: ['app'],
               },
             },
           },
@@ -256,17 +256,17 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   },
 
   // Network Firewall examples
-  "f5xc-api-network-security-network-firewall-create": {
+  'f5xc-api-network-security-network-firewall-create': {
     metadata: {
-      name: "example-network-firewall",
-      namespace: "system",
+      name: 'example-network-firewall',
+      namespace: 'system',
     },
     spec: {
       active_service_policies: {
         policies: [
           {
-            name: "example-service-policy",
-            namespace: "default",
+            name: 'example-service-policy',
+            namespace: 'default',
           },
         ],
       },
@@ -274,16 +274,16 @@ const COMMON_EXAMPLES: Record<string, Record<string, unknown>> = {
   },
 
   // Rate Limiter examples
-  "f5xc-api-rate-limiting-rate-limiter-create": {
+  'f5xc-api-rate-limiting-rate-limiter-create': {
     metadata: {
-      name: "example-rate-limiter",
-      namespace: "default",
+      name: 'example-rate-limiter',
+      namespace: 'default',
     },
     spec: {
       limits: [
         {
           total_number: 100,
-          unit: "MINUTE",
+          unit: 'MINUTE',
         },
       ],
     },
@@ -324,7 +324,7 @@ export function suggestParameters(toolName: string): SuggestionResult | null {
       return {
         examplePayload: payload,
         description: minConfig.description || `Example payload for ${tool.resource} ${tool.operation}`,
-        source: "spec",
+        source: 'spec',
         requiredFields: requiredFields.length > 0 ? requiredFields : undefined,
         mutuallyExclusiveGroups: mutuallyExclusiveGroups.length > 0 ? mutuallyExclusiveGroups : undefined,
         notes: allNotes,
@@ -340,14 +340,14 @@ export function suggestParameters(toolName: string): SuggestionResult | null {
   const curatedExample = COMMON_EXAMPLES[toolName];
   if (curatedExample) {
     const baseNotes = [
-      "This is a complete, working example based on common usage patterns",
-      "Modify the values to match your specific requirements",
-      "Required fields are already included",
+      'This is a complete, working example based on common usage patterns',
+      'Modify the values to match your specific requirements',
+      'Required fields are already included',
     ];
     return {
       examplePayload: JSON.parse(JSON.stringify(curatedExample)), // Deep copy
       description: `Curated example payload for ${tool.resource} ${tool.operation}`,
-      source: "curated",
+      source: 'curated',
       requiredFields: requiredFields.length > 0 ? requiredFields : undefined,
       mutuallyExclusiveGroups: mutuallyExclusiveGroups.length > 0 ? mutuallyExclusiveGroups : undefined,
       notes: [...baseNotes, ...oneOfNotes],
@@ -358,14 +358,14 @@ export function suggestParameters(toolName: string): SuggestionResult | null {
   const generatedPayload = generateSmartExamplePayload(toolName);
   if (generatedPayload) {
     const baseNotes = [
-      "This example was auto-generated from the schema",
-      "Review and modify values before using in production",
-      "Some nested objects may need additional configuration",
+      'This example was auto-generated from the schema',
+      'Review and modify values before using in production',
+      'Some nested objects may need additional configuration',
     ];
     return {
       examplePayload: generatedPayload,
       description: `Auto-generated example payload for ${tool.resource} ${tool.operation}`,
-      source: "generated",
+      source: 'generated',
       requiredFields: requiredFields.length > 0 ? requiredFields : undefined,
       mutuallyExclusiveGroups: mutuallyExclusiveGroups.length > 0 ? mutuallyExclusiveGroups : undefined,
       notes: [...baseNotes, ...oneOfNotes],
@@ -386,17 +386,17 @@ function buildNotesFromMinConfig(minConfig: MinimumConfiguration): string[] {
   }
 
   if (minConfig.required_fields && minConfig.required_fields.length > 0) {
-    notes.push(`Required fields: ${minConfig.required_fields.join(", ")}`);
+    notes.push(`Required fields: ${minConfig.required_fields.join(', ')}`);
   }
 
   if (minConfig.mutually_exclusive_groups && minConfig.mutually_exclusive_groups.length > 0) {
     for (const group of minConfig.mutually_exclusive_groups) {
-      notes.push(`Mutually exclusive: ${group.fields.join(" OR ")} - ${group.reason}`);
+      notes.push(`Mutually exclusive: ${group.fields.join(' OR ')} - ${group.reason}`);
     }
   }
 
   if (notes.length === 0) {
-    notes.push("Example from official F5XC API specification");
+    notes.push('Example from official F5XC API specification');
   }
 
   return notes;
@@ -409,7 +409,7 @@ function buildNotesFromOneOfGroups(groups: MutuallyExclusiveGroup[]): string[] {
   const notes: string[] = [];
 
   for (const group of groups) {
-    const options = group.options.map((o) => o.fieldName).join(", ");
+    const options = group.options.map((o) => o.fieldName).join(', ');
     let note = `Configuration choice (${group.fieldPath}): ${options}`;
     if (group.recommendedOption) {
       note += ` (Recommended: ${group.recommendedOption})`;
@@ -466,22 +466,22 @@ export function hasCuratedExample(toolName: string): boolean {
  * @param toolName - The exact tool name
  * @returns Source type or null if no suggestions available
  */
-export function getSuggestionSource(toolName: string): "curated" | "spec" | "generated" | null {
+export function getSuggestionSource(toolName: string): 'curated' | 'spec' | 'generated' | null {
   // Check minimum configuration first
   const minConfig = getMinimumConfiguration(toolName);
   if (minConfig?.example_json) {
-    return "spec";
+    return 'spec';
   }
 
   // Check curated examples
   if (toolName in COMMON_EXAMPLES) {
-    return "curated";
+    return 'curated';
   }
 
   // Check if can generate
   const tool = getToolByName(toolName);
   if (tool?.requestBodySchema) {
-    return "generated";
+    return 'generated';
   }
 
   return null;

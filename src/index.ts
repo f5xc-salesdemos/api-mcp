@@ -26,12 +26,12 @@
  *    - Individual profiles stored in ~/.config/f5xc/profiles/
  */
 
-import { createServer } from "./server.js";
-import { logger } from "./utils/logging.js";
-import { VERSION } from "./version.js";
+import { createServer } from './server.js';
+import { logger } from './utils/logging.js';
+import { VERSION } from './version.js';
 
 /** Re-export version for external consumers */
-export { VERSION } from "./version.js";
+export { VERSION } from './version.js';
 
 /**
  * Main entry point
@@ -42,13 +42,13 @@ async function main(): Promise<void> {
     const args = process.argv.slice(2);
 
     // Handle version flag
-    if (args.includes("--version") || args.includes("-v")) {
+    if (args.includes('--version') || args.includes('-v')) {
       console.log(`f5xc-api-mcp v${VERSION}\n`);
       process.exit(0);
     }
 
     // Handle help flag
-    if (args.includes("--help") || args.includes("-h")) {
+    if (args.includes('--help') || args.includes('-h')) {
       console.log(`F5 Distributed Cloud API MCP Server v${VERSION}
 
 Usage: f5xc-api-mcp [options]
@@ -86,26 +86,26 @@ allowing exploration of the API without authentication.
       process.exit(0);
     };
 
-    process.on("SIGINT", () => void shutdown("SIGINT"));
-    process.on("SIGTERM", () => void shutdown("SIGTERM"));
+    process.on('SIGINT', () => void shutdown('SIGINT'));
+    process.on('SIGTERM', () => void shutdown('SIGTERM'));
 
     // Handle uncaught errors
-    process.on("uncaughtException", (error: Error) => {
-      logger.error("Uncaught exception", {
+    process.on('uncaughtException', (error: Error) => {
+      logger.error('Uncaught exception', {
         error: error.message,
         stack: error.stack,
       });
       process.exit(1);
     });
 
-    process.on("unhandledRejection", (reason: unknown) => {
-      logger.error("Unhandled rejection", {
+    process.on('unhandledRejection', (reason: unknown) => {
+      logger.error('Unhandled rejection', {
         reason: reason instanceof Error ? reason.message : String(reason),
       });
       process.exit(1);
     });
   } catch (error) {
-    logger.error("Failed to start server", {
+    logger.error('Failed to start server', {
       error: error instanceof Error ? error.message : String(error),
     });
     process.exit(1);
@@ -113,11 +113,11 @@ allowing exploration of the API without authentication.
 }
 
 // Only run main when executed directly, not when imported (e.g., during tests)
-const isMainModule = import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith("f5xc-api-mcp");
+const isMainModule = import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('f5xc-api-mcp');
 
 if (isMainModule) {
   main().catch((error: unknown) => {
-    logger.error("Fatal error", {
+    logger.error('Fatal error', {
       error: error instanceof Error ? error.message : String(error),
     });
     process.exit(1);
