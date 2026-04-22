@@ -5,7 +5,7 @@
  * These simulate real user interactions with the opencode CLI.
  */
 
-import type { PromptScenario } from "./common-prompt-patterns.js";
+import type { PromptScenario } from './common-prompt-patterns.js';
 
 // ============================================================================
 // Discovery Prompts
@@ -16,44 +16,44 @@ import type { PromptScenario } from "./common-prompt-patterns.js";
  */
 export const HEALTHCHECK_DISCOVERY_PROMPTS: PromptScenario[] = [
   {
-    name: "discover_healthcheck_tools",
-    prompt: "What healthcheck tools are available?",
-    expectedOperation: "search",
-    expectedSearchTerms: ["healthcheck"],
+    name: 'discover_healthcheck_tools',
+    prompt: 'What healthcheck tools are available?',
+    expectedOperation: 'search',
+    expectedSearchTerms: ['healthcheck'],
     expectedExtractedValues: {},
-    category: "discovery",
+    category: 'discovery',
   },
   {
-    name: "discover_healthcheck_options",
-    prompt: "Show me the options for creating a healthcheck",
-    expectedOperation: "describe",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'discover_healthcheck_options',
+    prompt: 'Show me the options for creating a healthcheck',
+    expectedOperation: 'describe',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {},
-    category: "discovery",
+    category: 'discovery',
   },
   {
-    name: "discover_healthcheck_capabilities",
-    prompt: "What can I do with healthchecks?",
-    expectedOperation: "help", // "What can I do" matches help pattern
-    expectedSearchTerms: ["healthcheck"],
+    name: 'discover_healthcheck_capabilities',
+    prompt: 'What can I do with healthchecks?',
+    expectedOperation: 'help', // "What can I do" matches help pattern
+    expectedSearchTerms: ['healthcheck'],
     expectedExtractedValues: {},
-    category: "discovery",
+    category: 'discovery',
   },
   {
-    name: "discover_healthcheck_schema",
-    prompt: "What fields are required for a healthcheck?",
-    expectedOperation: "describe",
-    expectedSearchTerms: ["healthcheck", "schema", "fields"],
+    name: 'discover_healthcheck_schema',
+    prompt: 'What fields are required for a healthcheck?',
+    expectedOperation: 'describe',
+    expectedSearchTerms: ['healthcheck', 'schema', 'fields'],
     expectedExtractedValues: {},
-    category: "discovery",
+    category: 'discovery',
   },
   {
-    name: "discover_healthcheck_example",
-    prompt: "Show me an example healthcheck configuration",
-    expectedOperation: "describe",
-    expectedSearchTerms: ["healthcheck", "example"],
+    name: 'discover_healthcheck_example',
+    prompt: 'Show me an example healthcheck configuration',
+    expectedOperation: 'describe',
+    expectedSearchTerms: ['healthcheck', 'example'],
     expectedExtractedValues: {},
-    category: "discovery",
+    category: 'discovery',
   },
 ];
 
@@ -67,123 +67,123 @@ export const HEALTHCHECK_DISCOVERY_PROMPTS: PromptScenario[] = [
 export const HEALTHCHECK_CREATION_PROMPTS: PromptScenario[] = [
   // Simple creation
   {
-    name: "create_simple_healthcheck",
-    prompt: "Create a healthcheck named my-health",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_simple_healthcheck',
+    prompt: 'Create a healthcheck named my-health',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
-      name: "my-health",
+      name: 'my-health',
     },
-    category: "creation",
+    category: 'creation',
   },
   {
-    name: "create_healthcheck_with_namespace",
-    prompt: "Create a healthcheck named api-health in namespace production",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_healthcheck_with_namespace',
+    prompt: 'Create a healthcheck named api-health in namespace production',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
-      name: "api-health",
-      namespace: "production",
+      name: 'api-health',
+      namespace: 'production',
     },
-    category: "creation",
+    category: 'creation',
   },
 
   // Creation with HTTP path
   {
-    name: "create_healthcheck_with_http_path",
-    prompt: "Create a healthcheck named my-health with HTTP path /status",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_healthcheck_with_http_path',
+    prompt: 'Create a healthcheck named my-health with HTTP path /status',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
-      name: "my-health",
-      httpPath: "/status",
+      name: 'my-health',
+      httpPath: '/status',
     },
-    category: "creation",
+    category: 'creation',
   },
   {
-    name: "create_healthcheck_with_health_endpoint",
-    prompt: "Create a healthcheck called backend-hc using HTTP path /health",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_healthcheck_with_health_endpoint',
+    prompt: 'Create a healthcheck called backend-hc using HTTP path /health',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
-      name: "backend-hc",
-      httpPath: "/health",
+      name: 'backend-hc',
+      httpPath: '/health',
     },
-    category: "creation",
+    category: 'creation',
   },
 
   // Creation with timeout
   {
-    name: "create_healthcheck_with_timeout",
-    prompt: "Create a healthcheck with 5 second timeout",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_healthcheck_with_timeout',
+    prompt: 'Create a healthcheck with 5 second timeout',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
       timeout: 5,
     },
-    category: "creation",
+    category: 'creation',
   },
   {
-    name: "create_healthcheck_with_timeout_and_name",
-    prompt: "Create a healthcheck named fast-check with 2 second timeout",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_healthcheck_with_timeout_and_name',
+    prompt: 'Create a healthcheck named fast-check with 2 second timeout',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
-      name: "fast-check",
+      name: 'fast-check',
       timeout: 2,
     },
-    category: "creation",
+    category: 'creation',
   },
 
   // Creation with host header (OneOf choice)
   {
-    name: "create_healthcheck_with_host_header",
-    prompt: "Create a healthcheck named api-hc with custom host header api.example.com",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_healthcheck_with_host_header',
+    prompt: 'Create a healthcheck named api-hc with custom host header api.example.com',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
-      name: "api-hc",
-      hostHeader: "api.example.com",
+      name: 'api-hc',
+      hostHeader: 'api.example.com',
     },
-    category: "creation",
+    category: 'creation',
   },
   {
-    name: "create_healthcheck_use_origin_server",
-    prompt: "Create a healthcheck using origin server name for host header",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_healthcheck_use_origin_server',
+    prompt: 'Create a healthcheck using origin server name for host header',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
       useOriginServerName: true,
     },
-    category: "creation",
+    category: 'creation',
   },
 
   // Creation with multiple fields
   {
-    name: "create_healthcheck_full_config",
-    prompt: "Create a healthcheck named api-check with HTTP path /health, 5 second timeout, and 30 second interval",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_healthcheck_full_config',
+    prompt: 'Create a healthcheck named api-check with HTTP path /health, 5 second timeout, and 30 second interval',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
-      name: "api-check",
-      httpPath: "/health",
+      name: 'api-check',
+      httpPath: '/health',
       timeout: 5,
       interval: 30,
     },
-    category: "creation",
+    category: 'creation',
   },
 
   // OneOf conflict scenarios
   {
-    name: "create_healthcheck_oneof_conflict",
-    prompt: "Create a healthcheck with host header api.example.com and use origin server name",
-    expectedOperation: "create",
-    expectedSearchTerms: ["healthcheck", "create"],
+    name: 'create_healthcheck_oneof_conflict',
+    prompt: 'Create a healthcheck with host header api.example.com and use origin server name',
+    expectedOperation: 'create',
+    expectedSearchTerms: ['healthcheck', 'create'],
     expectedExtractedValues: {
-      hostHeader: "api.example.com",
+      hostHeader: 'api.example.com',
       useOriginServerName: true,
     },
-    category: "creation",
+    category: 'creation',
     hasOneOfConflict: true,
   },
 ];
@@ -198,75 +198,75 @@ export const HEALTHCHECK_CREATION_PROMPTS: PromptScenario[] = [
 export const HEALTHCHECK_INSPECTION_PROMPTS: PromptScenario[] = [
   // List operations
   {
-    name: "list_all_healthchecks",
-    prompt: "List all healthchecks in the default namespace",
-    expectedOperation: "list",
-    expectedSearchTerms: ["healthcheck", "list"],
+    name: 'list_all_healthchecks',
+    prompt: 'List all healthchecks in the default namespace',
+    expectedOperation: 'list',
+    expectedSearchTerms: ['healthcheck', 'list'],
     expectedExtractedValues: {
-      namespace: "default",
+      namespace: 'default',
     },
-    category: "inspection",
+    category: 'inspection',
   },
   {
-    name: "list_healthchecks_production",
-    prompt: "Show me all healthchecks in production namespace",
-    expectedOperation: "list", // "show me all" should match list
-    expectedSearchTerms: ["healthcheck", "list"],
+    name: 'list_healthchecks_production',
+    prompt: 'Show me all healthchecks in production namespace',
+    expectedOperation: 'list', // "show me all" should match list
+    expectedSearchTerms: ['healthcheck', 'list'],
     expectedExtractedValues: {
-      namespace: "production",
+      namespace: 'production',
     },
-    category: "inspection",
+    category: 'inspection',
   },
   {
-    name: "list_healthchecks_simple",
-    prompt: "What healthchecks exist?",
-    expectedOperation: "list", // "what exist" should match list
-    expectedSearchTerms: ["healthcheck", "list"],
+    name: 'list_healthchecks_simple',
+    prompt: 'What healthchecks exist?',
+    expectedOperation: 'list', // "what exist" should match list
+    expectedSearchTerms: ['healthcheck', 'list'],
     expectedExtractedValues: {},
-    category: "inspection",
+    category: 'inspection',
   },
 
   // Get specific resource
   {
-    name: "get_healthcheck_by_name",
-    prompt: "Get the healthcheck named my-health",
-    expectedOperation: "get", // Changed from "Show me" to "Get the"
-    expectedSearchTerms: ["healthcheck", "get"],
+    name: 'get_healthcheck_by_name',
+    prompt: 'Get the healthcheck named my-health',
+    expectedOperation: 'get', // Changed from "Show me" to "Get the"
+    expectedSearchTerms: ['healthcheck', 'get'],
     expectedExtractedValues: {
-      name: "my-health",
+      name: 'my-health',
     },
-    category: "inspection",
+    category: 'inspection',
   },
   {
-    name: "get_healthcheck_settings",
-    prompt: "What are the settings for healthcheck my-health?",
-    expectedOperation: "get", // "settings for" should match get
-    expectedSearchTerms: ["healthcheck", "get"],
+    name: 'get_healthcheck_settings',
+    prompt: 'What are the settings for healthcheck my-health?',
+    expectedOperation: 'get', // "settings for" should match get
+    expectedSearchTerms: ['healthcheck', 'get'],
     expectedExtractedValues: {
-      name: "my-health",
+      name: 'my-health',
     },
-    category: "inspection",
+    category: 'inspection',
   },
   {
-    name: "get_healthcheck_in_namespace",
-    prompt: "Get healthcheck api-check from production namespace",
-    expectedOperation: "get",
-    expectedSearchTerms: ["healthcheck", "get"],
+    name: 'get_healthcheck_in_namespace',
+    prompt: 'Get healthcheck api-check from production namespace',
+    expectedOperation: 'get',
+    expectedSearchTerms: ['healthcheck', 'get'],
     expectedExtractedValues: {
-      name: "api-check",
-      namespace: "production",
+      name: 'api-check',
+      namespace: 'production',
     },
-    category: "inspection",
+    category: 'inspection',
   },
   {
-    name: "display_healthcheck_config",
-    prompt: "Display healthcheck backend-hc configuration",
-    expectedOperation: "get", // "display" should match get
-    expectedSearchTerms: ["healthcheck", "get"],
+    name: 'display_healthcheck_config',
+    prompt: 'Display healthcheck backend-hc configuration',
+    expectedOperation: 'get', // "display" should match get
+    expectedSearchTerms: ['healthcheck', 'get'],
     expectedExtractedValues: {
-      name: "backend-hc",
+      name: 'backend-hc',
     },
-    category: "inspection",
+    category: 'inspection',
   },
 ];
 
@@ -279,52 +279,52 @@ export const HEALTHCHECK_INSPECTION_PROMPTS: PromptScenario[] = [
  */
 export const HEALTHCHECK_VALIDATION_PROMPTS: PromptScenario[] = [
   {
-    name: "validate_before_create",
-    prompt: "Validate my healthcheck configuration before creating",
-    expectedOperation: "validate",
-    expectedSearchTerms: ["healthcheck", "validate"],
+    name: 'validate_before_create',
+    prompt: 'Validate my healthcheck configuration before creating',
+    expectedOperation: 'validate',
+    expectedSearchTerms: ['healthcheck', 'validate'],
     expectedExtractedValues: {},
-    category: "validation",
+    category: 'validation',
     shouldValidate: true,
   },
   {
-    name: "validate_config_valid",
-    prompt: "Check if this healthcheck config is valid",
-    expectedOperation: "validate",
-    expectedSearchTerms: ["healthcheck", "validate"],
+    name: 'validate_config_valid',
+    prompt: 'Check if this healthcheck config is valid',
+    expectedOperation: 'validate',
+    expectedSearchTerms: ['healthcheck', 'validate'],
     expectedExtractedValues: {},
-    category: "validation",
+    category: 'validation',
     shouldValidate: true,
   },
   {
-    name: "validate_required_fields",
-    prompt: "Does this healthcheck have all required fields?",
-    expectedOperation: "validate",
-    expectedSearchTerms: ["healthcheck", "validate", "required"],
+    name: 'validate_required_fields',
+    prompt: 'Does this healthcheck have all required fields?',
+    expectedOperation: 'validate',
+    expectedSearchTerms: ['healthcheck', 'validate', 'required'],
     expectedExtractedValues: {},
-    category: "validation",
+    category: 'validation',
     shouldValidate: true,
   },
   {
-    name: "validate_oneof_conflict",
-    prompt: "Validate a healthcheck with both host_header and use_origin_server_name",
-    expectedOperation: "validate",
-    expectedSearchTerms: ["healthcheck", "validate"],
+    name: 'validate_oneof_conflict',
+    prompt: 'Validate a healthcheck with both host_header and use_origin_server_name',
+    expectedOperation: 'validate',
+    expectedSearchTerms: ['healthcheck', 'validate'],
     expectedExtractedValues: {
       hostHeader: true,
       useOriginServerName: true,
     },
-    category: "validation",
+    category: 'validation',
     shouldValidate: true,
     hasOneOfConflict: true,
   },
   {
-    name: "validate_mutually_exclusive",
-    prompt: "Are host_header and use_origin_server_name mutually exclusive for healthcheck?",
-    expectedOperation: "validate",
-    expectedSearchTerms: ["healthcheck", "validate", "mutually exclusive"],
+    name: 'validate_mutually_exclusive',
+    prompt: 'Are host_header and use_origin_server_name mutually exclusive for healthcheck?',
+    expectedOperation: 'validate',
+    expectedSearchTerms: ['healthcheck', 'validate', 'mutually exclusive'],
     expectedExtractedValues: {},
-    category: "validation",
+    category: 'validation',
     shouldValidate: true,
   },
 ];
@@ -338,37 +338,37 @@ export const HEALTHCHECK_VALIDATION_PROMPTS: PromptScenario[] = [
  */
 export const HEALTHCHECK_MODIFICATION_PROMPTS: PromptScenario[] = [
   {
-    name: "update_healthcheck_timeout",
-    prompt: "Update healthcheck my-health with timeout 10 seconds",
-    expectedOperation: "update",
-    expectedSearchTerms: ["healthcheck", "update"],
+    name: 'update_healthcheck_timeout',
+    prompt: 'Update healthcheck my-health with timeout 10 seconds',
+    expectedOperation: 'update',
+    expectedSearchTerms: ['healthcheck', 'update'],
     expectedExtractedValues: {
-      name: "my-health",
+      name: 'my-health',
       timeout: 10,
     },
-    category: "modification",
+    category: 'modification',
   },
   {
-    name: "update_healthcheck_interval",
-    prompt: "Change interval to 60 seconds for healthcheck api-check",
-    expectedOperation: "update",
-    expectedSearchTerms: ["healthcheck", "update"],
+    name: 'update_healthcheck_interval',
+    prompt: 'Change interval to 60 seconds for healthcheck api-check',
+    expectedOperation: 'update',
+    expectedSearchTerms: ['healthcheck', 'update'],
     expectedExtractedValues: {
-      name: "api-check",
+      name: 'api-check',
       interval: 60,
     },
-    category: "modification",
+    category: 'modification',
   },
   {
-    name: "update_healthcheck_path",
-    prompt: "Set HTTP path to /ready on healthcheck backend-hc",
-    expectedOperation: "update",
-    expectedSearchTerms: ["healthcheck", "update"],
+    name: 'update_healthcheck_path',
+    prompt: 'Set HTTP path to /ready on healthcheck backend-hc',
+    expectedOperation: 'update',
+    expectedSearchTerms: ['healthcheck', 'update'],
     expectedExtractedValues: {
-      name: "backend-hc",
-      httpPath: "/ready",
+      name: 'backend-hc',
+      httpPath: '/ready',
     },
-    category: "modification",
+    category: 'modification',
   },
 ];
 
@@ -381,45 +381,45 @@ export const HEALTHCHECK_MODIFICATION_PROMPTS: PromptScenario[] = [
  */
 export const HEALTHCHECK_DELETION_PROMPTS: PromptScenario[] = [
   {
-    name: "delete_healthcheck_simple",
-    prompt: "Delete the healthcheck named my-health",
-    expectedOperation: "delete",
-    expectedSearchTerms: ["healthcheck", "delete"],
+    name: 'delete_healthcheck_simple',
+    prompt: 'Delete the healthcheck named my-health',
+    expectedOperation: 'delete',
+    expectedSearchTerms: ['healthcheck', 'delete'],
     expectedExtractedValues: {
-      name: "my-health",
+      name: 'my-health',
     },
-    category: "deletion",
+    category: 'deletion',
   },
   {
-    name: "delete_healthcheck_remove",
-    prompt: "Remove healthcheck api-check",
-    expectedOperation: "delete",
-    expectedSearchTerms: ["healthcheck", "delete"],
+    name: 'delete_healthcheck_remove',
+    prompt: 'Remove healthcheck api-check',
+    expectedOperation: 'delete',
+    expectedSearchTerms: ['healthcheck', 'delete'],
     expectedExtractedValues: {
-      name: "api-check",
+      name: 'api-check',
     },
-    category: "deletion",
+    category: 'deletion',
   },
   {
-    name: "delete_healthcheck_in_namespace",
-    prompt: "Delete healthcheck backend-hc from namespace production",
-    expectedOperation: "delete",
-    expectedSearchTerms: ["healthcheck", "delete"],
+    name: 'delete_healthcheck_in_namespace',
+    prompt: 'Delete healthcheck backend-hc from namespace production',
+    expectedOperation: 'delete',
+    expectedSearchTerms: ['healthcheck', 'delete'],
     expectedExtractedValues: {
-      name: "backend-hc",
-      namespace: "production",
+      name: 'backend-hc',
+      namespace: 'production',
     },
-    category: "deletion",
+    category: 'deletion',
   },
   {
-    name: "destroy_healthcheck",
-    prompt: "Destroy healthcheck old-check",
-    expectedOperation: "delete",
-    expectedSearchTerms: ["healthcheck", "delete"],
+    name: 'destroy_healthcheck',
+    prompt: 'Destroy healthcheck old-check',
+    expectedOperation: 'delete',
+    expectedSearchTerms: ['healthcheck', 'delete'],
     expectedExtractedValues: {
-      name: "old-check",
+      name: 'old-check',
     },
-    category: "deletion",
+    category: 'deletion',
   },
 ];
 

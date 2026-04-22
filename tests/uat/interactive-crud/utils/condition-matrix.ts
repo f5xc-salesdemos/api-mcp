@@ -18,8 +18,8 @@ import {
   HEALTHCHECK_REQUIRED_FIELDS,
   type InputState,
   type OutcomeType,
-} from "../matrix/crud-condition-matrix.js";
-import type { ParsedPrompt } from "./prompt-parser.js";
+} from '../matrix/crud-condition-matrix.js';
+import type { ParsedPrompt } from './prompt-parser.js';
 
 // ============================================================================
 // Types
@@ -87,7 +87,7 @@ export function buildScenarioContext(
   const { isAuthenticated = false, resourceExists, config } = options;
 
   // Determine auth state
-  const authState: AuthState = isAuthenticated ? "authenticated" : "documentation";
+  const authState: AuthState = isAuthenticated ? 'authenticated' : 'documentation';
 
   // Map operation type
   const operation = mapOperationType(parsed.operation);
@@ -112,18 +112,18 @@ export function buildScenarioContext(
  */
 function mapOperationType(promptOperation: string): CrudOperation {
   const mapping: Record<string, CrudOperation> = {
-    create: "create",
-    get: "get",
-    list: "list",
-    update: "update",
-    delete: "delete",
-    validate: "validate",
-    search: "search",
-    describe: "describe",
-    help: "search",
+    create: 'create',
+    get: 'get',
+    list: 'list',
+    update: 'update',
+    delete: 'delete',
+    validate: 'validate',
+    search: 'search',
+    describe: 'describe',
+    help: 'search',
   };
 
-  return mapping[promptOperation] || "search";
+  return mapping[promptOperation] || 'search';
 }
 
 /**
@@ -134,17 +134,17 @@ function determineInputState(parsed: ParsedPrompt, config?: Record<string, unkno
   if (!config) {
     // Check for oneOf conflicts in parsed values
     if (hasOneOfConflictInValues(parsed.extractedValues)) {
-      return "oneOf_conflict";
+      return 'oneOf_conflict';
     }
 
     // Check for missing required values based on operation
-    if (parsed.operation === "create" || parsed.operation === "update") {
+    if (parsed.operation === 'create' || parsed.operation === 'update') {
       if (!parsed.extractedValues.name) {
-        return "missing_required";
+        return 'missing_required';
       }
     }
 
-    return "valid";
+    return 'valid';
   }
 
   // Validate config against schema
@@ -203,7 +203,7 @@ export function predictOutcome(context: ScenarioContext): PredictedOutcome {
   // Handle special cases first
 
   // Non-existent resource for get/update/delete
-  if (context.resourceExists === false && ["get", "update", "delete"].includes(context.operation)) {
+  if (context.resourceExists === false && ['get', 'update', 'delete'].includes(context.operation)) {
     const condition = findCondition(`${context.operation}_nonexistent_authenticated`);
     if (condition) {
       return {
@@ -217,8 +217,8 @@ export function predictOutcome(context: ScenarioContext): PredictedOutcome {
   // OneOf conflict
   if (context.hasOneOfConflict) {
     const scenarioId =
-      context.operation === "validate"
-        ? "validate_oneOf_conflict"
+      context.operation === 'validate'
+        ? 'validate_oneOf_conflict'
         : `${context.operation}_oneOf_conflict_authenticated`;
 
     const condition = findCondition(scenarioId);
@@ -226,7 +226,7 @@ export function predictOutcome(context: ScenarioContext): PredictedOutcome {
       return {
         condition,
         confidence: 0.9,
-        rationale: "OneOf conflict detected in input",
+        rationale: 'OneOf conflict detected in input',
       };
     }
   }
@@ -248,26 +248,26 @@ export function predictOutcome(context: ScenarioContext): PredictedOutcome {
     return {
       condition: docCondition,
       confidence: 0.6,
-      rationale: "Fallback to documentation mode",
+      rationale: 'Fallback to documentation mode',
     };
   }
 
   // Ultimate fallback
   return {
     condition: {
-      scenarioId: "fallback",
-      description: "No matching condition found",
+      scenarioId: 'fallback',
+      description: 'No matching condition found',
       authState: context.authState,
       operation: context.operation,
       inputState: context.inputState,
       expectedStatus: null,
-      outcomeType: "error",
+      outcomeType: 'error',
       expectedCharacteristics: {
         hasError: true,
       },
     },
     confidence: 0.3,
-    rationale: "No matching condition in matrix",
+    rationale: 'No matching condition in matrix',
   };
 }
 
@@ -296,8 +296,8 @@ export function validateHealthcheckConfig(config: Record<string, unknown>): Inpu
   // Check metadata
   const metadata = config.metadata as Record<string, unknown> | undefined;
   if (!metadata?.name) {
-    messages.push("Missing required field: metadata.name");
-    problemFields.push("metadata.name");
+    messages.push('Missing required field: metadata.name');
+    problemFields.push('metadata.name');
   }
 
   // Check spec
@@ -307,32 +307,32 @@ export function validateHealthcheckConfig(config: Record<string, unknown>): Inpu
     for (const [groupName, fields] of Object.entries(HEALTHCHECK_ONEOF_GROUPS)) {
       const presentFields = fields.filter((field) => spec[field] !== undefined);
       if (presentFields.length > 1) {
-        messages.push(`OneOf conflict in ${groupName}: ${presentFields.join(", ")} are mutually exclusive`);
+        messages.push(`OneOf conflict in ${groupName}: ${presentFields.join(', ')} are mutually exclusive`);
         problemFields.push(...presentFields);
       }
     }
 
     // Check for invalid types
-    if (spec.timeout !== undefined && typeof spec.timeout !== "number") {
-      messages.push("Invalid type for timeout: expected number");
-      problemFields.push("timeout");
+    if (spec.timeout !== undefined && typeof spec.timeout !== 'number') {
+      messages.push('Invalid type for timeout: expected number');
+      problemFields.push('timeout');
     }
 
-    if (spec.interval !== undefined && typeof spec.interval !== "number") {
-      messages.push("Invalid type for interval: expected number");
-      problemFields.push("interval");
+    if (spec.interval !== undefined && typeof spec.interval !== 'number') {
+      messages.push('Invalid type for interval: expected number');
+      problemFields.push('interval');
     }
   }
 
   // Determine input state
-  let inputState: InputState = "valid";
+  let inputState: InputState = 'valid';
 
   if (problemFields.some((f) => HEALTHCHECK_ONEOF_GROUPS.hostHeaderChoice.some((g) => f.includes(g)))) {
-    inputState = "oneOf_conflict";
-  } else if (problemFields.some((f) => f.includes("required") || f === "metadata.name")) {
-    inputState = "missing_required";
-  } else if (problemFields.some((f) => messages.some((m) => m.includes("Invalid type")))) {
-    inputState = "invalid_type";
+    inputState = 'oneOf_conflict';
+  } else if (problemFields.some((f) => f.includes('required') || f === 'metadata.name')) {
+    inputState = 'missing_required';
+  } else if (problemFields.some((f) => messages.some((m) => m.includes('Invalid type')))) {
+    inputState = 'invalid_type';
   }
 
   return {
@@ -427,9 +427,9 @@ export function findMatrixGaps(): {
     description: string;
   }> = [];
 
-  const authStates: AuthState[] = ["authenticated", "documentation"];
-  const operations: CrudOperation[] = ["create", "get", "list", "update", "delete"];
-  const inputStates: InputState[] = ["valid", "missing_required", "oneOf_conflict"];
+  const authStates: AuthState[] = ['authenticated', 'documentation'];
+  const operations: CrudOperation[] = ['create', 'get', 'list', 'update', 'delete'];
+  const inputStates: InputState[] = ['valid', 'missing_required', 'oneOf_conflict'];
 
   for (const authState of authStates) {
     for (const operation of operations) {

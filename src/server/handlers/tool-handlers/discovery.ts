@@ -11,8 +11,8 @@
  * - search-resources: Consolidated resource search
  */
 
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { z } from "zod";
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { z } from 'zod';
 import {
   DISCOVERY_TOOLS,
   describeTool,
@@ -21,8 +21,8 @@ import {
   searchConsolidatedResources,
   searchTools,
   suggestParameters,
-} from "../../../tools/discovery/index.js";
-import { createErrorResponse, createTextResponse } from "../../response-utils.js";
+} from '../../../tools/discovery/index.js';
+import { createErrorResponse, createTextResponse } from '../../response-utils.js';
 
 /**
  * Registers the search-tools tool for finding tools matching natural language queries.
@@ -32,12 +32,12 @@ export function registerSearchToolsTool(server: McpServer): void {
     DISCOVERY_TOOLS.search.name,
     DISCOVERY_TOOLS.search.description,
     {
-      query: z.string().describe("Natural language search query"),
-      limit: z.number().optional().describe("Maximum results (default: 10)"),
-      domains: z.array(z.string()).optional().describe("Filter by domains"),
-      operations: z.array(z.string()).optional().describe("Filter by operations"),
-      excludeDangerous: z.boolean().optional().describe("Exclude high-danger operations"),
-      includeDependencies: z.boolean().optional().describe("Include prerequisite hints for create operations"),
+      query: z.string().describe('Natural language search query'),
+      limit: z.number().optional().describe('Maximum results (default: 10)'),
+      domains: z.array(z.string()).optional().describe('Filter by domains'),
+      operations: z.array(z.string()).optional().describe('Filter by operations'),
+      excludeDangerous: z.boolean().optional().describe('Exclude high-danger operations'),
+      includeDependencies: z.boolean().optional().describe('Include prerequisite hints for create operations'),
     },
     async (args) => {
       const results = searchTools(args.query, {
@@ -61,7 +61,7 @@ export function registerSearchToolsTool(server: McpServer): void {
           dangerLevel: r.tool.dangerLevel,
           ...(r.prerequisites && { prerequisites: r.prerequisites }),
         })),
-        hint: "Use f5xc-api-describe-tool to get full schema for a specific tool.",
+        hint: 'Use f5xc-api-describe-tool to get full schema for a specific tool.',
       });
     },
   );
@@ -75,7 +75,7 @@ export function registerDescribeToolTool(server: McpServer): void {
     DISCOVERY_TOOLS.describe.name,
     DISCOVERY_TOOLS.describe.description,
     {
-      toolName: z.string().describe("Exact tool name to describe"),
+      toolName: z.string().describe('Exact tool name to describe'),
     },
     async (args) => {
       const description = describeTool(args.toolName);
@@ -83,13 +83,13 @@ export function registerDescribeToolTool(server: McpServer): void {
       if (!description) {
         return createErrorResponse(
           `Tool "${args.toolName}" not found`,
-          "Use f5xc-api-search-tools to find available tools.",
+          'Use f5xc-api-search-tools to find available tools.',
         );
       }
 
       return createTextResponse({
         tool: description,
-        hint: "Use f5xc-api-get-schema to get the full JSON schema, or f5xc-api-execute-tool to execute this tool.",
+        hint: 'Use f5xc-api-get-schema to get the full JSON schema, or f5xc-api-execute-tool to execute this tool.',
       });
     },
   );
@@ -103,7 +103,7 @@ export function registerGetSchemaTool(server: McpServer): void {
     DISCOVERY_TOOLS.getSchema.name,
     DISCOVERY_TOOLS.getSchema.description,
     {
-      toolName: z.string().describe("Exact tool name to get schema for"),
+      toolName: z.string().describe('Exact tool name to get schema for'),
     },
     async (args) => {
       // Get comprehensive schema info (resolved with metadata)
@@ -119,11 +119,11 @@ export function registerGetSchemaTool(server: McpServer): void {
           usage: {
             instruction: "Use examplePayload as the 'body' parameter for f5xc-api-execute-tool",
             steps: [
-              "1. Copy examplePayload as your starting point",
-              "2. Modify values (name, namespace, domains, etc.) for your use case",
-              "3. For mutuallyExclusiveGroups, choose ONE option from each group",
-              "4. Ensure all requiredFields are provided",
-              "5. Execute with f5xc-api-execute-tool",
+              '1. Copy examplePayload as your starting point',
+              '2. Modify values (name, namespace, domains, etc.) for your use case',
+              '3. For mutuallyExclusiveGroups, choose ONE option from each group',
+              '4. Ensure all requiredFields are provided',
+              '5. Execute with f5xc-api-execute-tool',
             ],
           },
         });
@@ -135,14 +135,14 @@ export function registerGetSchemaTool(server: McpServer): void {
       if (!rawSchema) {
         return createErrorResponse(
           `No request body schema found for tool "${args.toolName}"`,
-          "This tool may not require a request body, or use f5xc-api-describe-tool to check.",
+          'This tool may not require a request body, or use f5xc-api-describe-tool to check.',
         );
       }
 
       return createTextResponse({
         toolName: args.toolName,
         requestBodySchema: rawSchema,
-        note: "Schema contains unresolved $ref pointers. Use f5xc-api-suggest-parameters for working examples.",
+        note: 'Schema contains unresolved $ref pointers. Use f5xc-api-suggest-parameters for working examples.',
         hint: "Use this schema to construct the 'body' parameter for f5xc-api-execute-tool.",
       });
     },
@@ -157,7 +157,7 @@ export function registerSuggestParametersTool(server: McpServer): void {
     DISCOVERY_TOOLS.suggestParameters.name,
     DISCOVERY_TOOLS.suggestParameters.description,
     {
-      toolName: z.string().describe("Exact tool name to get examples for"),
+      toolName: z.string().describe('Exact tool name to get examples for'),
     },
     async (args) => {
       const suggestion = suggestParameters(args.toolName);
@@ -165,7 +165,7 @@ export function registerSuggestParametersTool(server: McpServer): void {
       if (!suggestion) {
         return createErrorResponse(
           `No pre-built examples available for tool "${args.toolName}"`,
-          "Use f5xc-api-get-schema to get the JSON schema, or f5xc-api-describe-tool for parameter descriptions.",
+          'Use f5xc-api-get-schema to get the JSON schema, or f5xc-api-describe-tool for parameter descriptions.',
         );
       }
 
@@ -186,9 +186,9 @@ export function registerSearchResourcesTool(server: McpServer): void {
     DISCOVERY_TOOLS.searchResources.name,
     DISCOVERY_TOOLS.searchResources.description,
     {
-      query: z.string().describe("Natural language search query"),
-      limit: z.number().optional().describe("Maximum results (default: 10)"),
-      domains: z.array(z.string()).optional().describe("Filter by domains"),
+      query: z.string().describe('Natural language search query'),
+      limit: z.number().optional().describe('Maximum results (default: 10)'),
+      domains: z.array(z.string()).optional().describe('Filter by domains'),
     },
     async (args) => {
       const results = searchConsolidatedResources(args.query, {
@@ -208,7 +208,7 @@ export function registerSearchResourcesTool(server: McpServer): void {
           isFullCrud: r.resource.isFullCrud,
           score: Math.round(r.score * 100) / 100,
         })),
-        hint: "Use f5xc-api-execute-resource with resourceName and operation to execute.",
+        hint: 'Use f5xc-api-execute-resource with resourceName and operation to execute.',
       });
     },
   );

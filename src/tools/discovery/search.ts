@@ -7,17 +7,17 @@
  * Uses inverted index for O(log n) lookups with fuzzy matching support.
  */
 
-import { getResourceMetadata } from "../../generator/domain-metadata.js";
-import { getPrerequisiteResources } from "./dependencies.js";
-import { getToolIndex } from "./index-loader.js";
+import { getResourceMetadata } from '../../generator/domain-metadata.js';
+import { getPrerequisiteResources } from './dependencies.js';
+import { getToolIndex } from './index-loader.js';
 import {
   buildSearchIndex,
   filterByDomain,
   filterByOperation,
   type SearchIndex,
   searchIndex as searchInvertedIndex,
-} from "./search-index.js";
-import type { SearchOptions, SearchResult, ToolIndexEntry } from "./types.js";
+} from './search-index.js';
+import type { SearchOptions, SearchResult, ToolIndexEntry } from './types.js';
 
 // Global search index instance (initialized on first search)
 let globalSearchIndex: SearchIndex | null = null;
@@ -40,8 +40,8 @@ function getSearchIndex(): SearchIndex {
 function normalizeText(text: string): string {
   return text
     .toLowerCase()
-    .replace(/[-_]/g, " ")
-    .replace(/[^a-z0-9\s]/g, "")
+    .replace(/[-_]/g, ' ')
+    .replace(/[^a-z0-9\s]/g, '')
     .trim();
 }
 
@@ -110,7 +110,7 @@ export function searchTools(query: string, options: SearchOptions = {}): SearchR
     if (!tool) continue;
 
     // Phase A: Apply danger level filter
-    if (excludeDangerous && tool.dangerLevel === "high") {
+    if (excludeDangerous && tool.dangerLevel === 'high') {
       continue;
     }
 
@@ -120,12 +120,12 @@ export function searchTools(query: string, options: SearchOptions = {}): SearchR
 
     // Apply boost factors from original implementation
     // Boost for domain match
-    if (normalizeText(tool.domain).includes(normalizeText(query.split(" ")[0] || ""))) {
+    if (normalizeText(tool.domain).includes(normalizeText(query.split(' ')[0] || ''))) {
       score *= 1.2;
     }
 
     // Boost for operation match
-    const operationTerms = ["create", "get", "list", "update", "delete", "patch"];
+    const operationTerms = ['create', 'get', 'list', 'update', 'delete', 'patch'];
     for (const opTerm of operationTerms) {
       if (query.toLowerCase().includes(opTerm) && tool.operation === opTerm) {
         score *= 1.3;
@@ -146,12 +146,12 @@ export function searchTools(query: string, options: SearchOptions = {}): SearchR
 
       // Phase B: Add prerequisite hints for create operations
       // Enhanced with v1.0.84+ upstream dependency metadata
-      if (includeDependencies && tool.operation === "create") {
+      if (includeDependencies && tool.operation === 'create') {
         const prereqs = getPrerequisiteResources(tool.domain, tool.resource);
         const resourceNames = prereqs.map((p) => `${p.domain}/${p.resourceType}`);
 
         // Get rich dependency data from upstream specs (v1.0.84+)
-        const normalizedResource = tool.resource.replace(/-/g, "_");
+        const normalizedResource = tool.resource.replace(/-/g, '_');
         const resourceMeta = getResourceMetadata(normalizedResource);
 
         if (prereqs.length > 0 || resourceMeta) {
@@ -159,7 +159,7 @@ export function searchTools(query: string, options: SearchOptions = {}): SearchR
             resources: resourceNames.length > 0 ? resourceNames : [],
             hint:
               prereqs.length > 0
-                ? `To create ${tool.resource}, you first need: ${prereqs.map((p) => p.resourceType).join(", ")}`
+                ? `To create ${tool.resource}, you first need: ${prereqs.map((p) => p.resourceType).join(', ')}`
                 : `No strict prerequisites for ${tool.resource}`,
             // v1.0.84+ rich metadata fields
             required: resourceMeta?.dependencies.required ?? [],

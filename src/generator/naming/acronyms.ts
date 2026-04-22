@@ -9,7 +9,7 @@
  * Acronyms are sourced from upstream x-f5xc-acronyms extension (v2.0.10+)
  */
 
-import { type AcronymEntry, getAcronyms } from "../domain-metadata.js";
+import { type AcronymEntry, getAcronyms } from '../domain-metadata.js';
 
 /**
  * Cached acronym map for case-insensitive lookup
@@ -73,10 +73,10 @@ export function getCanonicalAcronym(word: string): string | null {
 export function toKebabCase(text: string): string {
   return text
     .trim()
-    .replace(/([a-z])([A-Z])/g, "$1-$2") // camelCase to kebab
-    .replace(/[\s_]+/g, "-") // spaces and underscores to hyphens
-    .replace(/[^a-zA-Z0-9-]/g, "") // remove special characters
-    .replace(/-+/g, "-") // collapse multiple hyphens
+    .replace(/([a-z])([A-Z])/g, '$1-$2') // camelCase to kebab
+    .replace(/[\s_]+/g, '-') // spaces and underscores to hyphens
+    .replace(/[^a-zA-Z0-9-]/g, '') // remove special characters
+    .replace(/-+/g, '-') // collapse multiple hyphens
     .toLowerCase();
 }
 
@@ -91,10 +91,10 @@ export function toKebabCase(text: string): string {
 export function toSnakeCase(text: string): string {
   return text
     .trim()
-    .replace(/([a-z])([A-Z])/g, "$1_$2") // camelCase to snake
-    .replace(/[\s-]+/g, "_") // spaces and hyphens to underscores
-    .replace(/[^a-zA-Z0-9_]/g, "") // remove special characters
-    .replace(/_+/g, "_") // collapse multiple underscores
+    .replace(/([a-z])([A-Z])/g, '$1_$2') // camelCase to snake
+    .replace(/[\s-]+/g, '_') // spaces and hyphens to underscores
+    .replace(/[^a-zA-Z0-9_]/g, '') // remove special characters
+    .replace(/_+/g, '_') // collapse multiple underscores
     .toLowerCase();
 }
 
@@ -120,7 +120,7 @@ export function toPascalCase(text: string): string {
       // Capitalize first letter
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     })
-    .join("");
+    .join('');
 }
 
 /**

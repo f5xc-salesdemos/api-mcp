@@ -7,19 +7,19 @@
  * Handles both documentation mode and execution mode tool behaviors.
  */
 
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { AuthMode, type CredentialManager, type HttpClient } from "@robinmordasiewicz/f5xc-auth";
-import { z } from "zod";
-import { formatErrorForMcp } from "../utils/error-handling.js";
-import { logger } from "../utils/logging.js";
-import { getDomainMetadata, getResourceMetadata } from "./domain-metadata.js";
-import type { OpenApiParameter, OperationMetadata, ParsedOperation, SideEffects } from "./openapi-parser.js";
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { AuthMode, type CredentialManager, type HttpClient } from '@robinmordasiewicz/f5xc-auth';
+import { z } from 'zod';
+import { formatErrorForMcp } from '../utils/error-handling.js';
+import { logger } from '../utils/logging.js';
+import { getDomainMetadata, getResourceMetadata } from './domain-metadata.js';
+import type { OpenApiParameter, OperationMetadata, ParsedOperation, SideEffects } from './openapi-parser.js';
 
 /**
  * Tool response for documentation mode
  */
 export interface DocumentationResponse {
-  mode: "documentation";
+  mode: 'documentation';
   tool: string;
   description: string;
   httpMethod: string;
@@ -31,7 +31,7 @@ export interface DocumentationResponse {
   subscriptionTier: string;
   // Rich metadata from enriched specs v1.0.63
   displayName: string | null;
-  dangerLevel: "low" | "medium" | "high" | null;
+  dangerLevel: 'low' | 'medium' | 'high' | null;
   dangerWarning: string | null;
   sideEffects: SideEffects | null;
   confirmationRequired: boolean;
@@ -56,16 +56,16 @@ export interface DocumentationResponse {
   domainCategory: string | null;
   uiCategory: string | null;
   domainUseCases: string[] | null;
-  domainComplexity: "simple" | "moderate" | "advanced" | null;
+  domainComplexity: 'simple' | 'moderate' | 'advanced' | null;
 }
 
 /**
  * Tool response for execution mode
  */
 export interface ExecutionResponse {
-  mode: "execution";
+  mode: 'execution';
   tool: string;
-  status: "success" | "error";
+  status: 'success' | 'error';
   response: unknown;
   resourceUrl: string | null;
   duration: number;
@@ -76,7 +76,7 @@ export interface ExecutionResponse {
  */
 export interface ParameterInfo {
   name: string;
-  location: "path" | "query" | "body";
+  location: 'path' | 'query' | 'body';
   type: string;
   required: boolean;
   description: string;
@@ -116,38 +116,38 @@ export function validateParameters(
     const value = params[paramName];
 
     // Check max_len for strings
-    if (paramRules["ves.io.schema.rules.string.max_len"]) {
-      const maxLen = parseInt(paramRules["ves.io.schema.rules.string.max_len"]);
-      if (typeof value === "string" && value.length > maxLen) {
+    if (paramRules['ves.io.schema.rules.string.max_len']) {
+      const maxLen = parseInt(paramRules['ves.io.schema.rules.string.max_len']);
+      if (typeof value === 'string' && value.length > maxLen) {
         errors.push(`${paramName} exceeds max length of ${maxLen}`);
       }
     }
 
     // Check min_len for strings
-    if (paramRules["ves.io.schema.rules.string.min_len"]) {
-      const minLen = parseInt(paramRules["ves.io.schema.rules.string.min_len"]);
-      if (typeof value === "string" && value.length < minLen) {
+    if (paramRules['ves.io.schema.rules.string.min_len']) {
+      const minLen = parseInt(paramRules['ves.io.schema.rules.string.min_len']);
+      if (typeof value === 'string' && value.length < minLen) {
         errors.push(`${paramName} must be at least ${minLen} characters`);
       }
     }
 
     // Check required
-    if (paramRules["ves.io.schema.rules.message.required"] === "true") {
-      if (value === undefined || value === null || value === "") {
+    if (paramRules['ves.io.schema.rules.message.required'] === 'true') {
+      if (value === undefined || value === null || value === '') {
         errors.push(`${paramName} is required`);
       }
     }
 
     // Check max_items for arrays
-    if (paramRules["ves.io.schema.rules.repeated.max_items"]) {
-      const maxItems = parseInt(paramRules["ves.io.schema.rules.repeated.max_items"]);
+    if (paramRules['ves.io.schema.rules.repeated.max_items']) {
+      const maxItems = parseInt(paramRules['ves.io.schema.rules.repeated.max_items']);
       if (Array.isArray(value) && value.length > maxItems) {
         errors.push(`${paramName} exceeds max items of ${maxItems}`);
       }
     }
 
     // Check unique for arrays
-    if (paramRules["ves.io.schema.rules.repeated.unique"] === "true") {
+    if (paramRules['ves.io.schema.rules.repeated.unique'] === 'true') {
       if (Array.isArray(value)) {
         const uniqueSet = new Set(value.map((v) => JSON.stringify(v)));
         if (uniqueSet.size !== value.length) {
@@ -163,13 +163,13 @@ export function validateParameters(
 /**
  * Generate danger level warning message
  */
-export function getDangerWarning(level: "low" | "medium" | "high" | null): string | null {
+export function getDangerWarning(level: 'low' | 'medium' | 'high' | null): string | null {
   switch (level) {
-    case "high":
-      return "⚠️ HIGH RISK: This operation may cause significant changes. Confirm before proceeding.";
-    case "medium":
-      return "⚡ MEDIUM RISK: This operation will modify resources. Review parameters carefully.";
-    case "low":
+    case 'high':
+      return '⚠️ HIGH RISK: This operation may cause significant changes. Confirm before proceeding.';
+    case 'medium':
+      return '⚡ MEDIUM RISK: This operation will modify resources. Review parameters carefully.';
+    case 'low':
       return null;
     default:
       return null;
@@ -180,9 +180,9 @@ export function getDangerWarning(level: "low" | "medium" | "high" | null): strin
  * Subscription tier constants
  */
 export const SUBSCRIPTION_TIERS = {
-  NO_TIER: "NO_TIER",
-  STANDARD: "STANDARD",
-  ADVANCED: "ADVANCED",
+  NO_TIER: 'NO_TIER',
+  STANDARD: 'STANDARD',
+  ADVANCED: 'ADVANCED',
 } as const;
 
 /**
@@ -204,16 +204,16 @@ const FALLBACK_TIER_MAP: Record<string, string> = {
  * 3. Default to NO_TIER
  */
 function getSubscriptionTier(resource: string): string {
-  const normalizedResource = resource.toLowerCase().replace(/-/g, "_");
+  const normalizedResource = resource.toLowerCase().replace(/-/g, '_');
 
   // Try upstream resource metadata first (v1.0.84+)
   const resourceMeta = getResourceMetadata(normalizedResource);
   if (resourceMeta) {
     const upstreamTier = resourceMeta.tier.toLowerCase();
-    if (upstreamTier === "advanced") {
+    if (upstreamTier === 'advanced') {
       return SUBSCRIPTION_TIERS.ADVANCED;
     }
-    if (upstreamTier === "standard") {
+    if (upstreamTier === 'standard') {
       return SUBSCRIPTION_TIERS.STANDARD;
     }
     return SUBSCRIPTION_TIERS.NO_TIER;
@@ -235,12 +235,12 @@ function generatePrerequisites(operation: ParsedOperation): string[] {
   const prerequisites: string[] = [];
 
   // Common prerequisites
-  if (operation.path.includes("{namespace}")) {
-    prerequisites.push("Namespace must exist");
+  if (operation.path.includes('{namespace}')) {
+    prerequisites.push('Namespace must exist');
   }
 
   // Get upstream resource metadata
-  const resource = operation.resource.toLowerCase().replace(/-/g, "_");
+  const resource = operation.resource.toLowerCase().replace(/-/g, '_');
   const resourceMeta = getResourceMetadata(resource);
 
   if (resourceMeta) {
@@ -255,23 +255,23 @@ function generatePrerequisites(operation: ParsedOperation): string[] {
     }
 
     // Add tier requirement if Advanced
-    if (resourceMeta.tier === "Advanced") {
+    if (resourceMeta.tier === 'Advanced') {
       prerequisites.push(`${resourceMeta.category} subscription required`);
     }
   } else {
     // Fallback for resources not in upstream specs (pattern-based)
     const resourceName = operation.resource.toLowerCase();
 
-    if (resourceName.includes("loadbalancer") || resourceName.includes("lb")) {
-      prerequisites.push("Origin pool required for backend configuration");
+    if (resourceName.includes('loadbalancer') || resourceName.includes('lb')) {
+      prerequisites.push('Origin pool required for backend configuration');
     }
 
-    if (resourceName.includes("site")) {
-      prerequisites.push("Cloud credentials must be configured");
+    if (resourceName.includes('site')) {
+      prerequisites.push('Cloud credentials must be configured');
     }
 
-    if (resourceName.includes("waf") || resourceName.includes("firewall")) {
-      prerequisites.push("WAAP subscription required");
+    if (resourceName.includes('waf') || resourceName.includes('firewall')) {
+      prerequisites.push('WAAP subscription required');
     }
   }
 
@@ -283,9 +283,9 @@ function generatePrerequisites(operation: ParsedOperation): string[] {
  */
 function formatResourceName(name: string): string {
   return name
-    .split("_")
+    .split('_')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
 }
 
 /**
@@ -298,19 +298,19 @@ function parameterToZodSchema(param: OpenApiParameter): z.ZodTypeAny {
   let zodSchema: z.ZodTypeAny;
 
   switch (type) {
-    case "integer":
+    case 'integer':
       zodSchema = z.number().int();
       break;
-    case "number":
+    case 'number':
       zodSchema = z.number();
       break;
-    case "boolean":
+    case 'boolean':
       zodSchema = z.boolean();
       break;
-    case "array":
+    case 'array':
       zodSchema = z.array(z.unknown());
       break;
-    case "object":
+    case 'object':
       zodSchema = z.record(z.string(), z.unknown());
       break;
     default:
@@ -345,8 +345,8 @@ function buildToolSchema(operation: ParsedOperation): z.ZodObject<Record<string,
   }
 
   // Add body parameter for create/update operations
-  if (operation.requestBodySchema && (operation.operation === "create" || operation.operation === "update")) {
-    shape["body"] = z.record(z.string(), z.unknown()).optional().describe("Request body (JSON object)");
+  if (operation.requestBodySchema && (operation.operation === 'create' || operation.operation === 'update')) {
+    shape['body'] = z.record(z.string(), z.unknown()).optional().describe('Request body (JSON object)');
   }
 
   return z.object(shape);
@@ -364,11 +364,11 @@ function buildDocumentationResponse(operation: ParsedOperation): DocumentationRe
   for (const param of operation.pathParameters) {
     parameters.push({
       name: param.name,
-      location: "path",
-      type: ((param.schema as Record<string, unknown>)?.type as string) ?? "string",
+      location: 'path',
+      type: ((param.schema as Record<string, unknown>)?.type as string) ?? 'string',
       required: param.required ?? true,
-      description: param.description ?? "",
-      displayName: param["x-displayname"] ?? null,
+      description: param.description ?? '',
+      displayName: param['x-displayname'] ?? null,
       example: operation.parameterExamples[param.name] ?? null,
       validationRules: operation.validationRules[param.name] ?? null,
     });
@@ -378,11 +378,11 @@ function buildDocumentationResponse(operation: ParsedOperation): DocumentationRe
   for (const param of operation.queryParameters) {
     parameters.push({
       name: param.name,
-      location: "query",
-      type: ((param.schema as Record<string, unknown>)?.type as string) ?? "string",
+      location: 'query',
+      type: ((param.schema as Record<string, unknown>)?.type as string) ?? 'string',
       required: param.required ?? false,
-      description: param.description ?? "",
-      displayName: param["x-displayname"] ?? null,
+      description: param.description ?? '',
+      displayName: param['x-displayname'] ?? null,
       example: operation.parameterExamples[param.name] ?? null,
       validationRules: operation.validationRules[param.name] ?? null,
     });
@@ -392,17 +392,17 @@ function buildDocumentationResponse(operation: ParsedOperation): DocumentationRe
   let requestBody: RequestBodyInfo | null = null;
   if (operation.requestBodySchema) {
     requestBody = {
-      required: operation.requiredParams.includes("body"),
-      contentType: "application/json",
+      required: operation.requiredParams.includes('body'),
+      contentType: 'application/json',
       schema: operation.requestBodySchema,
     };
 
     parameters.push({
-      name: "body",
-      location: "body",
-      type: "object",
-      required: operation.requiredParams.includes("body"),
-      description: "Request body as JSON object",
+      name: 'body',
+      location: 'body',
+      type: 'object',
+      required: operation.requiredParams.includes('body'),
+      description: 'Request body as JSON object',
       displayName: null,
       example: null,
       validationRules: null,
@@ -421,7 +421,7 @@ function buildDocumentationResponse(operation: ParsedOperation): DocumentationRe
       ? {
           requires: operation.dependencies.map((dep) => ({
             resource: dep.resourceType,
-            domain: dep.domain || "unknown",
+            domain: dep.domain || 'unknown',
             required: dep.required,
           })),
           requiredBy: [], // Populated from dependency graph at runtime
@@ -439,12 +439,12 @@ function buildDocumentationResponse(operation: ParsedOperation): DocumentationRe
   const subscriptionRequirements =
     operation.subscriptionRequirements.length > 0
       ? operation.subscriptionRequirements.map(
-          (sub) => `${sub.displayName} (${sub.tier})${sub.required ? " - required" : ""}`,
+          (sub) => `${sub.displayName} (${sub.tier})${sub.required ? ' - required' : ''}`,
         )
       : null;
 
   return {
-    mode: "documentation",
+    mode: 'documentation',
     tool: operation.toolName,
     description: operation.displayName ?? operation.summary,
     httpMethod: operation.method,
@@ -486,7 +486,7 @@ function buildDocumentationResponse(operation: ParsedOperation): DocumentationRe
  * Uses x-ves-example values from enriched specs when available
  */
 function generateExampleRequest(operation: ParsedOperation): Record<string, unknown> | null {
-  if (operation.operation !== "create" && operation.operation !== "update") {
+  if (operation.operation !== 'create' && operation.operation !== 'update') {
     return null;
   }
 
@@ -497,28 +497,28 @@ function generateExampleRequest(operation: ParsedOperation): Record<string, unkn
   if (Object.keys(examples).length > 0) {
     return {
       metadata: {
-        name: examples["name"] ?? examples["metadata.name"] ?? `example-${resource}`,
-        namespace: examples["namespace"] ?? examples["metadata.namespace"] ?? "default",
+        name: examples['name'] ?? examples['metadata.name'] ?? `example-${resource}`,
+        namespace: examples['namespace'] ?? examples['metadata.namespace'] ?? 'default',
       },
       spec: {},
     };
   }
 
   // Fallback to resource-specific examples
-  if (resource.includes("loadbalancer") || resource.includes("lb")) {
+  if (resource.includes('loadbalancer') || resource.includes('lb')) {
     return {
       metadata: {
-        name: "example-lb",
-        namespace: "default",
+        name: 'example-lb',
+        namespace: 'default',
       },
       spec: {
-        domains: ["app.example.com"],
+        domains: ['app.example.com'],
         default_route_pools: [
           {
             pool: {
-              tenant: "your-tenant",
-              namespace: "default",
-              name: "example-origin-pool",
+              tenant: 'your-tenant',
+              namespace: 'default',
+              name: 'example-origin-pool',
             },
           },
         ],
@@ -526,17 +526,17 @@ function generateExampleRequest(operation: ParsedOperation): Record<string, unkn
     };
   }
 
-  if (resource.includes("origin") && resource.includes("pool")) {
+  if (resource.includes('origin') && resource.includes('pool')) {
     return {
       metadata: {
-        name: "example-origin-pool",
-        namespace: "default",
+        name: 'example-origin-pool',
+        namespace: 'default',
       },
       spec: {
         origin_servers: [
           {
             public_ip: {
-              ip: "10.0.0.1",
+              ip: '10.0.0.1',
             },
           },
         ],
@@ -550,7 +550,7 @@ function generateExampleRequest(operation: ParsedOperation): Record<string, unkn
   return {
     metadata: {
       name: `example-${resource}`,
-      namespace: "default",
+      namespace: 'default',
     },
     spec: {},
   };
@@ -570,35 +570,35 @@ function buildToolDescription(operation: ParsedOperation): string {
   // Add danger warning if applicable
   const dangerWarning = getDangerWarning(operation.dangerLevel);
   if (dangerWarning) {
-    parts.push("");
+    parts.push('');
     parts.push(dangerWarning);
   }
 
   // Add confirmation required notice
   if (operation.confirmationRequired) {
-    parts.push("🔒 Confirmation required before execution.");
+    parts.push('🔒 Confirmation required before execution.');
   }
 
   // Add side effects info
   if (operation.sideEffects) {
     const effects: string[] = [];
     if (operation.sideEffects.creates?.length) {
-      effects.push(`Creates: ${operation.sideEffects.creates.join(", ")}`);
+      effects.push(`Creates: ${operation.sideEffects.creates.join(', ')}`);
     }
     if (operation.sideEffects.modifies?.length) {
-      effects.push(`Modifies: ${operation.sideEffects.modifies.join(", ")}`);
+      effects.push(`Modifies: ${operation.sideEffects.modifies.join(', ')}`);
     }
     if (operation.sideEffects.deletes?.length) {
-      effects.push(`Deletes: ${operation.sideEffects.deletes.join(", ")}`);
+      effects.push(`Deletes: ${operation.sideEffects.deletes.join(', ')}`);
     }
     if (effects.length) {
-      parts.push("");
-      parts.push(`Side Effects: ${effects.join("; ")}`);
+      parts.push('');
+      parts.push(`Side Effects: ${effects.join('; ')}`);
     }
   }
 
   // Add domain metadata from upstream specs
-  parts.push("");
+  parts.push('');
   if (domainMeta) {
     parts.push(`Domain: ${domainMeta.title} (${domainMeta.domainCategory})`);
     parts.push(`Tier: ${domainMeta.requiresTier}`);
@@ -608,7 +608,7 @@ function buildToolDescription(operation: ParsedOperation): string {
   parts.push(`Resource: ${operation.resource}`);
   parts.push(`HTTP: ${operation.method} ${operation.path}`);
 
-  return parts.join("\n");
+  return parts.join('\n');
 }
 
 /**
@@ -632,7 +632,7 @@ export function registerTool(
         return {
           content: [
             {
-              type: "text",
+              type: 'text',
               text: JSON.stringify(docResponse, null, 2),
             },
           ],
@@ -664,20 +664,20 @@ export function registerTool(
       }
 
       // Execute request
-      let response;
-      const body = params["body"] as Record<string, unknown> | undefined;
+      let response: { data: unknown };
+      const body = params['body'] as Record<string, unknown> | undefined;
 
       switch (operation.method) {
-        case "GET":
+        case 'GET':
           response = await httpClient.get(apiPath);
           break;
-        case "POST":
+        case 'POST':
           response = await httpClient.post(apiPath, body);
           break;
-        case "PUT":
+        case 'PUT':
           response = await httpClient.put(apiPath, body);
           break;
-        case "DELETE":
+        case 'DELETE':
           response = await httpClient.delete(apiPath);
           break;
         default:
@@ -689,9 +689,9 @@ export function registerTool(
       const resourceUrl = tenant ? `https://${tenant}.console.ves.volterra.io${apiPath}` : null;
 
       const execResponse: ExecutionResponse = {
-        mode: "execution",
+        mode: 'execution',
         tool: operation.toolName,
-        status: "success",
+        status: 'success',
         response: response.data,
         resourceUrl,
         duration,
@@ -700,7 +700,7 @@ export function registerTool(
       return {
         content: [
           {
-            type: "text",
+            type: 'text',
             text: JSON.stringify(execResponse, null, 2),
           },
         ],

@@ -53,7 +53,7 @@ export function shouldSkipP12Tests(): boolean {
   if (!p12Bundle) return true; // P12 not configured at all
 
   // Check if it's a real file path vs a test mock
-  return !p12Bundle.includes("mock");
+  return !p12Bundle.includes('mock');
 }
 
 /**
@@ -65,7 +65,7 @@ export function shouldSkipTokenAuthTests(): boolean {
   if (!isCI()) return false;
 
   const apiToken = process.env.F5XC_API_TOKEN;
-  return !apiToken || apiToken === "test-token" || apiToken.includes("mock");
+  return !apiToken || apiToken === 'test-token' || apiToken.includes('mock');
 }
 
 /**
@@ -88,7 +88,7 @@ export function clearF5XCEnvVars(): void {
 export function setupDocumentationModeEnv(): void {
   clearF5XCEnvVars();
   // Set XDG_CONFIG_HOME to a non-existent directory to prevent loading real profiles
-  process.env.XDG_CONFIG_HOME = "/tmp/__nonexistent_test_config__";
+  process.env.XDG_CONFIG_HOME = '/tmp/__nonexistent_test_config__';
 }
 
 /**
@@ -96,6 +96,6 @@ export function setupDocumentationModeEnv(): void {
  */
 export function setupAuthenticatedModeEnv(options?: { apiUrl?: string; apiToken?: string }): void {
   clearF5XCEnvVars();
-  process.env.F5XC_API_URL = options?.apiUrl ?? "https://test.console.ves.volterra.io";
-  process.env.F5XC_API_TOKEN = options?.apiToken ?? "test-token";
+  process.env.F5XC_API_URL = options?.apiUrl ?? 'https://test.console.ves.volterra.io';
+  process.env.F5XC_API_TOKEN = options?.apiToken ?? 'test-token';
 }

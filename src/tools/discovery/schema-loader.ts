@@ -10,16 +10,16 @@
  * API payloads without guessing.
  */
 
-import { existsSync, readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-import type { FieldDefaultMetadata } from "../../generator/openapi-parser.js";
-import { getToolByName } from "../registry.js";
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import type { FieldDefaultMetadata } from '../../generator/openapi-parser.js';
+import { getToolByName } from '../registry.js';
 
 // Get specs directory path
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const SPECS_DIR = join(__dirname, "../../../specs/domains");
+const SPECS_DIR = join(__dirname, '../../../specs/domains');
 
 /**
  * Minimum configuration from x-f5xc-minimum-configuration extension
@@ -75,20 +75,20 @@ export interface ResolvedSchema {
   minLength?: number;
   maxLength?: number;
   pattern?: string;
-  "x-f5xc-minimum-configuration"?: MinimumConfiguration;
-  "x-displayname"?: string;
-  "x-ves-example"?: unknown;
-  "x-ves-required"?: string | boolean;
+  'x-f5xc-minimum-configuration'?: MinimumConfiguration;
+  'x-displayname'?: string;
+  'x-ves-example'?: unknown;
+  'x-ves-required'?: string | boolean;
   // PR #449: Server-applied default values
-  "x-f5xc-server-default"?: boolean;
-  "x-f5xc-required-for"?: {
+  'x-f5xc-server-default'?: boolean;
+  'x-f5xc-required-for'?: {
     minimum_config?: boolean;
     create?: boolean;
     update?: boolean;
     read?: boolean;
   };
   // v2.0.32: Recommended values matching web UI defaults
-  "x-f5xc-recommended-value"?: unknown;
+  'x-f5xc-recommended-value'?: unknown;
   [key: string]: unknown;
 }
 
@@ -133,14 +133,14 @@ export function loadDomainSchemas(domain: string): DomainSchemaCache | null {
 
   if (!existsSync(specPath)) {
     // Try alternative naming (replace underscores with hyphens)
-    const altPath = join(SPECS_DIR, domain.replace(/_/g, "-") + ".json");
+    const altPath = join(SPECS_DIR, domain.replace(/_/g, '-') + '.json');
     if (!existsSync(altPath)) {
       return null;
     }
   }
 
   try {
-    const specContent = readFileSync(specPath, "utf-8");
+    const specContent = readFileSync(specPath, 'utf-8');
     const spec = JSON.parse(specContent);
 
     const cacheEntry: DomainSchemaCache = {
@@ -162,7 +162,7 @@ export function loadDomainSchemas(domain: string): DomainSchemaCache | null {
  * @returns Schema name or null if invalid format
  */
 export function parseSchemaRef(ref: string): string | null {
-  if (!ref || typeof ref !== "string") {
+  if (!ref || typeof ref !== 'string') {
     return null;
   }
 
@@ -228,7 +228,7 @@ export function resolveNestedRefs(
   }
 
   // Handle null/undefined
-  if (!schema || typeof schema !== "object") {
+  if (!schema || typeof schema !== 'object') {
     return schema as ResolvedSchema;
   }
 
@@ -236,8 +236,8 @@ export function resolveNestedRefs(
 
   // Handle $ref with sibling property preservation (v2.0.33+)
   // JSON Schema allows sibling keywords alongside $ref - we must merge them
-  if ("$ref" in obj && typeof obj["$ref"] === "string") {
-    const ref = obj["$ref"];
+  if ('$ref' in obj && typeof obj['$ref'] === 'string') {
+    const ref = obj['$ref'];
 
     // Cycle detection
     if (visited.has(ref)) {
@@ -251,7 +251,7 @@ export function resolveNestedRefs(
       // Extract sibling properties (everything except $ref)
       const siblingProps: Record<string, unknown> = {};
       for (const [key, value] of Object.entries(obj)) {
-        if (key !== "$ref") {
+        if (key !== '$ref') {
           siblingProps[key] = value;
         }
       }
@@ -281,20 +281,20 @@ export function resolveNestedRefs(
   const result: Record<string, unknown> = {};
 
   for (const [key, value] of Object.entries(obj)) {
-    if (key === "properties" && typeof value === "object" && value !== null) {
+    if (key === 'properties' && typeof value === 'object' && value !== null) {
       // Resolve each property schema
       const props: Record<string, unknown> = {};
       for (const [propKey, propValue] of Object.entries(value as Record<string, unknown>)) {
         props[propKey] = resolveNestedRefs(propValue, domain, depth + 1, visited);
       }
       result[key] = props;
-    } else if (key === "items" && typeof value === "object") {
+    } else if (key === 'items' && typeof value === 'object') {
       // Resolve array items schema
       result[key] = resolveNestedRefs(value, domain, depth + 1, visited);
-    } else if ((key === "oneOf" || key === "anyOf" || key === "allOf") && Array.isArray(value)) {
+    } else if ((key === 'oneOf' || key === 'anyOf' || key === 'allOf') && Array.isArray(value)) {
       // Resolve composition schemas
       result[key] = value.map((item) => resolveNestedRefs(item, domain, depth + 1, visited));
-    } else if (key === "additionalProperties" && typeof value === "object" && value !== null) {
+    } else if (key === 'additionalProperties' && typeof value === 'object' && value !== null) {
       // Resolve additionalProperties schema
       result[key] = resolveNestedRefs(value, domain, depth + 1, visited);
     } else {
@@ -313,7 +313,7 @@ export function resolveNestedRefs(
  * @param path - Current field path (for recursion)
  * @returns Array of field default metadata
  */
-export function extractFieldDefaults(schema: ResolvedSchema, path: string = ""): FieldDefaultMetadata[] {
+export function extractFieldDefaults(schema: ResolvedSchema, path: string = ''): FieldDefaultMetadata[] {
   const defaults: FieldDefaultMetadata[] = [];
 
   if (!schema.properties) {
@@ -325,16 +325,16 @@ export function extractFieldDefaults(schema: ResolvedSchema, path: string = ""):
 
     // Extract metadata if field has defaults OR recommended values (v2.0.32+)
     const hasDefault = propSchema.default !== undefined;
-    const hasRecommended = propSchema["x-f5xc-recommended-value"] !== undefined;
+    const hasRecommended = propSchema['x-f5xc-recommended-value'] !== undefined;
 
     if (hasDefault || hasRecommended) {
       defaults.push({
         fieldPath,
         defaultValue: propSchema.default,
-        isServerDefault: propSchema["x-f5xc-server-default"] === true,
-        requiredForCreate: propSchema["x-f5xc-required-for"]?.create === true,
-        vesRequired: propSchema["x-ves-required"] === true || propSchema["x-ves-required"] === "true",
-        recommendedValue: propSchema["x-f5xc-recommended-value"],
+        isServerDefault: propSchema['x-f5xc-server-default'] === true,
+        requiredForCreate: propSchema['x-f5xc-required-for']?.create === true,
+        vesRequired: propSchema['x-ves-required'] === true || propSchema['x-ves-required'] === 'true',
+        recommendedValue: propSchema['x-f5xc-recommended-value'],
       });
     }
 
@@ -344,7 +344,7 @@ export function extractFieldDefaults(schema: ResolvedSchema, path: string = ""):
     }
 
     // Recurse into array items
-    if (propSchema.items && typeof propSchema.items === "object") {
+    if (propSchema.items && typeof propSchema.items === 'object') {
       defaults.push(...extractFieldDefaults(propSchema.items as ResolvedSchema, `${fieldPath}[]`));
     }
   }
@@ -368,8 +368,8 @@ export function getResolvedRequestBodySchema(toolName: string): ResolvedSchema |
   const schema = tool.requestBodySchema as Record<string, unknown>;
 
   // If schema has a $ref, resolve it
-  if ("$ref" in schema && typeof schema["$ref"] === "string") {
-    const resolved = resolveSchemaRef(schema["$ref"], tool.domain);
+  if ('$ref' in schema && typeof schema['$ref'] === 'string') {
+    const resolved = resolveSchemaRef(schema['$ref'], tool.domain);
     if (resolved) {
       return resolveNestedRefs(resolved, tool.domain);
     }
@@ -395,16 +395,16 @@ export function getMinimumConfigurationFromSchema(toolName: string): MinimumConf
   const schema = tool.requestBodySchema as Record<string, unknown>;
 
   // If schema has a $ref, resolve it first
-  if ("$ref" in schema && typeof schema["$ref"] === "string") {
-    const resolved = resolveSchemaRef(schema["$ref"], tool.domain);
-    if (resolved && "x-f5xc-minimum-configuration" in resolved) {
-      return resolved["x-f5xc-minimum-configuration"] as MinimumConfiguration;
+  if ('$ref' in schema && typeof schema['$ref'] === 'string') {
+    const resolved = resolveSchemaRef(schema['$ref'], tool.domain);
+    if (resolved && 'x-f5xc-minimum-configuration' in resolved) {
+      return resolved['x-f5xc-minimum-configuration'] as MinimumConfiguration;
     }
   }
 
   // Check inline schema
-  if ("x-f5xc-minimum-configuration" in schema) {
-    return schema["x-f5xc-minimum-configuration"] as MinimumConfiguration;
+  if ('x-f5xc-minimum-configuration' in schema) {
+    return schema['x-f5xc-minimum-configuration'] as MinimumConfiguration;
   }
 
   return null;
@@ -417,7 +417,7 @@ export function getMinimumConfigurationFromSchema(toolName: string): MinimumConf
  * @param path - Current path prefix for nested fields
  * @returns Array of required field paths
  */
-export function extractRequiredFields(schema: ResolvedSchema, path: string = ""): string[] {
+export function extractRequiredFields(schema: ResolvedSchema, path: string = ''): string[] {
   const required: string[] = [];
 
   // Add directly required fields
@@ -445,22 +445,22 @@ export function extractRequiredFields(schema: ResolvedSchema, path: string = "")
  * @param path - Current path prefix
  * @returns Array of mutually exclusive groups
  */
-export function extractMutuallyExclusiveGroups(schema: ResolvedSchema, path: string = ""): MutuallyExclusiveGroup[] {
+export function extractMutuallyExclusiveGroups(schema: ResolvedSchema, path: string = ''): MutuallyExclusiveGroup[] {
   const groups: MutuallyExclusiveGroup[] = [];
 
   // Check for x-ves-oneof-field annotations
   for (const [key, value] of Object.entries(schema)) {
-    if (key.startsWith("x-ves-oneof-field-") && typeof value === "string") {
+    if (key.startsWith('x-ves-oneof-field-') && typeof value === 'string') {
       try {
         const options = JSON.parse(value) as string[];
-        const choiceField = key.replace("x-ves-oneof-field-", "");
+        const choiceField = key.replace('x-ves-oneof-field-', '');
 
         // Look for recommended option
         let recommendedOption: string | undefined;
 
         // Method 1: Look for x-f5xc-recommended-oneof-variant-{choiceField} annotation
         const recommendedKey = `x-f5xc-recommended-oneof-variant-${choiceField}`;
-        if (recommendedKey in schema && typeof schema[recommendedKey] === "string") {
+        if (recommendedKey in schema && typeof schema[recommendedKey] === 'string') {
           recommendedOption = schema[recommendedKey] as string;
         }
 
@@ -468,9 +468,9 @@ export function extractMutuallyExclusiveGroups(schema: ResolvedSchema, path: str
         if (!recommendedOption && schema.properties) {
           for (const opt of options) {
             const optProp = schema.properties[opt];
-            if (optProp && typeof optProp === "object") {
+            if (optProp && typeof optProp === 'object') {
               const optObj = optProp as ResolvedSchema;
-              if (optObj["x-f5xc-server-default"] === true) {
+              if (optObj['x-f5xc-server-default'] === true) {
                 recommendedOption = opt;
                 break;
               }
@@ -484,7 +484,7 @@ export function extractMutuallyExclusiveGroups(schema: ResolvedSchema, path: str
           options: options.map((opt) => ({
             fieldName: path ? `${path}.${opt}` : opt,
           })),
-          reason: `Choose one of: ${options.join(", ")}`,
+          reason: `Choose one of: ${options.join(', ')}`,
           recommendedOption: recommendedOption
             ? path
               ? `${path}.${recommendedOption}`
@@ -500,23 +500,23 @@ export function extractMutuallyExclusiveGroups(schema: ResolvedSchema, path: str
   // Check for standard oneOf/anyOf
   if (schema.oneOf && Array.isArray(schema.oneOf)) {
     groups.push({
-      fieldPath: path || "root",
+      fieldPath: path || 'root',
       options: schema.oneOf.map((opt, idx) => ({
-        fieldName: typeof opt.title === "string" ? opt.title : `option${idx + 1}`,
-        description: typeof opt.description === "string" ? opt.description : undefined,
+        fieldName: typeof opt.title === 'string' ? opt.title : `option${idx + 1}`,
+        description: typeof opt.description === 'string' ? opt.description : undefined,
       })),
-      reason: "Choose one of the following options",
+      reason: 'Choose one of the following options',
     });
   }
 
   if (schema.anyOf && Array.isArray(schema.anyOf)) {
     groups.push({
-      fieldPath: path || "root",
+      fieldPath: path || 'root',
       options: schema.anyOf.map((opt, idx) => ({
-        fieldName: typeof opt.title === "string" ? opt.title : `option${idx + 1}`,
-        description: typeof opt.description === "string" ? opt.description : undefined,
+        fieldName: typeof opt.title === 'string' ? opt.title : `option${idx + 1}`,
+        description: typeof opt.description === 'string' ? opt.description : undefined,
       })),
-      reason: "Choose one or more of the following options",
+      reason: 'Choose one or more of the following options',
     });
   }
 

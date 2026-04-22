@@ -28,7 +28,7 @@ export function generateTestResourceName(prefix: string): string {
  * @returns True if name matches test resource pattern
  */
 export function isTestResource(name: string): boolean {
-  return name.startsWith("e2e-test-");
+  return name.startsWith('e2e-test-');
 }
 
 /**
@@ -57,10 +57,10 @@ export function getResourceAge(name: string): number | null {
  * Test metadata labels to attach to all test resources
  */
 export const TEST_METADATA_LABELS = {
-  "test-suite": "e2e-workflows",
-  "test-run-id": process.env.TEST_RUN_ID || "local",
-  "created-by": "vitest",
-  "cleanup-eligible": "true",
+  'test-suite': 'e2e-workflows',
+  'test-run-id': process.env.TEST_RUN_ID || 'local',
+  'created-by': 'vitest',
+  'cleanup-eligible': 'true',
 };
 
 /**
@@ -87,12 +87,12 @@ export function applyTestMetadata<T extends { metadata?: Record<string, unknown>
  * These are reserved for documentation and won't route
  */
 export const TEST_BACKEND_IPS = [
-  "192.0.2.1", // TEST-NET-1
-  "192.0.2.2",
-  "198.51.100.1", // TEST-NET-2
-  "198.51.100.2",
-  "203.0.113.1", // TEST-NET-3
-  "203.0.113.2",
+  '192.0.2.1', // TEST-NET-1
+  '192.0.2.2',
+  '198.51.100.1', // TEST-NET-2
+  '198.51.100.2',
+  '203.0.113.1', // TEST-NET-3
+  '203.0.113.2',
 ];
 
 /**
@@ -124,7 +124,7 @@ export function generateOriginPoolConfig(
   const spec: Record<string, unknown> = {
     origin_servers: originServers,
     port,
-    loadbalancer_algorithm: "ROUND_ROBIN",
+    loadbalancer_algorithm: 'ROUND_ROBIN',
   };
 
   if (healthCheck) {
@@ -136,7 +136,7 @@ export function generateOriginPoolConfig(
         healthy_threshold: 2,
         http_health_check: {
           use_origin_server_name: {},
-          path: "/health",
+          path: '/health',
         },
       },
     ];

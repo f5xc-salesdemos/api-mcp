@@ -8,17 +8,17 @@
  * execution mode (fetches actual resource data).
  */
 
-import { AuthMode, type CredentialManager, type HttpClient } from "@robinmordasiewicz/f5xc-auth";
-import { F5XCApiError } from "../utils/error-handling.js";
-import { logger } from "../utils/logging.js";
-import { normalizePath } from "../utils/url-utils.js";
+import { AuthMode, type CredentialManager, type HttpClient } from '@robinmordasiewicz/f5xc-auth';
+import { F5XCApiError } from '../utils/error-handling.js';
+import { logger } from '../utils/logging.js';
+import { normalizePath } from '../utils/url-utils.js';
 import {
   buildApiPath,
   getEnhancedResourceTypes,
   getResourceType,
   parseResourceUri,
   type ResourceType,
-} from "./templates.js";
+} from './templates.js';
 
 /**
  * Resource read result
@@ -31,7 +31,7 @@ export interface ResourceReadResult {
   /** Resource content */
   content: string;
   /** Whether this is documentation or actual data */
-  mode: "documentation" | "execution";
+  mode: 'documentation' | 'execution';
 }
 
 /**
@@ -65,20 +65,20 @@ function generateExampleResource(resourceType: string, namespace: string, name: 
   };
 
   switch (resourceType) {
-    case "http_loadbalancer":
+    case 'http_loadbalancer':
       return {
         metadata: baseMetadata,
         spec: {
-          domains: ["app.example.com"],
+          domains: ['app.example.com'],
           http: {
             dns_volterra_managed: true,
           },
           default_route_pools: [
             {
               pool: {
-                tenant: "your-tenant",
+                tenant: 'your-tenant',
                 namespace,
-                name: "example-origin-pool",
+                name: 'example-origin-pool',
               },
               weight: 1,
             },
@@ -86,33 +86,33 @@ function generateExampleResource(resourceType: string, namespace: string, name: 
           advertise_on_public_default_vip: {},
         },
         system_metadata: {
-          creation_timestamp: "2024-01-01T00:00:00Z",
-          modification_timestamp: "2024-01-01T00:00:00Z",
+          creation_timestamp: '2024-01-01T00:00:00Z',
+          modification_timestamp: '2024-01-01T00:00:00Z',
         },
       };
 
-    case "origin_pool":
+    case 'origin_pool':
       return {
         metadata: baseMetadata,
         spec: {
           origin_servers: [
             {
               public_ip: {
-                ip: "10.0.0.1",
+                ip: '10.0.0.1',
               },
             },
           ],
           port: 80,
           no_tls: {},
-          endpoint_selection: "LOCAL_PREFERRED",
-          loadbalancer_algorithm: "ROUND_ROBIN",
+          endpoint_selection: 'LOCAL_PREFERRED',
+          loadbalancer_algorithm: 'ROUND_ROBIN',
         },
         system_metadata: {
-          creation_timestamp: "2024-01-01T00:00:00Z",
+          creation_timestamp: '2024-01-01T00:00:00Z',
         },
       };
 
-    case "dns_zone":
+    case 'dns_zone':
       return {
         metadata: baseMetadata,
         spec: {
@@ -127,11 +127,11 @@ function generateExampleResource(resourceType: string, namespace: string, name: 
           },
         },
         system_metadata: {
-          creation_timestamp: "2024-01-01T00:00:00Z",
+          creation_timestamp: '2024-01-01T00:00:00Z',
         },
       };
 
-    case "app_firewall":
+    case 'app_firewall':
       return {
         metadata: baseMetadata,
         spec: {
@@ -144,13 +144,13 @@ function generateExampleResource(resourceType: string, namespace: string, name: 
             enable_threat_campaigns: {},
           },
           bot_protection_setting: {
-            malicious_bot_action: "BLOCK",
-            suspicious_bot_action: "REPORT",
-            good_bot_action: "REPORT",
+            malicious_bot_action: 'BLOCK',
+            suspicious_bot_action: 'REPORT',
+            good_bot_action: 'REPORT',
           },
         },
         system_metadata: {
-          creation_timestamp: "2024-01-01T00:00:00Z",
+          creation_timestamp: '2024-01-01T00:00:00Z',
         },
       };
 
@@ -159,7 +159,7 @@ function generateExampleResource(resourceType: string, namespace: string, name: 
         metadata: baseMetadata,
         spec: {},
         system_metadata: {
-          creation_timestamp: "2024-01-01T00:00:00Z",
+          creation_timestamp: '2024-01-01T00:00:00Z',
         },
       };
   }
@@ -201,7 +201,7 @@ function buildDocumentationResponse(
   return {
     uri,
     resourceType: rt,
-    apiPath: apiPath ?? "",
+    apiPath: apiPath ?? '',
     exampleResource: generateExampleResource(resourceType, namespace, name),
     curlExample: generateCurlExample(resourceType, namespace, name),
     relatedResources: rt.relatedResources ?? [],
@@ -244,9 +244,9 @@ export class ResourceHandler {
 
       return {
         uri,
-        mimeType: "application/json",
+        mimeType: 'application/json',
         content: JSON.stringify(doc, null, 2),
-        mode: "documentation",
+        mode: 'documentation',
       };
     }
 
@@ -263,9 +263,9 @@ export class ResourceHandler {
 
       return {
         uri,
-        mimeType: "application/json",
+        mimeType: 'application/json',
         content: JSON.stringify(response.data, null, 2),
-        mode: "execution",
+        mode: 'execution',
       };
     } catch (error) {
       logger.error(`Failed to read resource: ${uri}`, {
@@ -285,7 +285,7 @@ export class ResourceHandler {
     description: string;
     mimeType: string;
   }> {
-    const tenant = this.credentialManager.getTenant() ?? "{tenant}";
+    const tenant = this.credentialManager.getTenant() ?? '{tenant}';
     const enhancedTypes = getEnhancedResourceTypes();
 
     return Object.values(enhancedTypes).map((rt) => ({
@@ -294,7 +294,7 @@ export class ResourceHandler {
         : `f5xc://${tenant}/system/${rt.type}/{name}`,
       name: rt.name,
       description: rt.description,
-      mimeType: "application/json",
+      mimeType: 'application/json',
     }));
   }
 
@@ -308,7 +308,7 @@ export class ResourceHandler {
       throw new F5XCApiError(`Unknown resource type: ${resourceType}`, 400);
     }
 
-    const tenant = this.credentialManager.getTenant() ?? "unknown";
+    const tenant = this.credentialManager.getTenant() ?? 'unknown';
     const uri = `f5xc://${tenant}/${namespace}/${resourceType}`;
 
     // Documentation mode
@@ -317,14 +317,14 @@ export class ResourceHandler {
         uri,
         resourceType: rt,
         apiPath: buildApiPath(resourceType, namespace),
-        note: "In documentation mode. Provide F5XC credentials to list actual resources.",
+        note: 'In documentation mode. Provide F5XC credentials to list actual resources.',
       };
 
       return {
         uri,
-        mimeType: "application/json",
+        mimeType: 'application/json',
         content: JSON.stringify(doc, null, 2),
-        mode: "documentation",
+        mode: 'documentation',
       };
     }
 
@@ -341,9 +341,9 @@ export class ResourceHandler {
 
       return {
         uri,
-        mimeType: "application/json",
+        mimeType: 'application/json',
         content: JSON.stringify(response.data, null, 2),
-        mode: "execution",
+        mode: 'execution',
       };
     } catch (error) {
       logger.error(`Failed to list resources: ${resourceType}`, {

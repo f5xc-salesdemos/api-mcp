@@ -7,17 +7,17 @@
  * This provides a unified interface for executing any discovered tool.
  */
 
-import { AuthMode, CredentialManager, createHttpClient } from "@robinmordasiewicz/f5xc-auth";
-import type { ParsedOperation } from "../../generator/openapi-parser.js";
-import { formatQuotaError } from "../../services/quota-formatter.js";
-import { quotaService } from "../../services/quota-service.js";
-import type { QuotaInfo } from "../../types/quota.js";
-import { createHttpCacheFromEnv } from "../../utils/http-cache.js";
-import { logger } from "../../utils/logging.js";
-import { createRateLimiterFromEnv } from "../../utils/rate-limiter.js";
-import { createValidationConfigFromEnv, validateRequestBody } from "../../utils/validation.js";
-import { getToolByName } from "../registry.js";
-import { toolExists } from "./index-loader.js";
+import { AuthMode, CredentialManager, createHttpClient } from '@robinmordasiewicz/f5xc-auth';
+import type { ParsedOperation } from '../../generator/openapi-parser.js';
+import { formatQuotaError } from '../../services/quota-formatter.js';
+import { quotaService } from '../../services/quota-service.js';
+import type { QuotaInfo } from '../../types/quota.js';
+import { createHttpCacheFromEnv } from '../../utils/http-cache.js';
+import { logger } from '../../utils/logging.js';
+import { createRateLimiterFromEnv } from '../../utils/rate-limiter.js';
+import { createValidationConfigFromEnv, validateRequestBody } from '../../utils/validation.js';
+import { getToolByName } from '../registry.js';
+import { toolExists } from './index-loader.js';
 
 /** Module-level rate limiter singleton, configured from environment variables */
 const rateLimiter = createRateLimiterFromEnv();
@@ -96,7 +96,7 @@ function buildPath(pathTemplate: string, pathParams: Record<string, string>): st
   // Check for any remaining unsubstituted parameters
   const remaining = path.match(/\{[^}]+\}/g);
   if (remaining) {
-    throw new Error(`Missing path parameters: ${remaining.join(", ")}`);
+    throw new Error(`Missing path parameters: ${remaining.join(', ')}`);
   }
 
   return path;
@@ -118,7 +118,7 @@ function buildQueryString(queryParams: Record<string, string | string[]>): strin
     }
   }
 
-  return parts.length > 0 ? `?${parts.join("&")}` : "";
+  return parts.length > 0 ? `?${parts.join('&')}` : '';
 }
 
 /**
@@ -133,7 +133,7 @@ function buildQueryString(queryParams: Record<string, string | string[]>): strin
  * - Final URL: baseURL + normalizedPath = correct single /api path
  */
 function normalizeToolPath(path: string): string {
-  if (path.startsWith("/api/")) {
+  if (path.startsWith('/api/')) {
     return path.slice(4); // Remove '/api', keep the leading '/'
   }
   return path;
@@ -151,7 +151,7 @@ function generateCurlCommand(tool: ParsedOperation, params: ExecuteToolParams, a
   cmd += ' \\\n  -H "Authorization: APIToken $F5XC_API_TOKEN"';
   cmd += ' \\\n  -H "Content-Type: application/json"';
 
-  if (params.body && ["POST", "PUT", "PATCH"].includes(tool.method)) {
+  if (params.body && ['POST', 'PUT', 'PATCH'].includes(tool.method)) {
     cmd += ` \\\n  -d '${JSON.stringify(params.body, null, 2)}'`;
   }
 
@@ -162,7 +162,7 @@ function generateCurlCommand(tool: ParsedOperation, params: ExecuteToolParams, a
  * Generate documentation response for unauthenticated mode
  */
 function generateDocumentationResponse(tool: ParsedOperation, params: ExecuteToolParams): DocumentationResponse {
-  const apiUrl = "https://{tenant}.console.ves.volterra.io/api";
+  const apiUrl = 'https://{tenant}.console.ves.volterra.io/api';
 
   return {
     tool: {
@@ -175,7 +175,7 @@ function generateDocumentationResponse(tool: ParsedOperation, params: ExecuteToo
       operation: tool.operation,
     },
     curlExample: generateCurlCommand(tool, params, apiUrl),
-    authMessage: "API execution disabled. Set F5XC_API_URL and F5XC_API_TOKEN to enable execution.",
+    authMessage: 'API execution disabled. Set F5XC_API_URL and F5XC_API_TOKEN to enable execution.',
   };
 }
 
@@ -188,17 +188,17 @@ function generateDocumentationResponse(tool: ParsedOperation, params: ExecuteToo
  */
 function extractNamespace(pathParams?: Record<string, string>, body?: Record<string, unknown>): string | null {
   // Extract namespace from path params (e.g., metadata.namespace)
-  if (pathParams?.["metadata.namespace"]) {
-    return pathParams["metadata.namespace"];
+  if (pathParams?.['metadata.namespace']) {
+    return pathParams['metadata.namespace'];
   }
   if (pathParams?.namespace) {
     return pathParams.namespace;
   }
 
   // Extract from request body metadata
-  if (body?.metadata && typeof body.metadata === "object") {
+  if (body?.metadata && typeof body.metadata === 'object') {
     const metadata = body.metadata as Record<string, unknown>;
-    if (metadata.namespace && typeof metadata.namespace === "string") {
+    if (metadata.namespace && typeof metadata.namespace === 'string') {
       return metadata.namespace;
     }
   }
@@ -245,9 +245,9 @@ export async function executeTool(
       error: `Tool "${toolName}" not found. Use search_tools to find available tools.`,
       toolInfo: {
         name: toolName,
-        method: "UNKNOWN",
-        path: "UNKNOWN",
-        operation: "UNKNOWN",
+        method: 'UNKNOWN',
+        path: 'UNKNOWN',
+        operation: 'UNKNOWN',
       },
     };
   }
@@ -260,9 +260,9 @@ export async function executeTool(
       error: `Failed to load tool "${toolName}".`,
       toolInfo: {
         name: toolName,
-        method: "UNKNOWN",
-        path: "UNKNOWN",
-        operation: "UNKNOWN",
+        method: 'UNKNOWN',
+        path: 'UNKNOWN',
+        operation: 'UNKNOWN',
       },
     };
   }
@@ -288,12 +288,12 @@ export async function executeTool(
     const httpClient = createHttpClient(creds);
 
     // Check quota for create operations
-    if (tool.operation === "create") {
+    if (tool.operation === 'create') {
       const namespace = extractNamespace(pathParams, body);
 
       if (namespace) {
         // Check if quota checking is enabled
-        const quotaCheckEnabled = process.env.F5XC_QUOTA_CHECK_ENABLED !== "false";
+        const quotaCheckEnabled = process.env.F5XC_QUOTA_CHECK_ENABLED !== 'false';
 
         if (quotaCheckEnabled) {
           const quotaCheck = await quotaService.checkQuotaAvailability(namespace, tool.resource, httpClient);
@@ -314,7 +314,7 @@ export async function executeTool(
           }
 
           // Log warning if quota is in yellow zone (80-99%)
-          if (quotaCheck.quotaInfo.threshold === "yellow") {
+          if (quotaCheck.quotaInfo.threshold === 'yellow') {
             logger.info(`Quota warning for ${tool.resource}`, {
               toolName,
               namespace,
@@ -341,7 +341,7 @@ export async function executeTool(
     });
 
     // Check cache for GET requests before making HTTP call
-    if (tool.method.toUpperCase() === "GET") {
+    if (tool.method.toUpperCase() === 'GET') {
       const cached = httpCache.get(fullPath);
       if (cached) {
         logger.debug(`Cache hit for: ${fullPath}`);
@@ -359,16 +359,16 @@ export async function executeTool(
       let res: { data: unknown; status: number };
 
       switch (tool.method.toUpperCase()) {
-        case "GET":
+        case 'GET':
           res = await httpClient.get(fullPath);
           break;
-        case "POST":
+        case 'POST':
           res = await httpClient.post(fullPath, body);
           break;
-        case "PUT":
+        case 'PUT':
           res = await httpClient.put(fullPath, body);
           break;
-        case "DELETE":
+        case 'DELETE':
           res = await httpClient.delete(fullPath);
           break;
         default:
@@ -379,12 +379,12 @@ export async function executeTool(
     });
 
     // Cache successful GET responses
-    if (tool.method.toUpperCase() === "GET" && response.status >= 200 && response.status < 300) {
+    if (tool.method.toUpperCase() === 'GET' && response.status >= 200 && response.status < 300) {
       httpCache.set(fullPath, response);
     }
 
     // Invalidate cache for mutating operations on the same resource path
-    if (["POST", "PUT", "DELETE"].includes(tool.method.toUpperCase())) {
+    if (['POST', 'PUT', 'DELETE'].includes(tool.method.toUpperCase())) {
       httpCache.invalidate(fullPath);
     }
 
@@ -401,7 +401,7 @@ export async function executeTool(
 
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Unknown error occurred",
+      error: error instanceof Error ? error.message : 'Unknown error occurred',
       toolInfo,
     };
   }
@@ -425,7 +425,7 @@ export function validateExecuteParams(
   // Check required path parameters
   for (const param of tool.pathParameters) {
     if (param.required) {
-      const value = params.pathParams?.[param.name] ?? params.pathParams?.[param.name.replace("metadata.", "")];
+      const value = params.pathParams?.[param.name] ?? params.pathParams?.[param.name.replace('metadata.', '')];
       if (!value) {
         errors.push(`Missing required path parameter: ${param.name}`);
       }
@@ -434,8 +434,8 @@ export function validateExecuteParams(
 
   // Check if body is required
   if (tool.requestBodySchema && !params.body) {
-    if (["POST", "PUT", "PATCH"].includes(tool.method)) {
-      errors.push("Request body is required for this operation");
+    if (['POST', 'PUT', 'PATCH'].includes(tool.method)) {
+      errors.push('Request body is required for this operation');
     }
   }
 

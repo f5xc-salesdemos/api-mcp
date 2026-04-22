@@ -38,7 +38,7 @@ export function normalizeExamples(description: string): string {
   if (!description) {
     return description;
   }
-  return description.replace(MY_PREFIX_PATTERN, "example-$1");
+  return description.replace(MY_PREFIX_PATTERN, 'example-$1');
 }
 
 /**

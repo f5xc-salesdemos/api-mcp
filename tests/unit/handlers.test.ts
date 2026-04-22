@@ -4,28 +4,28 @@
  * Unit Tests for Resource Handlers
  */
 
-import { AuthMode, type CredentialManager, type HttpClient } from "@robinmordasiewicz/f5xc-auth";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { AuthMode, type CredentialManager, type HttpClient } from '@robinmordasiewicz/f5xc-auth';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   createResourceHandler,
   type ResourceDocumentation,
   ResourceHandler,
   type ResourceReadResult,
-} from "../../src/resources/handlers.js";
-import * as templates from "../../src/resources/templates.js";
+} from '../../src/resources/handlers.js';
+import * as templates from '../../src/resources/templates.js';
 
 // Mock modules
-vi.mock("@robinmordasiewicz/f5xc-auth", () => ({
+vi.mock('@robinmordasiewicz/f5xc-auth', () => ({
   CredentialManager: vi.fn(),
   AuthMode: {
-    NONE: "none",
-    TOKEN: "token",
-    MTLS: "mtls",
+    NONE: 'none',
+    TOKEN: 'token',
+    MTLS: 'mtls',
   },
   HttpClient: vi.fn(),
 }));
 
-vi.mock("../../src/utils/logging.js", () => ({
+vi.mock('../../src/utils/logging.js', () => ({
   logger: {
     error: vi.fn(),
     info: vi.fn(),
@@ -34,7 +34,7 @@ vi.mock("../../src/utils/logging.js", () => ({
   },
 }));
 
-describe("handlers", () => {
+describe('handlers', () => {
   let mockCredentialManager: {
     getAuthMode: ReturnType<typeof vi.fn>;
     getTenant: ReturnType<typeof vi.fn>;
@@ -48,7 +48,7 @@ describe("handlers", () => {
 
     mockCredentialManager = {
       getAuthMode: vi.fn().mockReturnValue(AuthMode.NONE),
-      getTenant: vi.fn().mockReturnValue("test-tenant"),
+      getTenant: vi.fn().mockReturnValue('test-tenant'),
     };
 
     mockHttpClient = {
@@ -60,9 +60,9 @@ describe("handlers", () => {
     vi.restoreAllMocks();
   });
 
-  describe("ResourceHandler", () => {
-    describe("constructor", () => {
-      it("should create handler with credential manager and http client", () => {
+  describe('ResourceHandler', () => {
+    describe('constructor', () => {
+      it('should create handler with credential manager and http client', () => {
         const handler = new ResourceHandler(
           mockCredentialManager as unknown as CredentialManager,
           mockHttpClient as unknown as HttpClient,
@@ -70,15 +70,15 @@ describe("handlers", () => {
         expect(handler).toBeInstanceOf(ResourceHandler);
       });
 
-      it("should create handler with null http client", () => {
+      it('should create handler with null http client', () => {
         const handler = new ResourceHandler(mockCredentialManager as unknown as CredentialManager, null);
         expect(handler).toBeInstanceOf(ResourceHandler);
       });
     });
 
-    describe("readResource", () => {
-      describe("documentation mode", () => {
-        it("should return documentation for http_loadbalancer resource", async () => {
+    describe('readResource', () => {
+      describe('documentation mode', () => {
+        it('should return documentation for http_loadbalancer resource', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
           const handler = new ResourceHandler(
@@ -86,21 +86,21 @@ describe("handlers", () => {
             mockHttpClient as unknown as HttpClient,
           );
 
-          const result = await handler.readResource("f5xc://test-tenant/default/http_loadbalancer/example-lb");
+          const result = await handler.readResource('f5xc://test-tenant/default/http_loadbalancer/example-lb');
 
-          expect(result.mode).toBe("documentation");
-          expect(result.mimeType).toBe("application/json");
-          expect(result.uri).toBe("f5xc://test-tenant/default/http_loadbalancer/example-lb");
+          expect(result.mode).toBe('documentation');
+          expect(result.mimeType).toBe('application/json');
+          expect(result.uri).toBe('f5xc://test-tenant/default/http_loadbalancer/example-lb');
 
           const content = JSON.parse(result.content) as ResourceDocumentation;
           expect(content.resourceType).toBeDefined();
-          expect(content.apiPath).toContain("http_loadbalancers");
+          expect(content.apiPath).toContain('http_loadbalancers');
           expect(content.exampleResource).toBeDefined();
           expect(content.exampleResource.metadata).toBeDefined();
           expect(content.exampleResource.spec).toBeDefined();
         });
 
-        it("should return documentation for origin_pool resource", async () => {
+        it('should return documentation for origin_pool resource', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
           const handler = new ResourceHandler(
@@ -108,14 +108,14 @@ describe("handlers", () => {
             mockHttpClient as unknown as HttpClient,
           );
 
-          const result = await handler.readResource("f5xc://test-tenant/default/origin_pool/example-pool");
+          const result = await handler.readResource('f5xc://test-tenant/default/origin_pool/example-pool');
 
-          expect(result.mode).toBe("documentation");
+          expect(result.mode).toBe('documentation');
           const content = JSON.parse(result.content) as ResourceDocumentation;
-          expect(content.apiPath).toContain("origin_pools");
+          expect(content.apiPath).toContain('origin_pools');
         });
 
-        it("should return documentation for dns_zone resource", async () => {
+        it('should return documentation for dns_zone resource', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
           const handler = new ResourceHandler(
@@ -123,14 +123,14 @@ describe("handlers", () => {
             mockHttpClient as unknown as HttpClient,
           );
 
-          const result = await handler.readResource("f5xc://test-tenant/default/dns_zone/example-zone");
+          const result = await handler.readResource('f5xc://test-tenant/default/dns_zone/example-zone');
 
-          expect(result.mode).toBe("documentation");
+          expect(result.mode).toBe('documentation');
           const content = JSON.parse(result.content) as ResourceDocumentation;
-          expect(content.apiPath).toContain("dns_zones");
+          expect(content.apiPath).toContain('dns_zones');
         });
 
-        it("should return documentation for app_firewall resource", async () => {
+        it('should return documentation for app_firewall resource', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
           const handler = new ResourceHandler(
@@ -138,14 +138,14 @@ describe("handlers", () => {
             mockHttpClient as unknown as HttpClient,
           );
 
-          const result = await handler.readResource("f5xc://test-tenant/default/app_firewall/example-waf");
+          const result = await handler.readResource('f5xc://test-tenant/default/app_firewall/example-waf');
 
-          expect(result.mode).toBe("documentation");
+          expect(result.mode).toBe('documentation');
           const content = JSON.parse(result.content) as ResourceDocumentation;
-          expect(content.apiPath).toContain("app_firewalls");
+          expect(content.apiPath).toContain('app_firewalls');
         });
 
-        it("should return documentation for namespace resource", async () => {
+        it('should return documentation for namespace resource', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
           const handler = new ResourceHandler(
@@ -153,24 +153,24 @@ describe("handlers", () => {
             mockHttpClient as unknown as HttpClient,
           );
 
-          const result = await handler.readResource("f5xc://test-tenant/system/namespace/example-ns");
+          const result = await handler.readResource('f5xc://test-tenant/system/namespace/example-ns');
 
-          expect(result.mode).toBe("documentation");
+          expect(result.mode).toBe('documentation');
           const content = JSON.parse(result.content) as ResourceDocumentation;
-          expect(content.apiPath).toContain("namespaces");
+          expect(content.apiPath).toContain('namespaces');
         });
 
-        it("should return documentation when httpClient is null", async () => {
+        it('should return documentation when httpClient is null', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.TOKEN);
 
           const handler = new ResourceHandler(mockCredentialManager as unknown as CredentialManager, null);
 
-          const result = await handler.readResource("f5xc://test-tenant/default/http_loadbalancer/example-lb");
+          const result = await handler.readResource('f5xc://test-tenant/default/http_loadbalancer/example-lb');
 
-          expect(result.mode).toBe("documentation");
+          expect(result.mode).toBe('documentation');
         });
 
-        it("should include related resources in documentation", async () => {
+        it('should include related resources in documentation', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
           const handler = new ResourceHandler(
@@ -178,7 +178,7 @@ describe("handlers", () => {
             mockHttpClient as unknown as HttpClient,
           );
 
-          const result = await handler.readResource("f5xc://test-tenant/default/http_loadbalancer/example-lb");
+          const result = await handler.readResource('f5xc://test-tenant/default/http_loadbalancer/example-lb');
 
           const content = JSON.parse(result.content) as ResourceDocumentation;
           expect(content.relatedResources).toBeDefined();
@@ -186,13 +186,13 @@ describe("handlers", () => {
         });
       });
 
-      describe("execution mode", () => {
-        it("should fetch actual resource data when authenticated", async () => {
+      describe('execution mode', () => {
+        it('should fetch actual resource data when authenticated', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.TOKEN);
           mockHttpClient.get.mockResolvedValue({
             data: {
-              metadata: { name: "example-lb" },
-              spec: { domains: ["example.com"] },
+              metadata: { name: 'example-lb' },
+              spec: { domains: ['example.com'] },
             },
           });
 
@@ -201,52 +201,52 @@ describe("handlers", () => {
             mockHttpClient as unknown as HttpClient,
           );
 
-          const result = await handler.readResource("f5xc://test-tenant/default/http_loadbalancer/example-lb");
+          const result = await handler.readResource('f5xc://test-tenant/default/http_loadbalancer/example-lb');
 
-          expect(result.mode).toBe("execution");
-          expect(mockHttpClient.get).toHaveBeenCalledWith(expect.stringContaining("http_loadbalancers"));
+          expect(result.mode).toBe('execution');
+          expect(mockHttpClient.get).toHaveBeenCalledWith(expect.stringContaining('http_loadbalancers'));
 
           const content = JSON.parse(result.content);
-          expect(content.metadata.name).toBe("example-lb");
+          expect(content.metadata.name).toBe('example-lb');
         });
 
-        it("should throw error when API call fails", async () => {
+        it('should throw error when API call fails', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.TOKEN);
-          mockHttpClient.get.mockRejectedValue(new Error("API Error"));
+          mockHttpClient.get.mockRejectedValue(new Error('API Error'));
 
           const handler = new ResourceHandler(
             mockCredentialManager as unknown as CredentialManager,
             mockHttpClient as unknown as HttpClient,
           );
 
-          await expect(handler.readResource("f5xc://test-tenant/default/http_loadbalancer/example-lb")).rejects.toThrow(
-            "API Error",
+          await expect(handler.readResource('f5xc://test-tenant/default/http_loadbalancer/example-lb')).rejects.toThrow(
+            'API Error',
           );
         });
       });
 
-      describe("error handling", () => {
-        it("should throw error for invalid URI format", async () => {
+      describe('error handling', () => {
+        it('should throw error for invalid URI format', async () => {
           const handler = new ResourceHandler(
             mockCredentialManager as unknown as CredentialManager,
             mockHttpClient as unknown as HttpClient,
           );
 
-          await expect(handler.readResource("invalid-uri")).rejects.toThrow("Invalid resource URI");
+          await expect(handler.readResource('invalid-uri')).rejects.toThrow('Invalid resource URI');
         });
 
-        it("should throw error for unknown resource type", async () => {
+        it('should throw error for unknown resource type', async () => {
           const handler = new ResourceHandler(
             mockCredentialManager as unknown as CredentialManager,
             mockHttpClient as unknown as HttpClient,
           );
 
           await expect(
-            handler.readResource("f5xc://test-tenant/default/unknown-resource/example-resource"),
-          ).rejects.toThrow("Unknown resource type");
+            handler.readResource('f5xc://test-tenant/default/unknown-resource/example-resource'),
+          ).rejects.toThrow('Unknown resource type');
         });
 
-        it("should throw F5XCApiError when buildApiPath returns null in execution mode", async () => {
+        it('should throw F5XCApiError when buildApiPath returns null in execution mode', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.TOKEN);
 
           const handler = new ResourceHandler(
@@ -255,16 +255,16 @@ describe("handlers", () => {
           );
 
           // Mock buildApiPath to return null
-          const buildApiPathSpy = vi.spyOn(templates, "buildApiPath").mockReturnValue(null);
+          const buildApiPathSpy = vi.spyOn(templates, 'buildApiPath').mockReturnValue(null);
 
-          await expect(handler.readResource("f5xc://test-tenant/default/http_loadbalancer/example-lb")).rejects.toThrow(
-            "Cannot build API path for",
+          await expect(handler.readResource('f5xc://test-tenant/default/http_loadbalancer/example-lb')).rejects.toThrow(
+            'Cannot build API path for',
           );
 
           buildApiPathSpy.mockRestore();
         });
 
-        it("should throw F5XCApiError when getResourceType returns null in buildDocumentationResponse", async () => {
+        it('should throw F5XCApiError when getResourceType returns null in buildDocumentationResponse', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
           const handler = new ResourceHandler(
@@ -274,16 +274,16 @@ describe("handlers", () => {
 
           // Mock getResourceType to return valid on first call, null on second
           const mockResourceType = {
-            type: "http_loadbalancer",
-            description: "test",
+            type: 'http_loadbalancer',
+            description: 'test',
           };
           const getResourceTypeSpy = vi
-            .spyOn(templates, "getResourceType")
+            .spyOn(templates, 'getResourceType')
             .mockReturnValueOnce(mockResourceType as templates.ResourceType)
             .mockReturnValueOnce(undefined);
 
-          await expect(handler.readResource("f5xc://test-tenant/default/http_loadbalancer/example-lb")).rejects.toThrow(
-            "Unknown resource type",
+          await expect(handler.readResource('f5xc://test-tenant/default/http_loadbalancer/example-lb')).rejects.toThrow(
+            'Unknown resource type',
           );
 
           getResourceTypeSpy.mockRestore();
@@ -291,8 +291,8 @@ describe("handlers", () => {
       });
     });
 
-    describe("listResourceTemplates", () => {
-      it("should return list of resource templates", () => {
+    describe('listResourceTemplates', () => {
+      it('should return list of resource templates', () => {
         const handler = new ResourceHandler(
           mockCredentialManager as unknown as CredentialManager,
           mockHttpClient as unknown as HttpClient,
@@ -304,15 +304,15 @@ describe("handlers", () => {
         expect(templates.length).toBeGreaterThan(0);
 
         const firstTemplate = templates[0];
-        expect(firstTemplate).toHaveProperty("uriTemplate");
-        expect(firstTemplate).toHaveProperty("name");
-        expect(firstTemplate).toHaveProperty("description");
-        expect(firstTemplate).toHaveProperty("mimeType");
-        expect(firstTemplate.mimeType).toBe("application/json");
+        expect(firstTemplate).toHaveProperty('uriTemplate');
+        expect(firstTemplate).toHaveProperty('name');
+        expect(firstTemplate).toHaveProperty('description');
+        expect(firstTemplate).toHaveProperty('mimeType');
+        expect(firstTemplate.mimeType).toBe('application/json');
       });
 
-      it("should include tenant in URI template", () => {
-        mockCredentialManager.getTenant.mockReturnValue("example-tenant");
+      it('should include tenant in URI template', () => {
+        mockCredentialManager.getTenant.mockReturnValue('example-tenant');
 
         const handler = new ResourceHandler(
           mockCredentialManager as unknown as CredentialManager,
@@ -320,12 +320,12 @@ describe("handlers", () => {
         );
 
         const templates = handler.listResourceTemplates();
-        const namespaceScoped = templates.find((t) => t.uriTemplate.includes("{namespace}"));
+        const namespaceScoped = templates.find((t) => t.uriTemplate.includes('{namespace}'));
 
-        expect(namespaceScoped?.uriTemplate).toContain("example-tenant");
+        expect(namespaceScoped?.uriTemplate).toContain('example-tenant');
       });
 
-      it("should use placeholder when tenant is null", () => {
+      it('should use placeholder when tenant is null', () => {
         mockCredentialManager.getTenant.mockReturnValue(null);
 
         const handler = new ResourceHandler(
@@ -336,27 +336,27 @@ describe("handlers", () => {
         const templates = handler.listResourceTemplates();
         const anyTemplate = templates[0];
 
-        expect(anyTemplate.uriTemplate).toContain("{tenant}");
+        expect(anyTemplate.uriTemplate).toContain('{tenant}');
       });
 
-      it("should have namespace-scoped and system-scoped templates", () => {
+      it('should have namespace-scoped and system-scoped templates', () => {
         const handler = new ResourceHandler(
           mockCredentialManager as unknown as CredentialManager,
           mockHttpClient as unknown as HttpClient,
         );
 
         const templates = handler.listResourceTemplates();
-        const namespaceScoped = templates.filter((t) => t.uriTemplate.includes("{namespace}"));
-        const systemScoped = templates.filter((t) => t.uriTemplate.includes("/system/"));
+        const namespaceScoped = templates.filter((t) => t.uriTemplate.includes('{namespace}'));
+        const systemScoped = templates.filter((t) => t.uriTemplate.includes('/system/'));
 
         expect(namespaceScoped.length).toBeGreaterThan(0);
         expect(systemScoped.length).toBeGreaterThan(0);
       });
     });
 
-    describe("listResources", () => {
-      describe("documentation mode", () => {
-        it("should return documentation for listing resources", async () => {
+    describe('listResources', () => {
+      describe('documentation mode', () => {
+        it('should return documentation for listing resources', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
           const handler = new ResourceHandler(
@@ -364,33 +364,33 @@ describe("handlers", () => {
             mockHttpClient as unknown as HttpClient,
           );
 
-          const result = await handler.listResources("default", "http_loadbalancer");
+          const result = await handler.listResources('default', 'http_loadbalancer');
 
-          expect(result.mode).toBe("documentation");
-          expect(result.mimeType).toBe("application/json");
+          expect(result.mode).toBe('documentation');
+          expect(result.mimeType).toBe('application/json');
 
           const content = JSON.parse(result.content);
-          expect(content.note).toContain("documentation mode");
+          expect(content.note).toContain('documentation mode');
           expect(content.apiPath).toBeDefined();
         });
 
-        it("should return documentation when httpClient is null", async () => {
+        it('should return documentation when httpClient is null', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.TOKEN);
 
           const handler = new ResourceHandler(mockCredentialManager as unknown as CredentialManager, null);
 
-          const result = await handler.listResources("default", "origin_pool");
+          const result = await handler.listResources('default', 'origin_pool');
 
-          expect(result.mode).toBe("documentation");
+          expect(result.mode).toBe('documentation');
         });
       });
 
-      describe("execution mode", () => {
-        it("should fetch actual resource list when authenticated", async () => {
+      describe('execution mode', () => {
+        it('should fetch actual resource list when authenticated', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.TOKEN);
           mockHttpClient.get.mockResolvedValue({
             data: {
-              items: [{ metadata: { name: "lb-1" } }, { metadata: { name: "lb-2" } }],
+              items: [{ metadata: { name: 'lb-1' } }, { metadata: { name: 'lb-2' } }],
             },
           });
 
@@ -399,39 +399,39 @@ describe("handlers", () => {
             mockHttpClient as unknown as HttpClient,
           );
 
-          const result = await handler.listResources("default", "http_loadbalancer");
+          const result = await handler.listResources('default', 'http_loadbalancer');
 
-          expect(result.mode).toBe("execution");
-          expect(mockHttpClient.get).toHaveBeenCalledWith(expect.stringContaining("http_loadbalancers"));
+          expect(result.mode).toBe('execution');
+          expect(mockHttpClient.get).toHaveBeenCalledWith(expect.stringContaining('http_loadbalancers'));
 
           const content = JSON.parse(result.content);
           expect(content.items).toHaveLength(2);
         });
 
-        it("should throw error when API call fails", async () => {
+        it('should throw error when API call fails', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.TOKEN);
-          mockHttpClient.get.mockRejectedValue(new Error("API Error"));
+          mockHttpClient.get.mockRejectedValue(new Error('API Error'));
 
           const handler = new ResourceHandler(
             mockCredentialManager as unknown as CredentialManager,
             mockHttpClient as unknown as HttpClient,
           );
 
-          await expect(handler.listResources("default", "http_loadbalancer")).rejects.toThrow("API Error");
+          await expect(handler.listResources('default', 'http_loadbalancer')).rejects.toThrow('API Error');
         });
       });
 
-      describe("error handling", () => {
-        it("should throw error for unknown resource type", async () => {
+      describe('error handling', () => {
+        it('should throw error for unknown resource type', async () => {
           const handler = new ResourceHandler(
             mockCredentialManager as unknown as CredentialManager,
             mockHttpClient as unknown as HttpClient,
           );
 
-          await expect(handler.listResources("default", "unknown-type")).rejects.toThrow("Unknown resource type");
+          await expect(handler.listResources('default', 'unknown-type')).rejects.toThrow('Unknown resource type');
         });
 
-        it("should throw F5XCApiError when buildApiPath returns null in execution mode", async () => {
+        it('should throw F5XCApiError when buildApiPath returns null in execution mode', async () => {
           mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.TOKEN);
 
           const handler = new ResourceHandler(
@@ -440,10 +440,10 @@ describe("handlers", () => {
           );
 
           // Mock buildApiPath to return null
-          const buildApiPathSpy = vi.spyOn(templates, "buildApiPath").mockReturnValue(null);
+          const buildApiPathSpy = vi.spyOn(templates, 'buildApiPath').mockReturnValue(null);
 
-          await expect(handler.listResources("default", "http_loadbalancer")).rejects.toThrow(
-            "Cannot build API path for listing",
+          await expect(handler.listResources('default', 'http_loadbalancer')).rejects.toThrow(
+            'Cannot build API path for listing',
           );
 
           buildApiPathSpy.mockRestore();
@@ -452,8 +452,8 @@ describe("handlers", () => {
     });
   });
 
-  describe("createResourceHandler", () => {
-    it("should create a ResourceHandler instance", () => {
+  describe('createResourceHandler', () => {
+    it('should create a ResourceHandler instance', () => {
       const handler = createResourceHandler(
         mockCredentialManager as unknown as CredentialManager,
         mockHttpClient as unknown as HttpClient,
@@ -462,20 +462,20 @@ describe("handlers", () => {
       expect(handler).toBeInstanceOf(ResourceHandler);
     });
 
-    it("should create handler with null http client", () => {
+    it('should create handler with null http client', () => {
       const handler = createResourceHandler(mockCredentialManager as unknown as CredentialManager, null);
 
       expect(handler).toBeInstanceOf(ResourceHandler);
     });
   });
 
-  describe("example resource generation", () => {
-    it("should generate http_loadbalancer example with correct structure", async () => {
+  describe('example resource generation', () => {
+    it('should generate http_loadbalancer example with correct structure', async () => {
       mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
       const handler = new ResourceHandler(mockCredentialManager as unknown as CredentialManager, null);
 
-      const result = await handler.readResource("f5xc://test-tenant/default/http_loadbalancer/example-lb");
+      const result = await handler.readResource('f5xc://test-tenant/default/http_loadbalancer/example-lb');
 
       const content = JSON.parse(result.content) as ResourceDocumentation;
       const example = content.exampleResource as {
@@ -484,19 +484,19 @@ describe("handlers", () => {
         system_metadata: { creation_timestamp: string };
       };
 
-      expect(example.metadata.name).toBe("example-lb");
-      expect(example.metadata.namespace).toBe("default");
-      expect(example.spec.domains).toContain("app.example.com");
+      expect(example.metadata.name).toBe('example-lb');
+      expect(example.metadata.namespace).toBe('default');
+      expect(example.spec.domains).toContain('app.example.com');
       expect(example.spec.default_route_pools).toHaveLength(1);
       expect(example.system_metadata.creation_timestamp).toBeDefined();
     });
 
-    it("should generate origin_pool example with correct structure", async () => {
+    it('should generate origin_pool example with correct structure', async () => {
       mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
       const handler = new ResourceHandler(mockCredentialManager as unknown as CredentialManager, null);
 
-      const result = await handler.readResource("f5xc://test-tenant/default/origin_pool/example-pool");
+      const result = await handler.readResource('f5xc://test-tenant/default/origin_pool/example-pool');
 
       const content = JSON.parse(result.content) as ResourceDocumentation;
       const example = content.exampleResource as {
@@ -508,12 +508,12 @@ describe("handlers", () => {
       expect(example.spec.no_tls).toBeDefined();
     });
 
-    it("should generate dns_zone example with correct structure", async () => {
+    it('should generate dns_zone example with correct structure', async () => {
       mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
       const handler = new ResourceHandler(mockCredentialManager as unknown as CredentialManager, null);
 
-      const result = await handler.readResource("f5xc://test-tenant/default/dns_zone/example-zone");
+      const result = await handler.readResource('f5xc://test-tenant/default/dns_zone/example-zone');
 
       const content = JSON.parse(result.content) as ResourceDocumentation;
       const example = content.exampleResource as {
@@ -524,12 +524,12 @@ describe("handlers", () => {
       expect(example.spec.primary.soa_parameters).toBeDefined();
     });
 
-    it("should generate app_firewall example with correct structure", async () => {
+    it('should generate app_firewall example with correct structure', async () => {
       mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
       const handler = new ResourceHandler(mockCredentialManager as unknown as CredentialManager, null);
 
-      const result = await handler.readResource("f5xc://test-tenant/default/app_firewall/example-waf");
+      const result = await handler.readResource('f5xc://test-tenant/default/app_firewall/example-waf');
 
       const content = JSON.parse(result.content) as ResourceDocumentation;
       const example = content.exampleResource as {
@@ -540,12 +540,12 @@ describe("handlers", () => {
       expect(example.spec.bot_protection_setting).toBeDefined();
     });
 
-    it("should generate generic example for unknown types", async () => {
+    it('should generate generic example for unknown types', async () => {
       mockCredentialManager.getAuthMode.mockReturnValue(AuthMode.NONE);
 
       const handler = new ResourceHandler(mockCredentialManager as unknown as CredentialManager, null);
 
-      const result = await handler.readResource("f5xc://test-tenant/default/certificate/example-cert");
+      const result = await handler.readResource('f5xc://test-tenant/default/certificate/example-cert');
 
       const content = JSON.parse(result.content) as ResourceDocumentation;
       const example = content.exampleResource as {
@@ -554,7 +554,7 @@ describe("handlers", () => {
         system_metadata: unknown;
       };
 
-      expect(example.metadata.name).toBe("example-cert");
+      expect(example.metadata.name).toBe('example-cert');
       expect(example.spec).toBeDefined();
       expect(example.system_metadata).toBeDefined();
     });

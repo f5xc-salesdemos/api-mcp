@@ -19,30 +19,30 @@
  *   2 - Script error
  */
 
-import { execSync } from "node:child_process";
-import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { execSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const projectRoot = join(__dirname, "..");
+const projectRoot = join(__dirname, '..');
 
 // Colors for console output
 const colors = {
-  reset: "\x1b[0m",
-  green: "\x1b[32m",
-  red: "\x1b[31m",
-  yellow: "\x1b[33m",
-  blue: "\x1b[34m",
-  cyan: "\x1b[36m",
-  dim: "\x1b[2m",
+  reset: '\x1b[0m',
+  green: '\x1b[32m',
+  red: '\x1b[31m',
+  yellow: '\x1b[33m',
+  blue: '\x1b[34m',
+  cyan: '\x1b[36m',
+  dim: '\x1b[2m',
 };
 
 // Parse CLI arguments
 const args = process.argv.slice(2);
-const verbose = args.includes("--verbose") || args.includes("-v");
-const testRealApi = args.includes("--test-real-api");
-const help = args.includes("--help") || args.includes("-h");
+const verbose = args.includes('--verbose') || args.includes('-v');
+const testRealApi = args.includes('--test-real-api');
+const help = args.includes('--help') || args.includes('-h');
 
 if (help) {
   console.log(`
@@ -95,8 +95,8 @@ function runCommand(
   try {
     const output = execSync(cmd, {
       cwd: options.cwd || projectRoot,
-      encoding: "utf-8",
-      stdio: options.silent ? "pipe" : ["pipe", "pipe", "pipe"],
+      encoding: 'utf-8',
+      stdio: options.silent ? 'pipe' : ['pipe', 'pipe', 'pipe'],
     });
     return { success: true, output: output.trim() };
   } catch (error) {
@@ -107,7 +107,7 @@ function runCommand(
     };
     return {
       success: false,
-      output: execError.stdout?.toString() || "",
+      output: execError.stdout?.toString() || '',
       error: execError.stderr?.toString() || execError.message,
     };
   }
@@ -169,25 +169,25 @@ async function main(): Promise<void> {
   // ---------------------------------------------------------------------------
   // 1. Package Dependencies
   // ---------------------------------------------------------------------------
-  await validate("Check f5xc-auth dependency installed", async () => {
-    const packageJson = JSON.parse(readFileSync(join(projectRoot, "package.json"), "utf-8"));
-    const hasAuthDep = "@robinmordasiewicz/f5xc-auth" in (packageJson.dependencies || {});
+  await validate('Check f5xc-auth dependency installed', async () => {
+    const packageJson = JSON.parse(readFileSync(join(projectRoot, 'package.json'), 'utf-8'));
+    const hasAuthDep = '@robinmordasiewicz/f5xc-auth' in (packageJson.dependencies || {});
 
     return {
       passed: hasAuthDep,
-      message: hasAuthDep ? "f5xc-auth dependency found in package.json" : "f5xc-auth dependency NOT found",
+      message: hasAuthDep ? 'f5xc-auth dependency found in package.json' : 'f5xc-auth dependency NOT found',
       details: hasAuthDep
-        ? `Version: ${packageJson.dependencies["@robinmordasiewicz/f5xc-auth"]}`
-        : "Add @robinmordasiewicz/f5xc-auth to dependencies",
+        ? `Version: ${packageJson.dependencies['@robinmordasiewicz/f5xc-auth']}`
+        : 'Add @robinmordasiewicz/f5xc-auth to dependencies',
     };
   });
 
-  await validate("Check f5xc-auth module resolves", async () => {
-    const result = runCommand("node -e \"require.resolve('@robinmordasiewicz/f5xc-auth')\"", { silent: true });
+  await validate('Check f5xc-auth module resolves', async () => {
+    const result = runCommand('node -e "require.resolve(\'@robinmordasiewicz/f5xc-auth\')"', { silent: true });
 
     return {
       passed: result.success,
-      message: result.success ? "f5xc-auth module resolves correctly" : "f5xc-auth module resolution failed",
+      message: result.success ? 'f5xc-auth module resolves correctly' : 'f5xc-auth module resolution failed',
       details: result.error,
     };
   });
@@ -195,12 +195,12 @@ async function main(): Promise<void> {
   // ---------------------------------------------------------------------------
   // 2. TypeScript Compilation
   // ---------------------------------------------------------------------------
-  await validate("TypeScript compilation", async () => {
-    const result = runCommand("npm run typecheck", { silent: true });
+  await validate('TypeScript compilation', async () => {
+    const result = runCommand('npm run typecheck', { silent: true });
 
     return {
       passed: result.success,
-      message: result.success ? "TypeScript compilation successful" : "TypeScript compilation failed",
+      message: result.success ? 'TypeScript compilation successful' : 'TypeScript compilation failed',
       details: result.error?.slice(0, 500),
     };
   });
@@ -208,12 +208,12 @@ async function main(): Promise<void> {
   // ---------------------------------------------------------------------------
   // 3. Build
   // ---------------------------------------------------------------------------
-  await validate("Build project", async () => {
-    const result = runCommand("npm run build", { silent: true });
+  await validate('Build project', async () => {
+    const result = runCommand('npm run build', { silent: true });
 
     return {
       passed: result.success,
-      message: result.success ? "Build successful" : "Build failed",
+      message: result.success ? 'Build successful' : 'Build failed',
       details: result.error?.slice(0, 500),
     };
   });
@@ -221,8 +221,8 @@ async function main(): Promise<void> {
   // ---------------------------------------------------------------------------
   // 4. Unit Tests
   // ---------------------------------------------------------------------------
-  await validate("Run unit tests", async () => {
-    const result = runCommand("npm run test -- tests/unit/ --reporter=dot", {
+  await validate('Run unit tests', async () => {
+    const result = runCommand('npm run test -- tests/unit/ --reporter=dot', {
       silent: true,
     });
 
@@ -242,8 +242,8 @@ async function main(): Promise<void> {
   // ---------------------------------------------------------------------------
   // 5. Acceptance Tests
   // ---------------------------------------------------------------------------
-  await validate("Run acceptance tests", async () => {
-    const result = runCommand("npm run test -- tests/acceptance/ --reporter=dot", { silent: true });
+  await validate('Run acceptance tests', async () => {
+    const result = runCommand('npm run test -- tests/acceptance/ --reporter=dot', { silent: true });
 
     const passMatch = result.output.match(/(\d+) passed/);
     const failMatch = result.output.match(/(\d+) failed/);
@@ -262,7 +262,7 @@ async function main(): Promise<void> {
   // ---------------------------------------------------------------------------
   // 6. Auth Package API Validation
   // ---------------------------------------------------------------------------
-  await validate("Validate CredentialManager API", async () => {
+  await validate('Validate CredentialManager API', async () => {
     const testCode = `
       const { CredentialManager, AuthMode } = require('@robinmordasiewicz/f5xc-auth');
 
@@ -286,18 +286,18 @@ async function main(): Promise<void> {
       console.log('API validated successfully');
     `;
 
-    const result = runCommand(`node -e "${testCode.replace(/\n/g, " ")}"`, {
+    const result = runCommand(`node -e "${testCode.replace(/\n/g, ' ')}"`, {
       silent: true,
     });
 
     return {
       passed: result.success,
-      message: result.success ? "CredentialManager API validated" : "CredentialManager API validation failed",
+      message: result.success ? 'CredentialManager API validated' : 'CredentialManager API validation failed',
       details: result.error,
     };
   });
 
-  await validate("Validate ProfileManager API", async () => {
+  await validate('Validate ProfileManager API', async () => {
     const testCode = `
       const { getProfileManager } = require('@robinmordasiewicz/f5xc-auth');
 
@@ -314,13 +314,13 @@ async function main(): Promise<void> {
       console.log('ProfileManager API validated successfully');
     `;
 
-    const result = runCommand(`node -e "${testCode.replace(/\n/g, " ")}"`, {
+    const result = runCommand(`node -e "${testCode.replace(/\n/g, ' ')}"`, {
       silent: true,
     });
 
     return {
       passed: result.success,
-      message: result.success ? "ProfileManager API validated" : "ProfileManager API validation failed",
+      message: result.success ? 'ProfileManager API validated' : 'ProfileManager API validation failed',
       details: result.error,
     };
   });
@@ -328,7 +328,7 @@ async function main(): Promise<void> {
   // ---------------------------------------------------------------------------
   // 7. Documentation Mode Validation
   // ---------------------------------------------------------------------------
-  await validate("Documentation mode initialization", async () => {
+  await validate('Documentation mode initialization', async () => {
     const testCode = `
       process.env.XDG_CONFIG_HOME = '/tmp/__nonexistent__';
       delete process.env.F5XC_API_URL;
@@ -351,13 +351,13 @@ async function main(): Promise<void> {
       test().catch(e => { console.error(e.message); process.exit(1); });
     `;
 
-    const result = runCommand(`node -e "${testCode.replace(/\n/g, " ")}"`, {
+    const result = runCommand(`node -e "${testCode.replace(/\n/g, ' ')}"`, {
       silent: true,
     });
 
     return {
       passed: result.success,
-      message: result.success ? "Documentation mode initialization works" : "Documentation mode initialization failed",
+      message: result.success ? 'Documentation mode initialization works' : 'Documentation mode initialization failed',
       details: result.error,
     };
   });
@@ -365,7 +365,7 @@ async function main(): Promise<void> {
   // ---------------------------------------------------------------------------
   // 8. Token Mode Validation
   // ---------------------------------------------------------------------------
-  await validate("Token mode initialization", async () => {
+  await validate('Token mode initialization', async () => {
     const testCode = `
       process.env.XDG_CONFIG_HOME = '/tmp/__nonexistent__';
       process.env.F5XC_API_URL = 'https://test.console.ves.volterra.io';
@@ -391,13 +391,13 @@ async function main(): Promise<void> {
       test().catch(e => { console.error(e.message); process.exit(1); });
     `;
 
-    const result = runCommand(`node -e "${testCode.replace(/\n/g, " ")}"`, {
+    const result = runCommand(`node -e "${testCode.replace(/\n/g, ' ')}"`, {
       silent: true,
     });
 
     return {
       passed: result.success,
-      message: result.success ? "Token mode initialization works" : "Token mode initialization failed",
+      message: result.success ? 'Token mode initialization works' : 'Token mode initialization failed',
       details: result.error,
     };
   });
@@ -405,7 +405,7 @@ async function main(): Promise<void> {
   // ---------------------------------------------------------------------------
   // 9. Server Creation Validation
   // ---------------------------------------------------------------------------
-  await validate("Server creation in documentation mode", async () => {
+  await validate('Server creation in documentation mode', async () => {
     const testCode = `
       process.env.XDG_CONFIG_HOME = '/tmp/__nonexistent__';
       delete process.env.F5XC_API_URL;
@@ -426,13 +426,13 @@ async function main(): Promise<void> {
       test().catch(e => { console.error(e.message); process.exit(1); });
     `;
 
-    const result = runCommand(`node -e "${testCode.replace(/\n/g, " ")}"`, {
+    const result = runCommand(`node -e "${testCode.replace(/\n/g, ' ')}"`, {
       silent: true,
     });
 
     return {
       passed: result.success,
-      message: result.success ? "Server creation in documentation mode works" : "Server creation failed",
+      message: result.success ? 'Server creation in documentation mode works' : 'Server creation failed',
       details: result.error,
     };
   });
@@ -441,15 +441,15 @@ async function main(): Promise<void> {
   // 10. Real API Test (Optional)
   // ---------------------------------------------------------------------------
   if (testRealApi) {
-    await validate("Real API connectivity test", async () => {
+    await validate('Real API connectivity test', async () => {
       const apiUrl = process.env.F5XC_API_URL;
       const apiToken = process.env.F5XC_API_TOKEN;
 
       if (!apiUrl || !apiToken) {
         return {
           passed: false,
-          message: "Missing F5XC_API_URL or F5XC_API_TOKEN",
-          details: "Set environment variables to run real API tests",
+          message: 'Missing F5XC_API_URL or F5XC_API_TOKEN',
+          details: 'Set environment variables to run real API tests',
         };
       }
 
@@ -486,13 +486,13 @@ async function main(): Promise<void> {
         test().then(console.log).catch(e => { console.error(e.message); process.exit(1); });
       `;
 
-      const result = runCommand(`node -e "${testCode.replace(/\n/g, " ")}"`, {
+      const result = runCommand(`node -e "${testCode.replace(/\n/g, ' ')}"`, {
         silent: true,
       });
 
       return {
         passed: result.success,
-        message: result.success ? "Real API connectivity verified" : "Real API connectivity failed",
+        message: result.success ? 'Real API connectivity verified' : 'Real API connectivity failed',
         details: result.error,
       };
     });

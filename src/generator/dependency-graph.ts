@@ -16,9 +16,9 @@ import type {
   ResourceReference,
   SerializedDependencyGraph,
   SubscriptionRequirement,
-} from "./dependency-types.js";
-import { createResourceKey, parseResourceKey } from "./dependency-types.js";
-import type { ParsedOperation, ParsedSpec } from "./openapi-parser.js";
+} from './dependency-types.js';
+import { createResourceKey, parseResourceKey } from './dependency-types.js';
+import type { ParsedOperation, ParsedSpec } from './openapi-parser.js';
 
 /**
  * Build a complete dependency graph from parsed specifications
@@ -121,7 +121,7 @@ export function buildDependencyGraph(
   }
 
   return {
-    version: "1.0.0",
+    version: '1.0.0',
     generatedAt: opts.generatedAt || new Date().toISOString(),
     totalResources: Object.keys(dependencies).length,
     dependencies,
@@ -195,7 +195,7 @@ function buildReverseDependencies(
 ): void {
   for (const deps of Object.values(dependencies)) {
     for (const ref of deps.requires) {
-      const refKey = createResourceKey(ref.domain || "unknown", ref.resourceType);
+      const refKey = createResourceKey(ref.domain || 'unknown', ref.resourceType);
 
       if (!reverseDeps[refKey]) {
         reverseDeps[refKey] = [];
@@ -263,7 +263,7 @@ export function computeCreationOrder(
     if (deps) {
       // Visit required dependencies first
       for (const ref of deps.requires) {
-        const refKey = createResourceKey(ref.domain || "unknown", ref.resourceType);
+        const refKey = createResourceKey(ref.domain || 'unknown', ref.resourceType);
         visit(refKey, depth + 1);
       }
     }
@@ -322,7 +322,7 @@ export function getPrerequisites(resourceKey: string, graph: DependencyGraph): s
     return [];
   }
 
-  return deps.requires.map((ref) => createResourceKey(ref.domain || "unknown", ref.resourceType));
+  return deps.requires.map((ref) => createResourceKey(ref.domain || 'unknown', ref.resourceType));
 }
 
 /**
@@ -385,7 +385,7 @@ export function validateGraph(graph: DependencyGraph): string[][] {
     const deps = graph.dependencies[key];
     if (deps) {
       for (const ref of deps.requires) {
-        const refKey = createResourceKey(ref.domain || "unknown", ref.resourceType);
+        const refKey = createResourceKey(ref.domain || 'unknown', ref.resourceType);
         dfs(refKey);
       }
     }
